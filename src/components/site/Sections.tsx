@@ -67,13 +67,13 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="inline-flex items-center gap-2.5 rounded-full border border-primary/25 bg-primary/[0.06] px-3.5 py-1.5 text-[11px] font-medium text-primary backdrop-blur-md"
+              className="inline-flex items-center gap-2.5 rounded-full border border-primary/20 bg-primary/[0.03] px-4 py-2 text-[10px] font-semibold text-primary backdrop-blur-md transition-colors hover:border-primary/40 hover:bg-primary/[0.06]"
             >
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
               </span>
-              <span className="text-mono uppercase tracking-[0.2em]">
+              <span className="text-mono uppercase tracking-[0.25em]">
                 Engenharia de Crescimento
               </span>
             </motion.span>
