@@ -416,16 +416,16 @@ function EditorToolbar({ onClose }: { onClose: () => void }) {
       {selected && (
         <div className="mt-3 pt-3 border-t border-white/10 grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-2">
           <Slider label="escala" value={t.scale} min={0.2} max={3} step={0.05}
-            onChange={(v) => setTransform(selected, { scale: v })} />
+            onChange={(v: number) => setTransform(selected, { scale: v })} />
           <Slider label="rotação" value={t.rotation} min={-180} max={180} step={1}
-            onChange={(v) => setTransform(selected, { rotation: v })} suffix="°" />
+            onChange={(v: number) => setTransform(selected, { rotation: v })} suffix="°" />
           <Slider label="opacidade" value={t.opacity} min={0} max={1} step={0.05}
-            onChange={(v) => setTransform(selected, { opacity: v })} />
-          <NumInput label="x" value={t.x} onChange={(v) => setTransform(selected, { x: v })} />
-          <NumInput label="y" value={t.y} onChange={(v) => setTransform(selected, { y: v })} />
-          <NumInput label="z-index" value={t.z_index} onChange={(v) => setTransform(selected, { z_index: v })} />
-          <NumInput label="largura" value={t.width ?? 0} onChange={(v) => setTransform(selected, { width: v || null })} />
-          <NumInput label="altura" value={t.height ?? 0} onChange={(v) => setTransform(selected, { height: v || null })} />
+            onChange={(v: number) => setTransform(selected, { opacity: v })} />
+          <NumInput label="x" value={t.x} onChange={(v: number) => setTransform(selected, { x: v })} />
+          <NumInput label="y" value={t.y} onChange={(v: number) => setTransform(selected, { y: v })} />
+          <NumInput label="z-index" value={t.z_index} onChange={(v: number) => setTransform(selected, { z_index: v })} />
+          <NumInput label="largura" value={t.width ?? 0} onChange={(v: number) => setTransform(selected, { width: v || null })} />
+          <NumInput label="altura" value={t.height ?? 0} onChange={(v: number) => setTransform(selected, { height: v || null })} />
           <button
             onClick={() => resetTransform(selected)}
             className="px-2 py-1 border border-white/20 hover:border-primary hover:text-primary self-end"
