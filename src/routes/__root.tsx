@@ -29,7 +29,9 @@ function NotFoundComponent() {
 const SITE_TITLE =
   "Aceleriq — Engenharia de Crescimento com Estratégia, Dados e IA";
 const SITE_DESCRIPTION =
-  "Aceleriq é a engenharia de crescimento que une estratégia, processo comercial, tráfego, CRM, IA e dados para escalar seu negócio com método. Faça o Diagnóstico de Maturidade gratuito.";
+  "Acelere seu crescimento com estratégia, processo comercial, tráfego, CRM, automação, IA e dados. Faça o Diagnóstico Gratuito da Aceleriq.";
+const SITE_URL = "https://aceleriq.com.br";
+const OG_IMAGE = `${SITE_URL}/og-image.jpg`;
 
 export const Route = createRootRoute({
   head: () => ({
@@ -48,13 +50,21 @@ export const Route = createRootRoute({
       { property: "og:description", content: SITE_DESCRIPTION },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "pt_BR" },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:image", content: OG_IMAGE },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Aceleriq — Engenharia de Crescimento" },
+      { property: "og:site_name", content: "Aceleriq" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: SITE_TITLE },
       { name: "twitter:description", content: SITE_DESCRIPTION },
-      { name: "theme-color", content: "#16182a" },
+      { name: "twitter:image", content: OG_IMAGE },
+      { name: "theme-color", content: "#0a0a0a" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "canonical", href: SITE_URL },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
       {
