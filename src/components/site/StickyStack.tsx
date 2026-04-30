@@ -87,7 +87,7 @@ function StickyLayer({
   const yIn = useTransform(
     progress,
     [inStart, inEnd],
-    isFirst ? [0, 0] : ["100%", "0%"],
+    isFirst ? ["0%", "0%"] : ["100%", "0%"],
   );
 
   return (
