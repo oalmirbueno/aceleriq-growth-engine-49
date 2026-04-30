@@ -734,7 +734,7 @@ export function DiagnosticoCTA({ onDiagnostico }: { onDiagnostico: () => void })
                   size="lg"
                   className="group h-12 rounded-md bg-primary px-6 text-[14px] font-semibold text-primary-foreground btn-interactive"
                 >
-                  Começar Diagnóstico
+                  Fazer Diagnóstico Gratuito
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </Button>
                 <Button
