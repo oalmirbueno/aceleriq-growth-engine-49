@@ -57,9 +57,18 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
 
         <div className="hidden items-center gap-8 md:flex">
           <div className="flex flex-col items-end">
-            <span className="font-mono text-[9px] uppercase tracking-widest text-primary/60">System_Access</span>
             <a
-              href="#top"
+              href="https://aceleriq.online"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-[9px] uppercase tracking-widest text-primary/60 transition-colors hover:text-primary"
+            >
+              System_Access
+            </a>
+            <a
+              href="https://aceleriq.online"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-[12px] font-medium text-foreground/80 transition-colors hover:text-primary"
             >
               Client Portal
