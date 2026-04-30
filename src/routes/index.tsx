@@ -20,6 +20,7 @@ import {
   BrandStrip,
 } from "@/components/site/Sections";
 import { StickyStack } from "@/components/site/StickyStack";
+import { InstrumentBar } from "@/components/site/Ornaments";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -61,6 +62,10 @@ function Index() {
         <Method />
         <Areas />
         <FitFor />
+
+        {/* Painel de instrumentos skeumórfico — ambienta entre seções */}
+        <InstrumentBar />
+
         <DiagnosticoCTA onDiagnostico={openDiagnostico} />
         <Results />
         <Testimonials />

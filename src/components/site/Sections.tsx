@@ -44,6 +44,7 @@ import {
 import aiEngineerImg from "@/assets/ai-engineer.jpg";
 import { Editable } from "@/components/editor/LayoutEditor";
 import { CountUp } from "@/components/ui/CountUp";
+import { SectionAmbient } from "@/components/site/Ornaments";
 
 // ─────────────────────────────────────────────────────────────
 // HERO
@@ -377,6 +378,7 @@ export function Method() {
       id="metodo"
       className="relative py-10 md:py-14 overflow-hidden bg-grid-ambient"
     >
+      <SectionAmbient variant="ai" />
       {/* Brilho ambiente verde, achatado e sutil — sem bolha redonda */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 h-[150px] w-[860px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.035] blur-[90px]" />
 
@@ -612,6 +614,7 @@ const FIT_NO = [
 export function FitFor() {
   return (
     <section className="relative py-10 md:py-14 overflow-hidden bg-grid-ambient">
+      <SectionAmbient variant="marketing" />
       {/* Glow ambiente verde mais presente */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 h-[280px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.06] blur-[100px]" />
       <div className="pointer-events-none absolute top-0 left-1/2 h-[1px] w-[60%] -translate-x-1/2 bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
@@ -832,8 +835,9 @@ const CASES = [
 
 export function Results() {
   return (
-    <section id="resultados" className="relative py-10 md:py-14 bg-grid-ambient">
-      <div className="container-aceleriq">
+    <section id="resultados" className="relative py-10 md:py-14 bg-grid-ambient overflow-hidden">
+      <SectionAmbient variant="data" />
+      <div className="container-aceleriq relative">
         <SectionHeader
           eyebrow="[ 07 ] · Resultados"
           title="Quando a engenharia entra, o resultado aparece."
