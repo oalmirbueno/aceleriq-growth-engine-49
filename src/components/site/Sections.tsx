@@ -614,6 +614,7 @@ const FIT_NO = [
 export function FitFor() {
   return (
     <section className="relative py-10 md:py-14 overflow-hidden bg-grid-ambient">
+      <SectionAmbient variant="marketing" />
       {/* Glow ambiente verde mais presente */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 h-[280px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.06] blur-[100px]" />
       <div className="pointer-events-none absolute top-0 left-1/2 h-[1px] w-[60%] -translate-x-1/2 bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
