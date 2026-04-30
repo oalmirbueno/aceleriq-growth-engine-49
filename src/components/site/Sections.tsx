@@ -928,50 +928,69 @@ export function Testimonials() {
         />
       </div>
 
-      {/* Carrossel auto-scroll com fade nas bordas */}
-      <div
-        className="mt-8 md:mt-10 relative overflow-hidden"
+      {/* Dois carrosséis em direções opostas para impacto visual */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className="mt-8 md:mt-10 space-y-4 relative"
         style={{
           maskImage:
-            "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+            "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
           WebkitMaskImage:
-            "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+            "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
         }}
       >
-        <motion.div
-          className="flex gap-4 w-max"
-          animate={{ x: ["0%", "-33.333%"] }}
-          transition={{
-            duration: 35,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        >
-          {loop.map((t, i) => (
-            <figure
-              key={i}
-              className="hairline relative rounded-2xl bg-card/60 p-6 w-[360px] flex-shrink-0 backdrop-blur"
-            >
-              <Quote className="h-5 w-5 text-primary/60" />
-              <blockquote className="mt-3 text-[14px] leading-relaxed text-foreground/90">
-                "{t.quote}"
-              </blockquote>
-              <figcaption className="mt-5 flex items-center gap-3 border-t border-border pt-5">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/15 text-mono text-sm font-semibold text-primary">
-                  {t.name.charAt(0)}
-                </div>
-                <div>
-                  <div className="text-[14px] font-medium">{t.name}</div>
-                  <div className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
-                    {t.role}
-                  </div>
-                </div>
-              </figcaption>
-            </figure>
-          ))}
-        </motion.div>
-      </div>
+        {/* Linha 1 — esquerda */}
+        <div className="overflow-hidden">
+          <motion.div
+            className="flex gap-4 w-max"
+            animate={{ x: ["0%", "-33.333%"] }}
+            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+          >
+            {loop.map((t, i) => (
+              <TestimonialCard key={`a-${i}`} t={t} />
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Linha 2 — direita (offset alternado) */}
+        <div className="overflow-hidden">
+          <motion.div
+            className="flex gap-4 w-max"
+            animate={{ x: ["-33.333%", "0%"] }}
+            transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+          >
+            {loop.slice().reverse().map((t, i) => (
+              <TestimonialCard key={`b-${i}`} t={t} />
+            ))}
+          </motion.div>
+        </div>
+      </motion.div>
     </section>
+  );
+}
+
+function TestimonialCard({ t }: { t: { quote: string; name: string; role: string } }) {
+  return (
+    <figure className="hairline relative rounded-2xl bg-card/60 p-6 w-[360px] flex-shrink-0 backdrop-blur transition-all hover:border-primary/40 hover:bg-card/80">
+      <Quote className="h-5 w-5 text-primary/60" />
+      <blockquote className="mt-3 text-[14px] leading-relaxed text-foreground/90">
+        "{t.quote}"
+      </blockquote>
+      <figcaption className="mt-5 flex items-center gap-3 border-t border-border pt-5">
+        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/15 text-mono text-sm font-semibold text-primary">
+          {t.name.charAt(0)}
+        </div>
+        <div>
+          <div className="text-[14px] font-medium">{t.name}</div>
+          <div className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+            {t.role}
+          </div>
+        </div>
+      </figcaption>
+    </figure>
   );
 }
 
@@ -991,7 +1010,7 @@ const COMPARE: [string, string, string][] = [
 
 export function Compare() {
   return (
-    <section className="relative py-8 md:py-10 bg-grid-ambient">
+    <section className="relative pt-8 md:pt-10 pb-4 md:pb-6 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
           eyebrow="[ 09 ] · Comparativo"
@@ -1044,8 +1063,8 @@ export function Compare() {
 // ─────────────────────────────────────────────────────────────
 export function WhyNow() {
   return (
-    <section className="relative py-8 md:py-10 bg-grid-ambient overflow-hidden">
-      
+    <section className="relative py-6 md:py-8 bg-grid-ambient overflow-hidden">
+
       <div className="container-aceleriq relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 16 }}

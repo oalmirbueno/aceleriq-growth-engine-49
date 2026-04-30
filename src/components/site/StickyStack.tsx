@@ -4,10 +4,13 @@ import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 /**
  * StickyStack — efeito "carta empilhada" cinematográfico.
  *
- * Cada filho fica sticky no topo ocupando 100vh.
- * Conforme o scroll avança, a próxima seção sobe POR CIMA cobrindo a anterior;
- * a anterior recua sutilmente (escala + blur + opacity) criando profundidade.
+ * Cada filho fica sticky no topo. A próxima seção SOBE de baixo
+ * cobrindo a anterior. A anterior recua sutilmente (escala + blur + opacity).
  * Sem cortes, sem espaços vazios.
+ *
+ * Layout: total height = (count) * 100vh — cada item ocupa exatamente 1 tela
+ * de scroll. A última seção NÃO ganha "scroll extra" para evitar espaço vazio
+ * antes da próxima seção fora do stack.
  */
 export function StickyStack({ children }: { children: ReactNode }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -23,8 +26,7 @@ export function StickyStack({ children }: { children: ReactNode }) {
     <div
       ref={containerRef}
       className="relative"
-      // Cada filho consome 100vh + extra para suavizar a transição
-      style={{ height: `${count * 130}vh` }}
+      style={{ height: `${count * 100}vh` }}
     >
       {items.map((child, i) => (
         <StickyLayer
@@ -51,52 +53,60 @@ function StickyLayer({
   total: number;
   progress: MotionValue<number>;
 }) {
-  // Janela de "vida" deste item dentro do progresso total
-  const start = index / total;
-  const end = (index + 1) / total;
+  const isFirst = index === 0;
   const isLast = index === total - 1;
 
-  // Transição começa em 55% da janela e termina em 95% (deixa "ar" para ler)
-  const tStart = start + (end - start) * 0.55;
-  const tEnd = start + (end - start) * 0.95;
+  // Janela de transição entre este item e o próximo
+  // Cada item domina de (i/total) a ((i+1)/total)
+  // A transição ocorre na fronteira: vamos de (i+0.6)/total a (i+1)/total
+  const outStart = (index + 0.6) / total;
+  const outEnd = (index + 1) / total;
 
-  // Escala recua de 1 -> 0.88 (mais visível)
-  const scale = useTransform(
+  // ENTRADA: este item sobe de baixo na fronteira anterior
+  const inStart = (index - 0.4) / total;
+  const inEnd = index / total;
+
+  // Animação de SAÍDA (este item recua quando o próximo cobre)
+  const scaleOut = useTransform(
     progress,
-    [start, tStart, tEnd],
-    isLast ? [1, 1, 1] : [1, 1, 0.88],
+    [outStart, outEnd],
+    isLast ? [1, 1] : [1, 0.9],
   );
-  // Opacidade vai de 1 -> 0.3 para criar sensação de "indo para trás"
-  const opacity = useTransform(
+  const opacityOut = useTransform(
     progress,
-    [start, tStart, tEnd],
-    isLast ? [1, 1, 1] : [1, 1, 0.3],
+    [outStart, outEnd],
+    isLast ? [1, 1] : [1, 0.35],
   );
-  // Leve deslocamento vertical para reforçar o "afundar"
-  const y = useTransform(
+  const filterOut = useTransform(
     progress,
-    [start, tStart, tEnd],
-    isLast ? [0, 0, 0] : [0, 0, -60],
+    [outStart, outEnd],
+    isLast ? ["blur(0px)", "blur(0px)"] : ["blur(0px)", "blur(3px)"],
   );
-  // Filtro de blur sutil — efeito profundidade
-  const filter = useTransform(
+
+  // Animação de ENTRADA (este item sobe de baixo)
+  const yIn = useTransform(
     progress,
-    [start, tStart, tEnd],
-    isLast ? ["blur(0px)", "blur(0px)", "blur(0px)"] : ["blur(0px)", "blur(0px)", "blur(4px)"],
+    [inStart, inEnd],
+    isFirst ? ["0%", "0%"] : ["100%", "0%"],
   );
 
   return (
     <div
-      className="sticky top-0 h-screen w-full"
+      className="sticky top-0 h-screen w-full overflow-hidden"
       style={{ zIndex: index + 1 }}
     >
       <motion.div
-        style={{ scale, opacity, y, filter }}
-        className="h-full w-full bg-background flex flex-col justify-center will-change-transform"
+        style={{
+          y: yIn,
+          scale: scaleOut,
+          opacity: opacityOut,
+          filter: filterOut,
+        }}
+        className="h-full w-full bg-background flex flex-col justify-center will-change-transform relative"
       >
-        {/* Linha-luz no topo da seção entrando, reforça a sobreposição */}
-        {index > 0 && (
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
+        {/* Linha-luz no topo da seção entrando */}
+        {!isFirst && (
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/70 to-transparent z-10" />
         )}
         {children}
       </motion.div>
