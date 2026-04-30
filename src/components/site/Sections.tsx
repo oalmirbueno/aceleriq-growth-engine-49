@@ -47,177 +47,180 @@ import {
 // ─────────────────────────────────────────────────────────────
 export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section id="top" className="relative min-h-[90vh] overflow-hidden pt-32 flex items-center md:pt-40">
-      <div className="grid-perspective absolute inset-0 -z-20" />
-      <div className="hero-overlay absolute inset-0 -z-10" />
-      
-      <div className="container-aceleriq relative">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="mx-auto max-w-4xl text-center"
-        >
-          <span className="inline-flex items-center gap-2.5 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-[11px] font-medium text-primary backdrop-blur-sm">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-            </span>
-            <span className="text-mono uppercase tracking-[0.2em]">
-              Engenharia de Crescimento 2.0
-            </span>
-          </span>
+    <section
+      id="top"
+      className="relative flex min-h-[100svh] items-center overflow-hidden pt-28 md:pt-32"
+    >
+      <div className="hero-bg absolute inset-0 -z-20" />
+      <div className="hero-vignette absolute inset-0 -z-10" />
 
-          <h1 className="mt-8 font-display text-[44px] font-semibold leading-[0.95] tracking-[-0.04em] md:text-7xl lg:text-[88px]">
-            A engenharia que <br className="hidden md:block" />
-            faz seu negócio <br className="hidden md:block" />
-            <span className="text-primary neon-text-glow">crescer com método</span>.
-          </h1>
-
-          <p className="mx-auto mt-8 max-w-xl text-[16px] leading-relaxed text-muted-foreground/90 md:text-lg">
-            Aceleriq não é uma agência de marketing comum. É a engenharia que une estratégia,
-            processo, CRM, dados e IA num único sistema de alto desempenho operando dentro da sua empresa.
-          </p>
-
-          <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button
-              onClick={onDiagnostico}
-              size="lg"
-              className="group h-12 rounded-md bg-primary px-6 text-[14px] font-semibold text-primary-foreground btn-interactive hover:bg-primary"
+      <div className="container-aceleriq relative w-full">
+        <div className="grid items-center gap-12 lg:grid-cols-12">
+          {/* Coluna esquerda — headline */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-7"
+          >
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="inline-flex items-center gap-2.5 rounded-full border border-primary/25 bg-primary/[0.06] px-3.5 py-1.5 text-[11px] font-medium text-primary backdrop-blur-md"
             >
-              Fazer Diagnóstico Gratuito
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="h-12 rounded-md border-border bg-transparent px-6 text-[14px] font-medium hover:bg-card"
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
+              </span>
+              <span className="text-mono uppercase tracking-[0.2em]">
+                Engenharia de Crescimento
+              </span>
+            </motion.span>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-7 font-display text-[44px] font-medium leading-[0.98] tracking-[-0.045em] md:text-[68px] lg:text-[84px]"
             >
-              <a
-                href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)}
-                target="_blank"
-                rel="noreferrer"
+              Acelere seu negócio
+              <br />
+              <span className="relative inline-block">
+                <span className="bg-gradient-to-r from-foreground via-foreground to-primary bg-clip-text text-transparent">
+                  com método,
+                </span>
+              </span>
+              <br />
+              <span className="text-primary neon-text-glow">dados e IA</span>
+              <span className="text-primary">.</span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.35 }}
+              className="mt-7 max-w-xl text-[15px] leading-relaxed text-muted-foreground md:text-[17px]"
+            >
+              Aceleriq não é uma agência de marketing. É a engenharia que une
+              estratégia, processo comercial, CRM, dados e inteligência
+              artificial num único sistema operando dentro do seu negócio.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.5 }}
+              className="mt-9 flex flex-col items-start gap-3 sm:flex-row sm:items-center"
+            >
+              <Button
+                onClick={onDiagnostico}
+                size="lg"
+                className="group h-12 rounded-md bg-primary px-6 text-[14px] font-semibold text-primary-foreground btn-interactive hover:bg-primary"
               >
-                <MessageCircle className="h-4 w-4 text-primary" />
-                Falar no WhatsApp
-              </a>
-            </Button>
-          </div>
+                Fazer Diagnóstico Gratuito
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="h-12 rounded-md border-border bg-background/40 px-6 text-[14px] font-medium backdrop-blur hover:bg-card"
+              >
+                <a
+                  href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <MessageCircle className="h-4 w-4 text-primary" />
+                  Falar no WhatsApp
+                </a>
+              </Button>
+            </motion.div>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
-            <span className="inline-flex items-center gap-1.5">
-              <ShieldCheck className="h-3.5 w-3.5 text-primary" />
-              Sem compromisso
-            </span>
-            <span className="text-border">/</span>
-            <span>Resultado em 5 minutos</span>
-            <span className="text-border">/</span>
-            <span>Baseado em dados</span>
-          </div>
-        </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.7, delay: 0.7 }}
+              className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] uppercase tracking-[0.16em] text-muted-foreground"
+            >
+              <span className="inline-flex items-center gap-1.5">
+                <ShieldCheck className="h-3.5 w-3.5 text-primary" />
+                Sem compromisso
+              </span>
+              <span className="text-border">/</span>
+              <span>Resultado em 5 minutos</span>
+              <span className="text-border">/</span>
+              <span>Baseado em dados</span>
+            </motion.div>
+          </motion.div>
 
-        {/* Console / dashboard mock */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-          className="relative mx-auto mt-20 max-w-5xl"
-        >
-          <div className="relative overflow-hidden rounded-2xl border border-border bg-card/60 backdrop-blur">
-            {/* Top bar terminal */}
-            <div className="flex items-center justify-between border-b border-border bg-background/60 px-4 py-2.5">
-              <div className="flex items-center gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-full bg-muted" />
-                <span className="h-2.5 w-2.5 rounded-full bg-muted" />
-                <span className="h-2.5 w-2.5 rounded-full bg-primary/70" />
+          {/* Coluna direita — KPI flutuante (apenas desktop) */}
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="hidden lg:col-span-5 lg:block"
+          >
+            <div className="relative ml-auto max-w-sm rounded-2xl border border-border/80 bg-background/40 p-6 backdrop-blur-xl shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]">
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
+
+              <div className="flex items-center justify-between">
+                <span className="label-eyebrow flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary pulse-dot" />
+                  Cockpit · Live
+                </span>
+                <span className="text-mono text-[10px] text-muted-foreground">
+                  Q4 / 2026
+                </span>
               </div>
-              <span className="text-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
-                aceleriq · cockpit/v1
-              </span>
-              <span className="hidden text-mono text-[11px] text-muted-foreground sm:inline">
-                live
-              </span>
-            </div>
 
-            <div className="p-5 md:p-7">
-              <div className="grid gap-4 md:grid-cols-3">
+              <div className="mt-6">
+                <span className="label-eyebrow">Score · Maturidade</span>
+                <div className="mt-2 flex items-baseline gap-2">
+                  <span className="text-mono text-[56px] font-semibold leading-none tracking-tight text-primary neon-text-glow">
+                    88
+                  </span>
+                  <span className="text-mono text-[13px] text-muted-foreground">
+                    /100
+                  </span>
+                  <span className="ml-auto inline-flex items-center gap-1 rounded-full border border-primary/25 bg-primary/[0.08] px-2 py-0.5 text-[10px] font-medium text-primary">
+                    <ArrowUpRight className="h-3 w-3" />
+                    +56
+                  </span>
+                </div>
+                <div className="mt-4 h-[3px] w-full overflow-hidden rounded-full bg-secondary">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: "88%" }}
+                    transition={{ duration: 1.4, delay: 1, ease: "easeOut" }}
+                    className="h-full rounded-full bg-primary"
+                  />
+                </div>
+              </div>
+
+              <div className="mt-6 grid grid-cols-2 gap-3 border-t border-border/80 pt-5">
                 {[
-                  {
-                    icon: TrendingUp,
-                    label: "Receita previsível",
-                    value: "+184%",
-                    sub: "ROI médio · 90 dias",
-                  },
-                  {
-                    icon: Bot,
-                    label: "IA em operação",
-                    value: "24/7",
-                    sub: "Automações ativas",
-                  },
-                  {
-                    icon: Target,
-                    label: "Pipeline qualificado",
-                    value: "3.2x",
-                    sub: "Conversão comercial",
-                  },
-                ].map((m) => (
-                  <div
-                    key={m.label}
-                    className="rounded-lg border border-border/80 bg-background/40 p-4"
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="label-eyebrow">{m.label}</span>
-                      <m.icon className="h-3.5 w-3.5 text-primary" />
-                    </div>
-                    <div className="mt-3 flex items-baseline gap-2">
-                      <span className="text-mono text-3xl font-semibold tracking-tight">
-                        {m.value}
-                      </span>
-                      <ArrowUpRight className="h-3.5 w-3.5 text-primary" />
-                    </div>
-                    <div className="mt-0.5 text-[11px] text-muted-foreground">
-                      {m.sub}
+                  { k: "ROI · 90d", v: "+184%" },
+                  { k: "Pipeline", v: "3.2x" },
+                  { k: "CAC", v: "−42%" },
+                  { k: "Renovação", v: "97%" },
+                ].map((s) => (
+                  <div key={s.k}>
+                    <span className="label-eyebrow">{s.k}</span>
+                    <div className="mt-1 text-mono text-lg font-semibold text-foreground">
+                      {s.v}
                     </div>
                   </div>
                 ))}
               </div>
-
-              <div className="mt-5 rounded-lg border border-border/80 bg-background/40 p-5">
-                <div className="mb-4 flex items-center justify-between">
-                  <span className="label-eyebrow">
-                    Maturidade em crescimento e IA
-                  </span>
-                  <span className="text-mono text-[11px] text-muted-foreground">
-                    Q1 → Q4
-                  </span>
-                </div>
-                <div className="flex h-24 items-end gap-1.5">
-                  {[
-                    28, 34, 30, 42, 38, 50, 46, 58, 54, 66, 62, 74, 70, 82, 78,
-                    88,
-                  ].map((h, i) => (
-                    <div
-                      key={i}
-                      className="flex-1 rounded-sm bg-primary/80"
-                      style={{
-                        height: `${h}%`,
-                        opacity: 0.35 + (i / 16) * 0.65,
-                      }}
-                    />
-                  ))}
-                </div>
-                <div className="mt-3 flex items-center justify-between text-[11px] text-muted-foreground">
-                  <span className="text-mono">score · 32</span>
-                  <span className="text-mono text-primary">score · 88</span>
-                </div>
-              </div>
             </div>
-          </div>
-
-          <div className="pointer-events-none absolute inset-x-0 -bottom-10 h-32 bg-gradient-to-t from-background to-transparent" />
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
+
+      {/* Fade inferior para a próxima seção */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
     </section>
   );
 }
