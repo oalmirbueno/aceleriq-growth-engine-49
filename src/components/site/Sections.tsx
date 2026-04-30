@@ -44,14 +44,13 @@ import {
 import aiEngineerImg from "@/assets/ai-engineer.jpg";
 import { Editable } from "@/components/editor/LayoutEditor";
 import { CountUp } from "@/components/ui/CountUp";
-import { Reveal } from "@/components/site/Reveal";
 
 // ─────────────────────────────────────────────────────────────
 // HERO
 // ─────────────────────────────────────────────────────────────
 export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section id="top" className="relative lg:min-h-screen flex items-center justify-center pt-24 pb-12 md:pt-28 md:pb-16 lg:pb-20 overflow-hidden bg-grid-tech">
+    <section id="top" className="relative min-h-screen flex items-center justify-center pt-20 pb-16 lg:pb-20 overflow-hidden bg-grid-tech">
       {/* Apenas o quadriculado, sem linhas */}
       {/* Background Decorativo - Camadas Técnicas */}
       <div className="hero-background" />
@@ -64,21 +63,21 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="self-start mb-6 md:mb-8"
+            className="self-start mb-8"
           >
             <span className="font-mono text-[10px] tracking-[0.4em] uppercase py-1 border-b border-primary text-primary">
               Status do Sistema: Operacional // Escala de Engenharia: Global
             </span>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center w-full">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <Editable id="hero-headline">
                 <motion.h1 
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1, ease: "circOut" }}
-                  className="text-[2rem] sm:text-5xl md:text-6xl lg:text-[5.5rem] font-bold leading-[0.95] flex flex-col"
+                  className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.9] flex flex-col"
                 >
                   <span className="text-stroke">Protocolo</span>
                   <span className="text-primary text-glow italic">de Engenharia</span>
@@ -90,7 +89,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
-                className="mt-8 md:mt-12 max-w-lg"
+                className="mt-12 max-w-lg"
               >
                 <p className="text-lg text-muted-foreground leading-relaxed border-l-2 border-primary/30 pl-6">
                   Abandonamos o "marketing de esperança". Instalamos sistemas de engenharia de dados e IA que garantem escala previsível e ROI matemático.
@@ -235,10 +234,8 @@ const PAINS = [
 
 export function Pains() {
   return (
-    <section className="relative surface-emerald noise-overlay py-12 md:py-20 bg-grid-ambient overflow-hidden">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-      <div className="orb-glow orb-emerald top-[-120px] left-[-100px] h-[380px] w-[380px]" />
-      <div className="orb-glow orb-blue bottom-[-120px] right-[-80px] h-[300px] w-[300px] opacity-20" />
+    <section className="relative py-10 md:py-14 bg-grid-ambient overflow-hidden">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
       
       <div className="container-aceleriq relative z-10">
         <SectionHeader
@@ -289,10 +286,10 @@ const PILLARS = [
 
 export function About() {
   return (
-    <section className="relative surface-midnight noise-overlay py-12 md:py-20 overflow-hidden bg-grid-ambient">
-      <div className="orb-glow orb-blue top-[-100px] right-[-100px] h-[420px] w-[420px]" />
-      <div className="orb-glow orb-emerald bottom-[-80px] left-[-60px] h-[280px] w-[280px] opacity-25" />
-      <div className="container-aceleriq relative z-10">
+    <section className="relative py-10 md:py-14 overflow-hidden bg-grid-ambient">
+      {/* Glow ambiente verde achatado e sutil */}
+      <div className="pointer-events-none absolute top-1/2 left-1/2 h-[140px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.03] blur-[90px]" />
+      <div className="container-aceleriq">
         <div className="grid gap-5 lg:grid-cols-12 lg:items-start">
           <motion.div
             initial={{ opacity: 0, x: -16 }}
@@ -378,7 +375,7 @@ export function Method() {
   return (
     <section
       id="metodo"
-      className="relative surface-graphite noise-overlay py-12 md:py-20 overflow-hidden bg-grid-ambient"
+      className="relative py-10 md:py-14 overflow-hidden bg-grid-ambient"
     >
       {/* Brilho ambiente verde, achatado e sutil — sem bolha redonda */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 h-[150px] w-[860px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.035] blur-[90px]" />
@@ -539,7 +536,7 @@ export function Areas() {
   return (
     <section
       id="areas"
-      className="relative surface-emerald noise-overlay py-12 md:py-20 overflow-hidden bg-grid-ambient"
+      className="relative py-10 md:py-14 overflow-hidden bg-grid-ambient"
     >
       {/* Glow ambiente verde achatado e sutil */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 h-[140px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.03] blur-[90px]" />
@@ -614,7 +611,7 @@ const FIT_NO = [
 
 export function FitFor() {
   return (
-    <section className="relative surface-midnight noise-overlay py-12 md:py-20 overflow-hidden bg-grid-ambient">
+    <section className="relative py-10 md:py-14 overflow-hidden bg-grid-ambient">
       {/* Glow ambiente verde mais presente */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 h-[280px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.06] blur-[100px]" />
       <div className="pointer-events-none absolute top-0 left-1/2 h-[1px] w-[60%] -translate-x-1/2 bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
@@ -714,9 +711,8 @@ export function FitFor() {
 // ─────────────────────────────────────────────────────────────
 export function DiagnosticoCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section id="diagnostico" className="relative surface-emerald noise-overlay py-12 md:py-20 bg-grid-ambient overflow-hidden">
-      <div className="orb-glow orb-emerald top-[-100px] right-[-80px] h-[360px] w-[360px]" />
-      <div className="container-aceleriq relative z-10">
+    <section id="diagnostico" className="relative py-10 md:py-14 bg-grid-ambient">
+      <div className="container-aceleriq">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -836,10 +832,8 @@ const CASES = [
 
 export function Results() {
   return (
-    <section id="resultados" className="relative surface-amethyst noise-overlay py-12 md:py-20 bg-grid-ambient overflow-hidden">
-      <div className="orb-glow orb-violet top-1/3 right-[-120px] h-[400px] w-[400px]" />
-      <div className="orb-glow orb-emerald bottom-[-100px] left-[-80px] h-[320px] w-[320px] opacity-25" />
-      <div className="container-aceleriq relative z-10">
+    <section id="resultados" className="relative py-10 md:py-14 bg-grid-ambient">
+      <div className="container-aceleriq">
         <SectionHeader
           eyebrow="[ 07 ] · Resultados"
           title="Quando a engenharia entra, o resultado aparece."
@@ -926,10 +920,8 @@ export function Testimonials() {
   // Duplica para criar loop infinito visual
   const loop = [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS];
   return (
-    <section className="relative surface-warm noise-overlay py-12 md:py-20 bg-grid-ambient overflow-hidden">
-      <div className="orb-glow orb-amber top-1/4 left-[-100px] h-[420px] w-[420px]" />
-      <div className="orb-glow orb-emerald bottom-[-80px] right-1/4 h-[300px] w-[300px] opacity-25" />
-      <div className="container-aceleriq relative z-10">
+    <section className="relative py-10 md:py-14 bg-grid-ambient overflow-hidden">
+      <div className="container-aceleriq">
         <SectionHeader
           eyebrow="[ 08 ] · Depoimentos"
           title="O que dizem os fundadores que aceleraram conosco."
@@ -1018,7 +1010,7 @@ const COMPARE: [string, string, string][] = [
 
 export function Compare() {
   return (
-    <section className="relative surface-graphite noise-overlay py-12 md:py-20 bg-grid-ambient">
+    <section className="relative py-10 md:py-14 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
           eyebrow="[ 09 ] · Comparativo"
@@ -1071,9 +1063,7 @@ export function Compare() {
 // ─────────────────────────────────────────────────────────────
 export function WhyNow() {
   return (
-    <section className="relative surface-midnight noise-overlay py-12 md:py-20 bg-grid-ambient overflow-hidden">
-      <div className="orb-glow orb-blue top-1/3 left-[-100px] h-[360px] w-[360px]" />
-      <div className="orb-glow orb-violet bottom-[-80px] right-[-60px] h-[280px] w-[280px] opacity-30" />
+    <section className="relative pt-10 pb-4 md:pt-12 md:pb-5 bg-grid-ambient overflow-hidden">
 
       <div className="container-aceleriq relative z-10">
         <motion.div
@@ -1173,7 +1163,7 @@ const FAQS = [
 
 export function FAQ() {
   return (
-    <section className="relative surface-graphite noise-overlay py-12 md:py-20 bg-grid-ambient overflow-hidden">
+    <section className="relative pt-3 pb-10 md:pt-4 md:pb-14 bg-grid-ambient overflow-hidden">
       {/* Glow lateral animado */}
       <div className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 h-[400px] w-[300px] bg-primary/[0.04] blur-[120px] rounded-full" />
       <div className="pointer-events-none absolute right-0 top-1/3 h-[300px] w-[250px] bg-accent/[0.04] blur-[120px] rounded-full" />
@@ -1223,9 +1213,8 @@ export function FAQ() {
 // ─────────────────────────────────────────────────────────────
 export function FinalCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section className="relative surface-emerald noise-overlay py-12 md:py-20 bg-grid-ambient overflow-hidden">
-      <div className="orb-glow orb-emerald top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] opacity-30" />
-      <div className="container-aceleriq relative z-10">
+    <section className="relative py-10 md:py-14 bg-grid-ambient">
+      <div className="container-aceleriq">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -1315,19 +1304,16 @@ function SectionHeader({
   description?: string;
 }) {
   return (
-    <Reveal className="mx-auto max-w-2xl text-center">
-      <div>
-        <span className="label-eyebrow">{eyebrow}</span>
-        <h2 className="mt-3 font-display text-3xl font-medium leading-[1.1] tracking-[-0.03em] md:text-[44px]">
-          {title}
-        </h2>
-        {description && (
-          <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-muted-foreground md:text-base">
-            {description}
-          </p>
-        )}
-      </div>
-    </Reveal>
+    <div className="mx-auto max-w-2xl text-center">
+      <span className="label-eyebrow">{eyebrow}</span>
+      <h2 className="mt-3 font-display text-3xl font-medium leading-[1.1] tracking-[-0.03em] md:text-[44px]">
+        {title}
+      </h2>
+      {description && (
+        <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-muted-foreground md:text-base">
+          {description}
+        </p>
+      )}
+    </div>
   );
 }
-
