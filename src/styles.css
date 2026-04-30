@@ -57,6 +57,18 @@
     max-width: 85rem;
   }
 
+  /* Hero background image with overlay */
+  .hero-background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url('/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.2; /* Sutil para não atrapalhar a leitura */
+    filter: saturate(0) contrast(1.2); /* Estética técnica/P&B */
+  }
+
   /* Grid Brutalista */
   .bg-grid-tech {
     background-size: 50px 50px;
