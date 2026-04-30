@@ -32,10 +32,10 @@ export function Footer() {
         <div className="md:col-span-3">
           <h4 className="label-eyebrow">Navegação</h4>
           <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
-            <li><a href="#metodo" className="hover:text-foreground">Método ACELERA</a></li>
-            <li><a href="#areas" className="hover:text-foreground">Áreas de atuação</a></li>
-            <li><a href="#resultados" className="hover:text-foreground">Resultados</a></li>
-            <li><a href="#faq" className="hover:text-foreground">FAQ</a></li>
+            <li><Link to="/" hash="metodo" className="hover:text-foreground">Método ACELERA</Link></li>
+            <li><Link to="/" hash="areas" className="hover:text-foreground">Áreas de atuação</Link></li>
+            <li><Link to="/" hash="resultados" className="hover:text-foreground">Resultados</Link></li>
+            <li><Link to="/" hash="faq" className="hover:text-foreground">FAQ</Link></li>
           </ul>
         </div>
 
