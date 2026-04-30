@@ -82,7 +82,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-7 font-display text-[44px] font-semibold leading-[0.9] tracking-[-0.05em] md:text-[84px] lg:text-[118px]"
+              className="mt-7 font-display text-[44px] font-bold leading-[0.9] tracking-[-0.06em] md:text-[88px] lg:text-[124px]"
             >
               <span className="headline-shadow block">Crescimento</span>
               <span className="relative inline-block bg-gradient-to-br from-primary via-primary to-primary/60 bg-clip-text text-transparent neon-text-glow">
@@ -106,7 +106,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.35 }}
-              className="mx-auto mt-8 max-w-xl text-[16px] leading-relaxed text-muted-foreground md:text-[18px]"
+              className="mx-auto mt-8 max-w-xl text-[16px] leading-relaxed text-muted-foreground/90 font-light md:text-[18px]"
             >
               Unimos estratégia, processo comercial, CRM, dados e IA num único
               sistema instalado dentro do seu negócio — para escalar com
@@ -168,7 +168,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
             transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="relative mt-16 w-full max-w-5xl"
           >
-            <div className="group relative overflow-hidden rounded-2xl border border-white/5 bg-[#0D0E14]/80 p-1 backdrop-blur-sm transition-all hover:border-primary/20 hover:shadow-[0_0_80px_-20px_hsl(var(--primary)/0.15)]">
+            <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[#0A0B10]/90 p-1 backdrop-blur-md transition-all duration-700 hover:border-primary/30 hover:shadow-[0_40px_100px_-20px_hsl(var(--primary)/0.12)]">
               {/* Header do Mockup */}
               <div className="flex items-center justify-between border-b border-white/5 bg-white/[0.02] px-4 py-2">
                 <div className="flex gap-1.5">
