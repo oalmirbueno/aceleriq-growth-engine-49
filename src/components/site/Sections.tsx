@@ -608,7 +608,7 @@ export function FitFor() {
 
       <div className="container-aceleriq relative">
         <SectionHeader
-          eyebrow="· 05 · Para quem é"
+          eyebrow="· 05 · Para quem é · R$ 100k+ · Produto validado · Quer profissionalizar"
           title="É parceria séria. Vale a pena saber se serve para você."
         />
 
