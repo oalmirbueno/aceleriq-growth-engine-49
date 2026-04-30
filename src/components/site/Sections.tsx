@@ -175,7 +175,8 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                   </div>
                 </div>
               </div>
-            </motion.div>
+              </motion.div>
+            </Editable>
           </div>
         </div>
       </div>
