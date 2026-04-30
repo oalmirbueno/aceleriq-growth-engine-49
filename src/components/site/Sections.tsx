@@ -1092,7 +1092,7 @@ function TestimonialCard({ t }: { t: TestimonialItem }) {
   const monogram = (t.company || t.name).charAt(0);
   return (
     <figure
-      className="liquid-glass relative rounded-2xl p-5 w-[400px] flex-shrink-0 transition-all duration-300 hover:-translate-y-0.5"
+      className="liquid-glass relative rounded-2xl p-5 w-[300px] sm:w-[360px] md:w-[400px] flex-shrink-0 transition-all duration-300 hover:-translate-y-0.5"
     >
       {/* Header: avatar + identidade + selo verificado */}
       <div className="flex items-start gap-3">
