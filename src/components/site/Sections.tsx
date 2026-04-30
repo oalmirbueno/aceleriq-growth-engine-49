@@ -804,19 +804,19 @@ const METRICS = [
 
 const CASES = [
   {
-    segment: "SaaS B2B",
-    challenge: "Time comercial sem método e CRM zerado",
-    result: "+220% em pipeline qualificado em 4 meses",
+    segment: "SaaS B2B · Gestão financeira",
+    challenge: "SDRs sem playbook, CRM desatualizado e ciclo de venda de 90+ dias sem previsibilidade de fechamento.",
+    result: "Pipeline qualificado +220% e ciclo de venda reduzido para 42 dias em 4 meses.",
   },
   {
-    segment: "E-commerce",
-    challenge: "Tráfego sem retorno e operação manual",
-    result: "ROAS de 1.8 → 4.6 com automação e IA",
+    segment: "E-commerce · Moda premium",
+    challenge: "ROAS travado em 1.8, dependência total de mídia paga e nenhuma automação de retenção pós-compra.",
+    result: "ROAS escalado para 4.6, LTV +63% com fluxos de IA em CRM e e-mail comportamental.",
   },
   {
-    segment: "Educação",
-    challenge: "Funil quebrado e dependência do dono",
-    result: "Operação 100% sistemizada e CAC -38%",
+    segment: "Educação · Cursos high-ticket",
+    challenge: "Funil quebrado entre marketing e vendas, operação dependente do fundador e CAC subindo todo mês.",
+    result: "Operação 100% sistemizada, CAC -38% e fundador fora da operação comercial em 5 meses.",
   },
 ];
 
