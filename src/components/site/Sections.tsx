@@ -84,7 +84,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
               transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
               className="mt-7 font-display text-[48px] font-medium leading-[0.9] tracking-[-0.05em] md:text-[88px] lg:text-[124px]"
             >
-              Acelere seu negócio <br className="hidden md:block" />
+              <span className="headline-shadow">Acelere seu negócio</span> <br className="hidden md:block" />
               <span className="relative inline-block bg-gradient-to-r from-primary via-primary/90 to-primary/70 bg-clip-text text-transparent neon-text-glow">
                 com método, dados e IA
               </span>
