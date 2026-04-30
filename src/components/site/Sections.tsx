@@ -49,6 +49,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
     <section id="top" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-grid-tech">
       {/* Background Decorativo - Camadas Técnicas */}
+      <div className="hero-background" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background z-10" />
       
       <div className="container-aceleriq relative z-20">
