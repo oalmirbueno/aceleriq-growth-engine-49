@@ -236,7 +236,9 @@ const PAINS = [
 export function Pains() {
   return (
     <section className="relative surface-emerald noise-overlay py-12 md:py-20 bg-grid-ambient overflow-hidden">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+      <div className="orb-glow orb-emerald top-[-120px] left-[-100px] h-[380px] w-[380px]" />
+      <div className="orb-glow orb-blue bottom-[-120px] right-[-80px] h-[300px] w-[300px] opacity-20" />
       
       <div className="container-aceleriq relative z-10">
         <SectionHeader
