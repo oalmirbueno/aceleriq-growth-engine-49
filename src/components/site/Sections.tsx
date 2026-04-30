@@ -612,9 +612,9 @@ const FIT_NO = [
 export function FitFor() {
   return (
     <section className="relative py-8 md:py-10 overflow-hidden bg-grid-ambient">
-      {/* Glow ambiente verde achatado e sutil */}
-      <div className="pointer-events-none absolute top-1/2 left-1/2 h-[130px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.025] blur-[90px]" />
-      
+      {/* Glow ambiente verde mais presente */}
+      <div className="pointer-events-none absolute top-1/2 left-1/2 h-[280px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.06] blur-[100px]" />
+      <div className="pointer-events-none absolute top-0 left-1/2 h-[1px] w-[60%] -translate-x-1/2 bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
 
       <div className="container-aceleriq relative z-10">
         <SectionHeader
@@ -627,29 +627,29 @@ export function FitFor() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
-          className="mt-5 md:mt-6 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.03] to-transparent shadow-[0_30px_80px_-30px_oklch(0%_0_0/0.6)]"
+          className="mt-5 md:mt-6 overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/[0.04] via-card/40 to-card/20 shadow-[0_0_60px_-15px_oklch(85%_0.2_145/0.25),0_30px_80px_-30px_oklch(0%_0_0/0.6)]"
         >
           {/* Cabeçalho da tabela */}
           <div className="grid grid-cols-1 md:grid-cols-2">
-            <div className="relative flex items-center gap-3 border-b border-white/10 bg-primary/[0.08] p-5 md:border-b-0 md:border-r">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-background shadow-[0_0_20px_oklch(85%_0.2_145/0.6)]">
+            <div className="relative flex items-center gap-3 border-b border-primary/20 bg-primary/[0.12] p-5 md:border-b-0 md:border-r">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-background shadow-[0_0_25px_oklch(85%_0.2_145/0.8)]">
                 <Check className="h-4 w-4" strokeWidth={3} />
               </span>
               <div>
                 <h3 className="font-display text-base font-semibold uppercase tracking-[0.14em] text-primary">
                   É para você
                 </h3>
-                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary/60">
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary/70">
                   Match — vamos crescer juntos
                 </p>
               </div>
             </div>
-            <div className="relative flex items-center gap-3 bg-white/[0.02] p-5">
+            <div className="relative flex items-center gap-3 bg-white/[0.03] p-5">
               <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-muted-foreground">
                 <X className="h-4 w-4" strokeWidth={3} />
               </span>
               <div>
-                <h3 className="font-display text-base font-semibold uppercase tracking-[0.14em] text-foreground/80">
+                <h3 className="font-display text-base font-semibold uppercase tracking-[0.14em] text-foreground/85">
                   Não é para você
                 </h3>
                 <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
