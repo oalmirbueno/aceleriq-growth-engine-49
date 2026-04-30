@@ -1221,8 +1221,9 @@ export function FAQ() {
 // ─────────────────────────────────────────────────────────────
 export function FinalCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section className="relative surface-emerald noise-overlay py-12 md:py-20 bg-grid-ambient">
-      <div className="container-aceleriq">
+    <section className="relative surface-emerald noise-overlay py-12 md:py-20 bg-grid-ambient overflow-hidden">
+      <div className="orb-glow orb-emerald top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] opacity-30" />
+      <div className="container-aceleriq relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
