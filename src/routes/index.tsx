@@ -47,28 +47,24 @@ function Index() {
       <main>
         <Hero onDiagnostico={openDiagnostico} />
 
-        {/* Seções 2 e 3 — efeito sticky stack (roleta) */}
+        {/* Sticky stack global — todas as seções (exceto Hero) entram sobrepondo a anterior.
+            Seções com conteúdo alto (Areas, Results, FAQ) ficam fora do stack para não cortar conteúdo. */}
         <StickyStack>
           <Pains />
           <About />
+          <Method />
+          <FitFor />
+          <DiagnosticoCTA onDiagnostico={openDiagnostico} />
+          <Testimonials />
+          <Compare />
+          <WhyNow />
+          <FinalCTA onDiagnostico={openDiagnostico} />
         </StickyStack>
 
-        {/* Seção 4 — animações laterais + texto saindo de baixo */}
-        <Method />
-
-        {/* Seções 5 e 6 — normais (conteúdo alto não cabe em h-screen) */}
+        {/* Seções altas — fluxo normal (não cabem em 100vh) */}
         <Areas />
-        <FitFor />
-
-        {/* Seções 7 e 8 — normais (Results tem conteúdo alto, não cabe em h-screen) */}
-        <DiagnosticoCTA onDiagnostico={openDiagnostico} />
         <Results />
-
-        <Testimonials />
-        <Compare />
-        <WhyNow />
         <FAQ />
-        <FinalCTA onDiagnostico={openDiagnostico} />
       </main>
       <Footer />
       <DiagnosticoModal open={diagOpen} onOpenChange={setDiagOpen} />
