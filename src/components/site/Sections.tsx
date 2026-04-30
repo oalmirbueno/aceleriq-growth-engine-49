@@ -1092,35 +1092,35 @@ export function WhyNow() {
 const FAQS = [
   {
     q: "Quanto custa trabalhar com a Aceleriq?",
-    a: "Depende do estágio e do escopo. Trabalhamos com programas mensais de engenharia de crescimento. No diagnóstico estratégico definimos juntos o investimento que faz sentido para o seu momento.",
+    a: "O investimento varia conforme o estágio da empresa e o escopo do programa (estratégia, vendas, dados, IA, mídia). Operamos com programas mensais de engenharia de crescimento que partem de faixas compatíveis com empresas a partir de R$ 100k/mês de faturamento. No Diagnóstico Gratuito mapeamos sua maturidade e desenhamos juntos o investimento que faz sentido para o seu momento — sem proposta padronizada e sem inflar escopo.",
   },
   {
     q: "Em quanto tempo eu vejo resultado?",
-    a: "Ajustes táticos aparecem nas primeiras semanas. Resultado estrutural — previsibilidade, CAC, processo comercial — costuma se consolidar entre 60 e 120 dias.",
+    a: "Resultados táticos (limpeza de CRM, automações, primeiros ajustes de mídia, reorganização de funil) aparecem nas primeiras 2 a 4 semanas. Resultado estrutural — previsibilidade comercial, redução real de CAC, processo de vendas rodando sem o fundador, IA gerando alavancagem — costuma se consolidar entre 60 e 120 dias. Empresas que chegam mais maduras aceleram mais rápido. Nenhuma promessa de 7 dias: construímos sistema, não milagre.",
   },
   {
     q: "Vocês atendem qualquer segmento?",
-    a: "Atuamos com SaaS, e-commerce, educação, serviços profissionais, indústria e infoprodutos. Trabalhamos melhor com empresas a partir de R$ 100k/mês.",
+    a: "Atuamos com SaaS, e-commerce, educação, infoprodutos, serviços profissionais B2B e indústrias com vendas consultivas. O critério não é o segmento, é a maturidade: produto/serviço validado, faturamento mensal a partir de R$ 100k e disposição para profissionalizar marketing, vendas e operação. Se você é early-stage validando oferta, não somos o parceiro certo agora — e dizemos isso com clareza no diagnóstico.",
   },
   {
     q: "Existe contrato de fidelidade?",
-    a: "Trabalhamos com ciclos mínimos para garantir entrega — geralmente 6 meses — porque construir um sistema de crescimento não é trabalho de 30 dias.",
+    a: "Trabalhamos com ciclos mínimos de 6 meses. Não é amarração comercial — é honestidade técnica: construir um sistema de crescimento (estratégia + dados + processo comercial + IA + operação) não acontece em 30 dias. Quem promete isso está vendendo entregável avulso, não engenharia. Após o ciclo inicial, a relação segue mensal, sem multa, enquanto fizer sentido para os dois lados.",
   },
   {
     q: "Qual a diferença real para uma agência?",
-    a: "Agência entrega peças. A Aceleriq entrega um sistema integrado de estratégia, vendas, dados e IA conectado ao seu negócio. Resultado é receita, não relatório de impressões.",
+    a: "Agência entrega peças isoladas (criativo, post, anúncio, relatório). A Aceleriq entrega um sistema integrado: diagnóstico estratégico, estruturação de CRM e processo comercial, dashboards de receita, agentes de IA conectados ao seu negócio, mídia orientada a pipeline e operação que roda dentro dos seus times e ferramentas. O entregável final é receita previsível e operação sistemizada — não impressões, alcance ou relatórios bonitos.",
   },
   {
     q: "Como funciona o Diagnóstico Gratuito?",
-    a: "Você responde 12 perguntas estratégicas (~5 minutos), recebe um score de maturidade, sua classificação de estágio e 3 recomendações personalizadas. Sem custo, sem compromisso.",
+    a: "Você preenche um formulário curto (nome, empresa, faturamento, principal gargalo) e responde 12 perguntas estratégicas sobre estratégia, vendas, dados, IA e operação. Leva ~5 minutos. Na hora você recebe: seu Score de Maturidade (0-100), sua classificação de estágio (Inicial, Estruturação, Avançado ou Otimizado) e 3 recomendações personalizadas. Sem custo, sem cartão, sem compromisso. Se houver fit, agendamos uma conversa estratégica para aprofundar.",
   },
   {
     q: "Vocês substituem meu time interno?",
-    a: "Não. Atuamos como engenharia parceira do seu time. Estruturamos, treinamos e aceleramos — para que sua operação rode sem depender de heróis.",
+    a: "Não. A Aceleriq atua como engenharia parceira do seu time, não como terceirização. Estruturamos processos, treinamos pessoas, implementamos ferramentas e aceleramos a operação para que ela rode com seu time, não dependendo de heróis nem da nossa presença diária. O objetivo final é deixar sua empresa autônoma com método — não criar dependência. Quando você não precisar mais da gente em algumas frentes, a gente comemora junto.",
   },
   {
     q: "Como começa o trabalho depois do diagnóstico?",
-    a: "Depois do diagnóstico, agendamos uma sessão estratégica para entender o seu negócio em profundidade. Se houver fit, montamos uma proposta com escopo, cronograma e investimento.",
+    a: "Após o Diagnóstico, agendamos uma sessão estratégica de aprofundamento (60-90 min) para entender seu negócio, números, time, ferramentas e prioridades reais. Se houver fit técnico e estratégico nos dois lados, montamos uma proposta personalizada com escopo de programa, cronograma de 90 dias, KPIs alvo e investimento. A partir do aceite, começamos com onboarding técnico, mapeamento de stack e o primeiro sprint em até 7 dias.",
   },
 ];
 
