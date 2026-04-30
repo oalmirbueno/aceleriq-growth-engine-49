@@ -78,7 +78,7 @@ const CAPTURA_STEPS: {
   {
     key: "site_instagram",
     pergunta: "Tem site ou Instagram da empresa?",
-    hint: "Opcional — ajuda a contextualizar a análise.",
+    hint: "Opcional · ajuda a contextualizar a análise.",
     required: false,
     type: "text",
     placeholder: "empresa.com.br ou @empresa",
@@ -100,7 +100,7 @@ const CAPTURA_STEPS: {
   {
     key: "principal_gargalo",
     pergunta: "Em uma frase, o que mais trava o crescimento hoje?",
-    hint: "Seja honesto — quanto mais claro, melhor o diagnóstico.",
+    hint: "Seja honesto · quanto mais claro, melhor o diagnóstico.",
     required: true,
     type: "textarea",
     placeholder: "Ex: time comercial sem método, CAC subindo, dependência do dono...",
@@ -607,7 +607,7 @@ function QuizSlide({
 
         <span className="hidden items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-muted-foreground md:flex">
           <kbd className="rounded border border-border bg-background/60 px-1.5 py-0.5 text-[9px]">1</kbd>
-          <span>—</span>
+          <span>·</span>
           <kbd className="rounded border border-border bg-background/60 px-1.5 py-0.5 text-[9px]">5</kbd>
           <span className="ml-1">para responder</span>
         </span>

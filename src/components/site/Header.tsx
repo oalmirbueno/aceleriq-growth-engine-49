@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Link } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
 import logoAceleriq from "@/assets/logo-aceleriq.png";
 
 const NAV = [
-  { label: "Método", href: "#metodo" },
-  { label: "Áreas", href: "#areas" },
-  { label: "Resultados", href: "#resultados" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Sobre", to: "/sobre-a-aceleriq" as const, type: "route" as const },
+  { label: "Método", href: "/#metodo", type: "anchor" as const },
+  { label: "Áreas", href: "/#areas", type: "anchor" as const },
+  { label: "Resultados", href: "/#resultados", type: "anchor" as const },
+  { label: "FAQ", href: "/#faq", type: "anchor" as const },
 ];
 
 export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
@@ -42,16 +43,27 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
           </a>
 
           <nav className="hidden items-center gap-8 lg:flex">
-            {NAV.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="relative text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary group"
-              >
-                {item.label}
-                <span className="absolute -bottom-1 left-0 h-px w-0 bg-primary transition-all duration-300 group-hover:w-full" />
-              </a>
-            ))}
+            {NAV.map((item) =>
+              item.type === "route" ? (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className="relative text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary group"
+                >
+                  {item.label}
+                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-primary transition-all duration-300 group-hover:w-full" />
+                </Link>
+              ) : (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="relative text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary group"
+                >
+                  {item.label}
+                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-primary transition-all duration-300 group-hover:w-full" />
+                </a>
+              ),
+            )}
           </nav>
         </div>
 
@@ -90,17 +102,29 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
       {open && (
         <div className="absolute inset-x-0 top-full border-t border-white/10 bg-background/95 backdrop-blur-2xl lg:hidden">
           <div className="container-aceleriq flex flex-col gap-1 py-8">
-            {NAV.map((item, i) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="flex items-center justify-between border-b border-white/5 py-4 text-sm font-mono uppercase tracking-widest text-muted-foreground hover:text-primary"
-              >
-                <span>{item.label}</span>
-                <span className="text-[10px] opacity-30">0{i + 1}</span>
-              </a>
-            ))}
+            {NAV.map((item, i) =>
+              item.type === "route" ? (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-between border-b border-white/5 py-4 text-sm font-mono uppercase tracking-widest text-muted-foreground hover:text-primary"
+                >
+                  <span>{item.label}</span>
+                  <span className="text-[10px] opacity-30">0{i + 1}</span>
+                </Link>
+              ) : (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-between border-b border-white/5 py-4 text-sm font-mono uppercase tracking-widest text-muted-foreground hover:text-primary"
+                >
+                  <span>{item.label}</span>
+                  <span className="text-[10px] opacity-30">0{i + 1}</span>
+                </a>
+              ),
+            )}
             <a
               href="https://aceleriq.online"
               target="_blank"

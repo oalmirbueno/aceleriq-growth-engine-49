@@ -26,11 +26,62 @@ function NotFoundComponent() {
 }
 
 const SITE_TITLE =
-  "Aceleriq — Engenharia de Crescimento com Estratégia, Dados e IA";
+  "Aceleriq · Engenharia de Crescimento com Estratégia, Dados e IA";
 const SITE_DESCRIPTION =
-  "Acelere seu crescimento com estratégia, processo comercial, tráfego, CRM, automação, IA e dados. Faça o Diagnóstico Gratuito da Aceleriq.";
+  "Aceleriq é uma engenharia de crescimento em Curitiba que une estratégia, CRM, tráfego, automação, IA, dados e processos comerciais para empresas que querem escalar com previsibilidade.";
 const SITE_URL = "https://aceleriq.com.br";
 const OG_IMAGE = `${SITE_URL}/og-image.jpg`;
+
+const ORGANIZATION_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Aceleriq",
+  alternateName: "Aceleriq Engenharia de Crescimento",
+  url: SITE_URL,
+  logo: `${SITE_URL}/og-image.jpg`,
+  email: "aceleriq@gmail.com",
+  telephone: "+55-41-99748-3429",
+  description:
+    "Engenharia de crescimento com estratégia, dados, IA, CRM, automação, tráfego e processos comerciais.",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Curitiba",
+    addressRegion: "PR",
+    addressCountry: "BR",
+  },
+  sameAs: ["https://instagram.com/aceleriq"],
+};
+
+const LOCALBUSINESS_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": `${SITE_URL}#localbusiness`,
+  name: "Aceleriq",
+  url: SITE_URL,
+  image: `${SITE_URL}/og-image.jpg`,
+  email: "aceleriq@gmail.com",
+  telephone: "+55-41-99748-3429",
+  priceRange: "$$$",
+  description:
+    "Engenharia de crescimento em Curitiba com estratégia, dados, IA, CRM, automação, tráfego e processos comerciais.",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Curitiba",
+    addressRegion: "PR",
+    addressCountry: "BR",
+  },
+  areaServed: { "@type": "Country", name: "Brasil" },
+  sameAs: ["https://instagram.com/aceleriq"],
+};
+
+const WEBSITE_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Aceleriq",
+  url: SITE_URL,
+  inLanguage: "pt-BR",
+  publisher: { "@type": "Organization", name: "Aceleriq" },
+};
 
 export const Route = createRootRoute({
   head: () => ({
@@ -43,7 +94,7 @@ export const Route = createRootRoute({
       {
         name: "keywords",
         content:
-          "engenharia de crescimento, marketing, IA, automação, CRM, tráfego pago, diagnóstico estratégico, processos comerciais, Aceleriq",
+          "Aceleriq, engenharia de crescimento, consultoria de crescimento Curitiba, CRM, automação comercial, IA para empresas, tráfego pago, processos comerciais, dados, dashboards",
       },
       { property: "og:title", content: SITE_TITLE },
       { property: "og:description", content: SITE_DESCRIPTION },
@@ -53,7 +104,7 @@ export const Route = createRootRoute({
       { property: "og:image", content: OG_IMAGE },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "Aceleriq — Engenharia de Crescimento" },
+      { property: "og:image:alt", content: "Aceleriq · Engenharia de Crescimento" },
       { property: "og:site_name", content: "Aceleriq" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: SITE_TITLE },
@@ -69,6 +120,20 @@ export const Route = createRootRoute({
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(ORGANIZATION_JSONLD),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(LOCALBUSINESS_JSONLD),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(WEBSITE_JSONLD),
       },
     ],
   }),
