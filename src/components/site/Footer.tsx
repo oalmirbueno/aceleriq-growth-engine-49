@@ -14,13 +14,11 @@ export function Footer() {
       <div className="container-aceleriq grid gap-12 py-16 md:grid-cols-12">
         <div className="md:col-span-5">
           <div className="flex items-center gap-2.5">
-            <span className="relative flex h-7 w-7 items-center justify-center rounded-md border border-border bg-card">
-              <span className="absolute inset-1 rounded-sm bg-primary/90" />
-              <span className="relative h-1.5 w-1.5 rounded-full bg-background" />
-            </span>
-            <span className="font-display text-[15px] font-semibold">
-              aceleriq<span className="text-primary">.</span>
-            </span>
+            <img 
+              src="/logo.png" 
+              alt="Aceleriq" 
+              className="h-8 w-auto object-contain brightness-0 invert" 
+            />
           </div>
           <p className="mt-5 max-w-md text-sm leading-relaxed text-muted-foreground">
             Engenharia de crescimento para empresas que querem escalar com
