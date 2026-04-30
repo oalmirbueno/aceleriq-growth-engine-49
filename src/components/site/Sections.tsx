@@ -1083,49 +1083,103 @@ type TestimonialItem = {
   company?: string;
   companyDomain?: string;
   avatar?: string;
+  sector?: string;
+  metric?: string;
 };
 
 function TestimonialCard({ t }: { t: TestimonialItem }) {
+  // Inicial da empresa para o monograma quando não há logo
+  const monogram = (t.company || t.name).charAt(0);
   return (
-    <figure className="hairline relative rounded-2xl bg-card/80 p-6 w-[380px] flex-shrink-0 transition-all hover:border-primary/40 hover:bg-card">
-      <div className="flex items-start justify-between gap-3">
-        <Quote className="h-5 w-5 text-primary/60" />
-        {t.companyDomain && (
-          <img
-            src={`https://logo.clearbit.com/${t.companyDomain}`}
-            alt={t.company || ""}
-            loading="lazy"
-            className="h-5 w-auto max-w-[90px] object-contain opacity-80"
-            onError={(e) => {
-              (e.currentTarget as HTMLImageElement).style.display = "none";
-            }}
-          />
-        )}
-      </div>
-      <blockquote className="mt-3 text-[14px] leading-relaxed text-foreground/90">
-        "{t.quote}"
-      </blockquote>
-      <figcaption className="mt-5 flex items-center gap-3 border-t border-border pt-5">
-        {t.avatar ? (
-          <img
-            src={t.avatar}
-            alt={t.name}
-            loading="lazy"
-            className="h-10 w-10 rounded-full object-cover ring-1 ring-primary/30"
-          />
-        ) : (
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/15 text-mono text-sm font-semibold text-primary">
-            {t.name.charAt(0)}
+    <figure
+      className="liquid-glass relative rounded-2xl p-5 w-[400px] flex-shrink-0 transition-all duration-300 hover:-translate-y-0.5"
+    >
+      {/* Header: avatar + identidade + selo verificado */}
+      <div className="flex items-start gap-3">
+        <div className="relative flex-shrink-0">
+          {t.avatar ? (
+            <img
+              src={t.avatar}
+              alt={t.name}
+              loading="lazy"
+              className="h-11 w-11 rounded-full object-cover ring-1 ring-primary/40"
+            />
+          ) : (
+            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/15 text-mono text-sm font-semibold text-primary ring-1 ring-primary/30">
+              {t.name.charAt(0)}
+            </div>
+          )}
+          {/* Selo verificado encostado no avatar */}
+          <BadgeCheck className="absolute -bottom-1 -right-1 h-4 w-4 text-primary fill-background drop-shadow-[0_0_4px_oklch(85%_0.2_145/0.6)]" />
+        </div>
+
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-1.5">
+            <span className="text-[14px] font-semibold text-foreground truncate">
+              {t.name}
+            </span>
           </div>
-        )}
-        <div className="min-w-0">
-          <div className="text-[14px] font-medium truncate">{t.name}</div>
-          <div className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground truncate">
+          <div className="text-[11px] text-muted-foreground truncate">
             {t.role}
-            {t.company ? ` · ${t.company}` : ""}
+            {t.company ? (
+              <>
+                {" · "}
+                <span className="font-medium text-foreground/80">{t.company}</span>
+              </>
+            ) : null}
           </div>
         </div>
-      </figcaption>
+
+        {/* Monograma da empresa estilizado — substitui logo Clearbit (que falharia para PMEs) */}
+        <div
+          className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-md font-mono text-[13px] font-bold text-primary"
+          style={{
+            background:
+              "linear-gradient(135deg, oklch(85% 0.2 145 / 0.18), oklch(85% 0.2 145 / 0.04))",
+            border: "1px solid oklch(85% 0.2 145 / 0.3)",
+            boxShadow: "inset 0 1px 0 oklch(100% 0 0 / 0.06)",
+          }}
+        >
+          {monogram}
+        </div>
+      </div>
+
+      {/* Setor + estrelas */}
+      <div className="mt-3 flex items-center justify-between gap-2">
+        {t.sector && (
+          <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-foreground/50">
+            {t.sector}
+          </span>
+        )}
+        <div className="flex items-center gap-0.5">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Star key={i} className="h-3 w-3 fill-primary text-primary" />
+          ))}
+        </div>
+      </div>
+
+      {/* Quote */}
+      <Quote className="mt-3 h-4 w-4 text-primary/50" />
+      <blockquote className="mt-1.5 text-[14px] leading-relaxed text-foreground/90">
+        {t.quote}
+      </blockquote>
+
+      {/* Métrica destacada — ancora resultado real, foge do depoimento genérico */}
+      {t.metric && (
+        <div
+          className="mt-4 flex items-center gap-2 rounded-md px-3 py-2"
+          style={{
+            background:
+              "linear-gradient(90deg, oklch(85% 0.2 145 / 0.10), transparent)",
+            borderLeft: "2px solid oklch(85% 0.2 145 / 0.7)",
+          }}
+        >
+          <TrendingUp className="h-3.5 w-3.5 text-primary flex-shrink-0" />
+          <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-primary truncate">
+            {t.metric}
+          </span>
+        </div>
+      )}
     </figure>
   );
 }
