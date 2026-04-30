@@ -189,32 +189,48 @@
     box-shadow: 0 10px 40px -20px hsl(145 100% 50% / 0.25);
   }
 
-  /* Grid perspectiva (hero) */
-  .grid-perspective {
+  /* Hero background art */
+  .hero-bg {
     position: absolute;
     inset: 0;
     overflow: hidden;
     pointer-events: none;
   }
-  .grid-perspective::before {
+  .hero-bg::before {
     content: '';
     position: absolute;
     inset: 0;
     background-image: url('/hero-bg.jpg');
     background-size: cover;
-    background-position: center;
-    opacity: 0.15;
-    filter: saturate(0) brightness(0.8);
-    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 90%);
-    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 90%);
+    background-position: center right;
+    opacity: 0.85;
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(
+        ellipse 70% 60% at 25% 45%,
+        var(--background) 0%,
+        hsl(0 0% 5% / 0.85) 35%,
+        transparent 75%
+      ),
+      linear-gradient(
+        to bottom,
+        hsl(0 0% 5% / 0.4) 0%,
+        transparent 30%,
+        transparent 70%,
+        var(--background) 100%
+      );
   }
 
-  /* Overlay de degradê para garantir leitura */
-  .hero-overlay {
+  /* Vinheta extra para o conteúdo do hero */
+  .hero-vignette {
     background: radial-gradient(
-      circle at 50% 30%,
-      transparent 0%,
-      var(--background) 80%
+      ellipse 60% 50% at 30% 50%,
+      hsl(0 0% 0% / 0.6) 0%,
+      transparent 70%
     );
   }
 
