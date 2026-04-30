@@ -97,6 +97,52 @@
     opacity: 0.9;
   }
 
+  /* Grid Ambient — versão sutil para seções pós-hero, com gradiente de fundo */
+  .bg-grid-ambient {
+    position: relative;
+    isolation: isolate;
+  }
+  .bg-grid-ambient::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+      linear-gradient(oklch(100% 0 0 / 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(100% 0 0 / 0.035) 1px, transparent 1px);
+    background-size: 56px 56px, 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 50%, black 0%, black 30%, transparent 90%);
+    mask-image: radial-gradient(ellipse 75% 70% at 50% 50%, black 0%, black 30%, transparent 90%);
+  }
+  .bg-grid-ambient > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Transição vertical suave entre seções (evita "corte" seco) */
+  .section-fade-edges {
+    position: relative;
+  }
+  .section-fade-edges::before,
+  .section-fade-edges::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 120px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .section-fade-edges::before {
+    top: 0;
+    background: linear-gradient(to bottom, var(--background), transparent);
+  }
+  .section-fade-edges::after {
+    bottom: 0;
+    background: linear-gradient(to top, var(--background), transparent);
+  }
+
   /* Efeito de Vidro Industrial */
   .glass-panel {
     background: oklch(100% 0 0 / 0.02);
