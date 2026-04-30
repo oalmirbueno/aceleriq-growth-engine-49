@@ -916,6 +916,54 @@ const TESTIMONIALS = [
   },
 ];
 
+// Faixa marquee — palavras-chave / setores que rodam infinitamente
+const BRAND_KEYWORDS = [
+  "ESTRATÉGIA",
+  "DADOS",
+  "IA APLICADA",
+  "CRM",
+  "TRÁFEGO PAGO",
+  "AUTOMAÇÃO",
+  "PIPELINE",
+  "ROI MENSURÁVEL",
+  "DIAGNÓSTICO 360º",
+  "ENGENHARIA DE CRESCIMENTO",
+  "SAAS",
+  "E-COMMERCE",
+  "INDÚSTRIA",
+  "EDUCAÇÃO",
+  "SERVIÇOS",
+];
+
+export function BrandStrip() {
+  const loop = [...BRAND_KEYWORDS, ...BRAND_KEYWORDS, ...BRAND_KEYWORDS];
+  return (
+    <div className="relative border-y border-primary/20 bg-primary/[0.03] py-4 overflow-hidden"
+      style={{
+        maskImage:
+          "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+        WebkitMaskImage:
+          "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+      }}
+    >
+      <motion.div
+        className="flex gap-10 w-max items-center"
+        animate={{ x: ["0%", "-33.333%"] }}
+        transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+      >
+        {loop.map((kw, i) => (
+          <div key={i} className="flex items-center gap-10 flex-shrink-0">
+            <span className="font-mono text-sm md:text-base tracking-[0.25em] text-foreground/80 uppercase whitespace-nowrap">
+              {kw}
+            </span>
+            <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_8px_currentColor]" />
+          </div>
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
 export function Testimonials() {
   // Duplica para criar loop infinito visual
   const loop = [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS];
@@ -926,6 +974,11 @@ export function Testimonials() {
           eyebrow="[ 08 ] · Depoimentos"
           title="O que dizem os fundadores que aceleraram conosco."
         />
+      </div>
+
+      {/* Faixa de palavras-chave acima dos depoimentos — adiciona ritmo visual */}
+      <div className="mt-8 md:mt-10">
+        <BrandStrip />
       </div>
 
       {/* Dois carrosséis em direções opostas para impacto visual */}
