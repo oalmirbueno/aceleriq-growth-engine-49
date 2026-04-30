@@ -44,6 +44,7 @@ import {
 import aiEngineerImg from "@/assets/ai-engineer.jpg";
 import { Editable } from "@/components/editor/LayoutEditor";
 import { CountUp } from "@/components/ui/CountUp";
+import { SectionAmbient } from "@/components/site/Ornaments";
 
 // ─────────────────────────────────────────────────────────────
 // HERO
