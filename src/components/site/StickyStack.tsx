@@ -88,15 +88,16 @@ function StickyLayer({
   return (
     <div
       className="sticky top-0 h-screen w-full overflow-hidden"
-      style={{ zIndex: index + 1 }}
+      style={{ zIndex: index + 1, backgroundColor: "var(--background)" }}
     >
       <motion.div
         style={{
           y: yIn,
           scale: scaleOut,
           opacity: opacityOut,
+          backgroundColor: "var(--background)",
         }}
-        className="h-full w-full bg-background flex flex-col justify-center will-change-transform relative"
+        className="h-full w-full flex flex-col justify-center will-change-transform relative overflow-hidden"
       >
         {/* Linha-luz no topo da seção entrando */}
         {!isFirst && (
