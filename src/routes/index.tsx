@@ -19,6 +19,7 @@ import {
   FinalCTA,
   BrandStrip,
 } from "@/components/site/Sections";
+import { ImmersiveReveal } from "@/components/site/ImmersiveReveal";
 
 export const Route = createFileRoute("/")({
   head: () => ({
