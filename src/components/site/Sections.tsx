@@ -43,6 +43,7 @@ import {
 } from "@/lib/contact";
 import aiEngineerImg from "@/assets/ai-engineer.jpg";
 import techElement1 from "@/assets/tech-element-1.png";
+import techElement2 from "@/assets/tech-element-2.png";
 import { Editable } from "@/components/editor/LayoutEditor";
 import { CountUp } from "@/components/ui/CountUp";
 
@@ -52,9 +53,10 @@ import { CountUp } from "@/components/ui/CountUp";
 function TechDecor({
   side = "right",
   size = 420,
-  opacity = 0.18,
+  opacity = 0.22,
   rotate = 0,
   offsetY = 0,
+  variant = 1,
   className = "",
 }: {
   side?: "left" | "right";
@@ -62,12 +64,14 @@ function TechDecor({
   opacity?: number;
   rotate?: number;
   offsetY?: number;
+  variant?: 1 | 2;
   className?: string;
 }) {
   const sideStyle =
     side === "right"
       ? { right: `-${Math.round(size * 0.18)}px` }
       : { left: `-${Math.round(size * 0.18)}px` };
+  const src = variant === 2 ? techElement2 : techElement1;
   return (
     <motion.div
       aria-hidden
@@ -84,19 +88,13 @@ function TechDecor({
         ...sideStyle,
       }}
     >
-      {/* Halo verde por trás */}
-      <div
-        className="absolute inset-[12%] rounded-full bg-primary/20 blur-3xl"
-        style={{ opacity: 0.55 }}
-      />
       <img
-        src={techElement1}
+        src={src}
         alt=""
         className="relative w-full h-full object-contain select-none"
         draggable={false}
         style={{
-          filter: "drop-shadow(0 0 40px rgba(20,255,0,0.15)) saturate(1.05)",
-          mixBlendMode: "screen",
+          filter: "drop-shadow(0 0 30px rgba(20,255,0,0.18)) saturate(1.1)",
         }}
       />
     </motion.div>
