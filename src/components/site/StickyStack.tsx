@@ -95,7 +95,6 @@ function StickyLayer({
           y: yIn,
           scale: scaleOut,
           opacity: opacityOut,
-          filter: filterOut,
         }}
         className="h-full w-full bg-background flex flex-col justify-center will-change-transform relative"
       >
