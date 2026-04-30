@@ -164,18 +164,17 @@
 
   .neon-glow {
     box-shadow:
-      0 0 0 1px hsl(145 100% 50% / 0.35),
-      0 0 24px hsl(145 100% 50% / 0.18);
+      0 0 0 1px hsl(145 100% 50% / 0.15),
+      0 20px 50px -10px hsl(145 100% 50% / 0.12);
   }
 
   .neon-text-glow {
     text-shadow: 
-      0 0 10px hsl(145 100% 50% / 0.3),
-      0 0 20px hsl(145 100% 50% / 0.1);
+      0 0 15px hsl(145 100% 50% / 0.2);
   }
 
   .headline-shadow {
-    text-shadow: 0 4px 12px hsl(0 0% 0% / 0.5);
+    text-shadow: 0 8px 24px hsl(0 0% 0% / 0.6);
   }
 
   /* Bordas vivas (linha fina + brilho hover) */
@@ -209,8 +208,9 @@
     background-image: url('/hero-bg.jpg');
     background-size: cover;
     background-position: center 30%;
-    opacity: 0.6;
-    filter: saturate(1.2) contrast(1.1);
+    opacity: 0.45;
+    filter: saturate(1.1) contrast(1.1) brightness(0.9);
+    transform: scale(1.05);
   }
   .hero-bg::after {
     content: '';
