@@ -128,15 +128,26 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                 <div className="absolute -bottom-3 -right-3 w-8 h-8 border-r-2 border-b-2 border-primary" />
 
                 {/* Foto */}
-                <div className="relative w-full h-full overflow-hidden border border-white/10">
+                <div className="relative w-full h-full overflow-hidden border border-white/10 shadow-2xl shadow-primary/10">
                   <img
                     src={aiEngineerImg}
                     alt="AI Engineer Aceleriq operando protocolo neural"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover select-none"
                     loading="eager"
+                    decoding="sync"
+                    draggable={false}
+                    style={{
+                      imageRendering: "auto",
+                      filter: "contrast(1.08) saturate(1.15) brightness(1.02)",
+                      WebkitBackfaceVisibility: "hidden",
+                      transform: "translateZ(0)",
+                    }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/10 to-transparent" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-transparent to-transparent" />
+                  {/* Vinheta sutil sem matar a nitidez */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-background/25 via-transparent to-transparent" />
+                  {/* Linha verde no canto inferior */}
+                  <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-60" />
 
                   {/* Identificador discreto sobre a foto */}
                   <div className="absolute bottom-4 left-4 flex items-center gap-2">
