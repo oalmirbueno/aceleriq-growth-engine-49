@@ -50,7 +50,12 @@ import { CountUp } from "@/components/ui/CountUp";
 // ─────────────────────────────────────────────────────────────
 export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section id="top" className="relative min-h-[90vh] flex items-center justify-center pt-20 overflow-hidden bg-grid-tech">
+    <section id="top" className="relative min-h-screen flex items-center justify-center pt-28 pb-32 lg:pb-40 overflow-hidden bg-grid-tech">
+      {/* Scanlines sutis */}
+      <div className="absolute inset-0 pointer-events-none z-[5] opacity-[0.04]" style={{ backgroundImage: "repeating-linear-gradient(0deg, transparent 0px, transparent 2px, #fff 2px, #fff 3px)" }} />
+      {/* Linhas verticais decorativas */}
+      <div className="absolute top-0 bottom-0 left-[8%] w-px bg-gradient-to-b from-transparent via-primary/15 to-transparent pointer-events-none z-[5] hidden lg:block" />
+      <div className="absolute top-0 bottom-0 right-[8%] w-px bg-gradient-to-b from-transparent via-primary/15 to-transparent pointer-events-none z-[5] hidden lg:block" />
       {/* Background Decorativo - Camadas Técnicas */}
       <div className="hero-background" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background z-10" />
@@ -123,15 +128,26 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                 <div className="absolute -bottom-3 -right-3 w-8 h-8 border-r-2 border-b-2 border-primary" />
 
                 {/* Foto */}
-                <div className="relative w-full h-full overflow-hidden border border-white/10">
+                <div className="relative w-full h-full overflow-hidden border border-white/10 shadow-2xl shadow-primary/10">
                   <img
                     src={aiEngineerImg}
                     alt="AI Engineer Aceleriq operando protocolo neural"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover select-none"
                     loading="eager"
+                    decoding="sync"
+                    draggable={false}
+                    style={{
+                      imageRendering: "auto",
+                      filter: "contrast(1.08) saturate(1.15) brightness(1.02)",
+                      WebkitBackfaceVisibility: "hidden",
+                      transform: "translateZ(0)",
+                    }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/10 to-transparent" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-transparent to-transparent" />
+                  {/* Vinheta sutil sem matar a nitidez */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-background/25 via-transparent to-transparent" />
+                  {/* Linha verde no canto inferior */}
+                  <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-60" />
 
                   {/* Identificador discreto sobre a foto */}
                   <div className="absolute bottom-4 left-4 flex items-center gap-2">
@@ -196,6 +212,12 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
             </Editable>
           </div>
         </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 hidden md:flex flex-col items-center gap-2 pointer-events-none">
+        <span className="font-mono text-[9px] tracking-[0.4em] uppercase text-white/40">Scroll</span>
+        <div className="w-px h-10 bg-gradient-to-b from-primary to-transparent animate-pulse" />
       </div>
     </section>
   );
