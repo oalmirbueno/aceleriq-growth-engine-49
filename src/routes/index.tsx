@@ -17,7 +17,6 @@ import {
   WhyNow,
   FAQ,
   FinalCTA,
-  BrandStrip,
 } from "@/components/site/Sections";
 
 export const Route = createFileRoute("/")({
@@ -42,7 +41,7 @@ function Index() {
   const openDiagnostico = () => setDiagOpen(true);
 
   return (
-    <div className="min-h-screen bg-background text-foreground relative z-10">
+    <div className="min-h-screen bg-background text-foreground">
       <Header onDiagnostico={openDiagnostico} />
       <main>
         <Hero onDiagnostico={openDiagnostico} />
@@ -53,7 +52,6 @@ function Index() {
         <FitFor />
         <DiagnosticoCTA onDiagnostico={openDiagnostico} />
         <Results />
-        <BrandStrip />
         <Testimonials />
         <Compare />
         <WhyNow />

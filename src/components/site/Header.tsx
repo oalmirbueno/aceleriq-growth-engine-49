@@ -27,7 +27,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
         scrolled
-          ? "liquid-glass !rounded-none border-b border-primary/20 py-2"
+          ? "border-b border-primary/20 bg-background/80 backdrop-blur-md py-2"
           : "bg-transparent py-5",
       )}
     >
@@ -37,7 +37,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
             <img
               src={logoAceleriq}
               alt="Aceleriq"
-              className="h-14 w-auto md:h-16 transition-transform duration-300 group-hover:scale-105"
+              className="h-10 w-auto md:h-11 transition-transform duration-300 group-hover:scale-105"
             />
           </a>
 
@@ -57,18 +57,9 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
 
         <div className="hidden items-center gap-8 md:flex">
           <div className="flex flex-col items-end">
+            <span className="font-mono text-[9px] uppercase tracking-widest text-primary/60">System_Access</span>
             <a
-              href="https://aceleriq.online"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-mono text-[9px] uppercase tracking-widest text-primary/60 transition-colors hover:text-primary"
-            >
-              System_Access
-            </a>
-            <a
-              href="https://aceleriq.online"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#top"
               className="text-[12px] font-medium text-foreground/80 transition-colors hover:text-primary"
             >
               Client Portal
