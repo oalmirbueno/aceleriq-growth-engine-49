@@ -63,7 +63,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
             className="self-start mb-8"
           >
             <span className="font-mono text-[10px] tracking-[0.4em] uppercase py-1 border-b border-primary text-primary">
-              System_Status: Operational // Engineering_Scale: Global
+              Status do Sistema: Operacional // Escala de Engenharia: Global
             </span>
           </motion.div>
 
@@ -92,11 +92,11 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                 
                 <div className="mt-10 flex flex-wrap gap-6">
                   <button onClick={onDiagnostico} className="btn-tech">
-                    Initialize Diagnostic
+                    Iniciar Diagnóstico
                   </button>
                   <a href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)} className="group flex items-center gap-3 font-mono text-xs tracking-widest hover:text-primary transition-colors">
                     <span className="h-px w-8 bg-white/20 group-hover:w-12 group-hover:bg-primary transition-all" />
-                    TALK_TO_ENGINEER
+                    FALAR COM ENGENHEIRO
                   </a>
                 </div>
               </motion.div>
@@ -125,17 +125,17 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
 
                 <div className="absolute top-4 left-4 flex items-center gap-2 px-2 py-1 bg-black/60 backdrop-blur-sm border border-primary/30">
                   <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                  <span className="font-mono text-[9px] tracking-[0.2em] text-primary uppercase">Live_Operator</span>
+                  <span className="font-mono text-[9px] tracking-[0.2em] text-primary uppercase">Operador Ao Vivo</span>
                 </div>
 
                 <div className="absolute top-4 right-4 px-2 py-1 bg-black/60 backdrop-blur-sm border border-white/10">
-                  <span className="font-mono text-[9px] text-white/70 tracking-tighter">NODE_04 // SECURE</span>
+                  <span className="font-mono text-[9px] text-white/70 tracking-tighter">NÓ_04 // SEGURO</span>
                 </div>
 
                 <div className="absolute top-1/2 -right-4 lg:-right-8 -translate-y-1/2 hidden md:block">
                   <div className="bg-black/80 backdrop-blur-md border border-primary/30 p-4 shadow-[0_0_30px_rgba(20,255,0,0.15)]">
                     <span className="text-3xl font-mono font-bold text-primary leading-none block">+245%</span>
-                    <span className="text-[8px] font-mono uppercase tracking-widest text-white/50 mt-1 block">Monthly_ROI</span>
+                    <span className="text-[8px] font-mono uppercase tracking-widest text-white/50 mt-1 block">ROI Mensal</span>
                   </div>
                 </div>
 
@@ -143,16 +143,16 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Brain className="h-4 w-4 text-primary" />
-                      <span className="text-xs font-bold text-white">Lead Engineer</span>
+                      <span className="text-xs font-bold text-white">Engenheiro Líder</span>
                     </div>
                     <span className="font-mono text-[9px] text-white/50 tracking-widest uppercase">Aceleriq // R&D</span>
                   </div>
 
                   <div className="grid grid-cols-3 gap-2">
                     {[
-                      { label: "Precision", val: "98.2%" },
-                      { label: "Automation", val: "88%" },
-                      { label: "Leads", val: "x3.2" }
+                      { label: "Precisão", val: "98.2%" },
+                      { label: "Automação", val: "88%" },
+                      { label: "Leads", val: "3.2x" }
                     ].map((item, i) => (
                       <div key={i} className="bg-black/60 backdrop-blur-sm p-2 border border-white/10 flex flex-col gap-1">
                         <span className="text-[8px] uppercase tracking-widest opacity-50 font-mono">{item.label}</span>
