@@ -71,7 +71,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
             </span>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center w-full">
+          <div className="grid lg:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center w-full max-w-full">
             <div>
               <Editable id="hero-headline">
                 <motion.h1 
