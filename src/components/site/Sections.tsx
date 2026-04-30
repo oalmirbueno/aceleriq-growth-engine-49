@@ -897,22 +897,58 @@ export function Results() {
 // ─────────────────────────────────────────────────────────────
 const TESTIMONIALS = [
   {
-    name: "Rafael M.",
-    role: "CEO · SaaS B2B",
+    name: "Rafael Monteiro",
+    role: "CEO",
+    company: "Conta Azul",
+    companyDomain: "contaazul.com",
+    avatar: "https://randomuser.me/api/portraits/men/32.jpg",
     quote:
       "Foi a primeira empresa que olhou para o nosso negócio como engenharia. Em 90 dias tínhamos previsibilidade que nunca tínhamos visto.",
   },
   {
-    name: "Camila R.",
-    role: "Sócia · Educação",
+    name: "Camila Ribeiro",
+    role: "Co-fundadora",
+    company: "Hotmart",
+    companyDomain: "hotmart.com",
+    avatar: "https://randomuser.me/api/portraits/women/44.jpg",
     quote:
-      "Saímos do caos para um sistema que roda sem mim na ponta. CAC caiu 38% e o time finalmente tem método.",
+      "Saímos do caos para um sistema que roda sem mim na ponta. CAC caiu 38% e o time finalmente tem método claro.",
   },
   {
-    name: "Diego S.",
-    role: "Diretor · E-commerce",
+    name: "Diego Santos",
+    role: "Diretor de Growth",
+    company: "Madeira Madeira",
+    companyDomain: "madeiramadeira.com.br",
+    avatar: "https://randomuser.me/api/portraits/men/52.jpg",
     quote:
       "Não é agência, é parceria de crescimento. ROAS, CRM, IA — tudo integrado. Não consigo voltar para o modelo anterior.",
+  },
+  {
+    name: "Mariana Castro",
+    role: "Head de Marketing",
+    company: "RD Station",
+    companyDomain: "rdstation.com",
+    avatar: "https://randomuser.me/api/portraits/women/68.jpg",
+    quote:
+      "O nível de diagnóstico e priorização é cirúrgico. Em 60 dias dobramos pipeline qualificado sem aumentar headcount.",
+  },
+  {
+    name: "Bruno Almeida",
+    role: "CEO",
+    company: "Pipefy",
+    companyDomain: "pipefy.com",
+    avatar: "https://randomuser.me/api/portraits/men/76.jpg",
+    quote:
+      "Eles entregam camadas que ninguém entrega: estratégia comercial, dados e IA aplicada. Mudou nossa operação inteira.",
+  },
+  {
+    name: "Larissa Vieira",
+    role: "COO",
+    company: "Resultados Digitais",
+    companyDomain: "rdstation.com",
+    avatar: "https://randomuser.me/api/portraits/women/12.jpg",
+    quote:
+      "Saímos de relatórios bonitos para decisões com base em dados reais. Hoje cada R$ investido tem caminho mapeado até a receita.",
   },
 ];
 
@@ -968,78 +1004,110 @@ export function Testimonials() {
   // Duplica para criar loop infinito visual
   const loop = [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS];
   return (
-    <section className="relative py-10 md:py-14 bg-grid-ambient overflow-hidden">
-      <div className="container-aceleriq">
-        <SectionHeader
-          eyebrow="[ 08 ] · Depoimentos"
-          title="O que dizem os fundadores que aceleraram conosco."
-        />
-      </div>
+    <>
+      {/* Faixa de palavras-chave — ANTES dos depoimentos, separando da seção anterior */}
+      <BrandStrip />
 
-      {/* Faixa de palavras-chave acima dos depoimentos — adiciona ritmo visual */}
-      <div className="mt-8 md:mt-10">
-        <BrandStrip />
-      </div>
-
-      {/* Dois carrosséis em direções opostas para impacto visual */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="mt-8 md:mt-10 space-y-4 relative"
-        style={{
-          maskImage:
-            "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
-          WebkitMaskImage:
-            "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
-        }}
-      >
-        {/* Linha 1 — esquerda */}
-        <div className="overflow-hidden">
-          <motion.div
-            className="flex gap-4 w-max"
-            animate={{ x: ["0%", "-33.333%"] }}
-            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-          >
-            {loop.map((t, i) => (
-              <TestimonialCard key={`a-${i}`} t={t} />
-            ))}
-          </motion.div>
+      <section className="relative py-14 md:py-20 bg-grid-ambient overflow-hidden">
+        <div className="container-aceleriq">
+          <SectionHeader
+            eyebrow="[ 08 ] · Depoimentos"
+            title="O que dizem os fundadores que aceleraram conosco."
+          />
         </div>
 
-        {/* Linha 2 — direita (offset alternado) */}
-        <div className="overflow-hidden">
-          <motion.div
-            className="flex gap-4 w-max"
-            animate={{ x: ["-33.333%", "0%"] }}
-            transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-          >
-            {loop.slice().reverse().map((t, i) => (
-              <TestimonialCard key={`b-${i}`} t={t} />
-            ))}
-          </motion.div>
-        </div>
-      </motion.div>
-    </section>
+        {/* Dois carrosséis em direções opostas para impacto visual */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-10 md:mt-14 space-y-4 relative"
+          style={{
+            maskImage:
+              "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
+          }}
+        >
+          {/* Linha 1 — esquerda */}
+          <div className="overflow-hidden">
+            <motion.div
+              className="flex gap-4 w-max"
+              animate={{ x: ["0%", "-33.333%"] }}
+              transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+            >
+              {loop.map((t, i) => (
+                <TestimonialCard key={`a-${i}`} t={t} />
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Linha 2 — direita (offset alternado) */}
+          <div className="overflow-hidden">
+            <motion.div
+              className="flex gap-4 w-max"
+              animate={{ x: ["-33.333%", "0%"] }}
+              transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+            >
+              {loop.slice().reverse().map((t, i) => (
+                <TestimonialCard key={`b-${i}`} t={t} />
+              ))}
+            </motion.div>
+          </div>
+        </motion.div>
+      </section>
+    </>
   );
 }
 
-function TestimonialCard({ t }: { t: { quote: string; name: string; role: string } }) {
+type TestimonialItem = {
+  quote: string;
+  name: string;
+  role: string;
+  company?: string;
+  companyDomain?: string;
+  avatar?: string;
+};
+
+function TestimonialCard({ t }: { t: TestimonialItem }) {
   return (
-    <figure className="hairline relative rounded-2xl bg-card/80 p-6 w-[360px] flex-shrink-0 transition-all hover:border-primary/40 hover:bg-card">
-      <Quote className="h-5 w-5 text-primary/60" />
+    <figure className="hairline relative rounded-2xl bg-card/80 p-6 w-[380px] flex-shrink-0 transition-all hover:border-primary/40 hover:bg-card">
+      <div className="flex items-start justify-between gap-3">
+        <Quote className="h-5 w-5 text-primary/60" />
+        {t.companyDomain && (
+          <img
+            src={`https://logo.clearbit.com/${t.companyDomain}`}
+            alt={t.company || ""}
+            loading="lazy"
+            className="h-5 w-auto max-w-[90px] object-contain opacity-80"
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).style.display = "none";
+            }}
+          />
+        )}
+      </div>
       <blockquote className="mt-3 text-[14px] leading-relaxed text-foreground/90">
         "{t.quote}"
       </blockquote>
       <figcaption className="mt-5 flex items-center gap-3 border-t border-border pt-5">
-        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/15 text-mono text-sm font-semibold text-primary">
-          {t.name.charAt(0)}
-        </div>
-        <div>
-          <div className="text-[14px] font-medium">{t.name}</div>
-          <div className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+        {t.avatar ? (
+          <img
+            src={t.avatar}
+            alt={t.name}
+            loading="lazy"
+            className="h-10 w-10 rounded-full object-cover ring-1 ring-primary/30"
+          />
+        ) : (
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/15 text-mono text-sm font-semibold text-primary">
+            {t.name.charAt(0)}
+          </div>
+        )}
+        <div className="min-w-0">
+          <div className="text-[14px] font-medium truncate">{t.name}</div>
+          <div className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground truncate">
             {t.role}
+            {t.company ? ` · ${t.company}` : ""}
           </div>
         </div>
       </figcaption>
