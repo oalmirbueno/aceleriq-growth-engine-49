@@ -375,17 +375,25 @@ export function Method() {
   return (
     <section
       id="metodo"
-      className="relative py-8 md:py-10 overflow-hidden bg-grid-ambient"
+      className="relative py-12 md:py-16 overflow-hidden bg-grid-ambient"
     >
       {/* Brilho ambiente verde, achatado e sutil — sem bolha redonda */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 h-[150px] w-[860px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.035] blur-[90px]" />
 
       <div className="container-aceleriq relative">
-        <SectionHeader
-          eyebrow="[ 03 ] · Método A.C.E.L.E.R.A"
-          title="Sete etapas. Uma linha do tempo."
-          description="Do diagnóstico à escala, com método de engenharia — não com palpite criativo."
-        />
+        {/* Cabeçalho descendo de cima — efeito "saindo de baixo da seção anterior" */}
+        <motion.div
+          initial={{ opacity: 0, y: -40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <SectionHeader
+            eyebrow="[ 03 ] · Método A.C.E.L.E.R.A"
+            title="Sete etapas. Uma linha do tempo."
+            description="Do diagnóstico à escala, com método de engenharia — não com palpite criativo."
+          />
+        </motion.div>
 
         {/* ───────── Timeline horizontal (desktop) ───────── */}
         <div className="mt-6 hidden lg:block">
