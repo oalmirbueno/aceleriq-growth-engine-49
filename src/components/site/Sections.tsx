@@ -887,22 +887,22 @@ export function Results() {
 // ─────────────────────────────────────────────────────────────
 const TESTIMONIALS = [
   {
-    name: "Rafael M.",
-    role: "CEO · SaaS B2B",
+    name: "Rafael Mendonça",
+    role: "CEO · SaaS B2B Fintech",
     quote:
-      "Foi a primeira empresa que olhou para o nosso negócio como engenharia. Em 90 dias tínhamos previsibilidade que nunca tínhamos visto.",
+      "Antes da Aceleriq, a gente vendia no esforço. Hoje temos um motor: SDR com playbook, CRM limpo e dashboard de receita em tempo real. Em 90 dias, previsibilidade que a gente nunca tinha visto em 4 anos de empresa.",
   },
   {
-    name: "Camila R.",
-    role: "Sócia · Educação",
+    name: "Camila Rocha",
+    role: "Co-fundadora · EdTech high-ticket",
     quote:
-      "Saímos do caos para um sistema que roda sem mim na ponta. CAC caiu 38% e o time finalmente tem método.",
+      "O que mudou não foi o tráfego, foi o sistema. Diagnóstico, plano de 90 dias, sprints semanais. Saí da operação em 5 meses, o time vende com método e o CAC caiu 38%. É outro patamar de negócio.",
   },
   {
-    name: "Diego S.",
-    role: "Diretor · E-commerce",
+    name: "Diego Salles",
+    role: "Diretor · E-commerce DTC",
     quote:
-      "Não é agência, é parceria de crescimento. ROAS, CRM, IA — tudo integrado. Não consigo voltar para o modelo anterior.",
+      "Já passei por 3 agências grandes. A Aceleriq é a primeira que entrou no meu CRM, no meu Shopify e nos meus dados. Não entrega post, entrega receita. ROAS 1.8 → 4.6 e LTV +63% com IA aplicada de verdade.",
   },
 ];
 
