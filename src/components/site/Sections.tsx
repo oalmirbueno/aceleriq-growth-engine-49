@@ -107,7 +107,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, ease: "circOut" }}
-              className="relative w-full max-w-md mx-auto lg:max-w-none aspect-[4/5]"
+              className="relative w-full max-w-sm mx-auto lg:max-w-md lg:ml-auto aspect-[4/5]"
             >
               <div className="absolute -inset-2 border border-primary/20 pointer-events-none" />
               <div className="absolute -top-3 -left-3 w-8 h-8 border-l-2 border-t-2 border-primary" />
