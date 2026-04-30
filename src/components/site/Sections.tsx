@@ -50,7 +50,7 @@ import { CountUp } from "@/components/ui/CountUp";
 // ─────────────────────────────────────────────────────────────
 export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section id="top" className="relative min-h-screen flex items-center justify-center pt-28 pb-32 lg:pb-40 overflow-hidden bg-grid-tech">
+    <section id="top" className="relative min-h-screen flex items-center justify-center pt-20 pb-16 lg:pb-20 overflow-hidden bg-grid-tech">
       {/* Apenas o quadriculado, sem linhas */}
       {/* Background Decorativo - Camadas Técnicas */}
       <div className="hero-background" />
@@ -95,7 +95,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                   Abandonamos o "marketing de esperança". Instalamos sistemas de engenharia de dados e IA que garantem escala previsível e ROI matemático.
                 </p>
                 
-                <div className="mt-10 flex flex-wrap gap-6">
+                <div className="mt-7 flex flex-wrap gap-6">
                   <button onClick={onDiagnostico} className="btn-tech">
                     Iniciar Diagnóstico
                   </button>
@@ -234,7 +234,7 @@ const PAINS = [
 
 export function Pains() {
   return (
-    <section className="relative py-28 md:py-36 bg-grid-ambient">
+    <section className="relative py-12 md:py-16 bg-grid-ambient">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
       <div className="container-aceleriq">
         <SectionHeader
@@ -243,7 +243,7 @@ export function Pains() {
           description="São os gargalos que travam empresas entre R$ 100k e R$ 5M/mês. Todos têm solução com a engenharia certa."
         />
 
-        <div className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 md:mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
           {PAINS.map((p, i) => (
             <motion.div
               key={p.title}
@@ -251,7 +251,7 @@ export function Pains() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.4, delay: i * 0.04 }}
-              className="group relative bg-background p-7 transition-colors hover:bg-card/40"
+              className="group relative bg-background p-6 transition-colors hover:bg-card/40"
             >
               <div className="flex items-start justify-between">
                 <p.icon className="h-5 w-5 text-primary" />
@@ -259,7 +259,7 @@ export function Pains() {
                   0{i + 1}
                 </span>
               </div>
-              <h3 className="mt-6 font-display text-[17px] font-medium tracking-tight">
+              <h3 className="mt-4 font-display text-[17px] font-medium tracking-tight">
                 {p.title}
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
@@ -285,11 +285,11 @@ const PILLARS = [
 
 export function About() {
   return (
-    <section className="relative py-28 md:py-36 overflow-hidden bg-grid-ambient">
+    <section className="relative py-12 md:py-16 overflow-hidden bg-grid-ambient">
       {/* Glow ambiente verde achatado e sutil */}
-      <div className="pointer-events-none absolute top-1/2 left-1/2 h-[220px] w-[1000px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.03] blur-[120px]" />
+      <div className="pointer-events-none absolute top-1/2 left-1/2 h-[140px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.03] blur-[90px]" />
       <div className="container-aceleriq">
-        <div className="grid gap-14 lg:grid-cols-12 lg:items-start">
+        <div className="grid gap-6 lg:grid-cols-12 lg:items-start">
           <motion.div
             initial={{ opacity: 0, x: -16 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -298,10 +298,10 @@ export function About() {
             className="lg:col-span-6"
           >
             <span className="label-eyebrow">[ 02 ] · O que é a Aceleriq</span>
-            <h2 className="mt-4 font-display text-3xl font-medium leading-[1.08] tracking-[-0.03em] md:text-5xl">
+            <h2 className="mt-3 font-display text-3xl font-medium leading-[1.08] tracking-[-0.03em] md:text-5xl">
               Não é agência. É a engenharia de crescimento do seu negócio.
             </h2>
-            <p className="mt-6 text-[15px] leading-relaxed text-muted-foreground md:text-base">
+            <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground md:text-base">
               Agências entregam peças soltas — criativo, post, anúncio. A
               Aceleriq entrega <span className="text-foreground">um sistema</span>:
               diagnóstico, estratégia, execução, dados e IA integrados ao seu
@@ -313,9 +313,9 @@ export function About() {
               que precisa funcionar.
             </p>
 
-            <div className="divider-neon mt-10" />
+            <div className="divider-neon mt-5" />
 
-            <dl className="mt-8 grid grid-cols-3 gap-6">
+            <dl className="mt-5 grid grid-cols-3 gap-6">
               {[
                 { k: "Empresas", v: "+50" },
                 { k: "Setores", v: "8" },
@@ -339,7 +339,7 @@ export function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.06 }}
-                className="hairline rounded-xl bg-card/40 p-6 card-hover"
+                className="hairline rounded-xl bg-card/40 p-5 card-hover"
               >
                 <p.icon className="h-5 w-5 text-primary" />
                 <h3 className="mt-5 font-display text-[15px] font-medium">
@@ -374,10 +374,10 @@ export function Method() {
   return (
     <section
       id="metodo"
-      className="relative py-28 md:py-36 overflow-hidden bg-grid-ambient"
+      className="relative py-12 md:py-16 overflow-hidden bg-grid-ambient"
     >
       {/* Brilho ambiente verde, achatado e sutil — sem bolha redonda */}
-      <div className="pointer-events-none absolute top-1/2 left-1/2 h-[260px] w-[1100px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.035] blur-[120px]" />
+      <div className="pointer-events-none absolute top-1/2 left-1/2 h-[150px] w-[860px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.035] blur-[90px]" />
 
       <div className="container-aceleriq relative">
         <SectionHeader
@@ -387,7 +387,7 @@ export function Method() {
         />
 
         {/* ───────── Timeline horizontal (desktop) ───────── */}
-        <div className="mt-24 hidden lg:block">
+        <div className="mt-10 hidden lg:block">
           <div className="relative">
             {/* Trilho base — gradiente suave */}
             <div className="absolute left-[7%] right-[7%] top-[44px] h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
@@ -468,7 +468,7 @@ export function Method() {
         </div>
 
         {/* ───────── Timeline vertical (mobile/tablet) ───────── */}
-        <div className="mt-14 lg:hidden">
+        <div className="mt-8 lg:hidden">
           <div className="relative pl-8">
             <div className="absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-primary/60 via-primary/30 to-transparent" />
             <ol className="space-y-8">
@@ -527,10 +527,10 @@ export function Areas() {
   return (
     <section
       id="areas"
-      className="relative py-28 md:py-36 overflow-hidden bg-grid-ambient"
+      className="relative py-12 md:py-16 overflow-hidden bg-grid-ambient"
     >
       {/* Glow ambiente verde achatado e sutil */}
-      <div className="pointer-events-none absolute top-1/2 left-1/2 h-[220px] w-[1000px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.03] blur-[120px]" />
+      <div className="pointer-events-none absolute top-1/2 left-1/2 h-[140px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.03] blur-[90px]" />
 
       <div className="container-aceleriq relative">
         <SectionHeader
@@ -539,7 +539,7 @@ export function Areas() {
           description="As 8 dimensões que separam empresas que crescem por sorte de empresas que crescem por engenharia."
         />
 
-        <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 md:mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {AREAS.map((a, i) => (
             <motion.div
               key={a.title}
@@ -547,7 +547,7 @@ export function Areas() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.45, delay: i * 0.04 }}
-              className="group relative overflow-hidden rounded-xl border border-white/[0.08] bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_20px_50px_-20px_oklch(85%_0.2_145/0.4)]"
+              className="group relative overflow-hidden rounded-xl border border-white/[0.08] bg-gradient-to-br from-white/[0.035] to-white/[0.01] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_20px_50px_-20px_oklch(85%_0.2_145/0.32)]"
             >
               {/* Glow no hover */}
               <div className="pointer-events-none absolute -top-12 -right-12 h-32 w-32 rounded-full bg-primary/0 blur-2xl transition-all duration-500 group-hover:bg-primary/20" />
@@ -564,7 +564,7 @@ export function Areas() {
                 </span>
               </div>
 
-              <h3 className="relative mt-6 font-display text-[15px] font-medium tracking-tight transition-colors group-hover:text-primary">
+              <h3 className="relative mt-4 font-display text-[15px] font-medium tracking-tight transition-colors group-hover:text-primary">
                 {a.title}
               </h3>
               <p className="relative mt-2 text-[13px] leading-relaxed text-muted-foreground">
@@ -601,9 +601,9 @@ const FIT_NO = [
 
 export function FitFor() {
   return (
-    <section className="relative py-28 md:py-36 overflow-hidden bg-grid-ambient">
+    <section className="relative py-12 md:py-16 overflow-hidden bg-grid-ambient">
       {/* Glow ambiente verde achatado e sutil */}
-      <div className="pointer-events-none absolute top-1/2 left-1/2 h-[200px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.025] blur-[120px]" />
+      <div className="pointer-events-none absolute top-1/2 left-1/2 h-[130px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.025] blur-[90px]" />
 
       <div className="container-aceleriq relative">
         <SectionHeader
@@ -616,7 +616,7 @@ export function FitFor() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
-          className="mt-16 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.03] to-transparent shadow-[0_30px_80px_-30px_oklch(0%_0_0/0.6)]"
+          className="mt-8 md:mt-10 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.03] to-transparent shadow-[0_30px_80px_-30px_oklch(0%_0_0/0.6)]"
         >
           {/* Cabeçalho da tabela */}
           <div className="grid grid-cols-1 md:grid-cols-2">
@@ -700,7 +700,7 @@ export function FitFor() {
 // ─────────────────────────────────────────────────────────────
 export function DiagnosticoCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section id="diagnostico" className="relative py-28 md:py-36 bg-grid-ambient">
+    <section id="diagnostico" className="relative py-12 md:py-16 bg-grid-ambient">
       <div className="container-aceleriq">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -712,22 +712,22 @@ export function DiagnosticoCTA({ onDiagnostico }: { onDiagnostico: () => void })
           <div className="absolute -right-32 -top-32 h-64 w-64 rounded-full bg-primary/[0.07] blur-3xl" />
           <div className="absolute inset-0 dot-grid opacity-40" />
 
-          <div className="relative grid gap-12 p-8 md:p-14 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+          <div className="relative grid gap-6 p-6 md:p-8 lg:grid-cols-[1.1fr_1fr] lg:items-center">
             <div>
               <span className="label-eyebrow flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary pulse-dot" />
                 [ 06 ] · Diagnóstico inteligente
               </span>
-              <h2 className="mt-4 font-display text-3xl font-medium leading-[1.08] tracking-[-0.03em] md:text-5xl">
+              <h2 className="mt-3 font-display text-3xl font-medium leading-[1.08] tracking-[-0.03em] md:text-5xl">
                 Descubra a maturidade do seu negócio em crescimento e IA.
               </h2>
-              <p className="mt-5 text-[15px] leading-relaxed text-muted-foreground md:text-base">
+              <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground md:text-base">
                 Em até 5 minutos você responde 12 perguntas estratégicas e
                 recebe sua classificação, score e 3 recomendações personalizadas
                 para destravar o próximo estágio.
               </p>
 
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <Button
                   onClick={onDiagnostico}
                   size="lg"
@@ -768,7 +768,7 @@ export function DiagnosticoCTA({ onDiagnostico }: { onDiagnostico: () => void })
                 <h4 className="font-display text-[17px] font-medium leading-snug">
                   Qual o nível de maturidade do seu processo comercial?
                 </h4>
-                <div className="mt-6 grid grid-cols-5 gap-2">
+                <div className="mt-4 grid grid-cols-5 gap-2">
                   {[1, 2, 3, 4, 5].map((n) => (
                     <button
                       key={n}
@@ -821,7 +821,7 @@ const CASES = [
 
 export function Results() {
   return (
-    <section id="resultados" className="relative py-28 md:py-36 bg-grid-ambient">
+    <section id="resultados" className="relative py-12 md:py-16 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
           eyebrow="[ 07 ] · Resultados"
@@ -829,7 +829,7 @@ export function Results() {
           description="Indicadores médios e mini-cases reais de empresas que estruturaram seu sistema de crescimento com a Aceleriq."
         />
 
-        <div className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 md:mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
           {METRICS.map((m, i) => (
             <motion.div
               key={m.label}
@@ -837,7 +837,7 @@ export function Results() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="bg-background p-7"
+              className="bg-background p-6"
             >
               <span className="label-eyebrow">{m.label}</span>
               <div className="mt-3 text-mono text-[40px] font-semibold leading-none tracking-tight text-primary md:text-[44px]">
@@ -855,7 +855,7 @@ export function Results() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="hairline rounded-2xl bg-card/40 p-7 card-hover"
+              className="hairline rounded-2xl bg-card/40 p-6 card-hover"
             >
               <span className="text-mono text-[11px] uppercase tracking-[0.18em] text-primary">
                 {c.segment}
@@ -907,14 +907,14 @@ const TESTIMONIALS = [
 
 export function Testimonials() {
   return (
-    <section className="relative py-28 md:py-36 bg-grid-ambient">
+    <section className="relative py-12 md:py-16 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
           eyebrow="[ 08 ] · Depoimentos"
           title="O que dizem os fundadores que aceleraram conosco."
         />
 
-        <div className="mt-16 grid gap-3 md:grid-cols-3">
+        <div className="mt-8 md:mt-10 grid gap-3 md:grid-cols-3">
           {TESTIMONIALS.map((t, i) => (
             <motion.figure
               key={t.name}
@@ -922,13 +922,13 @@ export function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="hairline relative rounded-2xl bg-card/40 p-7 card-hover"
+              className="hairline relative rounded-2xl bg-card/40 p-6 card-hover"
             >
               <Quote className="h-5 w-5 text-primary/60" />
-              <blockquote className="mt-5 text-[14px] leading-relaxed text-foreground/90">
+              <blockquote className="mt-3 text-[14px] leading-relaxed text-foreground/90">
                 "{t.quote}"
               </blockquote>
-              <figcaption className="mt-7 flex items-center gap-3 border-t border-border pt-5">
+              <figcaption className="mt-5 flex items-center gap-3 border-t border-border pt-5">
                 <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/15 text-mono text-sm font-semibold text-primary">
                   {t.name.charAt(0)}
                 </div>
@@ -963,7 +963,7 @@ const COMPARE: [string, string, string][] = [
 
 export function Compare() {
   return (
-    <section className="relative py-28 md:py-36 bg-grid-ambient">
+    <section className="relative py-12 md:py-16 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
           eyebrow="[ 09 ] · Comparativo"
@@ -971,7 +971,7 @@ export function Compare() {
           description="A diferença entre contratar entregáveis e contratar um sistema de crescimento."
         />
 
-        <div className="mt-16 overflow-hidden rounded-2xl border border-border">
+        <div className="mt-8 md:mt-10 overflow-hidden rounded-2xl border border-border">
           <div className="grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-border bg-card/40">
             <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
               Dimensão
@@ -1007,29 +1007,29 @@ export function Compare() {
 // ─────────────────────────────────────────────────────────────
 export function WhyNow() {
   return (
-    <section className="relative py-28 md:py-36 bg-grid-ambient">
+    <section className="relative py-12 md:py-16 bg-grid-ambient">
       <div className="container-aceleriq">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="relative overflow-hidden rounded-3xl border border-border bg-card/40 p-8 md:p-14"
+          className="relative overflow-hidden rounded-3xl border border-border bg-card/40 p-6 md:p-8"
         >
           <div className="absolute -right-32 -top-32 h-72 w-72 rounded-full bg-primary/[0.06] blur-3xl" />
           <div className="absolute inset-0 dot-grid opacity-40" />
 
-          <div className="relative grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
+          <div className="relative grid gap-6 lg:grid-cols-[1.2fr_1fr] lg:items-center">
             <div>
               <span className="label-eyebrow flex items-center gap-2">
                 <Rocket className="h-3.5 w-3.5 text-primary" />
                 [ 10 ] · Janela de mercado
               </span>
-              <h2 className="mt-4 font-display text-3xl font-medium leading-[1.08] tracking-[-0.03em] md:text-5xl">
+              <h2 className="mt-3 font-display text-3xl font-medium leading-[1.08] tracking-[-0.03em] md:text-5xl">
                 Por que agora? A janela é{" "}
                 <span className="text-primary neon-text-glow">curta</span>.
               </h2>
-              <p className="mt-5 text-[15px] leading-relaxed text-muted-foreground md:text-base">
+              <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground md:text-base">
                 Empresas que estruturarem dados, processo e IA nos próximos
                 12-18 meses vão competir num patamar diferente. Quem ficar
                 no modelo antigo de marketing vai ver margem, CAC e
@@ -1100,7 +1100,7 @@ const FAQS = [
 
 export function FAQ() {
   return (
-    <section id="faq" className="relative py-28 md:py-36 bg-grid-ambient">
+    <section id="faq" className="relative py-12 md:py-16 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
           eyebrow="[ 11 ] · Perguntas frequentes"
@@ -1108,7 +1108,7 @@ export function FAQ() {
           description="Não achou sua resposta? Fale com a gente no WhatsApp."
         />
 
-        <div className="mx-auto mt-16 max-w-3xl">
+        <div className="mx-auto mt-8 md:mt-10 max-w-3xl">
           <Accordion type="single" collapsible className="space-y-2.5">
             {FAQS.map((f, i) => (
               <AccordionItem
@@ -1139,14 +1139,14 @@ export function FAQ() {
 // ─────────────────────────────────────────────────────────────
 export function FinalCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section className="relative py-28 md:py-36 bg-grid-ambient">
+    <section className="relative py-12 md:py-16 bg-grid-ambient">
       <div className="container-aceleriq">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="relative overflow-hidden rounded-3xl border border-border bg-card/40 p-10 text-center md:p-16"
+          className="relative overflow-hidden rounded-3xl border border-border bg-card/40 p-7 text-center md:p-10"
         >
           <div className="grid-perspective absolute inset-0 opacity-60" />
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
@@ -1160,12 +1160,12 @@ export function FinalCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
               Pronto para acelerar com{" "}
               <span className="text-primary neon-text-glow">método, dados e IA</span>?
             </h2>
-            <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-muted-foreground md:text-base">
+            <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-muted-foreground md:text-base">
               Comece pelo Diagnóstico de Maturidade. Em 5 minutos você sabe
               exatamente em que estágio está e o que precisa destravar.
             </p>
 
-            <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Button
                 onClick={onDiagnostico}
                 size="lg"
@@ -1191,7 +1191,7 @@ export function FinalCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
               </Button>
             </div>
 
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[12px] text-muted-foreground">
+            <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[12px] text-muted-foreground">
               <a
                 href={`mailto:${EMAIL}`}
                 className="inline-flex items-center gap-2 hover:text-foreground"
@@ -1232,11 +1232,11 @@ function SectionHeader({
   return (
     <div className="mx-auto max-w-2xl text-center">
       <span className="label-eyebrow">{eyebrow}</span>
-      <h2 className="mt-4 font-display text-3xl font-medium leading-[1.1] tracking-[-0.03em] md:text-[44px]">
+      <h2 className="mt-3 font-display text-3xl font-medium leading-[1.1] tracking-[-0.03em] md:text-[44px]">
         {title}
       </h2>
       {description && (
-        <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-muted-foreground md:text-base">
+        <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-muted-foreground md:text-base">
           {description}
         </p>
       )}
