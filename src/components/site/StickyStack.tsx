@@ -26,7 +26,7 @@ export function StickyStack({ children }: { children: ReactNode }) {
     <div
       ref={containerRef}
       className="relative"
-      style={{ height: `${count * 100}vh` }}
+      style={{ height: `${count * 90}vh` }}
     >
       {items.map((child, i) => (
         <StickyLayer
@@ -70,17 +70,12 @@ function StickyLayer({
   const scaleOut = useTransform(
     progress,
     [outStart, outEnd],
-    isLast ? [1, 1] : [1, 0.9],
+    isLast ? [1, 1] : [1, 0.94],
   );
   const opacityOut = useTransform(
     progress,
     [outStart, outEnd],
-    isLast ? [1, 1] : [1, 0.35],
-  );
-  const filterOut = useTransform(
-    progress,
-    [outStart, outEnd],
-    isLast ? ["blur(0px)", "blur(0px)"] : ["blur(0px)", "blur(3px)"],
+    isLast ? [1, 1] : [1, 0.5],
   );
 
   // Animação de ENTRADA (este item sobe de baixo)
@@ -100,7 +95,6 @@ function StickyLayer({
           y: yIn,
           scale: scaleOut,
           opacity: opacityOut,
-          filter: filterOut,
         }}
         className="h-full w-full bg-background flex flex-col justify-center will-change-transform relative"
       >

@@ -974,7 +974,7 @@ export function Testimonials() {
 
 function TestimonialCard({ t }: { t: { quote: string; name: string; role: string } }) {
   return (
-    <figure className="hairline relative rounded-2xl bg-card/60 p-6 w-[360px] flex-shrink-0 backdrop-blur transition-all hover:border-primary/40 hover:bg-card/80">
+    <figure className="hairline relative rounded-2xl bg-card/80 p-6 w-[360px] flex-shrink-0 transition-all hover:border-primary/40 hover:bg-card">
       <Quote className="h-5 w-5 text-primary/60" />
       <blockquote className="mt-3 text-[14px] leading-relaxed text-foreground/90">
         "{t.quote}"
