@@ -1010,7 +1010,7 @@ const COMPARE: [string, string, string][] = [
 
 export function Compare() {
   return (
-    <section className="relative pt-8 md:pt-10 pb-4 md:pb-6 bg-grid-ambient">
+    <section className="relative py-10 md:py-14 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
           eyebrow="[ 09 ] · Comparativo"
@@ -1063,7 +1063,7 @@ export function Compare() {
 // ─────────────────────────────────────────────────────────────
 export function WhyNow() {
   return (
-    <section className="relative py-6 md:py-8 bg-grid-ambient overflow-hidden">
+    <section className="relative py-10 md:py-14 bg-grid-ambient overflow-hidden">
 
       <div className="container-aceleriq relative z-10">
         <motion.div
