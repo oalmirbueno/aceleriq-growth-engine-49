@@ -43,27 +43,17 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
           </a>
 
           <nav className="hidden items-center gap-8 lg:flex">
-            {NAV.map((item) =>
-              item.type === "route" ? (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  className="relative text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary group"
-                >
-                  {item.label}
-                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-primary transition-all duration-300 group-hover:w-full" />
-                </Link>
-              ) : (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="relative text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary group"
-                >
-                  {item.label}
-                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-primary transition-all duration-300 group-hover:w-full" />
-                </a>
-              ),
-            )}
+            {NAV.map((item) => (
+              <Link
+                key={item.label}
+                to={item.to}
+                hash={item.hash}
+                className="relative text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary group"
+              >
+                {item.label}
+                <span className="absolute -bottom-1 left-0 h-px w-0 bg-primary transition-all duration-300 group-hover:w-full" />
+              </Link>
+            ))}
           </nav>
         </div>
 
