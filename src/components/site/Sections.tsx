@@ -375,17 +375,25 @@ export function Method() {
   return (
     <section
       id="metodo"
-      className="relative py-8 md:py-10 overflow-hidden bg-grid-ambient"
+      className="relative py-12 md:py-16 overflow-hidden bg-grid-ambient"
     >
       {/* Brilho ambiente verde, achatado e sutil — sem bolha redonda */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 h-[150px] w-[860px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.035] blur-[90px]" />
 
       <div className="container-aceleriq relative">
-        <SectionHeader
-          eyebrow="[ 03 ] · Método A.C.E.L.E.R.A"
-          title="Sete etapas. Uma linha do tempo."
-          description="Do diagnóstico à escala, com método de engenharia — não com palpite criativo."
-        />
+        {/* Cabeçalho descendo de cima — efeito "saindo de baixo da seção anterior" */}
+        <motion.div
+          initial={{ opacity: 0, y: -40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <SectionHeader
+            eyebrow="[ 03 ] · Método A.C.E.L.E.R.A"
+            title="Sete etapas. Uma linha do tempo."
+            description="Do diagnóstico à escala, com método de engenharia — não com palpite criativo."
+          />
+        </motion.div>
 
         {/* ───────── Timeline horizontal (desktop) ───────── */}
         <div className="mt-6 hidden lg:block">
@@ -418,12 +426,12 @@ export function Method() {
               {METHOD.map((step, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, x: i % 2 === 0 ? -60 : 60, y: 10 }}
+                  whileInView={{ opacity: 1, x: 0, y: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{
                     duration: 0.7,
-                    delay: 0.3 + i * 0.18,
+                    delay: 0.3 + i * 0.12,
                     ease: [0.22, 1, 0.36, 1],
                   }}
                   className="group flex flex-col items-center px-2"
@@ -909,23 +917,40 @@ const TESTIMONIALS = [
 ];
 
 export function Testimonials() {
+  // Duplica para criar loop infinito visual
+  const loop = [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS];
   return (
-    <section className="relative py-8 md:py-10 bg-grid-ambient">
+    <section className="relative py-12 md:py-16 bg-grid-ambient overflow-hidden">
       <div className="container-aceleriq">
         <SectionHeader
           eyebrow="[ 08 ] · Depoimentos"
           title="O que dizem os fundadores que aceleraram conosco."
         />
+      </div>
 
-        <div className="mt-5 md:mt-6 grid gap-3 md:grid-cols-3">
-          {TESTIMONIALS.map((t, i) => (
-            <motion.figure
-              key={t.name}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="hairline relative rounded-2xl bg-card/40 p-5 card-hover"
+      {/* Carrossel auto-scroll com fade nas bordas */}
+      <div
+        className="mt-8 md:mt-10 relative overflow-hidden"
+        style={{
+          maskImage:
+            "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+          WebkitMaskImage:
+            "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+        }}
+      >
+        <motion.div
+          className="flex gap-4 w-max"
+          animate={{ x: ["0%", "-33.333%"] }}
+          transition={{
+            duration: 35,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        >
+          {loop.map((t, i) => (
+            <figure
+              key={i}
+              className="hairline relative rounded-2xl bg-card/60 p-6 w-[360px] flex-shrink-0 backdrop-blur"
             >
               <Quote className="h-5 w-5 text-primary/60" />
               <blockquote className="mt-3 text-[14px] leading-relaxed text-foreground/90">
@@ -942,9 +967,9 @@ export function Testimonials() {
                   </div>
                 </div>
               </figcaption>
-            </motion.figure>
+            </figure>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -974,30 +999,39 @@ export function Compare() {
           description="A diferença entre contratar entregáveis e contratar um sistema de crescimento."
         />
 
-        <div className="mt-5 md:mt-6 overflow-hidden rounded-2xl border border-border">
-          <div className="grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-border bg-card/40">
+        <div className="mt-5 md:mt-6 relative overflow-hidden rounded-2xl border border-border">
+          {/* Coluna Aceleriq destacada com glow vertical */}
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-[41.66%] bg-gradient-to-b from-primary/[0.04] via-primary/[0.06] to-primary/[0.04]" />
+          <div className="pointer-events-none absolute right-[41.66%] top-0 bottom-0 w-px bg-primary/30" />
+
+          <div className="relative grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-border bg-card/60 backdrop-blur">
             <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
               Dimensão
             </div>
             <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
               Agência comum
             </div>
-            <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-primary">
+            <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-primary flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse shadow-[0_0_8px_currentColor]" />
               Aceleriq
             </div>
           </div>
           {COMPARE.map(([dim, agency, us], i) => (
-            <div
+            <motion.div
               key={i}
-              className="grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-border last:border-b-0 text-sm transition-colors hover:bg-card/30"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.45, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+              className="relative grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-border last:border-b-0 text-sm transition-colors hover:bg-card/30"
             >
               <div className="px-5 py-4 font-medium text-foreground/95">{dim}</div>
-              <div className="px-5 py-4 text-muted-foreground">{agency}</div>
-              <div className="flex items-start gap-2 px-5 py-4 text-foreground">
+              <div className="px-5 py-4 text-muted-foreground line-through decoration-white/10">{agency}</div>
+              <div className="flex items-start gap-2 px-5 py-4 text-foreground font-medium">
                 <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
                 {us}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -1042,19 +1076,25 @@ export function WhyNow() {
             </div>
             <div className="grid gap-2.5">
               {[
-                { k: "Custo de aquisição", v: "+27% a.a." },
-                { k: "Empresas com IA aplicada", v: "Crescem 2.4x" },
-                { k: "Tempo médio de implantação", v: "60 — 120 dias" },
-              ].map((s) => (
-                <div
+                { k: "Custo de aquisição", num: 27, suffix: "% a.a.", prefix: "+" },
+                { k: "Empresas com IA aplicada", num: 2.4, suffix: "x", prefix: "Crescem ", decimals: 1 },
+                { k: "Tempo médio de implantação", num: 120, suffix: " dias", prefix: "60 — " },
+              ].map((s, i) => (
+                <motion.div
                   key={s.k}
-                  className="flex items-center justify-between rounded-xl border border-border bg-background/50 px-5 py-4"
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
+                  className="group flex items-center justify-between rounded-xl border border-border bg-background/50 px-5 py-4 transition-all hover:border-primary/40 hover:bg-background/80"
                 >
                   <span className="text-[13px] text-muted-foreground">{s.k}</span>
-                  <span className="text-mono text-[14px] font-semibold text-foreground">
-                    {s.v}
+                  <span className="text-mono text-[14px] font-semibold text-primary flex items-baseline">
+                    <span className="text-foreground/70">{s.prefix}</span>
+                    <CountUp to={s.num} decimals={s.decimals ?? 0} duration={1500} />
+                    <span>{s.suffix}</span>
                   </span>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -1104,32 +1144,44 @@ const FAQS = [
 
 export function FAQ() {
   return (
-    <section id="faq" className="relative py-8 md:py-10 bg-grid-ambient">
-      <div className="container-aceleriq">
+    <section id="faq" className="relative py-12 md:py-16 bg-grid-ambient overflow-hidden">
+      {/* Glow lateral animado */}
+      <div className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 h-[400px] w-[300px] bg-primary/[0.04] blur-[120px] rounded-full" />
+      <div className="pointer-events-none absolute right-0 top-1/3 h-[300px] w-[250px] bg-accent/[0.04] blur-[120px] rounded-full" />
+
+      <div className="container-aceleriq relative">
         <SectionHeader
           eyebrow="[ 11 ] · Perguntas frequentes"
           title="Dúvidas comuns antes de acelerar."
           description="Não achou sua resposta? Fale com a gente no WhatsApp."
         />
 
-        <div className="mx-auto mt-5 md:mt-6 max-w-3xl">
+        <div className="mx-auto mt-6 md:mt-8 max-w-3xl" style={{ perspective: "1200px" }}>
           <Accordion type="single" collapsible className="space-y-2.5">
             {FAQS.map((f, i) => (
-              <AccordionItem
+              <motion.div
                 key={i}
-                value={`item-${i}`}
-                className="overflow-hidden rounded-xl border border-border bg-card/40 px-5 transition-colors data-[state=open]:border-primary/30"
+                initial={{ opacity: 0, rotateX: -25, y: 20 }}
+                whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                style={{ transformStyle: "preserve-3d" }}
               >
-                <AccordionTrigger className="py-4 text-left text-[15px] font-medium hover:no-underline">
-                  <span className="flex items-center gap-3">
-                    <HelpCircle className="h-4 w-4 flex-shrink-0 text-primary" />
-                    {f.q}
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className="pb-4 pl-7 text-[14px] leading-relaxed text-muted-foreground">
-                  {f.a}
-                </AccordionContent>
-              </AccordionItem>
+                <AccordionItem
+                  value={`item-${i}`}
+                  className="overflow-hidden rounded-xl border border-border bg-card/40 px-5 transition-all data-[state=open]:border-primary/40 data-[state=open]:bg-card/70 data-[state=open]:shadow-[0_10px_40px_-15px_oklch(85%_0.2_145/0.3)]"
+                >
+                  <AccordionTrigger className="py-4 text-left text-[15px] font-medium hover:no-underline">
+                    <span className="flex items-center gap-3">
+                      <HelpCircle className="h-4 w-4 flex-shrink-0 text-primary" />
+                      {f.q}
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-4 pl-7 text-[14px] leading-relaxed text-muted-foreground">
+                    {f.a}
+                  </AccordionContent>
+                </AccordionItem>
+              </motion.div>
             ))}
           </Accordion>
         </div>
