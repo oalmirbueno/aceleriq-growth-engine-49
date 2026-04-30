@@ -846,7 +846,13 @@ export function Results() {
           description="Indicadores médios e mini-cases reais de empresas que estruturaram seu sistema de crescimento com a Aceleriq."
         />
 
-        <div className="mt-5 md:mt-6 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+        <div
+          className="liquid-glass mt-5 md:mt-6 grid gap-px overflow-hidden rounded-2xl sm:grid-cols-2 lg:grid-cols-4"
+          style={{
+            background:
+              "linear-gradient(180deg, oklch(85% 0.2 145 / 0.18), oklch(85% 0.2 145 / 0.06))",
+          }}
+        >
           {METRICS.map((m, i) => (
             <motion.div
               key={m.label}
@@ -854,12 +860,24 @@ export function Results() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="bg-background p-5"
+              className="relative p-6 transition-all duration-300 hover:bg-primary/[0.04]"
+              style={{
+                background:
+                  "linear-gradient(180deg, color-mix(in oklab, var(--background) 92%, transparent), color-mix(in oklab, var(--background) 80%, transparent))",
+                boxShadow:
+                  "inset 0 1px 0 oklch(100% 0 0 / 0.05), inset 0 -1px 0 oklch(0% 0 0 / 0.4)",
+              }}
             >
+              {/* Numeração discreta no canto */}
+              <span className="absolute right-3 top-3 font-mono text-[9px] uppercase tracking-[0.2em] text-foreground/30">
+                {String(i + 1).padStart(2, "0")}
+              </span>
               <span className="label-eyebrow">{m.label}</span>
-              <div className="mt-3 text-mono text-[40px] font-semibold leading-none tracking-tight text-primary md:text-[44px]">
+              <div className="mt-3 text-mono text-[40px] font-semibold leading-none tracking-tight text-primary md:text-[44px] drop-shadow-[0_0_12px_oklch(85%_0.2_145/0.4)]">
                 {m.value}
               </div>
+              {/* Linha-luz inferior — toque skeumórfico */}
+              <div className="pointer-events-none absolute inset-x-4 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
             </motion.div>
           ))}
         </div>
@@ -1197,12 +1215,21 @@ export function Compare() {
           description="A diferença entre contratar entregáveis e contratar um sistema de crescimento."
         />
 
-        <div className="mt-5 md:mt-6 relative overflow-hidden rounded-2xl border border-border">
+        <div className="liquid-glass mt-5 md:mt-6 relative overflow-hidden rounded-2xl">
           {/* Coluna Aceleriq destacada com glow vertical */}
-          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-[41.66%] bg-gradient-to-b from-primary/[0.04] via-primary/[0.06] to-primary/[0.04]" />
-          <div className="pointer-events-none absolute right-[41.66%] top-0 bottom-0 w-px bg-primary/30" />
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-[41.66%] bg-gradient-to-b from-primary/[0.06] via-primary/[0.10] to-primary/[0.06]" />
+          <div className="pointer-events-none absolute right-[41.66%] top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-primary/60 to-transparent" />
 
-          <div className="relative grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-border bg-card/60 backdrop-blur">
+          {/* Cabeçalho — pílula skeumórfica */}
+          <div
+            className="relative grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-primary/15"
+            style={{
+              background:
+                "linear-gradient(180deg, color-mix(in oklab, var(--foreground) 8%, transparent), color-mix(in oklab, var(--foreground) 2%, transparent))",
+              boxShadow:
+                "inset 0 1px 0 oklch(100% 0 0 / 0.08), inset 0 -1px 0 oklch(0% 0 0 / 0.4)",
+            }}
+          >
             <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
               Dimensão
             </div>
@@ -1221,12 +1248,20 @@ export function Compare() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.45, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-              className="relative grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-border last:border-b-0 text-sm transition-colors hover:bg-card/30"
+              className="relative grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-white/[0.04] last:border-b-0 text-sm transition-colors hover:bg-primary/[0.04]"
             >
-              <div className="px-5 py-4 font-medium text-foreground/95">{dim}</div>
-              <div className="px-5 py-4 text-muted-foreground line-through decoration-white/10">{agency}</div>
+              <div className="flex items-center gap-2 px-5 py-4 font-medium text-foreground/95">
+                <span className="font-mono text-[9px] text-primary/50">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                {dim}
+              </div>
+              <div className="flex items-start gap-2 px-5 py-4 text-muted-foreground">
+                <X className="mt-0.5 h-4 w-4 flex-shrink-0 text-foreground/30" />
+                <span className="line-through decoration-white/15">{agency}</span>
+              </div>
               <div className="flex items-start gap-2 px-5 py-4 text-foreground font-medium">
-                <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary drop-shadow-[0_0_4px_oklch(85%_0.2_145/0.6)]" />
                 {us}
               </div>
             </motion.div>
