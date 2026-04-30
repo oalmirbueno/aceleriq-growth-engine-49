@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Link } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
 import logoAceleriq from "@/assets/logo-aceleriq.png";
 
 const NAV = [
-  { label: "Método", href: "#metodo" },
-  { label: "Áreas", href: "#areas" },
-  { label: "Resultados", href: "#resultados" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Sobre", to: "/sobre-a-aceleriq" as const, type: "route" as const },
+  { label: "Método", href: "/#metodo", type: "anchor" as const },
+  { label: "Áreas", href: "/#areas", type: "anchor" as const },
+  { label: "Resultados", href: "/#resultados", type: "anchor" as const },
+  { label: "FAQ", href: "/#faq", type: "anchor" as const },
 ];
 
 export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
@@ -42,16 +43,27 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
           </a>
 
           <nav className="hidden items-center gap-8 lg:flex">
-            {NAV.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="relative text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary group"
-              >
-                {item.label}
-                <span className="absolute -bottom-1 left-0 h-px w-0 bg-primary transition-all duration-300 group-hover:w-full" />
-              </a>
-            ))}
+            {NAV.map((item) =>
+              item.type === "route" ? (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className="relative text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary group"
+                >
+                  {item.label}
+                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-primary transition-all duration-300 group-hover:w-full" />
+                </Link>
+              ) : (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="relative text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary group"
+                >
+                  {item.label}
+                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-primary transition-all duration-300 group-hover:w-full" />
+                </a>
+              ),
+            )}
           </nav>
         </div>
 
