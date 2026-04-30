@@ -1044,8 +1044,8 @@ export function Compare() {
 // ─────────────────────────────────────────────────────────────
 export function WhyNow() {
   return (
-    <section className="relative py-8 md:py-10 bg-grid-ambient overflow-hidden">
-      
+    <section className="relative py-6 md:py-8 bg-grid-ambient overflow-hidden">
+
       <div className="container-aceleriq relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
