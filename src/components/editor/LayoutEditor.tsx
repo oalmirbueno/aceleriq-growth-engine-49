@@ -184,10 +184,22 @@ function findElement(selector: string): HTMLElement | null {
 }
 
 // ─── Apply transforms to all matched elements ─────────
+// NOTE: overrides são salvos em desktop e quebram o layout responsivo
+// em mobile/tablet. Aplicamos apenas em viewports ≥ 1024px.
 function applyAll() {
+  const isDesktop = typeof window !== "undefined" && window.innerWidth >= 1024;
   Object.entries(memoryStore).forEach(([sel, t]) => {
     const el = findElement(sel);
     if (!el) return;
+    if (!isDesktop) {
+      // Limpa qualquer override aplicado antes (ao redimensionar do desktop p/ mobile)
+      el.style.transform = "";
+      el.style.opacity = "";
+      el.style.width = "";
+      el.style.height = "";
+      el.style.zIndex = "";
+      return;
+    }
     el.style.transform = `translate(${t.x}px, ${t.y}px) scale(${t.scale}) rotate(${t.rotation}deg)`;
     el.style.transformOrigin = "center center";
     el.style.opacity = String(t.opacity);
@@ -212,10 +224,11 @@ export function LayoutEditorProvider({ children }: { children: ReactNode }) {
     const unsub = subscribeRealtime();
     const reapply = () => applyAll();
     window.addEventListener("layout-editor:change", reapply);
+    window.addEventListener("resize", reapply);
     // Re-apply after route changes / DOM mutations
     const obs = new MutationObserver(() => applyAll());
     obs.observe(document.body, { childList: true, subtree: true });
-    return () => { unsub(); window.removeEventListener("layout-editor:change", reapply); obs.disconnect(); };
+    return () => { unsub(); window.removeEventListener("layout-editor:change", reapply); window.removeEventListener("resize", reapply); obs.disconnect(); };
   }, []);
 
   // Toggle key
