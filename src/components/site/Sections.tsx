@@ -605,7 +605,7 @@ const FIT_NO = [
 
 export function FitFor() {
   return (
-    <section className="relative py-28 md:py-36 overflow-hidden bg-gradient-to-b from-background via-[oklch(12%_0.02_145)] to-background">
+    <section className="relative py-28 md:py-36 overflow-hidden bg-grid-ambient bg-gradient-to-b from-background via-[oklch(12%_0.02_145)] to-background">
       {/* Glow ambiente sutil */}
       <div className="pointer-events-none absolute left-1/4 top-0 h-[300px] w-[400px] rounded-full bg-primary/[0.04] blur-3xl" />
 
