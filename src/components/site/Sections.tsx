@@ -227,7 +227,9 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                 <div className="text-2xl font-bold text-primary">IA</div>
               </motion.div>
             </motion.div>
-          </motion.div>
+          </div>
+        </div>
+      </div>
       </div>
 
       {/* Fade inferior para a próxima seção */}
