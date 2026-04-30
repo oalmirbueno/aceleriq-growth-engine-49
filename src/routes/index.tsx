@@ -42,7 +42,7 @@ function Index() {
   const openDiagnostico = () => setDiagOpen(true);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground relative z-10">
       <Header onDiagnostico={openDiagnostico} />
       <main>
         <Hero onDiagnostico={openDiagnostico} />
