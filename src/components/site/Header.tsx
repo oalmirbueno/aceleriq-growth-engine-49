@@ -5,12 +5,12 @@ import { cn } from "@/lib/utils";
 import logoAceleriq from "@/assets/logo-aceleriq.png";
 
 const NAV = [
-  { label: "Sobre", to: "/sobre-a-aceleriq" as const, type: "route" as const },
-  { label: "Método", href: "/#metodo", type: "anchor" as const },
-  { label: "Áreas", href: "/#areas", type: "anchor" as const },
-  { label: "Resultados", href: "/#resultados", type: "anchor" as const },
-  { label: "FAQ", href: "/#faq", type: "anchor" as const },
-];
+  { label: "Sobre", to: "/sobre-a-aceleriq", hash: undefined },
+  { label: "Método", to: "/", hash: "metodo" },
+  { label: "Áreas", to: "/", hash: "areas" },
+  { label: "Resultados", to: "/", hash: "resultados" },
+  { label: "FAQ", to: "/", hash: "faq" },
+] as const;
 
 export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
   const [scrolled, setScrolled] = useState(false);
