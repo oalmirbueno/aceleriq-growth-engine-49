@@ -14,6 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
+      diagnostico_leads: {
+        Row: {
+          classificacao: string
+          created_at: string
+          empresa: string
+          faturamento_mensal: string
+          id: string
+          interesse_principal: string
+          nome: string
+          principal_gargalo: string
+          recomendacoes: Json
+          respostas: Json
+          score: number
+          site_instagram: string | null
+          whatsapp: string
+        }
+        Insert: {
+          classificacao?: string
+          created_at?: string
+          empresa: string
+          faturamento_mensal: string
+          id?: string
+          interesse_principal: string
+          nome: string
+          principal_gargalo: string
+          recomendacoes?: Json
+          respostas?: Json
+          score?: number
+          site_instagram?: string | null
+          whatsapp: string
+        }
+        Update: {
+          classificacao?: string
+          created_at?: string
+          empresa?: string
+          faturamento_mensal?: string
+          id?: string
+          interesse_principal?: string
+          nome?: string
+          principal_gargalo?: string
+          recomendacoes?: Json
+          respostas?: Json
+          score?: number
+          site_instagram?: string | null
+          whatsapp?: string
+        }
+        Relationships: []
+      }
       layout_overrides: {
         Row: {
           height: number | null
