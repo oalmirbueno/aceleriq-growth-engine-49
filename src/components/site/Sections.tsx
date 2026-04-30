@@ -75,9 +75,9 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                 transition={{ duration: 1, ease: "circOut" }}
                 className="text-6xl md:text-8xl lg:text-9xl font-bold leading-[0.85] flex flex-col"
               >
-                <span className="text-stroke">Growth</span>
-                <span className="text-primary text-glow italic">Engineering</span>
-                <span className="text-white">Protocol</span>
+                <span className="text-stroke">Protocolo</span>
+                <span className="text-primary text-glow italic">de Engenharia</span>
+                <span className="text-white">de Crescimento</span>
               </motion.h1>
 
               <motion.div
