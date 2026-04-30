@@ -234,7 +234,7 @@ const PAINS = [
 
 export function Pains() {
   return (
-    <section className="relative py-8 md:py-10 bg-grid-ambient overflow-hidden">
+    <section className="relative py-10 md:py-14 bg-grid-ambient overflow-hidden">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
       
       <div className="container-aceleriq relative z-10">
@@ -286,7 +286,7 @@ const PILLARS = [
 
 export function About() {
   return (
-    <section className="relative py-8 md:py-10 overflow-hidden bg-grid-ambient">
+    <section className="relative py-10 md:py-14 overflow-hidden bg-grid-ambient">
       {/* Glow ambiente verde achatado e sutil */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 h-[140px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.03] blur-[90px]" />
       <div className="container-aceleriq">
@@ -375,7 +375,7 @@ export function Method() {
   return (
     <section
       id="metodo"
-      className="relative py-12 md:py-16 overflow-hidden bg-grid-ambient"
+      className="relative py-10 md:py-14 overflow-hidden bg-grid-ambient"
     >
       {/* Brilho ambiente verde, achatado e sutil — sem bolha redonda */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 h-[150px] w-[860px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.035] blur-[90px]" />
@@ -536,7 +536,7 @@ export function Areas() {
   return (
     <section
       id="areas"
-      className="relative py-8 md:py-10 overflow-hidden bg-grid-ambient"
+      className="relative py-10 md:py-14 overflow-hidden bg-grid-ambient"
     >
       {/* Glow ambiente verde achatado e sutil */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 h-[140px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.03] blur-[90px]" />
@@ -611,7 +611,7 @@ const FIT_NO = [
 
 export function FitFor() {
   return (
-    <section className="relative py-8 md:py-10 overflow-hidden bg-grid-ambient">
+    <section className="relative py-10 md:py-14 overflow-hidden bg-grid-ambient">
       {/* Glow ambiente verde mais presente */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 h-[280px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.06] blur-[100px]" />
       <div className="pointer-events-none absolute top-0 left-1/2 h-[1px] w-[60%] -translate-x-1/2 bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
@@ -711,7 +711,7 @@ export function FitFor() {
 // ─────────────────────────────────────────────────────────────
 export function DiagnosticoCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section id="diagnostico" className="relative py-8 md:py-10 bg-grid-ambient">
+    <section id="diagnostico" className="relative py-10 md:py-14 bg-grid-ambient">
       <div className="container-aceleriq">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -832,7 +832,7 @@ const CASES = [
 
 export function Results() {
   return (
-    <section id="resultados" className="relative py-8 md:py-10 bg-grid-ambient">
+    <section id="resultados" className="relative py-10 md:py-14 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
           eyebrow="[ 07 ] · Resultados"
@@ -920,7 +920,7 @@ export function Testimonials() {
   // Duplica para criar loop infinito visual
   const loop = [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS];
   return (
-    <section className="relative py-12 md:py-16 bg-grid-ambient overflow-hidden">
+    <section className="relative py-10 md:py-14 bg-grid-ambient overflow-hidden">
       <div className="container-aceleriq">
         <SectionHeader
           eyebrow="[ 08 ] · Depoimentos"
@@ -1163,7 +1163,7 @@ const FAQS = [
 
 export function FAQ() {
   return (
-    <section id="faq" className="relative py-12 md:py-16 bg-grid-ambient overflow-hidden">
+    <section id="faq" className="relative py-10 md:py-14 bg-grid-ambient overflow-hidden">
       {/* Glow lateral animado */}
       <div className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 h-[400px] w-[300px] bg-primary/[0.04] blur-[120px] rounded-full" />
       <div className="pointer-events-none absolute right-0 top-1/3 h-[300px] w-[250px] bg-accent/[0.04] blur-[120px] rounded-full" />
@@ -1214,7 +1214,7 @@ export function FAQ() {
 // ─────────────────────────────────────────────────────────────
 export function FinalCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section className="relative py-8 md:py-10 bg-grid-ambient">
+    <section className="relative py-10 md:py-14 bg-grid-ambient">
       <div className="container-aceleriq">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
