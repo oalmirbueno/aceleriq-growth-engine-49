@@ -24,13 +24,25 @@ export const Route = createFileRoute("/")({
     meta: [
       {
         title:
-          "Aceleriq — Engenharia de Crescimento com Estratégia, Dados e IA",
+          "Aceleriq · Engenharia de Crescimento com Estratégia, Dados e IA",
       },
       {
         name: "description",
         content:
-          "Aceleriq é a engenharia de crescimento que une estratégia, processo comercial, tráfego, CRM, IA e dados. Faça o Diagnóstico de Maturidade gratuito.",
+          "Aceleriq é uma engenharia de crescimento em Curitiba que une estratégia, CRM, tráfego, automação, IA, dados e processos comerciais para empresas que querem escalar com previsibilidade.",
       },
+      {
+        property: "og:title",
+        content:
+          "Aceleriq · Engenharia de Crescimento com Estratégia, Dados e IA",
+      },
+      {
+        property: "og:description",
+        content:
+          "Estratégia, CRM, automação, IA, dados e processos comerciais para empresas que querem escalar.",
+      },
+      { property: "og:url", content: "https://aceleriq.com.br" },
+      { property: "og:type", content: "website" },
     ],
   }),
   component: Index,
