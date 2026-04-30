@@ -224,10 +224,11 @@ export function LayoutEditorProvider({ children }: { children: ReactNode }) {
     const unsub = subscribeRealtime();
     const reapply = () => applyAll();
     window.addEventListener("layout-editor:change", reapply);
+    window.addEventListener("resize", reapply);
     // Re-apply after route changes / DOM mutations
     const obs = new MutationObserver(() => applyAll());
     obs.observe(document.body, { childList: true, subtree: true });
-    return () => { unsub(); window.removeEventListener("layout-editor:change", reapply); obs.disconnect(); };
+    return () => { unsub(); window.removeEventListener("layout-editor:change", reapply); window.removeEventListener("resize", reapply); obs.disconnect(); };
   }, []);
 
   // Toggle key
