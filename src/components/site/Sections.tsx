@@ -834,8 +834,9 @@ const CASES = [
 
 export function Results() {
   return (
-    <section id="resultados" className="relative py-10 md:py-14 bg-grid-ambient">
-      <div className="container-aceleriq">
+    <section id="resultados" className="relative py-10 md:py-14 bg-grid-ambient overflow-hidden">
+      <SectionAmbient variant="data" />
+      <div className="container-aceleriq relative">
         <SectionHeader
           eyebrow="[ 07 ] · Resultados"
           title="Quando a engenharia entra, o resultado aparece."
