@@ -228,11 +228,9 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
 // ─────────────────────────────────────────────────────────────
 const PAINS = [
   { icon: Megaphone, title: "Marketing sem ROI", desc: "Investimento em tráfego sem leitura clara do que gera receita." },
-  { icon: Users2, title: "Time comercial sem método", desc: "Vendedores apagando incêndio, sem playbook nem cadência." },
-  { icon: Workflow, title: "Ferramentas desconectadas", desc: "CRM, planilhas, WhatsApp e automações que não conversam." },
+  { icon: Users2, title: "Vendas sem método", desc: "Time comercial sem playbook, cadência ou previsibilidade." },
   { icon: Database, title: "Decisão sem dados", desc: "Você sente o pulso do negócio, mas não tem dashboards confiáveis." },
-  { icon: AlertTriangle, title: "Tudo depende do dono", desc: "Sem o sócio na operação, a empresa para. Existe heroísmo, não processo." },
-  { icon: Target, title: "Leads ruins, propostas frias", desc: "Volume sobe, qualidade desce. CAC alto, ciclo longo, conversão baixa." },
+  { icon: AlertTriangle, title: "Tudo depende do dono", desc: "Sem o sócio na operação, a empresa para. Heroísmo, não sistema." },
 ];
 
 export function Pains() {
