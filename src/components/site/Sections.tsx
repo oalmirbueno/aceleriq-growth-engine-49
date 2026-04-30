@@ -530,7 +530,7 @@ export function Areas() {
   return (
     <section
       id="areas"
-      className="relative py-28 md:py-36 overflow-hidden bg-gradient-to-b from-background via-[oklch(12%_0.015_250)] to-background"
+      className="relative py-28 md:py-36 overflow-hidden bg-grid-ambient bg-gradient-to-b from-background via-[oklch(12%_0.015_250)] to-background"
     >
       {/* Glow ambiente */}
       <div className="pointer-events-none absolute right-0 top-1/3 h-[400px] w-[600px] rounded-full bg-primary/[0.05] blur-3xl" />
