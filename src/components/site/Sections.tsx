@@ -109,71 +109,79 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
               className="relative aspect-square w-full max-w-md mx-auto lg:max-w-none"
             >
               <div className="absolute inset-0 glass-panel flex flex-col p-8 overflow-hidden border-white/20">
-                <div className="flex justify-between items-center mb-12">
-                  <div className="flex gap-2">
-                    <div className="w-12 h-1 bg-primary shadow-[0_0_10px_rgba(var(--primary-rgb),0.5)]" />
-                    <div className="w-4 h-1 bg-white/10" />
+                <div className="flex justify-between items-center mb-10">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full border border-primary/30 flex items-center justify-center bg-primary/5">
+                      <Brain className="h-5 w-5 text-primary" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[10px] font-bold text-white tracking-tight leading-none">Neural Protocol</span>
+                      <span className="text-[8px] opacity-40 font-mono uppercase tracking-widest mt-1">Status: Active</span>
+                    </div>
                   </div>
-                  <span className="font-mono text-[10px] opacity-60 tracking-tighter">OPERATIONAL_METRICS_V2</span>
+                  <div className="px-2 py-1 bg-primary/10 border border-primary/20 rounded-sm">
+                    <span className="font-mono text-[9px] text-primary tracking-tighter">SECURE_NODE_04</span>
+                  </div>
                 </div>
                 
-                <div className="flex-1 grid grid-cols-2 gap-8">
-                  <div className="flex flex-col justify-end gap-2">
-                    <div className="flex items-baseline gap-1">
-                      <span className="text-5xl font-mono font-bold text-white leading-none tracking-tighter">14.2%</span>
-                      <ArrowUpRight className="h-4 w-4 text-primary animate-pulse" />
+                <div className="flex-1 flex flex-col justify-center space-y-8">
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-end">
+                      <div className="flex flex-col">
+                        <span className="text-[9px] uppercase tracking-[0.2em] font-medium text-primary/80 mb-1">Scale_Acceleration</span>
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-5xl font-mono font-bold text-white leading-none tracking-tighter">98.2%</span>
+                          <span className="text-xs text-primary/60 font-mono">Precision</span>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-[18px] font-mono font-bold text-primary">+245%</div>
+                        <div className="text-[8px] uppercase tracking-widest opacity-40">Monthly_ROI</div>
+                      </div>
                     </div>
-                    <span className="text-[10px] uppercase tracking-[0.2em] font-medium text-primary/80">Growth_Index</span>
-                    <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                    
+                    <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden p-[1px]">
                       <motion.div 
                         initial={{ width: "0%" }}
-                        animate={{ width: "70%" }}
+                        animate={{ width: "98%" }}
                         transition={{ duration: 2, ease: "circOut" }}
-                        className="h-full bg-gradient-to-r from-primary/40 to-primary shadow-[0_0_15px_rgba(var(--primary-rgb),0.4)]"
+                        className="h-full bg-gradient-to-r from-primary/20 via-primary/60 to-primary shadow-[0_0_15px_rgba(var(--primary-rgb),0.4)] rounded-full"
                       />
                     </div>
                   </div>
-                  <div className="border-l border-white/10 pl-6 flex flex-col justify-center gap-5">
+
+                  <div className="grid grid-cols-3 gap-4">
                     {[
-                      { label: "Efficiency", val: "88%" },
-                      { label: "Stability", val: "94%" },
-                      { label: "Uptime", val: "99.9%" }
+                      { label: "Efficiency", val: "94%" },
+                      { label: "Automation", val: "88%" },
+                      { label: "Leads", val: "x3.2" }
                     ].map((item, i) => (
-                      <div key={i} className="flex flex-col gap-1.5">
-                        <div className="flex justify-between items-end">
-                          <span className="text-[8px] uppercase tracking-widest opacity-40 font-mono">{item.label}</span>
-                          <span className="text-[10px] font-mono text-primary/70">{item.val}</span>
-                        </div>
-                        <div className="h-[2px] w-full bg-white/5">
-                          <motion.div 
-                            initial={{ width: 0 }}
-                            animate={{ width: item.val }}
-                            transition={{ delay: 0.5 + (i * 0.2), duration: 1 }}
-                            className="h-full bg-primary/30" 
-                          />
-                        </div>
+                      <div key={i} className="bg-white/5 p-3 border border-white/5 flex flex-col gap-1">
+                        <span className="text-[8px] uppercase tracking-widest opacity-40 font-mono">{item.label}</span>
+                        <span className="text-sm font-mono text-white font-bold">{item.val}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="mt-12 pt-8 border-t border-white/10 flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div className="flex -space-x-3">
-                      {[1,2,3,4].map(i => (
-                        <div key={i} className="w-9 h-9 rounded-full border-2 border-zinc-950 bg-zinc-800 flex items-center justify-center overflow-hidden">
-                           <div className="w-full h-full bg-gradient-to-br from-zinc-700 to-zinc-900" />
+                <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="flex -space-x-2">
+                      {[1,2,3].map(i => (
+                        <div key={i} className="w-8 h-8 rounded-full border-2 border-zinc-950 bg-zinc-800 flex items-center justify-center overflow-hidden">
+                           <img 
+                             src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i + 10}&backgroundColor=b6e3f4,c0aede,d1d4f9`} 
+                             alt="User"
+                             className="w-full h-full object-cover"
+                           />
                         </div>
                       ))}
                     </div>
-                    <div className="flex flex-col">
-                      <span className="text-[10px] font-bold text-white tracking-tight">System Core</span>
-                      <span className="text-[8px] opacity-40 font-mono uppercase tracking-widest">Authorized Personnel</span>
-                    </div>
+                    <span className="text-[9px] font-mono text-white/60">SDR_Team_Sync</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_rgba(var(--primary-rgb),0.8)]" />
-                    <span className="text-[9px] font-mono text-primary/90 tracking-widest uppercase">Live_Scale</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shadow-[0_0_8px_rgba(var(--primary-rgb),0.8)]" />
+                    <span className="text-[9px] font-mono text-primary/90 tracking-widest uppercase">Live_Sync</span>
                   </div>
                 </div>
               </div>
