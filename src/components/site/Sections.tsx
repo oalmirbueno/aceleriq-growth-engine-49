@@ -73,18 +73,16 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
 
           <div className="grid lg:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center w-full max-w-full">
             <div>
-              <Editable id="hero-headline">
-                <motion.h1 
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, ease: "circOut" }}
-                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] md:leading-[0.9] flex flex-col"
-                >
-                  <span className="text-stroke">Protocolo</span>
-                  <span className="text-primary text-glow italic">de Engenharia</span>
-                  <span className="text-white">de Crescimento</span>
-                </motion.h1>
-              </Editable>
+              <motion.h1 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: "circOut" }}
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] md:leading-[0.9] flex flex-col"
+              >
+                <span className="text-stroke">Protocolo</span>
+                <span className="text-primary text-glow italic">de Engenharia</span>
+                <span className="text-white">de Crescimento</span>
+              </motion.h1>
 
               <motion.div
                 initial={{ opacity: 0 }}
