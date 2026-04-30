@@ -70,17 +70,12 @@ function StickyLayer({
   const scaleOut = useTransform(
     progress,
     [outStart, outEnd],
-    isLast ? [1, 1] : [1, 0.9],
+    isLast ? [1, 1] : [1, 0.94],
   );
   const opacityOut = useTransform(
     progress,
     [outStart, outEnd],
-    isLast ? [1, 1] : [1, 0.35],
-  );
-  const filterOut = useTransform(
-    progress,
-    [outStart, outEnd],
-    isLast ? ["blur(0px)", "blur(0px)"] : ["blur(0px)", "blur(3px)"],
+    isLast ? [1, 1] : [1, 0.5],
   );
 
   // Animação de ENTRADA (este item sobe de baixo)
