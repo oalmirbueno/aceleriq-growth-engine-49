@@ -835,8 +835,10 @@ const CASES = [
 
 export function Results() {
   return (
-    <section id="resultados" className="relative surface-amethyst noise-overlay py-12 md:py-20 bg-grid-ambient">
-      <div className="container-aceleriq">
+    <section id="resultados" className="relative surface-amethyst noise-overlay py-12 md:py-20 bg-grid-ambient overflow-hidden">
+      <div className="orb-glow orb-violet top-1/3 right-[-120px] h-[400px] w-[400px]" />
+      <div className="orb-glow orb-emerald bottom-[-100px] left-[-80px] h-[320px] w-[320px] opacity-25" />
+      <div className="container-aceleriq relative z-10">
         <SectionHeader
           eyebrow="[ 07 ] · Resultados"
           title="Quando a engenharia entra, o resultado aparece."
