@@ -234,8 +234,8 @@ const PAINS = [
 
 export function Pains() {
   return (
-    <section className="relative py-28 md:py-36">
-      <div className="container-aceleriq">
+    <section className="relative py-28 md:py-36 bg-grid-ambient bg-gradient-to-b from-background via-[oklch(11%_0.01_145)] to-background">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
         <SectionHeader
           eyebrow="Sintomas comuns"
           title="Você reconhece algum destes problemas?"
