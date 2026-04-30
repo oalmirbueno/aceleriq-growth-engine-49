@@ -55,11 +55,6 @@ function Index() {
           <About />
         </StickyStack>
 
-        {/* Faixa marquee — entre Seção 02 (Sobre) e Seção 03 (Método) */}
-        <div className="relative z-20">
-          <BrandStrip />
-        </div>
-
         {/* Seções de conteúdo alto — fluxo normal */}
         <Method />
         <Areas />
@@ -70,6 +65,10 @@ function Index() {
 
         <DiagnosticoCTA onDiagnostico={openDiagnostico} />
         <Results />
+
+        {/* Faixa marquee — entre Resultados e Depoimentos (zona segura, sem sticky) */}
+        <BrandStrip />
+
         <Testimonials />
 
         {/* Sticky stack final — seções compactas de fechamento */}
