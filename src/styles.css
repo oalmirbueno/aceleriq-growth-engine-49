@@ -53,8 +53,14 @@
   .container-aceleriq {
     width: 100%;
     margin-inline: auto;
-    padding-inline: 2rem;
+    padding-inline: 1rem;
     max-width: 95rem;
+  }
+  @media (min-width: 640px) {
+    .container-aceleriq { padding-inline: 1.5rem; }
+  }
+  @media (min-width: 1024px) {
+    .container-aceleriq { padding-inline: 2rem; }
   }
 
   /* Hero background image — usa a arte completa, com vinheta para legibilidade */
@@ -165,13 +171,17 @@
   /* Botão Industrial */
   .btn-tech {
     position: relative;
-    padding: 0.75rem 2rem;
+    padding: 0.75rem 1.75rem;
     background: var(--primary);
     color: black;
     font-weight: 700;
+    font-size: 0.875rem;
     text-transform: uppercase;
     clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
     transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  @media (min-width: 768px) {
+    .btn-tech { padding: 0.75rem 2rem; font-size: 1rem; }
   }
 
   .btn-tech:hover {
