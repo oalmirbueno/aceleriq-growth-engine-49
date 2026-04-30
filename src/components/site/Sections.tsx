@@ -972,7 +972,8 @@ export function Compare() {
           description="A diferença entre contratar entregáveis e contratar um sistema de crescimento."
         />
 
-        <div className="mt-8 md:mt-10 overflow-hidden rounded-2xl border border-border">
+        {/* Desktop: tabela em grid */}
+        <div className="mt-8 md:mt-10 hidden md:block overflow-hidden rounded-2xl border border-border">
           <div className="grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-border bg-card/40">
             <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
               Dimensão
@@ -994,6 +995,30 @@ export function Compare() {
               <div className="flex items-start gap-2 px-5 py-5 text-foreground">
                 <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
                 {us}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile: cards empilhados */}
+        <div className="mt-8 grid gap-3 md:hidden">
+          {COMPARE.map(([dim, agency, us], i) => (
+            <div key={i} className="overflow-hidden rounded-xl border border-border bg-card/40">
+              <div className="border-b border-border bg-card/60 px-4 py-2.5">
+                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">{dim}</span>
+              </div>
+              <div className="grid grid-cols-1 divide-y divide-border">
+                <div className="p-4">
+                  <span className="text-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Agência comum</span>
+                  <p className="mt-1.5 text-[13px] text-muted-foreground leading-relaxed">{agency}</p>
+                </div>
+                <div className="p-4 bg-primary/[0.04]">
+                  <span className="text-mono text-[10px] uppercase tracking-[0.16em] text-primary">Aceleriq</span>
+                  <p className="mt-1.5 flex items-start gap-2 text-[13px] text-foreground leading-relaxed">
+                    <Check className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-primary" />
+                    {us}
+                  </p>
+                </div>
               </div>
             </div>
           ))}
