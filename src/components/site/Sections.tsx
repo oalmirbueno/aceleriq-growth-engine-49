@@ -1104,7 +1104,7 @@ const FAQS = [
 
 export function FAQ() {
   return (
-    <section id="faq" className="py-28 md:py-36">
+    <section id="faq" className="relative py-28 md:py-36 bg-grid-ambient bg-gradient-to-b from-background via-[oklch(11%_0.015_145)] to-background">
       <div className="container-aceleriq">
         <SectionHeader
           eyebrow="[ 11 ] · Perguntas frequentes"
