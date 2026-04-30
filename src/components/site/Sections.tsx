@@ -41,6 +41,7 @@ import {
   whatsappLink,
   DEFAULT_WHATSAPP_MESSAGE,
 } from "@/lib/contact";
+import aiEngineerImg from "@/assets/ai-engineer.jpg";
 
 // ─────────────────────────────────────────────────────────────
 // HERO
