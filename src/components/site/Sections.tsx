@@ -714,8 +714,9 @@ export function FitFor() {
 // ─────────────────────────────────────────────────────────────
 export function DiagnosticoCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section id="diagnostico" className="relative surface-emerald noise-overlay py-12 md:py-20 bg-grid-ambient">
-      <div className="container-aceleriq">
+    <section id="diagnostico" className="relative surface-emerald noise-overlay py-12 md:py-20 bg-grid-ambient overflow-hidden">
+      <div className="orb-glow orb-emerald top-[-100px] right-[-80px] h-[360px] w-[360px]" />
+      <div className="container-aceleriq relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
