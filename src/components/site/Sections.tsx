@@ -369,41 +369,109 @@ const METHOD = [
 
 export function Method() {
   return (
-    <section id="metodo" className="relative py-28 md:py-36">
-      <div className="absolute inset-0 -z-10 dot-grid opacity-50" />
-      <div className="container-aceleriq">
+    <section
+      id="metodo"
+      className="relative py-28 md:py-36 overflow-hidden bg-gradient-to-b from-background via-[oklch(13%_0.02_160)] to-background"
+    >
+      {/* Brilho ambiente */}
+      <div className="pointer-events-none absolute -top-32 left-1/2 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-primary/[0.06] blur-3xl" />
+      <div className="pointer-events-none absolute inset-0 opacity-40 [background-image:linear-gradient(oklch(100%_0_0/0.04)_1px,transparent_1px),linear-gradient(90deg,oklch(100%_0_0/0.04)_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_50%,black,transparent)]" />
+
+      <div className="container-aceleriq relative">
         <SectionHeader
           eyebrow="[ 03 ] · Método A.C.E.L.E.R.A"
-          title="Sete etapas. Um sistema."
+          title="Sete etapas. Uma linha do tempo."
           description="Do diagnóstico à escala, com método de engenharia — não com palpite criativo."
         />
 
-        <div className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2 lg:grid-cols-4">
-          {METHOD.map((step, i) => (
+        {/* ───────── Timeline horizontal (desktop) ───────── */}
+        <div className="mt-20 hidden lg:block">
+          <div className="relative">
+            {/* Trilho */}
+            <div className="absolute left-0 right-0 top-[42px] h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
             <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.4, delay: i * 0.04 }}
-              className="group relative bg-background p-7 transition-colors hover:bg-card/40"
-            >
-              <div className="flex items-baseline justify-between">
-                <span className="font-display text-[64px] font-medium leading-none tracking-tighter text-primary neon-text-glow">
-                  {step.letter}
-                </span>
-                <span className="text-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                  · 0{i + 1}
-                </span>
-              </div>
-              <h3 className="mt-5 font-display text-[15px] font-medium uppercase tracking-[0.1em]">
-                {step.title}
-              </h3>
-              <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">
-                {step.desc}
-              </p>
-            </motion.div>
-          ))}
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1.6, ease: "easeOut" }}
+              style={{ transformOrigin: "left" }}
+              className="absolute left-0 right-0 top-[42px] h-[2px] bg-gradient-to-r from-primary via-primary to-primary/30 shadow-[0_0_20px_oklch(85%_0.2_145/0.5)]"
+            />
+
+            <div className="relative grid grid-cols-7">
+              {METHOD.map((step, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.5, delay: 0.15 + i * 0.1 }}
+                  className="group flex flex-col items-center px-2"
+                >
+                  {/* Número */}
+                  <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground">
+                    0{i + 1}
+                  </span>
+
+                  {/* Nó da timeline */}
+                  <div className="relative mt-3 flex h-[60px] w-[60px] items-center justify-center">
+                    <div className="absolute inset-0 rounded-full bg-primary/10 blur-md transition-opacity group-hover:opacity-100" />
+                    <div className="relative flex h-[52px] w-[52px] items-center justify-center rounded-full border border-primary/40 bg-background shadow-[0_0_0_4px_oklch(10%_0_0)] transition-all group-hover:border-primary group-hover:shadow-[0_0_24px_oklch(85%_0.2_145/0.6)]">
+                      <span className="font-display text-2xl font-bold text-primary">
+                        {step.letter}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Conteúdo */}
+                  <h3 className="mt-5 text-center font-display text-[13px] font-medium uppercase tracking-[0.14em] text-foreground">
+                    {step.title}
+                  </h3>
+                  <p className="mt-2 max-w-[150px] text-center text-[12px] leading-relaxed text-muted-foreground">
+                    {step.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ───────── Timeline vertical (mobile/tablet) ───────── */}
+        <div className="mt-14 lg:hidden">
+          <div className="relative pl-8">
+            <div className="absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-primary via-primary/40 to-transparent" />
+            <ol className="space-y-8">
+              {METHOD.map((step, i) => (
+                <motion.li
+                  key={i}
+                  initial={{ opacity: 0, x: -12 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.4, delay: i * 0.05 }}
+                  className="relative"
+                >
+                  <div className="absolute -left-8 top-0 flex h-10 w-10 items-center justify-center rounded-full border border-primary/40 bg-background shadow-[0_0_0_4px_oklch(10%_0_0)]">
+                    <span className="font-display text-lg font-bold text-primary">
+                      {step.letter}
+                    </span>
+                  </div>
+                  <div className="ml-6">
+                    <div className="flex items-baseline gap-3">
+                      <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground">
+                        0{i + 1}
+                      </span>
+                      <h3 className="font-display text-sm font-medium uppercase tracking-[0.14em]">
+                        {step.title}
+                      </h3>
+                    </div>
+                    <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">
+                      {step.desc}
+                    </p>
+                  </div>
+                </motion.li>
+              ))}
+            </ol>
+          </div>
         </div>
       </div>
     </section>
@@ -426,36 +494,55 @@ const AREAS = [
 
 export function Areas() {
   return (
-    <section id="areas" className="py-28 md:py-36">
-      <div className="container-aceleriq">
+    <section
+      id="areas"
+      className="relative py-28 md:py-36 overflow-hidden bg-gradient-to-b from-background via-[oklch(12%_0.015_250)] to-background"
+    >
+      {/* Glow ambiente */}
+      <div className="pointer-events-none absolute right-0 top-1/3 h-[400px] w-[600px] rounded-full bg-primary/[0.05] blur-3xl" />
+      <div className="pointer-events-none absolute left-0 bottom-0 h-[300px] w-[500px] rounded-full bg-[oklch(60%_0.2_250)]/[0.06] blur-3xl" />
+
+      <div className="container-aceleriq relative">
         <SectionHeader
           eyebrow="[ 04 ] · Áreas de atuação"
           title="Tudo que sustenta o crescimento de uma empresa moderna."
           description="As 8 dimensões que separam empresas que crescem por sorte de empresas que crescem por engenharia."
         />
 
-        <div className="mt-16 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {AREAS.map((a, i) => (
             <motion.div
               key={a.title}
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.4, delay: i * 0.03 }}
-              className="hairline rounded-xl bg-card/40 p-6 card-hover"
+              transition={{ duration: 0.45, delay: i * 0.04 }}
+              className="group relative overflow-hidden rounded-xl border border-white/[0.08] bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_20px_50px_-20px_oklch(85%_0.2_145/0.4)]"
             >
-              <div className="flex items-start justify-between">
-                <a.icon className="h-5 w-5 text-primary" />
-                <span className="text-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+              {/* Glow no hover */}
+              <div className="pointer-events-none absolute -top-12 -right-12 h-32 w-32 rounded-full bg-primary/0 blur-2xl transition-all duration-500 group-hover:bg-primary/20" />
+
+              {/* Linha superior animada */}
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+              <div className="relative flex items-start justify-between">
+                <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-primary/30 bg-primary/10 text-primary transition-all duration-300 group-hover:scale-110 group-hover:border-primary group-hover:bg-primary/20 group-hover:shadow-[0_0_20px_oklch(85%_0.2_145/0.5)]">
+                  <a.icon className="h-5 w-5" />
+                </div>
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
                   0{i + 1}
                 </span>
               </div>
-              <h3 className="mt-6 font-display text-[15px] font-medium tracking-tight">
+
+              <h3 className="relative mt-6 font-display text-[15px] font-medium tracking-tight transition-colors group-hover:text-primary">
                 {a.title}
               </h3>
-              <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">
+              <p className="relative mt-2 text-[13px] leading-relaxed text-muted-foreground">
                 {a.desc}
               </p>
+
+              {/* Seta canto inferior */}
+              <ArrowUpRight className="pointer-events-none absolute bottom-4 right-4 h-4 w-4 text-primary opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </motion.div>
           ))}
         </div>
@@ -484,52 +571,95 @@ const FIT_NO = [
 
 export function FitFor() {
   return (
-    <section className="py-28 md:py-36">
-      <div className="container-aceleriq">
+    <section className="relative py-28 md:py-36 overflow-hidden bg-gradient-to-b from-background via-[oklch(12%_0.02_145)] to-background">
+      {/* Glow ambiente sutil */}
+      <div className="pointer-events-none absolute left-1/4 top-0 h-[300px] w-[400px] rounded-full bg-primary/[0.04] blur-3xl" />
+
+      <div className="container-aceleriq relative">
         <SectionHeader
-          eyebrow="[ 05 ] · Para quem é"
+          eyebrow="· 05 · Para quem é"
           title="É parceria séria. Vale a pena saber se serve para você."
         />
 
-        <div className="mt-16 grid gap-3 md:grid-cols-2">
-          <div className="hairline rounded-2xl bg-card/40 p-7 md:p-9">
-            <div className="flex items-center gap-2.5">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/15 text-primary">
-                <Check className="h-3.5 w-3.5" />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5 }}
+          className="mt-16 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.03] to-transparent shadow-[0_30px_80px_-30px_oklch(0%_0_0/0.6)]"
+        >
+          {/* Cabeçalho da tabela */}
+          <div className="grid grid-cols-1 md:grid-cols-2">
+            <div className="relative flex items-center gap-3 border-b border-white/10 bg-primary/[0.08] p-6 md:border-b-0 md:border-r">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-background shadow-[0_0_20px_oklch(85%_0.2_145/0.6)]">
+                <Check className="h-4 w-4" strokeWidth={3} />
               </span>
-              <h3 className="font-display text-[15px] font-medium uppercase tracking-[0.12em]">
-                É para você se…
-              </h3>
+              <div>
+                <h3 className="font-display text-base font-semibold uppercase tracking-[0.14em] text-primary">
+                  É para você
+                </h3>
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary/60">
+                  Match — vamos crescer juntos
+                </p>
+              </div>
             </div>
-            <ul className="mt-7 space-y-4">
-              {FIT_YES.map((t) => (
-                <li key={t} className="flex items-start gap-3 text-[14px] leading-relaxed">
-                  <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-primary" />
-                  <span className="text-foreground/90">{t}</span>
-                </li>
-              ))}
-            </ul>
+            <div className="relative flex items-center gap-3 bg-white/[0.02] p-6">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-muted-foreground">
+                <X className="h-4 w-4" strokeWidth={3} />
+              </span>
+              <div>
+                <h3 className="font-display text-base font-semibold uppercase tracking-[0.14em] text-foreground/80">
+                  Não é para você
+                </h3>
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                  Melhor procurar outro parceiro
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div className="hairline rounded-2xl bg-card/40 p-7 md:p-9">
-            <div className="flex items-center gap-2.5">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-muted text-muted-foreground">
-                <X className="h-3.5 w-3.5" />
-              </span>
-              <h3 className="font-display text-[15px] font-medium uppercase tracking-[0.12em]">
-                Não é para você se…
-              </h3>
-            </div>
-            <ul className="mt-7 space-y-4">
-              {FIT_NO.map((t) => (
-                <li key={t} className="flex items-start gap-3 text-[14px] leading-relaxed">
-                  <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-muted-foreground/60" />
-                  <span className="text-muted-foreground">{t}</span>
-                </li>
+          {/* Linhas da tabela */}
+          <div className="grid grid-cols-1 divide-y divide-white/[0.06] md:grid-cols-2 md:divide-y-0">
+            <ul className="md:border-r md:border-white/10">
+              {FIT_YES.map((t, i) => (
+                <motion.li
+                  key={t}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.35, delay: 0.1 + i * 0.05 }}
+                  className="group flex items-start gap-4 border-b border-white/[0.06] p-5 transition-colors hover:bg-primary/[0.04] last:border-b-0"
+                >
+                  <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary transition-all group-hover:scale-110 group-hover:bg-primary/25">
+                    <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                  </span>
+                  <span className="text-[14px] leading-relaxed text-foreground/90">
+                    {t}
+                  </span>
+                </motion.li>
+              ))}
+            </ul>
+            <ul>
+              {FIT_NO.map((t, i) => (
+                <motion.li
+                  key={t}
+                  initial={{ opacity: 0, x: 10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.35, delay: 0.1 + i * 0.05 }}
+                  className="group flex items-start gap-4 border-b border-white/[0.06] p-5 transition-colors hover:bg-white/[0.03] last:border-b-0"
+                >
+                  <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-muted-foreground transition-all group-hover:scale-110">
+                    <X className="h-3.5 w-3.5" strokeWidth={3} />
+                  </span>
+                  <span className="text-[14px] leading-relaxed text-muted-foreground">
+                    {t}
+                  </span>
+                </motion.li>
               ))}
             </ul>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
