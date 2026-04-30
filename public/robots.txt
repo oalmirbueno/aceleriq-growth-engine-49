@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aceleriq.com.br/sitemap.xml
