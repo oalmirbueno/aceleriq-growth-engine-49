@@ -1,4 +1,5 @@
 import { Instagram, Mail, MessageCircle } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import {
   EMAIL,
   INSTAGRAM_HANDLE,
