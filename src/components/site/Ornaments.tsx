@@ -307,28 +307,33 @@ export function SectionAmbient({
   );
 }
 
-/** Faixa horizontal de "instrumentos" — para usar entre seções */
+/** Faixa de telemetria — métricas técnicas de growth/IA, sem "som". Compacta. */
 export function InstrumentBar() {
+  const metrics = [
+    { label: "PIPELINE", value: "+312%", icon: TrendingUp },
+    { label: "CAC", value: "−38%", icon: Target },
+    { label: "LTV/CAC", value: "4.2x", icon: BarChart3 },
+    { label: "AI AGENTS", value: "ON", icon: Bot },
+    { label: "DATA SYNC", value: "LIVE", icon: Database },
+    { label: "UPTIME", value: "99.98%", icon: Radio },
+  ];
   return (
-    <div className="container-aceleriq py-6">
-      <div className="liquid-glass relative flex items-center justify-between gap-6 rounded-2xl px-5 py-4 overflow-hidden">
-        <div className="flex items-center gap-3">
-          <NeonKnob value={0.65} />
-          <div className="hidden sm:block">
-            <div className="font-mono text-[9px] uppercase tracking-[0.22em] text-foreground/50">
-              GROWTH · GAIN
+    <div className="container-aceleriq py-3 md:py-4">
+      <div className="liquid-glass relative rounded-xl px-4 py-2.5 overflow-hidden">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-2 sm:grid-cols-3 md:flex md:items-center md:justify-between md:gap-6">
+          {metrics.map((m) => (
+            <div key={m.label} className="flex items-center gap-2 min-w-0">
+              <m.icon className="h-3.5 w-3.5 flex-shrink-0 text-primary drop-shadow-[0_0_6px_oklch(85%_0.2_145/0.6)]" />
+              <div className="flex items-baseline gap-1.5 min-w-0">
+                <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-foreground/55 truncate">
+                  {m.label}
+                </span>
+                <span className="font-mono text-[11px] font-semibold text-primary truncate">
+                  {m.value}
+                </span>
+              </div>
             </div>
-            <div className="font-mono text-sm text-primary">+0.65</div>
-          </div>
-        </div>
-        <WaveformStrip className="flex-1 max-w-md" bars={28} />
-        <div className="hidden md:flex items-center gap-3">
-          <ChipBadge label="AI" icon={Sparkles} />
-          <ChipBadge label="CRM" icon={Network} />
-          <ChipBadge label="PAID" icon={Zap} />
-        </div>
-        <div className="hidden lg:flex items-center gap-3">
-          <ChipCard label="V2" rotate={-4} />
+          ))}
         </div>
       </div>
     </div>
