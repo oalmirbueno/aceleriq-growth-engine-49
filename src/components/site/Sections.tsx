@@ -161,82 +161,122 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
             </motion.div>
           </motion.div>
 
-          {/* Visual de Mockup do Dashboard */}
+          {/* Visual de Alta Performance - Engenharia Real */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="relative mt-16 w-full max-w-5xl"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="relative mt-20 w-full max-w-6xl px-4"
           >
-            <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[#0A0B10]/90 p-1 backdrop-blur-md transition-all duration-700 hover:border-primary/30 hover:shadow-[0_40px_100px_-20px_hsl(var(--primary)/0.12)]">
-              {/* Header do Mockup */}
-              <div className="flex items-center justify-between border-b border-white/5 bg-white/[0.02] px-4 py-2">
-                <div className="flex gap-1.5">
-                  <div className="h-2 w-2 rounded-full bg-white/10" />
-                  <div className="h-2 w-2 rounded-full bg-white/10" />
-                  <div className="h-2 w-2 rounded-full bg-primary/40" />
-                </div>
-                <div className="text-[10px] font-medium tracking-[0.2em] text-white/20 uppercase text-mono">
-                  Aceleriq / Engenharia de Dados
-                </div>
-                <div className="h-2 w-8 rounded-full bg-white/5" />
-              </div>
-              
-              {/* Conteúdo do Mockup (Gráficos e Dados em CSS) */}
-              <div className="aspect-[16/9] md:aspect-[21/9] p-4 md:p-8 flex gap-4 overflow-hidden">
-                <div className="flex-1 flex flex-col gap-4">
-                  <div className="h-1/2 flex gap-4">
-                    <div className="flex-1 rounded-lg border border-white/5 bg-white/[0.01] p-4 relative overflow-hidden">
-                      <div className="h-full w-full flex items-end gap-1">
-                        {[40, 70, 45, 90, 65, 80, 50, 95, 75, 60].map((h, i) => (
-                          <motion.div 
-                            key={i}
-                            initial={{ height: 0 }}
-                            animate={{ height: `${h}%` }}
-                            transition={{ duration: 1, delay: 1 + (i * 0.1) }}
-                            className="flex-1 bg-primary/20 rounded-t-sm"
-                          />
-                        ))}
+            {/* Efeito de Vidro e Profundidade */}
+            <div className="relative group rounded-2xl border border-white/10 bg-black/40 p-1 backdrop-blur-md transition-all duration-700 hover:border-primary/40 hover:shadow-[0_40px_120px_-20px_hsl(var(--primary)/0.15)]">
+              <div className="overflow-hidden rounded-xl border border-white/5 bg-gradient-to-b from-white/[0.03] to-transparent">
+                <div className="aspect-[16/10] md:aspect-[21/9] w-full relative">
+                  {/* Grid de Dados Realista */}
+                  <div className="absolute inset-0 grid grid-cols-12 grid-rows-6 p-4 gap-4">
+                    {/* Painel Principal de Gráfico */}
+                    <div className="col-span-12 md:col-span-8 row-span-4 rounded-lg bg-white/[0.02] border border-white/5 p-6 flex flex-col gap-4">
+                      <div className="flex justify-between items-center">
+                        <div className="flex flex-col gap-1">
+                          <span className="text-[10px] text-primary uppercase tracking-widest font-mono">Performance Matrix</span>
+                          <span className="text-lg font-bold text-white tracking-tight">Growth Velocity Index</span>
+                        </div>
+                        <div className="flex gap-2">
+                           {[1, 2, 3].map(i => (
+                             <div key={i} className="h-6 w-12 rounded bg-white/5 border border-white/5" />
+                           ))}
+                        </div>
                       </div>
-                      <div className="absolute top-4 left-4 text-[10px] text-primary font-mono uppercase">ROI Tracking</div>
+                      
+                      {/* Gráfico de Linha Customizado (SVG Realista) */}
+                      <div className="flex-1 relative mt-4">
+                        <svg className="w-full h-full overflow-visible" viewBox="0 0 400 120">
+                          <defs>
+                            <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="0%" stopColor="hsl(145, 100%, 50%)" stopOpacity="0.2" />
+                              <stop offset="100%" stopColor="hsl(145, 100%, 50%)" stopOpacity="0" />
+                            </linearGradient>
+                          </defs>
+                          <path
+                            d="M0,100 Q40,90 80,60 T160,40 T240,70 T320,30 T400,10"
+                            fill="none"
+                            stroke="hsl(145, 100%, 50%)"
+                            strokeWidth="2.5"
+                            className="drop-shadow-[0_0_8px_rgba(34,211,94,0.4)]"
+                          />
+                          <path
+                            d="M0,100 Q40,90 80,60 T160,40 T240,70 T320,30 T400,10 V120 H0 Z"
+                            fill="url(#chartGradient)"
+                          />
+                          {/* Pontos de Dados */}
+                          {[80, 160, 320, 400].map((x, i) => (
+                            <circle key={i} cx={x} cy={x === 80 ? 60 : x === 160 ? 40 : x === 320 ? 30 : 10} r="3" fill="hsl(145, 100%, 50%)" />
+                          ))}
+                        </svg>
+                        
+                        {/* Overlay de Scanline */}
+                        <div className="absolute inset-0 scanlines pointer-events-none opacity-20" />
+                      </div>
                     </div>
-                    <div className="w-1/3 rounded-lg border border-white/5 bg-white/[0.01] p-4 flex flex-col justify-center items-center gap-2">
-                       <div className="text-3xl font-bold text-primary font-mono">+124%</div>
-                       <div className="text-[10px] text-muted-foreground uppercase text-center">Efficiency Gain</div>
+
+                    {/* KPI Cards Right */}
+                    <div className="col-span-12 md:col-span-4 row-span-2 rounded-lg bg-white/[0.02] border border-white/5 p-5 flex flex-col justify-between">
+                       <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-mono">Conversion Rate</span>
+                       <div className="flex items-end justify-between">
+                          <span className="text-3xl font-bold text-white font-mono tracking-tighter">42.8%</span>
+                          <span className="text-[11px] text-primary bg-primary/10 px-2 py-0.5 rounded-full border border-primary/20">+12.4%</span>
+                       </div>
+                    </div>
+                    
+                    <div className="col-span-12 md:col-span-4 row-span-2 rounded-lg bg-white/[0.02] border border-white/5 p-5 flex flex-col justify-between">
+                       <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-mono">Revenue Scale</span>
+                       <div className="flex items-end justify-between">
+                          <span className="text-3xl font-bold text-white font-mono tracking-tighter">R$ 1.2M</span>
+                          <span className="text-[11px] text-primary bg-primary/10 px-2 py-0.5 rounded-full border border-primary/20">+28.5%</span>
+                       </div>
+                    </div>
+
+                    {/* Bottom Utility Bar */}
+                    <div className="col-span-12 row-span-2 rounded-lg bg-black/20 border border-white/5 p-4 flex items-center justify-between">
+                       <div className="flex gap-8">
+                          {[
+                            { label: "Active Pipelines", val: "14" },
+                            { label: "AI Automations", val: "128" },
+                            { label: "Data Nodes", val: "4.2k" }
+                          ].map((item, i) => (
+                            <div key={i} className="flex flex-col">
+                               <span className="text-[9px] text-muted-foreground uppercase tracking-widest">{item.label}</span>
+                               <span className="text-sm font-bold text-white font-mono">{item.val}</span>
+                            </div>
+                          ))}
+                       </div>
+                       <div className="h-8 w-32 rounded bg-primary/10 border border-primary/20 flex items-center justify-center">
+                          <span className="text-[10px] font-bold text-primary uppercase tracking-widest animate-pulse">System Online</span>
+                       </div>
                     </div>
                   </div>
-                  <div className="flex-1 rounded-lg border border-white/5 bg-white/[0.01] p-4 flex flex-col gap-3">
-                     <div className="h-2 w-1/3 bg-white/5 rounded-full" />
-                     <div className="h-2 w-1/2 bg-white/5 rounded-full" />
-                     <div className="h-2 w-1/4 bg-primary/20 rounded-full" />
-                     <div className="flex-1 mt-2 border-t border-white/5 pt-3 flex gap-4">
-                        <div className="flex-1 bg-white/[0.02] rounded" />
-                        <div className="flex-1 bg-white/[0.02] rounded" />
-                     </div>
-                  </div>
-                </div>
-                <div className="w-1/4 rounded-lg border border-white/5 bg-white/[0.01] p-4 flex flex-col gap-4">
-                   <div className="h-10 w-10 rounded-full border border-primary/20 flex items-center justify-center">
-                      <div className="h-6 w-6 rounded-full bg-primary/10 animate-pulse" />
-                   </div>
-                   <div className="flex-1 flex flex-col gap-2">
-                      {[1,2,3,4,5].map(i => (
-                        <div key={i} className="h-1.5 w-full bg-white/5 rounded-full" />
-                      ))}
-                   </div>
-                   <div className="h-12 w-full bg-primary/10 rounded-md border border-primary/20" />
                 </div>
               </div>
-            </div>
 
-            {/* Elementos decorativos flutuantes */}
-            <motion.div 
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-6 -right-6 h-24 w-24 rounded-2xl border border-primary/30 bg-primary/5 backdrop-blur-md hidden md:flex items-center justify-center"
-            >
-              <div className="text-2xl font-bold text-primary">IA</div>
-            </motion.div>
+              {/* Elemento Decorativo Flutuante (Terminal Style) */}
+              <motion.div 
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-10 -right-6 hidden lg:block"
+              >
+                <div className="rounded-lg border border-primary/30 bg-black/80 p-4 backdrop-blur-xl shadow-2xl">
+                   <div className="flex items-center gap-2 mb-3">
+                      <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+                      <span className="text-[10px] text-primary font-mono font-bold tracking-widest">AI_ANALYSIS_ACTIVE</span>
+                   </div>
+                   <div className="space-y-1.5">
+                      <div className="h-1 w-32 bg-white/10 rounded-full" />
+                      <div className="h-1 w-24 bg-white/10 rounded-full" />
+                      <div className="h-1 w-28 bg-primary/30 rounded-full" />
+                   </div>
+                </div>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>
