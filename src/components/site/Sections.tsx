@@ -43,6 +43,7 @@ import {
 } from "@/lib/contact";
 import aiEngineerImg from "@/assets/ai-engineer.jpg";
 import { Editable } from "@/components/editor/LayoutEditor";
+import { CountUp } from "@/components/ui/CountUp";
 
 // ─────────────────────────────────────────────────────────────
 // HERO
@@ -105,76 +106,92 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
               </motion.div>
             </div>
 
-            {/* Visual Industrial - Foto AI Engineer com overlays */}
-            <Editable id="hero-photo" className="w-full max-w-sm mx-auto lg:max-w-md lg:ml-auto">
+            {/* Visual Industrial - Foto AI Engineer + cards flutuantes ao redor */}
+            <Editable id="hero-photo" className="w-full max-w-md mx-auto lg:max-w-lg lg:ml-auto">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1.2, ease: "circOut" }}
                 className="relative w-full aspect-[4/5]"
               >
-              <div className="absolute -inset-2 border border-primary/20 pointer-events-none" />
-              <div className="absolute -top-3 -left-3 w-8 h-8 border-l-2 border-t-2 border-primary" />
-              <div className="absolute -bottom-3 -right-3 w-8 h-8 border-r-2 border-b-2 border-primary" />
+                {/* Glow ambiente */}
+                <div className="absolute -inset-8 bg-primary/10 blur-3xl rounded-full pointer-events-none" />
 
-              <div className="relative w-full h-full overflow-hidden border border-white/10">
-                <img
-                  src={aiEngineerImg}
-                  alt="AI Engineer Aceleriq operando protocolo neural"
-                  className="w-full h-full object-cover"
-                  loading="eager"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-r from-background/50 via-transparent to-transparent" />
+                {/* Moldura técnica */}
+                <div className="absolute -inset-2 border border-primary/20 pointer-events-none" />
+                <div className="absolute -top-3 -left-3 w-8 h-8 border-l-2 border-t-2 border-primary" />
+                <div className="absolute -bottom-3 -right-3 w-8 h-8 border-r-2 border-b-2 border-primary" />
 
-                <div className="absolute top-4 left-4 flex items-center gap-2 px-2 py-1 bg-black/60 backdrop-blur-sm border border-primary/30">
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                  <span className="font-mono text-[9px] tracking-[0.2em] text-primary uppercase">Operador Ao Vivo</span>
-                </div>
+                {/* Foto */}
+                <div className="relative w-full h-full overflow-hidden border border-white/10">
+                  <img
+                    src={aiEngineerImg}
+                    alt="AI Engineer Aceleriq operando protocolo neural"
+                    className="w-full h-full object-cover"
+                    loading="eager"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/10 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-transparent to-transparent" />
 
-                <div className="absolute top-4 right-4 px-2 py-1 bg-black/60 backdrop-blur-sm border border-white/10">
-                  <span className="font-mono text-[9px] text-white/70 tracking-tighter">NÓ_04 // SEGURO</span>
-                </div>
-
-                <div className="absolute top-1/2 -right-4 lg:-right-8 -translate-y-1/2 hidden md:block">
-                  <div className="bg-black/80 backdrop-blur-md border border-primary/30 p-4 shadow-[0_0_30px_rgba(20,255,0,0.15)]">
-                    <span className="text-3xl font-mono font-bold text-primary leading-none block">+245%</span>
-                    <span className="text-[8px] font-mono uppercase tracking-widest text-white/50 mt-1 block">ROI Mensal</span>
+                  {/* Identificador discreto sobre a foto */}
+                  <div className="absolute bottom-4 left-4 flex items-center gap-2">
+                    <Brain className="h-4 w-4 text-primary" />
+                    <span className="text-xs font-bold text-white">Engenheiro Líder</span>
                   </div>
                 </div>
 
-                <div className="absolute bottom-0 left-0 right-0 p-5 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <Brain className="h-4 w-4 text-primary" />
-                      <span className="text-xs font-bold text-white">Engenheiro Líder</span>
+                {/* ───────── Cards flutuantes FORA da foto ───────── */}
+
+                {/* TOP-LEFT: Operador Ao Vivo */}
+                <div className="absolute -top-4 -left-4 md:-top-6 md:-left-10 float-a z-20">
+                  <div className="bg-black/85 backdrop-blur-md border border-primary/40 px-3 py-2 shadow-[0_0_30px_rgba(20,255,0,0.2)] flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                    <span className="font-mono text-[10px] tracking-[0.2em] text-primary uppercase">Operador Ao Vivo</span>
+                  </div>
+                </div>
+
+                {/* TOP-RIGHT: NÓ_04 */}
+                <div className="absolute -top-3 -right-3 md:-top-5 md:-right-8 float-b z-20">
+                  <div className="bg-black/85 backdrop-blur-md border border-white/15 px-3 py-2">
+                    <span className="font-mono text-[10px] text-white/80 tracking-tight">NÓ_04 // SEGURO</span>
+                  </div>
+                </div>
+
+                {/* RIGHT-MIDDLE: ROI Mensal grande */}
+                <div className="absolute top-1/3 -right-6 md:-right-14 float-c z-20">
+                  <div className="bg-black/90 backdrop-blur-md border border-primary/40 p-4 shadow-[0_0_40px_rgba(20,255,0,0.25)]">
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-3xl md:text-4xl font-mono font-bold text-primary leading-none">+</span>
+                      <CountUp to={245} duration={1800} className="text-3xl md:text-4xl font-mono font-bold text-primary leading-none" />
+                      <span className="text-2xl md:text-3xl font-mono font-bold text-primary leading-none">%</span>
                     </div>
-                    <span className="font-mono text-[9px] text-white/50 tracking-widest uppercase">Aceleriq // R&D</span>
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-2">
-                    {[
-                      { label: "Precisão", val: "98.2%" },
-                      { label: "Automação", val: "88%" },
-                      { label: "Leads", val: "3.2x" }
-                    ].map((item, i) => (
-                      <div key={i} className="bg-black/60 backdrop-blur-sm p-2 border border-white/10 flex flex-col gap-1">
-                        <span className="text-[8px] uppercase tracking-widest opacity-50 font-mono">{item.label}</span>
-                        <span className="text-xs font-mono text-primary font-bold">{item.val}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="h-[2px] w-full bg-white/5 overflow-hidden">
-                    <motion.div
-                      initial={{ width: "0%" }}
-                      animate={{ width: "98%" }}
-                      transition={{ duration: 2, ease: "circOut" }}
-                      className="h-full bg-primary shadow-[0_0_10px_rgba(20,255,0,0.6)]"
-                    />
+                    <span className="text-[9px] font-mono uppercase tracking-widest text-white/60 mt-1 block">ROI Mensal</span>
                   </div>
                 </div>
-              </div>
+
+                {/* BOTTOM-LEFT: Precisão */}
+                <div className="absolute -bottom-4 -left-4 md:-bottom-6 md:-left-12 float-b z-20">
+                  <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-3 py-2.5 min-w-[110px]">
+                    <span className="text-[8px] uppercase tracking-widest text-white/50 font-mono block">Precisão</span>
+                    <CountUp to={98.2} decimals={1} duration={1600} suffix="%" className="text-lg font-mono text-primary font-bold" />
+                  </div>
+                </div>
+
+                {/* BOTTOM-CENTER: Automação */}
+                <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 float-a z-20 hidden md:block">
+                  <div className="bg-black/85 backdrop-blur-md border border-white/15 px-3 py-2.5 min-w-[110px]">
+                    <span className="text-[8px] uppercase tracking-widest text-white/50 font-mono block">Automação</span>
+                    <CountUp to={88} duration={1500} suffix="%" className="text-lg font-mono text-primary font-bold" />
+                  </div>
+                </div>
+
+                {/* BOTTOM-RIGHT: Leads */}
+                <div className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-10 float-c z-20">
+                  <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-3 py-2.5 min-w-[110px]">
+                    <span className="text-[8px] uppercase tracking-widest text-white/50 font-mono block">Leads</span>
+                    <CountUp to={3.2} decimals={1} duration={1400} suffix="x" className="text-lg font-mono text-primary font-bold" />
+                  </div>
+                </div>
               </motion.div>
             </Editable>
           </div>
