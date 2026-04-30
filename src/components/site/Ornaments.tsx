@@ -311,13 +311,7 @@ export function SectionAmbient({
 export function InstrumentBar() {
   return (
     <div className="container-aceleriq py-6">
-      <div
-        className="hairline relative flex items-center justify-between gap-6 rounded-2xl bg-gradient-to-b from-card/80 to-background/60 px-5 py-4 backdrop-blur-sm overflow-hidden"
-        style={{
-          boxShadow:
-            "inset 0 1px 0 oklch(100% 0 0 / 0.04), 0 12px 40px -16px oklch(85% 0.2 145 / 0.25)",
-        }}
-      >
+      <div className="liquid-glass relative flex items-center justify-between gap-6 rounded-2xl px-5 py-4 overflow-hidden">
         <div className="flex items-center gap-3">
           <NeonKnob value={0.65} />
           <div className="hidden sm:block">
