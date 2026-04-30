@@ -39,17 +39,61 @@
     color: var(--foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    position: relative;
     /* IMPORTANTE: não usar overflow-x:hidden no body — quebra position:sticky.
        Em vez disso, controlamos overflow horizontal apenas dentro de seções específicas. */
+  }
+  /* Grid quadriculado tech aplicado globalmente, fixo no viewport — efeito da Seção 1
+     em todas as seções, sem interferir com o scroll/sticky. */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+      linear-gradient(oklch(100% 0 0 / 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(100% 0 0 / 0.04) 1px, transparent 1px);
+    background-size: 56px 56px, 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 0%, black 30%, transparent 95%);
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 0%, black 30%, transparent 95%);
   }
   html {
     overflow-x: clip; /* clip não cria contexto de scroll, preserva sticky */
   }
-  
+
   h1, h2, h3 {
     font-family: var(--font-display);
     text-transform: uppercase;
     letter-spacing: -0.04em;
+  }
+
+  /* ───────── Scrollbar moderna fina — verde neon 80% transparente ───────── */
+  /* Firefox */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: oklch(85% 0.2 145 / 0.2) transparent;
+  }
+  /* WebKit (Chrome / Safari / Edge) */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(85% 0.2 145 / 0.2); /* verde neon 80% transparente */
+    border-radius: 999px;
+    box-shadow: 0 0 6px oklch(85% 0.2 145 / 0.25);
+    transition: background 0.2s ease;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(85% 0.2 145 / 0.55);
+    box-shadow: 0 0 10px oklch(85% 0.2 145 / 0.6);
+  }
+  ::-webkit-scrollbar-corner {
+    background: transparent;
   }
 }
 
