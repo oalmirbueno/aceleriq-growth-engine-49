@@ -22,13 +22,16 @@ export function StickyStack({ children }: { children: ReactNode }) {
     offset: ["start start", "end end"],
   });
 
+  // Altura do container = N - 1 transições. NÃO adicionamos uma "tela extra"
+  // no final, porque a última camada usa height:auto e seguiria grudada
+  // gerando espaço vazio. Quando o scroll do container acaba, ela libera
+  // naturalmente e o fluxo continua.
+  const totalHeight = `${(count - 1) * 90}vh`;
   return (
     <div
       ref={containerRef}
       className="relative"
-      // Cada item precisa de scroll para sair: (count - 1) telas de transição
-      // + 1 tela para a última seção ser exibida sem espaço vazio extra.
-      style={{ height: `${(count - 1) * 80 + 60}vh` }}
+      style={{ height: totalHeight }}
     >
       {items.map((child, i) => (
         <StickyLayer
@@ -59,11 +62,13 @@ function StickyLayer({
   const isLast = index === total - 1;
 
   // Janela de transição entre este item e o próximo.
-  // Cada item domina de (i/total) a ((i+1)/total).
   const outStart = (index + 0.55) / total;
   const outEnd = (index + 1) / total;
-  const inStart = (index - 0.45) / total;
-  const inEnd = index / total;
+  // Para a ÚLTIMA camada, esticamos a entrada por TODO o resto do container,
+  // assim ela termina de subir exatamente quando o sticky se solta — sem
+  // espaço vazio onde ela ficaria parada.
+  const inStart = isLast ? (index - 1) / total : (index - 0.45) / total;
+  const inEnd = isLast ? 1 : index / total;
 
   // SAÍDA — recua sutilmente quando o próximo cobre.
   const scaleOut = useTransform(
