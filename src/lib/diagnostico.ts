@@ -144,7 +144,7 @@ export function classificar(score: number): {
     return {
       label: "Operação Reativa",
       resumo:
-        "Sua operação ainda depende de heroísmo e improviso. O potencial está intacto — falta engenharia.",
+        "Sua operação ainda depende de heroísmo e improviso. O potencial está intacto. Falta engenharia.",
     };
   }
   if (score < 60) {
@@ -189,7 +189,7 @@ function areaScores(answers: QuizAnswers): AreaScores {
 
 const RECS: Record<QuizQuestion["area"], string> = {
   estrategia:
-    "Reconstruir o plano estratégico com ICP, oferta, metas trimestrais e priorização — base de tudo que vem depois.",
+    "Reconstruir o plano estratégico com ICP, oferta, metas trimestrais e priorização: base de tudo que vem depois.",
   marketing:
     "Instalar leitura de ROI por canal, esteira de criativos e funil de aquisição lido por receita, não por clique.",
   vendas:
@@ -206,7 +206,7 @@ const INTERESSE_REC: Record<Interesse, string> = {
   vendas:
     "Estruturar processo comercial completo: CRM, cadência, qualificação, scripts e ritual de pipeline.",
   crm:
-    "Reengenharia do CRM como hub da operação — automações, integrações e leitura de funil em tempo real.",
+    "Reengenharia do CRM como hub da operação: automações, integrações e leitura de funil em tempo real.",
   ia:
     "Implantar IA aplicada (agentes, qualificação, atendimento) integrada ao seu CRM e ao seu funil.",
   dados:

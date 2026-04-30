@@ -301,7 +301,7 @@ export function About() {
               Não é agência. É a engenharia de crescimento do seu negócio.
             </h2>
             <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground md:text-base">
-              Agências entregam peças soltas — criativo, post, anúncio. A
+              Agências entregam peças soltas: criativo, post, anúncio. A
               Aceleriq entrega <span className="text-foreground">um sistema</span>:
               diagnóstico, estratégia, execução, dados e IA integrados ao seu
               negócio para gerar resultado previsível.
@@ -382,7 +382,7 @@ export function Method() {
         <SectionHeader
           eyebrow="[ 03 ] · Método A.C.E.L.E.R.A"
           title="Sete etapas. Uma linha do tempo."
-          description="Do diagnóstico à escala, com método de engenharia — não com palpite criativo."
+          description="Do diagnóstico à escala, com método de engenharia, não com palpite criativo."
         />
 
         {/* ───────── Timeline horizontal (desktop) ───────── */}
@@ -587,7 +587,7 @@ const FIT_YES = [
   "Faturamento mensal a partir de R$ 100 mil",
   "Produto/serviço validado e pronto para escalar",
   "Quer profissionalizar marketing, vendas e operação",
-  "Acredita em método, dados e IA — não em achismo",
+  "Acredita em método, dados e IA, não em achismo",
   "Pronto para construir um sistema, não comprar mágica",
 ];
 const FIT_NO = [
@@ -628,7 +628,7 @@ export function FitFor() {
                   É para você
                 </h3>
                 <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary/60">
-                  Match — vamos crescer juntos
+                  Match · vamos crescer juntos
                 </p>
               </div>
             </div>
@@ -1064,7 +1064,7 @@ export function WhyNow() {
               {[
                 { k: "Custo de aquisição", v: "+27% a.a." },
                 { k: "Empresas com IA aplicada", v: "Crescem 2.4x" },
-                { k: "Tempo médio de implantação", v: "60 — 120 dias" },
+                { k: "Tempo médio de implantação", v: "60 a 120 dias" },
               ].map((s) => (
                 <div
                   key={s.k}
@@ -1090,23 +1090,23 @@ export function WhyNow() {
 const FAQS = [
   {
     q: "Quanto custa trabalhar com a Aceleriq?",
-    a: "O investimento varia conforme o estágio da empresa e o escopo do programa (estratégia, vendas, dados, IA, mídia). Operamos com programas mensais de engenharia de crescimento que partem de faixas compatíveis com empresas a partir de R$ 100k/mês de faturamento. No Diagnóstico Gratuito mapeamos sua maturidade e desenhamos juntos o investimento que faz sentido para o seu momento — sem proposta padronizada e sem inflar escopo.",
+    a: "O investimento varia conforme o estágio da empresa e o escopo do programa (estratégia, vendas, dados, IA, mídia). Operamos com programas mensais de engenharia de crescimento que partem de faixas compatíveis com empresas a partir de R$ 100k/mês de faturamento. No Diagnóstico Gratuito mapeamos sua maturidade e desenhamos juntos o investimento que faz sentido para o seu momento, sem proposta padronizada e sem inflar escopo.",
   },
   {
     q: "Em quanto tempo eu vejo resultado?",
-    a: "Resultados táticos (limpeza de CRM, automações, primeiros ajustes de mídia, reorganização de funil) aparecem nas primeiras 2 a 4 semanas. Resultado estrutural — previsibilidade comercial, redução real de CAC, processo de vendas rodando sem o fundador, IA gerando alavancagem — costuma se consolidar entre 60 e 120 dias. Empresas que chegam mais maduras aceleram mais rápido. Nenhuma promessa de 7 dias: construímos sistema, não milagre.",
+    a: "Resultados táticos (limpeza de CRM, automações, primeiros ajustes de mídia, reorganização de funil) aparecem nas primeiras 2 a 4 semanas. Resultado estrutural: previsibilidade comercial, redução real de CAC, processo de vendas rodando sem o fundador, IA gerando alavancagem, costuma se consolidar entre 60 e 120 dias. Empresas que chegam mais maduras aceleram mais rápido. Nenhuma promessa de 7 dias: construímos sistema, não milagre.",
   },
   {
     q: "Vocês atendem qualquer segmento?",
-    a: "Atuamos com SaaS, e-commerce, educação, infoprodutos, serviços profissionais B2B e indústrias com vendas consultivas. O critério não é o segmento, é a maturidade: produto/serviço validado, faturamento mensal a partir de R$ 100k e disposição para profissionalizar marketing, vendas e operação. Se você é early-stage validando oferta, não somos o parceiro certo agora — e dizemos isso com clareza no diagnóstico.",
+    a: "Atuamos com SaaS, e-commerce, educação, infoprodutos, serviços profissionais B2B e indústrias com vendas consultivas. O critério não é o segmento, é a maturidade: produto/serviço validado, faturamento mensal a partir de R$ 100k e disposição para profissionalizar marketing, vendas e operação. Se você é early-stage validando oferta, não somos o parceiro certo agora, e dizemos isso com clareza no diagnóstico.",
   },
   {
     q: "Existe contrato de fidelidade?",
-    a: "Trabalhamos com ciclos mínimos de 6 meses. Não é amarração comercial — é honestidade técnica: construir um sistema de crescimento (estratégia + dados + processo comercial + IA + operação) não acontece em 30 dias. Quem promete isso está vendendo entregável avulso, não engenharia. Após o ciclo inicial, a relação segue mensal, sem multa, enquanto fizer sentido para os dois lados.",
+    a: "Trabalhamos com ciclos mínimos de 6 meses. Não é amarração comercial: é honestidade técnica: construir um sistema de crescimento (estratégia + dados + processo comercial + IA + operação) não acontece em 30 dias. Quem promete isso está vendendo entregável avulso, não engenharia. Após o ciclo inicial, a relação segue mensal, sem multa, enquanto fizer sentido para os dois lados.",
   },
   {
     q: "Qual a diferença real para uma agência?",
-    a: "Agência entrega peças isoladas (criativo, post, anúncio, relatório). A Aceleriq entrega um sistema integrado: diagnóstico estratégico, estruturação de CRM e processo comercial, dashboards de receita, agentes de IA conectados ao seu negócio, mídia orientada a pipeline e operação que roda dentro dos seus times e ferramentas. O entregável final é receita previsível e operação sistemizada — não impressões, alcance ou relatórios bonitos.",
+    a: "Agência entrega peças isoladas (criativo, post, anúncio, relatório). A Aceleriq entrega um sistema integrado: diagnóstico estratégico, estruturação de CRM e processo comercial, dashboards de receita, agentes de IA conectados ao seu negócio, mídia orientada a pipeline e operação que roda dentro dos seus times e ferramentas. O entregável final é receita previsível e operação sistemizada, não impressões, alcance ou relatórios bonitos.",
   },
   {
     q: "Como funciona o Diagnóstico Gratuito?",
@@ -1114,7 +1114,7 @@ const FAQS = [
   },
   {
     q: "Vocês substituem meu time interno?",
-    a: "Não. A Aceleriq atua como engenharia parceira do seu time, não como terceirização. Estruturamos processos, treinamos pessoas, implementamos ferramentas e aceleramos a operação para que ela rode com seu time, não dependendo de heróis nem da nossa presença diária. O objetivo final é deixar sua empresa autônoma com método — não criar dependência. Quando você não precisar mais da gente em algumas frentes, a gente comemora junto.",
+    a: "Não. A Aceleriq atua como engenharia parceira do seu time, não como terceirização. Estruturamos processos, treinamos pessoas, implementamos ferramentas e aceleramos a operação para que ela rode com seu time, não dependendo de heróis nem da nossa presença diária. O objetivo final é deixar sua empresa autônoma com método, não criar dependência. Quando você não precisar mais da gente em algumas frentes, a gente comemora junto.",
   },
   {
     q: "Como começa o trabalho depois do diagnóstico?",
