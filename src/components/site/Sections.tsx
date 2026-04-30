@@ -1063,7 +1063,7 @@ export function Compare() {
 // ─────────────────────────────────────────────────────────────
 export function WhyNow() {
   return (
-    <section className="relative py-10 md:py-14 bg-grid-ambient overflow-hidden">
+    <section className="relative pt-10 pb-4 md:pt-12 md:pb-5 bg-grid-ambient overflow-hidden">
 
       <div className="container-aceleriq relative z-10">
         <motion.div
@@ -1163,12 +1163,12 @@ const FAQS = [
 
 export function FAQ() {
   return (
-    <section id="faq" className="relative py-10 md:py-14 bg-grid-ambient overflow-hidden">
+    <section className="relative pt-3 pb-10 md:pt-4 md:pb-14 bg-grid-ambient overflow-hidden">
       {/* Glow lateral animado */}
       <div className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 h-[400px] w-[300px] bg-primary/[0.04] blur-[120px] rounded-full" />
       <div className="pointer-events-none absolute right-0 top-1/3 h-[300px] w-[250px] bg-accent/[0.04] blur-[120px] rounded-full" />
 
-      <div className="container-aceleriq relative">
+      <div id="faq" className="container-aceleriq relative scroll-mt-20">
         <SectionHeader
           eyebrow="[ 11 ] · Perguntas frequentes"
           title="Dúvidas comuns antes de acelerar."
