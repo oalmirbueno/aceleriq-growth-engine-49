@@ -236,7 +236,7 @@ export function Pains() {
   return (
     <section className="relative py-12 md:py-16 bg-grid-ambient overflow-hidden">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
-      <TechDecor side="right" size={460} opacity={0.16} rotate={-8} />
+      
       <div className="container-aceleriq relative z-10">
         <SectionHeader
           eyebrow="Sintomas comuns"
@@ -532,7 +532,7 @@ export function Areas() {
     >
       {/* Glow ambiente verde achatado e sutil */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 h-[140px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.03] blur-[90px]" />
-      <TechDecor side="left" size={460} opacity={0.2} rotate={0} offsetY={-20} variant={2} />
+      
 
       <div className="container-aceleriq relative z-10">
         <SectionHeader
@@ -606,7 +606,7 @@ export function FitFor() {
     <section className="relative py-12 md:py-16 overflow-hidden bg-grid-ambient">
       {/* Glow ambiente verde achatado e sutil */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 h-[130px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.025] blur-[90px]" />
-      <TechDecor side="right" size={420} opacity={0.13} rotate={-12} offsetY={10} />
+      
 
       <div className="container-aceleriq relative z-10">
         <SectionHeader
@@ -1011,7 +1011,7 @@ export function Compare() {
 export function WhyNow() {
   return (
     <section className="relative py-12 md:py-16 bg-grid-ambient overflow-hidden">
-      <TechDecor side="right" size={420} opacity={0.18} rotate={180} variant={2} />
+      
       <div className="container-aceleriq relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
