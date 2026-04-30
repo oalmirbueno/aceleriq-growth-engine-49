@@ -67,13 +67,13 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="inline-flex items-center gap-2.5 rounded-full border border-primary/25 bg-primary/[0.06] px-3.5 py-1.5 text-[11px] font-medium text-primary backdrop-blur-md"
+              className="inline-flex items-center gap-2.5 rounded-full border border-primary/20 bg-primary/[0.03] px-4 py-2 text-[10px] font-semibold text-primary backdrop-blur-md transition-colors hover:border-primary/40 hover:bg-primary/[0.06]"
             >
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
               </span>
-              <span className="text-mono uppercase tracking-[0.2em]">
+              <span className="text-mono uppercase tracking-[0.25em]">
                 Engenharia de Crescimento
               </span>
             </motion.span>
@@ -82,11 +82,11 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-7 font-display text-[48px] font-medium leading-[0.94] tracking-[-0.05em] md:text-[80px] lg:text-[116px]"
+              className="mt-7 font-display text-[48px] font-medium leading-[0.9] tracking-[-0.05em] md:text-[88px] lg:text-[124px]"
             >
-              Transforme sua <br className="hidden md:block" />
-              <span className="bg-gradient-to-r from-foreground via-foreground to-primary bg-clip-text text-transparent">
-                operação em lucro
+              <span className="headline-shadow">Acelere seu negócio</span> <br className="hidden md:block" />
+              <span className="relative inline-block bg-gradient-to-r from-primary via-primary/90 to-primary/70 bg-clip-text text-transparent neon-text-glow">
+                com método, dados e IA
               </span>
               <span className="text-primary">.</span>
             </motion.h1>

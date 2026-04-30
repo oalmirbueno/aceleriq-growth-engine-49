@@ -31,12 +31,13 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
       )}
     >
       <div className="container-aceleriq flex h-16 items-center justify-between md:h-[68px]">
-        <a href="#top" className="group flex items-center gap-2.5">
-          <img 
-            src="/logo.png" 
-            alt="Aceleriq" 
-            className="h-8 w-auto object-contain brightness-0 invert" 
-          />
+        <a href="#top" className="group flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
+            <div className="h-6 w-1 bg-primary rounded-full shadow-[0_0_12px_hsl(145,100%,50%,0.5)]" />
+            <span className="text-[20px] font-bold tracking-[-0.03em] text-foreground">
+              aceleriq<span className="text-primary">.</span>
+            </span>
+          </div>
         </a>
 
         <nav className="hidden items-center gap-1 md:flex">
