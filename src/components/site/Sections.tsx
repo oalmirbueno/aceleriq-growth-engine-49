@@ -43,6 +43,7 @@ import {
 } from "@/lib/contact";
 import aiEngineerImg from "@/assets/ai-engineer.jpg";
 import { Editable } from "@/components/editor/LayoutEditor";
+import { CountUp } from "@/components/ui/CountUp";
 
 // ─────────────────────────────────────────────────────────────
 // HERO
