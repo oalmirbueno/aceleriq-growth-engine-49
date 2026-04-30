@@ -47,36 +47,36 @@ import {
 // ─────────────────────────────────────────────────────────────
 export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section id="top" className="relative overflow-hidden pt-32 md:pt-40">
-      <div className="grid-perspective absolute inset-0 -z-10" />
-      <div className="absolute left-1/2 top-1/3 -z-10 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/[0.06] blur-3xl" />
-
+    <section id="top" className="relative min-h-[90vh] overflow-hidden pt-32 flex items-center md:pt-40">
+      <div className="grid-perspective absolute inset-0 -z-20" />
+      <div className="hero-overlay absolute inset-0 -z-10" />
+      
       <div className="container-aceleriq relative">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mx-auto max-w-3xl text-center"
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mx-auto max-w-4xl text-center"
         >
-          <span className="inline-flex items-center gap-2.5 rounded-full border border-border bg-card/60 px-3.5 py-1.5 text-[11px] font-medium text-muted-foreground backdrop-blur">
-            <span className="relative flex h-1.5 w-1.5">
+          <span className="inline-flex items-center gap-2.5 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-[11px] font-medium text-primary backdrop-blur-sm">
+            <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
             </span>
-            <span className="text-mono uppercase tracking-[0.18em]">
-              Engenharia de Crescimento
+            <span className="text-mono uppercase tracking-[0.2em]">
+              Engenharia de Crescimento 2.0
             </span>
           </span>
 
-          <h1 className="mt-7 font-display text-[40px] font-medium leading-[1.05] tracking-[-0.03em] md:text-6xl lg:text-[76px]">
-            A engenharia que faz seu negócio{" "}
+          <h1 className="mt-8 font-display text-[44px] font-semibold leading-[0.95] tracking-[-0.04em] md:text-7xl lg:text-[88px]">
+            A engenharia que <br className="hidden md:block" />
+            faz seu negócio <br className="hidden md:block" />
             <span className="text-primary neon-text-glow">crescer com método</span>.
           </h1>
 
-          <p className="mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-muted-foreground md:text-base">
-            Aceleriq não é agência. É a engenharia que une estratégia,
-            processo comercial, dados, CRM e IA num único sistema operando
-            dentro do seu negócio.
+          <p className="mx-auto mt-8 max-w-xl text-[16px] leading-relaxed text-muted-foreground/90 md:text-lg">
+            Aceleriq não é uma agência de marketing comum. É a engenharia que une estratégia,
+            processo, CRM, dados e IA num único sistema de alto desempenho operando dentro da sua empresa.
           </p>
 
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
