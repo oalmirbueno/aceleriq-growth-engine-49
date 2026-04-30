@@ -911,7 +911,7 @@ const TESTIMONIALS = [
 
 export function Testimonials() {
   return (
-    <section className="py-28 md:py-36">
+    <section className="relative py-28 md:py-36 bg-grid-ambient bg-gradient-to-b from-background via-[oklch(12%_0.018_250)] to-background">
       <div className="container-aceleriq">
         <SectionHeader
           eyebrow="[ 08 ] · Depoimentos"
