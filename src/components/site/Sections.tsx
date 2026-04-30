@@ -1010,8 +1010,10 @@ const COMPARE: [string, string, string][] = [
 
 export function Compare() {
   return (
-    <section className="relative py-10 md:py-14 bg-grid-ambient">
-      <div className="container-aceleriq">
+    <section className="relative py-10 md:py-14 bg-grid-ambient bg-background">
+      {/* Halo verde sutil para iluminar quando a seção fica sticky/sobreposta */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_30%,oklch(85%_0.2_145/0.06),transparent_70%)]" />
+      <div className="container-aceleriq relative">
         <SectionHeader
           eyebrow="[ 09 ] · Comparativo"
           title="Agência comum vs. Aceleriq"
