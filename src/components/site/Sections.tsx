@@ -378,6 +378,7 @@ export function Method() {
       id="metodo"
       className="relative py-10 md:py-14 overflow-hidden bg-grid-ambient"
     >
+      <SectionAmbient variant="ai" />
       {/* Brilho ambiente verde, achatado e sutil — sem bolha redonda */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 h-[150px] w-[860px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.035] blur-[90px]" />
 
