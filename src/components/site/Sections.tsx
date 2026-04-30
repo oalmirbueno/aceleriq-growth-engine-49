@@ -93,16 +93,16 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                 className="mt-8 md:mt-12 max-w-lg"
               >
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed border-l-2 border-primary/30 pl-4 md:pl-6">
-                  Abandonamos o "marketing de esperança". Instalamos sistemas de engenharia de dados e IA que garantem escala previsível e ROI matemático.
+                  Escalamos empresas com estratégia, dados, IA e processos comerciais previsíveis — não com marketing de esperança.
                 </p>
                 
                 <div className="mt-6 md:mt-7 flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 sm:items-center">
                   <button onClick={onDiagnostico} className="btn-tech self-start">
-                    Iniciar Diagnóstico
+                    Fazer Diagnóstico Gratuito
                   </button>
-                  <a href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)} className="group flex items-center gap-3 font-mono text-xs tracking-widest hover:text-primary transition-colors">
+                  <a href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)} target="_blank" rel="noreferrer" className="group flex items-center gap-3 font-mono text-xs tracking-widest hover:text-primary transition-colors">
                     <span className="h-px w-8 bg-white/20 group-hover:w-12 group-hover:bg-primary transition-all" />
-                    FALAR COM ENGENHEIRO
+                    FALAR COM ESPECIALISTA
                   </a>
                 </div>
               </motion.div>
