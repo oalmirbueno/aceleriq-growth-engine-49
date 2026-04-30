@@ -213,6 +213,12 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
           </div>
         </div>
       </div>
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 hidden md:flex flex-col items-center gap-2 pointer-events-none">
+        <span className="font-mono text-[9px] tracking-[0.4em] uppercase text-white/40">Scroll</span>
+        <div className="w-px h-10 bg-gradient-to-b from-primary to-transparent animate-pulse" />
+      </div>
     </section>
   );
 }
