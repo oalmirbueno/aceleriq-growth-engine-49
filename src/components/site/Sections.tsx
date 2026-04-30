@@ -608,7 +608,7 @@ export function FitFor() {
 
       <div className="container-aceleriq relative">
         <SectionHeader
-          eyebrow="· 05 · Para quem é"
+          eyebrow="· 05 · Para quem é · R$ 100k+ · Produto validado · Quer profissionalizar"
           title="É parceria séria. Vale a pena saber se serve para você."
         />
 
@@ -804,19 +804,19 @@ const METRICS = [
 
 const CASES = [
   {
-    segment: "SaaS B2B",
-    challenge: "Time comercial sem método e CRM zerado",
-    result: "+220% em pipeline qualificado em 4 meses",
+    segment: "SaaS B2B · Gestão financeira",
+    challenge: "SDRs sem playbook, CRM desatualizado e ciclo de venda de 90+ dias sem previsibilidade de fechamento.",
+    result: "Pipeline qualificado +220% e ciclo de venda reduzido para 42 dias em 4 meses.",
   },
   {
-    segment: "E-commerce",
-    challenge: "Tráfego sem retorno e operação manual",
-    result: "ROAS de 1.8 → 4.6 com automação e IA",
+    segment: "E-commerce · Moda premium",
+    challenge: "ROAS travado em 1.8, dependência total de mídia paga e nenhuma automação de retenção pós-compra.",
+    result: "ROAS escalado para 4.6, LTV +63% com fluxos de IA em CRM e e-mail comportamental.",
   },
   {
-    segment: "Educação",
-    challenge: "Funil quebrado e dependência do dono",
-    result: "Operação 100% sistemizada e CAC -38%",
+    segment: "Educação · Cursos high-ticket",
+    challenge: "Funil quebrado entre marketing e vendas, operação dependente do fundador e CAC subindo todo mês.",
+    result: "Operação 100% sistemizada, CAC -38% e fundador fora da operação comercial em 5 meses.",
   },
 ];
 
@@ -887,22 +887,22 @@ export function Results() {
 // ─────────────────────────────────────────────────────────────
 const TESTIMONIALS = [
   {
-    name: "Rafael M.",
-    role: "CEO · SaaS B2B",
+    name: "Rafael Mendonça",
+    role: "CEO · SaaS B2B Fintech",
     quote:
-      "Foi a primeira empresa que olhou para o nosso negócio como engenharia. Em 90 dias tínhamos previsibilidade que nunca tínhamos visto.",
+      "Antes da Aceleriq, a gente vendia no esforço. Hoje temos um motor: SDR com playbook, CRM limpo e dashboard de receita em tempo real. Em 90 dias, previsibilidade que a gente nunca tinha visto em 4 anos de empresa.",
   },
   {
-    name: "Camila R.",
-    role: "Sócia · Educação",
+    name: "Camila Rocha",
+    role: "Co-fundadora · EdTech high-ticket",
     quote:
-      "Saímos do caos para um sistema que roda sem mim na ponta. CAC caiu 38% e o time finalmente tem método.",
+      "O que mudou não foi o tráfego, foi o sistema. Diagnóstico, plano de 90 dias, sprints semanais. Saí da operação em 5 meses, o time vende com método e o CAC caiu 38%. É outro patamar de negócio.",
   },
   {
-    name: "Diego S.",
-    role: "Diretor · E-commerce",
+    name: "Diego Salles",
+    role: "Diretor · E-commerce DTC",
     quote:
-      "Não é agência, é parceria de crescimento. ROAS, CRM, IA — tudo integrado. Não consigo voltar para o modelo anterior.",
+      "Já passei por 3 agências grandes. A Aceleriq é a primeira que entrou no meu CRM, no meu Shopify e nos meus dados. Não entrega post, entrega receita. ROAS 1.8 → 4.6 e LTV +63% com IA aplicada de verdade.",
   },
 ];
 
@@ -1092,35 +1092,35 @@ export function WhyNow() {
 const FAQS = [
   {
     q: "Quanto custa trabalhar com a Aceleriq?",
-    a: "Depende do estágio e do escopo. Trabalhamos com programas mensais de engenharia de crescimento. No diagnóstico estratégico definimos juntos o investimento que faz sentido para o seu momento.",
+    a: "O investimento varia conforme o estágio da empresa e o escopo do programa (estratégia, vendas, dados, IA, mídia). Operamos com programas mensais de engenharia de crescimento que partem de faixas compatíveis com empresas a partir de R$ 100k/mês de faturamento. No Diagnóstico Gratuito mapeamos sua maturidade e desenhamos juntos o investimento que faz sentido para o seu momento — sem proposta padronizada e sem inflar escopo.",
   },
   {
     q: "Em quanto tempo eu vejo resultado?",
-    a: "Ajustes táticos aparecem nas primeiras semanas. Resultado estrutural — previsibilidade, CAC, processo comercial — costuma se consolidar entre 60 e 120 dias.",
+    a: "Resultados táticos (limpeza de CRM, automações, primeiros ajustes de mídia, reorganização de funil) aparecem nas primeiras 2 a 4 semanas. Resultado estrutural — previsibilidade comercial, redução real de CAC, processo de vendas rodando sem o fundador, IA gerando alavancagem — costuma se consolidar entre 60 e 120 dias. Empresas que chegam mais maduras aceleram mais rápido. Nenhuma promessa de 7 dias: construímos sistema, não milagre.",
   },
   {
     q: "Vocês atendem qualquer segmento?",
-    a: "Atuamos com SaaS, e-commerce, educação, serviços profissionais, indústria e infoprodutos. Trabalhamos melhor com empresas a partir de R$ 100k/mês.",
+    a: "Atuamos com SaaS, e-commerce, educação, infoprodutos, serviços profissionais B2B e indústrias com vendas consultivas. O critério não é o segmento, é a maturidade: produto/serviço validado, faturamento mensal a partir de R$ 100k e disposição para profissionalizar marketing, vendas e operação. Se você é early-stage validando oferta, não somos o parceiro certo agora — e dizemos isso com clareza no diagnóstico.",
   },
   {
     q: "Existe contrato de fidelidade?",
-    a: "Trabalhamos com ciclos mínimos para garantir entrega — geralmente 6 meses — porque construir um sistema de crescimento não é trabalho de 30 dias.",
+    a: "Trabalhamos com ciclos mínimos de 6 meses. Não é amarração comercial — é honestidade técnica: construir um sistema de crescimento (estratégia + dados + processo comercial + IA + operação) não acontece em 30 dias. Quem promete isso está vendendo entregável avulso, não engenharia. Após o ciclo inicial, a relação segue mensal, sem multa, enquanto fizer sentido para os dois lados.",
   },
   {
     q: "Qual a diferença real para uma agência?",
-    a: "Agência entrega peças. A Aceleriq entrega um sistema integrado de estratégia, vendas, dados e IA conectado ao seu negócio. Resultado é receita, não relatório de impressões.",
+    a: "Agência entrega peças isoladas (criativo, post, anúncio, relatório). A Aceleriq entrega um sistema integrado: diagnóstico estratégico, estruturação de CRM e processo comercial, dashboards de receita, agentes de IA conectados ao seu negócio, mídia orientada a pipeline e operação que roda dentro dos seus times e ferramentas. O entregável final é receita previsível e operação sistemizada — não impressões, alcance ou relatórios bonitos.",
   },
   {
     q: "Como funciona o Diagnóstico Gratuito?",
-    a: "Você responde 12 perguntas estratégicas (~5 minutos), recebe um score de maturidade, sua classificação de estágio e 3 recomendações personalizadas. Sem custo, sem compromisso.",
+    a: "Você preenche um formulário curto (nome, empresa, faturamento, principal gargalo) e responde 12 perguntas estratégicas sobre estratégia, vendas, dados, IA e operação. Leva ~5 minutos. Na hora você recebe: seu Score de Maturidade (0-100), sua classificação de estágio (Inicial, Estruturação, Avançado ou Otimizado) e 3 recomendações personalizadas. Sem custo, sem cartão, sem compromisso. Se houver fit, agendamos uma conversa estratégica para aprofundar.",
   },
   {
     q: "Vocês substituem meu time interno?",
-    a: "Não. Atuamos como engenharia parceira do seu time. Estruturamos, treinamos e aceleramos — para que sua operação rode sem depender de heróis.",
+    a: "Não. A Aceleriq atua como engenharia parceira do seu time, não como terceirização. Estruturamos processos, treinamos pessoas, implementamos ferramentas e aceleramos a operação para que ela rode com seu time, não dependendo de heróis nem da nossa presença diária. O objetivo final é deixar sua empresa autônoma com método — não criar dependência. Quando você não precisar mais da gente em algumas frentes, a gente comemora junto.",
   },
   {
     q: "Como começa o trabalho depois do diagnóstico?",
-    a: "Depois do diagnóstico, agendamos uma sessão estratégica para entender o seu negócio em profundidade. Se houver fit, montamos uma proposta com escopo, cronograma e investimento.",
+    a: "Após o Diagnóstico, agendamos uma sessão estratégica de aprofundamento (60-90 min) para entender seu negócio, números, time, ferramentas e prioridades reais. Se houver fit técnico e estratégico nos dois lados, montamos uma proposta personalizada com escopo de programa, cronograma de 90 dias, KPIs alvo e investimento. A partir do aceite, começamos com onboarding técnico, mapeamento de stack e o primeiro sprint em até 7 dias.",
   },
 ];
 
@@ -1183,12 +1183,13 @@ export function FinalCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
               [ 12 ] · Próximo passo
             </span>
             <h2 className="mx-auto mt-5 max-w-3xl font-display text-3xl font-medium leading-[1.05] tracking-[-0.03em] md:text-6xl">
-              Pronto para acelerar com{" "}
-              <span className="text-primary neon-text-glow">método, dados e IA</span>?
+              Pare de improvisar. Comece a{" "}
+              <span className="text-primary neon-text-glow">escalar com engenharia</span>.
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-muted-foreground md:text-base">
-              Comece pelo Diagnóstico de Maturidade. Em 5 minutos você sabe
-              exatamente em que estágio está e o que precisa destravar.
+              Faça o Diagnóstico Gratuito em 5 minutos e descubra exatamente
+              em que estágio sua operação está, o que está travando o crescimento
+              e os próximos passos para destravar receita previsível.
             </p>
 
             <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -1212,7 +1213,7 @@ export function FinalCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
                   rel="noreferrer"
                 >
                   <MessageCircle className="h-4 w-4 text-primary" />
-                  WhatsApp · {WHATSAPP_DISPLAY}
+                  Falar com especialista
                 </a>
               </Button>
             </div>
