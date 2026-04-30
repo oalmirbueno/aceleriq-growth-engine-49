@@ -19,8 +19,6 @@ import {
   FinalCTA,
   BrandStrip,
 } from "@/components/site/Sections";
-import { StickyStack } from "@/components/site/StickyStack";
-import { InstrumentBar } from "@/components/site/Ornaments";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -48,40 +46,19 @@ function Index() {
       <Header onDiagnostico={openDiagnostico} />
       <main>
         <Hero onDiagnostico={openDiagnostico} />
-
-        {/* Sticky stack — apenas seções compactas (cabem em 100vh) */}
-        <StickyStack>
-          <Pains />
-          <About />
-        </StickyStack>
-
-        {/* Seções de conteúdo alto — fluxo normal */}
+        <Pains />
+        <About />
         <Method />
         <Areas />
         <FitFor />
-
-        {/* Painel de instrumentos skeumórfico — ambienta entre seções */}
-        <InstrumentBar />
-
         <DiagnosticoCTA onDiagnostico={openDiagnostico} />
         <Results />
-
-        {/* Faixa marquee — entre Resultados e Depoimentos (zona segura, sem sticky) */}
         <BrandStrip />
-
         <Testimonials />
-
-        {/* Seção 09 — Comparativo no fluxo normal (estática) */}
         <Compare />
-
-        {/* Seção 10 — Por que agora, no fluxo normal */}
         <WhyNow />
-
-        {/* Sticky stack — FAQ (11) com efeito de sobreposição sobre Final CTA */}
-        <StickyStack>
-          <FAQ />
-          <FinalCTA onDiagnostico={openDiagnostico} />
-        </StickyStack>
+        <FAQ />
+        <FinalCTA onDiagnostico={openDiagnostico} />
       </main>
       <Footer />
       <DiagnosticoModal open={diagOpen} onOpenChange={setDiagOpen} />

@@ -73,14 +73,14 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
             </span>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div>
               <Editable id="hero-headline">
                 <motion.h1 
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1, ease: "circOut" }}
-                  className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.9] flex flex-col"
+                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] flex flex-col"
                 >
                   <span className="text-stroke">Protocolo</span>
                   <span className="text-primary text-glow italic">de Engenharia</span>
@@ -157,42 +157,42 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
 
                 {/* ───────── Cards flutuantes FORA da foto ───────── */}
 
-                {/* TOP-LEFT: Operador Ao Vivo */}
-                <div className="absolute -top-4 -left-4 md:-top-6 md:-left-10 float-a z-20">
-                  <div className="bg-black/85 backdrop-blur-md border border-primary/40 px-3 py-2 shadow-[0_0_30px_rgba(20,255,0,0.2)] flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                    <span className="font-mono text-[10px] tracking-[0.2em] text-primary uppercase">Operador Ao Vivo</span>
+                {/* TOP-LEFT: Operador Ao Vivo (mobile: visível, simplificado) */}
+                <div className="absolute -top-3 left-2 md:-top-6 md:-left-10 float-a z-20">
+                  <div className="bg-black/85 backdrop-blur-md border border-primary/40 px-2.5 py-1.5 md:px-3 md:py-2 shadow-[0_0_30px_rgba(20,255,0,0.2)] flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-primary animate-pulse" />
+                    <span className="font-mono text-[9px] md:text-[10px] tracking-[0.2em] text-primary uppercase">Ao Vivo</span>
                   </div>
                 </div>
 
-                {/* TOP-RIGHT: NÓ_04 */}
-                <div className="absolute -top-3 -right-3 md:-top-5 md:-right-8 float-b z-20">
+                {/* TOP-RIGHT: NÓ_04 — desktop only */}
+                <div className="hidden md:block absolute -top-5 -right-8 float-b z-20">
                   <div className="bg-black/85 backdrop-blur-md border border-white/15 px-3 py-2">
                     <span className="font-mono text-[10px] text-white/80 tracking-tight">NÓ_04 // SEGURO</span>
                   </div>
                 </div>
 
-                {/* RIGHT-MIDDLE: ROI Mensal grande */}
-                <div className="absolute top-1/3 -right-6 md:-right-14 float-c z-20">
-                  <div className="bg-black/90 backdrop-blur-md border border-primary/40 p-4 shadow-[0_0_40px_rgba(20,255,0,0.25)]">
+                {/* RIGHT-MIDDLE: ROI Mensal — destaque principal, mantido em mobile */}
+                <div className="absolute top-1/3 -right-2 md:-right-14 float-c z-20">
+                  <div className="bg-black/90 backdrop-blur-md border border-primary/40 p-3 md:p-4 shadow-[0_0_40px_rgba(20,255,0,0.25)]">
                     <div className="flex items-baseline gap-1">
-                      <span className="text-3xl md:text-4xl font-mono font-bold text-primary leading-none">+</span>
-                      <CountUp to={245} duration={1800} className="text-3xl md:text-4xl font-mono font-bold text-primary leading-none" />
-                      <span className="text-2xl md:text-3xl font-mono font-bold text-primary leading-none">%</span>
+                      <span className="text-2xl md:text-4xl font-mono font-bold text-primary leading-none">+</span>
+                      <CountUp to={245} duration={1800} className="text-2xl md:text-4xl font-mono font-bold text-primary leading-none" />
+                      <span className="text-xl md:text-3xl font-mono font-bold text-primary leading-none">%</span>
                     </div>
-                    <span className="text-[9px] font-mono uppercase tracking-widest text-white/60 mt-1 block">ROI Mensal</span>
+                    <span className="text-[8px] md:text-[9px] font-mono uppercase tracking-widest text-white/60 mt-1 block">ROI Mensal</span>
                   </div>
                 </div>
 
-                {/* BOTTOM-LEFT: Precisão */}
-                <div className="absolute -bottom-4 -left-4 md:-bottom-6 md:-left-12 float-b z-20">
+                {/* BOTTOM-LEFT: Precisão — desktop only */}
+                <div className="hidden md:block absolute -bottom-6 -left-12 float-b z-20">
                   <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-3 py-2.5 min-w-[110px]">
                     <span className="text-[8px] uppercase tracking-widest text-white/50 font-mono block">Precisão</span>
                     <CountUp to={98.2} decimals={1} duration={1600} suffix="%" className="text-lg font-mono text-primary font-bold" />
                   </div>
                 </div>
 
-                {/* BOTTOM-CENTER: Automação */}
+                {/* BOTTOM-CENTER: Automação — desktop only */}
                 <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 float-a z-20 hidden md:block">
                   <div className="bg-black/85 backdrop-blur-md border border-white/15 px-3 py-2.5 min-w-[110px]">
                     <span className="text-[8px] uppercase tracking-widest text-white/50 font-mono block">Automação</span>
@@ -200,11 +200,11 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                   </div>
                 </div>
 
-                {/* BOTTOM-RIGHT: Leads */}
-                <div className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-10 float-c z-20">
-                  <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-3 py-2.5 min-w-[110px]">
+                {/* BOTTOM-RIGHT: Leads — mantido em mobile, compacto */}
+                <div className="absolute -bottom-3 right-2 md:-bottom-6 md:-right-10 float-c z-20">
+                  <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-2.5 py-2 md:px-3 md:py-2.5 min-w-[90px] md:min-w-[110px]">
                     <span className="text-[8px] uppercase tracking-widest text-white/50 font-mono block">Leads</span>
-                    <CountUp to={3.2} decimals={1} duration={1400} suffix="x" className="text-lg font-mono text-primary font-bold" />
+                    <CountUp to={3.2} decimals={1} duration={1400} suffix="x" className="text-base md:text-lg font-mono text-primary font-bold" />
                   </div>
                 </div>
               </motion.div>
@@ -228,11 +228,9 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
 // ─────────────────────────────────────────────────────────────
 const PAINS = [
   { icon: Megaphone, title: "Marketing sem ROI", desc: "Investimento em tráfego sem leitura clara do que gera receita." },
-  { icon: Users2, title: "Time comercial sem método", desc: "Vendedores apagando incêndio, sem playbook nem cadência." },
-  { icon: Workflow, title: "Ferramentas desconectadas", desc: "CRM, planilhas, WhatsApp e automações que não conversam." },
+  { icon: Users2, title: "Vendas sem método", desc: "Time comercial sem playbook, cadência ou previsibilidade." },
   { icon: Database, title: "Decisão sem dados", desc: "Você sente o pulso do negócio, mas não tem dashboards confiáveis." },
-  { icon: AlertTriangle, title: "Tudo depende do dono", desc: "Sem o sócio na operação, a empresa para. Existe heroísmo, não processo." },
-  { icon: Target, title: "Leads ruins, propostas frias", desc: "Volume sobe, qualidade desce. CAC alto, ciclo longo, conversão baixa." },
+  { icon: AlertTriangle, title: "Tudo depende do dono", desc: "Sem o sócio na operação, a empresa para. Heroísmo, não sistema." },
 ];
 
 export function Pains() {
@@ -247,7 +245,7 @@ export function Pains() {
           description="São os gargalos que travam empresas entre R$ 100k e R$ 5M/mês. Todos têm solução com a engenharia certa."
         />
 
-        <div className="mt-5 md:mt-6 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-5 md:mt-6 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
           {PAINS.map((p, i) => (
             <motion.div
               key={p.title}
@@ -527,11 +525,9 @@ export function Method() {
 // ─────────────────────────────────────────────────────────────
 const AREAS = [
   { icon: Search, title: "Diagnóstico estratégico", desc: "Mapeamento completo da operação, funil e gargalos." },
-  { icon: Target, title: "Estratégia de crescimento", desc: "Plano de jogo com metas, alavancas e priorização." },
   { icon: Megaphone, title: "Tráfego pago", desc: "Meta, Google e LinkedIn lidos por receita, não por clique." },
-  { icon: Settings2, title: "CRM & funil de vendas", desc: "Estruturação de CRM, automações e cadência comercial." },
+  { icon: Settings2, title: "CRM & funil de vendas", desc: "CRM, automações e cadência comercial estruturados." },
   { icon: Bot, title: "IA & automação", desc: "Agentes de IA, fluxos n8n/Make e integrações sob medida." },
-  { icon: Workflow, title: "Processos comerciais", desc: "Playbook, scripts, qualificação e ritual de vendas." },
   { icon: LineChart, title: "Dados & dashboards", desc: "Métricas, BI e visão executiva semanal do negócio." },
   { icon: Building2, title: "Estruturação operacional", desc: "Pessoas, papéis, rituais e SOPs para escalar com saúde." },
 ];
@@ -550,10 +546,10 @@ export function Areas() {
         <SectionHeader
           eyebrow="[ 04 ] · Áreas de atuação"
           title="Tudo que sustenta o crescimento de uma empresa moderna."
-          description="As 8 dimensões que separam empresas que crescem por sorte de empresas que crescem por engenharia."
+          description="As dimensões que separam empresas que crescem por sorte de empresas que crescem por engenharia."
         />
 
-        <div className="mt-5 md:mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-5 md:mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {AREAS.map((a, i) => (
             <motion.div
               key={a.title}
@@ -1096,7 +1092,7 @@ function TestimonialCard({ t }: { t: TestimonialItem }) {
   const monogram = (t.company || t.name).charAt(0);
   return (
     <figure
-      className="liquid-glass relative rounded-2xl p-5 w-[400px] flex-shrink-0 transition-all duration-300 hover:-translate-y-0.5"
+      className="liquid-glass relative rounded-2xl p-5 w-[300px] sm:w-[360px] md:w-[400px] flex-shrink-0 transition-all duration-300 hover:-translate-y-0.5"
     >
       {/* Header: avatar + identidade + selo verificado */}
       <div className="flex items-start gap-3">
@@ -1216,13 +1212,13 @@ export function Compare() {
         />
 
         <div className="liquid-glass mt-5 md:mt-6 relative overflow-hidden rounded-2xl">
-          {/* Coluna Aceleriq destacada com glow vertical */}
-          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-[41.66%] bg-gradient-to-b from-primary/[0.06] via-primary/[0.10] to-primary/[0.06]" />
-          <div className="pointer-events-none absolute right-[41.66%] top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-primary/60 to-transparent" />
+          {/* Coluna Aceleriq destacada com glow vertical (apenas md+) */}
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-[41.66%] bg-gradient-to-b from-primary/[0.06] via-primary/[0.10] to-primary/[0.06] hidden md:block" />
+          <div className="pointer-events-none absolute right-[41.66%] top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-primary/60 to-transparent hidden md:block" />
 
-          {/* Cabeçalho — pílula skeumórfica */}
+          {/* Cabeçalho — desktop only (no mobile usamos labels inline) */}
           <div
-            className="relative grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-primary/15"
+            className="relative hidden md:grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-primary/15"
             style={{
               background:
                 "linear-gradient(180deg, color-mix(in oklab, var(--foreground) 8%, transparent), color-mix(in oklab, var(--foreground) 2%, transparent))",
@@ -1248,21 +1244,27 @@ export function Compare() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.45, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-              className="relative grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-white/[0.04] last:border-b-0 text-sm transition-colors hover:bg-primary/[0.04]"
+              className="relative grid grid-cols-1 md:grid-cols-[1fr_1.4fr_1.4fr] border-b border-white/[0.04] last:border-b-0 text-sm transition-colors hover:bg-primary/[0.04]"
             >
-              <div className="flex items-center gap-2 px-5 py-4 font-medium text-foreground/95">
+              <div className="flex items-center gap-2 px-5 pt-4 pb-2 md:py-4 font-medium text-foreground/95 bg-primary/[0.04] md:bg-transparent">
                 <span className="font-mono text-[9px] text-primary/50">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 {dim}
               </div>
-              <div className="flex items-start gap-2 px-5 py-4 text-muted-foreground">
+              <div className="flex items-start gap-2 px-5 py-3 md:py-4 text-muted-foreground">
                 <X className="mt-0.5 h-4 w-4 flex-shrink-0 text-foreground/30" />
-                <span className="line-through decoration-white/15">{agency}</span>
+                <span className="line-through decoration-white/15">
+                  <span className="md:hidden font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground/70 block mb-0.5">Agência</span>
+                  {agency}
+                </span>
               </div>
-              <div className="flex items-start gap-2 px-5 py-4 text-foreground font-medium">
+              <div className="flex items-start gap-2 px-5 py-3 md:py-4 text-foreground font-medium bg-primary/[0.05] md:bg-transparent">
                 <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary drop-shadow-[0_0_4px_oklch(85%_0.2_145/0.6)]" />
-                {us}
+                <span>
+                  <span className="md:hidden font-mono text-[9px] uppercase tracking-[0.18em] text-primary/70 block mb-0.5">Aceleriq</span>
+                  {us}
+                </span>
               </div>
             </motion.div>
           ))}
@@ -1343,19 +1345,11 @@ export function WhyNow() {
 const FAQS = [
   {
     q: "Quanto custa trabalhar com a Aceleriq?",
-    a: "Depende do estágio e do escopo. Trabalhamos com programas mensais de engenharia de crescimento. No diagnóstico estratégico definimos juntos o investimento que faz sentido para o seu momento.",
+    a: "Trabalhamos com programas mensais de engenharia de crescimento. No diagnóstico estratégico definimos juntos o investimento que faz sentido para o seu momento.",
   },
   {
     q: "Em quanto tempo eu vejo resultado?",
-    a: "Ajustes táticos aparecem nas primeiras semanas. Resultado estrutural — previsibilidade, CAC, processo comercial — costuma se consolidar entre 60 e 120 dias.",
-  },
-  {
-    q: "Vocês atendem qualquer segmento?",
-    a: "Atuamos com SaaS, e-commerce, educação, serviços profissionais, indústria e infoprodutos. Trabalhamos melhor com empresas a partir de R$ 100k/mês.",
-  },
-  {
-    q: "Existe contrato de fidelidade?",
-    a: "Trabalhamos com ciclos mínimos para garantir entrega — geralmente 6 meses — porque construir um sistema de crescimento não é trabalho de 30 dias.",
+    a: "Ajustes táticos aparecem nas primeiras semanas. Resultado estrutural — previsibilidade, CAC, processo comercial — se consolida entre 60 e 120 dias.",
   },
   {
     q: "Qual a diferença real para uma agência?",
@@ -1368,10 +1362,6 @@ const FAQS = [
   {
     q: "Vocês substituem meu time interno?",
     a: "Não. Atuamos como engenharia parceira do seu time. Estruturamos, treinamos e aceleramos — para que sua operação rode sem depender de heróis.",
-  },
-  {
-    q: "Como começa o trabalho depois do diagnóstico?",
-    a: "Depois do diagnóstico, agendamos uma sessão estratégica para entender o seu negócio em profundidade. Se houver fit, montamos uma proposta com escopo, cronograma e investimento.",
   },
 ];
 
