@@ -18,7 +18,7 @@ import {
   FAQ,
   FinalCTA,
 } from "@/components/site/Sections";
-import { StickyStack } from "@/components/site/StickyStack";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -46,24 +46,13 @@ function Index() {
       <Header onDiagnostico={openDiagnostico} />
       <main>
         <Hero onDiagnostico={openDiagnostico} />
-
-        {/* Seções 2 e 3 — efeito sticky stack (roleta) */}
-        <StickyStack>
-          <Pains />
-          <About />
-        </StickyStack>
-
-        {/* Seção 4 — animações laterais + texto saindo de baixo */}
+        <Pains />
+        <About />
         <Method />
-
-        {/* Seções 5 e 6 — normais (conteúdo alto não cabe em h-screen) */}
         <Areas />
         <FitFor />
-
-        {/* Seções 7 e 8 — normais (Results tem conteúdo alto, não cabe em h-screen) */}
         <DiagnosticoCTA onDiagnostico={openDiagnostico} />
         <Results />
-
         <Testimonials />
         <Compare />
         <WhyNow />
