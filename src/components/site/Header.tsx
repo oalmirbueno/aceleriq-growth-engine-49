@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -15,7 +15,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -26,36 +26,43 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-300",
         scrolled
-          ? "border-b border-border/60 bg-background/70 backdrop-blur-xl"
+          ? "border-b border-border/60 bg-background/80 backdrop-blur-xl"
           : "bg-transparent",
       )}
     >
-      <div className="container-aceleriq flex h-16 items-center justify-between md:h-20">
-        <a href="#top" className="flex items-center gap-2">
-          <span className="relative flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-primary shadow-glow-primary">
-            <Sparkles className="h-4 w-4 text-primary-foreground" />
+      <div className="container-aceleriq flex h-16 items-center justify-between md:h-[68px]">
+        <a href="#top" className="group flex items-center gap-2.5">
+          <span className="relative flex h-7 w-7 items-center justify-center rounded-md border border-border bg-card">
+            <span className="absolute inset-1 rounded-sm bg-primary/90" />
+            <span className="relative h-1.5 w-1.5 rounded-full bg-background" />
           </span>
-          <span className="font-display text-lg font-bold tracking-tight">
-            Aceleriq
+          <span className="font-display text-[15px] font-semibold tracking-tight">
+            aceleriq<span className="text-primary">.</span>
           </span>
         </a>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-1 md:flex">
           {NAV.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="rounded-md px-3 py-2 text-[13px] font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               {item.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden md:block">
+        <div className="hidden items-center gap-2 md:flex">
+          <a
+            href="#top"
+            className="text-[12px] font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Entrar em contato
+          </a>
           <Button
             onClick={onDiagnostico}
-            className="h-10 rounded-full bg-gradient-cta px-5 font-semibold text-lime-foreground shadow-glow-lime hover:opacity-95"
+            className="h-9 rounded-md bg-primary px-4 text-[13px] font-semibold text-primary-foreground btn-interactive hover:bg-primary"
           >
             Diagnóstico Gratuito
           </Button>
@@ -65,9 +72,9 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
           type="button"
           aria-label="Abrir menu"
           onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 items-center justify-center rounded-md border border-border bg-surface text-foreground md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-md border border-border bg-card text-foreground md:hidden"
         >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
         </button>
       </div>
 
@@ -79,7 +86,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="rounded-md px-3 py-3 text-base font-medium text-muted-foreground hover:bg-surface hover:text-foreground"
+                className="rounded-md px-3 py-3 text-base font-medium text-muted-foreground hover:bg-card hover:text-foreground"
               >
                 {item.label}
               </a>
@@ -89,7 +96,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
                 setOpen(false);
                 onDiagnostico();
               }}
-              className="mt-2 h-12 w-full rounded-full bg-gradient-cta font-semibold text-lime-foreground shadow-glow-lime"
+              className="mt-2 h-12 w-full rounded-md bg-primary text-base font-semibold text-primary-foreground"
             >
               Diagnóstico Gratuito
             </Button>
