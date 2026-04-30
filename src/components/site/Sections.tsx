@@ -73,7 +73,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: "circOut" }}
-                className="text-6xl md:text-8xl lg:text-9xl font-bold leading-[0.85] flex flex-col"
+                className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.9] flex flex-col"
               >
                 <span className="text-stroke">Protocolo</span>
                 <span className="text-primary text-glow italic">de Engenharia</span>
