@@ -62,11 +62,9 @@ function Index() {
           <FitFor />
         </StickyStack>
 
-        {/* Seções 7 e 8 — sticky stack */}
-        <StickyStack>
-          <DiagnosticoCTA onDiagnostico={openDiagnostico} />
-          <Results />
-        </StickyStack>
+        {/* Seções 7 e 8 — normais (Results tem conteúdo alto, não cabe em h-screen) */}
+        <DiagnosticoCTA onDiagnostico={openDiagnostico} />
+        <Results />
 
         <Testimonials />
         <Compare />
