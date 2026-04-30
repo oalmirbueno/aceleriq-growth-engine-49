@@ -56,11 +56,9 @@ function Index() {
         {/* Seção 4 — animações laterais + texto saindo de baixo */}
         <Method />
 
-        {/* Seções 5 e 6 — sticky stack */}
-        <StickyStack>
-          <Areas />
-          <FitFor />
-        </StickyStack>
+        {/* Seções 5 e 6 — normais (conteúdo alto não cabe em h-screen) */}
+        <Areas />
+        <FitFor />
 
         {/* Seções 7 e 8 — normais (Results tem conteúdo alto, não cabe em h-screen) */}
         <DiagnosticoCTA onDiagnostico={openDiagnostico} />
