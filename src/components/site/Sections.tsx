@@ -1031,13 +1031,13 @@ export function Testimonials() {
           />
         </div>
 
-        {/* Dois carrosséis em direções opostas para impacto visual */}
+        {/* Carrossel único — uma linha, mais leve */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-10 md:mt-14 space-y-4 relative"
+          className="mt-10 md:mt-14 relative"
           style={{
             maskImage:
               "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
@@ -1045,28 +1045,14 @@ export function Testimonials() {
               "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
           }}
         >
-          {/* Linha 1 — esquerda */}
           <div className="overflow-hidden">
             <motion.div
               className="flex gap-4 w-max"
               animate={{ x: ["0%", "-33.333%"] }}
-              transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 55, repeat: Infinity, ease: "linear" }}
             >
               {loop.map((t, i) => (
-                <TestimonialCard key={`a-${i}`} t={t} />
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Linha 2 — direita (offset alternado) */}
-          <div className="overflow-hidden">
-            <motion.div
-              className="flex gap-4 w-max"
-              animate={{ x: ["-33.333%", "0%"] }}
-              transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-            >
-              {loop.slice().reverse().map((t, i) => (
-                <TestimonialCard key={`b-${i}`} t={t} />
+                <TestimonialCard key={`t-${i}`} t={t} />
               ))}
             </motion.div>
           </div>
