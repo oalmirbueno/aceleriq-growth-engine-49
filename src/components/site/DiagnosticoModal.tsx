@@ -1,6 +1,6 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { MessageCircle, Mail, Sparkles } from "lucide-react";
+import { MessageCircle, Mail } from "lucide-react";
 import {
   EMAIL,
   WHATSAPP_DISPLAY,
@@ -19,50 +19,40 @@ export function DiagnosticoModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-lg overflow-hidden border-border/60 bg-gradient-card p-0">
-        <div className="relative p-6 md:p-8">
+      <DialogContent className="max-w-lg overflow-hidden border-border bg-card p-0">
+        <div className="relative p-7 md:p-8">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
 
-          <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-primary shadow-glow-primary">
-              <Sparkles className="h-5 w-5 text-primary-foreground" />
-            </span>
-            <div>
-              <DialogHeader className="space-y-1 text-left">
-                <DialogTitle className="font-display text-xl">
-                  Diagnóstico em ativação
-                </DialogTitle>
-                <DialogDescription className="text-sm text-muted-foreground">
-                  Estamos finalizando a calibração da ferramenta inteligente.
-                </DialogDescription>
-              </DialogHeader>
-            </div>
-          </div>
+          <span className="label-eyebrow flex items-center gap-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-primary pulse-dot" />
+            Diagnóstico · em ativação
+          </span>
 
-          <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
-            Em poucos dias o <span className="text-foreground">Diagnóstico de Maturidade
-            em Crescimento e IA</span> entra no ar — uma análise de 12 perguntas que
-            classifica seu estágio e entrega recomendações personalizadas.
-          </p>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            Enquanto isso, fale direto com nosso time — você sai dessa conversa
-            com 3 alavancas claras de crescimento.
-          </p>
+          <DialogHeader className="mt-3 space-y-2 text-left">
+            <DialogTitle className="font-display text-2xl font-semibold leading-tight">
+              Estamos calibrando a ferramenta inteligente.
+            </DialogTitle>
+            <DialogDescription className="text-sm leading-relaxed text-muted-foreground">
+              Em poucos dias o Diagnóstico de Maturidade em Crescimento e IA
+              entra no ar. Enquanto isso, fale direto com o time — você sai
+              da conversa com 3 alavancas claras de crescimento.
+            </DialogDescription>
+          </DialogHeader>
 
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-7 flex flex-col gap-2.5 sm:flex-row">
             <Button
               asChild
-              className="h-12 flex-1 rounded-full bg-gradient-cta font-semibold text-lime-foreground shadow-glow-lime hover:opacity-95"
+              className="h-11 flex-1 rounded-md bg-primary text-[13px] font-semibold text-primary-foreground btn-interactive"
             >
               <a href={whatsappLink(msg)} target="_blank" rel="noreferrer">
                 <MessageCircle className="h-4 w-4" />
-                WhatsApp {WHATSAPP_DISPLAY}
+                WhatsApp · {WHATSAPP_DISPLAY}
               </a>
             </Button>
             <Button
               asChild
               variant="outline"
-              className="h-12 flex-1 rounded-full border-border bg-surface/60 font-semibold hover:bg-surface"
+              className="h-11 flex-1 rounded-md border-border bg-transparent text-[13px] font-semibold hover:bg-card"
             >
               <a href={`mailto:${EMAIL}?subject=Diagnóstico%20Aceleriq`}>
                 <Mail className="h-4 w-4" />
