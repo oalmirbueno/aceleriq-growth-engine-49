@@ -55,13 +55,13 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
       <div className="hero-vignette absolute inset-0 -z-10" />
 
       <div className="container-aceleriq relative w-full">
-        <div className="grid items-center gap-12 lg:grid-cols-12">
+        <div className="flex flex-col items-center justify-center text-center">
           {/* Coluna esquerda — headline */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-7"
+            className="max-w-5xl"
           >
             <motion.span
               initial={{ opacity: 0 }}
@@ -82,17 +82,13 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-7 font-display text-[44px] font-medium leading-[0.98] tracking-[-0.045em] md:text-[68px] lg:text-[84px]"
+              className="mt-7 font-display text-[44px] font-medium leading-[0.98] tracking-[-0.045em] md:text-[72px] lg:text-[104px]"
             >
               Acelere seu negócio
               <br />
-              <span className="relative inline-block">
-                <span className="bg-gradient-to-r from-foreground via-foreground to-primary bg-clip-text text-transparent">
-                  com método,
-                </span>
+              <span className="bg-gradient-to-r from-foreground via-foreground to-primary bg-clip-text text-transparent">
+                com método, dados e IA
               </span>
-              <br />
-              <span className="text-primary neon-text-glow">dados e IA</span>
               <span className="text-primary">.</span>
             </motion.h1>
 
@@ -100,7 +96,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.35 }}
-              className="mt-7 max-w-xl text-[15px] leading-relaxed text-muted-foreground md:text-[17px]"
+              className="mx-auto mt-7 max-w-2xl text-[16px] leading-relaxed text-muted-foreground md:text-[19px]"
             >
               Aceleriq não é uma agência de marketing. É a engenharia que une
               estratégia, processo comercial, CRM, dados e inteligência
@@ -111,7 +107,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.5 }}
-              className="mt-9 flex flex-col items-start gap-3 sm:flex-row sm:items-center"
+              className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
             >
               <Button
                 onClick={onDiagnostico}
@@ -142,7 +138,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.7, delay: 0.7 }}
-              className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] uppercase tracking-[0.16em] text-muted-foreground"
+              className="mt-10 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] uppercase tracking-[0.16em] text-muted-foreground"
             >
               <span className="inline-flex items-center gap-1.5">
                 <ShieldCheck className="h-3.5 w-3.5 text-primary" />
@@ -155,67 +151,6 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
             </motion.div>
           </motion.div>
 
-          {/* Coluna direita — KPI flutuante (apenas desktop) */}
-          <motion.div
-            initial={{ opacity: 0, x: 24 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="hidden lg:col-span-5 lg:block"
-          >
-            <div className="relative ml-auto max-w-sm rounded-2xl border border-border/80 bg-background/40 p-6 backdrop-blur-xl shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]">
-              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
-
-              <div className="flex items-center justify-between">
-                <span className="label-eyebrow flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-primary pulse-dot" />
-                  Cockpit · Live
-                </span>
-                <span className="text-mono text-[10px] text-muted-foreground">
-                  Q4 / 2026
-                </span>
-              </div>
-
-              <div className="mt-6">
-                <span className="label-eyebrow">Score · Maturidade</span>
-                <div className="mt-2 flex items-baseline gap-2">
-                  <span className="text-mono text-[56px] font-semibold leading-none tracking-tight text-primary neon-text-glow">
-                    88
-                  </span>
-                  <span className="text-mono text-[13px] text-muted-foreground">
-                    /100
-                  </span>
-                  <span className="ml-auto inline-flex items-center gap-1 rounded-full border border-primary/25 bg-primary/[0.08] px-2 py-0.5 text-[10px] font-medium text-primary">
-                    <ArrowUpRight className="h-3 w-3" />
-                    +56
-                  </span>
-                </div>
-                <div className="mt-4 h-[3px] w-full overflow-hidden rounded-full bg-secondary">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: "88%" }}
-                    transition={{ duration: 1.4, delay: 1, ease: "easeOut" }}
-                    className="h-full rounded-full bg-primary"
-                  />
-                </div>
-              </div>
-
-              <div className="mt-6 grid grid-cols-2 gap-3 border-t border-border/80 pt-5">
-                {[
-                  { k: "ROI · 90d", v: "+184%" },
-                  { k: "Pipeline", v: "3.2x" },
-                  { k: "CAC", v: "−42%" },
-                  { k: "Renovação", v: "97%" },
-                ].map((s) => (
-                  <div key={s.k}>
-                    <span className="label-eyebrow">{s.k}</span>
-                    <div className="mt-1 text-mono text-lg font-semibold text-foreground">
-                      {s.v}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
         </div>
       </div>
 
