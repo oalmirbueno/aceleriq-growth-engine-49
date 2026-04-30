@@ -288,7 +288,7 @@ export function About() {
     <section className="relative py-28 md:py-36 overflow-hidden bg-grid-ambient">
       {/* Glow ambiente */}
       <div className="pointer-events-none absolute -left-32 top-1/3 h-[420px] w-[640px] rounded-full bg-primary/[0.05] blur-3xl" />
-      <div className="pointer-events-none absolute right-0 bottom-0 h-[320px] w-[480px] rounded-full bg-[oklch(60%_0.2_250)]/[0.05] blur-3xl" />
+      <div className="pointer-events-none absolute right-0 bottom-0 h-[320px] w-[480px] rounded-full bg-primary/[0.025] blur-3xl" />
       <div className="container-aceleriq">
         <div className="grid gap-14 lg:grid-cols-12 lg:items-start">
           <motion.div
@@ -379,7 +379,7 @@ export function Method() {
     >
       {/* Brilho ambiente refinado — múltiplas camadas suaves */}
       <div className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[920px] -translate-x-1/2 rounded-full bg-primary/[0.07] blur-[120px]" />
-      <div className="pointer-events-none absolute bottom-0 left-1/4 h-[340px] w-[520px] rounded-full bg-[oklch(60%_0.2_250)]/[0.05] blur-[100px]" />
+      <div className="pointer-events-none absolute bottom-0 left-1/4 h-[340px] w-[520px] rounded-full bg-primary/[0.025] blur-[100px]" />
       <div className="pointer-events-none absolute top-1/2 right-0 h-[300px] w-[400px] rounded-full bg-primary/[0.04] blur-[100px]" />
 
       <div className="container-aceleriq relative">
@@ -534,7 +534,7 @@ export function Areas() {
     >
       {/* Glow ambiente */}
       <div className="pointer-events-none absolute right-0 top-1/3 h-[400px] w-[600px] rounded-full bg-primary/[0.05] blur-3xl" />
-      <div className="pointer-events-none absolute left-0 bottom-0 h-[300px] w-[500px] rounded-full bg-[oklch(60%_0.2_250)]/[0.06] blur-3xl" />
+      <div className="pointer-events-none absolute left-0 bottom-0 h-[300px] w-[500px] rounded-full bg-primary/[0.03] blur-3xl" />
 
       <div className="container-aceleriq relative">
         <SectionHeader
