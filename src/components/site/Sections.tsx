@@ -924,7 +924,9 @@ export function Testimonials() {
   const loop = [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS];
   return (
     <section className="relative surface-warm noise-overlay py-12 md:py-20 bg-grid-ambient overflow-hidden">
-      <div className="container-aceleriq">
+      <div className="orb-glow orb-amber top-1/4 left-[-100px] h-[420px] w-[420px]" />
+      <div className="orb-glow orb-emerald bottom-[-80px] right-1/4 h-[300px] w-[300px] opacity-25" />
+      <div className="container-aceleriq relative z-10">
         <SectionHeader
           eyebrow="[ 08 ] · Depoimentos"
           title="O que dizem os fundadores que aceleraram conosco."
