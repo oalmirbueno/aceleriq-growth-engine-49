@@ -71,7 +71,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
             </span>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center w-full">
+          <div className="grid lg:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center w-full max-w-full">
             <div>
               <Editable id="hero-headline">
                 <motion.h1 
@@ -156,41 +156,41 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                 {/* ───────── Cards flutuantes FORA da foto ───────── */}
 
                 {/* TOP-LEFT: Operador Ao Vivo */}
-                <div className="absolute -top-3 -left-2 md:-top-6 md:-left-10 float-a z-20">
-                  <div className="bg-black/85 backdrop-blur-md border border-primary/40 px-2 py-1.5 md:px-3 md:py-2 shadow-[0_0_30px_rgba(20,255,0,0.2)] flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                    <span className="font-mono text-[8px] md:text-[10px] tracking-[0.2em] text-primary uppercase">Ao Vivo</span>
+                <div className="absolute top-2 left-2 md:-top-6 md:-left-10 float-a z-20">
+                  <div className="bg-black/85 backdrop-blur-md border border-primary/40 px-2 py-1 md:px-3 md:py-2 shadow-[0_0_30px_rgba(20,255,0,0.2)] flex items-center gap-1.5 md:gap-2">
+                    <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-primary animate-pulse" />
+                    <span className="font-mono text-[8px] md:text-[10px] tracking-[0.15em] md:tracking-[0.2em] text-primary uppercase">Ao Vivo</span>
                   </div>
                 </div>
 
-                {/* TOP-RIGHT: NÓ_04 — escondido em telas muito pequenas */}
-                <div className="absolute -top-3 -right-2 md:-top-5 md:-right-8 float-b z-20 hidden sm:block">
+                {/* TOP-RIGHT: NÓ_04 — só desktop */}
+                <div className="absolute -top-5 -right-8 float-b z-20 hidden lg:block">
                   <div className="bg-black/85 backdrop-blur-md border border-white/15 px-3 py-2">
                     <span className="font-mono text-[10px] text-white/80 tracking-tight">NÓ_04 // SEGURO</span>
                   </div>
                 </div>
 
                 {/* RIGHT-MIDDLE: ROI Mensal grande */}
-                <div className="absolute top-1/3 -right-3 md:-right-14 float-c z-20">
-                  <div className="bg-black/90 backdrop-blur-md border border-primary/40 p-2.5 md:p-4 shadow-[0_0_40px_rgba(20,255,0,0.25)]">
-                    <div className="flex items-baseline gap-1">
-                      <span className="text-2xl md:text-4xl font-mono font-bold text-primary leading-none">+</span>
-                      <CountUp to={245} duration={1800} className="text-2xl md:text-4xl font-mono font-bold text-primary leading-none" />
-                      <span className="text-xl md:text-3xl font-mono font-bold text-primary leading-none">%</span>
+                <div className="absolute top-1/3 right-2 md:-right-14 float-c z-20">
+                  <div className="bg-black/90 backdrop-blur-md border border-primary/40 p-2 md:p-4 shadow-[0_0_40px_rgba(20,255,0,0.25)]">
+                    <div className="flex items-baseline gap-0.5 md:gap-1">
+                      <span className="text-xl md:text-4xl font-mono font-bold text-primary leading-none">+</span>
+                      <CountUp to={245} duration={1800} className="text-xl md:text-4xl font-mono font-bold text-primary leading-none" />
+                      <span className="text-lg md:text-3xl font-mono font-bold text-primary leading-none">%</span>
                     </div>
-                    <span className="text-[8px] md:text-[9px] font-mono uppercase tracking-widest text-white/60 mt-1 block">ROI Mensal</span>
+                    <span className="text-[7px] md:text-[9px] font-mono uppercase tracking-widest text-white/60 mt-0.5 md:mt-1 block">ROI Mensal</span>
                   </div>
                 </div>
 
                 {/* BOTTOM-LEFT: Precisão */}
-                <div className="absolute -bottom-3 -left-2 md:-bottom-6 md:-left-12 float-b z-20">
-                  <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-2.5 py-2 md:px-3 md:py-2.5 min-w-[90px] md:min-w-[110px]">
+                <div className="absolute -bottom-2 left-2 md:-bottom-6 md:-left-12 float-b z-20">
+                  <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-2 py-1.5 md:px-3 md:py-2.5 min-w-[78px] md:min-w-[110px]">
                     <span className="text-[7px] md:text-[8px] uppercase tracking-widest text-white/50 font-mono block">Precisão</span>
-                    <CountUp to={98.2} decimals={1} duration={1600} suffix="%" className="text-base md:text-lg font-mono text-primary font-bold" />
+                    <CountUp to={98.2} decimals={1} duration={1600} suffix="%" className="text-sm md:text-lg font-mono text-primary font-bold" />
                   </div>
                 </div>
 
-                {/* BOTTOM-CENTER: Automação */}
+                {/* BOTTOM-CENTER: Automação — só desktop */}
                 <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 float-a z-20 hidden md:block">
                   <div className="bg-black/85 backdrop-blur-md border border-white/15 px-3 py-2.5 min-w-[110px]">
                     <span className="text-[8px] uppercase tracking-widest text-white/50 font-mono block">Automação</span>
@@ -199,10 +199,10 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                 </div>
 
                 {/* BOTTOM-RIGHT: Leads */}
-                <div className="absolute -bottom-3 -right-2 md:-bottom-6 md:-right-10 float-c z-20">
-                  <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-2.5 py-2 md:px-3 md:py-2.5 min-w-[90px] md:min-w-[110px]">
+                <div className="absolute -bottom-2 right-2 md:-bottom-6 md:-right-10 float-c z-20">
+                  <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-2 py-1.5 md:px-3 md:py-2.5 min-w-[78px] md:min-w-[110px]">
                     <span className="text-[7px] md:text-[8px] uppercase tracking-widest text-white/50 font-mono block">Leads</span>
-                    <CountUp to={3.2} decimals={1} duration={1400} suffix="x" className="text-base md:text-lg font-mono text-primary font-bold" />
+                    <CountUp to={3.2} decimals={1} duration={1400} suffix="x" className="text-sm md:text-lg font-mono text-primary font-bold" />
                   </div>
                 </div>
               </motion.div>
