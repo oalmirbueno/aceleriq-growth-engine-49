@@ -92,29 +92,18 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
       {open && (
         <div className="absolute inset-x-0 top-full border-t border-white/10 bg-background/95 backdrop-blur-2xl lg:hidden">
           <div className="container-aceleriq flex flex-col gap-1 py-8">
-            {NAV.map((item, i) =>
-              item.type === "route" ? (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  onClick={() => setOpen(false)}
-                  className="flex items-center justify-between border-b border-white/5 py-4 text-sm font-mono uppercase tracking-widest text-muted-foreground hover:text-primary"
-                >
-                  <span>{item.label}</span>
-                  <span className="text-[10px] opacity-30">0{i + 1}</span>
-                </Link>
-              ) : (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="flex items-center justify-between border-b border-white/5 py-4 text-sm font-mono uppercase tracking-widest text-muted-foreground hover:text-primary"
-                >
-                  <span>{item.label}</span>
-                  <span className="text-[10px] opacity-30">0{i + 1}</span>
-                </a>
-              ),
-            )}
+            {NAV.map((item, i) => (
+              <Link
+                key={item.label}
+                to={item.to}
+                hash={item.hash}
+                onClick={() => setOpen(false)}
+                className="flex items-center justify-between border-b border-white/5 py-4 text-sm font-mono uppercase tracking-widest text-muted-foreground hover:text-primary"
+              >
+                <span>{item.label}</span>
+                <span className="text-[10px] opacity-30">0{i + 1}</span>
+              </Link>
+            ))}
             <a
               href="https://aceleriq.online"
               target="_blank"
