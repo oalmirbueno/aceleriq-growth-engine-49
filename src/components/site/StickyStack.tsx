@@ -62,11 +62,13 @@ function StickyLayer({
   const isLast = index === total - 1;
 
   // Janela de transição entre este item e o próximo.
-  // Cada item domina de (i/total) a ((i+1)/total).
   const outStart = (index + 0.55) / total;
   const outEnd = (index + 1) / total;
-  const inStart = (index - 0.45) / total;
-  const inEnd = index / total;
+  // Para a ÚLTIMA camada, esticamos a entrada por TODO o resto do container,
+  // assim ela termina de subir exatamente quando o sticky se solta — sem
+  // espaço vazio onde ela ficaria parada.
+  const inStart = isLast ? (index - 1) / total : (index - 0.45) / total;
+  const inEnd = isLast ? 1 : index / total;
 
   // SAÍDA — recua sutilmente quando o próximo cobre.
   const scaleOut = useTransform(
