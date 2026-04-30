@@ -286,9 +286,8 @@ const PILLARS = [
 export function About() {
   return (
     <section className="relative py-28 md:py-36 overflow-hidden bg-grid-ambient">
-      {/* Glow ambiente */}
-      <div className="pointer-events-none absolute -left-32 top-1/3 h-[420px] w-[640px] rounded-full bg-primary/[0.05] blur-3xl" />
-      <div className="pointer-events-none absolute right-0 bottom-0 h-[320px] w-[480px] rounded-full bg-primary/[0.025] blur-3xl" />
+      {/* Glow ambiente verde achatado e sutil */}
+      <div className="pointer-events-none absolute top-1/2 left-1/2 h-[220px] w-[1000px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.03] blur-[120px]" />
       <div className="container-aceleriq">
         <div className="grid gap-14 lg:grid-cols-12 lg:items-start">
           <motion.div
