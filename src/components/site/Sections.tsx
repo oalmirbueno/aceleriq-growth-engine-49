@@ -1183,12 +1183,13 @@ export function FinalCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
               [ 12 ] · Próximo passo
             </span>
             <h2 className="mx-auto mt-5 max-w-3xl font-display text-3xl font-medium leading-[1.05] tracking-[-0.03em] md:text-6xl">
-              Pronto para acelerar com{" "}
-              <span className="text-primary neon-text-glow">método, dados e IA</span>?
+              Pare de improvisar. Comece a{" "}
+              <span className="text-primary neon-text-glow">escalar com engenharia</span>.
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-muted-foreground md:text-base">
-              Comece pelo Diagnóstico de Maturidade. Em 5 minutos você sabe
-              exatamente em que estágio está e o que precisa destravar.
+              Faça o Diagnóstico Gratuito em 5 minutos e descubra exatamente
+              em que estágio sua operação está, o que está travando o crescimento
+              e os próximos passos para destravar receita previsível.
             </p>
 
             <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -1212,7 +1213,7 @@ export function FinalCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
                   rel="noreferrer"
                 >
                   <MessageCircle className="h-4 w-4 text-primary" />
-                  WhatsApp · {WHATSAPP_DISPLAY}
+                  Falar com especialista
                 </a>
               </Button>
             </div>
