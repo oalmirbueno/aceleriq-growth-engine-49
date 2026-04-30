@@ -232,7 +232,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
             </Editable>
           </div>
         </div>
-      </div>
+
 
       {/* Scroll indicator */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 hidden md:flex flex-col items-center gap-2 pointer-events-none">
