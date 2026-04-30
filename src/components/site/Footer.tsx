@@ -18,7 +18,7 @@ export function Footer() {
             <img
               src={logoAceleriq}
               alt="Aceleriq"
-              className="h-9 w-auto"
+              className="h-14 w-auto md:h-16"
             />
           </div>
           <p className="mt-5 max-w-md text-sm leading-relaxed text-muted-foreground">
