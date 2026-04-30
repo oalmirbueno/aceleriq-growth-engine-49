@@ -50,7 +50,7 @@ import { CountUp } from "@/components/ui/CountUp";
 // ─────────────────────────────────────────────────────────────
 export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section id="top" className="relative min-h-screen flex items-center justify-center pt-20 pb-16 lg:pb-20 overflow-hidden bg-grid-tech">
+    <section id="top" className="relative min-h-screen flex items-center justify-center pt-24 pb-12 md:pt-20 md:pb-16 lg:pb-20 overflow-hidden bg-grid-tech">
       {/* Apenas o quadriculado, sem linhas */}
       {/* Background Decorativo - Camadas Técnicas */}
       <div className="hero-background" />
@@ -63,21 +63,22 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="self-start mb-8"
+            className="self-start mb-6 md:mb-8"
           >
-            <span className="font-mono text-[10px] tracking-[0.4em] uppercase py-1 border-b border-primary text-primary">
-              Status do Sistema: Operacional // Escala de Engenharia: Global
+            <span className="font-mono text-[9px] md:text-[10px] tracking-[0.3em] md:tracking-[0.4em] uppercase py-1 border-b border-primary text-primary">
+              <span className="hidden sm:inline">Status do Sistema: Operacional // Escala de Engenharia: Global</span>
+              <span className="sm:hidden">Sistema Operacional // Escala Global</span>
             </span>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center w-full">
             <div>
               <Editable id="hero-headline">
                 <motion.h1 
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1, ease: "circOut" }}
-                  className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.9] flex flex-col"
+                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] md:leading-[0.9] flex flex-col"
                 >
                   <span className="text-stroke">Protocolo</span>
                   <span className="text-primary text-glow italic">de Engenharia</span>
@@ -89,14 +90,14 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
-                className="mt-12 max-w-lg"
+                className="mt-8 md:mt-12 max-w-lg"
               >
-                <p className="text-lg text-muted-foreground leading-relaxed border-l-2 border-primary/30 pl-6">
+                <p className="text-base md:text-lg text-muted-foreground leading-relaxed border-l-2 border-primary/30 pl-4 md:pl-6">
                   Abandonamos o "marketing de esperança". Instalamos sistemas de engenharia de dados e IA que garantem escala previsível e ROI matemático.
                 </p>
                 
-                <div className="mt-7 flex flex-wrap gap-6">
-                  <button onClick={onDiagnostico} className="btn-tech">
+                <div className="mt-6 md:mt-7 flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 sm:items-center">
+                  <button onClick={onDiagnostico} className="btn-tech self-start">
                     Iniciar Diagnóstico
                   </button>
                   <a href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)} className="group flex items-center gap-3 font-mono text-xs tracking-widest hover:text-primary transition-colors">
@@ -108,7 +109,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
             </div>
 
             {/* Visual Industrial - Foto AI Engineer + cards flutuantes ao redor */}
-            <Editable id="hero-photo" className="w-full max-w-md mx-auto lg:max-w-lg lg:ml-auto">
+            <Editable id="hero-photo" className="w-full max-w-[280px] sm:max-w-sm md:max-w-md mx-auto lg:max-w-lg lg:ml-auto">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -155,37 +156,37 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                 {/* ───────── Cards flutuantes FORA da foto ───────── */}
 
                 {/* TOP-LEFT: Operador Ao Vivo */}
-                <div className="absolute -top-4 -left-4 md:-top-6 md:-left-10 float-a z-20">
-                  <div className="bg-black/85 backdrop-blur-md border border-primary/40 px-3 py-2 shadow-[0_0_30px_rgba(20,255,0,0.2)] flex items-center gap-2">
+                <div className="absolute -top-3 -left-2 md:-top-6 md:-left-10 float-a z-20">
+                  <div className="bg-black/85 backdrop-blur-md border border-primary/40 px-2 py-1.5 md:px-3 md:py-2 shadow-[0_0_30px_rgba(20,255,0,0.2)] flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                    <span className="font-mono text-[10px] tracking-[0.2em] text-primary uppercase">Operador Ao Vivo</span>
+                    <span className="font-mono text-[8px] md:text-[10px] tracking-[0.2em] text-primary uppercase">Ao Vivo</span>
                   </div>
                 </div>
 
-                {/* TOP-RIGHT: NÓ_04 */}
-                <div className="absolute -top-3 -right-3 md:-top-5 md:-right-8 float-b z-20">
+                {/* TOP-RIGHT: NÓ_04 — escondido em telas muito pequenas */}
+                <div className="absolute -top-3 -right-2 md:-top-5 md:-right-8 float-b z-20 hidden sm:block">
                   <div className="bg-black/85 backdrop-blur-md border border-white/15 px-3 py-2">
                     <span className="font-mono text-[10px] text-white/80 tracking-tight">NÓ_04 // SEGURO</span>
                   </div>
                 </div>
 
                 {/* RIGHT-MIDDLE: ROI Mensal grande */}
-                <div className="absolute top-1/3 -right-6 md:-right-14 float-c z-20">
-                  <div className="bg-black/90 backdrop-blur-md border border-primary/40 p-4 shadow-[0_0_40px_rgba(20,255,0,0.25)]">
+                <div className="absolute top-1/3 -right-3 md:-right-14 float-c z-20">
+                  <div className="bg-black/90 backdrop-blur-md border border-primary/40 p-2.5 md:p-4 shadow-[0_0_40px_rgba(20,255,0,0.25)]">
                     <div className="flex items-baseline gap-1">
-                      <span className="text-3xl md:text-4xl font-mono font-bold text-primary leading-none">+</span>
-                      <CountUp to={245} duration={1800} className="text-3xl md:text-4xl font-mono font-bold text-primary leading-none" />
-                      <span className="text-2xl md:text-3xl font-mono font-bold text-primary leading-none">%</span>
+                      <span className="text-2xl md:text-4xl font-mono font-bold text-primary leading-none">+</span>
+                      <CountUp to={245} duration={1800} className="text-2xl md:text-4xl font-mono font-bold text-primary leading-none" />
+                      <span className="text-xl md:text-3xl font-mono font-bold text-primary leading-none">%</span>
                     </div>
-                    <span className="text-[9px] font-mono uppercase tracking-widest text-white/60 mt-1 block">ROI Mensal</span>
+                    <span className="text-[8px] md:text-[9px] font-mono uppercase tracking-widest text-white/60 mt-1 block">ROI Mensal</span>
                   </div>
                 </div>
 
                 {/* BOTTOM-LEFT: Precisão */}
-                <div className="absolute -bottom-4 -left-4 md:-bottom-6 md:-left-12 float-b z-20">
-                  <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-3 py-2.5 min-w-[110px]">
-                    <span className="text-[8px] uppercase tracking-widest text-white/50 font-mono block">Precisão</span>
-                    <CountUp to={98.2} decimals={1} duration={1600} suffix="%" className="text-lg font-mono text-primary font-bold" />
+                <div className="absolute -bottom-3 -left-2 md:-bottom-6 md:-left-12 float-b z-20">
+                  <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-2.5 py-2 md:px-3 md:py-2.5 min-w-[90px] md:min-w-[110px]">
+                    <span className="text-[7px] md:text-[8px] uppercase tracking-widest text-white/50 font-mono block">Precisão</span>
+                    <CountUp to={98.2} decimals={1} duration={1600} suffix="%" className="text-base md:text-lg font-mono text-primary font-bold" />
                   </div>
                 </div>
 
@@ -198,10 +199,10 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                 </div>
 
                 {/* BOTTOM-RIGHT: Leads */}
-                <div className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-10 float-c z-20">
-                  <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-3 py-2.5 min-w-[110px]">
-                    <span className="text-[8px] uppercase tracking-widest text-white/50 font-mono block">Leads</span>
-                    <CountUp to={3.2} decimals={1} duration={1400} suffix="x" className="text-lg font-mono text-primary font-bold" />
+                <div className="absolute -bottom-3 -right-2 md:-bottom-6 md:-right-10 float-c z-20">
+                  <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-2.5 py-2 md:px-3 md:py-2.5 min-w-[90px] md:min-w-[110px]">
+                    <span className="text-[7px] md:text-[8px] uppercase tracking-widest text-white/50 font-mono block">Leads</span>
+                    <CountUp to={3.2} decimals={1} duration={1400} suffix="x" className="text-base md:text-lg font-mono text-primary font-bold" />
                   </div>
                 </div>
               </motion.div>
