@@ -290,9 +290,9 @@ const PILLARS = [
 export function About() {
   return (
     <section className="relative surface-midnight noise-overlay py-12 md:py-20 overflow-hidden bg-grid-ambient">
-      {/* Glow ambiente verde achatado e sutil */}
-      <div className="pointer-events-none absolute top-1/2 left-1/2 h-[140px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.03] blur-[90px]" />
-      <div className="container-aceleriq">
+      <div className="orb-glow orb-blue top-[-100px] right-[-100px] h-[420px] w-[420px]" />
+      <div className="orb-glow orb-emerald bottom-[-80px] left-[-60px] h-[280px] w-[280px] opacity-25" />
+      <div className="container-aceleriq relative z-10">
         <div className="grid gap-5 lg:grid-cols-12 lg:items-start">
           <motion.div
             initial={{ opacity: 0, x: -16 }}
@@ -1072,6 +1072,8 @@ export function Compare() {
 export function WhyNow() {
   return (
     <section className="relative surface-midnight noise-overlay py-12 md:py-20 bg-grid-ambient overflow-hidden">
+      <div className="orb-glow orb-blue top-1/3 left-[-100px] h-[360px] w-[360px]" />
+      <div className="orb-glow orb-violet bottom-[-80px] right-[-60px] h-[280px] w-[280px] opacity-30" />
 
       <div className="container-aceleriq relative z-10">
         <motion.div
