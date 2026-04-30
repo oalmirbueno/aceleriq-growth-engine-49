@@ -245,7 +245,7 @@ export function Pains() {
           description="São os gargalos que travam empresas entre R$ 100k e R$ 5M/mês. Todos têm solução com a engenharia certa."
         />
 
-        <div className="mt-5 md:mt-6 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-5 md:mt-6 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
           {PAINS.map((p, i) => (
             <motion.div
               key={p.title}
