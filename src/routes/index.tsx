@@ -18,6 +18,7 @@ import {
   FAQ,
   FinalCTA,
 } from "@/components/site/Sections";
+import { StickyStack } from "@/components/site/StickyStack";
 
 export const Route = createFileRoute("/")({
   head: () => ({
