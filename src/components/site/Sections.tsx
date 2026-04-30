@@ -546,7 +546,7 @@ export function Areas() {
         <SectionHeader
           eyebrow="[ 04 ] · Áreas de atuação"
           title="Tudo que sustenta o crescimento de uma empresa moderna."
-          description="As 8 dimensões que separam empresas que crescem por sorte de empresas que crescem por engenharia."
+          description="As dimensões que separam empresas que crescem por sorte de empresas que crescem por engenharia."
         />
 
         <div className="mt-5 md:mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
