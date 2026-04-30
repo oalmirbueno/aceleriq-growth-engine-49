@@ -82,15 +82,23 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-7 font-display text-[44px] font-medium leading-[0.95] tracking-[-0.045em] md:text-[80px] lg:text-[112px]"
+              className="mt-7 font-display text-[44px] font-semibold leading-[0.9] tracking-[-0.05em] md:text-[84px] lg:text-[118px]"
             >
               <span className="headline-shadow block">Crescimento</span>
               <span className="relative inline-block bg-gradient-to-br from-primary via-primary to-primary/60 bg-clip-text text-transparent neon-text-glow">
                 não é sorte
               </span>
               <span className="text-primary">.</span>
-              <span className="headline-shadow mt-3 block text-[26px] font-light tracking-[-0.03em] text-muted-foreground/85 md:text-[40px] lg:text-[52px]">
-                É engenharia.
+              <span className="headline-shadow mt-4 block text-[28px] font-normal tracking-[-0.03em] text-muted-foreground/80 md:text-[44px] lg:text-[56px]">
+                É <span className="relative inline-block">
+                  engenharia
+                  <motion.span 
+                    initial={{ width: 0 }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: 1, delay: 1.5 }}
+                    className="absolute -bottom-1 left-0 h-1 bg-primary/40 rounded-full"
+                  />
+                </span>.
               </span>
             </motion.h1>
 
