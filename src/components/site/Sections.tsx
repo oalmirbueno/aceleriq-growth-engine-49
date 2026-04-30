@@ -42,8 +42,66 @@ import {
   DEFAULT_WHATSAPP_MESSAGE,
 } from "@/lib/contact";
 import aiEngineerImg from "@/assets/ai-engineer.jpg";
+import techElement1 from "@/assets/tech-element-1.png";
 import { Editable } from "@/components/editor/LayoutEditor";
 import { CountUp } from "@/components/ui/CountUp";
+
+// ─────────────────────────────────────────────────────────────
+// Elemento decorativo técnico (distribuído pela landing)
+// ─────────────────────────────────────────────────────────────
+function TechDecor({
+  side = "right",
+  size = 420,
+  opacity = 0.18,
+  rotate = 0,
+  offsetY = 0,
+  className = "",
+}: {
+  side?: "left" | "right";
+  size?: number;
+  opacity?: number;
+  rotate?: number;
+  offsetY?: number;
+  className?: string;
+}) {
+  const sideStyle =
+    side === "right"
+      ? { right: `-${Math.round(size * 0.18)}px` }
+      : { left: `-${Math.round(size * 0.18)}px` };
+  return (
+    <motion.div
+      aria-hidden
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity, y: 0 }}
+      viewport={{ once: true, margin: "-120px" }}
+      transition={{ duration: 1.2, ease: "easeOut" }}
+      className={`pointer-events-none absolute hidden lg:block z-0 ${className}`}
+      style={{
+        width: size,
+        height: size,
+        top: `calc(50% + ${offsetY}px)`,
+        transform: `translateY(-50%) rotate(${rotate}deg)`,
+        ...sideStyle,
+      }}
+    >
+      {/* Halo verde por trás */}
+      <div
+        className="absolute inset-[12%] rounded-full bg-primary/20 blur-3xl"
+        style={{ opacity: 0.55 }}
+      />
+      <img
+        src={techElement1}
+        alt=""
+        className="relative w-full h-full object-contain select-none"
+        draggable={false}
+        style={{
+          filter: "drop-shadow(0 0 40px rgba(20,255,0,0.15)) saturate(1.05)",
+          mixBlendMode: "screen",
+        }}
+      />
+    </motion.div>
+  );
+}
 
 // ─────────────────────────────────────────────────────────────
 // HERO
@@ -234,9 +292,10 @@ const PAINS = [
 
 export function Pains() {
   return (
-    <section className="relative py-12 md:py-16 bg-grid-ambient">
+    <section className="relative py-12 md:py-16 bg-grid-ambient overflow-hidden">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
-      <div className="container-aceleriq">
+      <TechDecor side="right" size={460} opacity={0.16} rotate={-8} />
+      <div className="container-aceleriq relative z-10">
         <SectionHeader
           eyebrow="Sintomas comuns"
           title="Você reconhece algum destes problemas?"
@@ -531,8 +590,9 @@ export function Areas() {
     >
       {/* Glow ambiente verde achatado e sutil */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 h-[140px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.03] blur-[90px]" />
+      <TechDecor side="left" size={440} opacity={0.14} rotate={6} offsetY={-20} />
 
-      <div className="container-aceleriq relative">
+      <div className="container-aceleriq relative z-10">
         <SectionHeader
           eyebrow="[ 04 ] · Áreas de atuação"
           title="Tudo que sustenta o crescimento de uma empresa moderna."
@@ -604,8 +664,9 @@ export function FitFor() {
     <section className="relative py-12 md:py-16 overflow-hidden bg-grid-ambient">
       {/* Glow ambiente verde achatado e sutil */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 h-[130px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.025] blur-[90px]" />
+      <TechDecor side="right" size={420} opacity={0.13} rotate={-12} offsetY={10} />
 
-      <div className="container-aceleriq relative">
+      <div className="container-aceleriq relative z-10">
         <SectionHeader
           eyebrow="· 05 · Para quem é"
           title="É parceria séria. Vale a pena saber se serve para você."
@@ -1007,8 +1068,9 @@ export function Compare() {
 // ─────────────────────────────────────────────────────────────
 export function WhyNow() {
   return (
-    <section className="relative py-12 md:py-16 bg-grid-ambient">
-      <div className="container-aceleriq">
+    <section className="relative py-12 md:py-16 bg-grid-ambient overflow-hidden">
+      <TechDecor side="left" size={400} opacity={0.12} rotate={10} />
+      <div className="container-aceleriq relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
