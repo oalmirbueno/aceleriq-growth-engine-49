@@ -194,11 +194,7 @@ export function NodeGraph({ className = "" }: { className?: string }) {
 export function MiniChart({ className = "" }: { className?: string }) {
   return (
     <div
-      className={`pointer-events-none select-none rounded-lg border border-primary/20 bg-gradient-to-b from-card/85 to-background/70 p-2.5 backdrop-blur-sm ${className}`}
-      style={{
-        boxShadow:
-          "inset 0 1px 0 oklch(100% 0 0 / 0.05), 0 8px 22px -10px oklch(85% 0.2 145 / 0.3)",
-      }}
+      className={`liquid-glass pointer-events-none select-none rounded-lg p-2.5 ${className}`}
     >
       <div className="flex items-center justify-between mb-1.5">
         <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-foreground/50">
