@@ -1248,12 +1248,20 @@ export function Compare() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.45, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-              className="relative grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-border last:border-b-0 text-sm transition-colors hover:bg-card/30"
+              className="relative grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-white/[0.04] last:border-b-0 text-sm transition-colors hover:bg-primary/[0.04]"
             >
-              <div className="px-5 py-4 font-medium text-foreground/95">{dim}</div>
-              <div className="px-5 py-4 text-muted-foreground line-through decoration-white/10">{agency}</div>
+              <div className="flex items-center gap-2 px-5 py-4 font-medium text-foreground/95">
+                <span className="font-mono text-[9px] text-primary/50">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                {dim}
+              </div>
+              <div className="flex items-start gap-2 px-5 py-4 text-muted-foreground">
+                <X className="mt-0.5 h-4 w-4 flex-shrink-0 text-foreground/30" />
+                <span className="line-through decoration-white/15">{agency}</span>
+              </div>
               <div className="flex items-start gap-2 px-5 py-4 text-foreground font-medium">
-                <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary drop-shadow-[0_0_4px_oklch(85%_0.2_145/0.6)]" />
                 {us}
               </div>
             </motion.div>
