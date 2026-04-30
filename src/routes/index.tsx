@@ -71,14 +71,17 @@ function Index() {
 
         <Testimonials />
 
-        {/* Sticky stack final — Compare (09) sobreposto pelo FAQ (11). WhyNow (10) fica no fluxo normal. */}
-        <StickyStack>
-          <Compare />
-          <FAQ />
-        </StickyStack>
+        {/* Seção 09 — Comparativo no fluxo normal (estática) */}
+        <Compare />
 
+        {/* Seção 10 — Por que agora, no fluxo normal */}
         <WhyNow />
-        <FinalCTA onDiagnostico={openDiagnostico} />
+
+        {/* Sticky stack — FAQ (11) com efeito de sobreposição sobre Final CTA */}
+        <StickyStack>
+          <FAQ />
+          <FinalCTA onDiagnostico={openDiagnostico} />
+        </StickyStack>
       </main>
       <Footer />
       <DiagnosticoModal open={diagOpen} onOpenChange={setDiagOpen} />
