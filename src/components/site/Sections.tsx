@@ -1180,9 +1180,8 @@ export function FAQ() {
             {FAQS.map((f, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, rotateX: -25, y: 20 }}
-                whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
+                initial={false}
+                animate={{ opacity: 1, rotateX: 0, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
                 style={{ transformStyle: "preserve-3d" }}
               >
