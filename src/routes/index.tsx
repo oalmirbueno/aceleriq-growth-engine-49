@@ -20,6 +20,7 @@ import {
   BrandStrip,
 } from "@/components/site/Sections";
 import { StickyStack } from "@/components/site/StickyStack";
+import { InstrumentBar } from "@/components/site/Ornaments";
 
 export const Route = createFileRoute("/")({
   head: () => ({
