@@ -107,7 +107,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
             </div>
 
             {/* Visual Industrial - Foto AI Engineer + cards flutuantes ao redor */}
-            <Editable id="hero-photo" className="w-full max-w-[280px] sm:max-w-sm md:max-w-md mx-auto lg:max-w-lg lg:ml-auto">
+            <div className="w-full max-w-[280px] sm:max-w-sm md:max-w-md mx-auto lg:max-w-lg lg:ml-auto">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
