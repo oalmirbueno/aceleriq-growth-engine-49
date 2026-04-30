@@ -256,17 +256,15 @@ export function SectionAmbient({
     return (
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <ChipBadge
-          label="ROAS · LIVE"
+          label="GROWTH · LIVE"
           icon={TrendingUp}
           className="absolute right-6 top-10 hidden md:inline-flex opacity-70"
         />
-        <MiniChart className="absolute left-6 bottom-10 hidden md:block opacity-80" />
         <ChipBadge
           label="PIPELINE"
           icon={Target}
           className="absolute left-8 top-16 hidden lg:inline-flex opacity-60"
         />
-        <WaveformStrip className="absolute right-10 bottom-12 opacity-50 hidden lg:flex" />
       </div>
     );
   }
@@ -278,8 +276,6 @@ export function SectionAmbient({
           icon={Database}
           className="absolute left-6 top-10 hidden md:inline-flex opacity-70"
         />
-        <WaveformStrip className="absolute right-8 top-14 opacity-60 hidden md:flex" />
-        <NeonKnob className="absolute left-10 bottom-10 opacity-60 hidden lg:block" />
         <CircuitLine className="absolute right-0 bottom-6 w-72 opacity-40 hidden md:block text-primary" />
       </div>
     );
