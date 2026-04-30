@@ -63,21 +63,21 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="self-start mb-8"
+            className="self-start mb-6 md:mb-8"
           >
             <span className="font-mono text-[10px] tracking-[0.4em] uppercase py-1 border-b border-primary text-primary">
               Status do Sistema: Operacional // Escala de Engenharia: Global
             </span>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center w-full">
             <div>
               <Editable id="hero-headline">
                 <motion.h1 
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1, ease: "circOut" }}
-                  className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.9] flex flex-col"
+                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] flex flex-col"
                 >
                   <span className="text-stroke">Protocolo</span>
                   <span className="text-primary text-glow italic">de Engenharia</span>
@@ -89,7 +89,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
-                className="mt-12 max-w-lg"
+                className="mt-8 md:mt-12 max-w-lg"
               >
                 <p className="text-lg text-muted-foreground leading-relaxed border-l-2 border-primary/30 pl-6">
                   Abandonamos o "marketing de esperança". Instalamos sistemas de engenharia de dados e IA que garantem escala previsível e ROI matemático.
