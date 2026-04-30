@@ -17,6 +17,7 @@ import {
   WhyNow,
   FAQ,
   FinalCTA,
+  BrandStrip,
 } from "@/components/site/Sections";
 import { StickyStack } from "@/components/site/StickyStack";
 
@@ -52,6 +53,9 @@ function Index() {
           <Pains />
           <About />
         </StickyStack>
+
+        {/* Faixa marquee — entre Seção 02 (Sobre) e Seção 03 (Método) */}
+        <BrandStrip />
 
         {/* Seções de conteúdo alto — fluxo normal */}
         <Method />
