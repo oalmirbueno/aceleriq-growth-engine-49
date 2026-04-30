@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import logoAceleriq from "@/assets/logo-aceleriq.png";
 
 const NAV = [
   { label: "Método", href: "#metodo" },
@@ -31,25 +32,12 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
       )}
     >
       <div className="container-aceleriq flex h-16 items-center justify-between md:h-[68px]">
-        <a href="#top" className="group flex items-center gap-2">
-          <div className="flex items-center">
-            <img 
-              src="/logo.png" 
-              alt="Aceleriq" 
-              className="h-8 w-auto md:h-9"
-              onError={(e) => {
-                // Fallback para texto se a imagem não existir
-                e.currentTarget.style.display = 'none';
-                e.currentTarget.nextElementSibling?.classList.remove('hidden');
-              }}
-            />
-            <div className="hidden flex items-center gap-1.5">
-              <div className="h-6 w-1 bg-primary rounded-full shadow-[0_0_12px_hsl(145,100%,50%,0.5)]" />
-              <span className="text-[20px] font-bold tracking-[-0.03em] text-foreground">
-                aceleriq<span className="text-primary">.</span>
-              </span>
-            </div>
-          </div>
+        <a href="#top" className="group flex items-center">
+          <img
+            src={logoAceleriq}
+            alt="Aceleriq"
+            className="h-9 w-auto md:h-10 transition-opacity group-hover:opacity-80"
+          />
         </a>
 
         <nav className="hidden items-center gap-1 md:flex">
