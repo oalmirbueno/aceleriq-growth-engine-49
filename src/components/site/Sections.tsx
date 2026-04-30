@@ -602,8 +602,8 @@ const FIT_NO = [
 export function FitFor() {
   return (
     <section className="relative py-28 md:py-36 overflow-hidden bg-grid-ambient">
-      {/* Glow ambiente sutil */}
-      <div className="pointer-events-none absolute left-1/4 top-0 h-[300px] w-[400px] rounded-full bg-primary/[0.04] blur-3xl" />
+      {/* Glow ambiente verde achatado e sutil */}
+      <div className="pointer-events-none absolute top-1/2 left-1/2 h-[200px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.025] blur-[120px]" />
 
       <div className="container-aceleriq relative">
         <SectionHeader
