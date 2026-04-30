@@ -1005,9 +1005,6 @@ export function Testimonials() {
   const loop = [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS];
   return (
     <>
-      {/* Faixa de palavras-chave — ANTES dos depoimentos, separando da seção anterior */}
-      <BrandStrip />
-
       <section className="relative py-14 md:py-20 bg-grid-ambient overflow-hidden">
         <div className="container-aceleriq">
           <SectionHeader
