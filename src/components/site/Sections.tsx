@@ -153,6 +153,83 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
             </motion.div>
           </motion.div>
 
+          {/* Visual de Mockup do Dashboard */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="relative mt-16 w-full max-w-5xl"
+          >
+            <div className="group relative overflow-hidden rounded-2xl border border-white/5 bg-[#0D0E14]/80 p-1 backdrop-blur-sm transition-all hover:border-primary/20 hover:shadow-[0_0_80px_-20px_hsl(var(--primary)/0.15)]">
+              {/* Header do Mockup */}
+              <div className="flex items-center justify-between border-b border-white/5 bg-white/[0.02] px-4 py-2">
+                <div className="flex gap-1.5">
+                  <div className="h-2 w-2 rounded-full bg-white/10" />
+                  <div className="h-2 w-2 rounded-full bg-white/10" />
+                  <div className="h-2 w-2 rounded-full bg-primary/40" />
+                </div>
+                <div className="text-[10px] font-medium tracking-[0.2em] text-white/20 uppercase text-mono">
+                  Aceleriq / Engenharia de Dados
+                </div>
+                <div className="h-2 w-8 rounded-full bg-white/5" />
+              </div>
+              
+              {/* Conteúdo do Mockup (Gráficos e Dados em CSS) */}
+              <div className="aspect-[16/9] md:aspect-[21/9] p-4 md:p-8 flex gap-4 overflow-hidden">
+                <div className="flex-1 flex flex-col gap-4">
+                  <div className="h-1/2 flex gap-4">
+                    <div className="flex-1 rounded-lg border border-white/5 bg-white/[0.01] p-4 relative overflow-hidden">
+                      <div className="h-full w-full flex items-end gap-1">
+                        {[40, 70, 45, 90, 65, 80, 50, 95, 75, 60].map((h, i) => (
+                          <motion.div 
+                            key={i}
+                            initial={{ height: 0 }}
+                            animate={{ height: `${h}%` }}
+                            transition={{ duration: 1, delay: 1 + (i * 0.1) }}
+                            className="flex-1 bg-primary/20 rounded-t-sm"
+                          />
+                        ))}
+                      </div>
+                      <div className="absolute top-4 left-4 text-[10px] text-primary font-mono uppercase">ROI Tracking</div>
+                    </div>
+                    <div className="w-1/3 rounded-lg border border-white/5 bg-white/[0.01] p-4 flex flex-col justify-center items-center gap-2">
+                       <div className="text-3xl font-bold text-primary font-mono">+124%</div>
+                       <div className="text-[10px] text-muted-foreground uppercase text-center">Efficiency Gain</div>
+                    </div>
+                  </div>
+                  <div className="flex-1 rounded-lg border border-white/5 bg-white/[0.01] p-4 flex flex-col gap-3">
+                     <div className="h-2 w-1/3 bg-white/5 rounded-full" />
+                     <div className="h-2 w-1/2 bg-white/5 rounded-full" />
+                     <div className="h-2 w-1/4 bg-primary/20 rounded-full" />
+                     <div className="flex-1 mt-2 border-t border-white/5 pt-3 flex gap-4">
+                        <div className="flex-1 bg-white/[0.02] rounded" />
+                        <div className="flex-1 bg-white/[0.02] rounded" />
+                     </div>
+                  </div>
+                </div>
+                <div className="w-1/4 rounded-lg border border-white/5 bg-white/[0.01] p-4 flex flex-col gap-4">
+                   <div className="h-10 w-10 rounded-full border border-primary/20 flex items-center justify-center">
+                      <div className="h-6 w-6 rounded-full bg-primary/10 animate-pulse" />
+                   </div>
+                   <div className="flex-1 flex flex-col gap-2">
+                      {[1,2,3,4,5].map(i => (
+                        <div key={i} className="h-1.5 w-full bg-white/5 rounded-full" />
+                      ))}
+                   </div>
+                   <div className="h-12 w-full bg-primary/10 rounded-md border border-primary/20" />
+                </div>
+              </div>
+            </div>
+
+            {/* Elementos decorativos flutuantes */}
+            <motion.div 
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -top-6 -right-6 h-24 w-24 rounded-2xl border border-primary/30 bg-primary/5 backdrop-blur-md hidden md:flex items-center justify-center"
+            >
+              <div className="text-2xl font-bold text-primary">IA</div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
 
