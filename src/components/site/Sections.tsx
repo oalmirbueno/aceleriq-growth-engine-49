@@ -1258,11 +1258,11 @@ function SectionHeader({
   return (
     <div className="mx-auto max-w-2xl text-center">
       <span className="label-eyebrow">{eyebrow}</span>
-      <h2 className="mt-3 font-display text-3xl font-medium leading-[1.1] tracking-[-0.03em] md:text-[44px]">
+      <h2 className="mt-3 font-display text-2xl sm:text-3xl font-medium leading-[1.1] tracking-[-0.03em] md:text-[44px]">
         {title}
       </h2>
       {description && (
-        <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-muted-foreground md:text-base">
+        <p className="mx-auto mt-3 max-w-xl text-[14px] sm:text-[15px] leading-relaxed text-muted-foreground md:text-base">
           {description}
         </p>
       )}
