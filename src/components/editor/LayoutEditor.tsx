@@ -2,12 +2,16 @@ import { useEffect, useRef, useState, useCallback, ReactNode, createContext, use
 import { supabase } from "@/integrations/supabase/client";
 
 // ─────────────────────────────────────────────────────────────
-// Layout Editor — drag, resize, rotate, opacity, z-index per element
-// Persists to Supabase (cross-device) + localStorage (offline cache)
-// Activate via ?edit=1 in URL or pressing Shift+E
+// Universal Layout Editor
+// - Active via Shift+E or ?edit=1
+// - Click ANY element on the page to select it (no wrapper needed)
+// - Drag freely (any direction, any distance)
+// - Resize from corners
+// - Rotate, scale, opacity, z-index, width/height via toolbar
+// - Persists to Supabase (cross-device, realtime) + localStorage
 // ─────────────────────────────────────────────────────────────
 
-const STORAGE_KEY = "lovable-layout-editor-v2";
+const STORAGE_KEY = "lovable-layout-editor-v3";
 
 export type LayoutTransform = {
   x: number;
@@ -38,13 +42,12 @@ function writeCache(store: Store) {
 }
 
 let memoryStore: Store = readCache();
-
-function getAll(): Store { return memoryStore; }
 function getOne(id: string): LayoutTransform { return { ...DEFAULT, ...memoryStore[id] }; }
+function getAll(): Store { return memoryStore; }
 
 // ─── Cloud sync ─────────────────────────────────────
-let saveTimers: Record<string, NodeJS.Timeout> = {};
-let lastSavedAt: Record<string, string> = {};
+const saveTimers: Record<string, ReturnType<typeof setTimeout>> = {};
+const lastSavedAt: Record<string, string> = {};
 
 async function loadFromCloud() {
   try {
@@ -62,7 +65,7 @@ async function loadFromCloud() {
     memoryStore = { ...readCache(), ...next };
     writeCache(memoryStore);
   } catch (e) {
-    console.warn("[layout-editor] cloud load failed, using cache", e);
+    console.warn("[layout-editor] cloud load failed", e);
   }
 }
 
@@ -71,19 +74,21 @@ function queueCloudSave(id: string, t: LayoutTransform) {
   setSavingState(true);
   saveTimers[id] = setTimeout(async () => {
     try {
+      const updatedAt = new Date().toISOString();
       const { error } = await supabase.from("layout_overrides").upsert({
         id, x: t.x, y: t.y, scale: t.scale, rotation: t.rotation,
         opacity: t.opacity, z_index: t.z_index,
         width: t.width ?? null, height: t.height ?? null,
-        updated_at: new Date().toISOString(),
+        updated_at: updatedAt,
       });
       if (error) throw error;
-      setSavingState(false);
+      lastSavedAt[id] = updatedAt;
     } catch (e) {
       console.warn("[layout-editor] cloud save failed", e);
+    } finally {
       setSavingState(false);
     }
-  }, 400);
+  }, 350);
 }
 
 let savingListeners: Array<(s: boolean) => void> = [];
@@ -93,18 +98,15 @@ function onSaving(cb: (s: boolean) => void) {
   return () => { savingListeners = savingListeners.filter((x) => x !== cb); };
 }
 
-// ─── Realtime ─────────────────────────────────────
 function subscribeRealtime() {
   const channel = supabase
     .channel("layout_overrides_sync")
     .on("postgres_changes", { event: "*", schema: "public", table: "layout_overrides" }, (payload: any) => {
       const row = payload.new || payload.old;
       if (!row) return;
-      // Skip our own writes
       if (lastSavedAt[row.id] === row.updated_at) return;
-      if (payload.eventType === "DELETE") {
-        delete memoryStore[row.id];
-      } else {
+      if (payload.eventType === "DELETE") delete memoryStore[row.id];
+      else {
         memoryStore[row.id] = {
           x: row.x, y: row.y, scale: row.scale, rotation: row.rotation,
           opacity: row.opacity, z_index: row.z_index,
@@ -118,7 +120,6 @@ function subscribeRealtime() {
   return () => { supabase.removeChannel(channel); };
 }
 
-// ─── Public API ─────────────────────────────────────
 function setTransform(id: string, patch: Partial<LayoutTransform>) {
   const next = { ...DEFAULT, ...memoryStore[id], ...patch };
   memoryStore = { ...memoryStore, [id]: next };
@@ -148,39 +149,84 @@ export function useLayoutTransform(id: string): LayoutTransform {
   return t;
 }
 
-// ─── Editor context ─────────────────────────────────────
-type EditorCtx = {
-  active: boolean;
-  selected: string | null;
-  setSelected: (id: string | null) => void;
-  ids: string[];
-  registerId: (id: string) => void;
-};
-const Ctx = createContext<EditorCtx>({ active: false, selected: null, setSelected: () => {}, ids: [], registerId: () => {} });
+// ─── Selector generator (stable path for any element) ─────────
+function selectorFor(el: HTMLElement): string {
+  // 1. If element has a stable id, use it
+  if (el.dataset.editId) return `id:${el.dataset.editId}`;
+  if (el.id) return `#${el.id}`;
+  // 2. Otherwise build a structural path (tag + nth-of-type)
+  const path: string[] = [];
+  let node: HTMLElement | null = el;
+  let depth = 0;
+  while (node && node !== document.body && depth < 10) {
+    const parent: HTMLElement | null = node.parentElement;
+    if (!parent) break;
+    const same = Array.from(parent.children).filter((c) => c.tagName === node!.tagName);
+    const idx = same.indexOf(node);
+    let seg = node.tagName.toLowerCase();
+    if (same.length > 1) seg += `:nth-of-type(${idx + 1})`;
+    path.unshift(seg);
+    node = parent;
+    depth++;
+  }
+  return `path:${path.join(">")}`;
+}
 
+function findElement(selector: string): HTMLElement | null {
+  if (selector.startsWith("id:")) {
+    return document.querySelector(`[data-edit-id="${selector.slice(3)}"]`) as HTMLElement | null;
+  }
+  if (selector.startsWith("#")) return document.getElementById(selector.slice(1));
+  if (selector.startsWith("path:")) {
+    try { return document.body.querySelector(selector.slice(5)) as HTMLElement | null; } catch { return null; }
+  }
+  return null;
+}
+
+// ─── Apply transforms to all matched elements ─────────
+function applyAll() {
+  Object.entries(memoryStore).forEach(([sel, t]) => {
+    const el = findElement(sel);
+    if (!el) return;
+    el.style.transform = `translate(${t.x}px, ${t.y}px) scale(${t.scale}) rotate(${t.rotation}deg)`;
+    el.style.transformOrigin = "center center";
+    el.style.opacity = String(t.opacity);
+    if (t.z_index) el.style.zIndex = String(t.z_index);
+    if (t.width) el.style.width = `${t.width}px`;
+    if (t.height) el.style.height = `${t.height}px`;
+  });
+}
+
+// ─── Editor context ─────────────────────────────────────
+type EditorCtx = { active: boolean; selected: string | null; setSelected: (s: string | null) => void };
+const Ctx = createContext<EditorCtx>({ active: false, selected: null, setSelected: () => {} });
 export function useEditor() { return useContext(Ctx); }
 
 export function LayoutEditorProvider({ children }: { children: ReactNode }) {
   const [active, setActive] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
-  const [ids, setIds] = useState<string[]>([]);
 
-  const registerId = useCallback((id: string) => {
-    setIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
-  }, []);
-
-  // Load from cloud + subscribe on mount
+  // Cloud load + realtime
   useEffect(() => {
-    loadFromCloud();
+    loadFromCloud().then(() => applyAll());
     const unsub = subscribeRealtime();
-    return unsub;
+    const reapply = () => applyAll();
+    window.addEventListener("layout-editor:change", reapply);
+    // Re-apply after route changes / DOM mutations
+    const obs = new MutationObserver(() => applyAll());
+    obs.observe(document.body, { childList: true, subtree: true });
+    return () => { unsub(); window.removeEventListener("layout-editor:change", reapply); obs.disconnect(); };
   }, []);
 
+  // Toggle key
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (new URLSearchParams(window.location.search).get("edit") === "1") setActive(true);
     const handler = (e: KeyboardEvent) => {
-      if (e.shiftKey && (e.key === "E" || e.key === "e")) setActive((a) => !a);
+      if (e.shiftKey && (e.key === "E" || e.key === "e")) {
+        e.preventDefault();
+        setActive((a) => !a);
+      }
       if (!active || !selected) return;
       const t = getOne(selected);
       const step = e.shiftKey ? 10 : 1;
@@ -195,74 +241,100 @@ export function LayoutEditorProvider({ children }: { children: ReactNode }) {
   }, [active, selected]);
 
   return (
-    <Ctx.Provider value={{ active, selected, setSelected, ids, registerId }}>
+    <Ctx.Provider value={{ active, selected, setSelected }}>
       {children}
-      {active && <EditorToolbar onClose={() => setActive(false)} />}
+      {active && <UniversalEditor selected={selected} setSelected={setSelected} />}
+      {active && <EditorToolbar selected={selected} setSelected={setSelected} onClose={() => setActive(false)} />}
     </Ctx.Provider>
   );
 }
 
-// ─── Editable wrapper ─────────────────────────────────────
-export function Editable({
-  id,
-  children,
-  className = "",
-  resizable = true,
-}: {
-  id: string;
-  children: ReactNode;
-  className?: string;
-  resizable?: boolean;
-}) {
-  const { active, selected, setSelected, registerId } = useEditor();
-  const t = useLayoutTransform(id);
-  const ref = useRef<HTMLDivElement>(null);
-  const isSelected = selected === id;
+// ─── Universal click-to-select + drag overlay ─────────
+function UniversalEditor({ selected, setSelected }: { selected: string | null; setSelected: (s: string | null) => void }) {
+  const [hoverEl, setHoverEl] = useState<HTMLElement | null>(null);
+  const [, force] = useState(0);
+  const draggingRef = useRef(false);
 
-  useEffect(() => { registerId(id); }, [id, registerId]);
-
-  const style: React.CSSProperties = {
-    transform: `translate(${t.x}px, ${t.y}px) scale(${t.scale}) rotate(${t.rotation}deg)`,
-    transformOrigin: "center center",
-    width: t.width ?? undefined,
-    height: t.height ?? undefined,
-    opacity: t.opacity,
-    zIndex: t.z_index || undefined,
-    position: "relative",
-  };
-
-  const onPointerDown = useCallback((e: React.PointerEvent) => {
-    if (!active) return;
-    const target = e.target as HTMLElement;
-    if (target.closest("[data-resize-handle]") || target.closest("[data-rotate-handle]")) return;
-    e.preventDefault();
-    e.stopPropagation();
-    setSelected(id);
-    const startX = e.clientX;
-    const startY = e.clientY;
-    const start = { x: t.x, y: t.y };
-    const move = (ev: PointerEvent) => {
-      setTransform(id, { x: start.x + (ev.clientX - startX), y: start.y + (ev.clientY - startY) });
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      if (draggingRef.current) return;
+      const el = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null;
+      if (!el) return setHoverEl(null);
+      // Skip toolbar/overlays
+      if (el.closest("[data-editor-ui]")) return setHoverEl(null);
+      setHoverEl(el);
     };
-    const up = () => {
-      window.removeEventListener("pointermove", move);
-      window.removeEventListener("pointerup", up);
-    };
-    window.addEventListener("pointermove", move);
-    window.addEventListener("pointerup", up);
-  }, [active, id, t.x, t.y, setSelected]);
+    window.addEventListener("mousemove", onMove);
+    return () => window.removeEventListener("mousemove", onMove);
+  }, []);
 
+  // Re-render on store change to refresh handle positions
+  useEffect(() => {
+    const u = () => force((n) => n + 1);
+    window.addEventListener("layout-editor:change", u);
+    window.addEventListener("scroll", u, true);
+    window.addEventListener("resize", u);
+    return () => { window.removeEventListener("layout-editor:change", u); window.removeEventListener("scroll", u, true); window.removeEventListener("resize", u); };
+  }, []);
+
+  // Click handler — select
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest("[data-editor-ui]")) return;
+      e.preventDefault();
+      e.stopPropagation();
+      const el = target as HTMLElement;
+      const sel = selectorFor(el);
+      el.dataset.editSel = sel;
+      setSelected(sel);
+    };
+    document.addEventListener("click", onClick, true);
+    return () => document.removeEventListener("click", onClick, true);
+  }, [setSelected]);
+
+  // Drag the selected element from anywhere on it
+  useEffect(() => {
+    if (!selected) return;
+    const el = findElement(selected);
+    if (!el) return;
+    const onDown = (e: PointerEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest("[data-editor-ui]")) return;
+      if (!el.contains(target)) return;
+      e.preventDefault();
+      draggingRef.current = true;
+      const t = getOne(selected);
+      const startX = e.clientX, startY = e.clientY;
+      const start = { x: t.x, y: t.y };
+      const move = (ev: PointerEvent) => {
+        setTransform(selected, { x: start.x + (ev.clientX - startX), y: start.y + (ev.clientY - startY) });
+      };
+      const up = () => {
+        draggingRef.current = false;
+        window.removeEventListener("pointermove", move);
+        window.removeEventListener("pointerup", up);
+      };
+      window.addEventListener("pointermove", move);
+      window.addEventListener("pointerup", up);
+    };
+    document.addEventListener("pointerdown", onDown, true);
+    return () => document.removeEventListener("pointerdown", onDown, true);
+  }, [selected]);
+
+  const selEl = selected ? findElement(selected) : null;
+  const selRect = selEl?.getBoundingClientRect();
+  const hoverRect = hoverEl && hoverEl !== selEl ? hoverEl.getBoundingClientRect() : null;
+
+  // Resize handles
   const startResize = (e: React.PointerEvent, corner: "se" | "sw" | "ne" | "nw") => {
-    if (!active) return;
-    e.preventDefault();
-    e.stopPropagation();
-    setSelected(id);
-    const rect = ref.current?.getBoundingClientRect();
-    if (!rect) return;
+    if (!selected || !selEl) return;
+    e.preventDefault(); e.stopPropagation();
+    const t = getOne(selected);
+    const rect = selEl.getBoundingClientRect();
     const startW = rect.width / t.scale;
     const startH = rect.height / t.scale;
-    const startX = e.clientX;
-    const startY = e.clientY;
+    const startX = e.clientX, startY = e.clientY;
     const startPos = { x: t.x, y: t.y };
     const move = (ev: PointerEvent) => {
       const dx = ev.clientX - startX;
@@ -272,82 +344,77 @@ export function Editable({
       if (corner === "sw") { w = startW - dx; h = startH + dy; nx = startPos.x + dx; }
       if (corner === "ne") { w = startW + dx; h = startH - dy; ny = startPos.y + dy; }
       if (corner === "nw") { w = startW - dx; h = startH - dy; nx = startPos.x + dx; ny = startPos.y + dy; }
-      setTransform(id, { width: Math.max(40, Math.round(w)), height: Math.max(40, Math.round(h)), x: nx, y: ny });
+      setTransform(selected, { width: Math.max(20, Math.round(w)), height: Math.max(20, Math.round(h)), x: nx, y: ny });
     };
-    const up = () => {
-      window.removeEventListener("pointermove", move);
-      window.removeEventListener("pointerup", up);
-    };
+    const up = () => { window.removeEventListener("pointermove", move); window.removeEventListener("pointerup", up); };
     window.addEventListener("pointermove", move);
     window.addEventListener("pointerup", up);
   };
 
   const startRotate = (e: React.PointerEvent) => {
-    if (!active) return;
-    e.preventDefault();
-    e.stopPropagation();
-    setSelected(id);
-    const rect = ref.current?.getBoundingClientRect();
-    if (!rect) return;
+    if (!selected || !selEl) return;
+    e.preventDefault(); e.stopPropagation();
+    const t = getOne(selected);
+    const rect = selEl.getBoundingClientRect();
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
     const startAngle = Math.atan2(e.clientY - cy, e.clientX - cx) * (180 / Math.PI);
     const startRot = t.rotation;
     const move = (ev: PointerEvent) => {
-      const angle = Math.atan2(ev.clientY - cy, ev.clientX - cx) * (180 / Math.PI);
-      setTransform(id, { rotation: Math.round(startRot + (angle - startAngle)) });
+      const a = Math.atan2(ev.clientY - cy, ev.clientX - cx) * (180 / Math.PI);
+      setTransform(selected, { rotation: Math.round(startRot + (a - startAngle)) });
     };
-    const up = () => {
-      window.removeEventListener("pointermove", move);
-      window.removeEventListener("pointerup", up);
-    };
+    const up = () => { window.removeEventListener("pointermove", move); window.removeEventListener("pointerup", up); };
     window.addEventListener("pointermove", move);
     window.addEventListener("pointerup", up);
   };
 
   return (
-    <div ref={ref} className={className} style={style} onPointerDown={onPointerDown} data-editable-id={id}>
-      {children}
-      {active && (
+    <div data-editor-ui className="fixed inset-0 pointer-events-none" style={{ zIndex: 99999 }}>
+      {/* Hover outline */}
+      {hoverRect && (
+        <div
+          className="absolute border border-primary/60 pointer-events-none"
+          style={{ left: hoverRect.left, top: hoverRect.top, width: hoverRect.width, height: hoverRect.height }}
+        >
+          <div className="absolute -top-5 left-0 bg-primary/80 text-black text-[10px] font-mono px-1.5 leading-4 whitespace-nowrap">
+            {hoverEl?.tagName.toLowerCase()}{hoverEl?.className && typeof hoverEl.className === "string" ? `.${hoverEl.className.split(" ")[0]}` : ""}
+          </div>
+        </div>
+      )}
+      {/* Selected outline + handles */}
+      {selRect && (
         <>
           <div
-            className={`pointer-events-none absolute inset-0 border-2 ${isSelected ? "border-primary" : "border-primary/40 border-dashed"}`}
-            style={{ zIndex: 9998 }}
+            className="absolute border-2 border-primary pointer-events-none"
+            style={{ left: selRect.left, top: selRect.top, width: selRect.width, height: selRect.height, boxShadow: "0 0 0 1px rgba(0,0,0,0.4)" }}
           />
           <div
-            className="absolute top-0 left-0 -translate-y-full bg-primary text-black text-[10px] font-mono px-2 py-0.5 font-bold pointer-events-none whitespace-nowrap"
-            style={{ zIndex: 9999 }}
+            className="absolute bg-primary text-black text-[10px] font-mono px-2 py-0.5 font-bold whitespace-nowrap pointer-events-none"
+            style={{ left: selRect.left, top: selRect.top - 18 }}
           >
-            {id} · {Math.round(t.x)},{Math.round(t.y)} · ×{t.scale.toFixed(2)} · {t.rotation}°
+            {selected}
           </div>
-          {resizable && isSelected && (
-            <>
-              {(["nw", "ne", "sw", "se"] as const).map((c) => (
-                <div
-                  key={c}
-                  data-resize-handle
-                  onPointerDown={(e) => startResize(e, c)}
-                  className="absolute w-3 h-3 bg-primary border border-black"
-                  style={{
-                    zIndex: 10000,
-                    top: c.startsWith("n") ? -6 : "auto",
-                    bottom: c.startsWith("s") ? -6 : "auto",
-                    left: c.endsWith("w") ? -6 : "auto",
-                    right: c.endsWith("e") ? -6 : "auto",
-                    cursor: c === "ne" || c === "sw" ? "nesw-resize" : "nwse-resize",
-                  }}
-                />
-              ))}
-              {/* Rotate handle */}
+          {/* Resize handles */}
+          {(["nw", "ne", "sw", "se"] as const).map((c) => {
+            const x = c.endsWith("w") ? selRect.left - 5 : selRect.right - 5;
+            const y = c.startsWith("n") ? selRect.top - 5 : selRect.bottom - 5;
+            return (
               <div
-                data-rotate-handle
-                onPointerDown={startRotate}
-                className="absolute left-1/2 -translate-x-1/2 w-4 h-4 bg-yellow-400 border border-black rounded-full cursor-grab"
-                style={{ top: -28, zIndex: 10000 }}
-                title="Rotacionar"
+                key={c}
+                onPointerDown={(e) => startResize(e, c)}
+                className="absolute w-2.5 h-2.5 bg-primary border border-black pointer-events-auto"
+                style={{ left: x, top: y, cursor: c === "ne" || c === "sw" ? "nesw-resize" : "nwse-resize" }}
               />
-            </>
-          )}
+            );
+          })}
+          {/* Rotate handle */}
+          <div
+            onPointerDown={startRotate}
+            className="absolute w-3 h-3 bg-yellow-400 border border-black rounded-full pointer-events-auto cursor-grab"
+            style={{ left: selRect.left + selRect.width / 2 - 6, top: selRect.top - 26 }}
+            title="Rotacionar"
+          />
         </>
       )}
     </div>
@@ -355,18 +422,10 @@ export function Editable({
 }
 
 // ─── Toolbar ─────────────────────────────────────
-function EditorToolbar({ onClose }: { onClose: () => void }) {
-  const { selected, setSelected, ids } = useEditor();
+function EditorToolbar({ selected, setSelected, onClose }: { selected: string | null; setSelected: (s: string | null) => void; onClose: () => void }) {
   const t = useLayoutTransform(selected || "");
-  const [, force] = useState(0);
   const [saving, setSaving] = useState(false);
-
-  useEffect(() => {
-    const u = () => force((n) => n + 1);
-    window.addEventListener("layout-editor:change", u);
-    const unsub = onSaving(setSaving);
-    return () => { window.removeEventListener("layout-editor:change", u); unsub(); };
-  }, []);
+  useEffect(() => onSaving(setSaving), []);
 
   const exportJson = () => {
     const blob = new Blob([JSON.stringify(getAll(), null, 2)], { type: "application/json" });
@@ -378,64 +437,43 @@ function EditorToolbar({ onClose }: { onClose: () => void }) {
 
   return (
     <div
+      data-editor-ui
       className="fixed bottom-4 left-1/2 -translate-x-1/2 bg-black/95 border border-primary/40 backdrop-blur-md px-4 py-3 font-mono text-xs text-white shadow-2xl max-w-[95vw]"
       style={{ zIndex: 100000 }}
     >
       <div className="flex items-center gap-3 flex-wrap">
-        <span className="text-primary font-bold">EDITOR</span>
+        <span className="text-primary font-bold">EDITOR LIVRE</span>
         <span className={`flex items-center gap-1 ${saving ? "text-yellow-400" : "text-green-400"}`}>
           <span className={`w-1.5 h-1.5 rounded-full ${saving ? "bg-yellow-400 animate-pulse" : "bg-green-400"}`} />
           {saving ? "salvando…" : "sincronizado"}
         </span>
         <span className="text-white/40">|</span>
-        <select
-          value={selected || ""}
-          onChange={(e) => setSelected(e.target.value || null)}
-          className="bg-black border border-white/20 px-2 py-1 text-white"
-        >
-          <option value="">— selecionar elemento —</option>
-          {ids.map((id) => <option key={id} value={id}>{id}</option>)}
-        </select>
-        <button onClick={exportJson} className="px-2 py-1 border border-white/20 hover:border-primary hover:text-primary">
-          export
-        </button>
+        <span className="text-white/70 truncate max-w-[300px]">
+          {selected || "clique em qualquer elemento da página"}
+        </span>
+        <button onClick={exportJson} className="px-2 py-1 border border-white/20 hover:border-primary hover:text-primary">export</button>
         <button
           onClick={() => { if (confirm("Resetar TODAS as edições?")) resetAll(); }}
           className="px-2 py-1 border border-white/20 hover:border-red-500 hover:text-red-500"
-        >
-          reset all
-        </button>
-        <button
-          onClick={() => { setSelected(null); onClose(); }}
-          className="px-2 py-1 bg-primary text-black font-bold hover:bg-primary/80"
-        >
-          sair
-        </button>
+        >reset all</button>
+        <button onClick={() => { setSelected(null); onClose(); }} className="px-2 py-1 bg-primary text-black font-bold hover:bg-primary/80">sair</button>
       </div>
 
       {selected && (
         <div className="mt-3 pt-3 border-t border-white/10 grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-2">
-          <Slider label="escala" value={t.scale} min={0.2} max={3} step={0.05}
-            onChange={(v: number) => setTransform(selected, { scale: v })} />
-          <Slider label="rotação" value={t.rotation} min={-180} max={180} step={1}
-            onChange={(v: number) => setTransform(selected, { rotation: v })} suffix="°" />
-          <Slider label="opacidade" value={t.opacity} min={0} max={1} step={0.05}
-            onChange={(v: number) => setTransform(selected, { opacity: v })} />
+          <Slider label="escala" value={t.scale} min={0.1} max={5} step={0.05} onChange={(v: number) => setTransform(selected, { scale: v })} />
+          <Slider label="rotação" value={t.rotation} min={-180} max={180} step={1} onChange={(v: number) => setTransform(selected, { rotation: v })} suffix="°" />
+          <Slider label="opacidade" value={t.opacity} min={0} max={1} step={0.05} onChange={(v: number) => setTransform(selected, { opacity: v })} />
           <NumInput label="x" value={t.x} onChange={(v: number) => setTransform(selected, { x: v })} />
           <NumInput label="y" value={t.y} onChange={(v: number) => setTransform(selected, { y: v })} />
           <NumInput label="z-index" value={t.z_index} onChange={(v: number) => setTransform(selected, { z_index: v })} />
           <NumInput label="largura" value={t.width ?? 0} onChange={(v: number) => setTransform(selected, { width: v || null })} />
           <NumInput label="altura" value={t.height ?? 0} onChange={(v: number) => setTransform(selected, { height: v || null })} />
-          <button
-            onClick={() => resetTransform(selected)}
-            className="px-2 py-1 border border-white/20 hover:border-primary hover:text-primary self-end"
-          >
-            reset elemento
-          </button>
+          <button onClick={() => resetTransform(selected)} className="px-2 py-1 border border-white/20 hover:border-primary hover:text-primary self-end">reset elemento</button>
         </div>
       )}
       <div className="mt-2 text-[10px] text-white/40">
-        Atalhos: <b>Shift+E</b> abre/fecha · <b>setas</b> movem · <b>Shift+setas</b> +10px · <b>Esc</b> deseleciona · alça amarela rotaciona
+        <b>Shift+E</b> abre/fecha · clique em qualquer elemento · arraste livre · setas movem · <b>Shift+setas</b> +10px · alça amarela rotaciona · cantos redimensionam
       </div>
     </div>
   );
@@ -461,4 +499,9 @@ function NumInput({ label, value, onChange }: any) {
         className="bg-black border border-white/20 px-2 py-1 w-full text-white" />
     </label>
   );
+}
+
+// ─── Backwards-compat: Editable still works but is now optional ─
+export function Editable({ id, children, className = "" }: { id: string; children: ReactNode; className?: string; resizable?: boolean }) {
+  return <div data-edit-id={id} className={className}>{children}</div>;
 }
