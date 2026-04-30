@@ -46,13 +46,28 @@ function Index() {
       <Header onDiagnostico={openDiagnostico} />
       <main>
         <Hero onDiagnostico={openDiagnostico} />
-        <Pains />
-        <About />
+
+        {/* Seções 2 e 3 — efeito sticky stack (roleta) */}
+        <StickyStack>
+          <Pains />
+          <About />
+        </StickyStack>
+
+        {/* Seção 4 — animações laterais + texto saindo de baixo */}
         <Method />
-        <Areas />
-        <FitFor />
-        <DiagnosticoCTA onDiagnostico={openDiagnostico} />
-        <Results />
+
+        {/* Seções 5 e 6 — sticky stack */}
+        <StickyStack>
+          <Areas />
+          <FitFor />
+        </StickyStack>
+
+        {/* Seções 7 e 8 — sticky stack */}
+        <StickyStack>
+          <DiagnosticoCTA onDiagnostico={openDiagnostico} />
+          <Results />
+        </StickyStack>
+
         <Testimonials />
         <Compare />
         <WhyNow />
