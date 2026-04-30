@@ -1076,19 +1076,25 @@ export function WhyNow() {
             </div>
             <div className="grid gap-2.5">
               {[
-                { k: "Custo de aquisição", v: "+27% a.a." },
-                { k: "Empresas com IA aplicada", v: "Crescem 2.4x" },
-                { k: "Tempo médio de implantação", v: "60 — 120 dias" },
-              ].map((s) => (
-                <div
+                { k: "Custo de aquisição", num: 27, suffix: "% a.a.", prefix: "+" },
+                { k: "Empresas com IA aplicada", num: 2.4, suffix: "x", prefix: "Crescem ", decimals: 1 },
+                { k: "Tempo médio de implantação", num: 120, suffix: " dias", prefix: "60 — " },
+              ].map((s, i) => (
+                <motion.div
                   key={s.k}
-                  className="flex items-center justify-between rounded-xl border border-border bg-background/50 px-5 py-4"
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
+                  className="group flex items-center justify-between rounded-xl border border-border bg-background/50 px-5 py-4 transition-all hover:border-primary/40 hover:bg-background/80"
                 >
                   <span className="text-[13px] text-muted-foreground">{s.k}</span>
-                  <span className="text-mono text-[14px] font-semibold text-foreground">
-                    {s.v}
+                  <span className="text-mono text-[14px] font-semibold text-primary flex items-baseline">
+                    <span className="text-foreground/70">{s.prefix}</span>
+                    <CountUp to={s.num} decimals={s.decimals ?? 0} duration={1500} />
+                    <span>{s.suffix}</span>
                   </span>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
