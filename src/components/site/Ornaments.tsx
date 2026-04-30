@@ -23,11 +23,7 @@ export function ChipBadge({
 }) {
   return (
     <div
-      className={`pointer-events-none select-none inline-flex items-center gap-2 rounded-md border border-primary/30 bg-gradient-to-b from-card/90 to-background/80 px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/70 shadow-[inset_0_1px_0_oklch(100%_0_0/0.04),0_4px_18px_-8px_oklch(85%_0.2_145/0.35)] backdrop-blur-sm ${className}`}
-      style={{
-        boxShadow:
-          "inset 0 1px 0 oklch(100% 0 0 / 0.05), 0 0 0 1px oklch(85% 0.2 145 / 0.15), 0 8px 24px -10px oklch(85% 0.2 145 / 0.35)",
-      }}
+      className={`liquid-chip pointer-events-none select-none inline-flex items-center gap-2 rounded-md px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/80 ${className}`}
     >
       <Icon className="h-3 w-3 text-primary drop-shadow-[0_0_4px_oklch(85%_0.2_145/0.6)]" />
       <span>{label}</span>
@@ -198,11 +194,7 @@ export function NodeGraph({ className = "" }: { className?: string }) {
 export function MiniChart({ className = "" }: { className?: string }) {
   return (
     <div
-      className={`pointer-events-none select-none rounded-lg border border-primary/20 bg-gradient-to-b from-card/85 to-background/70 p-2.5 backdrop-blur-sm ${className}`}
-      style={{
-        boxShadow:
-          "inset 0 1px 0 oklch(100% 0 0 / 0.05), 0 8px 22px -10px oklch(85% 0.2 145 / 0.3)",
-      }}
+      className={`liquid-glass pointer-events-none select-none rounded-lg p-2.5 ${className}`}
     >
       <div className="flex items-center justify-between mb-1.5">
         <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-foreground/50">
@@ -319,13 +311,7 @@ export function SectionAmbient({
 export function InstrumentBar() {
   return (
     <div className="container-aceleriq py-6">
-      <div
-        className="hairline relative flex items-center justify-between gap-6 rounded-2xl bg-gradient-to-b from-card/80 to-background/60 px-5 py-4 backdrop-blur-sm overflow-hidden"
-        style={{
-          boxShadow:
-            "inset 0 1px 0 oklch(100% 0 0 / 0.04), 0 12px 40px -16px oklch(85% 0.2 145 / 0.25)",
-        }}
-      >
+      <div className="liquid-glass relative flex items-center justify-between gap-6 rounded-2xl px-5 py-4 overflow-hidden">
         <div className="flex items-center gap-3">
           <NeonKnob value={0.65} />
           <div className="hidden sm:block">

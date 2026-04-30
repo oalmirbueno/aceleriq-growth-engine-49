@@ -721,7 +721,7 @@ export function DiagnosticoCTA({ onDiagnostico }: { onDiagnostico: () => void })
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="relative overflow-hidden rounded-3xl border border-border bg-card/40"
+          className="liquid-glass relative overflow-hidden rounded-3xl"
         >
           <div className="absolute -right-32 -top-32 h-64 w-64 rounded-full bg-primary/[0.07] blur-3xl" />
           <div className="absolute inset-0 dot-grid opacity-40" />
