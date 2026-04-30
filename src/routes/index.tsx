@@ -47,24 +47,28 @@ function Index() {
       <main>
         <Hero onDiagnostico={openDiagnostico} />
 
-        {/* Sticky stack global — todas as seções (exceto Hero) entram sobrepondo a anterior.
-            Seções com conteúdo alto (Areas, Results, FAQ) ficam fora do stack para não cortar conteúdo. */}
+        {/* Sticky stack — apenas seções compactas (cabem em 100vh) */}
         <StickyStack>
           <Pains />
           <About />
-          <Method />
-          <FitFor />
-          <DiagnosticoCTA onDiagnostico={openDiagnostico} />
-          <Testimonials />
-          <Compare />
-          <WhyNow />
-          <FinalCTA onDiagnostico={openDiagnostico} />
         </StickyStack>
 
-        {/* Seções altas — fluxo normal (não cabem em 100vh) */}
+        {/* Seções de conteúdo alto — fluxo normal */}
+        <Method />
         <Areas />
+        <FitFor />
+        <DiagnosticoCTA onDiagnostico={openDiagnostico} />
         <Results />
+        <Testimonials />
+
+        {/* Sticky stack final — seções compactas de fechamento */}
+        <StickyStack>
+          <Compare />
+          <WhyNow />
+        </StickyStack>
+
         <FAQ />
+        <FinalCTA onDiagnostico={openDiagnostico} />
       </main>
       <Footer />
       <DiagnosticoModal open={diagOpen} onOpenChange={setDiagOpen} />
