@@ -71,14 +71,17 @@ function Index() {
 
         <Testimonials />
 
-        {/* Sticky stack final — seções compactas de fechamento */}
-        <StickyStack>
-          <Compare />
-          <WhyNow />
-        </StickyStack>
+        {/* Seção 09 — Comparativo no fluxo normal (estática) */}
+        <Compare />
 
-        <FAQ />
-        <FinalCTA onDiagnostico={openDiagnostico} />
+        {/* Seção 10 — Por que agora, no fluxo normal */}
+        <WhyNow />
+
+        {/* Sticky stack — FAQ (11) com efeito de sobreposição sobre Final CTA */}
+        <StickyStack>
+          <FAQ />
+          <FinalCTA onDiagnostico={openDiagnostico} />
+        </StickyStack>
       </main>
       <Footer />
       <DiagnosticoModal open={diagOpen} onOpenChange={setDiagOpen} />
