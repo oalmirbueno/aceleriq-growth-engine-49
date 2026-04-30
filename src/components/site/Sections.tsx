@@ -23,6 +23,7 @@ import {
   Zap,
   Brain,
   Rocket,
+  Building2,
   ChevronDown,
   Mail,
   Instagram,
