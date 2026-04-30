@@ -151,7 +151,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
 
               {/* Elementos Brutalistas de Fundo */}
               <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-primary/5 blur-[120px] rounded-full" />
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
