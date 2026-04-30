@@ -234,7 +234,7 @@ const PAINS = [
 
 export function Pains() {
   return (
-    <section className="relative py-28 md:py-36 bg-grid-ambient bg-gradient-to-b from-background via-[oklch(11%_0.01_145)] to-background">
+    <section className="relative py-28 md:py-36 bg-grid-ambient">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
       <div className="container-aceleriq">
         <SectionHeader
@@ -286,9 +286,8 @@ const PILLARS = [
 export function About() {
   return (
     <section className="relative py-28 md:py-36 overflow-hidden bg-grid-ambient">
-      {/* Glow ambiente */}
-      <div className="pointer-events-none absolute -left-32 top-1/3 h-[420px] w-[640px] rounded-full bg-primary/[0.05] blur-3xl" />
-      <div className="pointer-events-none absolute right-0 bottom-0 h-[320px] w-[480px] rounded-full bg-[oklch(60%_0.2_250)]/[0.05] blur-3xl" />
+      {/* Glow ambiente verde achatado e sutil */}
+      <div className="pointer-events-none absolute top-1/2 left-1/2 h-[220px] w-[1000px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.03] blur-[120px]" />
       <div className="container-aceleriq">
         <div className="grid gap-14 lg:grid-cols-12 lg:items-start">
           <motion.div
@@ -375,12 +374,10 @@ export function Method() {
   return (
     <section
       id="metodo"
-      className="relative py-28 md:py-36 overflow-hidden bg-grid-ambient bg-gradient-to-b from-background via-[oklch(12%_0.018_160)] to-background"
+      className="relative py-28 md:py-36 overflow-hidden bg-grid-ambient"
     >
-      {/* Brilho ambiente refinado — múltiplas camadas suaves */}
-      <div className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[920px] -translate-x-1/2 rounded-full bg-primary/[0.07] blur-[120px]" />
-      <div className="pointer-events-none absolute bottom-0 left-1/4 h-[340px] w-[520px] rounded-full bg-[oklch(60%_0.2_250)]/[0.05] blur-[100px]" />
-      <div className="pointer-events-none absolute top-1/2 right-0 h-[300px] w-[400px] rounded-full bg-primary/[0.04] blur-[100px]" />
+      {/* Brilho ambiente verde, achatado e sutil — sem bolha redonda */}
+      <div className="pointer-events-none absolute top-1/2 left-1/2 h-[260px] w-[1100px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.035] blur-[120px]" />
 
       <div className="container-aceleriq relative">
         <SectionHeader
@@ -530,11 +527,10 @@ export function Areas() {
   return (
     <section
       id="areas"
-      className="relative py-28 md:py-36 overflow-hidden bg-grid-ambient bg-gradient-to-b from-background via-[oklch(12%_0.015_250)] to-background"
+      className="relative py-28 md:py-36 overflow-hidden bg-grid-ambient"
     >
-      {/* Glow ambiente */}
-      <div className="pointer-events-none absolute right-0 top-1/3 h-[400px] w-[600px] rounded-full bg-primary/[0.05] blur-3xl" />
-      <div className="pointer-events-none absolute left-0 bottom-0 h-[300px] w-[500px] rounded-full bg-[oklch(60%_0.2_250)]/[0.06] blur-3xl" />
+      {/* Glow ambiente verde achatado e sutil */}
+      <div className="pointer-events-none absolute top-1/2 left-1/2 h-[220px] w-[1000px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.03] blur-[120px]" />
 
       <div className="container-aceleriq relative">
         <SectionHeader
@@ -605,9 +601,9 @@ const FIT_NO = [
 
 export function FitFor() {
   return (
-    <section className="relative py-28 md:py-36 overflow-hidden bg-grid-ambient bg-gradient-to-b from-background via-[oklch(12%_0.02_145)] to-background">
-      {/* Glow ambiente sutil */}
-      <div className="pointer-events-none absolute left-1/4 top-0 h-[300px] w-[400px] rounded-full bg-primary/[0.04] blur-3xl" />
+    <section className="relative py-28 md:py-36 overflow-hidden bg-grid-ambient">
+      {/* Glow ambiente verde achatado e sutil */}
+      <div className="pointer-events-none absolute top-1/2 left-1/2 h-[200px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.025] blur-[120px]" />
 
       <div className="container-aceleriq relative">
         <SectionHeader
@@ -704,7 +700,7 @@ export function FitFor() {
 // ─────────────────────────────────────────────────────────────
 export function DiagnosticoCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section id="diagnostico" className="relative py-28 md:py-36 bg-grid-ambient bg-gradient-to-b from-background via-[oklch(12%_0.02_160)] to-background">
+    <section id="diagnostico" className="relative py-28 md:py-36 bg-grid-ambient">
       <div className="container-aceleriq">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -825,7 +821,7 @@ const CASES = [
 
 export function Results() {
   return (
-    <section id="resultados" className="relative py-28 md:py-36 bg-grid-ambient bg-gradient-to-b from-background via-[oklch(11%_0.015_145)] to-background">
+    <section id="resultados" className="relative py-28 md:py-36 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
           eyebrow="[ 07 ] · Resultados"
@@ -911,7 +907,7 @@ const TESTIMONIALS = [
 
 export function Testimonials() {
   return (
-    <section className="relative py-28 md:py-36 bg-grid-ambient bg-gradient-to-b from-background via-[oklch(12%_0.018_250)] to-background">
+    <section className="relative py-28 md:py-36 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
           eyebrow="[ 08 ] · Depoimentos"
@@ -967,7 +963,7 @@ const COMPARE: [string, string, string][] = [
 
 export function Compare() {
   return (
-    <section className="relative py-28 md:py-36 bg-grid-ambient bg-gradient-to-b from-background via-[oklch(11%_0.015_145)] to-background">
+    <section className="relative py-28 md:py-36 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
           eyebrow="[ 09 ] · Comparativo"
@@ -1011,7 +1007,7 @@ export function Compare() {
 // ─────────────────────────────────────────────────────────────
 export function WhyNow() {
   return (
-    <section className="relative py-28 md:py-36 bg-grid-ambient bg-gradient-to-b from-background via-[oklch(12%_0.02_250)] to-background">
+    <section className="relative py-28 md:py-36 bg-grid-ambient">
       <div className="container-aceleriq">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -1104,7 +1100,7 @@ const FAQS = [
 
 export function FAQ() {
   return (
-    <section id="faq" className="relative py-28 md:py-36 bg-grid-ambient bg-gradient-to-b from-background via-[oklch(11%_0.015_145)] to-background">
+    <section id="faq" className="relative py-28 md:py-36 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
           eyebrow="[ 11 ] · Perguntas frequentes"
@@ -1143,7 +1139,7 @@ export function FAQ() {
 // ─────────────────────────────────────────────────────────────
 export function FinalCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section className="relative py-28 md:py-36 bg-grid-ambient bg-gradient-to-b from-background via-[oklch(13%_0.025_145)] to-background">
+    <section className="relative py-28 md:py-36 bg-grid-ambient">
       <div className="container-aceleriq">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
