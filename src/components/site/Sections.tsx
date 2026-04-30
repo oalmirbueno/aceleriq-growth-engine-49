@@ -42,64 +42,8 @@ import {
   DEFAULT_WHATSAPP_MESSAGE,
 } from "@/lib/contact";
 import aiEngineerImg from "@/assets/ai-engineer.jpg";
-import techElement1 from "@/assets/tech-element-1.png";
-import techElement2 from "@/assets/tech-element-2.png";
 import { Editable } from "@/components/editor/LayoutEditor";
 import { CountUp } from "@/components/ui/CountUp";
-
-// ─────────────────────────────────────────────────────────────
-// Elemento decorativo técnico (distribuído pela landing)
-// ─────────────────────────────────────────────────────────────
-function TechDecor({
-  side = "right",
-  size = 420,
-  opacity = 0.22,
-  rotate = 0,
-  offsetY = 0,
-  variant = 1,
-  className = "",
-}: {
-  side?: "left" | "right";
-  size?: number;
-  opacity?: number;
-  rotate?: number;
-  offsetY?: number;
-  variant?: 1 | 2;
-  className?: string;
-}) {
-  const sideStyle =
-    side === "right"
-      ? { right: `-${Math.round(size * 0.18)}px` }
-      : { left: `-${Math.round(size * 0.18)}px` };
-  const src = variant === 2 ? techElement2 : techElement1;
-  return (
-    <motion.div
-      aria-hidden
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity, y: 0 }}
-      viewport={{ once: true, margin: "-120px" }}
-      transition={{ duration: 1.2, ease: "easeOut" }}
-      className={`pointer-events-none absolute hidden lg:block z-0 ${className}`}
-      style={{
-        width: size,
-        height: size,
-        top: `calc(50% + ${offsetY}px)`,
-        transform: `translateY(-50%) rotate(${rotate}deg)`,
-        ...sideStyle,
-      }}
-    >
-      <img
-        src={src}
-        alt=""
-        className="relative w-full h-full object-contain select-none"
-        draggable={false}
-        style={{
-          filter: "drop-shadow(0 0 30px rgba(20,255,0,0.18)) saturate(1.1)",
-        }}
-      />
-    </motion.div>
-  );
-}
 
 // ─────────────────────────────────────────────────────────────
 // HERO
