@@ -47,11 +47,11 @@ export function Reveal({
         scale: 1,
         filter: "blur(0px)",
       }}
-      viewport={{ once: true, amount, margin: "-80px 0px -80px 0px" }}
+      viewport={{ once: true, amount: 0.05 }}
       transition={{
         duration: 0.9,
         delay,
-        ease: [0.22, 1, 0.36, 1], // expo-out — curva Apple
+        ease: [0.22, 1, 0.36, 1],
       }}
       className={className}
     >
