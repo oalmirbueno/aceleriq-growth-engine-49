@@ -1339,19 +1339,11 @@ export function WhyNow() {
 const FAQS = [
   {
     q: "Quanto custa trabalhar com a Aceleriq?",
-    a: "Depende do estágio e do escopo. Trabalhamos com programas mensais de engenharia de crescimento. No diagnóstico estratégico definimos juntos o investimento que faz sentido para o seu momento.",
+    a: "Trabalhamos com programas mensais de engenharia de crescimento. No diagnóstico estratégico definimos juntos o investimento que faz sentido para o seu momento.",
   },
   {
     q: "Em quanto tempo eu vejo resultado?",
-    a: "Ajustes táticos aparecem nas primeiras semanas. Resultado estrutural — previsibilidade, CAC, processo comercial — costuma se consolidar entre 60 e 120 dias.",
-  },
-  {
-    q: "Vocês atendem qualquer segmento?",
-    a: "Atuamos com SaaS, e-commerce, educação, serviços profissionais, indústria e infoprodutos. Trabalhamos melhor com empresas a partir de R$ 100k/mês.",
-  },
-  {
-    q: "Existe contrato de fidelidade?",
-    a: "Trabalhamos com ciclos mínimos para garantir entrega — geralmente 6 meses — porque construir um sistema de crescimento não é trabalho de 30 dias.",
+    a: "Ajustes táticos aparecem nas primeiras semanas. Resultado estrutural — previsibilidade, CAC, processo comercial — se consolida entre 60 e 120 dias.",
   },
   {
     q: "Qual a diferença real para uma agência?",
@@ -1364,10 +1356,6 @@ const FAQS = [
   {
     q: "Vocês substituem meu time interno?",
     a: "Não. Atuamos como engenharia parceira do seu time. Estruturamos, treinamos e aceleramos — para que sua operação rode sem depender de heróis.",
-  },
-  {
-    q: "Como começa o trabalho depois do diagnóstico?",
-    a: "Depois do diagnóstico, agendamos uma sessão estratégica para entender o seu negócio em profundidade. Se houver fit, montamos uma proposta com escopo, cronograma e investimento.",
   },
 ];
 
