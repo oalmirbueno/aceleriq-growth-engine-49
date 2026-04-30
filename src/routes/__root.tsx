@@ -39,7 +39,7 @@ const ORGANIZATION_JSONLD = {
   alternateName: "Aceleriq Engenharia de Crescimento",
   url: SITE_URL,
   logo: `${SITE_URL}/og-image.jpg`,
-  email: "aceleriq@gmail.com",
+  email: "contato@aceleriq.com.br",
   telephone: "+55-41-99748-3429",
   description:
     "Engenharia de crescimento com estratégia, dados, IA, CRM, automação, tráfego e processos comerciais.",
@@ -59,7 +59,7 @@ const LOCALBUSINESS_JSONLD = {
   name: "Aceleriq",
   url: SITE_URL,
   image: `${SITE_URL}/og-image.jpg`,
-  email: "aceleriq@gmail.com",
+  email: "contato@aceleriq.com.br",
   telephone: "+55-41-99748-3429",
   priceRange: "$$$",
   description:
