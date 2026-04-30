@@ -82,12 +82,11 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-7 font-display text-[44px] font-medium leading-[0.98] tracking-[-0.045em] md:text-[72px] lg:text-[104px]"
+              className="mt-7 font-display text-[48px] font-medium leading-[0.94] tracking-[-0.05em] md:text-[80px] lg:text-[116px]"
             >
-              Acelere seu negócio
-              <br />
+              Transforme sua <br className="hidden md:block" />
               <span className="bg-gradient-to-r from-foreground via-foreground to-primary bg-clip-text text-transparent">
-                com método, dados e IA
+                operação em lucro
               </span>
               <span className="text-primary">.</span>
             </motion.h1>
