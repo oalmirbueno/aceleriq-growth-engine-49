@@ -84,9 +84,9 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
               transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
               className="mt-7 font-display text-[48px] font-medium leading-[0.94] tracking-[-0.05em] md:text-[80px] lg:text-[116px]"
             >
-              Transforme sua <br className="hidden md:block" />
-              <span className="bg-gradient-to-r from-foreground via-foreground to-primary bg-clip-text text-transparent">
-                operação em lucro
+              Acelere seu negócio <br className="hidden md:block" />
+              <span className="bg-gradient-to-r from-foreground via-foreground/80 to-primary bg-clip-text text-transparent">
+                com método, dados e IA
               </span>
               <span className="text-primary">.</span>
             </motion.h1>
