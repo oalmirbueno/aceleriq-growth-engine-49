@@ -52,67 +52,88 @@ import { SectionAmbient } from "@/components/site/Ornaments";
 // HERO
 // ─────────────────────────────────────────────────────────────
 export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
+  // Delay base — sincroniza com o fim da ImmersiveReveal (~1.7s) para o headline
+  // entrar logo após a cortina abrir. Em sessões repetidas a reveal é skipada
+  // e o stagger continua funcionando como entrada normal.
+  const HEADLINE_LINES = [
+    { text: "Protocolo", className: "text-stroke" },
+    { text: "de Engenharia", className: "text-primary text-glow italic" },
+    { text: "de Crescimento", className: "text-white" },
+  ];
+
   return (
-    <section id="top" className="relative min-h-screen flex items-center justify-center pt-20 pb-16 lg:pb-20 overflow-hidden bg-grid-tech">
-      {/* Apenas o quadriculado, sem linhas */}
-      {/* Background Decorativo - Camadas Técnicas */}
+    <section
+      id="top"
+      className="relative min-h-[100svh] flex items-center justify-center pt-24 md:pt-20 pb-20 md:pb-24 overflow-hidden bg-grid-tech"
+    >
       <div className="hero-background" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background z-10" />
-      
-      <div className="container-aceleriq relative z-20">
-        <div className="flex flex-col items-center">
-          
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="self-start mb-8"
-          >
-            <span className="font-mono text-[10px] tracking-[0.4em] uppercase py-1 border-b border-primary text-primary">
-              Status do Sistema: Operacional // Escala de Engenharia: Global
-            </span>
-          </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-            <div>
-              <Editable id="hero-headline">
-                <motion.h1 
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, ease: "circOut" }}
-                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] flex flex-col"
+      <div className="container-aceleriq relative z-20 w-full">
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="mb-6 md:mb-10"
+        >
+          <span className="font-mono text-[9px] md:text-[10px] tracking-[0.4em] uppercase py-1 border-b border-primary text-primary">
+            Status do Sistema: Operacional // Escala: Global
+          </span>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div>
+            <Editable id="hero-headline">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] flex flex-col">
+                {HEADLINE_LINES.map((line, i) => (
+                  <span key={i} className="overflow-hidden inline-block">
+                    <motion.span
+                      initial={{ y: "110%", opacity: 0, filter: "blur(8px)" }}
+                      animate={{ y: "0%", opacity: 1, filter: "blur(0px)" }}
+                      transition={{
+                        duration: 0.9,
+                        delay: 0.35 + i * 0.13,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
+                      className={`inline-block ${line.className}`}
+                    >
+                      {line.text}
+                    </motion.span>
+                  </span>
+                ))}
+              </h1>
+            </Editable>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-6 md:mt-8 max-w-lg"
+            >
+              <p className="text-base md:text-lg text-muted-foreground leading-relaxed border-l-2 border-primary/30 pl-5 md:pl-6">
+                Abandonamos o "marketing de esperança". Instalamos sistemas de
+                engenharia de dados e IA que garantem escala previsível e ROI
+                matemático.
+              </p>
+
+              <div className="mt-6 md:mt-7 flex flex-wrap items-center gap-5 md:gap-6">
+                <button onClick={onDiagnostico} className="btn-tech">
+                  Iniciar Diagnóstico
+                </button>
+                <a
+                  href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)}
+                  className="group flex items-center gap-3 font-mono text-xs tracking-widest hover:text-primary transition-colors"
                 >
-                  <span className="text-stroke">Protocolo</span>
-                  <span className="text-primary text-glow italic">de Engenharia</span>
-                  <span className="text-white">de Crescimento</span>
-                </motion.h1>
-              </Editable>
+                  <span className="h-px w-8 bg-white/20 group-hover:w-12 group-hover:bg-primary transition-all" />
+                  FALAR COM ENGENHEIRO
+                </a>
+              </div>
+            </motion.div>
+          </div>
 
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                className="mt-12 max-w-lg"
-              >
-                <p className="text-lg text-muted-foreground leading-relaxed border-l-2 border-primary/30 pl-6">
-                  Abandonamos o "marketing de esperança". Instalamos sistemas de engenharia de dados e IA que garantem escala previsível e ROI matemático.
-                </p>
-                
-                <div className="mt-7 flex flex-wrap gap-6">
-                  <button onClick={onDiagnostico} className="btn-tech">
-                    Iniciar Diagnóstico
-                  </button>
-                  <a href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)} className="group flex items-center gap-3 font-mono text-xs tracking-widest hover:text-primary transition-colors">
-                    <span className="h-px w-8 bg-white/20 group-hover:w-12 group-hover:bg-primary transition-all" />
-                    FALAR COM ENGENHEIRO
-                  </a>
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Visual Industrial - Foto AI Engineer + cards flutuantes ao redor */}
-            <Editable id="hero-photo" className="w-full max-w-md mx-auto lg:max-w-lg lg:ml-auto">
-              <motion.div
+          {/* Visual Industrial - Foto AI Engineer + cards flutuantes ao redor */}
+          <Editable id="hero-photo" className="w-full max-w-md mx-auto lg:max-w-lg lg:ml-auto">
+            <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1.2, ease: "circOut" }}
