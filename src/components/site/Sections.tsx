@@ -50,7 +50,12 @@ import { CountUp } from "@/components/ui/CountUp";
 // ─────────────────────────────────────────────────────────────
 export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section id="top" className="relative min-h-[90vh] flex items-center justify-center pt-20 overflow-hidden bg-grid-tech">
+    <section id="top" className="relative min-h-screen flex items-center justify-center pt-28 pb-32 lg:pb-40 overflow-hidden bg-grid-tech">
+      {/* Scanlines sutis */}
+      <div className="absolute inset-0 pointer-events-none z-[5] opacity-[0.04]" style={{ backgroundImage: "repeating-linear-gradient(0deg, transparent 0px, transparent 2px, #fff 2px, #fff 3px)" }} />
+      {/* Linhas verticais decorativas */}
+      <div className="absolute top-0 bottom-0 left-[8%] w-px bg-gradient-to-b from-transparent via-primary/15 to-transparent pointer-events-none z-[5] hidden lg:block" />
+      <div className="absolute top-0 bottom-0 right-[8%] w-px bg-gradient-to-b from-transparent via-primary/15 to-transparent pointer-events-none z-[5] hidden lg:block" />
       {/* Background Decorativo - Camadas Técnicas */}
       <div className="hero-background" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background z-10" />
