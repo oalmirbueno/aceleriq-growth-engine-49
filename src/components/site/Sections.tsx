@@ -42,6 +42,7 @@ import {
   DEFAULT_WHATSAPP_MESSAGE,
 } from "@/lib/contact";
 import aiEngineerImg from "@/assets/ai-engineer.jpg";
+import { Editable } from "@/components/editor/LayoutEditor";
 
 // ─────────────────────────────────────────────────────────────
 // HERO
@@ -69,16 +70,18 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
 
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <motion.h1 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, ease: "circOut" }}
-                className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.9] flex flex-col"
-              >
-                <span className="text-stroke">Protocolo</span>
-                <span className="text-primary text-glow italic">de Engenharia</span>
-                <span className="text-white">de Crescimento</span>
-              </motion.h1>
+              <Editable id="hero-headline">
+                <motion.h1 
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, ease: "circOut" }}
+                  className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.9] flex flex-col"
+                >
+                  <span className="text-stroke">Protocolo</span>
+                  <span className="text-primary text-glow italic">de Engenharia</span>
+                  <span className="text-white">de Crescimento</span>
+                </motion.h1>
+              </Editable>
 
               <motion.div
                 initial={{ opacity: 0 }}
@@ -103,12 +106,13 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
             </div>
 
             {/* Visual Industrial - Foto AI Engineer com overlays */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.2, ease: "circOut" }}
-              className="relative w-full max-w-sm mx-auto lg:max-w-md lg:ml-auto aspect-[4/5]"
-            >
+            <Editable id="hero-photo" className="w-full max-w-sm mx-auto lg:max-w-md lg:ml-auto">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1.2, ease: "circOut" }}
+                className="relative w-full aspect-[4/5]"
+              >
               <div className="absolute -inset-2 border border-primary/20 pointer-events-none" />
               <div className="absolute -top-3 -left-3 w-8 h-8 border-l-2 border-t-2 border-primary" />
               <div className="absolute -bottom-3 -right-3 w-8 h-8 border-r-2 border-b-2 border-primary" />
