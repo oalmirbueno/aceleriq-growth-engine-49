@@ -25,6 +25,8 @@ import {
   Mail,
   Instagram,
   HelpCircle,
+  BadgeCheck,
+  Star,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
