@@ -1215,12 +1215,21 @@ export function Compare() {
           description="A diferença entre contratar entregáveis e contratar um sistema de crescimento."
         />
 
-        <div className="mt-5 md:mt-6 relative overflow-hidden rounded-2xl border border-border">
+        <div className="liquid-glass mt-5 md:mt-6 relative overflow-hidden rounded-2xl">
           {/* Coluna Aceleriq destacada com glow vertical */}
-          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-[41.66%] bg-gradient-to-b from-primary/[0.04] via-primary/[0.06] to-primary/[0.04]" />
-          <div className="pointer-events-none absolute right-[41.66%] top-0 bottom-0 w-px bg-primary/30" />
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-[41.66%] bg-gradient-to-b from-primary/[0.06] via-primary/[0.10] to-primary/[0.06]" />
+          <div className="pointer-events-none absolute right-[41.66%] top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-primary/60 to-transparent" />
 
-          <div className="relative grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-border bg-card/60 backdrop-blur">
+          {/* Cabeçalho — pílula skeumórfica */}
+          <div
+            className="relative grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-primary/15"
+            style={{
+              background:
+                "linear-gradient(180deg, color-mix(in oklab, var(--foreground) 8%, transparent), color-mix(in oklab, var(--foreground) 2%, transparent))",
+              boxShadow:
+                "inset 0 1px 0 oklch(100% 0 0 / 0.08), inset 0 -1px 0 oklch(0% 0 0 / 0.4)",
+            }}
+          >
             <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
               Dimensão
             </div>
