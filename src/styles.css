@@ -39,7 +39,11 @@
     color: var(--foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+    /* IMPORTANTE: não usar overflow-x:hidden no body — quebra position:sticky.
+       Em vez disso, controlamos overflow horizontal apenas dentro de seções específicas. */
+  }
+  html {
+    overflow-x: clip; /* clip não cria contexto de scroll, preserva sticky */
   }
   
   h1, h2, h3 {
