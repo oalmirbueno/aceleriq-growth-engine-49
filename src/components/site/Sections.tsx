@@ -101,93 +101,75 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
               </motion.div>
             </div>
 
-            {/* Visual Industrial - Não é desenho, é estrutura */}
+            {/* Visual Industrial - Foto AI Engineer com overlays */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.5, ease: "circOut" }}
-              className="relative aspect-square w-full max-w-md mx-auto lg:max-w-none"
+              transition={{ duration: 1.2, ease: "circOut" }}
+              className="relative w-full max-w-md mx-auto lg:max-w-none aspect-[4/5]"
             >
-              <div className="absolute inset-0 glass-panel flex flex-col p-8 overflow-hidden border-white/20">
-                <div className="flex justify-between items-center mb-10">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full border border-primary/30 flex items-center justify-center bg-primary/5">
-                      <Brain className="h-5 w-5 text-primary" />
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-[10px] font-bold text-white tracking-tight leading-none">Neural Protocol</span>
-                      <span className="text-[8px] opacity-40 font-mono uppercase tracking-widest mt-1">Status: Active</span>
-                    </div>
-                  </div>
-                  <div className="px-2 py-1 bg-primary/10 border border-primary/20 rounded-sm">
-                    <span className="font-mono text-[9px] text-primary tracking-tighter">SECURE_NODE_04</span>
+              <div className="absolute -inset-2 border border-primary/20 pointer-events-none" />
+              <div className="absolute -top-3 -left-3 w-8 h-8 border-l-2 border-t-2 border-primary" />
+              <div className="absolute -bottom-3 -right-3 w-8 h-8 border-r-2 border-b-2 border-primary" />
+
+              <div className="relative w-full h-full overflow-hidden border border-white/10">
+                <img
+                  src={aiEngineerImg}
+                  alt="AI Engineer Aceleriq operando protocolo neural"
+                  className="w-full h-full object-cover"
+                  loading="eager"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-background/50 via-transparent to-transparent" />
+
+                <div className="absolute top-4 left-4 flex items-center gap-2 px-2 py-1 bg-black/60 backdrop-blur-sm border border-primary/30">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                  <span className="font-mono text-[9px] tracking-[0.2em] text-primary uppercase">Live_Operator</span>
+                </div>
+
+                <div className="absolute top-4 right-4 px-2 py-1 bg-black/60 backdrop-blur-sm border border-white/10">
+                  <span className="font-mono text-[9px] text-white/70 tracking-tighter">NODE_04 // SECURE</span>
+                </div>
+
+                <div className="absolute top-1/2 -right-4 lg:-right-8 -translate-y-1/2 hidden md:block">
+                  <div className="bg-black/80 backdrop-blur-md border border-primary/30 p-4 shadow-[0_0_30px_rgba(20,255,0,0.15)]">
+                    <span className="text-3xl font-mono font-bold text-primary leading-none block">+245%</span>
+                    <span className="text-[8px] font-mono uppercase tracking-widest text-white/50 mt-1 block">Monthly_ROI</span>
                   </div>
                 </div>
-                
-                <div className="flex-1 flex flex-col justify-center space-y-8">
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-end">
-                      <div className="flex flex-col">
-                        <span className="text-[9px] uppercase tracking-[0.2em] font-medium text-primary/80 mb-1">Scale_Acceleration</span>
-                        <div className="flex items-baseline gap-2">
-                          <span className="text-5xl font-mono font-bold text-white leading-none tracking-tighter">98.2%</span>
-                          <span className="text-xs text-primary/60 font-mono">Precision</span>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-[18px] font-mono font-bold text-primary">+245%</div>
-                        <div className="text-[8px] uppercase tracking-widest opacity-40">Monthly_ROI</div>
-                      </div>
+
+                <div className="absolute bottom-0 left-0 right-0 p-5 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Brain className="h-4 w-4 text-primary" />
+                      <span className="text-xs font-bold text-white">Lead Engineer</span>
                     </div>
-                    
-                    <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden p-[1px]">
-                      <motion.div 
-                        initial={{ width: "0%" }}
-                        animate={{ width: "98%" }}
-                        transition={{ duration: 2, ease: "circOut" }}
-                        className="h-full bg-gradient-to-r from-primary/20 via-primary/60 to-primary shadow-[0_0_15px_rgba(var(--primary-rgb),0.4)] rounded-full"
-                      />
-                    </div>
+                    <span className="font-mono text-[9px] text-white/50 tracking-widest uppercase">Aceleriq // R&D</span>
                   </div>
 
-                  <div className="grid grid-cols-3 gap-4">
+                  <div className="grid grid-cols-3 gap-2">
                     {[
-                      { label: "Efficiency", val: "94%" },
+                      { label: "Precision", val: "98.2%" },
                       { label: "Automation", val: "88%" },
                       { label: "Leads", val: "x3.2" }
                     ].map((item, i) => (
-                      <div key={i} className="bg-white/5 p-3 border border-white/5 flex flex-col gap-1">
-                        <span className="text-[8px] uppercase tracking-widest opacity-40 font-mono">{item.label}</span>
-                        <span className="text-sm font-mono text-white font-bold">{item.val}</span>
+                      <div key={i} className="bg-black/60 backdrop-blur-sm p-2 border border-white/10 flex flex-col gap-1">
+                        <span className="text-[8px] uppercase tracking-widest opacity-50 font-mono">{item.label}</span>
+                        <span className="text-xs font-mono text-primary font-bold">{item.val}</span>
                       </div>
                     ))}
                   </div>
-                </div>
 
-                <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="flex -space-x-2">
-                      {[1,2,3].map(i => (
-                        <div key={i} className="w-8 h-8 rounded-full border-2 border-zinc-950 bg-zinc-800 flex items-center justify-center overflow-hidden">
-                           <img 
-                             src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i + 10}&backgroundColor=b6e3f4,c0aede,d1d4f9`} 
-                             alt="User"
-                             className="w-full h-full object-cover"
-                           />
-                        </div>
-                      ))}
-                    </div>
-                    <span className="text-[9px] font-mono text-white/60">SDR_Team_Sync</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shadow-[0_0_8px_rgba(var(--primary-rgb),0.8)]" />
-                    <span className="text-[9px] font-mono text-primary/90 tracking-widest uppercase">Live_Sync</span>
+                  <div className="h-[2px] w-full bg-white/5 overflow-hidden">
+                    <motion.div
+                      initial={{ width: "0%" }}
+                      animate={{ width: "98%" }}
+                      transition={{ duration: 2, ease: "circOut" }}
+                      className="h-full bg-primary shadow-[0_0_10px_rgba(20,255,0,0.6)]"
+                    />
                   </div>
                 </div>
               </div>
-
-              {/* Elementos Brutalistas de Fundo */}
-              <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-primary/5 rounded-full" />
             </motion.div>
           </div>
         </div>
