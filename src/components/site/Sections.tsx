@@ -846,7 +846,13 @@ export function Results() {
           description="Indicadores médios e mini-cases reais de empresas que estruturaram seu sistema de crescimento com a Aceleriq."
         />
 
-        <div className="mt-5 md:mt-6 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+        <div
+          className="liquid-glass mt-5 md:mt-6 grid gap-px overflow-hidden rounded-2xl sm:grid-cols-2 lg:grid-cols-4"
+          style={{
+            background:
+              "linear-gradient(180deg, oklch(85% 0.2 145 / 0.18), oklch(85% 0.2 145 / 0.06))",
+          }}
+        >
           {METRICS.map((m, i) => (
             <motion.div
               key={m.label}
@@ -854,12 +860,24 @@ export function Results() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="bg-background p-5"
+              className="relative p-6 transition-all duration-300 hover:bg-primary/[0.04]"
+              style={{
+                background:
+                  "linear-gradient(180deg, color-mix(in oklab, var(--background) 92%, transparent), color-mix(in oklab, var(--background) 80%, transparent))",
+                boxShadow:
+                  "inset 0 1px 0 oklch(100% 0 0 / 0.05), inset 0 -1px 0 oklch(0% 0 0 / 0.4)",
+              }}
             >
+              {/* Numeração discreta no canto */}
+              <span className="absolute right-3 top-3 font-mono text-[9px] uppercase tracking-[0.2em] text-foreground/30">
+                {String(i + 1).padStart(2, "0")}
+              </span>
               <span className="label-eyebrow">{m.label}</span>
-              <div className="mt-3 text-mono text-[40px] font-semibold leading-none tracking-tight text-primary md:text-[44px]">
+              <div className="mt-3 text-mono text-[40px] font-semibold leading-none tracking-tight text-primary md:text-[44px] drop-shadow-[0_0_12px_oklch(85%_0.2_145/0.4)]">
                 {m.value}
               </div>
+              {/* Linha-luz inferior — toque skeumórfico */}
+              <div className="pointer-events-none absolute inset-x-4 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
             </motion.div>
           ))}
         </div>
