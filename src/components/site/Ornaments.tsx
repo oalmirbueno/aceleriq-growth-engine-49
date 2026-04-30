@@ -23,11 +23,7 @@ export function ChipBadge({
 }) {
   return (
     <div
-      className={`pointer-events-none select-none inline-flex items-center gap-2 rounded-md border border-primary/30 bg-gradient-to-b from-card/90 to-background/80 px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/70 shadow-[inset_0_1px_0_oklch(100%_0_0/0.04),0_4px_18px_-8px_oklch(85%_0.2_145/0.35)] backdrop-blur-sm ${className}`}
-      style={{
-        boxShadow:
-          "inset 0 1px 0 oklch(100% 0 0 / 0.05), 0 0 0 1px oklch(85% 0.2 145 / 0.15), 0 8px 24px -10px oklch(85% 0.2 145 / 0.35)",
-      }}
+      className={`liquid-chip pointer-events-none select-none inline-flex items-center gap-2 rounded-md px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/80 ${className}`}
     >
       <Icon className="h-3 w-3 text-primary drop-shadow-[0_0_4px_oklch(85%_0.2_145/0.6)]" />
       <span>{label}</span>
