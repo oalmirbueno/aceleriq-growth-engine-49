@@ -26,7 +26,7 @@ export function StickyStack({ children }: { children: ReactNode }) {
     <div
       ref={containerRef}
       className="relative"
-      style={{ height: `${count * 100}vh` }}
+      style={{ height: `${count * 90}vh` }}
     >
       {items.map((child, i) => (
         <StickyLayer
