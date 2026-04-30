@@ -967,7 +967,7 @@ const COMPARE: [string, string, string][] = [
 
 export function Compare() {
   return (
-    <section className="py-28 md:py-36">
+    <section className="relative py-28 md:py-36 bg-grid-ambient bg-gradient-to-b from-background via-[oklch(11%_0.015_145)] to-background">
       <div className="container-aceleriq">
         <SectionHeader
           eyebrow="[ 09 ] · Comparativo"
