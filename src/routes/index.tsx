@@ -71,13 +71,13 @@ function Index() {
 
         <Testimonials />
 
-        {/* Sticky stack final — seções compactas de fechamento */}
+        {/* Sticky stack final — Compare (09) sobreposto pelo FAQ (11). WhyNow (10) fica no fluxo normal. */}
         <StickyStack>
           <Compare />
-          <WhyNow />
+          <FAQ />
         </StickyStack>
 
-        <FAQ />
+        <WhyNow />
         <FinalCTA onDiagnostico={openDiagnostico} />
       </main>
       <Footer />
