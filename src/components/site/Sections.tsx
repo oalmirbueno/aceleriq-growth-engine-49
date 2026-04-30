@@ -47,245 +47,118 @@ import {
 // ─────────────────────────────────────────────────────────────
 export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section
-      id="top"
-      className="relative flex min-h-[100svh] items-center overflow-hidden pt-28 md:pt-32"
-    >
-      <div className="hero-bg absolute inset-0 -z-20" />
-      <div className="hero-vignette absolute inset-0 -z-10" />
-
-      <div className="container-aceleriq relative w-full">
-        <div className="flex flex-col items-center justify-center text-center">
-          {/* Coluna esquerda — headline */}
+    <section id="top" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-grid-tech">
+      {/* Background Decorativo - Camadas Técnicas */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background z-10" />
+      
+      <div className="container-aceleriq relative z-20">
+        <div className="flex flex-col items-center">
+          
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-5xl"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="self-start mb-8"
           >
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="inline-flex items-center gap-2.5 rounded-full border border-primary/20 bg-primary/[0.03] px-4 py-2 text-[10px] font-semibold text-primary backdrop-blur-md transition-colors hover:border-primary/40 hover:bg-primary/[0.06]"
-            >
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
-              </span>
-              <span className="text-mono uppercase tracking-[0.25em]">
-                Engenharia de Crescimento
-              </span>
-            </motion.span>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-7 font-display text-[44px] font-bold leading-[0.9] tracking-[-0.06em] md:text-[88px] lg:text-[124px]"
-            >
-              <span className="headline-shadow block">Crescimento</span>
-              <span className="relative inline-block bg-gradient-to-br from-primary via-primary to-primary/60 bg-clip-text text-transparent neon-text-glow">
-                não é sorte
-              </span>
-              <span className="text-primary">.</span>
-              <span className="headline-shadow mt-4 block text-[28px] font-normal tracking-[-0.03em] text-muted-foreground/80 md:text-[44px] lg:text-[56px]">
-                É <span className="relative inline-block">
-                  engenharia
-                  <motion.span 
-                    initial={{ width: 0 }}
-                    animate={{ width: "100%" }}
-                    transition={{ duration: 1, delay: 1.5 }}
-                    className="absolute -bottom-1 left-0 h-1 bg-primary/40 rounded-full"
-                  />
-                </span>.
-              </span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.35 }}
-              className="mx-auto mt-8 max-w-xl text-[16px] leading-relaxed text-muted-foreground/90 font-light md:text-[18px]"
-            >
-              Unimos estratégia, processo comercial, CRM, dados e IA num único
-              sistema instalado dentro do seu negócio — para escalar com
-              previsibilidade, não com achismo.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.5 }}
-              className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
-            >
-              <Button
-                onClick={onDiagnostico}
-                size="lg"
-                className="group h-12 rounded-md bg-primary px-6 text-[14px] font-semibold text-primary-foreground btn-interactive hover:bg-primary"
-              >
-                Fazer Diagnóstico Gratuito
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="h-12 rounded-md border-border bg-background/40 px-6 text-[14px] font-medium backdrop-blur hover:bg-card"
-              >
-                <a
-                  href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <MessageCircle className="h-4 w-4 text-primary" />
-                  Falar no WhatsApp
-                </a>
-              </Button>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0.7 }}
-              className="mt-10 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] uppercase tracking-[0.16em] text-muted-foreground"
-            >
-              <span className="inline-flex items-center gap-1.5">
-                <ShieldCheck className="h-3.5 w-3.5 text-primary" />
-                Sem compromisso
-              </span>
-              <span className="text-border">/</span>
-              <span>Resultado em 5 minutos</span>
-              <span className="text-border">/</span>
-              <span>Baseado em dados</span>
-            </motion.div>
+            <span className="font-mono text-[10px] tracking-[0.4em] uppercase py-1 border-b border-primary text-primary">
+              System_Status: Operational // Engineering_Scale: Global
+            </span>
           </motion.div>
 
-          {/* Visual de Alta Performance - Engenharia Real */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="relative mt-20 w-full max-w-6xl px-4"
-          >
-            {/* Efeito de Vidro e Profundidade */}
-            <div className="relative group rounded-2xl border border-white/10 bg-black/40 p-1 backdrop-blur-md transition-all duration-700 hover:border-primary/40 hover:shadow-[0_40px_120px_-20px_hsl(var(--primary)/0.15)]">
-              <div className="overflow-hidden rounded-xl border border-white/5 bg-gradient-to-b from-white/[0.03] to-transparent">
-                <div className="aspect-[16/10] md:aspect-[21/9] w-full relative">
-                  {/* Grid de Dados Realista */}
-                  <div className="absolute inset-0 grid grid-cols-12 grid-rows-6 p-4 gap-4">
-                    {/* Painel Principal de Gráfico */}
-                    <div className="col-span-12 md:col-span-8 row-span-4 rounded-lg bg-white/[0.02] border border-white/5 p-6 flex flex-col gap-4">
-                      <div className="flex justify-between items-center">
-                        <div className="flex flex-col gap-1">
-                          <span className="text-[10px] text-primary uppercase tracking-widest font-mono">Performance Matrix</span>
-                          <span className="text-lg font-bold text-white tracking-tight">Growth Velocity Index</span>
-                        </div>
-                        <div className="flex gap-2">
-                           {[1, 2, 3].map(i => (
-                             <div key={i} className="h-6 w-12 rounded bg-white/5 border border-white/5" />
-                           ))}
-                        </div>
-                      </div>
-                      
-                      {/* Gráfico de Linha Customizado (SVG Realista) */}
-                      <div className="flex-1 relative mt-4">
-                        <svg className="w-full h-full overflow-visible" viewBox="0 0 400 120">
-                          <defs>
-                            <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-                              <stop offset="0%" stopColor="hsl(145, 100%, 50%)" stopOpacity="0.2" />
-                              <stop offset="100%" stopColor="hsl(145, 100%, 50%)" stopOpacity="0" />
-                            </linearGradient>
-                          </defs>
-                          <path
-                            d="M0,100 Q40,90 80,60 T160,40 T240,70 T320,30 T400,10"
-                            fill="none"
-                            stroke="hsl(145, 100%, 50%)"
-                            strokeWidth="2.5"
-                            className="drop-shadow-[0_0_8px_rgba(34,211,94,0.4)]"
-                          />
-                          <path
-                            d="M0,100 Q40,90 80,60 T160,40 T240,70 T320,30 T400,10 V120 H0 Z"
-                            fill="url(#chartGradient)"
-                          />
-                          {/* Pontos de Dados */}
-                          {[80, 160, 320, 400].map((x, i) => (
-                            <circle key={i} cx={x} cy={x === 80 ? 60 : x === 160 ? 40 : x === 320 ? 30 : 10} r="3" fill="hsl(145, 100%, 50%)" />
-                          ))}
-                        </svg>
-                        
-                        {/* Overlay de Scanline */}
-                        <div className="absolute inset-0 scanlines pointer-events-none opacity-20" />
-                      </div>
-                    </div>
-
-                    {/* KPI Cards Right */}
-                    <div className="col-span-12 md:col-span-4 row-span-2 rounded-lg bg-white/[0.02] border border-white/5 p-5 flex flex-col justify-between">
-                       <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-mono">Conversion Rate</span>
-                       <div className="flex items-end justify-between">
-                          <span className="text-3xl font-bold text-white font-mono tracking-tighter">42.8%</span>
-                          <span className="text-[11px] text-primary bg-primary/10 px-2 py-0.5 rounded-full border border-primary/20">+12.4%</span>
-                       </div>
-                    </div>
-                    
-                    <div className="col-span-12 md:col-span-4 row-span-2 rounded-lg bg-white/[0.02] border border-white/5 p-5 flex flex-col justify-between">
-                       <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-mono">Revenue Scale</span>
-                       <div className="flex items-end justify-between">
-                          <span className="text-3xl font-bold text-white font-mono tracking-tighter">R$ 1.2M</span>
-                          <span className="text-[11px] text-primary bg-primary/10 px-2 py-0.5 rounded-full border border-primary/20">+28.5%</span>
-                       </div>
-                    </div>
-
-                    {/* Bottom Utility Bar */}
-                    <div className="col-span-12 row-span-2 rounded-lg bg-black/20 border border-white/5 p-4 flex items-center justify-between">
-                       <div className="flex gap-8">
-                          {[
-                            { label: "Active Pipelines", val: "14" },
-                            { label: "AI Automations", val: "128" },
-                            { label: "Data Nodes", val: "4.2k" }
-                          ].map((item, i) => (
-                            <div key={i} className="flex flex-col">
-                               <span className="text-[9px] text-muted-foreground uppercase tracking-widest">{item.label}</span>
-                               <span className="text-sm font-bold text-white font-mono">{item.val}</span>
-                            </div>
-                          ))}
-                       </div>
-                       <div className="h-8 w-32 rounded bg-primary/10 border border-primary/20 flex items-center justify-center">
-                          <span className="text-[10px] font-bold text-primary uppercase tracking-widest animate-pulse">System Online</span>
-                       </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Elemento Decorativo Flutuante (Terminal Style) */}
-              <motion.div 
-                animate={{ y: [0, -12, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-10 -right-6 hidden lg:block"
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <motion.h1 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: "circOut" }}
+                className="text-6xl md:text-8xl lg:text-9xl font-bold leading-[0.85] flex flex-col"
               >
-                <div className="rounded-lg border border-primary/30 bg-black/80 p-4 backdrop-blur-xl shadow-2xl">
-                   <div className="flex items-center gap-2 mb-3">
-                      <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-                      <span className="text-[10px] text-primary font-mono font-bold tracking-widest">AI_ANALYSIS_ACTIVE</span>
-                   </div>
-                   <div className="space-y-1.5">
-                      <div className="h-1 w-32 bg-white/10 rounded-full" />
-                      <div className="h-1 w-24 bg-white/10 rounded-full" />
-                      <div className="h-1 w-28 bg-primary/30 rounded-full" />
-                   </div>
+                <span className="text-stroke">Growth</span>
+                <span className="text-primary text-glow italic">Engineering</span>
+                <span className="text-white">Protocol</span>
+              </motion.h1>
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="mt-12 max-w-lg"
+              >
+                <p className="text-lg text-muted-foreground leading-relaxed border-l-2 border-primary/30 pl-6">
+                  Abandonamos o "marketing de esperança". Instalamos sistemas de engenharia de dados e IA que garantem escala previsível e ROI matemático.
+                </p>
+                
+                <div className="mt-10 flex flex-wrap gap-6">
+                  <button onClick={onDiagnostico} className="btn-tech">
+                    Initialize Diagnostic
+                  </button>
+                  <a href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)} className="group flex items-center gap-3 font-mono text-xs tracking-widest hover:text-primary transition-colors">
+                    <span className="h-px w-8 bg-white/20 group-hover:w-12 group-hover:bg-primary transition-all" />
+                    TALK_TO_ENGINEER
+                  </a>
                 </div>
               </motion.div>
             </div>
-          </motion.div>
+
+            {/* Visual Industrial - Não é desenho, é estrutura */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.5, ease: "circOut" }}
+              className="relative aspect-square w-full max-w-md mx-auto lg:max-w-none"
+            >
+              <div className="absolute inset-0 glass-panel animate-float flex flex-col p-8 overflow-hidden">
+                <div className="flex justify-between items-center mb-12">
+                  <div className="flex gap-2">
+                    <div className="w-12 h-1 bg-primary" />
+                    <div className="w-4 h-1 bg-white/10" />
+                  </div>
+                  <span className="font-mono text-[10px] opacity-40">ACQ_KERNEL_v4.2</span>
+                </div>
+                
+                <div className="flex-1 grid grid-cols-2 gap-8">
+                  <div className="flex flex-col justify-end gap-2">
+                    <span className="text-4xl font-mono font-bold">14.2%</span>
+                    <span className="text-[9px] uppercase tracking-widest opacity-50">Conversion_Avg</span>
+                    <div className="h-1 w-full bg-white/5 overflow-hidden">
+                      <motion.div 
+                        initial={{ x: "-100%" }}
+                        animate={{ x: "0%" }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                        className="h-full w-1/2 bg-primary"
+                      />
+                    </div>
+                  </div>
+                  <div className="border-l border-white/10 pl-6 flex flex-col justify-center gap-6">
+                    {[1,2,3].map(i => (
+                      <div key={i} className="flex flex-col gap-1">
+                        <div className="h-1 w-full bg-white/10" />
+                        <div className="h-1 w-2/3 bg-primary/40" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-12 pt-8 border-t border-white/5 flex items-center justify-between">
+                  <div className="flex -space-x-2">
+                    {[1,2,3,4].map(i => (
+                      <div key={i} className="w-8 h-8 rounded-full border border-background bg-zinc-900" />
+                    ))}
+                  </div>
+                  <span className="text-[10px] font-mono text-primary animate-pulse">ENCRYPTION_ACTIVE</span>
+                </div>
+              </div>
+
+              {/* Elementos Brutalistas de Fundo */}
+              <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-primary/5 blur-[120px] rounded-full" />
+            </div>
+          </div>
         </div>
       </div>
-
-      {/* Fade inferior para a próxima seção */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
     </section>
   );
 }
+
 
 // ─────────────────────────────────────────────────────────────
 // DORES

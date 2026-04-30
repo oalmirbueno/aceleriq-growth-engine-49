@@ -5,320 +5,109 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Aceleriq — Design System (alinhado ao Comando OS)
- * Preto puro + verde neon (145 100% 50%) como acento único.
- * Tipografia Outfit. Linhas finas, espaçamento generoso, microinterações sutis.
+ * Aceleriq — Design System Brutalista-Tecnológico
+ * Estética de alta performance, tipografia técnica e camadas de profundidade.
  */
 
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-success: var(--success);
-  --color-warning: var(--warning);
-  --color-info: var(--info);
   --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-ring-offset-background: var(--background);
 
   --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Space Grotesk", "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-:root,
-.dark {
-  --radius: 0.75rem;
-
-  --background: hsl(0 0% 5%);
-  --foreground: hsl(0 0% 100%);
-
-  --card: hsl(0 0% 10%);
-  --card-foreground: hsl(0 0% 100%);
-
-  --popover: hsl(0 0% 7%);
-  --popover-foreground: hsl(0 0% 100%);
-
-  --primary: hsl(145 100% 50%);
-  --primary-foreground: hsl(0 0% 5%);
-
-  --secondary: hsl(0 0% 13%);
-  --secondary-foreground: hsl(0 0% 63%);
-
-  --muted: hsl(0 0% 13%);
-  --muted-foreground: hsl(0 0% 45%);
-
-  --accent: hsl(145 100% 50%);
-  --accent-foreground: hsl(0 0% 5%);
-
-  --destructive: hsl(0 100% 62%);
-  --destructive-foreground: hsl(0 0% 100%);
-
-  --success: hsl(145 100% 50%);
-  --warning: hsl(43 100% 50%);
-  --info: hsl(200 100% 50%);
-
-  --border: hsl(0 0% 17%);
-  --input: hsl(0 0% 17%);
-  --ring: hsl(145 100% 50%);
-
-  --sidebar: var(--background);
-  --sidebar-foreground: var(--muted-foreground);
-  --sidebar-primary: var(--primary);
-  --sidebar-primary-foreground: var(--primary-foreground);
-  --sidebar-accent: var(--secondary);
-  --sidebar-accent-foreground: var(--foreground);
-  --sidebar-border: var(--border);
-  --sidebar-ring: var(--primary);
-
-  --shadow-glow: 0 0 30px hsl(145 100% 50% / 0.18);
-  --shadow-elevated: 0 30px 80px -20px hsl(0 0% 0% / 0.6);
+:root {
+  --background: oklch(10% 0 0);
+  --foreground: oklch(100% 0 0);
+  --primary: oklch(85% 0.2 145); /* Verde neon sofisticado */
+  --border: oklch(25% 0 0 / 0.5);
+  --accent: oklch(60% 0.2 250); /* Azul elétrico sutil */
 }
 
 @layer base {
-  * {
-    border-color: var(--color-border);
-  }
-
-  html {
-    color-scheme: dark;
-    scroll-behavior: smooth;
-  }
-
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+    background-color: var(--background);
+    color: var(--foreground);
     font-family: var(--font-sans);
-    font-feature-settings: "ss01", "cv11";
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
   }
-
-  h1, h2, h3, h4, h5, h6 {
+  
+  h1, h2, h3 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
-    font-weight: 500;
-  }
-
-  ::selection {
-    background: hsl(145 100% 50% / 0.22);
-    color: hsl(0 0% 100%);
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
   }
 }
-
-::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: hsl(0 0% 18%); border-radius: 999px; }
-::-webkit-scrollbar-thumb:hover { background: hsl(145 100% 50% / 0.6); }
 
 @layer utilities {
   .container-aceleriq {
     width: 100%;
     margin-inline: auto;
-    padding-inline: 1.25rem;
-    max-width: 76rem;
+    padding-inline: 1.5rem;
+    max-width: 85rem;
   }
 
-  @media (min-width: 768px) {
-    .container-aceleriq { padding-inline: 2rem; }
+  /* Grid Brutalista */
+  .bg-grid-tech {
+    background-size: 50px 50px;
+    background-image: 
+      linear-gradient(to right, oklch(100% 0 0 / 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(100% 0 0 / 0.03) 1px, transparent 1px);
   }
 
-  /* Tipografia */
-  .label-eyebrow {
-    font-size: 11px;
-    font-weight: 500;
+  /* Efeito de Vidro Industrial */
+  .glass-panel {
+    background: oklch(100% 0 0 / 0.02);
+    backdrop-filter: blur(20px);
+    border: 1px solid oklch(100% 0 0 / 0.08);
+    box-shadow: 0 20px 50px -10px oklch(0% 0 0 / 0.5);
+  }
+
+  /* Tipografia Hi-Tech */
+  .text-glow {
+    text-shadow: 0 0 15px var(--primary);
+  }
+
+  .text-stroke {
+    -webkit-text-stroke: 1px oklch(100% 0 0 / 0.2);
+    color: transparent;
+  }
+
+  /* Botão Industrial */
+  .btn-tech {
+    position: relative;
+    padding: 0.75rem 2rem;
+    background: var(--primary);
+    color: black;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: hsl(var(--muted-foreground));
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   }
 
-  .text-mono {
-    font-family: var(--font-mono);
-    font-feature-settings: "tnum", "ss01";
-  }
-
-  /* Acento neon */
-  .text-neon { color: hsl(145 100% 50%); }
-  .bg-neon { background: hsl(145 100% 50%); color: hsl(0 0% 5%); }
-
-  .neon-glow {
-    box-shadow:
-      0 0 0 1px hsl(145 100% 50% / 0.15),
-      0 20px 50px -10px hsl(145 100% 50% / 0.12);
-  }
-
-  .neon-text-glow {
-    text-shadow: 
-      0 0 15px hsl(145 100% 50% / 0.2);
-  }
-
-  .headline-shadow {
-    text-shadow: 0 8px 24px hsl(0 0% 0% / 0.6);
-  }
-
-  /* Bordas vivas (linha fina + brilho hover) */
-  .hairline {
-    border: 1px solid hsl(0 0% 100% / 0.06);
-  }
-
-  .hairline-hover {
-    transition:
-      border-color 0.25s ease,
-      background-color 0.25s ease,
-      transform 0.25s ease,
-      box-shadow 0.25s ease;
-  }
-  .hairline-hover:hover {
-    border-color: hsl(145 100% 50% / 0.35);
-    box-shadow: 0 10px 40px -20px hsl(145 100% 50% / 0.25);
-  }
-
-  /* Hero background art */
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-  .hero-bg::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url('/hero-bg.jpg');
-    background-size: cover;
-    background-position: center 30%;
-    opacity: 0.45;
-    filter: saturate(1.1) contrast(1.1) brightness(0.9);
-    transform: scale(1.05);
-  }
-  .hero-bg::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(
-        ellipse 80% 70% at 50% 50%,
-        transparent 0%,
-        hsl(0 0% 5% / 0.7) 40%,
-        var(--background) 90%
-      ),
-      linear-gradient(
-        to bottom,
-        var(--background) 0%,
-        transparent 15%,
-        transparent 80%,
-        var(--background) 100%
-      );
-  }
-
-  /* Vinheta extra para o conteúdo do hero */
-  .hero-vignette {
-    background: radial-gradient(
-      ellipse 50% 50% at 50% 50%,
-      hsl(0 0% 0% / 0.4) 0%,
-      transparent 100%
-    );
-  }
-
-  /* Dot grid sutil */
-  .dot-grid {
-    background-image: radial-gradient(circle, hsl(0 0% 100% / 0.04) 1px, transparent 1px);
-    background-size: 22px 22px;
-  }
-
-  /* Linhas verticais decorativas (estilo terminal) */
-  .scanlines {
-    background-image: linear-gradient(
-      to bottom,
-      transparent 0,
-      transparent 2px,
-      hsl(0 0% 100% / 0.015) 2px,
-      hsl(0 0% 100% / 0.015) 4px
-    );
-  }
-
-  /* Pulse dot */
-  @keyframes pulse-dot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.55; transform: scale(0.92); }
-  }
-  .pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
-
-  /* Shimmer barra */
-  @keyframes neon-shimmer {
-    0% { background-position: -300px 0; }
-    100% { background-position: 300px 0; }
-  }
-  .neon-shimmer {
-    background: linear-gradient(
-      90deg,
-      hsl(145 100% 50%),
-      hsl(145 100% 38%),
-      hsl(145 100% 50%)
-    );
-    background-size: 600px 100%;
-    animation: neon-shimmer 3s linear infinite;
-  }
-
-  /* Card hover (Comando OS) */
-  .card-hover {
-    transition:
-      transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-      border-color 0.25s,
-      box-shadow 0.25s;
-  }
-  .card-hover:hover {
-    transform: translateY(-3px);
-    border-color: hsl(145 100% 50% / 0.3);
-    box-shadow: 0 12px 36px -16px hsl(145 100% 50% / 0.18);
-  }
-
-  /* Botão interativo */
-  .btn-interactive {
-    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s;
-  }
-  .btn-interactive:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 0 32px hsl(145 100% 50% / 0.35);
-  }
-  .btn-interactive:active { transform: scale(0.98); }
-
-  /* Linha gradiente decorativa */
-  .divider-neon {
-    height: 1px;
-    background: linear-gradient(
-      to right,
-      transparent,
-      hsl(145 100% 50% / 0.4),
-      transparent
-    );
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      transition-duration: 0.01ms !important;
-    }
+  .btn-tech:hover {
+    transform: translateY(-2px) skewX(-2deg);
+    box-shadow: -10px 10px 0 oklch(100% 0 0 / 0.1);
   }
 }
+
+/* Animações Realistas */
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-20px) rotate(1deg); }
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
