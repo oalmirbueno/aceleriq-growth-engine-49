@@ -82,24 +82,27 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-7 font-display text-[48px] font-medium leading-[0.9] tracking-[-0.05em] md:text-[88px] lg:text-[124px]"
+              className="mt-7 font-display text-[44px] font-medium leading-[0.95] tracking-[-0.045em] md:text-[80px] lg:text-[112px]"
             >
-              <span className="headline-shadow">Acelere seu negócio</span> <br className="hidden md:block" />
-              <span className="relative inline-block bg-gradient-to-r from-primary via-primary/90 to-primary/70 bg-clip-text text-transparent neon-text-glow">
-                com método, dados e IA
+              <span className="headline-shadow block">Crescimento</span>
+              <span className="relative inline-block bg-gradient-to-br from-primary via-primary to-primary/60 bg-clip-text text-transparent neon-text-glow">
+                não é sorte
               </span>
               <span className="text-primary">.</span>
+              <span className="headline-shadow mt-3 block text-[26px] font-light tracking-[-0.03em] text-muted-foreground/85 md:text-[40px] lg:text-[52px]">
+                É engenharia.
+              </span>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.35 }}
-              className="mx-auto mt-7 max-w-2xl text-[16px] leading-relaxed text-muted-foreground md:text-[19px]"
+              className="mx-auto mt-8 max-w-xl text-[16px] leading-relaxed text-muted-foreground md:text-[18px]"
             >
-              Aceleriq não é uma agência de marketing. É a engenharia que une
-              estratégia, processo comercial, CRM, dados e inteligência
-              artificial num único sistema operando dentro do seu negócio.
+              Unimos estratégia, processo comercial, CRM, dados e IA num único
+              sistema instalado dentro do seu negócio — para escalar com
+              previsibilidade, não com achismo.
             </motion.p>
 
             <motion.div
