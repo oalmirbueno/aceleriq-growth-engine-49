@@ -76,7 +76,7 @@
       linear-gradient(to bottom, transparent 60%, var(--background) 100%);
   }
 
-  /* Grid Quadriculado com Fade — overlay decorativo */
+  /* Grid Quadriculado com Fade — overlay decorativo (não afeta imagem de fundo) */
   .bg-grid-tech {
     position: relative;
   }
@@ -85,23 +85,15 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    z-index: 1;
-    background-color: transparent;
+    z-index: 6;
     background-image:
-      linear-gradient(oklch(100% 0 0 / 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, oklch(100% 0 0 / 0.05) 1px, transparent 1px),
-      linear-gradient(135deg, var(--primary) / 0.04 0%, transparent 40%);
-    background-size: 48px 48px, 48px 48px, 100% 100%;
+      linear-gradient(oklch(100% 0 0 / 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(100% 0 0 / 0.06) 1px, transparent 1px);
+    background-size: 48px 48px, 48px 48px;
     /* Efeito de desaparecimento radial — quadriculado some nas bordas */
-    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 0%, black 30%, transparent 85%);
-    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 0%, black 30%, transparent 85%);
-    mix-blend-mode: screen;
+    -webkit-mask-image: radial-gradient(ellipse 70% 65% at 50% 45%, black 0%, black 25%, transparent 85%);
+    mask-image: radial-gradient(ellipse 70% 65% at 50% 45%, black 0%, black 25%, transparent 85%);
     opacity: 0.9;
-  }
-  /* Garante que o conteúdo fica acima do overlay */
-  .bg-grid-tech > * {
-    position: relative;
-    z-index: 2;
   }
 
   /* Efeito de Vidro Industrial */
