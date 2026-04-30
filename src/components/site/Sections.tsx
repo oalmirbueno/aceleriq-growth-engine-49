@@ -1132,9 +1132,10 @@ const COMPARE: [string, string, string][] = [
 
 export function Compare() {
   return (
-    <section className="relative py-10 md:py-14 bg-grid-ambient bg-background">
-      {/* Halo verde sutil para iluminar quando a seção fica sticky/sobreposta */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_30%,oklch(85%_0.2_145/0.06),transparent_70%)]" />
+    <section className="relative py-12 md:py-16 bg-grid-ambient bg-background overflow-hidden">
+      {/* Iluminação ambiente — duas camadas para garantir clareza mesmo com sticky overlay */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_30%,oklch(85%_0.2_145/0.10),transparent_70%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-primary/[0.04] via-transparent to-transparent" />
       <div className="container-aceleriq relative">
         <SectionHeader
           eyebrow="[ 09 ] · Comparativo"

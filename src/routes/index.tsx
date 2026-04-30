@@ -56,7 +56,9 @@ function Index() {
         </StickyStack>
 
         {/* Faixa marquee — entre Seção 02 (Sobre) e Seção 03 (Método) */}
-        <BrandStrip />
+        <div className="relative z-20">
+          <BrandStrip />
+        </div>
 
         {/* Seções de conteúdo alto — fluxo normal */}
         <Method />
