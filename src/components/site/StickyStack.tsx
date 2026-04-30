@@ -26,7 +26,9 @@ export function StickyStack({ children }: { children: ReactNode }) {
     <div
       ref={containerRef}
       className="relative"
-      style={{ height: `${count * 90}vh` }}
+      // Cada item precisa de scroll para sair: (count - 1) telas de transição
+      // + 1 tela para a última seção ser exibida sem espaço vazio extra.
+      style={{ height: `${(count - 1) * 80 + 60}vh` }}
     >
       {items.map((child, i) => (
         <StickyLayer
@@ -56,17 +58,14 @@ function StickyLayer({
   const isFirst = index === 0;
   const isLast = index === total - 1;
 
-  // Janela de transição entre este item e o próximo
-  // Cada item domina de (i/total) a ((i+1)/total)
-  // A transição ocorre na fronteira: vamos de (i+0.6)/total a (i+1)/total
-  const outStart = (index + 0.6) / total;
+  // Janela de transição entre este item e o próximo.
+  // Cada item domina de (i/total) a ((i+1)/total).
+  const outStart = (index + 0.55) / total;
   const outEnd = (index + 1) / total;
-
-  // ENTRADA: este item sobe de baixo na fronteira anterior
-  const inStart = (index - 0.4) / total;
+  const inStart = (index - 0.45) / total;
   const inEnd = index / total;
 
-  // Animação de SAÍDA (este item recua quando o próximo cobre)
+  // SAÍDA — recua sutilmente quando o próximo cobre.
   const scaleOut = useTransform(
     progress,
     [outStart, outEnd],
@@ -75,10 +74,10 @@ function StickyLayer({
   const opacityOut = useTransform(
     progress,
     [outStart, outEnd],
-    isLast ? [1, 1] : [1, 0.5],
+    isLast ? [1, 1] : [1, 0.55],
   );
 
-  // Animação de ENTRADA (este item sobe de baixo)
+  // ENTRADA — sobe de baixo.
   const yIn = useTransform(
     progress,
     [inStart, inEnd],
@@ -87,8 +86,15 @@ function StickyLayer({
 
   return (
     <div
-      className="sticky top-0 h-screen w-full overflow-hidden"
-      style={{ zIndex: index + 1, backgroundColor: "var(--background)" }}
+      className="sticky top-0 w-full overflow-hidden"
+      style={{
+        zIndex: index + 1,
+        backgroundColor: "var(--background)",
+        // Última camada não força h-screen — segue altura natural do conteúdo,
+        // eliminando espaço vazio quando a seção é mais curta que a viewport.
+        height: isLast ? "auto" : "100vh",
+        minHeight: isLast ? "auto" : undefined,
+      }}
     >
       <motion.div
         style={{
@@ -97,7 +103,9 @@ function StickyLayer({
           opacity: opacityOut,
           backgroundColor: "var(--background)",
         }}
-        className="h-full w-full flex flex-col justify-center will-change-transform relative overflow-hidden"
+        className={`w-full will-change-transform relative overflow-hidden ${
+          isLast ? "" : "h-full flex flex-col justify-center"
+        }`}
       >
         {/* Linha-luz no topo da seção entrando */}
         {!isFirst && (
