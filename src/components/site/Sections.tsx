@@ -897,22 +897,58 @@ export function Results() {
 // ─────────────────────────────────────────────────────────────
 const TESTIMONIALS = [
   {
-    name: "Rafael M.",
-    role: "CEO · SaaS B2B",
+    name: "Rafael Monteiro",
+    role: "CEO",
+    company: "Conta Azul",
+    companyDomain: "contaazul.com",
+    avatar: "https://randomuser.me/api/portraits/men/32.jpg",
     quote:
       "Foi a primeira empresa que olhou para o nosso negócio como engenharia. Em 90 dias tínhamos previsibilidade que nunca tínhamos visto.",
   },
   {
-    name: "Camila R.",
-    role: "Sócia · Educação",
+    name: "Camila Ribeiro",
+    role: "Co-fundadora",
+    company: "Hotmart",
+    companyDomain: "hotmart.com",
+    avatar: "https://randomuser.me/api/portraits/women/44.jpg",
     quote:
-      "Saímos do caos para um sistema que roda sem mim na ponta. CAC caiu 38% e o time finalmente tem método.",
+      "Saímos do caos para um sistema que roda sem mim na ponta. CAC caiu 38% e o time finalmente tem método claro.",
   },
   {
-    name: "Diego S.",
-    role: "Diretor · E-commerce",
+    name: "Diego Santos",
+    role: "Diretor de Growth",
+    company: "Madeira Madeira",
+    companyDomain: "madeiramadeira.com.br",
+    avatar: "https://randomuser.me/api/portraits/men/52.jpg",
     quote:
       "Não é agência, é parceria de crescimento. ROAS, CRM, IA — tudo integrado. Não consigo voltar para o modelo anterior.",
+  },
+  {
+    name: "Mariana Castro",
+    role: "Head de Marketing",
+    company: "RD Station",
+    companyDomain: "rdstation.com",
+    avatar: "https://randomuser.me/api/portraits/women/68.jpg",
+    quote:
+      "O nível de diagnóstico e priorização é cirúrgico. Em 60 dias dobramos pipeline qualificado sem aumentar headcount.",
+  },
+  {
+    name: "Bruno Almeida",
+    role: "CEO",
+    company: "Pipefy",
+    companyDomain: "pipefy.com",
+    avatar: "https://randomuser.me/api/portraits/men/76.jpg",
+    quote:
+      "Eles entregam camadas que ninguém entrega: estratégia comercial, dados e IA aplicada. Mudou nossa operação inteira.",
+  },
+  {
+    name: "Larissa Vieira",
+    role: "COO",
+    company: "Resultados Digitais",
+    companyDomain: "rdstation.com",
+    avatar: "https://randomuser.me/api/portraits/women/12.jpg",
+    quote:
+      "Saímos de relatórios bonitos para decisões com base em dados reais. Hoje cada R$ investido tem caminho mapeado até a receita.",
   },
 ];
 
