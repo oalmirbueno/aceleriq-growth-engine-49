@@ -917,23 +917,40 @@ const TESTIMONIALS = [
 ];
 
 export function Testimonials() {
+  // Duplica para criar loop infinito visual
+  const loop = [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS];
   return (
-    <section className="relative py-8 md:py-10 bg-grid-ambient">
+    <section className="relative py-12 md:py-16 bg-grid-ambient overflow-hidden">
       <div className="container-aceleriq">
         <SectionHeader
           eyebrow="[ 08 ] · Depoimentos"
           title="O que dizem os fundadores que aceleraram conosco."
         />
+      </div>
 
-        <div className="mt-5 md:mt-6 grid gap-3 md:grid-cols-3">
-          {TESTIMONIALS.map((t, i) => (
-            <motion.figure
-              key={t.name}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="hairline relative rounded-2xl bg-card/40 p-5 card-hover"
+      {/* Carrossel auto-scroll com fade nas bordas */}
+      <div
+        className="mt-8 md:mt-10 relative overflow-hidden"
+        style={{
+          maskImage:
+            "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+          WebkitMaskImage:
+            "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+        }}
+      >
+        <motion.div
+          className="flex gap-4 w-max"
+          animate={{ x: ["0%", "-33.333%"] }}
+          transition={{
+            duration: 35,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        >
+          {loop.map((t, i) => (
+            <figure
+              key={i}
+              className="hairline relative rounded-2xl bg-card/60 p-6 w-[360px] flex-shrink-0 backdrop-blur"
             >
               <Quote className="h-5 w-5 text-primary/60" />
               <blockquote className="mt-3 text-[14px] leading-relaxed text-foreground/90">
@@ -950,9 +967,9 @@ export function Testimonials() {
                   </div>
                 </div>
               </figcaption>
-            </motion.figure>
+            </figure>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
