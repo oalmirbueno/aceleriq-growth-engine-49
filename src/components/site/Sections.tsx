@@ -588,7 +588,7 @@ export function Areas() {
     >
       {/* Glow ambiente verde achatado e sutil */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 h-[140px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.03] blur-[90px]" />
-      <TechDecor side="left" size={440} opacity={0.14} rotate={6} offsetY={-20} />
+      <TechDecor side="left" size={460} opacity={0.2} rotate={0} offsetY={-20} variant={2} />
 
       <div className="container-aceleriq relative z-10">
         <SectionHeader
@@ -1067,7 +1067,7 @@ export function Compare() {
 export function WhyNow() {
   return (
     <section className="relative py-12 md:py-16 bg-grid-ambient overflow-hidden">
-      <TechDecor side="left" size={400} opacity={0.12} rotate={10} />
+      <TechDecor side="right" size={420} opacity={0.18} rotate={180} variant={2} />
       <div className="container-aceleriq relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
