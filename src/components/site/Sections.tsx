@@ -825,7 +825,7 @@ const CASES = [
 
 export function Results() {
   return (
-    <section id="resultados" className="py-28 md:py-36">
+    <section id="resultados" className="relative py-28 md:py-36 bg-grid-ambient bg-gradient-to-b from-background via-[oklch(11%_0.015_145)] to-background">
       <div className="container-aceleriq">
         <SectionHeader
           eyebrow="[ 07 ] · Resultados"
