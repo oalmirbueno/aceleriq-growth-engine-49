@@ -704,7 +704,7 @@ export function FitFor() {
 // ─────────────────────────────────────────────────────────────
 export function DiagnosticoCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section id="diagnostico" className="relative py-28 md:py-36">
+    <section id="diagnostico" className="relative py-28 md:py-36 bg-grid-ambient bg-gradient-to-b from-background via-[oklch(12%_0.02_160)] to-background">
       <div className="container-aceleriq">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
