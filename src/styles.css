@@ -65,8 +65,8 @@
     background-image: url('/hero-bg.jpg');
     background-size: cover;
     background-position: center right;
-    opacity: 0.55;
-    filter: brightness(0.65);
+    opacity: 0.4;
+    filter: brightness(0.4);
   }
   .hero-background::after {
     content: '';
