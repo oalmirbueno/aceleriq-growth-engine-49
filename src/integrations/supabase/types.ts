@@ -14,7 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      layout_overrides: {
+        Row: {
+          height: number | null
+          id: string
+          opacity: number
+          rotation: number
+          scale: number
+          updated_at: string
+          width: number | null
+          x: number
+          y: number
+          z_index: number
+        }
+        Insert: {
+          height?: number | null
+          id: string
+          opacity?: number
+          rotation?: number
+          scale?: number
+          updated_at?: string
+          width?: number | null
+          x?: number
+          y?: number
+          z_index?: number
+        }
+        Update: {
+          height?: number | null
+          id?: string
+          opacity?: number
+          rotation?: number
+          scale?: number
+          updated_at?: string
+          width?: number | null
+          x?: number
+          y?: number
+          z_index?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
