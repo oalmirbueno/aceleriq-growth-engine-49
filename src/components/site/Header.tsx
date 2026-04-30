@@ -59,7 +59,9 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
           <div className="flex flex-col items-end">
             <span className="font-mono text-[9px] uppercase tracking-widest text-primary/60">System_Access</span>
             <a
-              href="#top"
+              href="https://aceleriq.online"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-[12px] font-medium text-foreground/80 transition-colors hover:text-primary"
             >
               Client Portal
@@ -99,6 +101,16 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
                 <span className="text-[10px] opacity-30">0{i + 1}</span>
               </a>
             ))}
+            <a
+              href="https://aceleriq.online"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="flex items-center justify-between border-b border-white/5 py-4 text-sm font-mono uppercase tracking-widest text-muted-foreground hover:text-primary"
+            >
+              <span>Client Portal</span>
+              <span className="text-[10px] opacity-30">↗</span>
+            </a>
             <div className="mt-8">
               <button
                 onClick={() => {
