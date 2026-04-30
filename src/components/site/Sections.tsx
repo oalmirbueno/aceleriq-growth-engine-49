@@ -375,11 +375,12 @@ export function Method() {
   return (
     <section
       id="metodo"
-      className="relative py-28 md:py-36 overflow-hidden bg-gradient-to-b from-background via-[oklch(13%_0.02_160)] to-background"
+      className="relative py-28 md:py-36 overflow-hidden bg-grid-ambient bg-gradient-to-b from-background via-[oklch(12%_0.018_160)] to-background"
     >
-      {/* Brilho ambiente */}
-      <div className="pointer-events-none absolute -top-32 left-1/2 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-primary/[0.06] blur-3xl" />
-      <div className="pointer-events-none absolute inset-0 opacity-40 [background-image:linear-gradient(oklch(100%_0_0/0.04)_1px,transparent_1px),linear-gradient(90deg,oklch(100%_0_0/0.04)_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_50%,black,transparent)]" />
+      {/* Brilho ambiente refinado — múltiplas camadas suaves */}
+      <div className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[920px] -translate-x-1/2 rounded-full bg-primary/[0.07] blur-[120px]" />
+      <div className="pointer-events-none absolute bottom-0 left-1/4 h-[340px] w-[520px] rounded-full bg-[oklch(60%_0.2_250)]/[0.05] blur-[100px]" />
+      <div className="pointer-events-none absolute top-1/2 right-0 h-[300px] w-[400px] rounded-full bg-primary/[0.04] blur-[100px]" />
 
       <div className="container-aceleriq relative">
         <SectionHeader
@@ -389,49 +390,78 @@ export function Method() {
         />
 
         {/* ───────── Timeline horizontal (desktop) ───────── */}
-        <div className="mt-20 hidden lg:block">
+        <div className="mt-24 hidden lg:block">
           <div className="relative">
-            {/* Trilho */}
-            <div className="absolute left-0 right-0 top-[42px] h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+            {/* Trilho base — gradiente suave */}
+            <div className="absolute left-[7%] right-[7%] top-[44px] h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+
+            {/* Trilho ativo — animado, com brilho elegante */}
             <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1.6, ease: "easeOut" }}
+              viewport={{ once: true, margin: "-120px" }}
+              transition={{ duration: 2.2, ease: [0.22, 1, 0.36, 1] }}
               style={{ transformOrigin: "left" }}
-              className="absolute left-0 right-0 top-[42px] h-[2px] bg-gradient-to-r from-primary via-primary to-primary/30 shadow-[0_0_20px_oklch(85%_0.2_145/0.5)]"
+              className="absolute left-[7%] right-[7%] top-[43px] h-[2px] bg-gradient-to-r from-primary/0 via-primary to-primary/0"
+            >
+              <div className="absolute inset-0 blur-[6px] bg-gradient-to-r from-primary/0 via-primary/80 to-primary/0" />
+            </motion.div>
+
+            {/* Pulso percorrendo o trilho */}
+            <motion.div
+              initial={{ left: "7%", opacity: 0 }}
+              whileInView={{ left: "93%", opacity: [0, 1, 1, 0] }}
+              viewport={{ once: true, margin: "-120px" }}
+              transition={{ duration: 2.2, ease: "easeInOut", times: [0, 0.1, 0.9, 1] }}
+              className="absolute top-[40px] h-[8px] w-[8px] rounded-full bg-primary shadow-[0_0_20px_oklch(85%_0.2_145/0.9)]"
             />
 
             <div className="relative grid grid-cols-7">
               {METHOD.map((step, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 24 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.5, delay: 0.15 + i * 0.1 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{
+                    duration: 0.7,
+                    delay: 0.3 + i * 0.18,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
                   className="group flex flex-col items-center px-2"
                 >
-                  {/* Número */}
-                  <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground">
+                  {/* Número discreto */}
+                  <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground transition-colors group-hover:text-primary/80">
                     0{i + 1}
                   </span>
 
-                  {/* Nó da timeline */}
-                  <div className="relative mt-3 flex h-[60px] w-[60px] items-center justify-center">
-                    <div className="absolute inset-0 rounded-full bg-primary/10 blur-md transition-opacity group-hover:opacity-100" />
-                    <div className="relative flex h-[52px] w-[52px] items-center justify-center rounded-full border border-primary/40 bg-background shadow-[0_0_0_4px_oklch(10%_0_0)] transition-all group-hover:border-primary group-hover:shadow-[0_0_24px_oklch(85%_0.2_145/0.6)]">
-                      <span className="font-display text-2xl font-bold text-primary">
+                  {/* Nó da timeline — design refinado em camadas */}
+                  <div className="relative mt-3 flex h-[64px] w-[64px] items-center justify-center">
+                    {/* Halo externo pulsante */}
+                    <motion.div
+                      initial={{ scale: 0.6, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: 0.5 + i * 0.18 }}
+                      className="absolute inset-0 rounded-full bg-primary/[0.08] blur-md transition-all duration-500 group-hover:bg-primary/20 group-hover:blur-lg"
+                    />
+
+                    {/* Anel externo */}
+                    <div className="absolute inset-1 rounded-full border border-white/10 transition-colors group-hover:border-primary/40" />
+
+                    {/* Disco principal — gradiente sofisticado */}
+                    <div className="relative flex h-[48px] w-[48px] items-center justify-center rounded-full border border-primary/30 bg-gradient-to-br from-[oklch(16%_0.02_145)] to-[oklch(10%_0_0)] shadow-[0_0_0_5px_oklch(10%_0_0),inset_0_1px_0_oklch(100%_0_0/0.06)] transition-all duration-500 group-hover:border-primary/70 group-hover:shadow-[0_0_0_5px_oklch(10%_0_0),0_0_28px_oklch(85%_0.2_145/0.45),inset_0_1px_0_oklch(100%_0_0/0.1)]">
+                      <span className="font-display text-xl font-bold text-primary text-glow">
                         {step.letter}
                       </span>
                     </div>
                   </div>
 
                   {/* Conteúdo */}
-                  <h3 className="mt-5 text-center font-display text-[13px] font-medium uppercase tracking-[0.14em] text-foreground">
+                  <h3 className="mt-6 text-center font-display text-[13px] font-medium uppercase tracking-[0.16em] text-foreground transition-colors group-hover:text-primary">
                     {step.title}
                   </h3>
-                  <p className="mt-2 max-w-[150px] text-center text-[12px] leading-relaxed text-muted-foreground">
+                  <p className="mt-2.5 max-w-[150px] text-center text-[12px] leading-relaxed text-muted-foreground">
                     {step.desc}
                   </p>
                 </motion.div>
@@ -443,19 +473,19 @@ export function Method() {
         {/* ───────── Timeline vertical (mobile/tablet) ───────── */}
         <div className="mt-14 lg:hidden">
           <div className="relative pl-8">
-            <div className="absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-primary via-primary/40 to-transparent" />
+            <div className="absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-primary/60 via-primary/30 to-transparent" />
             <ol className="space-y-8">
               {METHOD.map((step, i) => (
                 <motion.li
                   key={i}
-                  initial={{ opacity: 0, x: -12 }}
+                  initial={{ opacity: 0, x: -16 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.4, delay: i * 0.05 }}
+                  transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
                   className="relative"
                 >
-                  <div className="absolute -left-8 top-0 flex h-10 w-10 items-center justify-center rounded-full border border-primary/40 bg-background shadow-[0_0_0_4px_oklch(10%_0_0)]">
-                    <span className="font-display text-lg font-bold text-primary">
+                  <div className="absolute -left-8 top-0 flex h-10 w-10 items-center justify-center rounded-full border border-primary/40 bg-gradient-to-br from-[oklch(16%_0.02_145)] to-[oklch(10%_0_0)] shadow-[0_0_0_4px_oklch(10%_0_0),0_0_18px_oklch(85%_0.2_145/0.25)]">
+                    <span className="font-display text-lg font-bold text-primary text-glow">
                       {step.letter}
                     </span>
                   </div>
