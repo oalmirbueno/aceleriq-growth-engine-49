@@ -50,7 +50,7 @@ import { CountUp } from "@/components/ui/CountUp";
 // ─────────────────────────────────────────────────────────────
 export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section id="top" className="relative min-h-screen flex items-center justify-center pt-24 pb-12 md:pt-20 md:pb-16 lg:pb-20 overflow-hidden bg-grid-tech">
+    <section id="top" className="relative min-h-screen flex items-start lg:items-center justify-center pt-24 pb-12 md:pt-20 md:pb-16 lg:pb-20 overflow-hidden bg-grid-tech">
       {/* Apenas o quadriculado, sem linhas */}
       {/* Background Decorativo - Camadas Técnicas */}
       <div className="hero-background" />
