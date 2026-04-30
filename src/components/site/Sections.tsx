@@ -999,30 +999,39 @@ export function Compare() {
           description="A diferença entre contratar entregáveis e contratar um sistema de crescimento."
         />
 
-        <div className="mt-5 md:mt-6 overflow-hidden rounded-2xl border border-border">
-          <div className="grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-border bg-card/40">
+        <div className="mt-5 md:mt-6 relative overflow-hidden rounded-2xl border border-border">
+          {/* Coluna Aceleriq destacada com glow vertical */}
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-[41.66%] bg-gradient-to-b from-primary/[0.04] via-primary/[0.06] to-primary/[0.04]" />
+          <div className="pointer-events-none absolute right-[41.66%] top-0 bottom-0 w-px bg-primary/30" />
+
+          <div className="relative grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-border bg-card/60 backdrop-blur">
             <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
               Dimensão
             </div>
             <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
               Agência comum
             </div>
-            <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-primary">
+            <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-primary flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse shadow-[0_0_8px_currentColor]" />
               Aceleriq
             </div>
           </div>
           {COMPARE.map(([dim, agency, us], i) => (
-            <div
+            <motion.div
               key={i}
-              className="grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-border last:border-b-0 text-sm transition-colors hover:bg-card/30"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.45, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+              className="relative grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-border last:border-b-0 text-sm transition-colors hover:bg-card/30"
             >
               <div className="px-5 py-4 font-medium text-foreground/95">{dim}</div>
-              <div className="px-5 py-4 text-muted-foreground">{agency}</div>
-              <div className="flex items-start gap-2 px-5 py-4 text-foreground">
+              <div className="px-5 py-4 text-muted-foreground line-through decoration-white/10">{agency}</div>
+              <div className="flex items-start gap-2 px-5 py-4 text-foreground font-medium">
                 <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
                 {us}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
