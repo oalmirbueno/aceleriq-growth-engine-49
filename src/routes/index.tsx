@@ -43,26 +43,28 @@ function Index() {
   const openDiagnostico = () => setDiagOpen(true);
 
   return (
-    <div className="min-h-screen bg-background text-foreground relative z-10">
-      <Header onDiagnostico={openDiagnostico} />
-      <main>
-        <Hero onDiagnostico={openDiagnostico} />
-        <Pains />
-        <About />
-        <Method />
-        <Areas />
-        <FitFor />
-        <DiagnosticoCTA onDiagnostico={openDiagnostico} />
-        <Results />
-        <BrandStrip />
-        <Testimonials />
-        <Compare />
-        <WhyNow />
-        <FAQ />
-        <FinalCTA onDiagnostico={openDiagnostico} />
-      </main>
-      <Footer />
-      <DiagnosticoModal open={diagOpen} onOpenChange={setDiagOpen} />
-    </div>
+    <ImmersiveReveal>
+      <div className="min-h-screen bg-background text-foreground relative z-10">
+        <Header onDiagnostico={openDiagnostico} />
+        <main>
+          <Hero onDiagnostico={openDiagnostico} />
+          <Pains />
+          <About />
+          <Method />
+          <Areas />
+          <FitFor />
+          <DiagnosticoCTA onDiagnostico={openDiagnostico} />
+          <Results />
+          <BrandStrip />
+          <Testimonials />
+          <Compare />
+          <WhyNow />
+          <FAQ />
+          <FinalCTA onDiagnostico={openDiagnostico} />
+        </main>
+        <Footer />
+        <DiagnosticoModal open={diagOpen} onOpenChange={setDiagOpen} />
+      </div>
+    </ImmersiveReveal>
   );
 }
