@@ -57,16 +57,23 @@
     max-width: 85rem;
   }
 
-  /* Hero background image with overlay */
+  /* Hero background image — usa a arte completa, com vinheta para legibilidade */
   .hero-background {
     position: absolute;
     inset: 0;
     z-index: 0;
     background-image: url('/hero-bg.jpg');
     background-size: cover;
-    background-position: center;
-    opacity: 0.2; /* Sutil para não atrapalhar a leitura */
-    filter: saturate(0) contrast(1.2); /* Estética técnica/P&B */
+    background-position: center right;
+    opacity: 0.85;
+  }
+  .hero-background::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to right, var(--background) 0%, transparent 60%, transparent 100%),
+      linear-gradient(to bottom, transparent 60%, var(--background) 100%);
   }
 
   /* Grid Brutalista */
