@@ -87,7 +87,7 @@
   /* Efeito de Vidro Industrial */
   .glass-panel {
     background: oklch(100% 0 0 / 0.02);
-    backdrop-filter: blur(20px);
+    /* backdrop-filter: blur(20px); - Removido para performance */
     border: 1px solid oklch(100% 0 0 / 0.08);
     box-shadow: 0 20px 50px -10px oklch(0% 0 0 / 0.5);
   }

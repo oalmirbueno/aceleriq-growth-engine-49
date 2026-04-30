@@ -47,7 +47,7 @@ import {
 // ─────────────────────────────────────────────────────────────
 export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section id="top" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-grid-tech">
+    <section id="top" className="relative min-h-[90vh] flex items-center justify-center pt-20 overflow-hidden bg-grid-tech">
       {/* Background Decorativo - Camadas Técnicas */}
       <div className="hero-background" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background z-10" />
@@ -108,7 +108,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
               transition={{ duration: 1.5, ease: "circOut" }}
               className="relative aspect-square w-full max-w-md mx-auto lg:max-w-none"
             >
-              <div className="absolute inset-0 glass-panel animate-float flex flex-col p-8 overflow-hidden backdrop-blur-md border-white/20">
+              <div className="absolute inset-0 glass-panel flex flex-col p-8 overflow-hidden border-white/20">
                 <div className="flex justify-between items-center mb-12">
                   <div className="flex gap-2">
                     <div className="w-12 h-1 bg-primary shadow-[0_0_10px_rgba(var(--primary-rgb),0.5)]" />
@@ -179,7 +179,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
               </div>
 
               {/* Elementos Brutalistas de Fundo */}
-              <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-primary/5 blur-[120px] rounded-full" />
+              <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-primary/5 rounded-full" />
             </motion.div>
           </div>
         </div>
