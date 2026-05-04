@@ -49,7 +49,14 @@ const ORGANIZATION_JSONLD = {
     addressRegion: "PR",
     addressCountry: "BR",
   },
-  sameAs: ["https://instagram.com/aceleriq"],
+  sameAs: ["https://instagram.com/aceleriq", "https://share.google/N6bMgKWg8aRB1t9m9"],
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5.0",
+    reviewCount: "5",
+    bestRating: "5",
+    worstRating: "1",
+  },
 };
 
 const LOCALBUSINESS_JSONLD = {
@@ -71,7 +78,37 @@ const LOCALBUSINESS_JSONLD = {
     addressCountry: "BR",
   },
   areaServed: { "@type": "Country", name: "Brasil" },
-  sameAs: ["https://instagram.com/aceleriq"],
+  sameAs: ["https://instagram.com/aceleriq", "https://share.google/N6bMgKWg8aRB1t9m9"],
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5.0",
+    reviewCount: "5",
+    bestRating: "5",
+    worstRating: "1",
+  },
+  review: [
+    {
+      "@type": "Review",
+      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+      author: { "@type": "Person", name: "Ricardo Almeida" },
+      reviewBody:
+        "A Aceleriq estruturou todo o nosso comercial do zero. Em 90 dias o CRM estava rodando, automações ativas e o time finalmente vendendo com previsibilidade.",
+    },
+    {
+      "@type": "Review",
+      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+      author: { "@type": "Person", name: "Mariana Costa" },
+      reviewBody:
+        "Profissionais extremamente técnicos e estratégicos. Implementaram IA nos nossos fluxos e o impacto em produtividade foi imediato.",
+    },
+    {
+      "@type": "Review",
+      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+      author: { "@type": "Person", name: "Felipe Andrade" },
+      reviewBody:
+        "Tráfego pago + CRM integrado mudou nosso jogo. Saímos do achismo para decisões baseadas em dados reais.",
+    },
+  ],
 };
 
 const WEBSITE_JSONLD = {

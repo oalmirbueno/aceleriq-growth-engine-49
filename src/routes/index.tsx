@@ -18,6 +18,7 @@ import {
   FAQ,
   FinalCTA,
 } from "@/components/site/Sections";
+import { GoogleReviews } from "@/components/site/GoogleReviews";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -69,6 +70,7 @@ function Index() {
         <WhyNow />
         <FAQ />
         <FinalCTA onDiagnostico={openDiagnostico} />
+        <GoogleReviews />
       </main>
       <Footer />
       <DiagnosticoModal open={diagOpen} onOpenChange={setDiagOpen} />
