@@ -18,6 +18,7 @@ import {
   FAQ,
   FinalCTA,
 } from "@/components/site/Sections";
+import { GoogleReviews } from "@/components/site/GoogleReviews";
 
 export const Route = createFileRoute("/")({
   head: () => ({
