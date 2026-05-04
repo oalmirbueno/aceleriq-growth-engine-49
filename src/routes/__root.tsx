@@ -49,7 +49,14 @@ const ORGANIZATION_JSONLD = {
     addressRegion: "PR",
     addressCountry: "BR",
   },
-  sameAs: ["https://instagram.com/aceleriq"],
+  sameAs: ["https://instagram.com/aceleriq", "https://share.google/N6bMgKWg8aRB1t9m9"],
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5.0",
+    reviewCount: "5",
+    bestRating: "5",
+    worstRating: "1",
+  },
 };
 
 const LOCALBUSINESS_JSONLD = {
