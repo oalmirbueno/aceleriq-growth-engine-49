@@ -70,6 +70,7 @@ function Index() {
         <WhyNow />
         <FAQ />
         <FinalCTA onDiagnostico={openDiagnostico} />
+        <GoogleReviews />
       </main>
       <Footer />
       <DiagnosticoModal open={diagOpen} onOpenChange={setDiagOpen} />
