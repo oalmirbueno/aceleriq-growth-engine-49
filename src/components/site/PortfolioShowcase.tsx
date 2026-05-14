@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowUpRight, Check, RotateCw, Loader2, Monitor, Smartphone } from "lucide-react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { ArrowLeft, ArrowUpRight, Check, RotateCw, Monitor, Smartphone } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
