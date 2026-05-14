@@ -29,6 +29,7 @@ export const Route = createFileRoute("/agencia-de-marketing-digital-curitiba")({
 function Page() {
   return (
     <ServicePageLayout
+      variant="agencia"
       eyebrow="Curitiba · PR · Atendimento nacional"
       h1={<>Agência de <span className="text-primary neon-text-glow">Marketing Digital</span> em Curitiba</>}
       intro="A Aceleriq é a agência de marketing digital de Curitiba para empresas que cansaram de receber relatório bonito sem impacto em receita. Unimos sites, tráfego, automação, IA, CRM e consultoria estratégica no mesmo sistema."

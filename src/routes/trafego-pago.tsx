@@ -28,6 +28,7 @@ export const Route = createFileRoute("/trafego-pago")({
 function Page() {
   return (
     <ServicePageLayout
+      variant="trafego"
       eyebrow="Google · Meta · LinkedIn · TikTok"
       h1={<>Gestão de <span className="text-primary neon-text-glow">Tráfego Pago</span> orientada a receita</>}
       intro="Tráfego pago lido por pipeline, não por clique. Integramos Meta CAPI, Google Enhanced Conversions e CRM para você decidir investimento com base em CAC e LTV reais — não em métricas de vaidade."
