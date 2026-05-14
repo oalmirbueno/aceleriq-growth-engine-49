@@ -177,6 +177,107 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
       "Base escalável para novas features",
     ],
   },
+  {
+    slug: "jalimpo",
+    name: "JA Limpo",
+    segment: "Serviços · Limpeza",
+    origin: "https://jalimpo.com.br",
+    accent: "from-lime-500/30 via-emerald-500/20 to-transparent",
+    overview:
+      "Site institucional de empresa de limpeza com foco em captação local, autoridade de marca e contato direto via WhatsApp.",
+    challenge:
+      "Diferenciar uma operação de serviço em mercado pulverizado e gerar leads qualificados sem depender de marketplaces.",
+    solution:
+      "Site claro, com prova social, portfólio de serviços e CTA para WhatsApp em todos os pontos da jornada.",
+    highlights: [
+      "Hierarquia comercial clara",
+      "Portfólio de serviços segmentado",
+      "Prova social em destaque",
+      "SEO local Curitiba",
+    ],
+    stack: ["React", "Tailwind", "SEO local", "WhatsApp API"],
+    results: ["Aumento de contatos diretos", "Posicionamento local consolidado", "Marca percebida como premium"],
+  },
+  {
+    slug: "deliciasgama",
+    name: "Delícias Gama",
+    segment: "Food · Confeitaria",
+    origin: "https://deliciasgama.lovable.app",
+    accent: "from-pink-500/30 via-rose-500/20 to-transparent",
+    overview:
+      "Site de confeitaria artesanal com vitrine visual, narrativa afetiva e fluxo direto de pedido.",
+    challenge:
+      "Transformar um perfil de Instagram em uma operação digital com identidade própria e fluxo de pedidos organizado.",
+    solution:
+      "Vitrine fotográfica, cardápio organizado por categoria e CTA de pedido via WhatsApp em destaque.",
+    highlights: ["Vitrine fotográfica afetiva", "Cardápio organizado", "Fluxo direto de pedido", "Mobile-first"],
+    stack: ["React", "Tailwind", "Otimização de imagens"],
+    results: ["Pedidos diretos pelo site", "Identidade visual consistente", "Profissionalização da marca"],
+  },
+  {
+    slug: "rotasul",
+    name: "Rota Sul Multimarcas",
+    segment: "Automotivo · Varejo",
+    origin: "https://rotasulmultimarcas.lovable.app",
+    accent: "from-zinc-500/30 via-slate-500/20 to-transparent",
+    overview:
+      "Plataforma de loja multimarcas com vitrine de veículos, ficha técnica e captação direta para venda.",
+    challenge:
+      "Estruturar uma vitrine digital profissional para uma loja de carros que competia com grandes portais.",
+    solution:
+      "Catálogo dinâmico, fichas detalhadas, fotos em destaque e CTA direto para WhatsApp do vendedor.",
+    highlights: ["Catálogo de veículos dinâmico", "Fichas técnicas completas", "Fotos em alta resolução", "CTA direto ao vendedor"],
+    stack: ["React", "Tailwind", "Catálogo dinâmico"],
+    results: ["Captação independente de portais", "Aumento de leads qualificados", "Profissionalização da marca"],
+  },
+  {
+    slug: "cartaoacessosaude",
+    name: "Cartão Acesso Saúde",
+    segment: "Saúde · Benefícios",
+    origin: "https://cartaoacessosaude.lovable.app",
+    accent: "from-teal-500/30 via-cyan-500/20 to-transparent",
+    overview:
+      "Plataforma de cartão de benefícios em saúde com narrativa institucional e fluxo direto de adesão.",
+    challenge:
+      "Comunicar um produto sensível (saúde) com clareza, autoridade e fluxo de conversão sem fricção.",
+    solution:
+      "Site institucional com prova de rede, planos comparáveis e CTA direto de adesão.",
+    highlights: ["Comparativo de planos", "Prova de rede credenciada", "CTA de adesão claro", "Mobile-first"],
+    stack: ["React", "Tailwind", "SEO técnico"],
+    results: ["Adesões diretas pelo site", "Autoridade institucional", "Base escalável para tráfego pago"],
+  },
+  {
+    slug: "buenoconstrucao",
+    name: "Bueno Construção",
+    segment: "Construção · Materiais",
+    origin: "https://buenoconstrucao.lovable.app",
+    accent: "from-orange-500/30 via-amber-500/20 to-transparent",
+    overview:
+      "Site institucional de loja de materiais de construção com vitrine de produtos e atendimento direto.",
+    challenge:
+      "Levar uma operação tradicional para o digital sem perder a identidade local de relacionamento.",
+    solution:
+      "Site institucional com catálogo de categorias, prova social local e CTA WhatsApp em destaque.",
+    highlights: ["Catálogo por categoria", "Identidade local forte", "WhatsApp integrado", "SEO local"],
+    stack: ["React", "Tailwind", "SEO local"],
+    results: ["Captação digital ativa", "Modernização de marca tradicional", "Atendimento direto via WhatsApp"],
+  },
+  {
+    slug: "appplaybet",
+    name: "App Playbet",
+    segment: "App · Entretenimento",
+    origin: "https://appplaybet.lovable.app",
+    accent: "from-purple-500/30 via-indigo-500/20 to-transparent",
+    overview:
+      "Landing de aplicativo com narrativa de produto, prova de uso e CTA direto para download.",
+    challenge:
+      "Ativar conversões de download em um nicho competitivo, comunicando diferenciais com clareza.",
+    solution:
+      "Landing focada em benefício, prova social, screenshots do app e CTAs distribuídos na jornada.",
+    highlights: ["Hero focado em conversão", "Screenshots do app em destaque", "CTAs distribuídos", "Performance mobile"],
+    stack: ["React", "Tailwind", "Edge deploy"],
+    results: ["Pronta para campanhas pagas", "Mensagem clara de produto", "Conversão otimizada"],
+  },
 ];
 
 type Props = {
