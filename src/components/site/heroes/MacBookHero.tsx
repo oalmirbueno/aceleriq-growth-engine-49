@@ -12,8 +12,8 @@ export function MacBookHero() {
     offset: ["start 74%", "end 42%"],
   });
 
-  const rawLidAngle = useTransform(scrollYProgress, [0, 0.82], [reduceMotion ? 0 : 88, 0]);
-  const rawSceneY = useTransform(scrollYProgress, [0, 0.82, 1], [reduceMotion ? 0 : 28, 0, -18]);
+  const rawLidAngle = useTransform(scrollYProgress, [0, 0.82], [reduceMotion ? 0 : -82, 0]);
+  const rawSceneY = useTransform(scrollYProgress, [0, 0.82, 1], [reduceMotion ? 0 : 18, 10, -6]);
   const rawGlow = useTransform(scrollYProgress, [0, 0.35, 0.9], [0.18, 0.72, 0.44]);
   const lidAngle = useSpring(rawLidAngle, { stiffness: 92, damping: 28, mass: 0.7 });
   const sceneY = useSpring(rawSceneY, { stiffness: 120, damping: 30, mass: 0.8 });
@@ -21,15 +21,15 @@ export function MacBookHero() {
   return (
     <section
       ref={sectionRef}
-      className="relative mx-auto h-[112vh] min-h-[680px] w-full max-w-[1240px] px-2 md:h-[125vh] md:min-h-[820px] md:px-6"
+      className="relative mx-auto h-[104vh] min-h-[620px] w-full max-w-[1240px] px-2 md:h-[112vh] md:min-h-[720px] md:px-6"
     >
-      <div className="sticky top-[16vh] mx-auto flex h-[62vh] min-h-[430px] w-full items-center justify-center md:top-[12vh] md:h-[72vh]">
+      <div className="sticky top-[22vh] mx-auto flex h-[54vh] min-h-[390px] w-full items-center justify-center md:top-[18vh] md:h-[60vh]">
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           style={{ y: sceneY }}
-          className="relative mx-auto aspect-[16/10] w-full max-w-[1080px] [perspective:1800px]"
+          className="relative mx-auto aspect-[16/10] w-full max-w-[960px] [perspective:1700px]"
         >
           <motion.div
             aria-hidden
@@ -41,8 +41,8 @@ export function MacBookHero() {
             className="absolute left-1/2 top-[76%] h-[20%] w-[86%] -translate-x-1/2 rounded-[100%] bg-foreground/15 blur-2xl"
           />
 
-          <div className="absolute inset-0 [transform:rotateX(7deg)_rotateY(-5deg)] [transform-style:preserve-3d]">
-            <div className="absolute bottom-[13%] left-1/2 z-10 h-[19%] w-[92%] -translate-x-1/2 rounded-b-[32px] rounded-t-[12px] border border-foreground/10 bg-gradient-to-b from-foreground/85 via-foreground/62 to-foreground/36 shadow-[0_72px_120px_-58px_oklch(0%_0_0/1)] [transform:rotateX(64deg)] [transform-origin:50%_0%] [transform-style:preserve-3d]">
+          <div className="absolute inset-0 [transform:rotateX(7deg)_rotateY(-4deg)] [transform-style:preserve-3d]">
+            <div className="absolute bottom-[8%] left-1/2 z-20 h-[19%] w-[92%] -translate-x-1/2 rounded-b-[32px] rounded-t-[12px] border border-foreground/10 bg-gradient-to-b from-foreground/85 via-foreground/62 to-foreground/36 shadow-[0_72px_120px_-58px_oklch(0%_0_0/1)] [transform:rotateX(64deg)] [transform-origin:50%_0%] [transform-style:preserve-3d]">
               <div className="absolute inset-x-[5%] top-[16%] grid grid-cols-14 gap-[0.9%]">
                 {keys.map((key) => (
                   <span
@@ -57,7 +57,7 @@ export function MacBookHero() {
 
             <motion.div
               style={{ rotateX: lidAngle }}
-              className="absolute bottom-[25.5%] left-[8%] right-[8%] z-30 aspect-[16/10] origin-bottom rounded-t-[26px] border border-foreground/10 bg-gradient-to-b from-foreground/95 via-foreground/82 to-foreground/58 p-[1.05%] shadow-[0_58px_150px_-72px_oklch(0%_0_0/1)] [backface-visibility:hidden] [transform-style:preserve-3d]"
+              className="absolute bottom-[20.5%] left-[8%] right-[8%] z-10 aspect-[16/10] origin-bottom rounded-t-[26px] border border-foreground/10 bg-gradient-to-b from-foreground/95 via-foreground/82 to-foreground/58 p-[1.05%] shadow-[0_58px_150px_-72px_oklch(0%_0_0/1)] [backface-visibility:hidden] [transform-style:preserve-3d]"
             >
               <div className="relative h-full overflow-hidden rounded-t-[20px] border border-border/70 bg-background shadow-[inset_0_0_0_1px_oklch(100%_0_0/0.04)]">
                 <WebsiteScreen />
