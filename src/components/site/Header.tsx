@@ -27,10 +27,10 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 isolate transition-all duration-500 [backdrop-filter:saturate(140%)_blur(20px)] [-webkit-backdrop-filter:saturate(140%)_blur(20px)]",
+        "fixed inset-x-0 top-0 z-50 isolate transition-all duration-300 [backdrop-filter:saturate(150%)_blur(22px)] [-webkit-backdrop-filter:saturate(150%)_blur(22px)]",
         scrolled
-          ? "border-b border-white/[0.06] bg-black/40 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.8)] py-3"
-          : "border-b border-transparent bg-black/10 py-5",
+          ? "border-b border-primary/15 bg-black/65 shadow-[0_10px_36px_-16px_rgba(0,0,0,0.9)] py-2"
+          : "border-b border-white/[0.06] bg-black/55 shadow-[0_10px_36px_-18px_rgba(0,0,0,0.85)] py-2.5",
       )}
     >
       <div className="container-aceleriq flex items-center justify-between">
@@ -39,7 +39,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
             <img
               src={logoAceleriq}
               alt="Logotipo Aceleriq"
-              className="h-20 w-auto md:h-24 transition-transform duration-300 group-hover:scale-105"
+              className="h-14 w-auto md:h-16 transition-transform duration-300 group-hover:scale-105"
             />
           </Link>
 
