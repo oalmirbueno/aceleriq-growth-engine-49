@@ -141,6 +141,8 @@ export function ServicePageLayout(props: ServicePageProps) {
           </div>
         </section>
 
+        {props.extraSection}
+
         {/* FAQ */}
         <section className="relative py-12 md:py-16 bg-grid-ambient">
           <div className="container-aceleriq max-w-3xl">
