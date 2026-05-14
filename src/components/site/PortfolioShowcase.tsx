@@ -438,41 +438,16 @@ function CaseView({ item, onBack }: { item: PortfolioItem; onBack: () => void })
               </div>
 
               {/* Stage */}
-              <div className="relative flex items-center justify-center bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.04),_transparent_60%)] p-4 sm:p-6">
-                <div
-                  className={`relative w-full overflow-hidden bg-background transition-all duration-500 ${
-                    device === "mobile"
-                      ? "mx-auto aspect-[9/19] max-w-[340px] rounded-[28px] border border-white/10 shadow-2xl"
-                      : "aspect-[16/10] rounded-md border border-white/[0.06]"
-                  }`}
-                >
-                  {!loaded && (
-                    <div className="absolute inset-0 z-10 overflow-hidden">
-                      <img
-                        src={THUMB(item.origin, device === "mobile" ? 600 : 1200)}
-                        alt=""
-                        aria-hidden
-                        className="h-full w-full object-cover object-top opacity-60 blur-[1px]"
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center bg-background/40 backdrop-blur-sm">
-                        <div className="flex items-center gap-2 rounded-full border border-white/10 bg-background/80 px-4 py-2 text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
-                          <Loader2 className="h-3.5 w-3.5 animate-spin text-primary" />
-                          Carregando
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  <iframe
-                    key={`${iframeKey}-${device}`}
-                    src={item.origin}
-                    title={`Preview navegável de ${item.name}`}
-                    onLoad={() => setLoaded(true)}
-                    loading="lazy"
-                    referrerPolicy="no-referrer"
-                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                    className="absolute inset-0 h-full w-full border-0 bg-background"
-                  />
-                </div>
+              <div className="relative bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.04),_transparent_60%)] p-4 sm:p-6">
+                <ScaledFrame
+                  key={`${iframeKey}-${device}-${item.slug}`}
+                  src={item.origin}
+                  posterSrc={THUMB(item.origin, device === "mobile" ? 600 : 1400)}
+                  device={device}
+                  loaded={loaded}
+                  onLoad={() => setLoaded(true)}
+                  title={`Preview navegável de ${item.name}`}
+                />
               </div>
             </div>
 
