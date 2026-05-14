@@ -6,12 +6,19 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { DiagnosticoModal } from "@/components/site/DiagnosticoModal";
 import { AmbientBackdrop } from "@/components/site/AmbientBackdrop";
-import { ServiceVisual, type ServiceVariant } from "@/components/site/ServiceVisual";
+import type { ServiceVariant } from "@/components/site/ServiceVisual";
 import { Button } from "@/components/ui/button";
 import { CountUp } from "@/components/ui/CountUp";
 import { whatsappLink, DEFAULT_WHATSAPP_MESSAGE } from "@/lib/contact";
 
 export type ServiceFAQ = { q: string; a: string };
+
+export type ServicePrinciple = {
+  eyebrow: string;
+  title: ReactNode;
+  body: string;
+  stats: { v: string; l: string }[];
+};
 
 export type ServicePageProps = {
   variant: ServiceVariant;
@@ -24,6 +31,74 @@ export type ServicePageProps = {
   faqs: ServiceFAQ[];
   whatsappMessage?: string;
   extraSection?: ReactNode;
+  principle?: ServicePrinciple;
+};
+
+const DEFAULT_PRINCIPLES: Record<ServiceVariant, ServicePrinciple> = {
+  sites: {
+    eyebrow: "✦ Princípio · Sites",
+    title: (
+      <>
+        Site é <span className="bg-primary text-foreground px-2">ativo de receita</span>,
+        <br />
+        não cartão de visita.
+      </>
+    ),
+    body: "Cada bloco é desenhado para vender: hierarquia clara, performance brutal, SEO técnico nativo e CRM conectado. O site não termina no deploy, ele começa lá, alimentando tráfego, dados e funil em loop contínuo.",
+    stats: [
+      { v: "<1s", l: "LCP em produção" },
+      { v: "98", l: "Lighthouse SEO" },
+      { v: "100%", l: "leads no CRM" },
+    ],
+  },
+  trafego: {
+    eyebrow: "✦ Princípio · Tráfego",
+    title: (
+      <>
+        Mídia paga é <span className="bg-primary text-foreground px-2">distribuição</span>,
+        <br />
+        não loteria de clique.
+      </>
+    ),
+    body: "Tráfego sem CRM e sem CAPI é aposta. A Aceleriq conecta Meta, Google e LinkedIn ao seu pipeline real, mede CAC e LTV por canal e otimiza o investimento por receita gerada, não por métrica de vaidade.",
+    stats: [
+      { v: "1", l: "fonte da verdade (CRM)" },
+      { v: "S2S", l: "tracking server-side" },
+      { v: "ROAS", l: "lido por receita" },
+    ],
+  },
+  ia: {
+    eyebrow: "✦ Princípio · Automação & IA",
+    title: (
+      <>
+        IA é <span className="bg-primary text-foreground px-2">alavanca</span>,
+        <br />
+        não enfeite de pitch.
+      </>
+    ),
+    body: "Automação real tira tarefa repetitiva do colo do time e devolve foco em receita. Agentes de IA com RAG da sua base, fluxos n8n self-hosted e governança LGPD: tecnologia que opera, não que apenas demonstra.",
+    stats: [
+      { v: "24/7", l: "operação contínua" },
+      { v: "RAG", l: "sobre sua base" },
+      { v: "LGPD", l: "compliance nativo" },
+    ],
+  },
+  agencia: {
+    eyebrow: "✦ Princípio · Agência",
+    title: (
+      <>
+        A gente <span className="bg-primary text-foreground px-2">vende sistema</span>,
+        <br />
+        não relatório bonito.
+      </>
+    ),
+    body: "Cada peça do programa conversa com a próxima. Site alimenta tráfego. Tráfego alimenta CRM. CRM alimenta IA. IA devolve receita pra dentro do P&L. Sem ilha, sem entregável solto.",
+    stats: [
+      { v: "0", l: "departamentos isolados" },
+      { v: "1", l: "fonte da verdade" },
+      { v: "∞", l: "ciclos de melhoria" },
+    ],
+  },
 };
 
 const MARQUEE = [
@@ -40,6 +115,7 @@ export function ServicePageLayout(props: ServicePageProps) {
   const [diagOpen, setDiagOpen] = useState(false);
   const open = () => setDiagOpen(true);
   const wa = whatsappLink(props.whatsappMessage ?? DEFAULT_WHATSAPP_MESSAGE);
+  const principle = props.principle ?? DEFAULT_PRINCIPLES[props.variant];
 
   return (
     <div className="relative min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground overflow-hidden">
@@ -48,115 +124,66 @@ export function ServicePageLayout(props: ServicePageProps) {
 
       <main className="relative z-10">
         {/* HERO */}
-        <section
-          className={`relative ${props.variant === "sites" ? "overflow-visible pt-24 pb-0 md:pt-26 md:pb-0" : "overflow-hidden pt-28 pb-16 md:pt-32 md:pb-20"}`}
-        >
+        <section className="relative overflow-hidden pt-28 pb-16 md:pt-32 md:pb-20">
           <div className="relative px-6 lg:px-16 max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className={`flex items-center gap-3 mb-8 text-[11px] tracking-[0.2em] uppercase text-muted-foreground/80 ${props.variant === "sites" ? "justify-center" : ""}`}
+              className="flex items-center justify-center gap-3 mb-8 text-[11px] tracking-[0.2em] uppercase text-muted-foreground/80"
             >
               <span className="w-8 h-px bg-primary" />
               <span className="text-primary font-mono">{props.eyebrow}</span>
+              <span className="w-8 h-px bg-primary" />
             </motion.div>
 
-            {props.variant === "sites" ? (
-              // Sites: headline on top, MacBook centered, full width
-              <div className="space-y-0">
-                <div className="mx-auto max-w-5xl text-center">
-                  <h1 className="mx-auto max-w-[20ch] font-display text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[4.75rem] leading-[1] uppercase tracking-[-0.035em]">
-                    {props.h1}
-                  </h1>
+            <div className="mx-auto max-w-5xl text-center">
+              <motion.h1
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.05 }}
+                className="mx-auto max-w-[20ch] font-display text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[4.75rem] leading-[1] uppercase tracking-[-0.035em]"
+              >
+                {props.h1}
+              </motion.h1>
 
-                  <p className="mx-auto mt-6 max-w-xl text-[14px] md:text-[15px] text-foreground/70 font-light leading-[1.65]">
-                    {props.intro}
-                  </p>
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="mx-auto mt-7 max-w-xl text-[14px] md:text-[15px] text-foreground/70 font-light leading-[1.65]"
+              >
+                {props.intro}
+              </motion.p>
 
-                  <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
-                    <Button
-                      onClick={open}
-                      className="group h-12 rounded-none bg-primary px-6 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-foreground hover:-translate-y-0.5 transition-all hover:shadow-[0_8px_30px_oklch(85%_0.2_145/0.4)]"
-                    >
-                      Diagnóstico Gratuito
-                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                    </Button>
-                    <a
-                      href={wa}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="group inline-flex items-center gap-2.5 h-12 px-2 text-[11px] font-bold uppercase tracking-[0.18em] text-foreground/80 hover:text-primary transition-colors"
-                    >
-                      <span className="relative flex h-1.5 w-1.5">
-                        <span className="animate-ping absolute inline-flex h-full w-full bg-primary opacity-60" />
-                        <span className="relative inline-flex h-1.5 w-1.5 bg-primary" />
-                      </span>
-                      WhatsApp
-                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                    </a>
-                  </div>
-                </div>
-
-                <div className="relative z-0 mt-2 md:mt-4">
-                  <ServiceVisual variant={props.variant} />
-                </div>
-              </div>
-            ) : (
-              <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-                <div className="lg:col-span-6">
-                  <motion.h1
-                    initial={{ opacity: 0, y: 14 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.05 }}
-                    className="font-display text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[4.5rem] leading-[0.95] uppercase tracking-[-0.04em]"
-                  >
-                    {props.h1}
-                  </motion.h1>
-
-                  <motion.p
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    className="mt-8 text-[15px] md:text-base text-foreground/75 font-light leading-[1.6] max-w-xl"
-                  >
-                    {props.intro}
-                  </motion.p>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.32 }}
-                    className="mt-8 flex flex-wrap items-center gap-4"
-                  >
-                    <Button
-                      onClick={open}
-                      className="group h-12 rounded-none bg-primary px-6 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-foreground hover:-translate-y-0.5 transition-all hover:shadow-[0_8px_30px_oklch(85%_0.2_145/0.4)]"
-                    >
-                      Diagnóstico Gratuito
-                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                    </Button>
-                    <a
-                      href={wa}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="group inline-flex items-center gap-2.5 h-12 px-2 text-[11px] font-bold uppercase tracking-[0.18em] text-foreground/80 hover:text-primary transition-colors"
-                    >
-                      <span className="relative flex h-1.5 w-1.5">
-                        <span className="animate-ping absolute inline-flex h-full w-full bg-primary opacity-60" />
-                        <span className="relative inline-flex h-1.5 w-1.5 bg-primary" />
-                      </span>
-                      WhatsApp
-                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                    </a>
-                  </motion.div>
-                </div>
-
-                <div className="lg:col-span-6">
-                  <ServiceVisual variant={props.variant} />
-                </div>
-              </div>
-            )}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.32 }}
+                className="mt-9 flex flex-wrap items-center justify-center gap-4"
+              >
+                <Button
+                  onClick={open}
+                  className="group h-12 rounded-none bg-primary px-6 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-foreground hover:-translate-y-0.5 transition-all hover:shadow-[0_8px_30px_oklch(85%_0.2_145/0.4)]"
+                >
+                  Diagnóstico Gratuito
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                </Button>
+                <a
+                  href={wa}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group inline-flex items-center gap-2.5 h-12 px-2 text-[11px] font-bold uppercase tracking-[0.18em] text-foreground/80 hover:text-primary transition-colors"
+                >
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full bg-primary opacity-60" />
+                    <span className="relative inline-flex h-1.5 w-1.5 bg-primary" />
+                  </span>
+                  WhatsApp
+                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </a>
+              </motion.div>
+            </div>
           </div>
         </section>
 
@@ -312,26 +339,18 @@ export function ServicePageLayout(props: ServicePageProps) {
           />
           <div className="relative max-w-7xl mx-auto px-6 lg:px-16 py-20 md:py-28 grid lg:grid-cols-12 gap-10">
             <div className="lg:col-span-2 font-mono text-[10px] uppercase tracking-[0.25em] opacity-60">
-              ✦ Princípio
+              {principle.eyebrow}
             </div>
             <div className="lg:col-span-7">
               <h2 className="font-display text-3xl md:text-5xl lg:text-6xl uppercase leading-[0.95] tracking-[-0.045em]">
-                A gente <span className="bg-primary text-foreground px-2">vende sistema</span>,
-                <br />
-                não relatório bonito.
+                {principle.title}
               </h2>
               <p className="mt-6 max-w-xl text-[15px] md:text-base leading-[1.65] opacity-75">
-                Cada peça do programa conversa com a próxima. Site alimenta tráfego. Tráfego
-                alimenta CRM. CRM alimenta IA. IA devolve receita pra dentro do P&L. Sem ilha, sem
-                entregável solto.
+                {principle.body}
               </p>
             </div>
             <div className="lg:col-span-3 flex flex-col gap-4">
-              {[
-                { v: "0", l: "departamentos isolados" },
-                { v: "1", l: "fonte da verdade" },
-                { v: "∞", l: "ciclos de melhoria" },
-              ].map((s) => (
+              {principle.stats.map((s) => (
                 <div
                   key={s.l}
                   className="flex items-baseline gap-3 border-b border-background/15 pb-3"
