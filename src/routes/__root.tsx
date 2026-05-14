@@ -25,9 +25,10 @@ function NotFoundComponent() {
   );
 }
 
-const SITE_TITLE = "Aceleriq · Engenharia de Crescimento";
+const SITE_TITLE =
+  "Aceleriq · Agência de Marketing Digital, Sites, Tráfego e Automação em Curitiba";
 const SITE_DESCRIPTION =
-  "Engenharia de crescimento em Curitiba: estratégia, CRM, tráfego, automação, IA e dados para escalar com previsibilidade.";
+  "Agência de marketing digital em Curitiba: criação de sites, tráfego pago, automação, IA, CRM, sistemas e consultoria de crescimento. Diagnóstico gratuito + Método Acelera.";
 const SITE_URL = "https://aceleriq.com.br";
 const OG_IMAGE = `${SITE_URL}/og-image.jpg`;
 
