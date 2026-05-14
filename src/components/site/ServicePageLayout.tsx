@@ -13,6 +13,13 @@ import { whatsappLink, DEFAULT_WHATSAPP_MESSAGE } from "@/lib/contact";
 
 export type ServiceFAQ = { q: string; a: string };
 
+export type ServicePrinciple = {
+  eyebrow: string;
+  title: ReactNode;
+  body: string;
+  stats: { v: string; l: string }[];
+};
+
 export type ServicePageProps = {
   variant: ServiceVariant;
   eyebrow: string;
@@ -24,6 +31,74 @@ export type ServicePageProps = {
   faqs: ServiceFAQ[];
   whatsappMessage?: string;
   extraSection?: ReactNode;
+  principle?: ServicePrinciple;
+};
+
+const DEFAULT_PRINCIPLES: Record<ServiceVariant, ServicePrinciple> = {
+  sites: {
+    eyebrow: "✦ Princípio · Sites",
+    title: (
+      <>
+        Site é <span className="bg-primary text-foreground px-2">ativo de receita</span>,
+        <br />
+        não cartão de visita.
+      </>
+    ),
+    body: "Cada bloco é desenhado para vender: hierarquia clara, performance brutal, SEO técnico nativo e CRM conectado. O site não termina no deploy, ele começa lá, alimentando tráfego, dados e funil em loop contínuo.",
+    stats: [
+      { v: "<1s", l: "LCP em produção" },
+      { v: "98", l: "Lighthouse SEO" },
+      { v: "100%", l: "leads no CRM" },
+    ],
+  },
+  trafego: {
+    eyebrow: "✦ Princípio · Tráfego",
+    title: (
+      <>
+        Mídia paga é <span className="bg-primary text-foreground px-2">distribuição</span>,
+        <br />
+        não loteria de clique.
+      </>
+    ),
+    body: "Tráfego sem CRM e sem CAPI é aposta. A Aceleriq conecta Meta, Google e LinkedIn ao seu pipeline real, mede CAC e LTV por canal e otimiza o investimento por receita gerada, não por métrica de vaidade.",
+    stats: [
+      { v: "1", l: "fonte da verdade (CRM)" },
+      { v: "S2S", l: "tracking server-side" },
+      { v: "ROAS", l: "lido por receita" },
+    ],
+  },
+  ia: {
+    eyebrow: "✦ Princípio · Automação & IA",
+    title: (
+      <>
+        IA é <span className="bg-primary text-foreground px-2">alavanca</span>,
+        <br />
+        não enfeite de pitch.
+      </>
+    ),
+    body: "Automação real tira tarefa repetitiva do colo do time e devolve foco em receita. Agentes de IA com RAG da sua base, fluxos n8n self-hosted e governança LGPD: tecnologia que opera, não que apenas demonstra.",
+    stats: [
+      { v: "24/7", l: "operação contínua" },
+      { v: "RAG", l: "sobre sua base" },
+      { v: "LGPD", l: "compliance nativo" },
+    ],
+  },
+  agencia: {
+    eyebrow: "✦ Princípio · Agência",
+    title: (
+      <>
+        A gente <span className="bg-primary text-foreground px-2">vende sistema</span>,
+        <br />
+        não relatório bonito.
+      </>
+    ),
+    body: "Cada peça do programa conversa com a próxima. Site alimenta tráfego. Tráfego alimenta CRM. CRM alimenta IA. IA devolve receita pra dentro do P&L. Sem ilha, sem entregável solto.",
+    stats: [
+      { v: "0", l: "departamentos isolados" },
+      { v: "1", l: "fonte da verdade" },
+      { v: "∞", l: "ciclos de melhoria" },
+    ],
+  },
 };
 
 const MARQUEE = [
