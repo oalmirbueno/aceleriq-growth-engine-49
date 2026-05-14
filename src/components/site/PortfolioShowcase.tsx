@@ -24,7 +24,7 @@ export type PortfolioItem = {
 };
 
 const THUMB = (origin: string, w: number) =>
-  `https://image.thum.io/get/width/${w}/crop/900/noanimate/${origin}`;
+  `https://image.thum.io/get/width/${w}/crop/1200/noanimate/${origin}`;
 
 export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
   {
@@ -177,6 +177,107 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
       "Base escalável para novas features",
     ],
   },
+  {
+    slug: "jalimpo",
+    name: "JA Limpo",
+    segment: "Serviços · Limpeza",
+    origin: "https://jalimpo.com.br",
+    accent: "from-lime-500/30 via-emerald-500/20 to-transparent",
+    overview:
+      "Site institucional de empresa de limpeza com foco em captação local, autoridade de marca e contato direto via WhatsApp.",
+    challenge:
+      "Diferenciar uma operação de serviço em mercado pulverizado e gerar leads qualificados sem depender de marketplaces.",
+    solution:
+      "Site claro, com prova social, portfólio de serviços e CTA para WhatsApp em todos os pontos da jornada.",
+    highlights: [
+      "Hierarquia comercial clara",
+      "Portfólio de serviços segmentado",
+      "Prova social em destaque",
+      "SEO local Curitiba",
+    ],
+    stack: ["React", "Tailwind", "SEO local", "WhatsApp API"],
+    results: ["Aumento de contatos diretos", "Posicionamento local consolidado", "Marca percebida como premium"],
+  },
+  {
+    slug: "deliciasgama",
+    name: "Delícias Gama",
+    segment: "Food · Confeitaria",
+    origin: "https://deliciasgama.lovable.app",
+    accent: "from-pink-500/30 via-rose-500/20 to-transparent",
+    overview:
+      "Site de confeitaria artesanal com vitrine visual, narrativa afetiva e fluxo direto de pedido.",
+    challenge:
+      "Transformar um perfil de Instagram em uma operação digital com identidade própria e fluxo de pedidos organizado.",
+    solution:
+      "Vitrine fotográfica, cardápio organizado por categoria e CTA de pedido via WhatsApp em destaque.",
+    highlights: ["Vitrine fotográfica afetiva", "Cardápio organizado", "Fluxo direto de pedido", "Mobile-first"],
+    stack: ["React", "Tailwind", "Otimização de imagens"],
+    results: ["Pedidos diretos pelo site", "Identidade visual consistente", "Profissionalização da marca"],
+  },
+  {
+    slug: "rotasul",
+    name: "Rota Sul Multimarcas",
+    segment: "Automotivo · Varejo",
+    origin: "https://rotasulmultimarcas.lovable.app",
+    accent: "from-zinc-500/30 via-slate-500/20 to-transparent",
+    overview:
+      "Plataforma de loja multimarcas com vitrine de veículos, ficha técnica e captação direta para venda.",
+    challenge:
+      "Estruturar uma vitrine digital profissional para uma loja de carros que competia com grandes portais.",
+    solution:
+      "Catálogo dinâmico, fichas detalhadas, fotos em destaque e CTA direto para WhatsApp do vendedor.",
+    highlights: ["Catálogo de veículos dinâmico", "Fichas técnicas completas", "Fotos em alta resolução", "CTA direto ao vendedor"],
+    stack: ["React", "Tailwind", "Catálogo dinâmico"],
+    results: ["Captação independente de portais", "Aumento de leads qualificados", "Profissionalização da marca"],
+  },
+  {
+    slug: "cartaoacessosaude",
+    name: "Cartão Acesso Saúde",
+    segment: "Saúde · Benefícios",
+    origin: "https://cartaoacessosaude.lovable.app",
+    accent: "from-teal-500/30 via-cyan-500/20 to-transparent",
+    overview:
+      "Plataforma de cartão de benefícios em saúde com narrativa institucional e fluxo direto de adesão.",
+    challenge:
+      "Comunicar um produto sensível (saúde) com clareza, autoridade e fluxo de conversão sem fricção.",
+    solution:
+      "Site institucional com prova de rede, planos comparáveis e CTA direto de adesão.",
+    highlights: ["Comparativo de planos", "Prova de rede credenciada", "CTA de adesão claro", "Mobile-first"],
+    stack: ["React", "Tailwind", "SEO técnico"],
+    results: ["Adesões diretas pelo site", "Autoridade institucional", "Base escalável para tráfego pago"],
+  },
+  {
+    slug: "buenoconstrucao",
+    name: "Bueno Construção",
+    segment: "Construção · Materiais",
+    origin: "https://buenoconstrucao.lovable.app",
+    accent: "from-orange-500/30 via-amber-500/20 to-transparent",
+    overview:
+      "Site institucional de loja de materiais de construção com vitrine de produtos e atendimento direto.",
+    challenge:
+      "Levar uma operação tradicional para o digital sem perder a identidade local de relacionamento.",
+    solution:
+      "Site institucional com catálogo de categorias, prova social local e CTA WhatsApp em destaque.",
+    highlights: ["Catálogo por categoria", "Identidade local forte", "WhatsApp integrado", "SEO local"],
+    stack: ["React", "Tailwind", "SEO local"],
+    results: ["Captação digital ativa", "Modernização de marca tradicional", "Atendimento direto via WhatsApp"],
+  },
+  {
+    slug: "appplaybet",
+    name: "App Playbet",
+    segment: "App · Entretenimento",
+    origin: "https://appplaybet.lovable.app",
+    accent: "from-purple-500/30 via-indigo-500/20 to-transparent",
+    overview:
+      "Landing de aplicativo com narrativa de produto, prova de uso e CTA direto para download.",
+    challenge:
+      "Ativar conversões de download em um nicho competitivo, comunicando diferenciais com clareza.",
+    solution:
+      "Landing focada em benefício, prova social, screenshots do app e CTAs distribuídos na jornada.",
+    highlights: ["Hero focado em conversão", "Screenshots do app em destaque", "CTAs distribuídos", "Performance mobile"],
+    stack: ["React", "Tailwind", "Edge deploy"],
+    results: ["Pronta para campanhas pagas", "Mensagem clara de produto", "Conversão otimizada"],
+  },
 ];
 
 type Props = {
@@ -242,7 +343,12 @@ export function PortfolioShowcase({
         )}
 
         {active ? (
-          <CaseView item={active} onBack={() => setActiveSlug(null)} />
+          <CaseView
+            item={active}
+            items={items}
+            onBack={() => setActiveSlug(null)}
+            onSelect={(slug) => setActiveSlug(slug)}
+          />
         ) : (
           <div className="mt-10">
             <Carousel opts={{ align: "start", loop: false }} className="w-full">
@@ -326,7 +432,17 @@ function PortfolioCard({
   );
 }
 
-function CaseView({ item, onBack }: { item: PortfolioItem; onBack: () => void }) {
+function CaseView({
+  item,
+  items,
+  onBack,
+  onSelect,
+}: {
+  item: PortfolioItem;
+  items: PortfolioItem[];
+  onBack: () => void;
+  onSelect: (slug: string) => void;
+}) {
   const [iframeKey, setIframeKey] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const [device, setDevice] = useState<"desktop" | "mobile">("desktop");
@@ -336,6 +452,8 @@ function CaseView({ item, onBack }: { item: PortfolioItem; onBack: () => void })
     const t = setTimeout(() => setLoaded(true), 2500);
     return () => clearTimeout(t);
   }, [iframeKey, item.slug, device]);
+
+  const currentIndex = items.findIndex((i) => i.slug === item.slug);
 
   return (
     <div className="animate-fade-in">
@@ -350,121 +468,161 @@ function CaseView({ item, onBack }: { item: PortfolioItem; onBack: () => void })
           Portfólio
         </button>
         <span className="hidden font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground md:inline">
-          [ Case · {String(DEFAULT_PORTFOLIO.findIndex((i) => i.slug === item.slug) + 1).padStart(2, "0")} ]
+          [ Case · {String(currentIndex + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")} ]
         </span>
       </div>
 
-      {/* Hero do case */}
-      <div className="mt-8 flex flex-col gap-3">
-        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
-          {item.segment}
-        </span>
-        <h3 className="font-display text-4xl font-medium leading-[1.02] tracking-[-0.03em] md:text-6xl">
-          {item.name}
-        </h3>
-        <p className="max-w-3xl text-[15px] leading-relaxed text-muted-foreground md:text-[16px]">
-          {item.overview}
-        </p>
-      </div>
-
-      <div className="mt-12 grid gap-10 lg:grid-cols-[1.5fr_1fr]">
-        {/* Browser frame */}
-        <div className="order-2 lg:order-1 lg:sticky lg:top-24 self-start">
-          <div className="relative">
-            {/* Ambient glow */}
-            <div
-              aria-hidden
-              className={`pointer-events-none absolute -inset-10 -z-10 rounded-[40px] bg-gradient-to-br ${item.accent} opacity-60 blur-3xl`}
-            />
-
-            {/* Device toggle */}
-            <div className="mb-4 flex items-center justify-between">
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                Preview ao vivo
-              </span>
-              <div className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-card/60 p-1 backdrop-blur">
-                <button
-                  type="button"
-                  onClick={() => setDevice("desktop")}
-                  aria-label="Visualização desktop"
-                  aria-pressed={device === "desktop"}
-                  className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.18em] transition ${
-                    device === "desktop"
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  <Monitor className="h-3 w-3" />
-                  Desktop
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setDevice("mobile")}
-                  aria-label="Visualização mobile"
-                  aria-pressed={device === "mobile"}
-                  className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.18em] transition ${
-                    device === "mobile"
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  <Smartphone className="h-3 w-3" />
-                  Mobile
-                </button>
-              </div>
-            </div>
-
-            <div className="overflow-hidden rounded-2xl border border-white/10 bg-background/60 shadow-[0_40px_100px_-40px_rgba(0,0,0,0.8)] backdrop-blur">
-              {/* Chrome */}
-              <div className="flex items-center gap-2 border-b border-white/10 bg-white/[0.03] px-3 py-2.5">
-                <div className="flex items-center gap-1.5">
-                  <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />
-                </div>
-                <div className="ml-2 flex flex-1 items-center justify-center">
-                  <span className="rounded-md bg-background/60 px-3 py-1 text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
-                    aceleriq · {item.slug}
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setIframeKey((k) => k + 1)}
-                  aria-label="Recarregar preview"
-                  className="rounded-md p-1.5 text-muted-foreground transition hover:bg-white/[0.05] hover:text-foreground"
-                >
-                  <RotateCw className="h-3.5 w-3.5" />
-                </button>
-              </div>
-
-              {/* Stage */}
-              <div className="relative bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.04),_transparent_60%)] p-4 sm:p-6">
-                <ScaledFrame
-                  key={`${iframeKey}-${device}-${item.slug}`}
-                  src={item.origin}
-                  posterSrc={THUMB(item.origin, device === "mobile" ? 600 : 1400)}
-                  device={device}
-                  loaded={loaded}
-                  onLoad={() => setLoaded(true)}
-                  title={`Preview navegável de ${item.name}`}
-                />
-              </div>
-            </div>
-
-            <p className="mt-4 text-center text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
-              Navegue pelo projeto sem sair daqui
-            </p>
-          </div>
+      {/* Case meta */}
+      <div className="mt-8 flex flex-col items-start gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
+            {item.segment}
+          </span>
+          <h3 className="mt-2 font-display text-4xl font-medium leading-[1.02] tracking-[-0.03em] md:text-6xl">
+            {item.name}
+          </h3>
         </div>
 
-        {/* Conteúdo do case */}
-        <aside className="order-1 lg:order-2 space-y-7">
-          <CaseBlock label="Desafio" body={item.challenge} />
-          <CaseBlock label="Solução Aceleriq" body={item.solution} />
+        <div className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-card/60 p-1 backdrop-blur">
+          <button
+            type="button"
+            onClick={() => setDevice("desktop")}
+            aria-pressed={device === "desktop"}
+            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.18em] transition ${
+              device === "desktop"
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <Monitor className="h-3 w-3" />
+            Desktop
+          </button>
+          <button
+            type="button"
+            onClick={() => setDevice("mobile")}
+            aria-pressed={device === "mobile"}
+            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.18em] transition ${
+              device === "mobile"
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <Smartphone className="h-3 w-3" />
+            Mobile
+          </button>
+        </div>
+      </div>
+
+      {/* FULL-WIDTH preview */}
+      <div className="relative mt-8">
+        {/* Ambient glow */}
+        <div
+          aria-hidden
+          className={`pointer-events-none absolute -inset-12 -z-10 rounded-[40px] bg-gradient-to-br ${item.accent} opacity-60 blur-3xl`}
+        />
+
+        <div className="overflow-hidden rounded-2xl border border-white/10 bg-background/60 shadow-[0_40px_120px_-40px_rgba(0,0,0,0.9)] backdrop-blur">
+          {/* Browser chrome */}
+          <div className="flex items-center gap-2 border-b border-white/10 bg-white/[0.03] px-3 py-2.5">
+            <div className="flex items-center gap-1.5">
+              <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
+              <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
+              <span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />
+            </div>
+            <div className="ml-2 flex flex-1 items-center justify-center">
+              <span className="rounded-md bg-background/60 px-3 py-1 text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
+                aceleriq · {item.slug}
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setIframeKey((k) => k + 1)}
+              aria-label="Recarregar preview"
+              className="rounded-md p-1.5 text-muted-foreground transition hover:bg-white/[0.05] hover:text-foreground"
+            >
+              <RotateCw className="h-3.5 w-3.5" />
+            </button>
+          </div>
+
+          {/* Stage */}
+          <div className="relative bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.04),_transparent_60%)] p-3 sm:p-5">
+            <ScaledFrame
+              key={`${iframeKey}-${device}-${item.slug}`}
+              src={item.origin}
+              posterSrc={THUMB(item.origin, device === "mobile" ? 900 : 2400)}
+              device={device}
+              loaded={loaded}
+              onLoad={() => setLoaded(true)}
+              title={`Preview navegável de ${item.name}`}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Cases rail — switch project inline */}
+      <div className="mt-8">
+        <div className="mb-3 flex items-center justify-between">
+          <span className="label-eyebrow">Outros cases</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+            Clique para trocar de projeto
+          </span>
+        </div>
+        <div className="flex gap-3 overflow-x-auto pb-2 custom-scroll">
+          {items.map((it) => {
+            const isActive = it.slug === item.slug;
+            return (
+              <button
+                key={it.slug}
+                type="button"
+                onClick={() => onSelect(it.slug)}
+                aria-label={`Abrir case ${it.name}`}
+                className={`group relative flex-shrink-0 overflow-hidden rounded-xl border text-left transition ${
+                  isActive
+                    ? "border-primary/70 ring-2 ring-primary/40"
+                    : "border-white/10 hover:border-white/25"
+                }`}
+                style={{ width: "180px" }}
+              >
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted/10">
+                  <img
+                    src={THUMB(it.origin, 480)}
+                    alt={it.name}
+                    loading="lazy"
+                    decoding="async"
+                    className={`h-full w-full object-cover object-top transition-transform duration-500 ${
+                      isActive ? "" : "group-hover:scale-[1.05]"
+                    }`}
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/85 via-background/10 to-transparent" />
+                </div>
+                <div className="px-3 py-2">
+                  <p className="truncate font-display text-[12px] font-medium leading-tight">
+                    {it.name}
+                  </p>
+                  <p className="truncate font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">
+                    {it.segment}
+                  </p>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Conteúdo do case — abaixo do preview, em colunas */}
+      <div className="mt-12 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+        <div className="space-y-7 lg:col-span-2">
+          <p className="max-w-3xl text-[15px] leading-relaxed text-muted-foreground md:text-[16px]">
+            {item.overview}
+          </p>
+          <div className="grid gap-7 sm:grid-cols-2">
+            <CaseBlock label="Desafio" body={item.challenge} />
+            <CaseBlock label="Solução Aceleriq" body={item.solution} />
+          </div>
 
           <div>
             <span className="label-eyebrow">Destaques</span>
-            <ul className="mt-3 space-y-2">
+            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
               {item.highlights.map((h) => (
                 <li
                   key={h}
@@ -476,7 +634,9 @@ function CaseView({ item, onBack }: { item: PortfolioItem; onBack: () => void })
               ))}
             </ul>
           </div>
+        </div>
 
+        <aside className="space-y-7">
           <div>
             <span className="label-eyebrow">Stack & técnicas</span>
             <div className="mt-3 flex flex-wrap gap-1.5">
@@ -531,11 +691,9 @@ function CaseBlock({ label, body }: { label: string; body: string }) {
 }
 
 /**
- * Renders an iframe at a real device viewport (1440 desktop / 390 mobile)
- * and scales it down with CSS transform to fit the container width — so the
- * embedded site loads its true desktop layout, not a squished narrow one.
- * A poster screenshot sits underneath as instant content; the iframe fades
- * in on top once loaded. Never shows a blank white frame.
+ * Renders an iframe at a real device viewport (1600 desktop / 390 mobile)
+ * scaled with CSS transform to fit the container — embedded site loads its
+ * true desktop layout. Poster sits underneath as instant content.
  */
 function ScaledFrame({
   src,
@@ -555,9 +713,9 @@ function ScaledFrame({
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const [scale, setScale] = useState(1);
 
-  // Real device viewport
-  const FRAME_W = device === "mobile" ? 390 : 1440;
-  const FRAME_H = device === "mobile" ? 820 : 900;
+  // Real device viewport — desktop renders at 1600 wide for true 4K-ready feel
+  const FRAME_W = device === "mobile" ? 390 : 1600;
+  const FRAME_H = device === "mobile" ? 820 : 1000;
 
   useLayoutEffect(() => {
     const el = wrapRef.current;
@@ -581,7 +739,7 @@ function ScaledFrame({
       ref={wrapRef}
       className={`relative mx-auto w-full overflow-hidden bg-background transition-all duration-500 ${
         isMobile
-          ? "max-w-[340px] rounded-[28px] border border-white/10 shadow-2xl"
+          ? "max-w-[380px] rounded-[32px] border border-white/10 shadow-2xl"
           : "rounded-md border border-white/[0.06]"
       }`}
       style={{ height: stageHeight ? `${stageHeight}px` : undefined }}
@@ -615,4 +773,3 @@ function ScaledFrame({
     </div>
   );
 }
-
