@@ -343,7 +343,12 @@ export function PortfolioShowcase({
         )}
 
         {active ? (
-          <CaseView item={active} onBack={() => setActiveSlug(null)} />
+          <CaseView
+            item={active}
+            items={items}
+            onBack={() => setActiveSlug(null)}
+            onSelect={(slug) => setActiveSlug(slug)}
+          />
         ) : (
           <div className="mt-10">
             <Carousel opts={{ align: "start", loop: false }} className="w-full">
