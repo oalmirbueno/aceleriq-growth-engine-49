@@ -300,13 +300,13 @@ export function PortfolioShowcase({
   const sectionRef = useRef<HTMLElement | null>(null);
   const active = activeSlug ? items.find((i) => i.slug === activeSlug) ?? null : null;
 
-  // Scroll para o topo da seção APENAS na abertura inicial do case,
-  // não ao trocar entre cases (mantém a posição do usuário).
+  // Scroll para o topo da seção APENAS na abertura inicial do case.
+  // Usamos "auto" (instantâneo) para abrir muito mais rápido — sem animação lenta.
   const wasActiveRef = useRef(false);
   useEffect(() => {
     const isActive = !!active;
     if (isActive && !wasActiveRef.current && sectionRef.current) {
-      sectionRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      sectionRef.current.scrollIntoView({ behavior: "auto", block: "start" });
     }
     wasActiveRef.current = isActive;
   }, [active]);
@@ -361,18 +361,18 @@ export function PortfolioShowcase({
           <div className="mt-10">
             <Carousel opts={{ align: "start", loop: false }} className="w-full">
               <CarouselContent className="-ml-4">
-                {items.map((it) => (
+                {items.map((it, idx) => (
                   <CarouselItem
                     key={it.slug}
                     className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3"
                   >
-                    <PortfolioCard item={it} onOpen={() => setActiveSlug(it.slug)} />
+                    <PortfolioCard item={it} eager={idx < 3} onOpen={() => setActiveSlug(it.slug)} />
                   </CarouselItem>
                 ))}
               </CarouselContent>
               <div className="mt-6 flex items-center justify-end gap-2">
-                <CarouselPrevious className="static translate-y-0 h-10 w-10 border-white/10 bg-card/40 hover:bg-card" />
-                <CarouselNext className="static translate-y-0 h-10 w-10 border-white/10 bg-card/40 hover:bg-card" />
+                <CarouselPrevious className="static translate-y-0 h-10 w-10 border-primary/30 bg-card/40 text-primary hover:bg-primary hover:text-primary-foreground" />
+                <CarouselNext className="static translate-y-0 h-10 w-10 border-primary/30 bg-card/40 text-primary hover:bg-primary hover:text-primary-foreground" />
               </div>
             </Carousel>
           </div>
@@ -385,24 +385,27 @@ export function PortfolioShowcase({
 function PortfolioCard({
   item,
   onOpen,
+  eager = false,
 }: {
   item: PortfolioItem;
   onOpen: () => void;
+  eager?: boolean;
 }) {
-
   return (
     <button
       type="button"
       onClick={onOpen}
       aria-label={`Abrir case ${item.name}`}
-      className="group relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-card/40 text-left transition duration-300 hover:-translate-y-0.5 hover:border-white/15 hover:bg-card/60 focus:outline-none focus:ring-2 focus:ring-primary/60"
+      className="group relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-card/40 text-left transition duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:bg-card/60 hover:shadow-[0_20px_60px_-20px_oklch(85%_0.2_145/0.35)] focus:outline-none focus:ring-2 focus:ring-primary/60"
     >
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-white">
+      {/* dark stage avoids the white flash before the image paints */}
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-[oklch(15%_0.01_240)]">
         <img
           src={LOCAL_PREVIEW(item.slug)}
           alt={`Preview do site ${item.name} — ${item.segment}`}
-          loading="lazy"
+          loading={eager ? "eager" : "lazy"}
           decoding="async"
+          fetchPriority={eager ? "high" : "auto"}
           width={720}
           height={450}
           onError={(e) => {
@@ -414,8 +417,10 @@ function PortfolioCard({
           }}
           className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.04]"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
-        <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-background/70 px-2.5 py-1 text-[10px] font-mono uppercase tracking-[0.18em] text-foreground/90 backdrop-blur transition group-hover:bg-primary group-hover:text-primary-foreground">
+        {/* unified brand tint — kills the multi-color "dirty" feel */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/85 via-background/10 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/[0.04] via-transparent to-transparent" />
+        <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-background/80 px-2.5 py-1 text-[10px] font-mono uppercase tracking-[0.18em] text-primary backdrop-blur transition group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary">
           Abrir case
           <ArrowUpRight className="h-3 w-3" />
         </span>
@@ -450,11 +455,11 @@ function CaseView({
   const [loaded, setLoaded] = useState(false);
   const [device, setDevice] = useState<"desktop" | "mobile">("desktop");
 
-  // Só reseta o loaded ao trocar device ou ao recarregar manualmente.
-  // Trocar de case NÃO força reload — o ScaledFrame já reage ao src.
+  // Fallback agressivo: se o iframe demorar, removemos o overlay rápido.
+  // Mobile carrega ainda mais rápido (viewport menor, menos assets).
   useEffect(() => {
     setLoaded(false);
-    const t = setTimeout(() => setLoaded(true), 2000);
+    const t = setTimeout(() => setLoaded(true), device === "mobile" ? 600 : 900);
     return () => clearTimeout(t);
   }, [iframeKey, device]);
 
@@ -763,7 +768,9 @@ function ScaledFrame({
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const [scale, setScale] = useState(1);
-  const [activated, setActivated] = useState(false);
+  // Pré-ativa o iframe automaticamente — o site começa a carregar
+  // assim que o case abre, sem esperar o usuário clicar no overlay.
+  const [activated, setActivated] = useState(true);
   const [blocked, setBlocked] = useState(false);
 
   // Real device viewport — desktop renders at 1600 wide for true 4K-ready feel
@@ -783,9 +790,9 @@ function ScaledFrame({
     return () => ro.disconnect();
   }, [FRAME_W]);
 
-  // Reset on src change
+  // Reset on src change — re-ativa para já começar a carregar o novo site.
   useEffect(() => {
-    setActivated(false);
+    setActivated(true);
     setBlocked(false);
   }, [src]);
 
