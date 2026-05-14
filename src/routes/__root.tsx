@@ -25,10 +25,9 @@ function NotFoundComponent() {
   );
 }
 
-const SITE_TITLE =
-  "Aceleriq · Engenharia de Crescimento com Estratégia, Dados e IA";
+const SITE_TITLE = "Aceleriq · Engenharia de Crescimento";
 const SITE_DESCRIPTION =
-  "Aceleriq é uma engenharia de crescimento em Curitiba que une estratégia, CRM, tráfego, automação, IA, dados e processos comerciais para empresas que querem escalar com previsibilidade.";
+  "Engenharia de crescimento em Curitiba: estratégia, CRM, tráfego, automação, IA e dados para escalar com previsibilidade.";
 const SITE_URL = "https://aceleriq.com.br";
 const OG_IMAGE = `${SITE_URL}/og-image.jpg`;
 
