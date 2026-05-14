@@ -389,7 +389,6 @@ function PortfolioCard({
   item: PortfolioItem;
   onOpen: () => void;
 }) {
-  const [loaded, setLoaded] = useState(false);
 
   return (
     <button
