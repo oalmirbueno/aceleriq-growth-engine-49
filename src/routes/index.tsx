@@ -19,7 +19,7 @@ import {
   FinalCTA,
 } from "@/components/site/Sections";
 import { GoogleReviews } from "@/components/site/GoogleReviews";
-import { GoogleBusiness } from "@/components/site/GoogleBusiness";
+
 import { PortfolioShowcase } from "@/components/site/PortfolioShowcase";
 
 const HOME_TITLE =
@@ -93,7 +93,7 @@ function Index() {
         <Compare />
         <WhyNow />
         <FAQ />
-        <GoogleBusiness />
+        
         <FinalCTA onDiagnostico={openDiagnostico} />
         <GoogleReviews />
       </main>
