@@ -19,6 +19,7 @@ export type ServicePageProps = {
   process: { step: string; title: string; desc: string }[];
   faqs: ServiceFAQ[];
   whatsappMessage?: string;
+  extraSection?: ReactNode;
 };
 
 export function ServicePageLayout(props: ServicePageProps) {
