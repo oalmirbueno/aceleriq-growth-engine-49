@@ -36,13 +36,13 @@ const ORGANIZATION_JSONLD = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Aceleriq",
-  alternateName: "Aceleriq Engenharia de Crescimento",
+  alternateName: ["Aceleriq Engenharia de Crescimento", "Agência Aceleriq", "Aceleriq Marketing"],
   url: SITE_URL,
   logo: `${SITE_URL}/og-image.jpg`,
   email: "contato@aceleriq.com.br",
   telephone: "+55-41-99748-3429",
   description:
-    "Engenharia de crescimento com estratégia, dados, IA, CRM, automação, tráfego e processos comerciais.",
+    "Agência de marketing digital e engenharia de crescimento em Curitiba: criação de sites, tráfego pago, automação, IA, CRM, sistemas, dados e consultoria.",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Curitiba",
