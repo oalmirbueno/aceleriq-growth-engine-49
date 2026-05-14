@@ -10,6 +10,7 @@ export function MacBookHero() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const rafRef = useRef<number | null>(null);
   const lastProgressRef = useRef(0);
+  const phaseRef = useRef<RevealPhase>("closed");
   const [phase, setPhase] = useState<RevealPhase>("closed");
 
   const { scrollYProgress } = useScroll({
@@ -28,7 +29,11 @@ export function MacBookHero() {
 
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
     lastProgressRef.current = progress;
-    setPhase(progress < 0.34 ? "closed" : progress < 0.7 ? "waking" : "live");
+    const nextPhase = progress < 0.34 ? "closed" : progress < 0.7 ? "waking" : "live";
+    if (phaseRef.current !== nextPhase) {
+      phaseRef.current = nextPhase;
+      setPhase(nextPhase);
+    }
 
     if (rafRef.current !== null) return;
     rafRef.current = requestAnimationFrame(() => {
