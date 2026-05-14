@@ -329,31 +329,33 @@ function PortfolioCard({
 function CaseView({ item, onBack }: { item: PortfolioItem; onBack: () => void }) {
   const [iframeKey, setIframeKey] = useState(0);
   const [loaded, setLoaded] = useState(false);
+  const [device, setDevice] = useState<"desktop" | "mobile">("desktop");
 
   useEffect(() => {
     setLoaded(false);
-    const t = setTimeout(() => setLoaded(true), 8000); // safety: hide loader after 8s
+    const t = setTimeout(() => setLoaded(true), 8000);
     return () => clearTimeout(t);
-  }, [iframeKey, item.slug]);
+  }, [iframeKey, item.slug, device]);
 
   return (
     <div className="animate-fade-in">
+      {/* Top bar */}
       <div className="flex items-center justify-between gap-4">
         <button
           type="button"
           onClick={onBack}
-          className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-card/40 px-4 py-2 text-[12px] font-mono uppercase tracking-[0.2em] text-muted-foreground transition hover:border-white/20 hover:text-foreground"
+          className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-card/40 px-4 py-2 text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground transition hover:border-white/20 hover:text-foreground"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
-          Voltar
+          Portfólio
         </button>
         <span className="hidden font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground md:inline">
-          Case · {item.name}
+          [ Case · {String(DEFAULT_PORTFOLIO.findIndex((i) => i.slug === item.slug) + 1).padStart(2, "0")} ]
         </span>
       </div>
 
       {/* Hero do case */}
-      <div className="mt-6 flex flex-col gap-3">
+      <div className="mt-8 flex flex-col gap-3">
         <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
           {item.segment}
         </span>
@@ -365,64 +367,119 @@ function CaseView({ item, onBack }: { item: PortfolioItem; onBack: () => void })
         </p>
       </div>
 
-      <div className="mt-10 grid gap-8 lg:grid-cols-[1.5fr_1fr]">
-        {/* Browser frame com iframe navegável */}
+      <div className="mt-12 grid gap-10 lg:grid-cols-[1.5fr_1fr]">
+        {/* Browser frame */}
         <div className="order-2 lg:order-1 lg:sticky lg:top-24 self-start">
-          <div className="overflow-hidden rounded-2xl border border-white/10 bg-background/40 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.7)]">
-            <div className="flex items-center gap-2 border-b border-white/10 bg-white/[0.03] px-3 py-2.5">
-              <div className="flex items-center gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
-                <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
-                <span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />
+          <div className="relative">
+            {/* Ambient glow */}
+            <div
+              aria-hidden
+              className={`pointer-events-none absolute -inset-10 -z-10 rounded-[40px] bg-gradient-to-br ${item.accent} opacity-60 blur-3xl`}
+            />
+
+            {/* Device toggle */}
+            <div className="mb-4 flex items-center justify-between">
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                Preview ao vivo
+              </span>
+              <div className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-card/60 p-1 backdrop-blur">
+                <button
+                  type="button"
+                  onClick={() => setDevice("desktop")}
+                  aria-label="Visualização desktop"
+                  aria-pressed={device === "desktop"}
+                  className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.18em] transition ${
+                    device === "desktop"
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  <Monitor className="h-3 w-3" />
+                  Desktop
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setDevice("mobile")}
+                  aria-label="Visualização mobile"
+                  aria-pressed={device === "mobile"}
+                  className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.18em] transition ${
+                    device === "mobile"
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  <Smartphone className="h-3 w-3" />
+                  Mobile
+                </button>
               </div>
-              <div className="ml-2 flex flex-1 items-center justify-center">
-                <span className="rounded-md bg-background/60 px-3 py-1 text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
-                  aceleriq · {item.slug}
-                </span>
-              </div>
-              <button
-                type="button"
-                onClick={() => setIframeKey((k) => k + 1)}
-                aria-label="Recarregar preview"
-                className="rounded-md p-1.5 text-muted-foreground transition hover:bg-white/[0.05] hover:text-foreground"
-              >
-                <RotateCw className="h-3.5 w-3.5" />
-              </button>
             </div>
 
-            <div className="relative aspect-[4/3] w-full bg-background sm:aspect-[16/11]">
-              {/* Poster screenshot enquanto carrega */}
-              {!loaded && (
-                <div className="absolute inset-0 z-10 overflow-hidden">
-                  <img
-                    src={THUMB(item.origin, 1200)}
-                    alt=""
-                    aria-hidden
-                    className="h-full w-full object-cover object-top opacity-60 blur-[1px]"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center bg-background/40 backdrop-blur-sm">
-                    <div className="flex items-center gap-2 rounded-full border border-white/10 bg-background/80 px-4 py-2 text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
-                      <Loader2 className="h-3.5 w-3.5 animate-spin text-primary" />
-                      Carregando ambiente
-                    </div>
-                  </div>
+            <div className="overflow-hidden rounded-2xl border border-white/10 bg-background/60 shadow-[0_40px_100px_-40px_rgba(0,0,0,0.8)] backdrop-blur">
+              {/* Chrome */}
+              <div className="flex items-center gap-2 border-b border-white/10 bg-white/[0.03] px-3 py-2.5">
+                <div className="flex items-center gap-1.5">
+                  <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />
                 </div>
-              )}
-              <iframe
-                key={iframeKey}
-                src={item.origin}
-                title={`Preview navegável de ${item.name}`}
-                onLoad={() => setLoaded(true)}
-                loading="lazy"
-                referrerPolicy="no-referrer"
-                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                className="absolute inset-0 h-full w-full border-0 bg-background"
-              />
+                <div className="ml-2 flex flex-1 items-center justify-center">
+                  <span className="rounded-md bg-background/60 px-3 py-1 text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
+                    aceleriq · {item.slug}
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIframeKey((k) => k + 1)}
+                  aria-label="Recarregar preview"
+                  className="rounded-md p-1.5 text-muted-foreground transition hover:bg-white/[0.05] hover:text-foreground"
+                >
+                  <RotateCw className="h-3.5 w-3.5" />
+                </button>
+              </div>
+
+              {/* Stage */}
+              <div className="relative flex items-center justify-center bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.04),_transparent_60%)] p-4 sm:p-6">
+                <div
+                  className={`relative w-full overflow-hidden bg-background transition-all duration-500 ${
+                    device === "mobile"
+                      ? "mx-auto aspect-[9/19] max-w-[340px] rounded-[28px] border border-white/10 shadow-2xl"
+                      : "aspect-[16/10] rounded-md border border-white/[0.06]"
+                  }`}
+                >
+                  {!loaded && (
+                    <div className="absolute inset-0 z-10 overflow-hidden">
+                      <img
+                        src={THUMB(item.origin, device === "mobile" ? 600 : 1200)}
+                        alt=""
+                        aria-hidden
+                        className="h-full w-full object-cover object-top opacity-60 blur-[1px]"
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center bg-background/40 backdrop-blur-sm">
+                        <div className="flex items-center gap-2 rounded-full border border-white/10 bg-background/80 px-4 py-2 text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
+                          <Loader2 className="h-3.5 w-3.5 animate-spin text-primary" />
+                          Carregando
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  <iframe
+                    key={`${iframeKey}-${device}`}
+                    src={item.origin}
+                    title={`Preview navegável de ${item.name}`}
+                    onLoad={() => setLoaded(true)}
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                    className="absolute inset-0 h-full w-full border-0 bg-background"
+                  />
+                </div>
+              </div>
             </div>
+
+            <p className="mt-4 text-center text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
+              Navegue pelo projeto sem sair daqui
+            </p>
           </div>
-          <p className="mt-3 text-center text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
-            Navegue pelo projeto sem sair daqui
-          </p>
         </div>
 
         {/* Conteúdo do case */}
