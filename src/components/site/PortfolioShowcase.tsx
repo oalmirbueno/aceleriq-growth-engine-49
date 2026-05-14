@@ -567,52 +567,52 @@ function CaseView({
       </div>
 
       {/* Cases rail — switch project inline */}
-      <div className="mt-8">
-        <div className="mb-3 flex items-center justify-between">
+      <div className="mt-10">
+        <div className="mb-4 flex items-center justify-between">
           <span className="label-eyebrow">Outros cases</span>
           <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-            Clique para trocar de projeto
+            {items.length.toString().padStart(2, "0")} projetos · clique para trocar
           </span>
         </div>
-        <div className="flex gap-3 overflow-x-auto pb-2 custom-scroll">
-          {items.map((it) => {
-            const isActive = it.slug === item.slug;
-            return (
-              <button
-                key={it.slug}
-                type="button"
-                onClick={() => onSelect(it.slug)}
-                aria-label={`Abrir case ${it.name}`}
-                className={`group relative flex-shrink-0 overflow-hidden rounded-xl border text-left transition ${
-                  isActive
-                    ? "border-primary/70 ring-2 ring-primary/40"
-                    : "border-white/10 hover:border-white/25"
-                }`}
-                style={{ width: "180px" }}
-              >
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted/10">
-                  <img
-                    src={THUMB(it.origin, 480)}
-                    alt={it.name}
-                    loading="lazy"
-                    decoding="async"
-                    className={`h-full w-full object-cover object-top transition-transform duration-500 ${
-                      isActive ? "" : "group-hover:scale-[1.05]"
-                    }`}
-                  />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/85 via-background/10 to-transparent" />
-                </div>
-                <div className="px-3 py-2">
-                  <p className="truncate font-display text-[12px] font-medium leading-tight">
-                    {it.name}
-                  </p>
-                  <p className="truncate font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">
-                    {it.segment}
-                  </p>
-                </div>
-              </button>
-            );
-          })}
+        <div
+          className="relative -mx-1 overflow-x-auto overflow-y-hidden custom-scroll"
+          style={{
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent 0, black 24px, black calc(100% - 24px), transparent 100%)",
+            maskImage:
+              "linear-gradient(to right, transparent 0, black 24px, black calc(100% - 24px), transparent 100%)",
+          }}
+        >
+          <div className="flex gap-3 px-1 pb-3">
+            {items.map((it, i) => {
+              const isActive = it.slug === item.slug;
+              return (
+                <button
+                  key={it.slug}
+                  type="button"
+                  onClick={() => onSelect(it.slug)}
+                  aria-label={`Abrir case ${it.name}`}
+                  aria-current={isActive ? "true" : undefined}
+                  className={`group relative flex-shrink-0 overflow-hidden rounded-xl border bg-card/40 text-left transition-all duration-300 ${
+                    isActive
+                      ? "border-primary/70 ring-2 ring-primary/30 shadow-[0_10px_40px_-12px_oklch(85%_0.2_145_/_0.4)]"
+                      : "border-white/[0.08] hover:-translate-y-0.5 hover:border-white/25 hover:bg-card/70"
+                  }`}
+                  style={{ width: "190px" }}
+                >
+                  <RailThumb item={it} isActive={isActive} index={i} />
+                  <div className="px-3 py-2.5">
+                    <p className="truncate font-display text-[12.5px] font-medium leading-tight">
+                      {it.name}
+                    </p>
+                    <p className="truncate font-mono text-[9px] uppercase tracking-[0.2em] text-muted-foreground">
+                      {it.segment}
+                    </p>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 
