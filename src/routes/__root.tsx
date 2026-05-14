@@ -147,6 +147,7 @@ export const Route = createRootRoute({
       { name: "twitter:description", content: SITE_DESCRIPTION },
       { name: "twitter:image", content: OG_IMAGE },
       { name: "theme-color", content: "#0a0a0a" },
+      { name: "google-site-verification", content: "1mBlyoiFOwpc1VMRgb385i1KzpeNFStyr8aqIkHU5-0" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
