@@ -98,7 +98,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                   </div>
                 </div>
 
-                <div className="relative z-0 -mt-8 md:-mt-16">
+                <div className="relative z-0 mt-10 md:mt-14">
                   <ServiceVisual variant={props.variant} />
                 </div>
               </div>
