@@ -18,13 +18,13 @@ export function MacBookHero() {
     offset: ["start start", "end end"],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 0.22, 0.72, 1], [0.78, 0.92, 1.08, 1.02], { clamp: true });
-  const rotateX = useTransform(scrollYProgress, [0, 0.55], [14, 0], { clamp: true });
-  const rotateY = useTransform(scrollYProgress, [0, 0.55], [-18, 0], { clamp: true });
-  const y = useTransform(scrollYProgress, [0, 0.72, 1], [90, 0, -34], { clamp: true });
+  const scale = useTransform(scrollYProgress, [0, 0.22, 0.72, 1], [0.9, 0.96, 1.08, 1.02], { clamp: true });
+  const rotateX = useTransform(scrollYProgress, [0, 0.55], [8, 0], { clamp: true });
+  const rotateY = useTransform(scrollYProgress, [0, 0.55], [-10, 0], { clamp: true });
+  const y = useTransform(scrollYProgress, [0, 0.72, 1], [28, 0, -34], { clamp: true });
   const glowOpacity = useTransform(scrollYProgress, [0, 0.2, 0.9], [0.15, 0.75, 0.45], { clamp: true });
-  const veilOpacity = useTransform(scrollYProgress, [0, 0.5, 0.76], [0.72, 0.24, 0], { clamp: true });
-  const statusOpacity = useTransform(scrollYProgress, [0.05, 0.22, 0.82], [0, 1, 0], { clamp: true });
+  const veilOpacity = useTransform(scrollYProgress, [0, 0.5, 0.76], [0.1, 0.18, 0], { clamp: true });
+  const statusOpacity = useTransform(scrollYProgress, [0, 0.16, 0.82], [1, 1, 0], { clamp: true });
   const hudOpacity = useTransform(scrollYProgress, [0.62, 0.82], [0, 1], { clamp: true });
 
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
