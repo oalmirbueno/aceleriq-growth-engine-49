@@ -103,7 +103,7 @@ export function TrafegoCalculator() {
           </div>
 
           {/* Coluna direita — output visual */}
-          <div className="lg:col-span-3 relative bg-white p-8 md:p-10 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.25)] border border-black/5">
+          <div className="lg:col-span-3 relative bg-white p-8 md:p-10 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.25)] border border-black/5 rounded-[28px] overflow-hidden" style={{ transform: "rotate(-0.6deg)" }}>
             <div className="flex items-start justify-between mb-8">
               <div>
                 <div className="text-[10px] uppercase tracking-[0.25em] text-[oklch(45%_0.18_145)] font-mono mb-2">
@@ -122,7 +122,7 @@ export function TrafegoCalculator() {
                   ≈ <span className="font-semibold text-[oklch(20%_0_0)]">R$ {fmt(revenue * 12)}</span> / ano
                 </div>
               </div>
-              <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-[oklch(95%_0.05_145)] border border-[oklch(85%_0.18_145)/0.4]">
+              <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-[oklch(95%_0.05_145)] border border-[oklch(85%_0.18_145)/0.4] rounded-full">
                 <TrendingUp className="h-3.5 w-3.5 text-[oklch(45%_0.18_145)]" />
                 <span className="font-mono text-[11px] uppercase tracking-widest text-[oklch(35%_0.15_145)]">
                   {roas.toFixed(1)}x ROAS
@@ -131,7 +131,7 @@ export function TrafegoCalculator() {
             </div>
 
             {/* Métricas em grade */}
-            <div className="grid grid-cols-3 gap-px bg-black/8 border-t border-b border-black/10 -mx-8 md:-mx-10 px-0">
+            <div className="grid grid-cols-3 gap-px bg-black/8 border border-black/10 rounded-2xl overflow-hidden">
               <MetricCell label="Leads" value={fmt(leads)} unit="/mês" />
               <MetricCell label="Vendas" value={fmt(sales)} unit="/mês" />
               <MetricCell label="CAC" value={`R$ ${fmt(cac)}`} unit="" />
