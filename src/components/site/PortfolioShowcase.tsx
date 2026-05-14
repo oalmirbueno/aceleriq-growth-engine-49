@@ -23,7 +23,10 @@ export type PortfolioItem = {
   results: string[];
 };
 
-const THUMB = (origin: string, w: number) =>
+/** Local snapshot baked into /public — instant, never blank. */
+const LOCAL_PREVIEW = (slug: string) => `/portfolio-previews/${slug}.jpg`;
+/** Live screenshot fallback (only used if the local file ever 404s). */
+const REMOTE_THUMB = (origin: string, w: number) =>
   `https://image.thum.io/get/width/${w}/crop/1200/noanimate/${origin}`;
 
 export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
@@ -386,7 +389,6 @@ function PortfolioCard({
   item: PortfolioItem;
   onOpen: () => void;
 }) {
-  const [loaded, setLoaded] = useState(false);
 
   return (
     <button
@@ -395,25 +397,22 @@ function PortfolioCard({
       aria-label={`Abrir case ${item.name}`}
       className="group relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-card/40 text-left transition duration-300 hover:-translate-y-0.5 hover:border-white/15 hover:bg-card/60 focus:outline-none focus:ring-2 focus:ring-primary/60"
     >
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#0a0a0a]">
-        {!loaded && (
-          <div
-            aria-hidden
-            className="absolute inset-0 animate-pulse bg-[linear-gradient(110deg,#0d0d0d_8%,#1a1a1a_18%,#0d0d0d_33%)] bg-[length:200%_100%]"
-          />
-        )}
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-white">
         <img
-          src={THUMB(item.origin, 720)}
+          src={LOCAL_PREVIEW(item.slug)}
           alt={`Preview do site ${item.name} — ${item.segment}`}
           loading="lazy"
           decoding="async"
           width={720}
           height={450}
-          onLoad={() => setLoaded(true)}
-          onError={() => setLoaded(true)}
-          className={`absolute inset-0 h-full w-full object-cover object-top transition-all duration-500 ease-out group-hover:scale-[1.04] ${
-            loaded ? "opacity-100" : "opacity-0"
-          }`}
+          onError={(e) => {
+            const t = e.currentTarget;
+            if (!t.dataset.fallback) {
+              t.dataset.fallback = "1";
+              t.src = REMOTE_THUMB(item.origin, 720);
+            }
+          }}
+          className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.04]"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
         <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-background/70 px-2.5 py-1 text-[10px] font-mono uppercase tracking-[0.18em] text-foreground/90 backdrop-blur transition group-hover:bg-primary group-hover:text-primary-foreground">
@@ -555,7 +554,7 @@ function CaseView({
             <ScaledFrame
               key={`${iframeKey}-${device}`}
               src={item.origin}
-              posterSrc={THUMB(item.origin, device === "mobile" ? 900 : 2400)}
+              posterSrc={LOCAL_PREVIEW(item.slug)}
               device={device}
               loaded={loaded}
               onLoad={() => setLoaded(true)}
@@ -694,32 +693,27 @@ function RailThumb({
   isActive: boolean;
   index: number;
 }) {
-  const [loaded, setLoaded] = useState(false);
-
   return (
-    <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#0a0a0a]">
-      {/* Shimmer skeleton — visível só enquanto o screenshot carrega */}
-      {!loaded && (
-        <div
-          aria-hidden
-          className="absolute inset-0 animate-pulse bg-[linear-gradient(110deg,#0d0d0d_8%,#1a1a1a_18%,#0d0d0d_33%)] bg-[length:200%_100%]"
-        />
-      )}
-
-      {/* Sempre tenta carregar a captura real do site — eager + low-res p/ instantâneo */}
+    <div className="relative aspect-[16/10] w-full overflow-hidden bg-white">
+      {/* Captura local — instantânea, sem tela escura */}
       <img
-        src={THUMB(item.origin, 360)}
+        src={LOCAL_PREVIEW(item.slug)}
         alt={`Preview ${item.name}`}
         loading="eager"
         decoding="async"
         fetchPriority="high"
         width={360}
         height={225}
-        onLoad={() => setLoaded(true)}
-        onError={() => setLoaded(true)}
-        className={`absolute inset-0 h-full w-full object-cover object-top transition-all duration-500 ${
-          loaded ? "opacity-100" : "opacity-0"
-        } ${isActive ? "" : "group-hover:scale-[1.05]"}`}
+        onError={(e) => {
+          const t = e.currentTarget;
+          if (!t.dataset.fallback) {
+            t.dataset.fallback = "1";
+            t.src = REMOTE_THUMB(item.origin, 480);
+          }
+        }}
+        className={`absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 ${
+          isActive ? "" : "group-hover:scale-[1.05]"
+        }`}
       />
 
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent" />
