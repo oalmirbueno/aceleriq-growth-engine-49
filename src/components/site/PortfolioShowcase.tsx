@@ -716,7 +716,10 @@ function ScaledFrame({
   title: string;
 }) {
   const wrapRef = useRef<HTMLDivElement | null>(null);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const [scale, setScale] = useState(1);
+  const [activated, setActivated] = useState(false);
+  const [blocked, setBlocked] = useState(false);
 
   // Real device viewport — desktop renders at 1600 wide for true 4K-ready feel
   const FRAME_W = device === "mobile" ? 390 : 1600;
@@ -735,8 +738,29 @@ function ScaledFrame({
     return () => ro.disconnect();
   }, [FRAME_W]);
 
-  const stageHeight = FRAME_H * scale;
+  // Reset on src change
+  useEffect(() => {
+    setActivated(false);
+    setBlocked(false);
+  }, [src]);
 
+  const handleIframeLoad = () => {
+    // Detect about:blank (X-Frame-Options blocked) — same-origin returns href,
+    // cross-origin success throws SecurityError.
+    const f = iframeRef.current;
+    try {
+      const href = f?.contentWindow?.location?.href;
+      if (href === "about:blank" || href === "") {
+        setBlocked(true);
+        return;
+      }
+    } catch {
+      /* cross-origin = loaded successfully */
+    }
+    onLoad();
+  };
+
+  const stageHeight = FRAME_H * scale;
   const isMobile = device === "mobile";
 
   return (
@@ -749,7 +773,7 @@ function ScaledFrame({
       }`}
       style={{ height: stageHeight ? `${stageHeight}px` : undefined }}
     >
-      {/* Poster — always present underneath, prevents blank frame */}
+      {/* Poster — sempre visível até o iframe carregar (e fica caso bloqueado) */}
       <img
         src={posterSrc}
         alt=""
@@ -759,22 +783,50 @@ function ScaledFrame({
         className="absolute inset-0 h-full w-full object-cover object-top"
       />
 
-      {/* Scaled iframe at real viewport */}
-      <iframe
-        src={src}
-        title={title}
-        onLoad={onLoad}
-        loading="eager"
-        referrerPolicy="no-referrer"
-        className="absolute left-0 top-0 border-0 bg-background transition-opacity duration-500"
-        style={{
-          width: `${FRAME_W}px`,
-          height: `${FRAME_H}px`,
-          transform: `scale(${scale})`,
-          transformOrigin: "top left",
-          opacity: loaded ? 1 : 0,
-        }}
-      />
+      {/* Iframe — só monta quando o usuário ativa (lighter / no blank) */}
+      {activated && !blocked && (
+        <iframe
+          ref={iframeRef}
+          src={src}
+          title={title}
+          onLoad={handleIframeLoad}
+          loading="eager"
+          referrerPolicy="no-referrer"
+          className="absolute left-0 top-0 border-0 transition-opacity duration-500"
+          style={{
+            width: `${FRAME_W}px`,
+            height: `${FRAME_H}px`,
+            transform: `scale(${scale})`,
+            transformOrigin: "top left",
+            opacity: loaded ? 1 : 0,
+          }}
+        />
+      )}
+
+      {/* Overlay CTA — clique para navegar */}
+      {(!activated || blocked) && (
+        <div className="absolute inset-0 z-10 flex items-end justify-center bg-gradient-to-t from-background/85 via-background/10 to-transparent p-5">
+          <button
+            type="button"
+            onClick={() => {
+              setBlocked(false);
+              setActivated(true);
+            }}
+            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-background/80 px-5 py-2.5 text-[11px] font-mono uppercase tracking-[0.2em] text-foreground backdrop-blur-md transition hover:border-primary/60 hover:bg-primary hover:text-primary-foreground"
+          >
+            {blocked ? "Tentar novamente" : "Navegar no site ao vivo"}
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </button>
+        </div>
+      )}
+
+      {/* Loader sutil enquanto iframe inicializa */}
+      {activated && !loaded && !blocked && (
+        <div className="absolute right-4 top-4 z-20 inline-flex items-center gap-2 rounded-full border border-white/15 bg-background/70 px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground backdrop-blur">
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+          Carregando ambiente
+        </div>
+      )}
     </div>
   );
 }
