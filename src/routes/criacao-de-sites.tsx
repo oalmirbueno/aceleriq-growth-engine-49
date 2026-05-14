@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout, buildServiceHead } from "@/components/site/ServicePageLayout";
+import { PortfolioShowcase } from "@/components/site/PortfolioShowcase";
 
 const URL = "https://aceleriq.com.br/criacao-de-sites";
 const TITLE = "Criação de Sites em Curitiba · Aceleriq";
@@ -59,6 +60,13 @@ function Page() {
       ]}
       faqs={FAQS}
       whatsappMessage="Olá! Quero criar um site com a Aceleriq."
+      extraSection={
+        <PortfolioShowcase
+          eyebrow="[ 03b ] · Cases"
+          title="Sites recentes entregues pela Aceleriq"
+          intro="Projetos reais em produção — institucionais, e-commerce, landing pages, plataformas de marca e apps. Clique para ver o case completo."
+        />
+      }
     />
   );
 }

@@ -19,6 +19,7 @@ export type ServicePageProps = {
   process: { step: string; title: string; desc: string }[];
   faqs: ServiceFAQ[];
   whatsappMessage?: string;
+  extraSection?: ReactNode;
 };
 
 export function ServicePageLayout(props: ServicePageProps) {
@@ -139,6 +140,8 @@ export function ServicePageLayout(props: ServicePageProps) {
             </div>
           </div>
         </section>
+
+        {props.extraSection}
 
         {/* FAQ */}
         <section className="relative py-12 md:py-16 bg-grid-ambient">

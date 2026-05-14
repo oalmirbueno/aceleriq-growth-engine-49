@@ -20,6 +20,7 @@ import {
 } from "@/components/site/Sections";
 import { GoogleReviews } from "@/components/site/GoogleReviews";
 import { GoogleBusiness } from "@/components/site/GoogleBusiness";
+import { PortfolioShowcase } from "@/components/site/PortfolioShowcase";
 
 const HOME_TITLE =
   "Aceleriq · Agência de Marketing Digital, Sites, Tráfego, Automação e IA em Curitiba";
@@ -88,6 +89,7 @@ function Index() {
         <DiagnosticoCTA onDiagnostico={openDiagnostico} />
         <Results />
         <Testimonials />
+        <PortfolioShowcase />
         <Compare />
         <WhyNow />
         <FAQ />

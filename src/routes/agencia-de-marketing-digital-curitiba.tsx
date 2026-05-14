@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout, buildServiceHead } from "@/components/site/ServicePageLayout";
+import { PortfolioShowcase } from "@/components/site/PortfolioShowcase";
 
 const URL = "https://aceleriq.com.br/agencia-de-marketing-digital-curitiba";
 const TITLE = "Agência de Marketing Digital em Curitiba · Aceleriq";
@@ -59,6 +60,13 @@ function Page() {
       ]}
       faqs={FAQS}
       whatsappMessage="Olá! Quero conversar sobre os serviços da agência Aceleriq."
+      extraSection={
+        <PortfolioShowcase
+          eyebrow="[ 03b ] · Cases da agência"
+          title="Marcas que crescem com a Aceleriq"
+          intro="Sites, e-commerces e plataformas em produção — desenvolvidos, otimizados e operados pela agência."
+        />
+      }
     />
   );
 }
