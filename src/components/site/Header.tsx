@@ -27,10 +27,10 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-500",
+        "fixed inset-x-0 top-0 z-50 isolate transition-all duration-500 [backdrop-filter:saturate(140%)_blur(20px)] [-webkit-backdrop-filter:saturate(140%)_blur(20px)]",
         scrolled
-          ? "border-b border-white/[0.06] bg-black/70 backdrop-blur-2xl shadow-[0_8px_30px_-12px_rgba(0,0,0,0.8)] py-3"
-          : "border-b border-transparent bg-black/40 backdrop-blur-xl py-5",
+          ? "border-b border-white/[0.06] bg-black/40 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.8)] py-3"
+          : "border-b border-transparent bg-black/10 py-5",
       )}
     >
       <div className="container-aceleriq flex items-center justify-between">
