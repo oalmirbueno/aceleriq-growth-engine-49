@@ -40,7 +40,7 @@ export function TrafegoCalculator() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-5" style={{ transform: "rotate(-1deg)" }}>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
           <PlatformCard name="Google Ads" badge="Partner" code="google" variant="light" />
           <PlatformCard name="Meta Business" badge="Partner" code="meta" variant="dark" />
           <PlatformCard name="LinkedIn Ads" badge="Marketing" code="linkedin" variant="dark" />
@@ -177,7 +177,7 @@ export function TrafegoCalculator() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-5" style={{ transform: "rotate(-1deg)" }}>
+        <div className="grid md:grid-cols-3 gap-5">
           <StrategyCard
             icon={<Target className="h-5 w-5" />}
             tag="01 / Topo"
@@ -296,11 +296,12 @@ function PlatformCard({
   const isDark = variant === "dark";
   return (
     <div
-      className={`group relative p-6 flex flex-col gap-5 transition-all duration-300 hover:-translate-y-1 hover:rotate-0 rounded-[22px] ${
+      className={`group relative p-6 flex flex-col gap-5 transition-all duration-300 hover:-translate-y-1 ${
         isDark
           ? "bg-[oklch(12%_0_0)] text-white border border-white/8 hover:border-primary/40"
           : "bg-white text-[oklch(15%_0_0)] border border-black/8 hover:border-primary/40 shadow-[0_15px_40px_-20px_rgba(0,0,0,0.2)]"
       }`}
+      style={{ clipPath: "polygon(0 6%, 100% 0, 100% 94%, 0 100%)" }}
     >
       <div className="flex items-center justify-between">
         <PlatformLogo code={code} />
@@ -369,7 +370,8 @@ function StrategyCard({
 
   return (
     <div
-      className={`relative p-7 md:p-8 transition-all duration-300 hover:-translate-y-1 hover:rotate-0 rounded-[24px] ${styles}`}
+      className={`relative p-7 md:p-8 transition-all duration-300 hover:-translate-y-1 ${styles}`}
+      style={{ clipPath: "polygon(0 5%, 100% 0, 100% 95%, 0 100%)" }}
     >
       <div className={`flex items-center gap-2 mb-5 ${iconColor}`}>
         {icon}
