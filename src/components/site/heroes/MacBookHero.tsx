@@ -9,11 +9,11 @@ export function MacBookHero() {
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start 74%", "end 42%"],
+    offset: ["start 86%", "end 48%"],
   });
 
   const rawLidAngle = useTransform(scrollYProgress, [0, 0.82], [reduceMotion ? 0 : -82, 0]);
-  const rawSceneY = useTransform(scrollYProgress, [0, 0.82, 1], [reduceMotion ? 0 : 18, 10, -6]);
+  const rawSceneY = useTransform(scrollYProgress, [0, 0.82, 1], [reduceMotion ? 0 : 30, 0, -8]);
   const rawGlow = useTransform(scrollYProgress, [0, 0.35, 0.9], [0.18, 0.72, 0.44]);
   const lidAngle = useSpring(rawLidAngle, { stiffness: 92, damping: 28, mass: 0.7 });
   const sceneY = useSpring(rawSceneY, { stiffness: 120, damping: 30, mass: 0.8 });
@@ -21,15 +21,15 @@ export function MacBookHero() {
   return (
     <section
       ref={sectionRef}
-      className="relative mx-auto h-[104vh] min-h-[620px] w-full max-w-[1240px] px-2 md:h-[112vh] md:min-h-[720px] md:px-6"
+      className="relative mx-auto mt-2 w-full max-w-[1180px] px-2 pb-10 pt-2 md:mt-0 md:px-6 md:pb-14 md:pt-4"
     >
-      <div className="sticky top-[22vh] mx-auto flex h-[54vh] min-h-[390px] w-full items-center justify-center md:top-[18vh] md:h-[60vh]">
+      <div className="mx-auto flex min-h-[360px] w-full items-center justify-center md:min-h-[520px]">
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           style={{ y: sceneY }}
-          className="relative mx-auto aspect-[16/10] w-full max-w-[960px] [perspective:1700px]"
+          className="relative mx-auto aspect-[16/10] w-full max-w-[980px] [perspective:1700px]"
         >
           <motion.div
             aria-hidden
