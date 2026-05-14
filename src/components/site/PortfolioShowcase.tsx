@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Check, RotateCw, Loader2 } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -12,8 +12,9 @@ export type PortfolioItem = {
   slug: string;
   name: string;
   segment: string;
-  /** Origin used only to build the screenshot URL — never displayed to the user. */
+  /** Origin used only to build the iframe/screenshot — never displayed to the user. */
   origin: string;
+  accent: string; // gradient fallback
   overview: string;
   challenge: string;
   solution: string;
@@ -22,10 +23,6 @@ export type PortfolioItem = {
   results: string[];
 };
 
-/** thum.io full-page capture — long screenshot the user can scroll inside the frame. */
-const FULL_SHOT = (origin: string, w: number) =>
-  `https://image.thum.io/get/width/${w}/page/${origin}`;
-/** thum.io fixed-viewport thumbnail — small, fast for cards. */
 const THUMB = (origin: string, w: number) =>
   `https://image.thum.io/get/width/${w}/crop/900/noanimate/${origin}`;
 
@@ -35,16 +32,17 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
     name: "Stop Info",
     segment: "Tecnologia · Varejo",
     origin: "https://stopinfo.com.br",
+    accent: "from-sky-500/30 via-indigo-500/20 to-transparent",
     overview:
       "Reposicionamento digital completo de uma marca de tecnologia consolidada em Curitiba, com site institucional e e-commerce integrados em uma única identidade.",
     challenge:
       "Marca tradicional com presença digital fragmentada, baixa captação online e ausência de funil entre site institucional e loja.",
     solution:
-      "Refizemos a arquitetura de marca digital, criamos site institucional rápido e SEO-ready, e estruturamos a loja online com catálogo escalável e checkout otimizado, falando entre si.",
+      "Refizemos a arquitetura de marca digital, criamos site institucional rápido e SEO-ready, e estruturamos a loja online com catálogo escalável e checkout otimizado.",
     highlights: [
       "Identidade digital coerente entre institucional e e-commerce",
       "Catálogo dinâmico com filtros por categoria e marca",
-      "SEO técnico e performance Core Web Vitals verde",
+      "SEO técnico e Core Web Vitals verde",
       "Integração com WhatsApp, GA4 e pixels de conversão",
     ],
     stack: ["Next.js", "Tailwind", "Headless commerce", "GA4"],
@@ -59,15 +57,16 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
     name: "Pousada Flor de São Roque",
     segment: "Hospedagem · Turismo",
     origin: "https://flordesaoroquepousada.lovable.app",
+    accent: "from-emerald-500/30 via-teal-500/20 to-transparent",
     overview:
       "Site de hospedagem com narrativa visual imersiva, traduzindo a experiência da pousada em uma jornada digital sensorial.",
     challenge:
       "Comunicar a atmosfera única do lugar e converter visitantes em reservas diretas, sem depender 100% de OTAs.",
     solution:
-      "Storytelling visual com fotografia em destaque, hierarquia editorial e fluxo direto para reserva via WhatsApp e contato qualificado.",
+      "Storytelling visual com fotografia em destaque, hierarquia editorial e fluxo direto para reserva via WhatsApp.",
     highlights: [
       "Hero cinematográfico com fotografia em destaque",
-      "Galeria editorial das acomodações e do entorno",
+      "Galeria editorial das acomodações",
       "Fluxo direto de reserva e contato",
       "Layout responsivo otimizado para mobile",
     ],
@@ -81,8 +80,9 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
   {
     slug: "camillystresser",
     name: "Camilly Stresser",
-    segment: "Marca pessoal · Profissional liberal",
+    segment: "Marca pessoal",
     origin: "https://camillystresser.com.br",
+    accent: "from-rose-500/30 via-pink-500/20 to-transparent",
     overview:
       "Plataforma de autoridade para profissional liberal, traduzindo posicionamento técnico em uma experiência digital premium.",
     challenge:
@@ -107,10 +107,11 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
     name: "Brit",
     segment: "Marca · D2C",
     origin: "https://brit.lovable.app",
+    accent: "from-amber-500/30 via-orange-500/20 to-transparent",
     overview:
       "Site de marca direta ao consumidor com identidade forte, narrativa de produto e estética premium.",
     challenge:
-      "Comunicar uma marca emergente com personalidade própria sem cair no padrão genérico de e-commerce shopify-template.",
+      "Comunicar uma marca emergente com personalidade própria sem cair no padrão genérico de e-commerce template.",
     solution:
       "Design custom com hierarquia editorial, foco em produto e narrativa de marca consistente em cada bloco da página.",
     highlights: [
@@ -129,8 +130,9 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
   {
     slug: "level-me",
     name: "Level Me",
-    segment: "Lifestyle · Performance pessoal",
+    segment: "Lifestyle · Performance",
     origin: "https://level-me.lovable.app",
+    accent: "from-violet-500/30 via-fuchsia-500/20 to-transparent",
     overview:
       "Plataforma de marca lifestyle com foco em performance pessoal, posicionamento aspiracional e captação contínua.",
     challenge:
@@ -155,6 +157,7 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
     name: "SiteBolt",
     segment: "SaaS · Tecnologia",
     origin: "https://sitebolt.lovable.app",
+    accent: "from-cyan-500/30 via-blue-500/20 to-transparent",
     overview:
       "Landing page de produto SaaS com narrativa orientada a benefício, prova técnica e fluxo direto de ativação.",
     challenge:
@@ -187,7 +190,7 @@ export function PortfolioShowcase({
   items = DEFAULT_PORTFOLIO,
   eyebrow = "[ · ] · Portfólio",
   title = "Cases recentes da Aceleriq",
-  intro = "Selecionamos os projetos que melhor representam o nosso padrão: design editorial, performance real e estratégia integrada ao funil.",
+  intro = "Selecionamos os projetos que melhor representam nosso padrão: design editorial, performance real e estratégia integrada ao funil. Clique e navegue pelo case dentro do nosso ambiente.",
 }: Props) {
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -227,16 +230,14 @@ export function PortfolioShowcase({
       />
       <div className="container-aceleriq">
         {!active && (
-          <div className="flex flex-col gap-6 animate-fade-in md:flex-row md:items-end md:justify-between">
-            <div className="max-w-2xl">
-              <span className="label-eyebrow">{eyebrow}</span>
-              <h2 className="mt-3 font-display text-3xl font-medium leading-[1.05] tracking-[-0.03em] md:text-5xl">
-                {title}
-              </h2>
-              <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
-                {intro}
-              </p>
-            </div>
+          <div className="max-w-2xl animate-fade-in">
+            <span className="label-eyebrow">{eyebrow}</span>
+            <h2 className="mt-3 font-display text-3xl font-medium leading-[1.05] tracking-[-0.03em] md:text-5xl">
+              {title}
+            </h2>
+            <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
+              {intro}
+            </p>
           </div>
         )}
 
@@ -244,10 +245,7 @@ export function PortfolioShowcase({
           <CaseView item={active} onBack={() => setActiveSlug(null)} />
         ) : (
           <div className="mt-10">
-            <Carousel
-              opts={{ align: "start", loop: false }}
-              className="w-full"
-            >
+            <Carousel opts={{ align: "start", loop: false }} className="w-full">
               <CarouselContent className="-ml-4">
                 {items.map((it) => (
                   <CarouselItem
@@ -277,33 +275,47 @@ function PortfolioCard({
   item: PortfolioItem;
   onOpen: () => void;
 }) {
+  const [imgFailed, setImgFailed] = useState(false);
+
   return (
     <button
       type="button"
       onClick={onOpen}
       aria-label={`Abrir case ${item.name}`}
-      className="group relative flex w-full flex-col overflow-hidden rounded-xl border border-white/[0.08] bg-card/40 text-left transition duration-300 hover:-translate-y-0.5 hover:border-white/15 hover:bg-card/60 focus:outline-none focus:ring-2 focus:ring-primary/60"
+      className="group relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-card/40 text-left transition duration-300 hover:-translate-y-0.5 hover:border-white/15 hover:bg-card/60 focus:outline-none focus:ring-2 focus:ring-primary/60"
     >
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted/10">
-        <img
-          src={THUMB(item.origin, 720)}
-          alt={`Preview do site ${item.name} — ${item.segment}`}
-          loading="lazy"
-          decoding="async"
-          width={720}
-          height={450}
-          className="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-        />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
-        <span className="absolute right-2.5 top-2.5 inline-flex h-7 w-7 items-center justify-center rounded-full border border-white/15 bg-background/70 text-foreground/90 backdrop-blur transition group-hover:bg-primary group-hover:text-primary-foreground">
-          <ArrowUpRight className="h-3.5 w-3.5" />
+        {!imgFailed ? (
+          <img
+            src={THUMB(item.origin, 720)}
+            alt={`Preview do site ${item.name} — ${item.segment}`}
+            loading="lazy"
+            decoding="async"
+            width={720}
+            height={450}
+            onError={() => setImgFailed(true)}
+            className="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+          />
+        ) : (
+          <div
+            className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${item.accent}`}
+          >
+            <span className="font-display text-2xl font-medium text-foreground/80">
+              {item.name}
+            </span>
+          </div>
+        )}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+        <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-background/70 px-2.5 py-1 text-[10px] font-mono uppercase tracking-[0.18em] text-foreground/90 backdrop-blur transition group-hover:bg-primary group-hover:text-primary-foreground">
+          Abrir case
+          <ArrowUpRight className="h-3 w-3" />
         </span>
       </div>
-      <div className="flex flex-1 flex-col gap-1.5 p-4">
+      <div className="flex flex-1 flex-col gap-1.5 p-5">
         <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
           {item.segment}
         </span>
-        <h3 className="font-display text-[15px] font-medium leading-tight tracking-tight">
+        <h3 className="font-display text-[16px] font-medium leading-tight tracking-tight">
           {item.name}
         </h3>
         <p className="mt-1 line-clamp-2 text-[12.5px] leading-relaxed text-muted-foreground">
@@ -315,63 +327,111 @@ function PortfolioCard({
 }
 
 function CaseView({ item, onBack }: { item: PortfolioItem; onBack: () => void }) {
+  const [iframeKey, setIframeKey] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setLoaded(false);
+    const t = setTimeout(() => setLoaded(true), 8000); // safety: hide loader after 8s
+    return () => clearTimeout(t);
+  }, [iframeKey, item.slug]);
+
   return (
     <div className="animate-fade-in">
-      <button
-        type="button"
-        onClick={onBack}
-        className="inline-flex items-center gap-2 text-[12px] font-mono uppercase tracking-[0.2em] text-muted-foreground transition hover:text-primary"
-      >
-        <ArrowLeft className="h-3.5 w-3.5" />
-        Voltar ao portfólio
-      </button>
+      <div className="flex items-center justify-between gap-4">
+        <button
+          type="button"
+          onClick={onBack}
+          className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-card/40 px-4 py-2 text-[12px] font-mono uppercase tracking-[0.2em] text-muted-foreground transition hover:border-white/20 hover:text-foreground"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" />
+          Voltar
+        </button>
+        <span className="hidden font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground md:inline">
+          Case · {item.name}
+        </span>
+      </div>
 
-      <div className="mt-6 grid gap-8 lg:grid-cols-[1.4fr_1fr]">
-        {/* Scrollable preview frame */}
+      {/* Hero do case */}
+      <div className="mt-6 flex flex-col gap-3">
+        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
+          {item.segment}
+        </span>
+        <h3 className="font-display text-4xl font-medium leading-[1.02] tracking-[-0.03em] md:text-6xl">
+          {item.name}
+        </h3>
+        <p className="max-w-3xl text-[15px] leading-relaxed text-muted-foreground md:text-[16px]">
+          {item.overview}
+        </p>
+      </div>
+
+      <div className="mt-10 grid gap-8 lg:grid-cols-[1.5fr_1fr]">
+        {/* Browser frame com iframe navegável */}
         <div className="order-2 lg:order-1 lg:sticky lg:top-24 self-start">
           <div className="overflow-hidden rounded-2xl border border-white/10 bg-background/40 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.7)]">
-            <div className="flex items-center gap-1.5 border-b border-white/10 bg-white/[0.03] px-3 py-2.5">
-              <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
-              <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
-              <span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />
-              <span className="ml-3 truncate text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
-                Projeto Aceleriq · {item.name}
-              </span>
+            <div className="flex items-center gap-2 border-b border-white/10 bg-white/[0.03] px-3 py-2.5">
+              <div className="flex items-center gap-1.5">
+                <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
+                <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
+                <span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />
+              </div>
+              <div className="ml-2 flex flex-1 items-center justify-center">
+                <span className="rounded-md bg-background/60 px-3 py-1 text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
+                  aceleriq · {item.slug}
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIframeKey((k) => k + 1)}
+                aria-label="Recarregar preview"
+                className="rounded-md p-1.5 text-muted-foreground transition hover:bg-white/[0.05] hover:text-foreground"
+              >
+                <RotateCw className="h-3.5 w-3.5" />
+              </button>
             </div>
-            <div className="custom-scroll max-h-[78vh] overflow-y-auto bg-background">
-              <img
-                src={FULL_SHOT(item.origin, 1400)}
-                alt={`Captura completa do site ${item.name}`}
-                loading="eager"
-                decoding="async"
-                className="block w-full"
+
+            <div className="relative aspect-[4/3] w-full bg-background sm:aspect-[16/11]">
+              {/* Poster screenshot enquanto carrega */}
+              {!loaded && (
+                <div className="absolute inset-0 z-10 overflow-hidden">
+                  <img
+                    src={THUMB(item.origin, 1200)}
+                    alt=""
+                    aria-hidden
+                    className="h-full w-full object-cover object-top opacity-60 blur-[1px]"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-background/40 backdrop-blur-sm">
+                    <div className="flex items-center gap-2 rounded-full border border-white/10 bg-background/80 px-4 py-2 text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
+                      <Loader2 className="h-3.5 w-3.5 animate-spin text-primary" />
+                      Carregando ambiente
+                    </div>
+                  </div>
+                </div>
+              )}
+              <iframe
+                key={iframeKey}
+                src={item.origin}
+                title={`Preview navegável de ${item.name}`}
+                onLoad={() => setLoaded(true)}
+                loading="lazy"
+                referrerPolicy="no-referrer"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                className="absolute inset-0 h-full w-full border-0 bg-background"
               />
             </div>
           </div>
           <p className="mt-3 text-center text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
-            Role para explorar o projeto
+            Navegue pelo projeto sem sair daqui
           </p>
         </div>
 
-        {/* Case content */}
+        {/* Conteúdo do case */}
         <aside className="order-1 lg:order-2 space-y-7">
-          <div>
-            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
-              {item.segment}
-            </span>
-            <h3 className="mt-2 font-display text-3xl font-medium leading-[1.05] tracking-[-0.03em] md:text-4xl">
-              {item.name}
-            </h3>
-            <p className="mt-4 text-[14px] leading-relaxed text-muted-foreground">
-              {item.overview}
-            </p>
-          </div>
-
           <CaseBlock label="Desafio" body={item.challenge} />
           <CaseBlock label="Solução Aceleriq" body={item.solution} />
 
           <div>
-            <span className="label-eyebrow">Destaques do projeto</span>
+            <span className="label-eyebrow">Destaques</span>
             <ul className="mt-3 space-y-2">
               {item.highlights.map((h) => (
                 <li
