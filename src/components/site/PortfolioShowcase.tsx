@@ -686,6 +686,60 @@ function CaseView({
   );
 }
 
+function RailThumb({
+  item,
+  isActive,
+  index,
+}: {
+  item: PortfolioItem;
+  isActive: boolean;
+  index: number;
+}) {
+  const [failed, setFailed] = useState(false);
+  const initials = item.name
+    .split(" ")
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase();
+
+  return (
+    <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted/10">
+      {!failed ? (
+        <img
+          src={THUMB(item.origin, 480)}
+          alt={`Preview ${item.name}`}
+          loading="lazy"
+          decoding="async"
+          width={480}
+          height={300}
+          onError={() => setFailed(true)}
+          className={`h-full w-full object-cover object-top transition-transform duration-500 ${
+            isActive ? "" : "group-hover:scale-[1.05]"
+          }`}
+        />
+      ) : (
+        <div
+          className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${item.accent}`}
+        >
+          <span className="font-display text-3xl font-medium tracking-tight text-foreground/85">
+            {initials}
+          </span>
+        </div>
+      )}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/85 via-background/15 to-transparent" />
+      <span className="absolute left-2 top-2 rounded-md border border-white/15 bg-background/70 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-foreground/85 backdrop-blur">
+        {String(index + 1).padStart(2, "0")}
+      </span>
+      {isActive && (
+        <span className="absolute right-2 top-2 rounded-md bg-primary px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-primary-foreground">
+          Ativo
+        </span>
+      )}
+    </div>
+  );
+}
+
 function CaseBlock({ label, body }: { label: string; body: string }) {
   return (
     <div>
