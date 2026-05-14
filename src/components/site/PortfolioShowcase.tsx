@@ -297,10 +297,15 @@ export function PortfolioShowcase({
   const sectionRef = useRef<HTMLElement | null>(null);
   const active = activeSlug ? items.find((i) => i.slug === activeSlug) ?? null : null;
 
+  // Scroll para o topo da seção APENAS na abertura inicial do case,
+  // não ao trocar entre cases (mantém a posição do usuário).
+  const wasActiveRef = useRef(false);
   useEffect(() => {
-    if (active && sectionRef.current) {
+    const isActive = !!active;
+    if (isActive && !wasActiveRef.current && sectionRef.current) {
       sectionRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
+    wasActiveRef.current = isActive;
   }, [active]);
 
   const ITEMLIST_JSONLD = {
