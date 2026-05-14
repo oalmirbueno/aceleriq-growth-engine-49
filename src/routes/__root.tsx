@@ -131,7 +131,7 @@ export const Route = createRootRoute({
       {
         name: "keywords",
         content:
-          "Aceleriq, engenharia de crescimento, consultoria de crescimento Curitiba, CRM, automação comercial, IA para empresas, tráfego pago, processos comerciais, dados, dashboards",
+          "Aceleriq, agência de marketing digital Curitiba, criação de sites Curitiba, tráfego pago, gestão de tráfego, automação de marketing, automação comercial, IA para empresas, CRM, desenvolvimento de sistemas, aplicativos, consultoria de marketing, consultoria de crescimento, engenharia de crescimento, Método Acelera, marketing para empresas",
       },
       { property: "og:title", content: SITE_TITLE },
       { property: "og:description", content: SITE_DESCRIPTION },
