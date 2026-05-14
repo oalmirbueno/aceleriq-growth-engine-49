@@ -29,6 +29,7 @@ export const Route = createFileRoute("/criacao-de-sites")({
 function Page() {
   return (
     <ServicePageLayout
+      variant="sites"
       eyebrow="Sites · Landing pages · Plataformas"
       h1={<>Criação de <span className="text-primary neon-text-glow">Sites</span> que vendem</>}
       intro="Sites e landing pages projetados como ativo comercial, não como folder online. Integrados ao CRM, otimizados para SEO e construídos para converter o tráfego que você paga ou ganha."

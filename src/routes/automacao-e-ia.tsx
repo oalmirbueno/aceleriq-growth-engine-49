@@ -28,6 +28,7 @@ export const Route = createFileRoute("/automacao-e-ia")({
 function Page() {
   return (
     <ServicePageLayout
+      variant="ia"
       eyebrow="n8n · OpenAI · CRM · Workflows"
       h1={<>Automação e <span className="text-primary neon-text-glow">IA</span> que escala sem contratar</>}
       intro="Agentes de IA, fluxos automatizados e integrações sob medida para tirar o operacional repetitivo do colo do seu time. A Aceleriq instala automação real — não receita pronta de YouTube."
