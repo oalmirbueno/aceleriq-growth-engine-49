@@ -17,8 +17,10 @@ export type GoogleReview = {
   avatarColor?: string;
 };
 
-// ⚠️ Avaliações curadas (apenas 5★). Para adicionar novas, basta inserir no array.
-// Quando a Google Places API for ativada, este array é substituído pela busca automática.
+// ⚠️ PLACEHOLDER — substituir pelos textos REAIS dos reviews do Google Business
+// (cliente vai enviar). Cada item: copie author + date + text exatamente como aparece
+// no perfil. Manter apenas 5★. Quando a Google Places API for ativada, este array é
+// substituído pela busca automática.
 export const REVIEWS: GoogleReview[] = [
   {
     author: "Ricardo Almeida",
