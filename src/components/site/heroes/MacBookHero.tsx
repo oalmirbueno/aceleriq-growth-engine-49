@@ -21,7 +21,7 @@ export function MacBookHero() {
   });
 
   const smooth = useSpring(scrollYProgress, { stiffness: 120, damping: 28, mass: 0.25 });
-  const lidRotate = useTransform(smooth, [0, 0.56, 1], [-96, -8, -2], { clamp: true });
+  const lidRotate = useTransform(smooth, [0, 0.56, 1], [-74, -8, -2], { clamp: true });
   const laptopScale = useTransform(smooth, [0, 0.32, 0.78, 1], [0.86, 1, 1.08, 1.02], { clamp: true });
   const laptopY = useTransform(smooth, [0, 0.65, 1], [34, 0, -24], { clamp: true });
   const laptopRotateX = useTransform(smooth, [0, 0.5, 1], [12, 3, 0], { clamp: true });
@@ -55,7 +55,7 @@ export function MacBookHero() {
               className="relative mx-auto aspect-[16/10] w-full max-w-[1060px] will-change-transform"
             >
               <motion.div
-                className="absolute left-[6%] right-[6%] top-[6%] z-20 aspect-[16/10] origin-bottom overflow-hidden rounded-t-[22px] border border-foreground/10 bg-gradient-to-b from-foreground/95 via-foreground/90 to-foreground/70 p-[1.1%] shadow-[0_42px_110px_-55px_oklch(0%_0_0/0.95)] will-change-transform"
+                className="absolute left-[6%] right-[6%] top-[6%] z-20 aspect-[16/10] origin-bottom overflow-hidden rounded-t-[22px] border border-foreground/10 bg-gradient-to-b from-foreground/95 via-foreground/90 to-foreground/70 p-[1.1%] shadow-[0_42px_110px_-55px_oklch(0%_0_0/0.95)] will-change-transform [backface-visibility:hidden]"
                 style={{ rotateX: lidRotate, transformStyle: "preserve-3d" }}
               >
                 <div className="relative h-full overflow-hidden rounded-t-[16px] bg-background">
