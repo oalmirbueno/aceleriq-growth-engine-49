@@ -37,7 +37,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
           <a href="#top" className="group flex items-center">
             <img
               src={logoAceleriq}
-              alt="Aceleriq"
+              alt="Logotipo Aceleriq"
               className="h-20 w-auto md:h-24 transition-transform duration-300 group-hover:scale-105"
             />
           </a>

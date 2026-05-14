@@ -439,7 +439,7 @@ function CapturaSlide({
         <span>Sobre você</span>
       </div>
 
-      <h2 className="font-display text-2xl font-semibold leading-[1.15] tracking-tight text-foreground md:text-3xl">
+      <h2 id={`cap-q-${idx}`} className="font-display text-2xl font-semibold leading-[1.15] tracking-tight text-foreground md:text-3xl">
         {step.pergunta}
         {step.required && <span className="ml-1 text-primary">*</span>}
       </h2>
@@ -457,6 +457,7 @@ function CapturaSlide({
             value={value}
             onChange={(e) => onChange(e.target.value)}
             placeholder={step.placeholder}
+            aria-labelledby={`cap-q-${idx}`}
             className="h-12 border-0 border-b border-border bg-transparent px-0 text-lg shadow-none focus-visible:border-primary focus-visible:ring-0 md:text-xl"
           />
         ) : step.type === "textarea" ? (
@@ -466,6 +467,7 @@ function CapturaSlide({
             onChange={(e) => onChange(e.target.value)}
             placeholder={step.placeholder}
             rows={4}
+            aria-labelledby={`cap-q-${idx}`}
             className="resize-none border-0 border-b border-border bg-transparent px-0 text-base shadow-none focus-visible:border-primary focus-visible:ring-0 md:text-lg"
           />
         ) : step.type === "select" && step.options ? (
