@@ -24,7 +24,7 @@ export type PortfolioItem = {
 };
 
 const THUMB = (origin: string, w: number) =>
-  `https://image.thum.io/get/width/${w}/crop/900/noanimate/${origin}`;
+  `https://image.thum.io/get/width/${w}/crop/1200/noanimate/${origin}`;
 
 export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
   {
