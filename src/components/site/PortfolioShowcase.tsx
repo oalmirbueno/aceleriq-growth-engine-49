@@ -693,32 +693,27 @@ function RailThumb({
   isActive: boolean;
   index: number;
 }) {
-  const [loaded, setLoaded] = useState(false);
-
   return (
-    <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#0a0a0a]">
-      {/* Shimmer skeleton — visível só enquanto o screenshot carrega */}
-      {!loaded && (
-        <div
-          aria-hidden
-          className="absolute inset-0 animate-pulse bg-[linear-gradient(110deg,#0d0d0d_8%,#1a1a1a_18%,#0d0d0d_33%)] bg-[length:200%_100%]"
-        />
-      )}
-
-      {/* Sempre tenta carregar a captura real do site — eager + low-res p/ instantâneo */}
+    <div className="relative aspect-[16/10] w-full overflow-hidden bg-white">
+      {/* Captura local — instantânea, sem tela escura */}
       <img
-        src={THUMB(item.origin, 360)}
+        src={LOCAL_PREVIEW(item.slug)}
         alt={`Preview ${item.name}`}
         loading="eager"
         decoding="async"
         fetchPriority="high"
         width={360}
         height={225}
-        onLoad={() => setLoaded(true)}
-        onError={() => setLoaded(true)}
-        className={`absolute inset-0 h-full w-full object-cover object-top transition-all duration-500 ${
-          loaded ? "opacity-100" : "opacity-0"
-        } ${isActive ? "" : "group-hover:scale-[1.05]"}`}
+        onError={(e) => {
+          const t = e.currentTarget;
+          if (!t.dataset.fallback) {
+            t.dataset.fallback = "1";
+            t.src = REMOTE_THUMB(item.origin, 480);
+          }
+        }}
+        className={`absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 ${
+          isActive ? "" : "group-hover:scale-[1.05]"
+        }`}
       />
 
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent" />
