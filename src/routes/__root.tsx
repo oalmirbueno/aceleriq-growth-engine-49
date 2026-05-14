@@ -25,9 +25,10 @@ function NotFoundComponent() {
   );
 }
 
-const SITE_TITLE = "Aceleriq · Engenharia de Crescimento";
+const SITE_TITLE =
+  "Aceleriq · Agência de Marketing Digital, Sites, Tráfego e Automação em Curitiba";
 const SITE_DESCRIPTION =
-  "Engenharia de crescimento em Curitiba: estratégia, CRM, tráfego, automação, IA e dados para escalar com previsibilidade.";
+  "Agência de marketing digital em Curitiba: criação de sites, tráfego pago, automação, IA, CRM, sistemas e consultoria de crescimento. Diagnóstico gratuito + Método Acelera.";
 const SITE_URL = "https://aceleriq.com.br";
 const OG_IMAGE = `${SITE_URL}/og-image.jpg`;
 
@@ -35,13 +36,13 @@ const ORGANIZATION_JSONLD = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Aceleriq",
-  alternateName: "Aceleriq Engenharia de Crescimento",
+  alternateName: ["Aceleriq Engenharia de Crescimento", "Agência Aceleriq", "Aceleriq Marketing"],
   url: SITE_URL,
   logo: `${SITE_URL}/og-image.jpg`,
   email: "contato@aceleriq.com.br",
   telephone: "+55-41-99748-3429",
   description:
-    "Engenharia de crescimento com estratégia, dados, IA, CRM, automação, tráfego e processos comerciais.",
+    "Agência de marketing digital e engenharia de crescimento em Curitiba: criação de sites, tráfego pago, automação, IA, CRM, sistemas, dados e consultoria.",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Curitiba",
@@ -69,7 +70,7 @@ const LOCALBUSINESS_JSONLD = {
   telephone: "+55-41-99748-3429",
   priceRange: "$$$",
   description:
-    "Engenharia de crescimento em Curitiba com estratégia, dados, IA, CRM, automação, tráfego e processos comerciais.",
+    "Agência de marketing digital em Curitiba com criação de sites, tráfego pago, automação, IA, CRM, sistemas e consultoria de crescimento (Método Acelera).",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Curitiba",
@@ -130,7 +131,7 @@ export const Route = createRootRoute({
       {
         name: "keywords",
         content:
-          "Aceleriq, engenharia de crescimento, consultoria de crescimento Curitiba, CRM, automação comercial, IA para empresas, tráfego pago, processos comerciais, dados, dashboards",
+          "Aceleriq, agência de marketing digital Curitiba, criação de sites Curitiba, tráfego pago, gestão de tráfego, automação de marketing, automação comercial, IA para empresas, CRM, desenvolvimento de sistemas, aplicativos, consultoria de marketing, consultoria de crescimento, engenharia de crescimento, Método Acelera, marketing para empresas",
       },
       { property: "og:title", content: SITE_TITLE },
       { property: "og:description", content: SITE_DESCRIPTION },
