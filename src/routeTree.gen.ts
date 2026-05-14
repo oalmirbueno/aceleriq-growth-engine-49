@@ -9,14 +9,39 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TrafegoPagoRouteImport } from './routes/trafego-pago'
 import { Route as SobreAAceleriqRouteImport } from './routes/sobre-a-aceleriq'
+import { Route as CriacaoDeSitesRouteImport } from './routes/criacao-de-sites'
+import { Route as AutomacaoEIaRouteImport } from './routes/automacao-e-ia'
+import { Route as AgenciaDeMarketingDigitalCuritibaRouteImport } from './routes/agencia-de-marketing-digital-curitiba'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TrafegoPagoRoute = TrafegoPagoRouteImport.update({
+  id: '/trafego-pago',
+  path: '/trafego-pago',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SobreAAceleriqRoute = SobreAAceleriqRouteImport.update({
   id: '/sobre-a-aceleriq',
   path: '/sobre-a-aceleriq',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CriacaoDeSitesRoute = CriacaoDeSitesRouteImport.update({
+  id: '/criacao-de-sites',
+  path: '/criacao-de-sites',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AutomacaoEIaRoute = AutomacaoEIaRouteImport.update({
+  id: '/automacao-e-ia',
+  path: '/automacao-e-ia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgenciaDeMarketingDigitalCuritibaRoute =
+  AgenciaDeMarketingDigitalCuritibaRouteImport.update({
+    id: '/agencia-de-marketing-digital-curitiba',
+    path: '/agencia-de-marketing-digital-curitiba',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -25,37 +50,100 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agencia-de-marketing-digital-curitiba': typeof AgenciaDeMarketingDigitalCuritibaRoute
+  '/automacao-e-ia': typeof AutomacaoEIaRoute
+  '/criacao-de-sites': typeof CriacaoDeSitesRoute
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
+  '/trafego-pago': typeof TrafegoPagoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agencia-de-marketing-digital-curitiba': typeof AgenciaDeMarketingDigitalCuritibaRoute
+  '/automacao-e-ia': typeof AutomacaoEIaRoute
+  '/criacao-de-sites': typeof CriacaoDeSitesRoute
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
+  '/trafego-pago': typeof TrafegoPagoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/agencia-de-marketing-digital-curitiba': typeof AgenciaDeMarketingDigitalCuritibaRoute
+  '/automacao-e-ia': typeof AutomacaoEIaRoute
+  '/criacao-de-sites': typeof CriacaoDeSitesRoute
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
+  '/trafego-pago': typeof TrafegoPagoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sobre-a-aceleriq'
+  fullPaths:
+    | '/'
+    | '/agencia-de-marketing-digital-curitiba'
+    | '/automacao-e-ia'
+    | '/criacao-de-sites'
+    | '/sobre-a-aceleriq'
+    | '/trafego-pago'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sobre-a-aceleriq'
-  id: '__root__' | '/' | '/sobre-a-aceleriq'
+  to:
+    | '/'
+    | '/agencia-de-marketing-digital-curitiba'
+    | '/automacao-e-ia'
+    | '/criacao-de-sites'
+    | '/sobre-a-aceleriq'
+    | '/trafego-pago'
+  id:
+    | '__root__'
+    | '/'
+    | '/agencia-de-marketing-digital-curitiba'
+    | '/automacao-e-ia'
+    | '/criacao-de-sites'
+    | '/sobre-a-aceleriq'
+    | '/trafego-pago'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AgenciaDeMarketingDigitalCuritibaRoute: typeof AgenciaDeMarketingDigitalCuritibaRoute
+  AutomacaoEIaRoute: typeof AutomacaoEIaRoute
+  CriacaoDeSitesRoute: typeof CriacaoDeSitesRoute
   SobreAAceleriqRoute: typeof SobreAAceleriqRoute
+  TrafegoPagoRoute: typeof TrafegoPagoRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/trafego-pago': {
+      id: '/trafego-pago'
+      path: '/trafego-pago'
+      fullPath: '/trafego-pago'
+      preLoaderRoute: typeof TrafegoPagoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sobre-a-aceleriq': {
       id: '/sobre-a-aceleriq'
       path: '/sobre-a-aceleriq'
       fullPath: '/sobre-a-aceleriq'
       preLoaderRoute: typeof SobreAAceleriqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/criacao-de-sites': {
+      id: '/criacao-de-sites'
+      path: '/criacao-de-sites'
+      fullPath: '/criacao-de-sites'
+      preLoaderRoute: typeof CriacaoDeSitesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/automacao-e-ia': {
+      id: '/automacao-e-ia'
+      path: '/automacao-e-ia'
+      fullPath: '/automacao-e-ia'
+      preLoaderRoute: typeof AutomacaoEIaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agencia-de-marketing-digital-curitiba': {
+      id: '/agencia-de-marketing-digital-curitiba'
+      path: '/agencia-de-marketing-digital-curitiba'
+      fullPath: '/agencia-de-marketing-digital-curitiba'
+      preLoaderRoute: typeof AgenciaDeMarketingDigitalCuritibaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,8 +158,22 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AgenciaDeMarketingDigitalCuritibaRoute:
+    AgenciaDeMarketingDigitalCuritibaRoute,
+  AutomacaoEIaRoute: AutomacaoEIaRoute,
+  CriacaoDeSitesRoute: CriacaoDeSitesRoute,
   SobreAAceleriqRoute: SobreAAceleriqRoute,
+  TrafegoPagoRoute: TrafegoPagoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
