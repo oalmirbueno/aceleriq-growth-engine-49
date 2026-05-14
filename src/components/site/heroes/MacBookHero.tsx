@@ -54,11 +54,11 @@ export function MacBookHero() {
   return (
     <section
       ref={sectionRef}
-      className="relative mx-auto mt-0 h-[126vh] min-h-[760px] w-full max-w-[1320px] px-2 pb-14 pt-0 md:h-[138vh] md:min-h-[940px] md:px-6 md:pb-20"
+      className="relative mx-auto mt-0 h-[92vh] min-h-[610px] w-full max-w-[1320px] px-2 pb-10 pt-0 md:h-[104vh] md:min-h-[760px] md:px-6 md:pb-14"
     >
       <div
         ref={stageRef}
-        className="notebook-stage sticky top-[116px] mx-auto flex h-[calc(100vh-126px)] min-h-[520px] w-full items-center justify-center md:top-[108px] md:h-[calc(100vh-118px)] md:min-h-[660px] [--lift:24px] [--open:0]"
+        className="notebook-stage sticky top-[102px] mx-auto flex h-[calc(100vh-112px)] min-h-[500px] w-full items-start justify-center pt-8 md:top-[92px] md:h-[calc(100vh-102px)] md:min-h-[620px] md:pt-10 [--lift:24px] [--open:0]"
       >
         <div
           aria-hidden
