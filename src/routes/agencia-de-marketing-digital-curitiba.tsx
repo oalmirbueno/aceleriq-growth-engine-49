@@ -60,6 +60,13 @@ function Page() {
       ]}
       faqs={FAQS}
       whatsappMessage="Olá! Quero conversar sobre os serviços da agência Aceleriq."
+      extraSection={
+        <PortfolioShowcase
+          eyebrow="[ 03b ] · Cases da agência"
+          title="Marcas que crescem com a Aceleriq"
+          intro="Sites, e-commerces e plataformas em produção — desenvolvidos, otimizados e operados pela agência."
+        />
+      }
     />
   );
 }
