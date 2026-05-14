@@ -35,13 +35,13 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
     >
       <div className="container-aceleriq flex items-center justify-between">
         <div className="flex items-center gap-12">
-          <a href="#top" className="group flex items-center">
+          <Link to="/" aria-label="Voltar para a home" className="group flex items-center">
             <img
               src={logoAceleriq}
               alt="Logotipo Aceleriq"
               className="h-20 w-auto md:h-24 transition-transform duration-300 group-hover:scale-105"
             />
-          </a>
+          </Link>
 
           <nav className="hidden items-center gap-8 lg:flex">
             {NAV.map((item) => (
