@@ -41,7 +41,7 @@ export function MacBookHero() {
 
   return (
     <div ref={wrapRef} className="relative h-[220vh]">
-      <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden">
+      <div className="sticky top-20 flex h-[calc(100vh-5rem)] w-full items-center justify-center overflow-hidden md:top-24 md:h-[calc(100vh-6rem)]">
         <motion.div style={{ opacity: stageOpacity }} className="relative mx-auto w-full max-w-[1180px] px-4 md:px-8">
           <motion.div
             aria-hidden
@@ -55,7 +55,7 @@ export function MacBookHero() {
               className="relative mx-auto aspect-[16/10] w-full max-w-[1060px] will-change-transform"
             >
               <motion.div
-                className="absolute left-[6%] right-[6%] top-[8%] z-20 aspect-[16/10] origin-bottom overflow-hidden rounded-t-[22px] border border-foreground/10 bg-foreground/95 p-[1.1%] shadow-[0_42px_110px_-55px_oklch(0%_0_0/0.95)] will-change-transform"
+                className="absolute left-[6%] right-[6%] top-[6%] z-20 aspect-[16/10] origin-bottom overflow-hidden rounded-t-[22px] border border-foreground/10 bg-gradient-to-b from-foreground/95 via-foreground/90 to-foreground/70 p-[1.1%] shadow-[0_42px_110px_-55px_oklch(0%_0_0/0.95)] will-change-transform"
                 style={{ rotateX: lidRotate, transformStyle: "preserve-3d" }}
               >
                 <div className="relative h-full overflow-hidden rounded-t-[16px] bg-background">
