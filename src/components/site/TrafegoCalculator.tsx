@@ -287,25 +287,20 @@ function FunnelBar({ pct, label, sub, tone }: { pct: number; label: string; sub:
 }
 
 function PlatformCard({
-  name, badge, code, tilt, variant,
+  name, badge, code, variant,
 }: {
   name: string; badge: string;
   code: "google" | "meta" | "linkedin" | "tiktok";
-  tilt: number;
   variant: "light" | "dark";
 }) {
   const isDark = variant === "dark";
   return (
     <div
-      className={`group relative p-6 flex flex-col gap-5 transition-all duration-300 hover:-translate-y-1 ${
+      className={`group relative p-6 flex flex-col gap-5 transition-all duration-300 hover:-translate-y-1 hover:rotate-0 rounded-[22px] ${
         isDark
           ? "bg-[oklch(12%_0_0)] text-white border border-white/8 hover:border-primary/40"
           : "bg-white text-[oklch(15%_0_0)] border border-black/8 hover:border-primary/40 shadow-[0_15px_40px_-20px_rgba(0,0,0,0.2)]"
       }`}
-      style={{
-        transform: `rotate(${tilt}deg)`,
-        clipPath: "polygon(0 0, 100% 4%, 100% 100%, 0 96%)",
-      }}
     >
       <div className="flex items-center justify-between">
         <PlatformLogo code={code} />
