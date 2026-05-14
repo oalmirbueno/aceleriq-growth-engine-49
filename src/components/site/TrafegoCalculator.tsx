@@ -89,7 +89,7 @@ export function TrafegoCalculator() {
               raw={ticket} onChange={setTicket}
             />
 
-            <div className="bg-[oklch(15%_0_0)] text-white p-6 relative overflow-hidden"
+            <div className="bg-[oklch(15%_0_0)] text-white p-6 relative overflow-hidden rounded-[20px]"
                  style={{ clipPath: "polygon(0 0, 100% 3%, 100% 100%, 0 97%)" }}>
               <div className="text-[10px] uppercase tracking-[0.25em] text-white/50 mb-2 font-mono">
                 benchmarks aplicados
