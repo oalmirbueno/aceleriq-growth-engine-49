@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout, buildServiceHead } from "@/components/site/ServicePageLayout";
+import { AutomationSimulator } from "@/components/site/AutomationSimulator";
 
 const URL = "https://aceleriq.com.br/automacao-e-ia";
 const TITLE = "Automação e IA para Empresas · Aceleriq";
@@ -11,7 +12,7 @@ const FAQS = [
   { q: "Quais ferramentas vocês usam?", a: "n8n, Make, Zapier, OpenAI/Anthropic, RAG com vetores (Supabase/Pinecone), CRMs (HubSpot, RD, Pipedrive), WhatsApp Business API, e integrações sob medida." },
   { q: "Preciso ter CRM para automatizar?", a: "Não obrigatoriamente, mas é altamente recomendado. Se você não tem, implantamos no projeto." },
   { q: "Vocês treinam o time depois?", a: "Sim. Documentação, vídeos e sessões de handover ficam inclusos. O cliente pode operar sozinho ou manter governança conosco." },
-  { q: "IA generativa funciona pro meu negócio?", a: "Para a maioria dos negócios B2B sim — qualificação, atendimento, geração de conteúdo, análise de dados, suporte. Validamos viabilidade no diagnóstico antes de propor escopo." },
+  { q: "IA generativa funciona pro meu negócio?", a: "Para a maioria dos negócios B2B sim, qualificação, atendimento, geração de conteúdo, análise de dados, suporte. Validamos viabilidade no diagnóstico antes de propor escopo." },
 ];
 
 export const Route = createFileRoute("/automacao-e-ia")({
@@ -31,7 +32,7 @@ function Page() {
       variant="ia"
       eyebrow="n8n · OpenAI · CRM · Workflows"
       h1={<>Automação e <span className="text-primary neon-text-glow">IA</span> que escala sem contratar</>}
-      intro="Agentes de IA, fluxos automatizados e integrações sob medida para tirar o operacional repetitivo do colo do seu time. A Aceleriq instala automação real — não receita pronta de YouTube."
+      intro="Agentes de IA, fluxos automatizados e integrações sob medida para tirar o operacional repetitivo do colo do seu time. A Aceleriq instala automação real, não receita pronta de YouTube."
       benefits={[
         { title: "Agentes de IA reais", desc: "Atendimento, qualificação, SDR e suporte com modelos da OpenAI/Anthropic + RAG da sua base." },
         { title: "Fluxos n8n/Make", desc: "Automações enterprise self-hosted, sem teto de operações ou refém de SaaS caro." },
@@ -60,6 +61,7 @@ function Page() {
       ]}
       faqs={FAQS}
       whatsappMessage="Olá! Quero conversar sobre automação e IA com a Aceleriq."
+      extraSection={<AutomationSimulator />}
     />
   );
 }

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout, buildServiceHead } from "@/components/site/ServicePageLayout";
+import { TrafegoCalculator } from "@/components/site/TrafegoCalculator";
 
 const URL = "https://aceleriq.com.br/trafego-pago";
 const TITLE = "Gestão de Tráfego Pago em Curitiba · Aceleriq";
@@ -31,7 +32,7 @@ function Page() {
       variant="trafego"
       eyebrow="Google · Meta · LinkedIn · TikTok"
       h1={<>Gestão de <span className="text-primary neon-text-glow">Tráfego Pago</span> orientada a receita</>}
-      intro="Tráfego pago lido por pipeline, não por clique. Integramos Meta CAPI, Google Enhanced Conversions e CRM para você decidir investimento com base em CAC e LTV reais — não em métricas de vaidade."
+      intro="Tráfego pago lido por pipeline, não por clique. Integramos Meta CAPI, Google Enhanced Conversions e CRM para você decidir investimento com base em CAC e LTV reais, não em métricas de vaidade."
       benefits={[
         { title: "Lido por receita", desc: "CRM + tracking server-side. Você vê quanto cada campanha gerou em vendas, não só leads." },
         { title: "Estratégia + execução", desc: "Mídia conversa com copy, criativo, landing e nutrição. Zero ilha." },
@@ -55,11 +56,12 @@ function Page() {
       process={[
         { step: "01", title: "Auditoria", desc: "Diagnóstico de contas, tracking, criativos, funil e benchmarks." },
         { step: "02", title: "Setup", desc: "Estruturação, tagging, integrações server-side e contas de teste." },
-        { step: "03", title: "Aprendizado", desc: "30–60 dias para algoritmo aprender e identificar criativos vencedores." },
+        { step: "03", title: "Aprendizado", desc: "30-60 dias para algoritmo aprender e identificar criativos vencedores." },
         { step: "04", title: "Escala", desc: "Aumento de orçamento controlado, expansão de públicos e novos formatos." },
       ]}
       faqs={FAQS}
       whatsappMessage="Olá! Quero gestão de tráfego pago com a Aceleriq."
+      extraSection={<TrafegoCalculator />}
     />
   );
 }

@@ -60,72 +60,120 @@ export function ServicePageLayout(props: ServicePageProps) {
               <span className="text-primary font-mono">{props.eyebrow}</span>
             </motion.div>
 
-            <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-              <div className="lg:col-span-7">
-                <motion.h1
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.05 }}
-                  className="font-display text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[5rem] leading-[0.95] uppercase tracking-[-0.04em]"
-                >
-                  {props.h1}
-                </motion.h1>
+            {props.variant === "sites" ? (
+              // Sites: headline on top, MacBook centered, full width
+              <div className="space-y-12">
+                <div className="max-w-4xl">
+                  <motion.h1
+                    initial={{ opacity: 0, y: 14 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.05 }}
+                    className="font-display text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[5.5rem] leading-[0.95] uppercase tracking-[-0.04em]"
+                  >
+                    {props.h1}
+                  </motion.h1>
 
-                <motion.p
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  className="mt-8 text-[15px] md:text-base text-foreground/75 font-light leading-[1.6] max-w-xl"
-                >
-                  {props.intro}
-                </motion.p>
+                  <motion.p
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="mt-6 text-[15px] md:text-base text-foreground/75 font-light leading-[1.6] max-w-2xl"
+                  >
+                    {props.intro}
+                  </motion.p>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.32 }}
+                    className="mt-8 flex flex-wrap items-center gap-4"
+                  >
+                    <Button
+                      onClick={open}
+                      className="group h-12 rounded-none bg-primary px-6 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-foreground hover:-translate-y-0.5 transition-all hover:shadow-[0_8px_30px_oklch(85%_0.2_145/0.4)]"
+                    >
+                      Diagnóstico Gratuito
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                    <a
+                      href={wa}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="group inline-flex items-center gap-2.5 h-12 px-2 text-[11px] font-bold uppercase tracking-[0.18em] text-foreground/80 hover:text-primary transition-colors"
+                    >
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full bg-primary opacity-60" />
+                        <span className="relative inline-flex h-1.5 w-1.5 bg-primary" />
+                      </span>
+                      WhatsApp
+                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    </a>
+                  </motion.div>
+                </div>
 
                 <motion.div
-                  initial={{ opacity: 0, y: 12 }}
+                  initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.32 }}
-                  className="mt-8 flex flex-wrap items-center gap-4"
+                  transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <Button
-                    onClick={open}
-                    className="group h-12 rounded-none bg-primary px-6 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-foreground hover:-translate-y-0.5 transition-all hover:shadow-[0_8px_30px_oklch(85%_0.2_145/0.4)]"
-                  >
-                    Diagnóstico Gratuito
-                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                  <a
-                    href={wa}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="group inline-flex items-center gap-2.5 h-12 px-2 text-[11px] font-bold uppercase tracking-[0.18em] text-foreground/80 hover:text-primary transition-colors"
-                  >
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full bg-primary opacity-60" />
-                      <span className="relative inline-flex h-1.5 w-1.5 bg-primary" />
-                    </span>
-                    WhatsApp
-                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                  </a>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
-                  className="mt-10 flex items-center gap-6 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground/55"
-                >
-                  <span>Curitiba · BR</span>
-                  <span className="h-px w-8 bg-border" />
-                  <span>Operando 24/7</span>
-                  <span className="h-px w-8 bg-border" />
-                  <span className="text-primary">v3.0 / online</span>
+                  <ServiceVisual variant={props.variant} />
                 </motion.div>
               </div>
+            ) : (
+              <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+                <div className="lg:col-span-6">
+                  <motion.h1
+                    initial={{ opacity: 0, y: 14 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.05 }}
+                    className="font-display text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[4.5rem] leading-[0.95] uppercase tracking-[-0.04em]"
+                  >
+                    {props.h1}
+                  </motion.h1>
 
-              <div className="lg:col-span-5">
-                <ServiceVisual variant={props.variant} />
+                  <motion.p
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="mt-8 text-[15px] md:text-base text-foreground/75 font-light leading-[1.6] max-w-xl"
+                  >
+                    {props.intro}
+                  </motion.p>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.32 }}
+                    className="mt-8 flex flex-wrap items-center gap-4"
+                  >
+                    <Button
+                      onClick={open}
+                      className="group h-12 rounded-none bg-primary px-6 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-foreground hover:-translate-y-0.5 transition-all hover:shadow-[0_8px_30px_oklch(85%_0.2_145/0.4)]"
+                    >
+                      Diagnóstico Gratuito
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                    <a
+                      href={wa}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="group inline-flex items-center gap-2.5 h-12 px-2 text-[11px] font-bold uppercase tracking-[0.18em] text-foreground/80 hover:text-primary transition-colors"
+                    >
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full bg-primary opacity-60" />
+                        <span className="relative inline-flex h-1.5 w-1.5 bg-primary" />
+                      </span>
+                      WhatsApp
+                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    </a>
+                  </motion.div>
+                </div>
+
+                <div className="lg:col-span-6">
+                  <ServiceVisual variant={props.variant} />
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </section>
 
@@ -215,7 +263,7 @@ export function ServicePageLayout(props: ServicePageProps) {
           </div>
         </section>
 
-        {/* DELIVERABLES — refined two-column list */}
+        {/* DELIVERABLES, refined two-column list */}
         <section className="relative px-6 lg:px-16 py-16 md:py-24 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-8 mb-12">
             <div className="lg:col-span-2 font-mono text-[10px] text-primary uppercase tracking-[0.2em] lg:pt-2">
@@ -252,6 +300,41 @@ export function ServicePageLayout(props: ServicePageProps) {
                 </span>
               </motion.div>
             ))}
+          </div>
+        </section>
+
+        {/* MANIFESTO, light section to break the all-black rhythm */}
+        <section className="relative bg-foreground text-background overflow-hidden border-y border-foreground/15">
+          <div className="absolute -right-32 -top-32 h-96 w-96 rounded-full"
+            style={{ background: "radial-gradient(circle, oklch(85% 0.2 145 / 0.4), transparent 70%)" }}
+          />
+          <div className="relative max-w-7xl mx-auto px-6 lg:px-16 py-20 md:py-28 grid lg:grid-cols-12 gap-10">
+            <div className="lg:col-span-2 font-mono text-[10px] uppercase tracking-[0.25em] opacity-60">
+              ✦ Princípio
+            </div>
+            <div className="lg:col-span-7">
+              <h2 className="font-display text-3xl md:text-5xl lg:text-6xl uppercase leading-[0.95] tracking-[-0.045em]">
+                A gente <span className="bg-primary text-foreground px-2">vende sistema</span>,
+                <br />não relatório bonito.
+              </h2>
+              <p className="mt-6 max-w-xl text-[15px] md:text-base leading-[1.65] opacity-75">
+                Cada peça do programa conversa com a próxima. Site alimenta tráfego.
+                Tráfego alimenta CRM. CRM alimenta IA. IA devolve receita pra dentro
+                do P&L. Sem ilha, sem entregável solto.
+              </p>
+            </div>
+            <div className="lg:col-span-3 flex flex-col gap-4">
+              {[
+                { v: "0", l: "departamentos isolados" },
+                { v: "1", l: "fonte da verdade" },
+                { v: "∞", l: "ciclos de melhoria" },
+              ].map((s) => (
+                <div key={s.l} className="flex items-baseline gap-3 border-b border-background/15 pb-3">
+                  <span className="font-display text-3xl font-bold tracking-[-0.03em] text-primary">{s.v}</span>
+                  <span className="text-[12px] uppercase tracking-widest opacity-70">{s.l}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -311,7 +394,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                 Dúvidas <em className="italic font-light text-primary">comuns</em>.
               </h2>
               <p className="mt-5 text-[13px] text-muted-foreground leading-relaxed max-w-xs">
-                Respostas diretas. Fora desta lista? Chame no WhatsApp — respondemos em horas.
+                Respostas diretas. Fora desta lista? Chame no WhatsApp, respondemos em horas.
               </p>
               <a
                 href={wa}
@@ -368,7 +451,7 @@ export function ServicePageLayout(props: ServicePageProps) {
               Quer o diagnóstico do seu <em className="italic font-light text-primary">cenário?</em>
             </h2>
             <p className="text-muted-foreground text-[15px] md:text-base mb-10 font-light max-w-xl mx-auto leading-[1.6]">
-              5 minutos. Score de Maturidade, classificação de estágio e 3 recomendações personalizadas — sem custo.
+              5 minutos. Score de Maturidade, classificação de estágio e 3 recomendações personalizadas, sem custo.
             </p>
 
             <div className="flex flex-col md:flex-row justify-center items-center gap-5">
