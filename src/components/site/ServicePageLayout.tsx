@@ -115,7 +115,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                   initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                  className="-mt-28 md:-mt-40"
+                  className="mt-2 md:-mt-6"
                 >
                   <ServiceVisual variant={props.variant} />
                 </motion.div>
