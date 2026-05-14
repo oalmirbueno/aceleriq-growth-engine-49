@@ -1,20 +1,42 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { ShieldCheck, TrendingUp, Target, LineChart, Layers, Sparkles } from "lucide-react";
 
 /**
- * Tráfego — Projeção visual moderna + certificações + estratégia
- * Sem cara de terminal/IA. Cards com cortes diagonais, fundos alternados
- * (branco/preto), tipografia editorial, números grandes, interação fluida.
+ * Tráfego — Projeção por nicho + certificações + estratégia.
+ * Cards alinhados na mesma diagonal, paleta clara dominante,
+ * benchmarks reais variando por vertical.
  */
-export function TrafegoCalculator() {
-  const [invest, setInvest] = useState(15000);
-  const [ticket, setTicket] = useState(2500);
 
-  const cpl = 18;
-  const convRate = 0.12;
-  const leads = Math.round(invest / cpl);
-  const sales = Math.round(leads * convRate);
+type NicheKey = "servicos" | "ecommerce" | "imobiliario" | "saude" | "educacao" | "b2b";
+
+const NICHES: Record<NicheKey, {
+  label: string;
+  cpl: number;        // R$ por lead
+  convRate: number;   // lead → venda
+  ticket: number;     // ticket médio sugerido
+  ticketRange: [number, number];
+  note: string;
+}> = {
+  servicos:    { label: "Serviços locais",    cpl: 22, convRate: 0.14, ticket: 1800,  ticketRange: [300, 15000],  note: "Demanda quente, ciclo curto" },
+  ecommerce:   { label: "E-commerce",         cpl: 9,  convRate: 0.022,ticket: 280,   ticketRange: [80, 2500],    note: "Volume alto, ticket menor" },
+  imobiliario: { label: "Imobiliário / Alto ticket", cpl: 65, convRate: 0.04, ticket: 28000, ticketRange: [5000, 200000], note: "Lead caro, LTV altíssimo" },
+  saude:       { label: "Saúde / Estética",   cpl: 28, convRate: 0.18, ticket: 1200,  ticketRange: [200, 12000],  note: "Conversão por agendamento" },
+  educacao:    { label: "Educação / Cursos",  cpl: 14, convRate: 0.08, ticket: 1900,  ticketRange: [300, 25000],  note: "Janela de matrícula" },
+  b2b:         { label: "B2B / SaaS",         cpl: 95, convRate: 0.06, ticket: 18000, ticketRange: [2000, 150000],note: "Ciclo longo, MQL → SQL" },
+};
+
+export function TrafegoCalculator() {
+  const [niche, setNiche] = useState<NicheKey>("servicos");
+  const [invest, setInvest] = useState(15000);
+  const cfg = NICHES[niche];
+  const [ticket, setTicket] = useState(cfg.ticket);
+
+  // ao trocar nicho, sugere ticket do nicho
+  useMemo(() => { setTicket(cfg.ticket); }, [niche]); // eslint-disable-line
+
+  const leads = Math.round(invest / cfg.cpl);
+  const sales = Math.max(1, Math.round(leads * cfg.convRate));
   const revenue = sales * ticket;
   const roas = revenue / Math.max(invest, 1);
   const cac = sales > 0 ? Math.round(invest / sales) : 0;
@@ -40,24 +62,24 @@ export function TrafegoCalculator() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-          <PlatformCard name="Google Ads" badge="Partner" code="google" variant="light" />
-          <PlatformCard name="Meta Business" badge="Partner" code="meta" variant="dark" />
-          <PlatformCard name="LinkedIn Ads" badge="Marketing" code="linkedin" variant="dark" />
-          <PlatformCard name="TikTok Ads" badge="Manager" code="tiktok" variant="light" />
+        {/* Todos os cards em fundo claro, mesma diagonal, alinhados */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-5 items-stretch">
+          <PlatformCard name="Google Ads" badge="Partner" code="google" />
+          <PlatformCard name="Meta Business" badge="Partner" code="meta" />
+          <PlatformCard name="LinkedIn Ads" badge="Marketing" code="linkedin" />
+          <PlatformCard name="TikTok Ads" badge="Manager" code="tiktok" />
         </div>
       </section>
 
-      {/* ============ PROJEÇÃO — visual moderno ============ */}
+      {/* ============ PROJEÇÃO ============ */}
       <section className="relative px-6 lg:px-16 py-20 md:py-28 max-w-7xl mx-auto">
-        {/* faixa diagonal de fundo */}
         <div
           aria-hidden
           className="absolute inset-x-0 top-12 bottom-12 -z-10 bg-[oklch(96%_0.02_145)]"
           style={{ clipPath: "polygon(0 4%, 100% 0, 100% 96%, 0 100%)" }}
         />
 
-        <div className="grid lg:grid-cols-12 gap-8 mb-12">
+        <div className="grid lg:grid-cols-12 gap-8 mb-10">
           <div className="lg:col-span-2 font-mono text-[10px] text-primary uppercase tracking-[0.2em] lg:pt-2">
             ⌖ Projeção
           </div>
@@ -66,14 +88,35 @@ export function TrafegoCalculator() {
               Quanto sua mídia <em className="italic font-light text-[oklch(45%_0.18_145)]">deveria gerar</em>?
             </h2>
             <p className="mt-4 max-w-2xl text-[15px] text-[oklch(35%_0_0)] leading-relaxed">
-              Mexa nas variáveis e veja a projeção em tempo real. Benchmarks reais de operação Aceleriq.
+              Selecione seu nicho. Os benchmarks (CPL, conversão e ticket) ajustam automaticamente
+              com base em operações reais Aceleriq.
             </p>
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-5">
-          {/* Coluna esquerda — controles */}
-          <div className="lg:col-span-2 space-y-4">
+        {/* Seletor de nicho */}
+        <div className="mb-6 flex flex-wrap gap-2">
+          {(Object.keys(NICHES) as NicheKey[]).map((k) => {
+            const active = niche === k;
+            return (
+              <button
+                key={k}
+                onClick={() => setNiche(k)}
+                className={`px-4 py-2 text-[12px] font-mono uppercase tracking-[0.15em] rounded-full border transition-all ${
+                  active
+                    ? "bg-[oklch(15%_0_0)] text-white border-transparent shadow-[0_8px_24px_-10px_rgba(0,0,0,0.4)]"
+                    : "bg-white/70 text-[oklch(30%_0_0)] border-black/10 hover:border-[oklch(45%_0.18_145)] hover:text-[oklch(15%_0_0)]"
+                }`}
+              >
+                {NICHES[k].label}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="grid lg:grid-cols-5 gap-5 items-stretch">
+          {/* Controles */}
+          <div className="lg:col-span-2 flex flex-col gap-5">
             <ControlCard
               label="Investimento mensal"
               value={`R$ ${fmt(invest)}`}
@@ -84,27 +127,35 @@ export function TrafegoCalculator() {
             <ControlCard
               label="Ticket médio"
               value={`R$ ${fmt(ticket)}`}
-              hint="receita por venda"
-              min={300} max={50000} step={100}
+              hint={`sugerido: R$ ${fmt(cfg.ticket)}`}
+              min={cfg.ticketRange[0]} max={cfg.ticketRange[1]}
+              step={Math.max(50, Math.round(cfg.ticketRange[1] / 200))}
               raw={ticket} onChange={setTicket}
             />
 
-            <div className="bg-[oklch(15%_0_0)] text-white p-6 relative overflow-hidden rounded-[20px]"
-                 style={{ clipPath: "polygon(0 0, 100% 3%, 100% 100%, 0 97%)" }}>
-              <div className="text-[10px] uppercase tracking-[0.25em] text-white/50 mb-2 font-mono">
-                benchmarks aplicados
+            {/* Bench card — agora claro, segue a paleta */}
+            <div className="bg-white border border-black/8 p-6 relative shadow-[0_15px_40px_-25px_rgba(0,0,0,0.2)] flex-1"
+                 style={{ clipPath: "polygon(0 4%, 100% 0, 100% 96%, 0 100%)" }}>
+              <div className="text-[10px] uppercase tracking-[0.25em] text-[oklch(45%_0_0)] mb-3 font-mono">
+                benchmarks · {cfg.label}
               </div>
-              <div className="space-y-1.5 text-sm">
-                <BenchRow k="CPL médio" v="R$ 18" />
-                <BenchRow k="Lead → venda" v="12%" />
-                <BenchRow k="Janela" v="30 dias" />
+              <div className="space-y-2 text-sm">
+                <BenchRow k="CPL médio" v={`R$ ${cfg.cpl}`} />
+                <BenchRow k="Lead → venda" v={`${(cfg.convRate * 100).toFixed(1)}%`} />
+                <BenchRow k="Janela típica" v="30 dias" />
+              </div>
+              <div className="mt-4 pt-4 border-t border-black/8 text-[11px] text-[oklch(50%_0_0)] italic">
+                {cfg.note}
               </div>
             </div>
           </div>
 
-          {/* Coluna direita — output visual */}
-          <div className="lg:col-span-3 relative bg-white p-8 md:p-10 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.25)] border border-black/5 rounded-[28px] overflow-hidden" style={{ transform: "rotate(-0.6deg)" }}>
-            <div className="flex items-start justify-between mb-8">
+          {/* Output */}
+          <div
+            className="lg:col-span-3 relative bg-white p-8 md:p-10 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.25)] border border-black/5"
+            style={{ clipPath: "polygon(0 3%, 100% 0, 100% 97%, 0 100%)" }}
+          >
+            <div className="flex items-start justify-between mb-8 gap-4">
               <div>
                 <div className="text-[10px] uppercase tracking-[0.25em] text-[oklch(45%_0.18_145)] font-mono mb-2">
                   → receita projetada · mensal
@@ -122,7 +173,7 @@ export function TrafegoCalculator() {
                   ≈ <span className="font-semibold text-[oklch(20%_0_0)]">R$ {fmt(revenue * 12)}</span> / ano
                 </div>
               </div>
-              <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-[oklch(95%_0.05_145)] border border-[oklch(85%_0.18_145)/0.4] rounded-full">
+              <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-[oklch(95%_0.05_145)] border border-[oklch(85%_0.18_145)/0.4] rounded-full shrink-0">
                 <TrendingUp className="h-3.5 w-3.5 text-[oklch(45%_0.18_145)]" />
                 <span className="font-mono text-[11px] uppercase tracking-widest text-[oklch(35%_0.15_145)]">
                   {roas.toFixed(1)}x ROAS
@@ -130,14 +181,12 @@ export function TrafegoCalculator() {
               </div>
             </div>
 
-            {/* Métricas em grade */}
-            <div className="grid grid-cols-3 gap-px bg-black/8 border border-black/10 rounded-2xl overflow-hidden">
+            <div className="grid grid-cols-3 gap-px bg-black/8 border border-black/10 overflow-hidden">
               <MetricCell label="Leads" value={fmt(leads)} unit="/mês" />
               <MetricCell label="Vendas" value={fmt(sales)} unit="/mês" />
               <MetricCell label="CAC" value={`R$ ${fmt(cac)}`} unit="" />
             </div>
 
-            {/* Barra de funil */}
             <div className="mt-8">
               <div className="text-[10px] uppercase tracking-[0.25em] text-[oklch(45%_0_0)] font-mono mb-3">
                 funil
@@ -149,7 +198,7 @@ export function TrafegoCalculator() {
             </div>
 
             <p className="mt-6 text-[11px] text-[oklch(50%_0_0)]">
-              * Projeção ilustrativa. Resultado real depende de oferta, criativo, funil comercial e maturidade do algoritmo.
+              * Benchmarks médios reais por vertical. Resultado depende de oferta, criativo, funil comercial e maturidade do algoritmo.
             </p>
           </div>
         </div>
@@ -177,27 +226,28 @@ export function TrafegoCalculator() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-5">
+        {/* Cards alinhados, mesma diagonal */}
+        <div className="grid md:grid-cols-3 gap-5 items-stretch">
           <StrategyCard
             icon={<Target className="h-5 w-5" />}
             tag="01 / Topo"
             title="Demanda latente"
             items={["Vídeo curto + UGC", "Públicos amplos", "CPM otimizado", "Awareness por região"]}
-            variant="dark"
+            accent="dark"
           />
           <StrategyCard
             icon={<Layers className="h-5 w-5" />}
             tag="02 / Meio"
             title="Consideração"
             items={["Retargeting segmentado", "Cases e prova social", "Lookalikes 1-3%", "Comparativos"]}
-            variant="light"
+            accent="light"
           />
           <StrategyCard
             icon={<LineChart className="h-5 w-5" />}
             tag="03 / Fundo"
             title="Conversão"
             items={["Search alta intenção", "PMax com feed limpo", "CAPI + Enhanced Conv.", "Lances por valor"]}
-            variant="green"
+            accent="green"
           />
         </div>
       </section>
@@ -216,7 +266,8 @@ function ControlCard({
 }) {
   const pct = ((raw - min) / (max - min)) * 100;
   return (
-    <div className="bg-white border border-black/8 p-6 relative overflow-hidden shadow-[0_10px_30px_-15px_rgba(0,0,0,0.15)] rounded-[20px]">
+    <div className="bg-white border border-black/8 p-6 relative shadow-[0_10px_30px_-15px_rgba(0,0,0,0.15)]"
+         style={{ clipPath: "polygon(0 4%, 100% 0, 100% 96%, 0 100%)" }}>
       <div className="flex items-baseline justify-between mb-1">
         <div className="text-[10px] uppercase tracking-[0.25em] text-[oklch(45%_0_0)] font-mono">{label}</div>
         <div className="text-[10px] text-[oklch(55%_0_0)]">{hint}</div>
@@ -241,9 +292,9 @@ function ControlCard({
 
 function BenchRow({ k, v }: { k: string; v: string }) {
   return (
-    <div className="flex justify-between items-baseline border-b border-white/8 pb-1.5">
-      <span className="text-white/60">{k}</span>
-      <span className="font-mono text-primary">{v}</span>
+    <div className="flex justify-between items-baseline border-b border-black/8 pb-1.5">
+      <span className="text-[oklch(45%_0_0)]">{k}</span>
+      <span className="font-mono text-[oklch(35%_0.15_145)] font-semibold">{v}</span>
     </div>
   );
 }
@@ -287,33 +338,27 @@ function FunnelBar({ pct, label, sub, tone }: { pct: number; label: string; sub:
 }
 
 function PlatformCard({
-  name, badge, code, variant,
+  name, badge, code,
 }: {
   name: string; badge: string;
   code: "google" | "meta" | "linkedin" | "tiktok";
-  variant: "light" | "dark";
 }) {
-  const isDark = variant === "dark";
   return (
     <div
-      className={`group relative p-6 flex flex-col gap-5 transition-all duration-300 hover:-translate-y-1 ${
-        isDark
-          ? "bg-[oklch(12%_0_0)] text-white border border-white/8 hover:border-primary/40"
-          : "bg-white text-[oklch(15%_0_0)] border border-black/8 hover:border-primary/40 shadow-[0_15px_40px_-20px_rgba(0,0,0,0.2)]"
-      }`}
+      className="group relative bg-white text-[oklch(15%_0_0)] border border-black/8 p-6 flex flex-col gap-5 transition-all duration-300 hover:-translate-y-1 hover:border-[oklch(45%_0.18_145)/0.5] shadow-[0_15px_40px_-20px_rgba(0,0,0,0.18)] h-full"
       style={{ clipPath: "polygon(0 6%, 100% 0, 100% 94%, 0 100%)" }}
     >
       <div className="flex items-center justify-between">
         <PlatformLogo code={code} />
-        <ShieldCheck className={`h-4 w-4 ${isDark ? "text-primary" : "text-[oklch(45%_0.18_145)]"}`} />
+        <ShieldCheck className="h-4 w-4 text-[oklch(45%_0.18_145)]" />
       </div>
-      <div>
+      <div className="mt-auto">
         <div className="font-display text-base font-bold tracking-tight">{name}</div>
-        <div className={`font-mono text-[10px] uppercase tracking-[0.2em] mt-0.5 ${isDark ? "text-white/50" : "text-[oklch(50%_0_0)]"}`}>
+        <div className="font-mono text-[10px] uppercase tracking-[0.2em] mt-0.5 text-[oklch(50%_0_0)]">
           Certified · {badge}
         </div>
       </div>
-      <div className={`font-mono text-[10px] ${isDark ? "text-white/35" : "text-[oklch(60%_0_0)]"}`}>
+      <div className="font-mono text-[10px] text-[oklch(60%_0_0)]">
         ID: AQ-{code.toUpperCase().slice(0, 3)}-{(code.length * 4721).toString().slice(0, 4)}
       </div>
     </div>
@@ -346,42 +391,39 @@ function PlatformLogo({ code }: { code: "google" | "meta" | "linkedin" | "tiktok
     case "tiktok":
       return (
         <svg viewBox="0 0 24 24" className="h-7 w-7">
-          <path fill="currentColor" d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.3 0 .58.04.85.13V9.4a6.34 6.34 0 0 0-5.94 10.46A6.34 6.34 0 0 0 15.7 15.7V8.83a8.16 8.16 0 0 0 4.77 1.52V6.93c-.3 0-.59-.08-.88-.24z"/>
+          <path fill="#111111" d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.3 0 .58.04.85.13V9.4a6.34 6.34 0 0 0-5.94 10.46A6.34 6.34 0 0 0 15.7 15.7V8.83a8.16 8.16 0 0 0 4.77 1.52V6.93c-.3 0-.59-.08-.88-.24z"/>
         </svg>
       );
   }
 }
 
 function StrategyCard({
-  icon, tag, title, items, variant,
+  icon, tag, title, items, accent,
 }: {
   icon: React.ReactNode; tag: string; title: string; items: string[];
-  variant: "light" | "dark" | "green";
+  accent: "light" | "dark" | "green";
 }) {
-  const styles =
-    variant === "green"
-      ? "bg-[oklch(85%_0.2_145)] text-[oklch(12%_0_0)]"
-      : variant === "light"
-      ? "bg-white text-[oklch(15%_0_0)] shadow-[0_20px_50px_-25px_rgba(0,0,0,0.25)]"
-      : "bg-[oklch(12%_0_0)] text-white border border-white/8";
-
-  const iconColor = variant === "green" ? "text-[oklch(20%_0_0)]" : variant === "light" ? "text-[oklch(45%_0.18_145)]" : "text-primary";
-  const muted = variant === "green" ? "text-[oklch(25%_0_0)]" : variant === "light" ? "text-[oklch(45%_0_0)]" : "text-white/65";
+  // todos com fundo claro dominante; o "accent" só muda a barrinha lateral e ícones
+  const accentColor =
+    accent === "green" ? "oklch(60% 0.2 145)"
+    : accent === "dark" ? "oklch(15% 0 0)"
+    : "oklch(45% 0.18 145)";
 
   return (
     <div
-      className={`relative p-7 md:p-8 transition-all duration-300 hover:-translate-y-1 ${styles}`}
+      className="relative bg-white text-[oklch(15%_0_0)] p-7 md:p-8 transition-all duration-300 hover:-translate-y-1 shadow-[0_20px_50px_-25px_rgba(0,0,0,0.22)] border border-black/8 h-full overflow-hidden"
       style={{ clipPath: "polygon(0 5%, 100% 0, 100% 95%, 0 100%)" }}
     >
-      <div className={`flex items-center gap-2 mb-5 ${iconColor}`}>
+      <div className="absolute left-0 top-[5%] bottom-[5%] w-[3px]" style={{ background: accentColor }} />
+      <div className="flex items-center gap-2 mb-5" style={{ color: accentColor }}>
         {icon}
         <span className="font-mono text-[10px] uppercase tracking-[0.25em]">{tag}</span>
       </div>
       <div className="font-display text-2xl md:text-3xl font-bold tracking-tight mb-5 leading-tight">{title}</div>
       <ul className="space-y-2.5">
         {items.map((it) => (
-          <li key={it} className={`text-[13px] flex gap-2.5 leading-snug ${muted}`}>
-            <span className={iconColor}>→</span>
+          <li key={it} className="text-[13px] flex gap-2.5 leading-snug text-[oklch(40%_0_0)]">
+            <span style={{ color: accentColor }}>→</span>
             <span>{it}</span>
           </li>
         ))}
