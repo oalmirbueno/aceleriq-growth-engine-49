@@ -452,11 +452,13 @@ function CaseView({
   const [loaded, setLoaded] = useState(false);
   const [device, setDevice] = useState<"desktop" | "mobile">("desktop");
 
+  // Só reseta o loaded ao trocar device ou ao recarregar manualmente.
+  // Trocar de case NÃO força reload — o ScaledFrame já reage ao src.
   useEffect(() => {
     setLoaded(false);
-    const t = setTimeout(() => setLoaded(true), 2500);
+    const t = setTimeout(() => setLoaded(true), 2000);
     return () => clearTimeout(t);
-  }, [iframeKey, item.slug, device]);
+  }, [iframeKey, device]);
 
   const currentIndex = items.findIndex((i) => i.slug === item.slug);
 
@@ -552,7 +554,7 @@ function CaseView({
           {/* Stage */}
           <div className="relative bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.04),_transparent_60%)] p-3 sm:p-5">
             <ScaledFrame
-              key={`${iframeKey}-${device}-${item.slug}`}
+              key={`${iframeKey}-${device}`}
               src={item.origin}
               posterSrc={THUMB(item.origin, device === "mobile" ? 900 : 2400)}
               device={device}
@@ -766,7 +768,7 @@ function ScaledFrame({
   return (
     <div
       ref={wrapRef}
-      className={`relative mx-auto w-full overflow-hidden bg-background transition-all duration-500 ${
+      className={`relative mx-auto w-full overflow-hidden bg-background ${
         isMobile
           ? "max-w-[380px] rounded-[32px] border border-white/10 shadow-2xl"
           : "rounded-md border border-white/[0.06]"
