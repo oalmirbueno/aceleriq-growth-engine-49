@@ -19,7 +19,10 @@ export function MacBookHero() {
   const sceneY = useSpring(rawSceneY, { stiffness: 120, damping: 30, mass: 0.8 });
 
   return (
-    <section ref={sectionRef} className="relative mx-auto h-[112vh] min-h-[680px] w-full max-w-[1240px] px-2 md:h-[125vh] md:min-h-[820px] md:px-6">
+    <section
+      ref={sectionRef}
+      className="relative mx-auto h-[112vh] min-h-[680px] w-full max-w-[1240px] px-2 md:h-[125vh] md:min-h-[820px] md:px-6"
+    >
       <div className="sticky top-[16vh] mx-auto flex h-[62vh] min-h-[430px] w-full items-center justify-center md:top-[12vh] md:h-[72vh]">
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}
@@ -33,13 +36,19 @@ export function MacBookHero() {
             style={{ opacity: rawGlow }}
             className="absolute left-1/2 top-[46%] h-[48%] w-[88%] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/25 blur-3xl"
           />
-          <div aria-hidden className="absolute left-1/2 top-[76%] h-[20%] w-[86%] -translate-x-1/2 rounded-[100%] bg-foreground/15 blur-2xl" />
+          <div
+            aria-hidden
+            className="absolute left-1/2 top-[76%] h-[20%] w-[86%] -translate-x-1/2 rounded-[100%] bg-foreground/15 blur-2xl"
+          />
 
           <div className="absolute inset-0 [transform:rotateX(7deg)_rotateY(-5deg)] [transform-style:preserve-3d]">
             <div className="absolute bottom-[13%] left-1/2 z-10 h-[19%] w-[92%] -translate-x-1/2 rounded-b-[32px] rounded-t-[12px] border border-foreground/10 bg-gradient-to-b from-foreground/85 via-foreground/62 to-foreground/36 shadow-[0_72px_120px_-58px_oklch(0%_0_0/1)] [transform:rotateX(64deg)] [transform-origin:50%_0%] [transform-style:preserve-3d]">
               <div className="absolute inset-x-[5%] top-[16%] grid grid-cols-14 gap-[0.9%]">
                 {keys.map((key) => (
-                  <span key={key} className="h-[clamp(3px,0.48vw,7px)] rounded-[2px] bg-background/22 shadow-[inset_0_1px_0_oklch(100%_0_0/0.08)]" />
+                  <span
+                    key={key}
+                    className="h-[clamp(3px,0.48vw,7px)] rounded-[2px] bg-background/22 shadow-[inset_0_1px_0_oklch(100%_0_0/0.08)]"
+                  />
                 ))}
               </div>
               <div className="absolute bottom-[13%] left-1/2 h-[34%] w-[18%] -translate-x-1/2 rounded-[7px] border border-background/20 bg-background/18" />
@@ -52,10 +61,19 @@ export function MacBookHero() {
             >
               <div className="relative h-full overflow-hidden rounded-t-[20px] border border-border/70 bg-background shadow-[inset_0_0_0_1px_oklch(100%_0_0/0.04)]">
                 <WebsiteScreen />
-                <div aria-hidden className="absolute inset-0 bg-gradient-to-tr from-transparent via-foreground/10 to-transparent opacity-45" />
-                <div aria-hidden className="absolute inset-0 ring-1 ring-inset ring-foreground/10" />
+                <div
+                  aria-hidden
+                  className="absolute inset-0 bg-gradient-to-tr from-transparent via-foreground/10 to-transparent opacity-45"
+                />
+                <div
+                  aria-hidden
+                  className="absolute inset-0 ring-1 ring-inset ring-foreground/10"
+                />
               </div>
-              <div aria-hidden className="absolute bottom-[-2.4%] left-1/2 h-[3.8%] w-[104%] -translate-x-1/2 rounded-b-[12px] bg-foreground/70" />
+              <div
+                aria-hidden
+                className="absolute bottom-[-2.4%] left-1/2 h-[3.8%] w-[104%] -translate-x-1/2 rounded-b-[12px] bg-foreground/70"
+              />
             </motion.div>
           </div>
         </motion.div>
@@ -116,14 +134,21 @@ function WebsiteScreen() {
 
           <div className="col-span-5 grid grid-rows-[1fr_0.72fr] gap-[5%]">
             <div className="relative overflow-hidden border border-primary/25 bg-primary/[0.06] p-[6%]">
-              <div aria-hidden className="absolute inset-x-[12%] bottom-[16%] h-[44%] bg-primary/25 blur-2xl" />
+              <div
+                aria-hidden
+                className="absolute inset-x-[12%] bottom-[16%] h-[44%] bg-primary/25 blur-2xl"
+              />
               <div className="relative h-full">
                 <div className="mb-[7%] font-mono text-[clamp(6px,0.7vw,10px)] uppercase tracking-[0.16em] text-primary">
                   funil em tempo real
                 </div>
                 <div className="flex h-[72%] items-end gap-[4%]">
                   {bars.map((height, index) => (
-                    <div key={index} className="flex-1 bg-gradient-to-t from-primary/30 to-primary" style={{ height: `${height}%` }} />
+                    <div
+                      key={index}
+                      className="flex-1 bg-gradient-to-t from-primary/30 to-primary"
+                      style={{ height: `${height}%` }}
+                    />
                   ))}
                 </div>
               </div>
@@ -138,7 +163,9 @@ function WebsiteScreen() {
                   <div key={item} className="flex items-center gap-[4%]">
                     <span className="h-[0.55vw] max-h-2 min-h-1 w-[0.55vw] min-w-1 max-w-2 bg-primary" />
                     <span className="text-[clamp(8px,0.9vw,13px)] text-foreground/80">{item}</span>
-                    <span className="ml-auto font-mono text-[clamp(6px,0.7vw,10px)] text-primary">0{index + 1}</span>
+                    <span className="ml-auto font-mono text-[clamp(6px,0.7vw,10px)] text-primary">
+                      0{index + 1}
+                    </span>
                   </div>
                 ))}
               </div>
