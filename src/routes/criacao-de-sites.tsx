@@ -42,9 +42,9 @@ function Page() {
         { title: "Stack moderna", desc: "React/Next/TanStack, Tailwind, deploy edge, hospedagem incluída." },
       ]}
       deliverables={[
-        "Wireframe e arquitetura de informação",
-        "Design UI custom (Figma)",
-        "Desenvolvimento responsivo",
+        "Wireframe e arquitetura de informação orientada a conversão",
+        "Design de UI premium com IA generativa avançada",
+        "Desenvolvimento responsivo (desktop, tablet, mobile)",
         "Otimização SEO on-page",
         "Integração com GA4 e Meta Pixel/CAPI",
         "Integração com CRM e e-mail",
