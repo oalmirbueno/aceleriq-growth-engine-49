@@ -30,12 +30,13 @@ export function Footer() {
         </div>
 
         <div className="md:col-span-3">
-          <h3 className="label-eyebrow">Navegação</h3>
+          <h3 className="label-eyebrow">Serviços</h3>
           <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
-            <li><Link to="/" hash="metodo" className="hover:text-foreground">Método ACELERA</Link></li>
-            <li><Link to="/" hash="areas" className="hover:text-foreground">Áreas de atuação</Link></li>
-            <li><Link to="/" hash="resultados" className="hover:text-foreground">Resultados</Link></li>
-            <li><Link to="/" hash="faq" className="hover:text-foreground">FAQ</Link></li>
+            <li><Link to="/agencia-de-marketing-digital-curitiba" className="hover:text-foreground">Agência de Marketing</Link></li>
+            <li><Link to="/criacao-de-sites" className="hover:text-foreground">Criação de Sites</Link></li>
+            <li><Link to="/trafego-pago" className="hover:text-foreground">Tráfego Pago</Link></li>
+            <li><Link to="/automacao-e-ia" className="hover:text-foreground">Automação & IA</Link></li>
+            <li><Link to="/sobre-a-aceleriq" className="hover:text-foreground">Sobre a Aceleriq</Link></li>
           </ul>
         </div>
 
