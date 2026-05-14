@@ -6,7 +6,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { DiagnosticoModal } from "@/components/site/DiagnosticoModal";
 import { AmbientBackdrop } from "@/components/site/AmbientBackdrop";
-import { ServiceVisual, type ServiceVariant } from "@/components/site/ServiceVisual";
+import type { ServiceVariant } from "@/components/site/ServiceVisual";
 import { Button } from "@/components/ui/button";
 import { CountUp } from "@/components/ui/CountUp";
 import { whatsappLink, DEFAULT_WHATSAPP_MESSAGE } from "@/lib/contact";
