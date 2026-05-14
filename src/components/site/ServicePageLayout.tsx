@@ -48,7 +48,9 @@ export function ServicePageLayout(props: ServicePageProps) {
 
       <main className="relative z-10">
         {/* HERO */}
-        <section className="relative pt-28 pb-16 md:pt-32 md:pb-20 overflow-hidden">
+        <section
+          className={`relative overflow-hidden ${props.variant === "sites" ? "pt-24 pb-0 md:pt-26 md:pb-0" : "pt-28 pb-16 md:pt-32 md:pb-20"}`}
+        >
           <div className="relative px-6 lg:px-16 max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -62,13 +64,13 @@ export function ServicePageLayout(props: ServicePageProps) {
 
             {props.variant === "sites" ? (
               // Sites: headline on top, MacBook centered, full width
-              <div className="space-y-12">
+              <div className="space-y-0">
                 <div className="mx-auto max-w-5xl text-center">
                   <motion.h1
                     initial={{ opacity: 0, y: 14 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.05 }}
-                    className="mx-auto max-w-[11ch] font-display text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[5.5rem] leading-[0.95] uppercase tracking-[-0.04em]"
+                    className="mx-auto max-w-[11ch] font-display text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[5.15rem] leading-[0.95] uppercase tracking-[-0.04em]"
                   >
                     {props.h1}
                   </motion.h1>
@@ -77,7 +79,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    className="mx-auto mt-6 max-w-2xl text-[15px] md:text-base text-foreground/75 font-light leading-[1.6]"
+                    className="mx-auto mt-5 max-w-2xl text-[15px] md:text-base text-foreground/75 font-light leading-[1.6]"
                   >
                     {props.intro}
                   </motion.p>
@@ -86,7 +88,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.32 }}
-                    className="mt-8 flex flex-wrap items-center justify-center gap-4"
+                    className="mt-6 flex flex-wrap items-center justify-center gap-4"
                   >
                     <Button
                       onClick={open}
@@ -115,7 +117,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                   initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                  className="mt-6 md:mt-4"
+                  className="relative z-0 -mt-8 md:-mt-16"
                 >
                   <ServiceVisual variant={props.variant} />
                 </motion.div>
