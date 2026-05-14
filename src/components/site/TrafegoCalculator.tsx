@@ -352,10 +352,9 @@ function PlatformLogo({ code }: { code: "google" | "meta" | "linkedin" | "tiktok
 }
 
 function StrategyCard({
-  icon, tag, title, items, tilt, variant,
+  icon, tag, title, items, variant,
 }: {
   icon: React.ReactNode; tag: string; title: string; items: string[];
-  tilt: number;
   variant: "light" | "dark" | "green";
 }) {
   const styles =
@@ -370,11 +369,7 @@ function StrategyCard({
 
   return (
     <div
-      className={`relative p-7 md:p-8 transition-all duration-300 hover:-translate-y-1 ${styles}`}
-      style={{
-        transform: `rotate(${tilt}deg)`,
-        clipPath: "polygon(0 0, 100% 3%, 100% 100%, 0 97%)",
-      }}
+      className={`relative p-7 md:p-8 transition-all duration-300 hover:-translate-y-1 hover:rotate-0 rounded-[24px] ${styles}`}
     >
       <div className={`flex items-center gap-2 mb-5 ${iconColor}`}>
         {icon}
