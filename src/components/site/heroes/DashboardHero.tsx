@@ -53,7 +53,6 @@ export function DashboardHero() {
         transition={{ y: { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }, opacity: { duration: 0.6 } }}
         style={{ transformStyle: "preserve-3d", transform: "translateZ(60px)" }}
         className="absolute right-0 top-0 w-[230px] rounded-2xl border border-primary/40 p-5 shadow-[0_30px_60px_-15px_oklch(85%_0.2_145/0.5)]"
-        style2={{}}
       >
         <div
           className="absolute inset-0 -z-10 rounded-2xl"
