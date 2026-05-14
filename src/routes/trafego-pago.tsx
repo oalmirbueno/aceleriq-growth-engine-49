@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout, buildServiceHead } from "@/components/site/ServicePageLayout";
+import { TrafegoCalculator } from "@/components/site/TrafegoCalculator";
 
 const URL = "https://aceleriq.com.br/trafego-pago";
 const TITLE = "Gestão de Tráfego Pago em Curitiba · Aceleriq";
@@ -60,6 +61,7 @@ function Page() {
       ]}
       faqs={FAQS}
       whatsappMessage="Olá! Quero gestão de tráfego pago com a Aceleriq."
+      extraSection={<TrafegoCalculator />}
     />
   );
 }
