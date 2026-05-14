@@ -54,7 +54,7 @@ export function ServicePageLayout(props: ServicePageProps) {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="flex items-center gap-3 mb-8 text-[11px] tracking-[0.2em] uppercase text-muted-foreground/80"
+              className={`flex items-center gap-3 mb-8 text-[11px] tracking-[0.2em] uppercase text-muted-foreground/80 ${props.variant === "sites" ? "justify-center" : ""}`}
             >
               <span className="w-8 h-px bg-primary" />
               <span className="text-primary font-mono">{props.eyebrow}</span>
@@ -63,12 +63,12 @@ export function ServicePageLayout(props: ServicePageProps) {
             {props.variant === "sites" ? (
               // Sites: headline on top, MacBook centered, full width
               <div className="space-y-12">
-                <div className="max-w-4xl">
+                <div className="mx-auto max-w-5xl text-center">
                   <motion.h1
                     initial={{ opacity: 0, y: 14 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.05 }}
-                    className="font-display text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[5.5rem] leading-[0.95] uppercase tracking-[-0.04em]"
+                    className="mx-auto max-w-[11ch] font-display text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[5.5rem] leading-[0.95] uppercase tracking-[-0.04em]"
                   >
                     {props.h1}
                   </motion.h1>
@@ -77,7 +77,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    className="mt-6 text-[15px] md:text-base text-foreground/75 font-light leading-[1.6] max-w-2xl"
+                    className="mx-auto mt-6 max-w-2xl text-[15px] md:text-base text-foreground/75 font-light leading-[1.6]"
                   >
                     {props.intro}
                   </motion.p>
@@ -86,7 +86,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.32 }}
-                    className="mt-8 flex flex-wrap items-center gap-4"
+                    className="mt-8 flex flex-wrap items-center justify-center gap-4"
                   >
                     <Button
                       onClick={open}
@@ -115,7 +115,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                   initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                  className="mt-2 md:-mt-6"
+                  className="mt-6 md:mt-4"
                 >
                   <ServiceVisual variant={props.variant} />
                 </motion.div>
