@@ -216,8 +216,7 @@ function ControlCard({
 }) {
   const pct = ((raw - min) / (max - min)) * 100;
   return (
-    <div className="bg-white border border-black/8 p-6 relative overflow-hidden shadow-[0_10px_30px_-15px_rgba(0,0,0,0.15)]"
-         style={{ clipPath: "polygon(0 0, 100% 2%, 100% 98%, 0 100%)" }}>
+    <div className="bg-white border border-black/8 p-6 relative overflow-hidden shadow-[0_10px_30px_-15px_rgba(0,0,0,0.15)] rounded-[20px]">
       <div className="flex items-baseline justify-between mb-1">
         <div className="text-[10px] uppercase tracking-[0.25em] text-[oklch(45%_0_0)] font-mono">{label}</div>
         <div className="text-[10px] text-[oklch(55%_0_0)]">{hint}</div>
