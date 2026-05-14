@@ -554,7 +554,7 @@ function CaseView({
           {/* Stage */}
           <div className="relative bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.04),_transparent_60%)] p-3 sm:p-5">
             <ScaledFrame
-              key={`${iframeKey}-${device}-${item.slug}`}
+              key={`${iframeKey}-${device}`}
               src={item.origin}
               posterSrc={THUMB(item.origin, device === "mobile" ? 900 : 2400)}
               device={device}
