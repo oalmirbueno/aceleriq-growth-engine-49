@@ -386,7 +386,7 @@ function PortfolioCard({
   item: PortfolioItem;
   onOpen: () => void;
 }) {
-  const [imgFailed, setImgFailed] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <button
@@ -395,27 +395,26 @@ function PortfolioCard({
       aria-label={`Abrir case ${item.name}`}
       className="group relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-card/40 text-left transition duration-300 hover:-translate-y-0.5 hover:border-white/15 hover:bg-card/60 focus:outline-none focus:ring-2 focus:ring-primary/60"
     >
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted/10">
-        {!imgFailed ? (
-          <img
-            src={THUMB(item.origin, 720)}
-            alt={`Preview do site ${item.name} — ${item.segment}`}
-            loading="lazy"
-            decoding="async"
-            width={720}
-            height={450}
-            onError={() => setImgFailed(true)}
-            className="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-          />
-        ) : (
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#0a0a0a]">
+        {!loaded && (
           <div
-            className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${item.accent}`}
-          >
-            <span className="font-display text-2xl font-medium text-foreground/80">
-              {item.name}
-            </span>
-          </div>
+            aria-hidden
+            className="absolute inset-0 animate-pulse bg-[linear-gradient(110deg,#0d0d0d_8%,#1a1a1a_18%,#0d0d0d_33%)] bg-[length:200%_100%]"
+          />
         )}
+        <img
+          src={THUMB(item.origin, 720)}
+          alt={`Preview do site ${item.name} — ${item.segment}`}
+          loading="lazy"
+          decoding="async"
+          width={720}
+          height={450}
+          onLoad={() => setLoaded(true)}
+          onError={() => setLoaded(true)}
+          className={`absolute inset-0 h-full w-full object-cover object-top transition-all duration-500 ease-out group-hover:scale-[1.04] ${
+            loaded ? "opacity-100" : "opacity-0"
+          }`}
+        />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
         <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-background/70 px-2.5 py-1 text-[10px] font-mono uppercase tracking-[0.18em] text-foreground/90 backdrop-blur transition group-hover:bg-primary group-hover:text-primary-foreground">
           Abrir case
@@ -695,39 +694,35 @@ function RailThumb({
   isActive: boolean;
   index: number;
 }) {
-  const [failed, setFailed] = useState(false);
-  const initials = item.name
-    .split(" ")
-    .slice(0, 2)
-    .map((w) => w[0])
-    .join("")
-    .toUpperCase();
+  const [loaded, setLoaded] = useState(false);
 
   return (
-    <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted/10">
-      {!failed ? (
-        <img
-          src={THUMB(item.origin, 480)}
-          alt={`Preview ${item.name}`}
-          loading="lazy"
-          decoding="async"
-          width={480}
-          height={300}
-          onError={() => setFailed(true)}
-          className={`h-full w-full object-cover object-top transition-transform duration-500 ${
-            isActive ? "" : "group-hover:scale-[1.05]"
-          }`}
-        />
-      ) : (
+    <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#0a0a0a]">
+      {/* Shimmer skeleton — visível só enquanto o screenshot carrega */}
+      {!loaded && (
         <div
-          className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${item.accent}`}
-        >
-          <span className="font-display text-3xl font-medium tracking-tight text-foreground/85">
-            {initials}
-          </span>
-        </div>
+          aria-hidden
+          className="absolute inset-0 animate-pulse bg-[linear-gradient(110deg,#0d0d0d_8%,#1a1a1a_18%,#0d0d0d_33%)] bg-[length:200%_100%]"
+        />
       )}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/85 via-background/15 to-transparent" />
+
+      {/* Sempre tenta carregar a captura real do site — eager + low-res p/ instantâneo */}
+      <img
+        src={THUMB(item.origin, 360)}
+        alt={`Preview ${item.name}`}
+        loading="eager"
+        decoding="async"
+        fetchPriority="high"
+        width={360}
+        height={225}
+        onLoad={() => setLoaded(true)}
+        onError={() => setLoaded(true)}
+        className={`absolute inset-0 h-full w-full object-cover object-top transition-all duration-500 ${
+          loaded ? "opacity-100" : "opacity-0"
+        } ${isActive ? "" : "group-hover:scale-[1.05]"}`}
+      />
+
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent" />
       <span className="absolute left-2 top-2 rounded-md border border-white/15 bg-background/70 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-foreground/85 backdrop-blur">
         {String(index + 1).padStart(2, "0")}
       </span>
