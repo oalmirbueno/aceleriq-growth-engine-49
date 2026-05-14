@@ -66,30 +66,15 @@ export function ServicePageLayout(props: ServicePageProps) {
               // Sites: headline on top, MacBook centered, full width
               <div className="space-y-0">
                 <div className="mx-auto max-w-5xl text-center">
-                  <motion.h1
-                    initial={{ opacity: 0, y: 14 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.05 }}
-                    className="mx-auto max-w-[11ch] font-display text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[5.15rem] leading-[0.95] uppercase tracking-[-0.04em]"
-                  >
+                  <h1 className="mx-auto max-w-[11ch] font-display text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[5.15rem] leading-[0.95] uppercase tracking-[-0.04em]">
                     {props.h1}
-                  </motion.h1>
+                  </h1>
 
-                  <motion.p
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    className="mx-auto mt-5 max-w-2xl text-[15px] md:text-base text-foreground/75 font-light leading-[1.6]"
-                  >
+                  <p className="mx-auto mt-5 max-w-2xl text-[15px] md:text-base text-foreground/75 font-light leading-[1.6]">
                     {props.intro}
-                  </motion.p>
+                  </p>
 
-                  <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.32 }}
-                    className="mt-6 flex flex-wrap items-center justify-center gap-4"
-                  >
+                  <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
                     <Button
                       onClick={open}
                       className="group h-12 rounded-none bg-primary px-6 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-foreground hover:-translate-y-0.5 transition-all hover:shadow-[0_8px_30px_oklch(85%_0.2_145/0.4)]"
@@ -110,17 +95,12 @@ export function ServicePageLayout(props: ServicePageProps) {
                       WhatsApp
                       <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                     </a>
-                  </motion.div>
+                  </div>
                 </div>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                  className="relative z-0 -mt-8 md:-mt-16"
-                >
+                <div className="relative z-0 -mt-8 md:-mt-16">
                   <ServiceVisual variant={props.variant} />
-                </motion.div>
+                </div>
               </div>
             ) : (
               <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
