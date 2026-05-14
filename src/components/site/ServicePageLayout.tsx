@@ -49,7 +49,7 @@ export function ServicePageLayout(props: ServicePageProps) {
       <main className="relative z-10">
         {/* HERO */}
         <section
-          className={`relative overflow-hidden ${props.variant === "sites" ? "pt-24 pb-0 md:pt-26 md:pb-0" : "pt-28 pb-16 md:pt-32 md:pb-20"}`}
+          className={`relative ${props.variant === "sites" ? "overflow-visible pt-24 pb-0 md:pt-26 md:pb-0" : "overflow-hidden pt-28 pb-16 md:pt-32 md:pb-20"}`}
         >
           <div className="relative px-6 lg:px-16 max-w-7xl mx-auto">
             <motion.div
@@ -98,7 +98,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                   </div>
                 </div>
 
-                <div className="relative z-0 mt-10 md:mt-14">
+                <div className="relative z-0 mt-2 md:mt-4">
                   <ServiceVisual variant={props.variant} />
                 </div>
               </div>
