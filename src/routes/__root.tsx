@@ -70,7 +70,7 @@ const LOCALBUSINESS_JSONLD = {
   telephone: "+55-41-99748-3429",
   priceRange: "$$$",
   description:
-    "Engenharia de crescimento em Curitiba com estratégia, dados, IA, CRM, automação, tráfego e processos comerciais.",
+    "Agência de marketing digital em Curitiba com criação de sites, tráfego pago, automação, IA, CRM, sistemas e consultoria de crescimento (Método Acelera).",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Curitiba",
