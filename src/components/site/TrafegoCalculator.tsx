@@ -273,13 +273,12 @@ function FunnelBar({ pct, label, sub, tone }: { pct: number; label: string; sub:
         <span className="text-[oklch(20%_0_0)] font-medium">{label}</span>
         <span className="text-[oklch(50%_0_0)] font-mono text-[11px]">{sub}</span>
       </div>
-      <div className="h-2 bg-[oklch(94%_0_0)] overflow-hidden"
-           style={{ clipPath: "polygon(0 0, 100% 0, 99% 100%, 0 100%)" }}>
+      <div className="h-2 bg-[oklch(94%_0_0)] overflow-hidden rounded-full">
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: `${pct}%` }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="h-full"
+          className="h-full rounded-full"
           style={{ background: fill }}
         />
       </div>
