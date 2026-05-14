@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout, buildServiceHead } from "@/components/site/ServicePageLayout";
+import { PortfolioShowcase } from "@/components/site/PortfolioShowcase";
 
 const URL = "https://aceleriq.com.br/agencia-de-marketing-digital-curitiba";
 const TITLE = "Agência de Marketing Digital em Curitiba · Aceleriq";
