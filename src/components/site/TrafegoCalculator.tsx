@@ -177,13 +177,12 @@ export function TrafegoCalculator() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-5">
+        <div className="grid md:grid-cols-3 gap-5" style={{ transform: "rotate(-1deg)" }}>
           <StrategyCard
             icon={<Target className="h-5 w-5" />}
             tag="01 / Topo"
             title="Demanda latente"
             items={["Vídeo curto + UGC", "Públicos amplos", "CPM otimizado", "Awareness por região"]}
-            tilt={-1}
             variant="dark"
           />
           <StrategyCard
@@ -191,7 +190,6 @@ export function TrafegoCalculator() {
             tag="02 / Meio"
             title="Consideração"
             items={["Retargeting segmentado", "Cases e prova social", "Lookalikes 1-3%", "Comparativos"]}
-            tilt={0.6}
             variant="light"
           />
           <StrategyCard
@@ -199,7 +197,6 @@ export function TrafegoCalculator() {
             tag="03 / Fundo"
             title="Conversão"
             items={["Search alta intenção", "PMax com feed limpo", "CAPI + Enhanced Conv.", "Lances por valor"]}
-            tilt={-0.4}
             variant="green"
           />
         </div>
