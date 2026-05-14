@@ -89,6 +89,7 @@ function Index() {
         <DiagnosticoCTA onDiagnostico={openDiagnostico} />
         <Results />
         <Testimonials />
+        <PortfolioShowcase />
         <Compare />
         <WhyNow />
         <FAQ />
