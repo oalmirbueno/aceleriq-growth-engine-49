@@ -6,9 +6,10 @@ import logoAceleriq from "@/assets/logo-aceleriq.png";
 
 const NAV = [
   { label: "Sobre", to: "/sobre-a-aceleriq", hash: undefined },
+  { label: "Sites", to: "/criacao-de-sites", hash: undefined },
+  { label: "Tráfego", to: "/trafego-pago", hash: undefined },
+  { label: "Automação & IA", to: "/automacao-e-ia", hash: undefined },
   { label: "Método", to: "/", hash: "metodo" },
-  { label: "Áreas", to: "/", hash: "areas" },
-  { label: "Resultados", to: "/", hash: "resultados" },
   { label: "FAQ", to: "/", hash: "faq" },
 ] as const;
 
