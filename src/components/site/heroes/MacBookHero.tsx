@@ -41,15 +41,15 @@ export function MacBookHero() {
 
   return (
     <div ref={wrapRef} className="relative h-[220vh]">
-      <div className="sticky top-20 flex h-[calc(100vh-5rem)] w-full items-center justify-center overflow-hidden md:top-24 md:h-[calc(100vh-6rem)]">
+      <div className="sticky top-24 flex h-[calc(100vh-6rem)] w-full items-start justify-center overflow-hidden md:top-28 md:h-[calc(100vh-7rem)]">
         <motion.div style={{ opacity: stageOpacity }} className="relative mx-auto w-full max-w-[1180px] px-4 md:px-8">
           <motion.div
             aria-hidden
             style={{ opacity: screenGlow }}
-            className="absolute left-1/2 top-[48%] h-[44vw] max-h-[560px] min-h-[260px] w-[86vw] max-w-[1120px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/25 blur-3xl"
+            className="absolute left-1/2 top-[34%] h-[44vw] max-h-[560px] min-h-[260px] w-[86vw] max-w-[1120px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/25 blur-3xl"
           />
 
-          <div className="relative [perspective:2100px]">
+          <div className="relative -mt-10 [perspective:2100px] md:-mt-16">
             <motion.div
               style={{ scale: laptopScale, y: laptopY, rotateX: laptopRotateX, transformStyle: "preserve-3d" }}
               className="relative mx-auto aspect-[16/10] w-full max-w-[1060px] will-change-transform"
