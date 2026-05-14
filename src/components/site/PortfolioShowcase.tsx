@@ -554,7 +554,7 @@ function CaseView({
             <ScaledFrame
               key={`${iframeKey}-${device}`}
               src={item.origin}
-              posterSrc={THUMB(item.origin, device === "mobile" ? 900 : 2400)}
+              posterSrc={LOCAL_PREVIEW(item.slug)}
               device={device}
               loaded={loaded}
               onLoad={() => setLoaded(true)}
