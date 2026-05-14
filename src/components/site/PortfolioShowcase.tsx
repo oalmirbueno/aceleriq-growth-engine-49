@@ -432,7 +432,17 @@ function PortfolioCard({
   );
 }
 
-function CaseView({ item, onBack }: { item: PortfolioItem; onBack: () => void }) {
+function CaseView({
+  item,
+  items,
+  onBack,
+  onSelect,
+}: {
+  item: PortfolioItem;
+  items: PortfolioItem[];
+  onBack: () => void;
+  onSelect: (slug: string) => void;
+}) {
   const [iframeKey, setIframeKey] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const [device, setDevice] = useState<"desktop" | "mobile">("desktop");
@@ -442,6 +452,8 @@ function CaseView({ item, onBack }: { item: PortfolioItem; onBack: () => void })
     const t = setTimeout(() => setLoaded(true), 2500);
     return () => clearTimeout(t);
   }, [iframeKey, item.slug, device]);
+
+  const currentIndex = items.findIndex((i) => i.slug === item.slug);
 
   return (
     <div className="animate-fade-in">
@@ -456,121 +468,161 @@ function CaseView({ item, onBack }: { item: PortfolioItem; onBack: () => void })
           Portfólio
         </button>
         <span className="hidden font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground md:inline">
-          [ Case · {String(DEFAULT_PORTFOLIO.findIndex((i) => i.slug === item.slug) + 1).padStart(2, "0")} ]
+          [ Case · {String(currentIndex + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")} ]
         </span>
       </div>
 
-      {/* Hero do case */}
-      <div className="mt-8 flex flex-col gap-3">
-        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
-          {item.segment}
-        </span>
-        <h3 className="font-display text-4xl font-medium leading-[1.02] tracking-[-0.03em] md:text-6xl">
-          {item.name}
-        </h3>
-        <p className="max-w-3xl text-[15px] leading-relaxed text-muted-foreground md:text-[16px]">
-          {item.overview}
-        </p>
-      </div>
-
-      <div className="mt-12 grid gap-10 lg:grid-cols-[1.5fr_1fr]">
-        {/* Browser frame */}
-        <div className="order-2 lg:order-1 lg:sticky lg:top-24 self-start">
-          <div className="relative">
-            {/* Ambient glow */}
-            <div
-              aria-hidden
-              className={`pointer-events-none absolute -inset-10 -z-10 rounded-[40px] bg-gradient-to-br ${item.accent} opacity-60 blur-3xl`}
-            />
-
-            {/* Device toggle */}
-            <div className="mb-4 flex items-center justify-between">
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                Preview ao vivo
-              </span>
-              <div className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-card/60 p-1 backdrop-blur">
-                <button
-                  type="button"
-                  onClick={() => setDevice("desktop")}
-                  aria-label="Visualização desktop"
-                  aria-pressed={device === "desktop"}
-                  className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.18em] transition ${
-                    device === "desktop"
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  <Monitor className="h-3 w-3" />
-                  Desktop
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setDevice("mobile")}
-                  aria-label="Visualização mobile"
-                  aria-pressed={device === "mobile"}
-                  className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.18em] transition ${
-                    device === "mobile"
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  <Smartphone className="h-3 w-3" />
-                  Mobile
-                </button>
-              </div>
-            </div>
-
-            <div className="overflow-hidden rounded-2xl border border-white/10 bg-background/60 shadow-[0_40px_100px_-40px_rgba(0,0,0,0.8)] backdrop-blur">
-              {/* Chrome */}
-              <div className="flex items-center gap-2 border-b border-white/10 bg-white/[0.03] px-3 py-2.5">
-                <div className="flex items-center gap-1.5">
-                  <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />
-                </div>
-                <div className="ml-2 flex flex-1 items-center justify-center">
-                  <span className="rounded-md bg-background/60 px-3 py-1 text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
-                    aceleriq · {item.slug}
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setIframeKey((k) => k + 1)}
-                  aria-label="Recarregar preview"
-                  className="rounded-md p-1.5 text-muted-foreground transition hover:bg-white/[0.05] hover:text-foreground"
-                >
-                  <RotateCw className="h-3.5 w-3.5" />
-                </button>
-              </div>
-
-              {/* Stage */}
-              <div className="relative bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.04),_transparent_60%)] p-4 sm:p-6">
-                <ScaledFrame
-                  key={`${iframeKey}-${device}-${item.slug}`}
-                  src={item.origin}
-                  posterSrc={THUMB(item.origin, device === "mobile" ? 600 : 1400)}
-                  device={device}
-                  loaded={loaded}
-                  onLoad={() => setLoaded(true)}
-                  title={`Preview navegável de ${item.name}`}
-                />
-              </div>
-            </div>
-
-            <p className="mt-4 text-center text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
-              Navegue pelo projeto sem sair daqui
-            </p>
-          </div>
+      {/* Case meta */}
+      <div className="mt-8 flex flex-col items-start gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
+            {item.segment}
+          </span>
+          <h3 className="mt-2 font-display text-4xl font-medium leading-[1.02] tracking-[-0.03em] md:text-6xl">
+            {item.name}
+          </h3>
         </div>
 
-        {/* Conteúdo do case */}
-        <aside className="order-1 lg:order-2 space-y-7">
-          <CaseBlock label="Desafio" body={item.challenge} />
-          <CaseBlock label="Solução Aceleriq" body={item.solution} />
+        <div className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-card/60 p-1 backdrop-blur">
+          <button
+            type="button"
+            onClick={() => setDevice("desktop")}
+            aria-pressed={device === "desktop"}
+            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.18em] transition ${
+              device === "desktop"
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <Monitor className="h-3 w-3" />
+            Desktop
+          </button>
+          <button
+            type="button"
+            onClick={() => setDevice("mobile")}
+            aria-pressed={device === "mobile"}
+            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.18em] transition ${
+              device === "mobile"
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <Smartphone className="h-3 w-3" />
+            Mobile
+          </button>
+        </div>
+      </div>
+
+      {/* FULL-WIDTH preview */}
+      <div className="relative mt-8">
+        {/* Ambient glow */}
+        <div
+          aria-hidden
+          className={`pointer-events-none absolute -inset-12 -z-10 rounded-[40px] bg-gradient-to-br ${item.accent} opacity-60 blur-3xl`}
+        />
+
+        <div className="overflow-hidden rounded-2xl border border-white/10 bg-background/60 shadow-[0_40px_120px_-40px_rgba(0,0,0,0.9)] backdrop-blur">
+          {/* Browser chrome */}
+          <div className="flex items-center gap-2 border-b border-white/10 bg-white/[0.03] px-3 py-2.5">
+            <div className="flex items-center gap-1.5">
+              <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
+              <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
+              <span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />
+            </div>
+            <div className="ml-2 flex flex-1 items-center justify-center">
+              <span className="rounded-md bg-background/60 px-3 py-1 text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
+                aceleriq · {item.slug}
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setIframeKey((k) => k + 1)}
+              aria-label="Recarregar preview"
+              className="rounded-md p-1.5 text-muted-foreground transition hover:bg-white/[0.05] hover:text-foreground"
+            >
+              <RotateCw className="h-3.5 w-3.5" />
+            </button>
+          </div>
+
+          {/* Stage */}
+          <div className="relative bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.04),_transparent_60%)] p-3 sm:p-5">
+            <ScaledFrame
+              key={`${iframeKey}-${device}-${item.slug}`}
+              src={item.origin}
+              posterSrc={THUMB(item.origin, device === "mobile" ? 900 : 2400)}
+              device={device}
+              loaded={loaded}
+              onLoad={() => setLoaded(true)}
+              title={`Preview navegável de ${item.name}`}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Cases rail — switch project inline */}
+      <div className="mt-8">
+        <div className="mb-3 flex items-center justify-between">
+          <span className="label-eyebrow">Outros cases</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+            Clique para trocar de projeto
+          </span>
+        </div>
+        <div className="flex gap-3 overflow-x-auto pb-2 custom-scroll">
+          {items.map((it) => {
+            const isActive = it.slug === item.slug;
+            return (
+              <button
+                key={it.slug}
+                type="button"
+                onClick={() => onSelect(it.slug)}
+                aria-label={`Abrir case ${it.name}`}
+                className={`group relative flex-shrink-0 overflow-hidden rounded-xl border text-left transition ${
+                  isActive
+                    ? "border-primary/70 ring-2 ring-primary/40"
+                    : "border-white/10 hover:border-white/25"
+                }`}
+                style={{ width: "180px" }}
+              >
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted/10">
+                  <img
+                    src={THUMB(it.origin, 480)}
+                    alt={it.name}
+                    loading="lazy"
+                    decoding="async"
+                    className={`h-full w-full object-cover object-top transition-transform duration-500 ${
+                      isActive ? "" : "group-hover:scale-[1.05]"
+                    }`}
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/85 via-background/10 to-transparent" />
+                </div>
+                <div className="px-3 py-2">
+                  <p className="truncate font-display text-[12px] font-medium leading-tight">
+                    {it.name}
+                  </p>
+                  <p className="truncate font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">
+                    {it.segment}
+                  </p>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Conteúdo do case — abaixo do preview, em colunas */}
+      <div className="mt-12 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+        <div className="space-y-7 lg:col-span-2">
+          <p className="max-w-3xl text-[15px] leading-relaxed text-muted-foreground md:text-[16px]">
+            {item.overview}
+          </p>
+          <div className="grid gap-7 sm:grid-cols-2">
+            <CaseBlock label="Desafio" body={item.challenge} />
+            <CaseBlock label="Solução Aceleriq" body={item.solution} />
+          </div>
 
           <div>
             <span className="label-eyebrow">Destaques</span>
-            <ul className="mt-3 space-y-2">
+            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
               {item.highlights.map((h) => (
                 <li
                   key={h}
@@ -582,7 +634,9 @@ function CaseView({ item, onBack }: { item: PortfolioItem; onBack: () => void })
               ))}
             </ul>
           </div>
+        </div>
 
+        <aside className="space-y-7">
           <div>
             <span className="label-eyebrow">Stack & técnicas</span>
             <div className="mt-3 flex flex-wrap gap-1.5">
@@ -621,6 +675,101 @@ function CaseView({ item, onBack }: { item: PortfolioItem; onBack: () => void })
           </div>
         </aside>
       </div>
+    </div>
+  );
+}
+
+function CaseBlock({ label, body }: { label: string; body: string }) {
+  return (
+    <div>
+      <span className="label-eyebrow">{label}</span>
+      <p className="mt-2 text-[13.5px] leading-relaxed text-muted-foreground">
+        {body}
+      </p>
+    </div>
+  );
+}
+
+/**
+ * Renders an iframe at a real device viewport (1600 desktop / 390 mobile)
+ * scaled with CSS transform to fit the container — embedded site loads its
+ * true desktop layout. Poster sits underneath as instant content.
+ */
+function ScaledFrame({
+  src,
+  posterSrc,
+  device,
+  loaded,
+  onLoad,
+  title,
+}: {
+  src: string;
+  posterSrc: string;
+  device: "desktop" | "mobile";
+  loaded: boolean;
+  onLoad: () => void;
+  title: string;
+}) {
+  const wrapRef = useRef<HTMLDivElement | null>(null);
+  const [scale, setScale] = useState(1);
+
+  // Real device viewport — desktop renders at 1600 wide for true 4K-ready feel
+  const FRAME_W = device === "mobile" ? 390 : 1600;
+  const FRAME_H = device === "mobile" ? 820 : 1000;
+
+  useLayoutEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const update = () => {
+      const w = el.clientWidth;
+      if (w > 0) setScale(w / FRAME_W);
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [FRAME_W]);
+
+  const stageHeight = FRAME_H * scale;
+
+  const isMobile = device === "mobile";
+
+  return (
+    <div
+      ref={wrapRef}
+      className={`relative mx-auto w-full overflow-hidden bg-background transition-all duration-500 ${
+        isMobile
+          ? "max-w-[380px] rounded-[32px] border border-white/10 shadow-2xl"
+          : "rounded-md border border-white/[0.06]"
+      }`}
+      style={{ height: stageHeight ? `${stageHeight}px` : undefined }}
+    >
+      {/* Poster — always present underneath, prevents blank frame */}
+      <img
+        src={posterSrc}
+        alt=""
+        aria-hidden
+        loading="eager"
+        decoding="async"
+        className="absolute inset-0 h-full w-full object-cover object-top"
+      />
+
+      {/* Scaled iframe at real viewport */}
+      <iframe
+        src={src}
+        title={title}
+        onLoad={onLoad}
+        loading="eager"
+        referrerPolicy="no-referrer"
+        className="absolute left-0 top-0 border-0 bg-background transition-opacity duration-500"
+        style={{
+          width: `${FRAME_W}px`,
+          height: `${FRAME_H}px`,
+          transform: `scale(${scale})`,
+          transformOrigin: "top left",
+          opacity: loaded ? 1 : 0,
+        }}
+      />
     </div>
   );
 }
