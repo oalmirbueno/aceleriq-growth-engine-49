@@ -54,11 +54,11 @@ export function MacBookHero() {
   return (
     <section
       ref={sectionRef}
-      className="relative mx-auto mt-0 w-full max-w-[1260px] px-2 pb-14 pt-0 md:px-6 md:pb-20"
+      className="relative mx-auto mt-0 h-[126vh] min-h-[760px] w-full max-w-[1320px] px-2 pb-14 pt-0 md:h-[138vh] md:min-h-[940px] md:px-6 md:pb-20"
     >
       <div
         ref={stageRef}
-        className="notebook-stage relative mx-auto flex min-h-[430px] w-full items-center justify-center md:min-h-[620px] [--lift:24px] [--open:0]"
+        className="notebook-stage sticky top-[116px] mx-auto flex h-[calc(100vh-126px)] min-h-[520px] w-full items-center justify-center md:top-[108px] md:h-[calc(100vh-118px)] md:min-h-[660px] [--lift:24px] [--open:0]"
       >
         <div
           aria-hidden
@@ -88,10 +88,10 @@ export function MacBookHero() {
           </div>
         ))}
 
-        <div className="relative mx-auto aspect-[16/9.8] w-full max-w-[1100px] [perspective:1900px]">
+        <div className="relative mx-auto aspect-[16/9.8] w-full max-w-[1160px] [perspective:2100px]">
           <div className="absolute inset-0 [transform:translateY(var(--lift))_rotateX(7deg)_rotateY(-5deg)] [transform-style:preserve-3d]">
-            <div className="absolute bottom-[12.5%] left-1/2 z-30 h-[17%] w-[91%] -translate-x-1/2 rounded-b-[34px] rounded-t-[11px] border border-foreground/10 bg-gradient-to-b from-foreground/88 via-foreground/62 to-foreground/36 shadow-[0_90px_140px_-72px_oklch(0%_0_0/1)] [transform:rotateX(63deg)] [transform-origin:50%_0%] [transform-style:preserve-3d]">
-              <div className="absolute inset-x-[4.6%] top-[14%] grid grid-cols-16 gap-[0.75%]">
+            <div className="absolute bottom-[12.5%] left-1/2 z-30 h-[18%] w-[93%] -translate-x-1/2 rounded-b-[36px] rounded-t-[12px] border border-foreground/10 bg-gradient-to-b from-foreground/90 via-foreground/64 to-foreground/38 shadow-[0_96px_150px_-70px_oklch(0%_0_0/1)] [transform:rotateX(63deg)] [transform-origin:50%_0%] [transform-style:preserve-3d]">
+              <div className="absolute inset-x-[4.6%] top-[14%] grid grid-cols-[repeat(16,minmax(0,1fr))] gap-[0.75%]">
                 {keys.map((key) => (
                   <span
                     key={key}
@@ -104,7 +104,7 @@ export function MacBookHero() {
               <div className="absolute -bottom-[9%] left-1/2 h-[20%] w-[108%] -translate-x-1/2 rounded-[100%] bg-primary/20 blur-2xl" />
             </div>
 
-            <div className="absolute bottom-[25%] left-[7%] right-[7%] z-20 aspect-[16/9.9] origin-bottom rounded-t-[28px] border border-foreground/10 bg-gradient-to-b from-foreground/95 via-foreground/78 to-foreground/52 p-[1.05%] shadow-[0_65px_160px_-76px_oklch(0%_0_0/1)] [backface-visibility:hidden] [transform:rotateX(calc(-84deg+var(--open)*84deg))] [transform-style:preserve-3d]">
+            <div className="absolute bottom-[26%] left-[6.5%] right-[6.5%] z-20 aspect-[16/9.9] origin-bottom rounded-t-[30px] border border-foreground/10 bg-gradient-to-b from-foreground/96 via-foreground/80 to-foreground/52 p-[1.05%] shadow-[0_65px_170px_-76px_oklch(0%_0_0/1)] [backface-visibility:hidden] [transform:rotateX(calc(-84deg+var(--open)*84deg))] [transform-style:preserve-3d]">
               <div className="relative h-full overflow-hidden rounded-t-[21px] border border-border/70 bg-background shadow-[inset_0_0_0_1px_oklch(100%_0_0/0.05)]">
                 <WebsiteScreen />
                 <div
