@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { ArrowUpRight, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 
 export type PortfolioItem = {
   slug: string;
@@ -12,7 +11,7 @@ export type PortfolioItem = {
   origin: string;
 };
 
-const SHOTS = (origin: string, w = 1200) =>
+const SHOTS = (origin: string, w: number) =>
   `https://image.thum.io/get/width/${w}/crop/900/noanimate/${origin}`;
 
 export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
@@ -37,7 +36,7 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
   {
     slug: "jalimpo",
     name: "JáLimpo",
-    segment: "Serviços · Limpeza Profissional",
+    segment: "Serviços · Limpeza",
     scope: ["Site institucional", "Geração de leads", "Local SEO"],
     description:
       "Site de serviços com foco em conversão local, formulários inteligentes e estrutura preparada para escalar tráfego pago.",
@@ -46,7 +45,7 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
   {
     slug: "camillystresser",
     name: "Camilly Stresser",
-    segment: "Profissional Liberal · Marca pessoal",
+    segment: "Marca pessoal",
     scope: ["Branding digital", "Site de autoridade", "Captação"],
     description:
       "Plataforma de autoridade para profissional liberal, traduzindo posicionamento técnico em uma experiência digital premium.",
@@ -64,7 +63,7 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
   {
     slug: "deliciasgama",
     name: "Delícias da Gama",
-    segment: "Gastronomia · Delivery",
+    segment: "Gastronomia",
     scope: ["Cardápio digital", "Pedidos", "Identidade visual"],
     description:
       "Vitrine digital de gastronomia com cardápio organizado, fotografia de produto e fluxo direto para WhatsApp e pedidos.",
@@ -73,7 +72,7 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
   {
     slug: "rotasul",
     name: "Rota Sul Multimarcas",
-    segment: "Automotivo · Revenda",
+    segment: "Automotivo",
     scope: ["Catálogo de veículos", "Captação", "Performance"],
     description:
       "Plataforma para revenda automotiva com catálogo dinâmico, fichas técnicas e captação de interesse qualificada.",
@@ -100,7 +99,7 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
   {
     slug: "sitebolt",
     name: "SiteBolt",
-    segment: "SaaS · Tecnologia",
+    segment: "SaaS",
     scope: ["Landing de produto", "Onboarding", "Conversão"],
     description:
       "Landing page de produto SaaS com narrativa orientada a benefício, prova técnica e fluxo direto de ativação.",
@@ -118,7 +117,7 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
   {
     slug: "level-me",
     name: "Level Me",
-    segment: "Lifestyle · Performance pessoal",
+    segment: "Lifestyle",
     scope: ["Site de marca", "Captação", "Conteúdo"],
     description:
       "Plataforma de marca lifestyle com foco em performance pessoal, posicionamento aspiracional e captação contínua.",
@@ -127,7 +126,7 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
   {
     slug: "appplaybet",
     name: "PlayBet",
-    segment: "App · Entretenimento",
+    segment: "App",
     scope: ["Landing de app", "Aquisição", "Mobile-first"],
     description:
       "Landing mobile-first para aplicativo, com foco em aquisição, prova social e CTA otimizado para download.",
@@ -135,18 +134,28 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
   },
 ];
 
-export function PortfolioShowcase({
-  items = DEFAULT_PORTFOLIO,
-  eyebrow = "[ · ] · Portfólio",
-  title = "Sites e plataformas que a Aceleriq construiu",
-  intro = "Cada projeto é construído como ativo comercial: design premium, SEO técnico, performance real e integração ao funil. Alguns dos cases recentes da agência.",
-}: {
+type Props = {
   items?: PortfolioItem[];
   eyebrow?: string;
   title?: string;
   intro?: string;
-}) {
-  const [active, setActive] = useState<PortfolioItem | null>(null);
+};
+
+export function PortfolioShowcase({
+  items = DEFAULT_PORTFOLIO,
+  eyebrow = "[ · ] · Portfólio",
+  title = "Sites e plataformas que a Aceleriq construiu",
+  intro = "Cada projeto é construído como ativo comercial: design premium, SEO técnico, performance real e integração ao funil.",
+}: Props) {
+  const [activeSlug, setActiveSlug] = useState<string | null>(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const active = activeSlug ? items.find((i) => i.slug === activeSlug) ?? null : null;
+
+  useEffect(() => {
+    if (active && sectionRef.current) {
+      sectionRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [active]);
 
   const ITEMLIST_JSONLD = {
     "@context": "https://schema.org",
@@ -165,162 +174,153 @@ export function PortfolioShowcase({
   };
 
   return (
-    <section className="relative py-16 md:py-24 bg-grid-ambient">
+    <section
+      ref={sectionRef}
+      className="relative py-16 md:py-24 bg-grid-ambient scroll-mt-24"
+    >
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(ITEMLIST_JSONLD) }}
       />
       <div className="container-aceleriq">
-        <div className="max-w-2xl">
-          <span className="label-eyebrow">{eyebrow}</span>
-          <h2 className="mt-3 font-display text-3xl font-medium leading-[1.05] tracking-[-0.03em] md:text-5xl">
-            {title}
-          </h2>
-          <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
-            {intro}
-          </p>
-        </div>
+        {!active && (
+          <div className="max-w-2xl animate-fade-in">
+            <span className="label-eyebrow">{eyebrow}</span>
+            <h2 className="mt-3 font-display text-3xl font-medium leading-[1.05] tracking-[-0.03em] md:text-5xl">
+              {title}
+            </h2>
+            <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
+              {intro}
+            </p>
+          </div>
+        )}
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((it, i) => (
-            <motion.button
-              key={it.slug}
-              type="button"
-              onClick={() => setActive(it)}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.4, delay: Math.min(i, 6) * 0.04 }}
-              className="group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-card/40 text-left card-hover focus:outline-none focus:ring-2 focus:ring-primary/60"
-              aria-label={`Abrir case ${it.name}`}
-            >
-              <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted/20">
-                <img
-                  src={SHOTS(it.origin, 800)}
-                  alt={`Preview do site ${it.name} — ${it.segment}`}
-                  loading="lazy"
-                  decoding="async"
-                  className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
-                />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/90 via-background/10 to-transparent" />
-                <div className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-background/70 px-2.5 py-1 text-[10px] font-mono uppercase tracking-[0.18em] text-foreground/90 backdrop-blur">
-                  Ver case
-                  <ArrowUpRight className="h-3 w-3" />
-                </div>
-              </div>
-              <div className="p-5">
-                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
-                  {it.segment}
-                </span>
-                <h3 className="mt-2 font-display text-[17px] font-medium tracking-tight">
-                  {it.name}
-                </h3>
-                <div className="mt-3 flex flex-wrap gap-1.5">
-                  {it.scope.slice(0, 3).map((s) => (
-                    <span
-                      key={s}
-                      className="rounded-full border border-white/10 bg-white/[0.03] px-2 py-0.5 text-[10px] text-muted-foreground"
-                    >
-                      {s}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.button>
-          ))}
-        </div>
+        {active ? (
+          <CaseView item={active} onBack={() => setActiveSlug(null)} />
+        ) : (
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {items.map((it) => (
+              <PortfolioCard
+                key={it.slug}
+                item={it}
+                onOpen={() => setActiveSlug(it.slug)}
+              />
+            ))}
+          </div>
+        )}
       </div>
-
-      {active && <CaseModal item={active} onClose={() => setActive(null)} />}
     </section>
   );
 }
 
-function CaseModal({ item, onClose }: { item: PortfolioItem; onClose: () => void }) {
+function PortfolioCard({
+  item,
+  onOpen,
+}: {
+  item: PortfolioItem;
+  onOpen: () => void;
+}) {
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-label={`Case ${item.name}`}
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8"
-      onClick={onClose}
+    <button
+      type="button"
+      onClick={onOpen}
+      aria-label={`Abrir case ${item.name}`}
+      className="group relative flex flex-col overflow-hidden rounded-xl border border-white/[0.08] bg-card/40 text-left transition duration-300 hover:-translate-y-0.5 hover:border-white/15 hover:bg-card/60 focus:outline-none focus:ring-2 focus:ring-primary/60"
     >
-      <div className="absolute inset-0 bg-background/85 backdrop-blur-md" />
-      <motion.div
-        initial={{ opacity: 0, y: 20, scale: 0.98 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.25, ease: "easeOut" }}
-        className="relative z-10 flex max-h-[92vh] w-full max-w-6xl flex-col overflow-hidden rounded-2xl border border-white/10 bg-card/95 shadow-2xl"
-        onClick={(e) => e.stopPropagation()}
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted/10">
+        <img
+          src={SHOTS(item.origin, 600)}
+          alt={`Preview do site ${item.name} — ${item.segment}`}
+          loading="lazy"
+          decoding="async"
+          width={600}
+          height={375}
+          className="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
+        <span className="absolute right-2.5 top-2.5 inline-flex h-7 w-7 items-center justify-center rounded-full border border-white/15 bg-background/70 text-foreground/90 backdrop-blur transition group-hover:bg-primary group-hover:text-primary-foreground">
+          <ArrowUpRight className="h-3.5 w-3.5" />
+        </span>
+      </div>
+      <div className="flex flex-1 flex-col gap-1.5 p-4">
+        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
+          {item.segment}
+        </span>
+        <h3 className="font-display text-[15px] font-medium leading-tight tracking-tight">
+          {item.name}
+        </h3>
+      </div>
+    </button>
+  );
+}
+
+function CaseView({ item, onBack }: { item: PortfolioItem; onBack: () => void }) {
+  return (
+    <div className="animate-fade-in">
+      <button
+        type="button"
+        onClick={onBack}
+        className="inline-flex items-center gap-2 text-[12px] font-mono uppercase tracking-[0.2em] text-muted-foreground transition hover:text-primary"
       >
-        <div className="flex items-start justify-between gap-4 border-b border-white/10 px-6 py-5">
-          <div>
-            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
-              {item.segment}
+        <ArrowLeft className="h-3.5 w-3.5" />
+        Voltar ao portfólio
+      </button>
+
+      <div className="mt-6 grid gap-8 lg:grid-cols-[1.6fr_1fr]">
+        <div className="order-2 overflow-hidden rounded-2xl border border-white/10 bg-background/40 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.6)] lg:order-1">
+          <div className="flex items-center gap-1.5 border-b border-white/10 bg-white/[0.03] px-3 py-2">
+            <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
+            <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
+            <span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />
+            <span className="ml-3 truncate text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
+              Projeto Aceleriq · {item.name}
             </span>
-            <h3 className="mt-1 font-display text-2xl font-medium tracking-tight md:text-3xl">
-              {item.name}
-            </h3>
           </div>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Fechar"
-            className="rounded-full border border-white/10 bg-background/60 p-2 text-muted-foreground transition hover:text-foreground"
-          >
-            <X className="h-4 w-4" />
-          </button>
+          <img
+            src={SHOTS(item.origin, 1400)}
+            alt={`Captura completa do site ${item.name}`}
+            loading="eager"
+            decoding="async"
+            className="block w-full"
+          />
         </div>
 
-        <div className="grid flex-1 gap-0 overflow-hidden md:grid-cols-[1.6fr_1fr]">
-          <div className="relative overflow-y-auto bg-black/30 p-4 md:p-6">
-            <div className="overflow-hidden rounded-xl border border-white/10 bg-background shadow-xl">
-              <div className="flex items-center gap-1.5 border-b border-white/10 bg-white/[0.03] px-3 py-2">
-                <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
-                <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
-                <span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />
-                <span className="ml-3 text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
-                  Projeto Aceleriq · {item.name}
-                </span>
-              </div>
-              <img
-                src={SHOTS(item.origin, 1600)}
-                alt={`Captura completa do site ${item.name}`}
-                loading="eager"
-                decoding="async"
-                className="block w-full"
-              />
-            </div>
+        <aside className="order-1 lg:order-2">
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
+            {item.segment}
+          </span>
+          <h3 className="mt-2 font-display text-3xl font-medium leading-[1.05] tracking-[-0.03em] md:text-4xl">
+            {item.name}
+          </h3>
+          <p className="mt-4 text-[14px] leading-relaxed text-muted-foreground">
+            {item.description}
+          </p>
+
+          <div className="mt-7">
+            <span className="label-eyebrow">Escopo entregue</span>
+            <ul className="mt-3 space-y-2">
+              {item.scope.map((s) => (
+                <li
+                  key={s}
+                  className="flex items-start gap-2.5 text-[13px] text-foreground/90"
+                >
+                  <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-primary" />
+                  {s}
+                </li>
+              ))}
+            </ul>
           </div>
-          <div className="overflow-y-auto border-t border-white/10 bg-card/60 p-6 md:border-l md:border-t-0">
-            <span className="label-eyebrow">Sobre o projeto</span>
-            <p className="mt-3 text-[14px] leading-relaxed text-muted-foreground">
-              {item.description}
+
+          <div className="mt-7 rounded-xl border border-white/10 bg-white/[0.02] p-4">
+            <p className="text-[12px] leading-relaxed text-muted-foreground">
+              Projeto desenvolvido pela{" "}
+              <strong className="text-foreground">Aceleriq</strong> — agência de
+              marketing digital, sites e crescimento em Curitiba.
             </p>
-            <div className="mt-6">
-              <span className="label-eyebrow">Escopo entregue</span>
-              <ul className="mt-3 space-y-2">
-                {item.scope.map((s) => (
-                  <li
-                    key={s}
-                    className="flex items-start gap-2 text-[13px] text-foreground/90"
-                  >
-                    <span className="mt-1.5 h-1 w-1 rounded-full bg-primary" />
-                    {s}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="mt-6 rounded-xl border border-white/10 bg-white/[0.02] p-4">
-              <p className="text-[12px] leading-relaxed text-muted-foreground">
-                Projeto desenvolvido pela <strong className="text-foreground">Aceleriq</strong> —
-                agência de marketing digital, sites e crescimento em Curitiba.
-              </p>
-            </div>
           </div>
-        </div>
-      </motion.div>
+        </aside>
+      </div>
     </div>
   );
 }
