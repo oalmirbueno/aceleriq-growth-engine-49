@@ -464,7 +464,7 @@ export function ServicePageLayout(props: ServicePageProps) {
         </section>
 
         {/* CTA */}
-        <section className="relative px-6 lg:px-16 py-24 md:py-32 overflow-hidden border-t border-border/60">
+        <section className="relative px-6 lg:px-16 pt-20 pb-16 md:pt-24 md:pb-20 overflow-hidden border-t border-border/60">
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0"
@@ -515,7 +515,9 @@ export function ServicePageLayout(props: ServicePageProps) {
           </div>
         </section>
       </main>
-      <Footer />
+      <div className="relative z-10">
+        <Footer />
+      </div>
       <DiagnosticoModal open={diagOpen} onOpenChange={setDiagOpen} />
     </div>
   );

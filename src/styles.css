@@ -238,6 +238,20 @@
     transform: translateY(-2px) skewX(-2deg);
     box-shadow: -10px 10px 0 oklch(100% 0 0 / 0.1);
   }
+
+  .label-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    line-height: 1.4;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+  }
+
+  .text-mono {
+    font-family: var(--font-mono);
+  }
 }
 
 /* Animações Realistas */

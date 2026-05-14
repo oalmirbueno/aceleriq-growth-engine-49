@@ -12,8 +12,9 @@ import logoAceleriq from "@/assets/logo-aceleriq.png";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/60">
-      <div className="container-aceleriq grid gap-12 py-16 md:grid-cols-12">
+    <footer className="relative border-t border-primary/15 bg-black/70 text-foreground">
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-primary/[0.04] via-transparent to-black" />
+      <div className="container-aceleriq relative grid gap-12 py-14 md:grid-cols-12">
         <div className="md:col-span-5">
           <div className="flex items-center">
             <img
@@ -78,7 +79,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-border/60">
+      <div className="relative border-t border-primary/10">
         <div className="container-aceleriq flex flex-col items-center justify-between gap-2 py-6 text-[11px] uppercase tracking-[0.18em] text-muted-foreground md:flex-row">
           <span>© {new Date().getFullYear()} Aceleriq</span>
           <span className="text-mono">v1.0 · Estratégia · Dados · IA</span>
