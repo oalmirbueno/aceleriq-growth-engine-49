@@ -12,16 +12,26 @@ import { motion } from "framer-motion";
 export function AmbientBackdrop() {
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+      {/* 0. Deep black-to-green base — sets the darker tone */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 90% 70% at 50% 0%, oklch(12% 0.04 145 / 0.9), oklch(6% 0 0) 70%)," +
+            "linear-gradient(180deg, oklch(5% 0 0) 0%, oklch(7% 0.02 145) 50%, oklch(4% 0 0) 100%)",
+        }}
+      />
+
       {/* 1. Mesh gradient — animated, opaque depth */}
-      <div className="absolute inset-0 hue-pulse">
+      <div className="absolute inset-0 hue-pulse opacity-70">
         <div
           className="absolute inset-0 mesh-drift"
           style={{
             background:
-              "radial-gradient(circle at 18% 22%, oklch(85% 0.2 145 / 0.18), transparent 38%)," +
-              "radial-gradient(circle at 82% 18%, oklch(60% 0.22 250 / 0.14), transparent 42%)," +
-              "radial-gradient(circle at 50% 90%, oklch(85% 0.2 145 / 0.12), transparent 45%)," +
-              "radial-gradient(circle at 92% 75%, oklch(70% 0.18 200 / 0.10), transparent 40%)",
+              "radial-gradient(circle at 18% 22%, oklch(85% 0.2 145 / 0.10), transparent 38%)," +
+              "radial-gradient(circle at 82% 18%, oklch(60% 0.22 250 / 0.07), transparent 42%)," +
+              "radial-gradient(circle at 50% 90%, oklch(85% 0.2 145 / 0.08), transparent 45%)," +
+              "radial-gradient(circle at 92% 75%, oklch(70% 0.18 200 / 0.06), transparent 40%)",
           }}
         />
       </div>
@@ -40,22 +50,22 @@ export function AmbientBackdrop() {
         }}
       />
 
-      {/* 3. Floating neon orbs */}
+      {/* 3. Floating neon orbs — softened */}
       <motion.div
-        className="absolute -top-40 -right-40 h-[720px] w-[720px] rounded-full blur-[140px]"
-        style={{ background: "radial-gradient(circle, oklch(85% 0.2 145 / 0.22), transparent 60%)" }}
+        className="absolute -top-40 -right-40 h-[720px] w-[720px] rounded-full blur-[160px]"
+        style={{ background: "radial-gradient(circle, oklch(85% 0.2 145 / 0.13), transparent 60%)" }}
         animate={{ x: [0, 50, -25, 0], y: [0, -35, 25, 0] }}
         transition={{ duration: 26, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute top-[42vh] -left-48 h-[640px] w-[640px] rounded-full blur-[140px]"
-        style={{ background: "radial-gradient(circle, oklch(60% 0.22 250 / 0.16), transparent 60%)" }}
+        className="absolute top-[42vh] -left-48 h-[640px] w-[640px] rounded-full blur-[160px]"
+        style={{ background: "radial-gradient(circle, oklch(60% 0.22 250 / 0.09), transparent 60%)" }}
         animate={{ x: [0, 70, 25, 0], y: [0, 45, -35, 0] }}
         transition={{ duration: 32, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute bottom-[-10%] right-[18%] h-[560px] w-[560px] rounded-full blur-[140px]"
-        style={{ background: "radial-gradient(circle, oklch(85% 0.2 145 / 0.13), transparent 60%)" }}
+        className="absolute bottom-[-10%] right-[18%] h-[560px] w-[560px] rounded-full blur-[160px]"
+        style={{ background: "radial-gradient(circle, oklch(85% 0.2 145 / 0.08), transparent 60%)" }}
         animate={{ x: [0, -50, 35, 0], y: [0, -25, 35, 0] }}
         transition={{ duration: 28, repeat: Infinity, ease: "easeInOut" }}
       />

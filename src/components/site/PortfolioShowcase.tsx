@@ -459,7 +459,7 @@ function CaseView({
   // Mobile carrega ainda mais rápido (viewport menor, menos assets).
   useEffect(() => {
     setLoaded(false);
-    const t = setTimeout(() => setLoaded(true), device === "mobile" ? 600 : 900);
+    const t = setTimeout(() => setLoaded(true), device === "mobile" ? 300 : 450);
     return () => clearTimeout(t);
   }, [iframeKey, device]);
 
