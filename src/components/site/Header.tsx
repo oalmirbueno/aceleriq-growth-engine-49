@@ -29,8 +29,8 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
         scrolled
-          ? "border-b border-primary/20 bg-background/80 backdrop-blur-md py-3"
-          : "bg-transparent py-6",
+          ? "border-b border-white/[0.06] bg-black/70 backdrop-blur-2xl shadow-[0_8px_30px_-12px_rgba(0,0,0,0.8)] py-3"
+          : "border-b border-transparent bg-black/40 backdrop-blur-xl py-5",
       )}
     >
       <div className="container-aceleriq flex items-center justify-between">
