@@ -386,7 +386,7 @@ function PortfolioCard({
   item: PortfolioItem;
   onOpen: () => void;
 }) {
-  const [imgFailed, setImgFailed] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <button
@@ -395,27 +395,26 @@ function PortfolioCard({
       aria-label={`Abrir case ${item.name}`}
       className="group relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-card/40 text-left transition duration-300 hover:-translate-y-0.5 hover:border-white/15 hover:bg-card/60 focus:outline-none focus:ring-2 focus:ring-primary/60"
     >
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted/10">
-        {!imgFailed ? (
-          <img
-            src={THUMB(item.origin, 720)}
-            alt={`Preview do site ${item.name} — ${item.segment}`}
-            loading="lazy"
-            decoding="async"
-            width={720}
-            height={450}
-            onError={() => setImgFailed(true)}
-            className="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-          />
-        ) : (
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#0a0a0a]">
+        {!loaded && (
           <div
-            className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${item.accent}`}
-          >
-            <span className="font-display text-2xl font-medium text-foreground/80">
-              {item.name}
-            </span>
-          </div>
+            aria-hidden
+            className="absolute inset-0 animate-pulse bg-[linear-gradient(110deg,#0d0d0d_8%,#1a1a1a_18%,#0d0d0d_33%)] bg-[length:200%_100%]"
+          />
         )}
+        <img
+          src={THUMB(item.origin, 720)}
+          alt={`Preview do site ${item.name} — ${item.segment}`}
+          loading="lazy"
+          decoding="async"
+          width={720}
+          height={450}
+          onLoad={() => setLoaded(true)}
+          onError={() => setLoaded(true)}
+          className={`absolute inset-0 h-full w-full object-cover object-top transition-all duration-500 ease-out group-hover:scale-[1.04] ${
+            loaded ? "opacity-100" : "opacity-0"
+          }`}
+        />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
         <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-background/70 px-2.5 py-1 text-[10px] font-mono uppercase tracking-[0.18em] text-foreground/90 backdrop-blur transition group-hover:bg-primary group-hover:text-primary-foreground">
           Abrir case
