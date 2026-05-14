@@ -40,11 +40,11 @@ export function TrafegoCalculator() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-          <PlatformCard name="Google Ads" badge="Partner" code="google" tilt={-1.2} variant="light" />
-          <PlatformCard name="Meta Business" badge="Partner" code="meta" tilt={0.8} variant="dark" />
-          <PlatformCard name="LinkedIn Ads" badge="Marketing" code="linkedin" tilt={-0.6} variant="dark" />
-          <PlatformCard name="TikTok Ads" badge="Manager" code="tiktok" tilt={1.4} variant="light" />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-5" style={{ transform: "rotate(-1deg)" }}>
+          <PlatformCard name="Google Ads" badge="Partner" code="google" variant="light" />
+          <PlatformCard name="Meta Business" badge="Partner" code="meta" variant="dark" />
+          <PlatformCard name="LinkedIn Ads" badge="Marketing" code="linkedin" variant="dark" />
+          <PlatformCard name="TikTok Ads" badge="Manager" code="tiktok" variant="light" />
         </div>
       </section>
 
@@ -89,7 +89,7 @@ export function TrafegoCalculator() {
               raw={ticket} onChange={setTicket}
             />
 
-            <div className="bg-[oklch(15%_0_0)] text-white p-6 relative overflow-hidden"
+            <div className="bg-[oklch(15%_0_0)] text-white p-6 relative overflow-hidden rounded-[20px]"
                  style={{ clipPath: "polygon(0 0, 100% 3%, 100% 100%, 0 97%)" }}>
               <div className="text-[10px] uppercase tracking-[0.25em] text-white/50 mb-2 font-mono">
                 benchmarks aplicados
@@ -103,7 +103,7 @@ export function TrafegoCalculator() {
           </div>
 
           {/* Coluna direita — output visual */}
-          <div className="lg:col-span-3 relative bg-white p-8 md:p-10 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.25)] border border-black/5">
+          <div className="lg:col-span-3 relative bg-white p-8 md:p-10 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.25)] border border-black/5 rounded-[28px] overflow-hidden" style={{ transform: "rotate(-0.6deg)" }}>
             <div className="flex items-start justify-between mb-8">
               <div>
                 <div className="text-[10px] uppercase tracking-[0.25em] text-[oklch(45%_0.18_145)] font-mono mb-2">
@@ -122,7 +122,7 @@ export function TrafegoCalculator() {
                   ≈ <span className="font-semibold text-[oklch(20%_0_0)]">R$ {fmt(revenue * 12)}</span> / ano
                 </div>
               </div>
-              <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-[oklch(95%_0.05_145)] border border-[oklch(85%_0.18_145)/0.4]">
+              <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-[oklch(95%_0.05_145)] border border-[oklch(85%_0.18_145)/0.4] rounded-full">
                 <TrendingUp className="h-3.5 w-3.5 text-[oklch(45%_0.18_145)]" />
                 <span className="font-mono text-[11px] uppercase tracking-widest text-[oklch(35%_0.15_145)]">
                   {roas.toFixed(1)}x ROAS
@@ -131,7 +131,7 @@ export function TrafegoCalculator() {
             </div>
 
             {/* Métricas em grade */}
-            <div className="grid grid-cols-3 gap-px bg-black/8 border-t border-b border-black/10 -mx-8 md:-mx-10 px-0">
+            <div className="grid grid-cols-3 gap-px bg-black/8 border border-black/10 rounded-2xl overflow-hidden">
               <MetricCell label="Leads" value={fmt(leads)} unit="/mês" />
               <MetricCell label="Vendas" value={fmt(sales)} unit="/mês" />
               <MetricCell label="CAC" value={`R$ ${fmt(cac)}`} unit="" />
@@ -177,13 +177,12 @@ export function TrafegoCalculator() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-5">
+        <div className="grid md:grid-cols-3 gap-5" style={{ transform: "rotate(-1deg)" }}>
           <StrategyCard
             icon={<Target className="h-5 w-5" />}
             tag="01 / Topo"
             title="Demanda latente"
             items={["Vídeo curto + UGC", "Públicos amplos", "CPM otimizado", "Awareness por região"]}
-            tilt={-1}
             variant="dark"
           />
           <StrategyCard
@@ -191,7 +190,6 @@ export function TrafegoCalculator() {
             tag="02 / Meio"
             title="Consideração"
             items={["Retargeting segmentado", "Cases e prova social", "Lookalikes 1-3%", "Comparativos"]}
-            tilt={0.6}
             variant="light"
           />
           <StrategyCard
@@ -199,7 +197,6 @@ export function TrafegoCalculator() {
             tag="03 / Fundo"
             title="Conversão"
             items={["Search alta intenção", "PMax com feed limpo", "CAPI + Enhanced Conv.", "Lances por valor"]}
-            tilt={-0.4}
             variant="green"
           />
         </div>
@@ -219,8 +216,7 @@ function ControlCard({
 }) {
   const pct = ((raw - min) / (max - min)) * 100;
   return (
-    <div className="bg-white border border-black/8 p-6 relative overflow-hidden shadow-[0_10px_30px_-15px_rgba(0,0,0,0.15)]"
-         style={{ clipPath: "polygon(0 0, 100% 2%, 100% 98%, 0 100%)" }}>
+    <div className="bg-white border border-black/8 p-6 relative overflow-hidden shadow-[0_10px_30px_-15px_rgba(0,0,0,0.15)] rounded-[20px]">
       <div className="flex items-baseline justify-between mb-1">
         <div className="text-[10px] uppercase tracking-[0.25em] text-[oklch(45%_0_0)] font-mono">{label}</div>
         <div className="text-[10px] text-[oklch(55%_0_0)]">{hint}</div>
@@ -277,13 +273,12 @@ function FunnelBar({ pct, label, sub, tone }: { pct: number; label: string; sub:
         <span className="text-[oklch(20%_0_0)] font-medium">{label}</span>
         <span className="text-[oklch(50%_0_0)] font-mono text-[11px]">{sub}</span>
       </div>
-      <div className="h-2 bg-[oklch(94%_0_0)] overflow-hidden"
-           style={{ clipPath: "polygon(0 0, 100% 0, 99% 100%, 0 100%)" }}>
+      <div className="h-2 bg-[oklch(94%_0_0)] overflow-hidden rounded-full">
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: `${pct}%` }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="h-full"
+          className="h-full rounded-full"
           style={{ background: fill }}
         />
       </div>
@@ -292,25 +287,20 @@ function FunnelBar({ pct, label, sub, tone }: { pct: number; label: string; sub:
 }
 
 function PlatformCard({
-  name, badge, code, tilt, variant,
+  name, badge, code, variant,
 }: {
   name: string; badge: string;
   code: "google" | "meta" | "linkedin" | "tiktok";
-  tilt: number;
   variant: "light" | "dark";
 }) {
   const isDark = variant === "dark";
   return (
     <div
-      className={`group relative p-6 flex flex-col gap-5 transition-all duration-300 hover:-translate-y-1 ${
+      className={`group relative p-6 flex flex-col gap-5 transition-all duration-300 hover:-translate-y-1 hover:rotate-0 rounded-[22px] ${
         isDark
           ? "bg-[oklch(12%_0_0)] text-white border border-white/8 hover:border-primary/40"
           : "bg-white text-[oklch(15%_0_0)] border border-black/8 hover:border-primary/40 shadow-[0_15px_40px_-20px_rgba(0,0,0,0.2)]"
       }`}
-      style={{
-        transform: `rotate(${tilt}deg)`,
-        clipPath: "polygon(0 0, 100% 4%, 100% 100%, 0 96%)",
-      }}
     >
       <div className="flex items-center justify-between">
         <PlatformLogo code={code} />
@@ -362,10 +352,9 @@ function PlatformLogo({ code }: { code: "google" | "meta" | "linkedin" | "tiktok
 }
 
 function StrategyCard({
-  icon, tag, title, items, tilt, variant,
+  icon, tag, title, items, variant,
 }: {
   icon: React.ReactNode; tag: string; title: string; items: string[];
-  tilt: number;
   variant: "light" | "dark" | "green";
 }) {
   const styles =
@@ -380,11 +369,7 @@ function StrategyCard({
 
   return (
     <div
-      className={`relative p-7 md:p-8 transition-all duration-300 hover:-translate-y-1 ${styles}`}
-      style={{
-        transform: `rotate(${tilt}deg)`,
-        clipPath: "polygon(0 0, 100% 3%, 100% 100%, 0 97%)",
-      }}
+      className={`relative p-7 md:p-8 transition-all duration-300 hover:-translate-y-1 hover:rotate-0 rounded-[24px] ${styles}`}
     >
       <div className={`flex items-center gap-2 mb-5 ${iconColor}`}>
         {icon}
