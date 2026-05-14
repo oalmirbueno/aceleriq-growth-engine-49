@@ -40,11 +40,11 @@ export function TrafegoCalculator() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-          <PlatformCard name="Google Ads" badge="Partner" code="google" tilt={-1.2} variant="light" />
-          <PlatformCard name="Meta Business" badge="Partner" code="meta" tilt={0.8} variant="dark" />
-          <PlatformCard name="LinkedIn Ads" badge="Marketing" code="linkedin" tilt={-0.6} variant="dark" />
-          <PlatformCard name="TikTok Ads" badge="Manager" code="tiktok" tilt={1.4} variant="light" />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-5" style={{ transform: "rotate(-1deg)" }}>
+          <PlatformCard name="Google Ads" badge="Partner" code="google" variant="light" />
+          <PlatformCard name="Meta Business" badge="Partner" code="meta" variant="dark" />
+          <PlatformCard name="LinkedIn Ads" badge="Marketing" code="linkedin" variant="dark" />
+          <PlatformCard name="TikTok Ads" badge="Manager" code="tiktok" variant="light" />
         </div>
       </section>
 
