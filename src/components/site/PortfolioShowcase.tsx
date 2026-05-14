@@ -768,7 +768,7 @@ function ScaledFrame({
   return (
     <div
       ref={wrapRef}
-      className={`relative mx-auto w-full overflow-hidden bg-background transition-all duration-500 ${
+      className={`relative mx-auto w-full overflow-hidden bg-background ${
         isMobile
           ? "max-w-[380px] rounded-[32px] border border-white/10 shadow-2xl"
           : "rounded-md border border-white/[0.06]"
