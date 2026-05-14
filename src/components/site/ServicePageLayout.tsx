@@ -66,11 +66,11 @@ export function ServicePageLayout(props: ServicePageProps) {
               // Sites: headline on top, MacBook centered, full width
               <div className="space-y-0">
                 <div className="mx-auto max-w-5xl text-center">
-                  <h1 className="mx-auto max-w-[11ch] font-display text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[5.15rem] leading-[0.95] uppercase tracking-[-0.04em]">
+                  <h1 className="mx-auto max-w-[20ch] font-display text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[4.75rem] leading-[1] uppercase tracking-[-0.035em]">
                     {props.h1}
                   </h1>
 
-                  <p className="mx-auto mt-5 max-w-2xl text-[15px] md:text-base text-foreground/75 font-light leading-[1.6]">
+                  <p className="mx-auto mt-6 max-w-xl text-[14px] md:text-[15px] text-foreground/70 font-light leading-[1.65]">
                     {props.intro}
                   </p>
 
