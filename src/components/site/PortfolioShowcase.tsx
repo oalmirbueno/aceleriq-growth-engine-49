@@ -452,11 +452,13 @@ function CaseView({
   const [loaded, setLoaded] = useState(false);
   const [device, setDevice] = useState<"desktop" | "mobile">("desktop");
 
+  // Só reseta o loaded ao trocar device ou ao recarregar manualmente.
+  // Trocar de case NÃO força reload — o ScaledFrame já reage ao src.
   useEffect(() => {
     setLoaded(false);
-    const t = setTimeout(() => setLoaded(true), 2500);
+    const t = setTimeout(() => setLoaded(true), 2000);
     return () => clearTimeout(t);
-  }, [iframeKey, item.slug, device]);
+  }, [iframeKey, device]);
 
   const currentIndex = items.findIndex((i) => i.slug === item.slug);
 
