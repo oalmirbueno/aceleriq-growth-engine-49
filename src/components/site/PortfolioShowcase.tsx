@@ -1,17 +1,32 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 export type PortfolioItem = {
   slug: string;
   name: string;
   segment: string;
-  scope: string[];
-  description: string;
   /** Origin used only to build the screenshot URL — never displayed to the user. */
   origin: string;
+  overview: string;
+  challenge: string;
+  solution: string;
+  highlights: string[];
+  stack: string[];
+  results: string[];
 };
 
-const SHOTS = (origin: string, w: number) =>
+/** thum.io full-page capture — long screenshot the user can scroll inside the frame. */
+const FULL_SHOT = (origin: string, w: number) =>
+  `https://image.thum.io/get/width/${w}/page/${origin}`;
+/** thum.io fixed-viewport thumbnail — small, fast for cards. */
+const THUMB = (origin: string, w: number) =>
   `https://image.thum.io/get/width/${w}/crop/900/noanimate/${origin}`;
 
 export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
@@ -19,118 +34,145 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
     slug: "stopinfo",
     name: "Stop Info",
     segment: "Tecnologia · Varejo",
-    scope: ["Site institucional", "SEO técnico", "Performance"],
-    description:
-      "Reposicionamento digital de uma marca de tecnologia consolidada, com site institucional rápido, otimizado para SEO local e orientado a captação qualificada.",
     origin: "https://stopinfo.com.br",
-  },
-  {
-    slug: "stopinfo-loja",
-    name: "Stop Info · Loja",
-    segment: "E-commerce",
-    scope: ["E-commerce", "Catálogo", "Conversão"],
-    description:
-      "Loja online integrada à operação física, com arquitetura de catálogo escalável, checkout otimizado e foco em recompra.",
-    origin: "https://stopinfo.com.br/loja",
-  },
-  {
-    slug: "jalimpo",
-    name: "JáLimpo",
-    segment: "Serviços · Limpeza",
-    scope: ["Site institucional", "Geração de leads", "Local SEO"],
-    description:
-      "Site de serviços com foco em conversão local, formulários inteligentes e estrutura preparada para escalar tráfego pago.",
-    origin: "https://jalimpo.com.br",
-  },
-  {
-    slug: "camillystresser",
-    name: "Camilly Stresser",
-    segment: "Marca pessoal",
-    scope: ["Branding digital", "Site de autoridade", "Captação"],
-    description:
-      "Plataforma de autoridade para profissional liberal, traduzindo posicionamento técnico em uma experiência digital premium.",
-    origin: "https://camillystresser.com.br",
+    overview:
+      "Reposicionamento digital completo de uma marca de tecnologia consolidada em Curitiba, com site institucional e e-commerce integrados em uma única identidade.",
+    challenge:
+      "Marca tradicional com presença digital fragmentada, baixa captação online e ausência de funil entre site institucional e loja.",
+    solution:
+      "Refizemos a arquitetura de marca digital, criamos site institucional rápido e SEO-ready, e estruturamos a loja online com catálogo escalável e checkout otimizado, falando entre si.",
+    highlights: [
+      "Identidade digital coerente entre institucional e e-commerce",
+      "Catálogo dinâmico com filtros por categoria e marca",
+      "SEO técnico e performance Core Web Vitals verde",
+      "Integração com WhatsApp, GA4 e pixels de conversão",
+    ],
+    stack: ["Next.js", "Tailwind", "Headless commerce", "GA4"],
+    results: [
+      "Aumento de tráfego orgânico mês a mês",
+      "Funil único entre institucional e loja",
+      "Operação digital pronta para escalar tráfego pago",
+    ],
   },
   {
     slug: "flordesaoroque",
     name: "Pousada Flor de São Roque",
     segment: "Hospedagem · Turismo",
-    scope: ["Site institucional", "Reservas", "Storytelling visual"],
-    description:
-      "Site de hospedagem com narrativa visual imersiva, fotografia em destaque e fluxo direto de contato para reservas.",
     origin: "https://flordesaoroquepousada.lovable.app",
+    overview:
+      "Site de hospedagem com narrativa visual imersiva, traduzindo a experiência da pousada em uma jornada digital sensorial.",
+    challenge:
+      "Comunicar a atmosfera única do lugar e converter visitantes em reservas diretas, sem depender 100% de OTAs.",
+    solution:
+      "Storytelling visual com fotografia em destaque, hierarquia editorial e fluxo direto para reserva via WhatsApp e contato qualificado.",
+    highlights: [
+      "Hero cinematográfico com fotografia em destaque",
+      "Galeria editorial das acomodações e do entorno",
+      "Fluxo direto de reserva e contato",
+      "Layout responsivo otimizado para mobile",
+    ],
+    stack: ["React", "Tailwind", "Otimização de imagens", "SEO local"],
+    results: [
+      "Reservas diretas pelo site",
+      "Redução da dependência de plataformas terceiras",
+      "Identidade digital alinhada à experiência presencial",
+    ],
   },
   {
-    slug: "deliciasgama",
-    name: "Delícias da Gama",
-    segment: "Gastronomia",
-    scope: ["Cardápio digital", "Pedidos", "Identidade visual"],
-    description:
-      "Vitrine digital de gastronomia com cardápio organizado, fotografia de produto e fluxo direto para WhatsApp e pedidos.",
-    origin: "https://deliciasgama.lovable.app",
-  },
-  {
-    slug: "rotasul",
-    name: "Rota Sul Multimarcas",
-    segment: "Automotivo",
-    scope: ["Catálogo de veículos", "Captação", "Performance"],
-    description:
-      "Plataforma para revenda automotiva com catálogo dinâmico, fichas técnicas e captação de interesse qualificada.",
-    origin: "https://rotasulmultimarcas.lovable.app",
-  },
-  {
-    slug: "cartaoacessosaude",
-    name: "Cartão Acesso Saúde",
-    segment: "Saúde · Assinatura",
-    scope: ["Site de produto", "Adesão online", "Educação de mercado"],
-    description:
-      "Site de produto para serviço de saúde por assinatura, com explicação clara dos benefícios e fluxo de adesão simplificado.",
-    origin: "https://cartaoacessosaude.lovable.app",
-  },
-  {
-    slug: "buenoconstrucao",
-    name: "Bueno Construção",
-    segment: "Construção Civil",
-    scope: ["Site institucional", "Portfólio de obras", "Autoridade"],
-    description:
-      "Site institucional para construtora, com portfólio visual de obras, prova social e captação para orçamentos.",
-    origin: "https://buenoconstrucao.lovable.app",
-  },
-  {
-    slug: "sitebolt",
-    name: "SiteBolt",
-    segment: "SaaS",
-    scope: ["Landing de produto", "Onboarding", "Conversão"],
-    description:
-      "Landing page de produto SaaS com narrativa orientada a benefício, prova técnica e fluxo direto de ativação.",
-    origin: "https://sitebolt.lovable.app",
+    slug: "camillystresser",
+    name: "Camilly Stresser",
+    segment: "Marca pessoal · Profissional liberal",
+    origin: "https://camillystresser.com.br",
+    overview:
+      "Plataforma de autoridade para profissional liberal, traduzindo posicionamento técnico em uma experiência digital premium.",
+    challenge:
+      "Construir autoridade online em um mercado saturado e capturar leads qualificados sem parecer mais um perfil profissional genérico.",
+    solution:
+      "Site de marca pessoal com identidade tipográfica forte, prova social estruturada e CTA principal claro para contato direto.",
+    highlights: [
+      "Identidade visual editorial e premium",
+      "Prova social e credenciais em destaque",
+      "Captação direta via formulário e WhatsApp",
+      "SEO de nome e nicho",
+    ],
+    stack: ["React", "Tailwind", "Form handling", "SEO on-page"],
+    results: [
+      "Posicionamento de autoridade na busca pelo nome",
+      "Aumento de contatos qualificados",
+      "Plataforma escalável para conteúdo futuro",
+    ],
   },
   {
     slug: "brit",
     name: "Brit",
     segment: "Marca · D2C",
-    scope: ["Identidade digital", "Site de marca", "Storytelling"],
-    description:
-      "Site de marca direta ao consumidor com identidade forte, narrativa de produto e estética premium.",
     origin: "https://brit.lovable.app",
+    overview:
+      "Site de marca direta ao consumidor com identidade forte, narrativa de produto e estética premium.",
+    challenge:
+      "Comunicar uma marca emergente com personalidade própria sem cair no padrão genérico de e-commerce shopify-template.",
+    solution:
+      "Design custom com hierarquia editorial, foco em produto e narrativa de marca consistente em cada bloco da página.",
+    highlights: [
+      "Identidade visual forte e consistente",
+      "Storytelling de produto orientado a desejo",
+      "Layout custom, sem sensação de template",
+      "Performance e responsividade nativas",
+    ],
+    stack: ["React", "Tailwind", "Motion", "Design system custom"],
+    results: [
+      "Posicionamento premium de marca",
+      "Base preparada para escalar D2C",
+      "Diferenciação clara da concorrência",
+    ],
   },
   {
     slug: "level-me",
     name: "Level Me",
-    segment: "Lifestyle",
-    scope: ["Site de marca", "Captação", "Conteúdo"],
-    description:
-      "Plataforma de marca lifestyle com foco em performance pessoal, posicionamento aspiracional e captação contínua.",
+    segment: "Lifestyle · Performance pessoal",
     origin: "https://level-me.lovable.app",
+    overview:
+      "Plataforma de marca lifestyle com foco em performance pessoal, posicionamento aspiracional e captação contínua.",
+    challenge:
+      "Traduzir um conceito aspiracional em uma experiência digital coerente, com captação ativa sem agredir o público.",
+    solution:
+      "Arquitetura de site centrada em narrativa, com seções de prova, método e captação distribuídos ao longo da jornada.",
+    highlights: [
+      "Hero aspiracional com hierarquia clara",
+      "Seções de método e prova bem distribuídas",
+      "Captação contínua em pontos estratégicos",
+      "Identidade premium consistente",
+    ],
+    stack: ["React", "Tailwind", "Animações scroll", "SEO"],
+    results: [
+      "Plataforma de marca consolidada",
+      "Captação contínua de novos leads",
+      "Posicionamento premium no nicho",
+    ],
   },
   {
-    slug: "appplaybet",
-    name: "PlayBet",
-    segment: "App",
-    scope: ["Landing de app", "Aquisição", "Mobile-first"],
-    description:
-      "Landing mobile-first para aplicativo, com foco em aquisição, prova social e CTA otimizado para download.",
-    origin: "https://appplaybet.lovable.app",
+    slug: "sitebolt",
+    name: "SiteBolt",
+    segment: "SaaS · Tecnologia",
+    origin: "https://sitebolt.lovable.app",
+    overview:
+      "Landing page de produto SaaS com narrativa orientada a benefício, prova técnica e fluxo direto de ativação.",
+    challenge:
+      "Comunicar um produto técnico de forma clara para um público misto (técnico + decisor) e ativar conversões sem fricção.",
+    solution:
+      "Hero direto ao valor, prova técnica em destaque, seções de feature/benefício separadas e CTA repetido em pontos-chave.",
+    highlights: [
+      "Hero focado em proposta de valor",
+      "Demonstração visual do produto",
+      "Pricing e CTA claros",
+      "Performance e SEO técnico nativos",
+    ],
+    stack: ["React", "Tailwind", "Edge deploy", "Analytics"],
+    results: [
+      "Landing pronta para campanhas pagas",
+      "Mensagem clara para público técnico e decisor",
+      "Base escalável para novas features",
+    ],
   },
 ];
 
@@ -144,8 +186,8 @@ type Props = {
 export function PortfolioShowcase({
   items = DEFAULT_PORTFOLIO,
   eyebrow = "[ · ] · Portfólio",
-  title = "Sites e plataformas que a Aceleriq construiu",
-  intro = "Cada projeto é construído como ativo comercial: design premium, SEO técnico, performance real e integração ao funil.",
+  title = "Cases recentes da Aceleriq",
+  intro = "Selecionamos os projetos que melhor representam o nosso padrão: design editorial, performance real e estratégia integrada ao funil.",
 }: Props) {
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -185,28 +227,42 @@ export function PortfolioShowcase({
       />
       <div className="container-aceleriq">
         {!active && (
-          <div className="max-w-2xl animate-fade-in">
-            <span className="label-eyebrow">{eyebrow}</span>
-            <h2 className="mt-3 font-display text-3xl font-medium leading-[1.05] tracking-[-0.03em] md:text-5xl">
-              {title}
-            </h2>
-            <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
-              {intro}
-            </p>
+          <div className="flex flex-col gap-6 animate-fade-in md:flex-row md:items-end md:justify-between">
+            <div className="max-w-2xl">
+              <span className="label-eyebrow">{eyebrow}</span>
+              <h2 className="mt-3 font-display text-3xl font-medium leading-[1.05] tracking-[-0.03em] md:text-5xl">
+                {title}
+              </h2>
+              <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
+                {intro}
+              </p>
+            </div>
           </div>
         )}
 
         {active ? (
           <CaseView item={active} onBack={() => setActiveSlug(null)} />
         ) : (
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {items.map((it) => (
-              <PortfolioCard
-                key={it.slug}
-                item={it}
-                onOpen={() => setActiveSlug(it.slug)}
-              />
-            ))}
+          <div className="mt-10">
+            <Carousel
+              opts={{ align: "start", loop: false }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-4">
+                {items.map((it) => (
+                  <CarouselItem
+                    key={it.slug}
+                    className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3"
+                  >
+                    <PortfolioCard item={it} onOpen={() => setActiveSlug(it.slug)} />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="mt-6 flex items-center justify-end gap-2">
+                <CarouselPrevious className="static translate-y-0 h-10 w-10 border-white/10 bg-card/40 hover:bg-card" />
+                <CarouselNext className="static translate-y-0 h-10 w-10 border-white/10 bg-card/40 hover:bg-card" />
+              </div>
+            </Carousel>
           </div>
         )}
       </div>
@@ -226,16 +282,16 @@ function PortfolioCard({
       type="button"
       onClick={onOpen}
       aria-label={`Abrir case ${item.name}`}
-      className="group relative flex flex-col overflow-hidden rounded-xl border border-white/[0.08] bg-card/40 text-left transition duration-300 hover:-translate-y-0.5 hover:border-white/15 hover:bg-card/60 focus:outline-none focus:ring-2 focus:ring-primary/60"
+      className="group relative flex w-full flex-col overflow-hidden rounded-xl border border-white/[0.08] bg-card/40 text-left transition duration-300 hover:-translate-y-0.5 hover:border-white/15 hover:bg-card/60 focus:outline-none focus:ring-2 focus:ring-primary/60"
     >
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted/10">
         <img
-          src={SHOTS(item.origin, 600)}
+          src={THUMB(item.origin, 720)}
           alt={`Preview do site ${item.name} — ${item.segment}`}
           loading="lazy"
           decoding="async"
-          width={600}
-          height={375}
+          width={720}
+          height={450}
           className="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.04]"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
@@ -250,6 +306,9 @@ function PortfolioCard({
         <h3 className="font-display text-[15px] font-medium leading-tight tracking-tight">
           {item.name}
         </h3>
+        <p className="mt-1 line-clamp-2 text-[12.5px] leading-relaxed text-muted-foreground">
+          {item.overview}
+        </p>
       </div>
     </button>
   );
@@ -267,52 +326,95 @@ function CaseView({ item, onBack }: { item: PortfolioItem; onBack: () => void })
         Voltar ao portfólio
       </button>
 
-      <div className="mt-6 grid gap-8 lg:grid-cols-[1.6fr_1fr]">
-        <div className="order-2 overflow-hidden rounded-2xl border border-white/10 bg-background/40 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.6)] lg:order-1">
-          <div className="flex items-center gap-1.5 border-b border-white/10 bg-white/[0.03] px-3 py-2">
-            <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
-            <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
-            <span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />
-            <span className="ml-3 truncate text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
-              Projeto Aceleriq · {item.name}
-            </span>
+      <div className="mt-6 grid gap-8 lg:grid-cols-[1.4fr_1fr]">
+        {/* Scrollable preview frame */}
+        <div className="order-2 lg:order-1 lg:sticky lg:top-24 self-start">
+          <div className="overflow-hidden rounded-2xl border border-white/10 bg-background/40 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.7)]">
+            <div className="flex items-center gap-1.5 border-b border-white/10 bg-white/[0.03] px-3 py-2.5">
+              <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
+              <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
+              <span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />
+              <span className="ml-3 truncate text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
+                Projeto Aceleriq · {item.name}
+              </span>
+            </div>
+            <div className="custom-scroll max-h-[78vh] overflow-y-auto bg-background">
+              <img
+                src={FULL_SHOT(item.origin, 1400)}
+                alt={`Captura completa do site ${item.name}`}
+                loading="eager"
+                decoding="async"
+                className="block w-full"
+              />
+            </div>
           </div>
-          <img
-            src={SHOTS(item.origin, 1400)}
-            alt={`Captura completa do site ${item.name}`}
-            loading="eager"
-            decoding="async"
-            className="block w-full"
-          />
+          <p className="mt-3 text-center text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
+            Role para explorar o projeto
+          </p>
         </div>
 
-        <aside className="order-1 lg:order-2">
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
-            {item.segment}
-          </span>
-          <h3 className="mt-2 font-display text-3xl font-medium leading-[1.05] tracking-[-0.03em] md:text-4xl">
-            {item.name}
-          </h3>
-          <p className="mt-4 text-[14px] leading-relaxed text-muted-foreground">
-            {item.description}
-          </p>
+        {/* Case content */}
+        <aside className="order-1 lg:order-2 space-y-7">
+          <div>
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
+              {item.segment}
+            </span>
+            <h3 className="mt-2 font-display text-3xl font-medium leading-[1.05] tracking-[-0.03em] md:text-4xl">
+              {item.name}
+            </h3>
+            <p className="mt-4 text-[14px] leading-relaxed text-muted-foreground">
+              {item.overview}
+            </p>
+          </div>
 
-          <div className="mt-7">
-            <span className="label-eyebrow">Escopo entregue</span>
+          <CaseBlock label="Desafio" body={item.challenge} />
+          <CaseBlock label="Solução Aceleriq" body={item.solution} />
+
+          <div>
+            <span className="label-eyebrow">Destaques do projeto</span>
             <ul className="mt-3 space-y-2">
-              {item.scope.map((s) => (
+              {item.highlights.map((h) => (
                 <li
-                  key={s}
-                  className="flex items-start gap-2.5 text-[13px] text-foreground/90"
+                  key={h}
+                  className="flex items-start gap-2.5 text-[13px] leading-relaxed text-foreground/90"
                 >
-                  <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-primary" />
-                  {s}
+                  <Check className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-primary" />
+                  {h}
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="mt-7 rounded-xl border border-white/10 bg-white/[0.02] p-4">
+          <div>
+            <span className="label-eyebrow">Stack & técnicas</span>
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {item.stack.map((s) => (
+                <span
+                  key={s}
+                  className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 text-[11px] text-muted-foreground"
+                >
+                  {s}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <span className="label-eyebrow">Resultados</span>
+            <ul className="mt-3 space-y-2">
+              {item.results.map((r) => (
+                <li
+                  key={r}
+                  className="flex items-start gap-2.5 text-[13px] leading-relaxed text-foreground/90"
+                >
+                  <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-primary" />
+                  {r}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4">
             <p className="text-[12px] leading-relaxed text-muted-foreground">
               Projeto desenvolvido pela{" "}
               <strong className="text-foreground">Aceleriq</strong> — agência de
@@ -321,6 +423,17 @@ function CaseView({ item, onBack }: { item: PortfolioItem; onBack: () => void })
           </div>
         </aside>
       </div>
+    </div>
+  );
+}
+
+function CaseBlock({ label, body }: { label: string; body: string }) {
+  return (
+    <div>
+      <span className="label-eyebrow">{label}</span>
+      <p className="mt-2 text-[13.5px] leading-relaxed text-muted-foreground">
+        {body}
+      </p>
     </div>
   );
 }
