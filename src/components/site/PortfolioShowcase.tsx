@@ -23,7 +23,10 @@ export type PortfolioItem = {
   results: string[];
 };
 
-const THUMB = (origin: string, w: number) =>
+/** Local snapshot baked into /public — instant, never blank. */
+const LOCAL_PREVIEW = (slug: string) => `/portfolio-previews/${slug}.jpg`;
+/** Live screenshot fallback (only used if the local file ever 404s). */
+const REMOTE_THUMB = (origin: string, w: number) =>
   `https://image.thum.io/get/width/${w}/crop/1200/noanimate/${origin}`;
 
 export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
