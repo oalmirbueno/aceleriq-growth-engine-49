@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { Star, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
+import { Star, ExternalLink, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
+
+const MAPS_EMBED = "https://www.google.com/maps?q=Aceleriq+Curitiba&output=embed";
 
 // Link de avaliação do Google fornecido pelo cliente
 export const GOOGLE_REVIEW_URL = "https://share.google/N6bMgKWg8aRB1t9m9";
