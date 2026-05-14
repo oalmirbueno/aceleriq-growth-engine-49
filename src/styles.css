@@ -18,7 +18,11 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
   --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
 
   --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
@@ -29,6 +33,9 @@
   --background: oklch(10% 0 0);
   --foreground: oklch(100% 0 0);
   --primary: oklch(85% 0.2 145); /* Verde neon sofisticado */
+  --primary-foreground: oklch(12% 0 0);
+  --muted: oklch(18% 0 0);
+  --muted-foreground: oklch(72% 0 0);
   --border: oklch(25% 0 0 / 0.5);
   --accent: oklch(60% 0.2 250); /* Azul elétrico sutil */
 }
