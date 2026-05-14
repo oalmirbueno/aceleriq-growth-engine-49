@@ -1,0 +1,14 @@
+# Aceleriq
+
+> Engenharia de crescimento em Curitiba que une estratégia, CRM, tráfego, automação, IA, dados e processos comerciais para empresas que querem escalar com previsibilidade.
+
+A Aceleriq atua como engenharia parceira de empresas a partir de R$ 100 mil/mês de faturamento, estruturando marketing, vendas e operação como um sistema integrado — não como entregáveis avulsos de agência.
+
+## Pages
+
+- [Home](/): Visão geral da Aceleriq, método ACELERA, áreas de atuação, resultados e diagnóstico gratuito.
+- [Sobre a Aceleriq](/sobre-a-aceleriq): Quem somos, pilares (estratégia + dados, processo comercial, IA & automação, estrutura operacional) e frentes de serviço.
+
+## Optional
+
+- [Diagnóstico Gratuito](/): Quiz de 12 perguntas (~5 min) com Score de Maturidade, classificação e 3 recomendações personalizadas.

@@ -127,9 +127,12 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                   <img
                     src={aiEngineerImg}
                     alt="AI Engineer Aceleriq operando protocolo neural"
+                    width={1024}
+                    height={1024}
                     className="w-full h-full object-cover select-none"
                     loading="eager"
                     decoding="sync"
+                    fetchPriority="high"
                     draggable={false}
                     style={{
                       imageRendering: "auto",
@@ -764,9 +767,9 @@ export function DiagnosticoCTA({ onDiagnostico }: { onDiagnostico: () => void })
                 <div className="mb-7 h-[3px] overflow-hidden rounded-full bg-secondary">
                   <div className="h-full w-1/4 rounded-full bg-primary" />
                 </div>
-                <h4 className="font-display text-[17px] font-medium leading-snug">
+                <h3 className="font-display text-[17px] font-medium leading-snug">
                   Qual o nível de maturidade do seu processo comercial?
-                </h4>
+                </h3>
                 <div className="mt-4 grid grid-cols-5 gap-2">
                   {[1, 2, 3, 4, 5].map((n) => (
                     <button

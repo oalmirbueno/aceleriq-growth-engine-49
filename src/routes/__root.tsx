@@ -25,10 +25,9 @@ function NotFoundComponent() {
   );
 }
 
-const SITE_TITLE =
-  "Aceleriq · Engenharia de Crescimento com Estratégia, Dados e IA";
+const SITE_TITLE = "Aceleriq · Engenharia de Crescimento";
 const SITE_DESCRIPTION =
-  "Aceleriq é uma engenharia de crescimento em Curitiba que une estratégia, CRM, tráfego, automação, IA, dados e processos comerciais para empresas que querem escalar com previsibilidade.";
+  "Engenharia de crescimento em Curitiba: estratégia, CRM, tráfego, automação, IA e dados para escalar com previsibilidade.";
 const SITE_URL = "https://aceleriq.com.br";
 const OG_IMAGE = `${SITE_URL}/og-image.jpg`;
 
@@ -148,14 +147,6 @@ export const Route = createRootRoute({
       { name: "twitter:description", content: SITE_DESCRIPTION },
       { name: "twitter:image", content: OG_IMAGE },
       { name: "theme-color", content: "#0a0a0a" },
-      { title: "Aceleriq I Engenharia de Crescimento com Estratégia, Dados e" },
-      { property: "og:title", content: "Aceleriq I Engenharia de Crescimento com Estratégia, Dados e" },
-      { name: "twitter:title", content: "Aceleriq I Engenharia de Crescimento com Estratégia, Dados e" },
-      { name: "description", content: "Aceleriq é uma engenharia de crescimento em Curitiba que une estratégia, IA, SIstema, Marketing e Comercial que geram Resultados" },
-      { property: "og:description", content: "Aceleriq é uma engenharia de crescimento em Curitiba que une estratégia, IA, SIstema, Marketing e Comercial que geram Resultados" },
-      { name: "twitter:description", content: "Aceleriq é uma engenharia de crescimento em Curitiba que une estratégia, IA, SIstema, Marketing e Comercial que geram Resultados" },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/15134d37-3cd4-40e2-86da-d70be62eae7e/id-preview-cca5ba3e--f5e56613-d905-400e-a8e2-80206adf0dda.lovable.app-1777567728285.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/15134d37-3cd4-40e2-86da-d70be62eae7e/id-preview-cca5ba3e--f5e56613-d905-400e-a8e2-80206adf0dda.lovable.app-1777567728285.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -167,7 +158,7 @@ export const Route = createRootRoute({
       { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
       { rel: "manifest", href: "/site.webmanifest" },
       { rel: "preload", as: "image", href: "/hero-bg.jpg", fetchpriority: "high" } as any,
-      { rel: "canonical", href: SITE_URL },
+      
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
       {

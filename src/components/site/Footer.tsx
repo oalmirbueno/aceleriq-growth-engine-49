@@ -18,7 +18,7 @@ export function Footer() {
           <div className="flex items-center">
             <img
               src={logoAceleriq}
-              alt="Aceleriq"
+              alt="Logotipo Aceleriq"
               className="h-20 w-auto md:h-24"
             />
           </div>
@@ -30,7 +30,7 @@ export function Footer() {
         </div>
 
         <div className="md:col-span-3">
-          <h4 className="label-eyebrow">Navegação</h4>
+          <h3 className="label-eyebrow">Navegação</h3>
           <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
             <li><Link to="/" hash="metodo" className="hover:text-foreground">Método ACELERA</Link></li>
             <li><Link to="/" hash="areas" className="hover:text-foreground">Áreas de atuação</Link></li>
@@ -40,7 +40,7 @@ export function Footer() {
         </div>
 
         <div className="md:col-span-4">
-          <h4 className="label-eyebrow">Contato direto</h4>
+          <h3 className="label-eyebrow">Contato direto</h3>
           <ul className="mt-5 space-y-3 text-sm">
             <li>
               <a
