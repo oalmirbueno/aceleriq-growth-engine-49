@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { Star, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
+import { Star, ExternalLink, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
+
+const MAPS_EMBED = "https://www.google.com/maps?q=Aceleriq+Curitiba&output=embed";
 
 // Link de avaliação do Google fornecido pelo cliente
 export const GOOGLE_REVIEW_URL = "https://share.google/N6bMgKWg8aRB1t9m9";
@@ -15,8 +17,10 @@ export type GoogleReview = {
   avatarColor?: string;
 };
 
-// ⚠️ Avaliações curadas (apenas 5★). Para adicionar novas, basta inserir no array.
-// Quando a Google Places API for ativada, este array é substituído pela busca automática.
+// ⚠️ PLACEHOLDER — substituir pelos textos REAIS dos reviews do Google Business
+// (cliente vai enviar). Cada item: copie author + date + text exatamente como aparece
+// no perfil. Manter apenas 5★. Quando a Google Places API for ativada, este array é
+// substituído pela busca automática.
 export const REVIEWS: GoogleReview[] = [
   {
     author: "Ricardo Almeida",
@@ -238,6 +242,45 @@ export function GoogleReviews() {
               >
                 <ChevronRight className="h-4 w-4" />
               </button>
+            </div>
+          </div>
+
+          {/* Map + location card */}
+          <div className="mt-16 grid gap-6 lg:grid-cols-12 lg:gap-8">
+            <div className="lg:col-span-4 flex flex-col justify-between rounded-2xl border border-border/60 bg-card/40 p-7">
+              <div>
+                <span className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
+                  <MapPin className="h-3.5 w-3.5" />
+                  Curitiba · PR
+                </span>
+                <h3 className="mt-4 font-display text-2xl uppercase tracking-[-0.03em] leading-[1.1]">
+                  Sede física,<br />
+                  <span className="text-primary">atendimento nacional</span>
+                </h3>
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                  Operação 100% remota para o Brasil inteiro, com base em Curitiba.
+                  Perfil verificado no Google Business.
+                </p>
+              </div>
+              <a
+                href={GOOGLE_REVIEW_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="group mt-6 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-primary"
+              >
+                Ver no Google
+                <ExternalLink className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+              </a>
+            </div>
+            <div className="lg:col-span-8 overflow-hidden rounded-2xl border border-border/60 bg-card/40">
+              <iframe
+                title="Aceleriq no Google Maps"
+                src={MAPS_EMBED}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="h-[280px] w-full md:h-[340px]"
+                style={{ border: 0, filter: "invert(0.92) hue-rotate(180deg) saturate(0.6)" }}
+              />
             </div>
           </div>
         </div>
