@@ -303,6 +303,41 @@ export function ServicePageLayout(props: ServicePageProps) {
           </div>
         </section>
 
+        {/* MANIFESTO — light section to break the all-black rhythm */}
+        <section className="relative bg-foreground text-background overflow-hidden border-y border-foreground/15">
+          <div className="absolute -right-32 -top-32 h-96 w-96 rounded-full"
+            style={{ background: "radial-gradient(circle, oklch(85% 0.2 145 / 0.4), transparent 70%)" }}
+          />
+          <div className="relative max-w-7xl mx-auto px-6 lg:px-16 py-20 md:py-28 grid lg:grid-cols-12 gap-10">
+            <div className="lg:col-span-2 font-mono text-[10px] uppercase tracking-[0.25em] opacity-60">
+              ✦ Princípio
+            </div>
+            <div className="lg:col-span-7">
+              <h2 className="font-display text-3xl md:text-5xl lg:text-6xl uppercase leading-[0.95] tracking-[-0.045em]">
+                A gente <span className="bg-primary text-foreground px-2">vende sistema</span>,
+                <br />não relatório bonito.
+              </h2>
+              <p className="mt-6 max-w-xl text-[15px] md:text-base leading-[1.65] opacity-75">
+                Cada peça do programa conversa com a próxima. Site alimenta tráfego.
+                Tráfego alimenta CRM. CRM alimenta IA. IA devolve receita pra dentro
+                do P&L. Sem ilha, sem entregável solto.
+              </p>
+            </div>
+            <div className="lg:col-span-3 flex flex-col gap-4">
+              {[
+                { v: "0", l: "departamentos isolados" },
+                { v: "1", l: "fonte da verdade" },
+                { v: "∞", l: "ciclos de melhoria" },
+              ].map((s) => (
+                <div key={s.l} className="flex items-baseline gap-3 border-b border-background/15 pb-3">
+                  <span className="font-display text-3xl font-bold tracking-[-0.03em] text-primary">{s.v}</span>
+                  <span className="text-[12px] uppercase tracking-widest opacity-70">{s.l}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* PROCESS */}
         <section className="px-6 lg:px-16 py-16 md:py-24 border-t border-border/60 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-8 mb-12 items-end">
