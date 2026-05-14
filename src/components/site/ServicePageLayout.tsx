@@ -200,9 +200,24 @@ export function ServicePageLayout(props: ServicePageProps) {
         <section className="px-6 lg:px-16 py-16 md:py-20 max-w-7xl mx-auto">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
             {[
-              { val: 312, suffix: "%", label: "lift médio em conversão", note: "vs. baseline do cliente" },
-              { val: 14, suffix: "d", label: "go-live para landing pages", note: "do briefing ao deploy" },
-              { val: 96, suffix: "+", label: "Lighthouse performance", note: "Core Web Vitals verdes" },
+              {
+                val: 312,
+                suffix: "%",
+                label: "lift médio em conversão",
+                note: "vs. baseline do cliente",
+              },
+              {
+                val: 14,
+                suffix: "d",
+                label: "go-live para landing pages",
+                note: "do briefing ao deploy",
+              },
+              {
+                val: 96,
+                suffix: "+",
+                label: "Lighthouse performance",
+                note: "Core Web Vitals verdes",
+              },
               { val: 40, suffix: "+", label: "operações em produção", note: "verticais B2B e B2C" },
             ].map((m, i) => (
               <motion.div
@@ -236,7 +251,8 @@ export function ServicePageLayout(props: ServicePageProps) {
               01 / Por que
             </div>
             <h2 className="lg:col-span-10 font-display text-2xl md:text-4xl lg:text-5xl uppercase leading-[1.05] tracking-[-0.035em] max-w-[24ch]">
-              Resultado lido por <em className="italic font-light text-primary">receita</em>, não por entregável avulso.
+              Resultado lido por <em className="italic font-light text-primary">receita</em>, não
+              por entregável avulso.
             </h2>
           </div>
 
@@ -306,8 +322,11 @@ export function ServicePageLayout(props: ServicePageProps) {
 
         {/* MANIFESTO, light section to break the all-black rhythm */}
         <section className="relative bg-foreground text-background overflow-hidden border-y border-foreground/15">
-          <div className="absolute -right-32 -top-32 h-96 w-96 rounded-full"
-            style={{ background: "radial-gradient(circle, oklch(85% 0.2 145 / 0.4), transparent 70%)" }}
+          <div
+            className="absolute -right-32 -top-32 h-96 w-96 rounded-full"
+            style={{
+              background: "radial-gradient(circle, oklch(85% 0.2 145 / 0.4), transparent 70%)",
+            }}
           />
           <div className="relative max-w-7xl mx-auto px-6 lg:px-16 py-20 md:py-28 grid lg:grid-cols-12 gap-10">
             <div className="lg:col-span-2 font-mono text-[10px] uppercase tracking-[0.25em] opacity-60">
@@ -316,12 +335,13 @@ export function ServicePageLayout(props: ServicePageProps) {
             <div className="lg:col-span-7">
               <h2 className="font-display text-3xl md:text-5xl lg:text-6xl uppercase leading-[0.95] tracking-[-0.045em]">
                 A gente <span className="bg-primary text-foreground px-2">vende sistema</span>,
-                <br />não relatório bonito.
+                <br />
+                não relatório bonito.
               </h2>
               <p className="mt-6 max-w-xl text-[15px] md:text-base leading-[1.65] opacity-75">
-                Cada peça do programa conversa com a próxima. Site alimenta tráfego.
-                Tráfego alimenta CRM. CRM alimenta IA. IA devolve receita pra dentro
-                do P&L. Sem ilha, sem entregável solto.
+                Cada peça do programa conversa com a próxima. Site alimenta tráfego. Tráfego
+                alimenta CRM. CRM alimenta IA. IA devolve receita pra dentro do P&L. Sem ilha, sem
+                entregável solto.
               </p>
             </div>
             <div className="lg:col-span-3 flex flex-col gap-4">
@@ -330,8 +350,13 @@ export function ServicePageLayout(props: ServicePageProps) {
                 { v: "1", l: "fonte da verdade" },
                 { v: "∞", l: "ciclos de melhoria" },
               ].map((s) => (
-                <div key={s.l} className="flex items-baseline gap-3 border-b border-background/15 pb-3">
-                  <span className="font-display text-3xl font-bold tracking-[-0.03em] text-primary">{s.v}</span>
+                <div
+                  key={s.l}
+                  className="flex items-baseline gap-3 border-b border-background/15 pb-3"
+                >
+                  <span className="font-display text-3xl font-bold tracking-[-0.03em] text-primary">
+                    {s.v}
+                  </span>
                   <span className="text-[12px] uppercase tracking-widest opacity-70">{s.l}</span>
                 </div>
               ))}
@@ -410,7 +435,10 @@ export function ServicePageLayout(props: ServicePageProps) {
             </div>
             <div className="lg:col-span-8 border-t border-border/60">
               {props.faqs.map((f, i) => (
-                <details key={f.q} className="group border-b border-border/60 open:bg-card/10 transition-colors">
+                <details
+                  key={f.q}
+                  className="group border-b border-border/60 open:bg-card/10 transition-colors"
+                >
                   <summary className="flex justify-between items-baseline gap-6 py-5 cursor-pointer list-none hover:text-primary transition-colors">
                     <div className="flex items-baseline gap-5">
                       <span className="font-mono text-[10px] text-muted-foreground/50 uppercase tracking-widest shrink-0">
@@ -452,7 +480,8 @@ export function ServicePageLayout(props: ServicePageProps) {
               Quer o diagnóstico do seu <em className="italic font-light text-primary">cenário?</em>
             </h2>
             <p className="text-muted-foreground text-[15px] md:text-base mb-10 font-light max-w-xl mx-auto leading-[1.6]">
-              5 minutos. Score de Maturidade, classificação de estágio e 3 recomendações personalizadas, sem custo.
+              5 minutos. Score de Maturidade, classificação de estágio e 3 recomendações
+              personalizadas, sem custo.
             </p>
 
             <div className="flex flex-col md:flex-row justify-center items-center gap-5">
