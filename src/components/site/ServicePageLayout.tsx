@@ -115,6 +115,7 @@ export function ServicePageLayout(props: ServicePageProps) {
   const [diagOpen, setDiagOpen] = useState(false);
   const open = () => setDiagOpen(true);
   const wa = whatsappLink(props.whatsappMessage ?? DEFAULT_WHATSAPP_MESSAGE);
+  const principle = props.principle ?? DEFAULT_PRINCIPLES[props.variant];
 
   return (
     <div className="relative min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground overflow-hidden">
@@ -123,115 +124,66 @@ export function ServicePageLayout(props: ServicePageProps) {
 
       <main className="relative z-10">
         {/* HERO */}
-        <section
-          className={`relative ${props.variant === "sites" ? "overflow-visible pt-24 pb-0 md:pt-26 md:pb-0" : "overflow-hidden pt-28 pb-16 md:pt-32 md:pb-20"}`}
-        >
+        <section className="relative overflow-hidden pt-28 pb-16 md:pt-32 md:pb-20">
           <div className="relative px-6 lg:px-16 max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className={`flex items-center gap-3 mb-8 text-[11px] tracking-[0.2em] uppercase text-muted-foreground/80 ${props.variant === "sites" ? "justify-center" : ""}`}
+              className="flex items-center justify-center gap-3 mb-8 text-[11px] tracking-[0.2em] uppercase text-muted-foreground/80"
             >
               <span className="w-8 h-px bg-primary" />
               <span className="text-primary font-mono">{props.eyebrow}</span>
+              <span className="w-8 h-px bg-primary" />
             </motion.div>
 
-            {props.variant === "sites" ? (
-              // Sites: headline on top, MacBook centered, full width
-              <div className="space-y-0">
-                <div className="mx-auto max-w-5xl text-center">
-                  <h1 className="mx-auto max-w-[20ch] font-display text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[4.75rem] leading-[1] uppercase tracking-[-0.035em]">
-                    {props.h1}
-                  </h1>
+            <div className="mx-auto max-w-5xl text-center">
+              <motion.h1
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.05 }}
+                className="mx-auto max-w-[20ch] font-display text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[4.75rem] leading-[1] uppercase tracking-[-0.035em]"
+              >
+                {props.h1}
+              </motion.h1>
 
-                  <p className="mx-auto mt-6 max-w-xl text-[14px] md:text-[15px] text-foreground/70 font-light leading-[1.65]">
-                    {props.intro}
-                  </p>
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="mx-auto mt-7 max-w-xl text-[14px] md:text-[15px] text-foreground/70 font-light leading-[1.65]"
+              >
+                {props.intro}
+              </motion.p>
 
-                  <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
-                    <Button
-                      onClick={open}
-                      className="group h-12 rounded-none bg-primary px-6 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-foreground hover:-translate-y-0.5 transition-all hover:shadow-[0_8px_30px_oklch(85%_0.2_145/0.4)]"
-                    >
-                      Diagnóstico Gratuito
-                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                    </Button>
-                    <a
-                      href={wa}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="group inline-flex items-center gap-2.5 h-12 px-2 text-[11px] font-bold uppercase tracking-[0.18em] text-foreground/80 hover:text-primary transition-colors"
-                    >
-                      <span className="relative flex h-1.5 w-1.5">
-                        <span className="animate-ping absolute inline-flex h-full w-full bg-primary opacity-60" />
-                        <span className="relative inline-flex h-1.5 w-1.5 bg-primary" />
-                      </span>
-                      WhatsApp
-                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                    </a>
-                  </div>
-                </div>
-
-                <div className="relative z-0 mt-2 md:mt-4">
-                  <ServiceVisual variant={props.variant} />
-                </div>
-              </div>
-            ) : (
-              <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-                <div className="lg:col-span-6">
-                  <motion.h1
-                    initial={{ opacity: 0, y: 14 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.05 }}
-                    className="font-display text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[4.5rem] leading-[0.95] uppercase tracking-[-0.04em]"
-                  >
-                    {props.h1}
-                  </motion.h1>
-
-                  <motion.p
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    className="mt-8 text-[15px] md:text-base text-foreground/75 font-light leading-[1.6] max-w-xl"
-                  >
-                    {props.intro}
-                  </motion.p>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.32 }}
-                    className="mt-8 flex flex-wrap items-center gap-4"
-                  >
-                    <Button
-                      onClick={open}
-                      className="group h-12 rounded-none bg-primary px-6 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-foreground hover:-translate-y-0.5 transition-all hover:shadow-[0_8px_30px_oklch(85%_0.2_145/0.4)]"
-                    >
-                      Diagnóstico Gratuito
-                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                    </Button>
-                    <a
-                      href={wa}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="group inline-flex items-center gap-2.5 h-12 px-2 text-[11px] font-bold uppercase tracking-[0.18em] text-foreground/80 hover:text-primary transition-colors"
-                    >
-                      <span className="relative flex h-1.5 w-1.5">
-                        <span className="animate-ping absolute inline-flex h-full w-full bg-primary opacity-60" />
-                        <span className="relative inline-flex h-1.5 w-1.5 bg-primary" />
-                      </span>
-                      WhatsApp
-                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                    </a>
-                  </motion.div>
-                </div>
-
-                <div className="lg:col-span-6">
-                  <ServiceVisual variant={props.variant} />
-                </div>
-              </div>
-            )}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.32 }}
+                className="mt-9 flex flex-wrap items-center justify-center gap-4"
+              >
+                <Button
+                  onClick={open}
+                  className="group h-12 rounded-none bg-primary px-6 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-foreground hover:-translate-y-0.5 transition-all hover:shadow-[0_8px_30px_oklch(85%_0.2_145/0.4)]"
+                >
+                  Diagnóstico Gratuito
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                </Button>
+                <a
+                  href={wa}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group inline-flex items-center gap-2.5 h-12 px-2 text-[11px] font-bold uppercase tracking-[0.18em] text-foreground/80 hover:text-primary transition-colors"
+                >
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full bg-primary opacity-60" />
+                    <span className="relative inline-flex h-1.5 w-1.5 bg-primary" />
+                  </span>
+                  WhatsApp
+                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </a>
+              </motion.div>
+            </div>
           </div>
         </section>
 
