@@ -24,9 +24,9 @@ import {
 } from "@/lib/contact";
 
 const PAGE_TITLE =
-  "Sobre a Aceleriq · Engenharia de Crescimento em Curitiba";
+  "Sobre a Aceleriq · Engenharia de Crescimento";
 const PAGE_DESCRIPTION =
-  "Conheça a Aceleriq, engenharia de crescimento em Curitiba que une estratégia, CRM, tráfego, automação, IA, dados e processos comerciais para empresas que querem escalar com previsibilidade no Brasil.";
+  "Conheça a Aceleriq, engenharia de crescimento em Curitiba que une estratégia, CRM, tráfego, automação, IA e dados para escalar com previsibilidade.";
 const PAGE_URL = "https://aceleriq.com.br/sobre-a-aceleriq";
 const OG_IMAGE = "https://aceleriq.com.br/og-image.jpg";
 
