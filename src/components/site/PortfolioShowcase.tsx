@@ -333,7 +333,7 @@ function CaseView({ item, onBack }: { item: PortfolioItem; onBack: () => void })
 
   useEffect(() => {
     setLoaded(false);
-    const t = setTimeout(() => setLoaded(true), 8000);
+    const t = setTimeout(() => setLoaded(true), 2500);
     return () => clearTimeout(t);
   }, [iframeKey, item.slug, device]);
 
