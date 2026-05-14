@@ -1,222 +1,262 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const keys = Array.from({ length: 64 }, (_, index) => index);
-const chartBars = [38, 62, 46, 78, 58, 92, 74];
-const floatingCards = [
-  { label: "LCP", value: "0.8s", className: "left-[4%] top-[22%]" },
-  { label: "SEO", value: "98", className: "right-[3%] top-[30%]" },
-  { label: "Leads", value: "+41%", className: "bottom-[22%] left-[10%]" },
-];
+const VIDEO_URL =
+  "/__l5e/assets-v1/f6115db9-15ba-4460-8769-8aba4ed50151/sites-laptop-aceleriq-reveal.mp4";
 
+/**
+ * Real MacBook opening hero, scroll-scrubbed.
+ * - Pins a tall section and maps scroll progress to video.currentTime
+ * - Real footage of a laptop opening (not a CSS cartoon)
+ * - When fully open, an interactive panel fades in over the screen area
+ */
 export function MacBookHero() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const stageRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [ready, setReady] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const section = sectionRef.current;
-    const stage = stageRef.current;
-    if (!section || !stage) return;
+    const video = videoRef.current;
+    if (!section || !video) return;
 
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let frame = 0;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const update = () => {
-      frame = 0;
+    let raf = 0;
+    let target = 0;
+    let current = 0;
+
+    const compute = () => {
       const rect = section.getBoundingClientRect();
-      const viewport = window.innerHeight || 1;
-      const start = viewport * 0.88;
-      const end = viewport * 0.24;
-      const raw = (start - rect.top) / (start - end);
-      const progress = reduceMotion ? 1 : Math.min(1, Math.max(0, raw));
-      const eased =
-        progress < 0.5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-
-      stage.style.setProperty("--open", eased.toFixed(4));
-      stage.style.setProperty("--lift", `${(1 - eased) * 24}px`);
+      const vh = window.innerHeight || 1;
+      // progress 0 when section top hits viewport top, 1 after we've scrolled (height - vh)
+      const total = section.offsetHeight - vh;
+      const scrolled = -rect.top;
+      const p = Math.min(1, Math.max(0, scrolled / Math.max(1, total)));
+      target = reduce ? 1 : p;
+      tick();
     };
 
-    const requestUpdate = () => {
-      if (frame) return;
-      frame = window.requestAnimationFrame(update);
+    const tick = () => {
+      // smooth lerp toward target to avoid janky seeks
+      current += (target - current) * 0.18;
+      if (Math.abs(target - current) < 0.001) current = target;
+
+      const dur = video.duration;
+      if (dur && Number.isFinite(dur)) {
+        const t = current * dur;
+        // only seek if delta is meaningful
+        if (Math.abs(video.currentTime - t) > 0.02) {
+          try {
+            video.currentTime = t;
+          } catch {
+            /* ignore */
+          }
+        }
+      }
+      setProgress(current);
+
+      if (Math.abs(target - current) > 0.001) {
+        raf = requestAnimationFrame(tick);
+      } else {
+        raf = 0;
+      }
     };
 
-    update();
-    window.addEventListener("scroll", requestUpdate, { passive: true });
-    window.addEventListener("resize", requestUpdate);
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(compute);
+    };
+
+    const onMeta = () => {
+      setReady(true);
+      compute();
+    };
+
+    video.addEventListener("loadedmetadata", onMeta);
+    if (video.readyState >= 1) onMeta();
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    compute();
 
     return () => {
-      if (frame) window.cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", requestUpdate);
-      window.removeEventListener("resize", requestUpdate);
+      if (raf) cancelAnimationFrame(raf);
+      video.removeEventListener("loadedmetadata", onMeta);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
     };
   }, []);
 
-  return (
-    <section
-      ref={sectionRef}
-      className="relative mx-auto mt-0 h-[92vh] min-h-[610px] w-full max-w-[1320px] px-2 pb-10 pt-0 md:h-[104vh] md:min-h-[760px] md:px-6 md:pb-14"
-    >
-      <div
-        ref={stageRef}
-        className="notebook-stage sticky top-[102px] mx-auto flex h-[calc(100vh-112px)] min-h-[500px] w-full items-start justify-center pt-8 md:top-[92px] md:h-[calc(100vh-102px)] md:min-h-[620px] md:pt-10 [--lift:24px] [--open:0]"
-      >
-        <div
-          aria-hidden
-          className="absolute left-1/2 top-[52%] h-[58%] w-[88%] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/25 opacity-[calc(0.2+var(--open)*0.55)] blur-3xl"
-        />
-        <div
-          aria-hidden
-          className="absolute left-1/2 top-[78%] h-[18%] w-[78%] -translate-x-1/2 rounded-[100%] bg-foreground/15 blur-2xl"
-        />
+  // Reveal the interactive panel only when the lid is mostly open
+  const panelOpacity = Math.max(0, Math.min(1, (progress - 0.78) / 0.18));
+  const panelScale = 0.96 + panelOpacity * 0.04;
 
-        {floatingCards.map((card, index) => (
+  return (
+    <div
+      ref={sectionRef}
+      className="relative w-full"
+      style={{ height: "220vh" }}
+    >
+      <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden">
+        {/* Stage */}
+        <div className="relative mx-auto w-full max-w-[1280px] px-4 md:px-6">
+          {/* Soft floor glow */}
           <div
-            key={card.label}
             aria-hidden
-            className={`pointer-events-none absolute z-30 hidden border border-primary/25 bg-background/75 px-4 py-3 text-left shadow-[0_22px_70px_-42px_oklch(0%_0_0/1)] backdrop-blur-xl md:block ${card.className}`}
-            style={{
-              opacity: `calc(var(--open) * ${index === 1 ? 0.78 : 0.62})`,
-              transform: `translate3d(0, calc((1 - var(--open)) * ${index === 1 ? 34 : 46}px), 0)`,
-            }}
-          >
-            <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">
-              {card.label}
-            </div>
-            <div className="mt-1 font-display text-2xl font-semibold leading-none tracking-normal text-foreground">
-              {card.value}
+            className="pointer-events-none absolute left-1/2 top-[58%] h-[55%] w-[80%] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/20 blur-3xl"
+            style={{ opacity: 0.35 + progress * 0.45 }}
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 bottom-[6%] h-[12%] w-[70%] -translate-x-1/2 rounded-[100%] bg-foreground/30 blur-2xl"
+          />
+
+          <div className="relative mx-auto aspect-[16/10] w-full">
+            {/* Real laptop opening video, scroll-scrubbed */}
+            <video
+              ref={videoRef}
+              src={VIDEO_URL}
+              muted
+              playsInline
+              preload="auto"
+              disablePictureInPicture
+              className="absolute inset-0 h-full w-full object-contain"
+              style={{
+                opacity: ready ? 1 : 0,
+                transition: "opacity 600ms ease",
+              }}
+            />
+
+            {/* Interactive panel that appears once the lid is open */}
+            <div
+              className="pointer-events-none absolute left-[14%] right-[14%] top-[8%] bottom-[36%] flex items-center justify-center"
+              style={{
+                opacity: panelOpacity,
+                transform: `scale(${panelScale})`,
+                transition: "opacity 200ms linear",
+              }}
+            >
+              <div
+                className="pointer-events-auto h-full w-full overflow-hidden rounded-[6px] border border-white/10 bg-[#0a0a0a] shadow-[0_30px_120px_-40px_rgba(0,0,0,0.9)]"
+                style={{ opacity: panelOpacity }}
+              >
+                <LiveScreen />
+              </div>
             </div>
           </div>
-        ))}
 
-        <div className="relative mx-auto aspect-[16/9.8] w-full max-w-[1160px] [perspective:2100px]">
-          <div className="absolute inset-0 [transform:translateY(var(--lift))_rotateX(7deg)_rotateY(-5deg)] [transform-style:preserve-3d]">
-            <div className="absolute bottom-[12.5%] left-1/2 z-30 h-[18%] w-[93%] -translate-x-1/2 rounded-b-[36px] rounded-t-[12px] border border-foreground/10 bg-gradient-to-b from-foreground/90 via-foreground/64 to-foreground/38 shadow-[0_96px_150px_-70px_oklch(0%_0_0/1)] [transform:rotateX(63deg)] [transform-origin:50%_0%] [transform-style:preserve-3d]">
-              <div className="absolute inset-x-[4.6%] top-[14%] grid grid-cols-[repeat(16,minmax(0,1fr))] gap-[0.75%]">
-                {keys.map((key) => (
-                  <span
-                    key={key}
-                    className="h-[clamp(3px,0.46vw,7px)] rounded-[2px] bg-background/24 shadow-[inset_0_1px_0_oklch(100%_0_0/0.1)]"
-                  />
-                ))}
-              </div>
-              <div className="absolute bottom-[12%] left-1/2 h-[34%] w-[20%] -translate-x-1/2 rounded-[7px] border border-background/25 bg-background/18 shadow-[inset_0_1px_0_oklch(100%_0_0/0.08)]" />
-              <div className="absolute left-1/2 top-[-4%] h-[14%] w-[17%] -translate-x-1/2 rounded-b-full bg-background/22" />
-              <div className="absolute -bottom-[9%] left-1/2 h-[20%] w-[108%] -translate-x-1/2 rounded-[100%] bg-primary/20 blur-2xl" />
-            </div>
-
-            <div className="absolute bottom-[26%] left-[6.5%] right-[6.5%] z-20 aspect-[16/9.9] origin-bottom rounded-t-[30px] border border-foreground/10 bg-gradient-to-b from-foreground/96 via-foreground/80 to-foreground/52 p-[1.05%] shadow-[0_65px_170px_-76px_oklch(0%_0_0/1)] [backface-visibility:hidden] [transform:rotateX(calc(-84deg+var(--open)*84deg))] [transform-style:preserve-3d]">
-              <div className="relative h-full overflow-hidden rounded-t-[21px] border border-border/70 bg-background shadow-[inset_0_0_0_1px_oklch(100%_0_0/0.05)]">
-                <WebsiteScreen />
-                <div
-                  aria-hidden
-                  className="absolute inset-0 bg-gradient-to-tr from-transparent via-foreground/10 to-transparent opacity-45"
-                />
-                <div
-                  aria-hidden
-                  className="absolute left-1/2 top-[1.5%] h-[1.7%] w-[7%] -translate-x-1/2 rounded-full bg-background/40"
-                />
-              </div>
-              <div
-                aria-hidden
-                className="absolute bottom-[-2.4%] left-1/2 h-[3.6%] w-[104%] -translate-x-1/2 rounded-b-[12px] bg-foreground/70"
-              />
-            </div>
+          {/* Scroll hint */}
+          <div
+            className="pointer-events-none absolute left-1/2 bottom-4 -translate-x-1/2 text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground/70"
+            style={{ opacity: Math.max(0, 1 - progress * 2) }}
+          >
+            role para abrir ↓
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
-function WebsiteScreen() {
+function LiveScreen() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [sent, setSent] = useState(false);
+
   return (
-    <div className="relative h-full w-full overflow-hidden bg-background text-foreground">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_16%,oklch(85%_0.2_145/0.24),transparent_30%),radial-gradient(circle_at_86%_18%,oklch(70%_0.18_255/0.18),transparent_32%)]" />
-      <div className="relative flex h-full flex-col p-[3.2%]">
-        <div className="flex items-center justify-between border-b border-border/70 pb-[2.1%]">
-          <div className="font-display text-[clamp(14px,1.75vw,28px)] font-bold leading-none tracking-normal">
-            ACELER<span className="text-primary">IQ</span>
+    <div className="relative h-full w-full bg-[#0b0b0b] text-white">
+      {/* Browser chrome */}
+      <div className="flex items-center gap-2 border-b border-white/10 bg-[#111] px-3 py-2">
+        <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f56]" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[#27c93f]" />
+        <div className="ml-3 flex-1 truncate rounded-sm bg-black/40 px-2 py-[3px] text-[10px] text-white/60">
+          https://aceleriq.com.br
+        </div>
+      </div>
+
+      <div className="grid h-[calc(100%-30px)] grid-cols-12">
+        {/* Left: brand + copy */}
+        <div className="col-span-7 flex flex-col justify-between p-[3.5%]">
+          <div>
+            <div className="font-display text-[clamp(11px,1.3vw,18px)] font-bold">
+              ACELER<span className="text-primary">IQ</span>
+            </div>
+            <h3 className="mt-[6%] max-w-[14ch] font-display text-[clamp(16px,2.6vw,38px)] font-bold uppercase leading-[0.95] tracking-[-0.03em]">
+              Pronto para acelerar seu pipeline?
+            </h3>
+            <p className="mt-[3%] max-w-[34ch] text-[clamp(8px,0.95vw,12px)] leading-[1.55] text-white/60">
+              Diagnóstico gratuito. Sites, tráfego e IA conectados ao seu CRM em até 14 dias.
+            </p>
           </div>
-          <div className="hidden items-center gap-5 font-mono text-[clamp(7px,0.7vw,10px)] uppercase tracking-[0.16em] text-muted-foreground md:flex">
-            <span>Sites</span>
-            <span>SEO</span>
-            <span>CRM</span>
-            <span>Growth</span>
+
+          <div className="grid grid-cols-3 gap-[3%]">
+            {[
+              ["LCP", "0.8s"],
+              ["SEO", "98"],
+              ["Leads", "+41%"],
+            ].map(([k, v]) => (
+              <div key={k} className="rounded-sm border border-white/10 bg-white/[0.03] px-[8%] py-[10%]">
+                <div className="font-mono text-[clamp(6px,0.65vw,9px)] uppercase tracking-[0.18em] text-white/40">
+                  {k}
+                </div>
+                <div className="mt-1 font-display text-[clamp(11px,1.6vw,22px)] font-semibold leading-none">
+                  {v}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
-        <div className="grid min-h-0 flex-1 grid-cols-12 gap-[3.2%] pt-[4%]">
-          <div className="col-span-7 flex flex-col justify-between">
-            <div>
-              <div className="mb-[3%] inline-flex border border-primary/30 px-[2%] py-[1%] font-mono text-[clamp(6px,0.68vw,10px)] uppercase tracking-[0.18em] text-primary">
-                site premium ativo
+        {/* Right: working signup form */}
+        <div className="col-span-5 flex flex-col justify-center border-l border-white/10 bg-gradient-to-br from-white/[0.04] to-transparent p-[5%]">
+          {sent ? (
+            <div className="flex h-full flex-col items-center justify-center text-center">
+              <div className="text-primary text-[clamp(20px,2.5vw,32px)]">✓</div>
+              <div className="mt-2 font-display text-[clamp(10px,1.1vw,15px)] uppercase tracking-[0.18em]">
+                recebido
               </div>
-              <h2 className="max-w-[9ch] font-display text-[clamp(28px,5vw,72px)] font-bold uppercase leading-[0.88] tracking-normal">
-                Presença que vende
-              </h2>
-              <p className="mt-[4%] max-w-[36ch] text-[clamp(8px,0.9vw,14px)] leading-[1.55] text-muted-foreground">
-                Narrativa, prova, SEO e conversão conectados em uma página rápida.
-              </p>
+              <div className="mt-1 text-[clamp(8px,0.85vw,11px)] text-white/60">
+                Falamos com você em minutos.
+              </div>
             </div>
-
-            <div className="grid grid-cols-3 gap-[3%]">
-              {[
-                ["Load", "0.8s", "edge"],
-                ["SEO", "98", "score"],
-                ["Lead", "+41%", "lift"],
-              ].map(([label, value, detail]) => (
-                <div key={label} className="border border-border/80 bg-foreground/[0.03] p-[8%]">
-                  <div className="font-mono text-[clamp(6px,0.65vw,9px)] uppercase tracking-[0.14em] text-muted-foreground">
-                    {label}
-                  </div>
-                  <div className="mt-[8%] font-display text-[clamp(14px,2vw,28px)] font-semibold leading-none tracking-normal">
-                    {value}
-                  </div>
-                  <div className="mt-[8%] text-[clamp(6px,0.72vw,10px)] text-primary">{detail}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="col-span-5 grid grid-rows-[1fr_0.72fr] gap-[5%]">
-            <div className="relative overflow-hidden border border-primary/25 bg-primary/[0.06] p-[6%]">
-              <div
-                aria-hidden
-                className="absolute inset-x-[12%] bottom-[16%] h-[44%] bg-primary/25 blur-2xl"
+          ) : (
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (!name || !email) return;
+                setSent(true);
+              }}
+              className="flex flex-col gap-[6%]"
+            >
+              <div className="font-mono text-[clamp(6px,0.7vw,9px)] uppercase tracking-[0.22em] text-primary">
+                diagnóstico gratuito
+              </div>
+              <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Seu nome"
+                className="w-full rounded-sm border border-white/10 bg-black/40 px-3 py-2 text-[clamp(9px,1vw,12px)] outline-none focus:border-primary/60"
               />
-              <div className="relative h-full">
-                <div className="mb-[7%] font-mono text-[clamp(6px,0.7vw,10px)] uppercase tracking-[0.16em] text-primary">
-                  funil em tempo real
-                </div>
-                <div className="flex h-[72%] items-end gap-[4%]">
-                  {chartBars.map((height, index) => (
-                    <div
-                      key={index}
-                      className="flex-1 bg-gradient-to-t from-primary/30 to-primary"
-                      style={{ height: `${height}%` }}
-                    />
-                  ))}
-                </div>
+              <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                placeholder="E-mail corporativo"
+                className="w-full rounded-sm border border-white/10 bg-black/40 px-3 py-2 text-[clamp(9px,1vw,12px)] outline-none focus:border-primary/60"
+              />
+              <button
+                type="submit"
+                className="mt-1 rounded-sm bg-primary px-3 py-2 text-[clamp(8px,0.9vw,11px)] font-bold uppercase tracking-[0.18em] text-primary-foreground hover:brightness-110"
+              >
+                quero meu diagnóstico →
+              </button>
+              <div className="text-[clamp(7px,0.7vw,9px)] text-white/40">
+                Sem spam. Resposta em até 1 dia útil.
               </div>
-            </div>
-
-            <div className="border border-border/80 bg-foreground/[0.03] p-[6%]">
-              <div className="font-mono text-[clamp(6px,0.7vw,10px)] uppercase tracking-[0.16em] text-muted-foreground">
-                stack
-              </div>
-              <div className="mt-[5%] space-y-[4%]">
-                {["Core Web Vitals", "SEO técnico", "CRM integrado"].map((item, index) => (
-                  <div key={item} className="flex items-center gap-[4%]">
-                    <span className="h-[0.55vw] max-h-2 min-h-1 w-[0.55vw] min-w-1 max-w-2 bg-primary" />
-                    <span className="text-[clamp(8px,0.9vw,13px)] text-foreground/80">{item}</span>
-                    <span className="ml-auto font-mono text-[clamp(6px,0.7vw,10px)] text-primary">
-                      0{index + 1}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+            </form>
+          )}
         </div>
       </div>
     </div>
