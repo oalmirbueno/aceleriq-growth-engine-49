@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowUpRight, Check, RotateCw, Loader2, Monitor, Smartphone } from "lucide-react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { ArrowLeft, ArrowUpRight, Check, RotateCw, Monitor, Smartphone } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -333,7 +333,7 @@ function CaseView({ item, onBack }: { item: PortfolioItem; onBack: () => void })
 
   useEffect(() => {
     setLoaded(false);
-    const t = setTimeout(() => setLoaded(true), 8000);
+    const t = setTimeout(() => setLoaded(true), 2500);
     return () => clearTimeout(t);
   }, [iframeKey, item.slug, device]);
 
@@ -438,41 +438,16 @@ function CaseView({ item, onBack }: { item: PortfolioItem; onBack: () => void })
               </div>
 
               {/* Stage */}
-              <div className="relative flex items-center justify-center bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.04),_transparent_60%)] p-4 sm:p-6">
-                <div
-                  className={`relative w-full overflow-hidden bg-background transition-all duration-500 ${
-                    device === "mobile"
-                      ? "mx-auto aspect-[9/19] max-w-[340px] rounded-[28px] border border-white/10 shadow-2xl"
-                      : "aspect-[16/10] rounded-md border border-white/[0.06]"
-                  }`}
-                >
-                  {!loaded && (
-                    <div className="absolute inset-0 z-10 overflow-hidden">
-                      <img
-                        src={THUMB(item.origin, device === "mobile" ? 600 : 1200)}
-                        alt=""
-                        aria-hidden
-                        className="h-full w-full object-cover object-top opacity-60 blur-[1px]"
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center bg-background/40 backdrop-blur-sm">
-                        <div className="flex items-center gap-2 rounded-full border border-white/10 bg-background/80 px-4 py-2 text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
-                          <Loader2 className="h-3.5 w-3.5 animate-spin text-primary" />
-                          Carregando
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  <iframe
-                    key={`${iframeKey}-${device}`}
-                    src={item.origin}
-                    title={`Preview navegável de ${item.name}`}
-                    onLoad={() => setLoaded(true)}
-                    loading="lazy"
-                    referrerPolicy="no-referrer"
-                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                    className="absolute inset-0 h-full w-full border-0 bg-background"
-                  />
-                </div>
+              <div className="relative bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.04),_transparent_60%)] p-4 sm:p-6">
+                <ScaledFrame
+                  key={`${iframeKey}-${device}-${item.slug}`}
+                  src={item.origin}
+                  posterSrc={THUMB(item.origin, device === "mobile" ? 600 : 1400)}
+                  device={device}
+                  loaded={loaded}
+                  onLoad={() => setLoaded(true)}
+                  title={`Preview navegável de ${item.name}`}
+                />
               </div>
             </div>
 
@@ -554,3 +529,90 @@ function CaseBlock({ label, body }: { label: string; body: string }) {
     </div>
   );
 }
+
+/**
+ * Renders an iframe at a real device viewport (1440 desktop / 390 mobile)
+ * and scales it down with CSS transform to fit the container width — so the
+ * embedded site loads its true desktop layout, not a squished narrow one.
+ * A poster screenshot sits underneath as instant content; the iframe fades
+ * in on top once loaded. Never shows a blank white frame.
+ */
+function ScaledFrame({
+  src,
+  posterSrc,
+  device,
+  loaded,
+  onLoad,
+  title,
+}: {
+  src: string;
+  posterSrc: string;
+  device: "desktop" | "mobile";
+  loaded: boolean;
+  onLoad: () => void;
+  title: string;
+}) {
+  const wrapRef = useRef<HTMLDivElement | null>(null);
+  const [scale, setScale] = useState(1);
+
+  // Real device viewport
+  const FRAME_W = device === "mobile" ? 390 : 1440;
+  const FRAME_H = device === "mobile" ? 820 : 900;
+
+  useLayoutEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const update = () => {
+      const w = el.clientWidth;
+      if (w > 0) setScale(w / FRAME_W);
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [FRAME_W]);
+
+  const stageHeight = FRAME_H * scale;
+
+  const isMobile = device === "mobile";
+
+  return (
+    <div
+      ref={wrapRef}
+      className={`relative mx-auto w-full overflow-hidden bg-background transition-all duration-500 ${
+        isMobile
+          ? "max-w-[340px] rounded-[28px] border border-white/10 shadow-2xl"
+          : "rounded-md border border-white/[0.06]"
+      }`}
+      style={{ height: stageHeight ? `${stageHeight}px` : undefined }}
+    >
+      {/* Poster — always present underneath, prevents blank frame */}
+      <img
+        src={posterSrc}
+        alt=""
+        aria-hidden
+        loading="eager"
+        decoding="async"
+        className="absolute inset-0 h-full w-full object-cover object-top"
+      />
+
+      {/* Scaled iframe at real viewport */}
+      <iframe
+        src={src}
+        title={title}
+        onLoad={onLoad}
+        loading="eager"
+        referrerPolicy="no-referrer"
+        className="absolute left-0 top-0 border-0 bg-background transition-opacity duration-500"
+        style={{
+          width: `${FRAME_W}px`,
+          height: `${FRAME_H}px`,
+          transform: `scale(${scale})`,
+          transformOrigin: "top left",
+          opacity: loaded ? 1 : 0,
+        }}
+      />
+    </div>
+  );
+}
+
