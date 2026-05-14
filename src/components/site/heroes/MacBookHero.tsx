@@ -1,65 +1,111 @@
-import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
+import { useEffect, useRef } from "react";
 
-const keys = Array.from({ length: 56 }, (_, index) => index);
-const bars = [44, 71, 58, 86, 67, 94];
+const keys = Array.from({ length: 64 }, (_, index) => index);
+const chartBars = [38, 62, 46, 78, 58, 92, 74];
+const floatingCards = [
+  { label: "LCP", value: "0.8s", className: "left-[4%] top-[22%]" },
+  { label: "SEO", value: "98", className: "right-[3%] top-[30%]" },
+  { label: "Leads", value: "+41%", className: "bottom-[22%] left-[10%]" },
+];
 
 export function MacBookHero() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start 86%", "end 48%"],
-  });
+  const sectionRef = useRef<HTMLElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
 
-  const rawLidAngle = useTransform(scrollYProgress, [0, 0.82], [reduceMotion ? 0 : -82, 0]);
-  const rawSceneY = useTransform(scrollYProgress, [0, 0.82, 1], [reduceMotion ? 0 : 30, 0, -8]);
-  const rawGlow = useTransform(scrollYProgress, [0, 0.35, 0.9], [0.18, 0.72, 0.44]);
-  const lidAngle = useSpring(rawLidAngle, { stiffness: 92, damping: 28, mass: 0.7 });
-  const sceneY = useSpring(rawSceneY, { stiffness: 120, damping: 30, mass: 0.8 });
+  useEffect(() => {
+    const section = sectionRef.current;
+    const stage = stageRef.current;
+    if (!section || !stage) return;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      const rect = section.getBoundingClientRect();
+      const viewport = window.innerHeight || 1;
+      const start = viewport * 0.88;
+      const end = viewport * 0.24;
+      const raw = (start - rect.top) / (start - end);
+      const progress = reduceMotion ? 1 : Math.min(1, Math.max(0, raw));
+      const eased =
+        progress < 0.5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+      stage.style.setProperty("--open", eased.toFixed(4));
+      stage.style.setProperty("--lift", `${(1 - eased) * 24}px`);
+    };
+
+    const requestUpdate = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+
+    return () => {
+      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+    };
+  }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="relative mx-auto mt-2 w-full max-w-[1180px] px-2 pb-10 pt-2 md:mt-0 md:px-6 md:pb-14 md:pt-4"
+      className="relative mx-auto mt-0 h-[92vh] min-h-[610px] w-full max-w-[1320px] px-2 pb-10 pt-0 md:h-[104vh] md:min-h-[760px] md:px-6 md:pb-14"
     >
-      <div className="mx-auto flex min-h-[360px] w-full items-center justify-center md:min-h-[520px]">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          style={{ y: sceneY }}
-          className="relative mx-auto aspect-[16/10] w-full max-w-[980px] [perspective:1700px]"
-        >
-          <motion.div
-            aria-hidden
-            style={{ opacity: rawGlow }}
-            className="absolute left-1/2 top-[46%] h-[48%] w-[88%] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/25 blur-3xl"
-          />
-          <div
-            aria-hidden
-            className="absolute left-1/2 top-[76%] h-[20%] w-[86%] -translate-x-1/2 rounded-[100%] bg-foreground/15 blur-2xl"
-          />
+      <div
+        ref={stageRef}
+        className="notebook-stage sticky top-[102px] mx-auto flex h-[calc(100vh-112px)] min-h-[500px] w-full items-start justify-center pt-8 md:top-[92px] md:h-[calc(100vh-102px)] md:min-h-[620px] md:pt-10 [--lift:24px] [--open:0]"
+      >
+        <div
+          aria-hidden
+          className="absolute left-1/2 top-[52%] h-[58%] w-[88%] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/25 opacity-[calc(0.2+var(--open)*0.55)] blur-3xl"
+        />
+        <div
+          aria-hidden
+          className="absolute left-1/2 top-[78%] h-[18%] w-[78%] -translate-x-1/2 rounded-[100%] bg-foreground/15 blur-2xl"
+        />
 
-          <div className="absolute inset-0 [transform:rotateX(7deg)_rotateY(-4deg)] [transform-style:preserve-3d]">
-            <div className="absolute bottom-[8%] left-1/2 z-20 h-[19%] w-[92%] -translate-x-1/2 rounded-b-[32px] rounded-t-[12px] border border-foreground/10 bg-gradient-to-b from-foreground/85 via-foreground/62 to-foreground/36 shadow-[0_72px_120px_-58px_oklch(0%_0_0/1)] [transform:rotateX(64deg)] [transform-origin:50%_0%] [transform-style:preserve-3d]">
-              <div className="absolute inset-x-[5%] top-[16%] grid grid-cols-14 gap-[0.9%]">
+        {floatingCards.map((card, index) => (
+          <div
+            key={card.label}
+            aria-hidden
+            className={`pointer-events-none absolute z-30 hidden border border-primary/25 bg-background/75 px-4 py-3 text-left shadow-[0_22px_70px_-42px_oklch(0%_0_0/1)] backdrop-blur-xl md:block ${card.className}`}
+            style={{
+              opacity: `calc(var(--open) * ${index === 1 ? 0.78 : 0.62})`,
+              transform: `translate3d(0, calc((1 - var(--open)) * ${index === 1 ? 34 : 46}px), 0)`,
+            }}
+          >
+            <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">
+              {card.label}
+            </div>
+            <div className="mt-1 font-display text-2xl font-semibold leading-none tracking-normal text-foreground">
+              {card.value}
+            </div>
+          </div>
+        ))}
+
+        <div className="relative mx-auto aspect-[16/9.8] w-full max-w-[1160px] [perspective:2100px]">
+          <div className="absolute inset-0 [transform:translateY(var(--lift))_rotateX(7deg)_rotateY(-5deg)] [transform-style:preserve-3d]">
+            <div className="absolute bottom-[12.5%] left-1/2 z-30 h-[18%] w-[93%] -translate-x-1/2 rounded-b-[36px] rounded-t-[12px] border border-foreground/10 bg-gradient-to-b from-foreground/90 via-foreground/64 to-foreground/38 shadow-[0_96px_150px_-70px_oklch(0%_0_0/1)] [transform:rotateX(63deg)] [transform-origin:50%_0%] [transform-style:preserve-3d]">
+              <div className="absolute inset-x-[4.6%] top-[14%] grid grid-cols-[repeat(16,minmax(0,1fr))] gap-[0.75%]">
                 {keys.map((key) => (
                   <span
                     key={key}
-                    className="h-[clamp(3px,0.48vw,7px)] rounded-[2px] bg-background/22 shadow-[inset_0_1px_0_oklch(100%_0_0/0.08)]"
+                    className="h-[clamp(3px,0.46vw,7px)] rounded-[2px] bg-background/24 shadow-[inset_0_1px_0_oklch(100%_0_0/0.1)]"
                   />
                 ))}
               </div>
-              <div className="absolute bottom-[13%] left-1/2 h-[34%] w-[18%] -translate-x-1/2 rounded-[7px] border border-background/20 bg-background/18" />
-              <div className="absolute left-1/2 top-0 h-[10%] w-[18%] -translate-x-1/2 rounded-b-full bg-background/24" />
+              <div className="absolute bottom-[12%] left-1/2 h-[34%] w-[20%] -translate-x-1/2 rounded-[7px] border border-background/25 bg-background/18 shadow-[inset_0_1px_0_oklch(100%_0_0/0.08)]" />
+              <div className="absolute left-1/2 top-[-4%] h-[14%] w-[17%] -translate-x-1/2 rounded-b-full bg-background/22" />
+              <div className="absolute -bottom-[9%] left-1/2 h-[20%] w-[108%] -translate-x-1/2 rounded-[100%] bg-primary/20 blur-2xl" />
             </div>
 
-            <motion.div
-              style={{ rotateX: lidAngle }}
-              className="absolute bottom-[20.5%] left-[8%] right-[8%] z-10 aspect-[16/10] origin-bottom rounded-t-[26px] border border-foreground/10 bg-gradient-to-b from-foreground/95 via-foreground/82 to-foreground/58 p-[1.05%] shadow-[0_58px_150px_-72px_oklch(0%_0_0/1)] [backface-visibility:hidden] [transform-style:preserve-3d]"
-            >
-              <div className="relative h-full overflow-hidden rounded-t-[20px] border border-border/70 bg-background shadow-[inset_0_0_0_1px_oklch(100%_0_0/0.04)]">
+            <div className="absolute bottom-[26%] left-[6.5%] right-[6.5%] z-20 aspect-[16/9.9] origin-bottom rounded-t-[30px] border border-foreground/10 bg-gradient-to-b from-foreground/96 via-foreground/80 to-foreground/52 p-[1.05%] shadow-[0_65px_170px_-76px_oklch(0%_0_0/1)] [backface-visibility:hidden] [transform:rotateX(calc(-84deg+var(--open)*84deg))] [transform-style:preserve-3d]">
+              <div className="relative h-full overflow-hidden rounded-t-[21px] border border-border/70 bg-background shadow-[inset_0_0_0_1px_oklch(100%_0_0/0.05)]">
                 <WebsiteScreen />
                 <div
                   aria-hidden
@@ -67,16 +113,16 @@ export function MacBookHero() {
                 />
                 <div
                   aria-hidden
-                  className="absolute inset-0 ring-1 ring-inset ring-foreground/10"
+                  className="absolute left-1/2 top-[1.5%] h-[1.7%] w-[7%] -translate-x-1/2 rounded-full bg-background/40"
                 />
               </div>
               <div
                 aria-hidden
-                className="absolute bottom-[-2.4%] left-1/2 h-[3.8%] w-[104%] -translate-x-1/2 rounded-b-[12px] bg-foreground/70"
+                className="absolute bottom-[-2.4%] left-1/2 h-[3.6%] w-[104%] -translate-x-1/2 rounded-b-[12px] bg-foreground/70"
               />
-            </motion.div>
+            </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -85,7 +131,7 @@ export function MacBookHero() {
 function WebsiteScreen() {
   return (
     <div className="relative h-full w-full overflow-hidden bg-background text-foreground">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_16%,oklch(85%_0.2_145/0.22),transparent_30%),radial-gradient(circle_at_86%_18%,oklch(70%_0.18_255/0.18),transparent_32%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_16%,oklch(85%_0.2_145/0.24),transparent_30%),radial-gradient(circle_at_86%_18%,oklch(70%_0.18_255/0.18),transparent_32%)]" />
       <div className="relative flex h-full flex-col p-[3.2%]">
         <div className="flex items-center justify-between border-b border-border/70 pb-[2.1%]">
           <div className="font-display text-[clamp(14px,1.75vw,28px)] font-bold leading-none tracking-normal">
@@ -143,7 +189,7 @@ function WebsiteScreen() {
                   funil em tempo real
                 </div>
                 <div className="flex h-[72%] items-end gap-[4%]">
-                  {bars.map((height, index) => (
+                  {chartBars.map((height, index) => (
                     <div
                       key={index}
                       className="flex-1 bg-gradient-to-t from-primary/30 to-primary"
