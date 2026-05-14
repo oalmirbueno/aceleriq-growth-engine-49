@@ -263,7 +263,7 @@ export function ServicePageLayout(props: ServicePageProps) {
           </div>
         </section>
 
-        {/* DELIVERABLES — refined two-column list */}
+        {/* DELIVERABLES, refined two-column list */}
         <section className="relative px-6 lg:px-16 py-16 md:py-24 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-8 mb-12">
             <div className="lg:col-span-2 font-mono text-[10px] text-primary uppercase tracking-[0.2em] lg:pt-2">
@@ -303,7 +303,7 @@ export function ServicePageLayout(props: ServicePageProps) {
           </div>
         </section>
 
-        {/* MANIFESTO — light section to break the all-black rhythm */}
+        {/* MANIFESTO, light section to break the all-black rhythm */}
         <section className="relative bg-foreground text-background overflow-hidden border-y border-foreground/15">
           <div className="absolute -right-32 -top-32 h-96 w-96 rounded-full"
             style={{ background: "radial-gradient(circle, oklch(85% 0.2 145 / 0.4), transparent 70%)" }}
@@ -394,7 +394,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                 Dúvidas <em className="italic font-light text-primary">comuns</em>.
               </h2>
               <p className="mt-5 text-[13px] text-muted-foreground leading-relaxed max-w-xs">
-                Respostas diretas. Fora desta lista? Chame no WhatsApp — respondemos em horas.
+                Respostas diretas. Fora desta lista? Chame no WhatsApp, respondemos em horas.
               </p>
               <a
                 href={wa}
@@ -451,7 +451,7 @@ export function ServicePageLayout(props: ServicePageProps) {
               Quer o diagnóstico do seu <em className="italic font-light text-primary">cenário?</em>
             </h2>
             <p className="text-muted-foreground text-[15px] md:text-base mb-10 font-light max-w-xl mx-auto leading-[1.6]">
-              5 minutos. Score de Maturidade, classificação de estágio e 3 recomendações personalizadas — sem custo.
+              5 minutos. Score de Maturidade, classificação de estágio e 3 recomendações personalizadas, sem custo.
             </p>
 
             <div className="flex flex-col md:flex-row justify-center items-center gap-5">

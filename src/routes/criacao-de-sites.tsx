@@ -8,10 +8,10 @@ const DESCRIPTION =
   "Criação de sites institucionais, landing pages e plataformas sob medida em Curitiba. Sites otimizados para SEO, performance e conversão, integrados a CRM e tráfego pago.";
 
 const FAQS = [
-  { q: "Que tipo de site a Aceleriq cria?", a: "Sites institucionais, landing pages de captura, sites de produto/SaaS e plataformas sob medida — todos com foco em conversão e integração ao CRM." },
+  { q: "Que tipo de site a Aceleriq cria?", a: "Sites institucionais, landing pages de captura, sites de produto/SaaS e plataformas sob medida, todos com foco em conversão e integração ao CRM." },
   { q: "Os sites são otimizados para SEO?", a: "Sim. Entregamos com performance Lighthouse, schema.org, sitemap, meta tags, imagens otimizadas e estrutura semântica." },
   { q: "Vocês integram com CRM e ferramentas?", a: "Sim. Integramos a HubSpot, RD Station, Pipedrive, Meta CAPI, Google Ads, GA4, n8n e webhooks personalizados." },
-  { q: "Qual o prazo de entrega?", a: "Landing pages em 5–10 dias úteis. Sites institucionais entre 3 e 6 semanas, dependendo do escopo." },
+  { q: "Qual o prazo de entrega?", a: "Landing pages em 5-10 dias úteis. Sites institucionais entre 3 e 6 semanas, dependendo do escopo." },
   { q: "Vocês fazem manutenção depois?", a: "Sim. Oferecemos contrato mensal de evolução contínua: ajustes, novas páginas, A/B test e melhorias de performance." },
 ];
 
@@ -65,7 +65,7 @@ function Page() {
         <PortfolioShowcase
           eyebrow="[ 03b ] · Cases"
           title="Sites recentes entregues pela Aceleriq"
-          intro="Projetos reais em produção — institucionais, e-commerce, landing pages, plataformas de marca e apps. Clique para ver o case completo."
+          intro="Projetos reais em produção, institucionais, e-commerce, landing pages, plataformas de marca e apps. Clique para ver o case completo."
         />
       }
     />

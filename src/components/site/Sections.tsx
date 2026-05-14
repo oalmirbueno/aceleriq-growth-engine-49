@@ -91,7 +91,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                 className="mt-8 md:mt-12 max-w-lg"
               >
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed border-l-2 border-primary/30 pl-4 md:pl-6">
-                  Escalamos empresas com estratégia, dados, IA e processos comerciais previsíveis — não com marketing de esperança.
+                  Escalamos empresas com estratégia, dados, IA e processos comerciais previsíveis, não com marketing de esperança.
                 </p>
                 
                 <div className="mt-6 md:mt-7 flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 sm:items-center">
@@ -164,7 +164,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                   </div>
                 </div>
 
-                {/* TOP-RIGHT: NÓ_04 — só desktop */}
+                {/* TOP-RIGHT: NÓ_04, só desktop */}
                 <div className="absolute -top-5 -right-8 float-b z-20 hidden lg:block">
                   <div className="bg-black/85 backdrop-blur-md border border-white/15 px-3 py-2">
                     <span className="font-mono text-[10px] text-white/80 tracking-tight">NÓ_04 // SEGURO</span>
@@ -191,7 +191,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                   </div>
                 </div>
 
-                {/* BOTTOM-CENTER: Automação — só desktop */}
+                {/* BOTTOM-CENTER: Automação, só desktop */}
                 <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 float-a z-20 hidden md:block">
                   <div className="bg-black/85 backdrop-blur-md border border-white/15 px-3 py-2.5 min-w-[110px]">
                     <span className="text-[8px] uppercase tracking-widest text-white/50 font-mono block">Automação</span>
@@ -378,7 +378,7 @@ export function Method() {
       id="metodo"
       className="relative py-12 md:py-16 overflow-hidden bg-grid-ambient"
     >
-      {/* Brilho ambiente verde, achatado e sutil — sem bolha redonda */}
+      {/* Brilho ambiente verde, achatado e sutil, sem bolha redonda */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 h-[150px] w-[860px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.035] blur-[90px]" />
 
       <div className="container-aceleriq relative">
@@ -391,10 +391,10 @@ export function Method() {
         {/* ───────── Timeline horizontal (desktop) ───────── */}
         <div className="mt-10 hidden lg:block">
           <div className="relative">
-            {/* Trilho base — gradiente suave */}
+            {/* Trilho base, gradiente suave */}
             <div className="absolute left-[7%] right-[7%] top-[44px] h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
 
-            {/* Trilho ativo — animado, com brilho elegante */}
+            {/* Trilho ativo, animado, com brilho elegante */}
             <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
@@ -434,7 +434,7 @@ export function Method() {
                     0{i + 1}
                   </span>
 
-                  {/* Nó da timeline — design refinado em camadas */}
+                  {/* Nó da timeline, design refinado em camadas */}
                   <div className="relative mt-3 flex h-[64px] w-[64px] items-center justify-center">
                     {/* Halo externo pulsante */}
                     <motion.div
@@ -448,7 +448,7 @@ export function Method() {
                     {/* Anel externo */}
                     <div className="absolute inset-1 rounded-full border border-white/10 transition-colors group-hover:border-primary/40" />
 
-                    {/* Disco principal — gradiente sofisticado */}
+                    {/* Disco principal, gradiente sofisticado */}
                     <div className="relative flex h-[48px] w-[48px] items-center justify-center rounded-full border border-primary/30 bg-gradient-to-br from-[oklch(16%_0.02_145)] to-[oklch(10%_0_0)] shadow-[0_0_0_5px_oklch(10%_0_0),inset_0_1px_0_oklch(100%_0_0/0.06)] transition-all duration-500 group-hover:border-primary/70 group-hover:shadow-[0_0_0_5px_oklch(10%_0_0),0_0_28px_oklch(85%_0.2_145/0.45),inset_0_1px_0_oklch(100%_0_0/0.1)]">
                       <span className="font-display text-xl font-bold text-primary text-glow">
                         {step.letter}
