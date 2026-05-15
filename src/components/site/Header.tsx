@@ -40,7 +40,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
             <img
               src={logoAceleriq}
               alt="Logotipo Aceleriq"
-              className="h-14 w-auto md:h-16 transition-transform duration-300 group-hover:scale-105"
+              className="h-16 w-auto md:h-20 transition-transform duration-300 group-hover:scale-105"
             />
           </Link>
 
