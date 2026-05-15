@@ -9,6 +9,7 @@ const NAV = [
   { label: "Sites", to: "/criacao-de-sites", hash: undefined },
   { label: "Tráfego", to: "/trafego-pago", hash: undefined },
   { label: "Automação & IA", to: "/automacao-e-ia", hash: undefined },
+  { label: "Blog", to: "/blog", hash: undefined },
   { label: "Método", to: "/", hash: "metodo" },
   { label: "FAQ", to: "/", hash: "faq" },
 ] as const;
