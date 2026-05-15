@@ -13,8 +13,8 @@ const LOGOS = [
 export function AIRobotHero() {
   return (
     <div
-      className="relative mx-auto w-full max-w-[680px] aspect-[3/4] overflow-visible"
-      style={{ marginBottom: "-22%" }}
+      className="relative mx-auto w-full max-w-[620px] aspect-[3/4] overflow-hidden"
+      style={{ marginBottom: "-18%" }}
     >
       {/* Ambient green glow — blends with page background */}
       <div
@@ -75,7 +75,7 @@ export function AIRobotHero() {
         height={1280}
         loading="eager"
         decoding="async"
-        className="relative z-10 h-[118%] w-full object-contain"
+        className="relative z-10 h-full w-full object-contain"
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: [0, -8, 0] }}
         transition={{
