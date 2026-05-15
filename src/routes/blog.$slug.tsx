@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { ArrowLeft, ArrowRight, Clock, MessageCircle, Sparkles } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -130,13 +132,12 @@ export const Route = createFileRoute("/blog/$slug")({
 function BlogPostPage() {
   const [diagOpen, setDiagOpen] = useState(false);
   const { post, related } = Route.useLoaderData();
-  const internalBody = post.isLocal && post.content
-    ? post.content.split(/\n\s*\n/)
-    : [
-        `Esse movimento em ${post.category} importa porque indica uma mudança prática no jeito como empresas captam demanda, operam vendas e tomam decisões com dados. A notícia reforça que tecnologia só gera vantagem quando entra conectada ao funil, à oferta e à execução comercial.`,
-        post.excerpt,
-        `Na leitura da Aceleriq, o ponto central não é apenas acompanhar a tendência, mas transformar esse sinal de mercado em ação: revisar processos, automatizar etapas repetitivas, melhorar a mensuração e criar campanhas mais precisas para gerar receita previsível.`,
-      ].filter(Boolean);
+  const hasMarkdown = Boolean(post.content && post.content.length > 0);
+  const fallbackBody = [
+    `Esse movimento em ${post.category} importa porque indica uma mudança prática no jeito como empresas captam demanda, operam vendas e tomam decisões com dados. A notícia reforça que tecnologia só gera vantagem quando entra conectada ao funil, à oferta e à execução comercial.`,
+    post.excerpt,
+    `Na leitura da Aceleriq, o ponto central não é apenas acompanhar a tendência, mas transformar esse sinal de mercado em ação: revisar processos, automatizar etapas repetitivas, melhorar a mensuração e criar campanhas mais precisas para gerar receita previsível.`,
+  ].filter(Boolean);
 
   return (
     <div className="min-h-screen bg-background">
@@ -200,17 +201,23 @@ function BlogPostPage() {
             />
           </div>
 
-          <div className="max-w-none mt-12 leading-relaxed space-y-6">
-            {internalBody.map((p: string, i: number) => (
-              <p
-                key={i}
-                className="text-base md:text-lg text-foreground/90"
-                style={{ color: "hsl(var(--foreground) / 0.9)" }}
-              >
-                {p.trim()}
-              </p>
-            ))}
-          </div>
+          {hasMarkdown ? (
+            <div className="mt-12 article-prose">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content!}</ReactMarkdown>
+            </div>
+          ) : (
+            <div className="max-w-none mt-12 leading-relaxed space-y-6">
+              {fallbackBody.map((p: string, i: number) => (
+                <p
+                  key={i}
+                  className="text-base md:text-lg text-foreground/90"
+                  style={{ color: "hsl(var(--foreground) / 0.9)" }}
+                >
+                  {p.trim()}
+                </p>
+              ))}
+            </div>
+          )}
 
           {/* Aceleriq angle */}
           <div className="mt-12 border border-primary/25 bg-primary/[0.04] p-6 md:p-8 relative overflow-hidden">
