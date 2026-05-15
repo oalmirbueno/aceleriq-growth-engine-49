@@ -361,8 +361,9 @@ async function loadAll(): Promise<BlogPost[]> {
     }
   }
 
-  // Locais primeiro (autoridade), depois feed.
-  const all = [...buildLocalPosts(), ...unique];
+  // Posts autorais Aceleriq (admin) primeiro, depois locais hardcoded, depois feed.
+  const adminPosts = await loadAdminPosts();
+  const all = [...adminPosts, ...buildLocalPosts(), ...unique];
   cache = { at: Date.now(), posts: all };
   return all;
 }
