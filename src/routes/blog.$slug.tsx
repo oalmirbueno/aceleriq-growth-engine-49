@@ -156,18 +156,19 @@ function BlogPostPage() {
 
   const keyPoints: string[] = (() => {
     if (!hasMarkdown) return [];
-    const headings = (post.content || "")
+    const content: string = (post.content as string) || "";
+    const headings = content
       .split("\n")
-      .filter((l) => /^#{2,3}\s+/.test(l))
-      .map((l) => l.replace(/^#{2,3}\s+/, "").trim())
-      .filter((l) => l.length > 6 && l.length < 110)
+      .filter((l: string) => /^#{2,3}\s+/.test(l))
+      .map((l: string) => l.replace(/^#{2,3}\s+/, "").trim())
+      .filter((l: string) => l.length > 6 && l.length < 110)
       .slice(0, 3);
     if (headings.length >= 2) return headings;
-    const sentences = (post.content || "")
+    const sentences = content
       .replace(/[#*_>`]/g, "")
       .split(/(?<=[.!?])\s+/)
-      .map((s) => s.trim())
-      .filter((s) => s.length > 40 && s.length < 180)
+      .map((s: string) => s.trim())
+      .filter((s: string) => s.length > 40 && s.length < 180)
       .slice(0, 3);
     return sentences;
   })();
