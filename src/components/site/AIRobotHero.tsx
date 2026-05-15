@@ -2,12 +2,12 @@ import { motion } from "framer-motion";
 import robotImg from "@/assets/ai-robot-3d.png";
 
 const LOGOS = [
-  { slug: "huggingface",  label: "Hugging Face", x: "6%",  y: "14%", size: 46, delay: 0 },
-  { slug: "anthropic",    label: "Claude",       x: "84%", y: "10%", size: 42, delay: 0.4 },
-  { slug: "n8n",          label: "n8n",          x: "90%", y: "46%", size: 40, delay: 0.8 },
-  { slug: "make",         label: "Make",         x: "4%",  y: "50%", size: 38, delay: 1.2 },
-  { slug: "googlegemini", label: "Gemini",       x: "82%", y: "78%", size: 42, delay: 1.6 },
-  { slug: "whatsapp",     label: "WhatsApp",     x: "10%", y: "82%", size: 38, delay: 2.0 },
+  { slug: "huggingface",  label: "Hugging Face", x: "62%", y: "12%", size: 38, delay: 0 },
+  { slug: "anthropic",    label: "Claude",       x: "88%", y: "22%", size: 36, delay: 0.4 },
+  { slug: "n8n",          label: "n8n",          x: "94%", y: "52%", size: 34, delay: 0.8 },
+  { slug: "make",         label: "Make",         x: "58%", y: "70%", size: 32, delay: 1.2 },
+  { slug: "googlegemini", label: "Gemini",       x: "86%", y: "82%", size: 36, delay: 1.6 },
+  { slug: "whatsapp",     label: "WhatsApp",     x: "70%", y: "44%", size: 32, delay: 2.0 },
 ];
 
 export function AIRobotHero() {
