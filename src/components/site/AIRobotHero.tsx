@@ -1,6 +1,6 @@
-import { motion, useAnimationControls, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
-import robotImage from "@/assets/ai-robot-3d.png";
+import robotVideoAsset from "@/assets/ai-robot-alive-v4.mp4.asset.json";
 
 const LOGOS = [
   { slug: "huggingface",  label: "Hugging Face", x: "2%",  y: "8%",  size: 40, delay: 0 },
@@ -13,80 +13,42 @@ const LOGOS = [
 
 export function AIRobotHero() {
   const wrapRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Cursor (-1..1) — drives subtle parallax rotation
+  // Cursor (-1..1) — drives gentle head/body orientation, no jitter
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
-  const sx = useSpring(mx, { stiffness: 55, damping: 18, mass: 0.8 });
-  const sy = useSpring(my, { stiffness: 55, damping: 18, mass: 0.8 });
+  const sx = useSpring(mx, { stiffness: 40, damping: 22, mass: 1 });
+  const sy = useSpring(my, { stiffness: 40, damping: 22, mass: 1 });
 
-  const rotateY = useTransform(sx, [-1.2, 1.2], [-9, 9]);
-  const rotateX = useTransform(sy, [-1.2, 1.2], [6, -6]);
-  const xShift  = useTransform(sx, [-1.2, 1.2], [-6, 6]);
+  // Subtle "look at the cursor" — small angles only
+  const rotateY = useTransform(sx, [-1, 1], [-7, 7]);
+  const rotateX = useTransform(sy, [-1, 1], [5, -5]);
+  const xShift  = useTransform(sx, [-1, 1], [-4, 4]);
+  const yShift  = useTransform(sy, [-1, 1], [-3, 3]);
 
-  // Idle "alive" choreography — varied, non-repeating sequence
-  const controls = useAnimationControls();
-
+  // Track global cursor so the robot follows the mouse anywhere on the page
   useEffect(() => {
-    const el = wrapRef.current;
-    if (!el) return;
     const onMove = (e: PointerEvent) => {
-      const r = el.getBoundingClientRect();
-      const cx = r.left + r.width / 2;
-      const cy = r.top + r.height / 2;
-      const dx = (e.clientX - cx) / (Math.max(r.width, 1) / 2);
-      const dy = (e.clientY - cy) / (Math.max(r.height, 1) / 2);
-      mx.set(Math.max(-1.4, Math.min(1.4, dx)));
-      my.set(Math.max(-1.4, Math.min(1.4, dy)));
+      const w = window.innerWidth || 1;
+      const h = window.innerHeight || 1;
+      const dx = (e.clientX / w) * 2 - 1; // -1..1
+      const dy = (e.clientY / h) * 2 - 1;
+      mx.set(Math.max(-1, Math.min(1, dx)));
+      my.set(Math.max(-1, Math.min(1, dy)));
     };
-    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointermove", onMove, { passive: true });
     return () => window.removeEventListener("pointermove", onMove);
   }, [mx, my]);
 
-  // Loop a random "alive" gesture with breathing baseline
+  // Make sure the video autoplays smoothly on all browsers
   useEffect(() => {
-    let cancelled = false;
-
-    // Distinct micro-gestures — never the same twice in a row
-    const gestures: Array<{ y: number[]; rotZ: number[]; scale: number[]; dur: number }> = [
-      // soft breath
-      { y: [0, -3, 0, -2, 0], rotZ: [0, 0, 0, 0, 0], scale: [1, 1.012, 1, 1.008, 1], dur: 4.2 },
-      // gentle lean left + sway
-      { y: [0, -2, 0],         rotZ: [0, -1.4, 0],    scale: [1, 1.006, 1],          dur: 3.4 },
-      // lean right + subtle bob
-      { y: [0, -2, 0],         rotZ: [0, 1.4, 0],     scale: [1, 1.006, 1],          dur: 3.6 },
-      // little hop / bounce
-      { y: [0, -6, 0, -2, 0],  rotZ: [0, 0.4, -0.4, 0.2, 0], scale: [1, 1.02, 1, 1.005, 1], dur: 2.6 },
-      // attentive nod
-      { y: [0, 1, 0, -1, 0],   rotZ: [0, 0, 0, 0, 0],  scale: [1, 1, 1, 1, 1],         dur: 2.2 },
-    ];
-
-    let lastIdx = -1;
-    const pick = () => {
-      let i = Math.floor(Math.random() * gestures.length);
-      if (i === lastIdx) i = (i + 1) % gestures.length;
-      lastIdx = i;
-      return gestures[i];
-    };
-
-    const run = async () => {
-      while (!cancelled) {
-        const g = pick();
-        await controls.start({
-          y: g.y,
-          rotateZ: g.rotZ,
-          scale: g.scale,
-          transition: { duration: g.dur, ease: "easeInOut", times: g.y.map((_, k, arr) => k / (arr.length - 1)) },
-        });
-        // tiny pause so it doesn't feel mechanical
-        await new Promise((r) => setTimeout(r, 350 + Math.random() * 900));
-      }
-    };
-    run();
-    return () => {
-      cancelled = true;
-    };
-  }, [controls]);
+    const v = videoRef.current;
+    if (!v) return;
+    v.playbackRate = 0.95;
+    const tryPlay = () => v.play().catch(() => {});
+    tryPlay();
+  }, []);
 
   return (
     <div
@@ -143,41 +105,41 @@ export function AIRobotHero() {
           width: "48%",
           height: "14px",
           background:
-            "radial-gradient(ellipse at center, oklch(0% 0 0 / 0.65) 0%, oklch(0% 0 0 / 0.25) 60%, transparent 92%)",
+            "radial-gradient(ellipse at center, oklch(0% 0 0 / 0.7) 0%, oklch(0% 0 0 / 0.28) 60%, transparent 92%)",
           filter: "blur(5px)",
           transform: "perspective(400px) rotateX(62deg)",
           transformOrigin: "center bottom",
         }}
       />
 
-      {/* Robot — transparent asset, mouse parallax + lifelike idle loop */}
+      {/* Robot — Seedance video, black bg removed via screen blend, follows cursor */}
       <motion.div
-        className="relative z-10 flex items-end justify-center h-[112%] w-auto"
+        className="relative z-10 flex items-end justify-center h-[108%] w-auto"
         style={{
           rotateX,
           rotateY,
           x: xShift,
+          y: yShift,
           transformOrigin: "50% 100%",
           transformStyle: "preserve-3d",
           willChange: "transform",
         }}
       >
-        <motion.img
-          src={robotImage}
-          alt="Robô de IA 3D da Aceleriq"
-          loading="eager"
-          decoding="async"
-          width={1024}
-          height={1280}
+        <video
+          ref={videoRef}
+          src={robotVideoAsset.url}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
           className="h-full w-auto max-w-none object-contain object-bottom select-none pointer-events-none"
           style={{
+            mixBlendMode: "screen",
             transformOrigin: "50% 100%",
             filter:
-              "brightness(1.06) contrast(1.08) saturate(1.08) drop-shadow(0 0 22px oklch(85% 0.22 145 / 0.16)) drop-shadow(0 10px 18px oklch(0% 0 0 / 0.28))",
+              "brightness(1.04) contrast(1.1) saturate(1.06) drop-shadow(0 0 22px oklch(85% 0.22 145 / 0.18))",
           }}
-          initial={{ opacity: 1, y: 0 }}
-          animate={controls}
-          draggable={false}
         />
       </motion.div>
     </div>
