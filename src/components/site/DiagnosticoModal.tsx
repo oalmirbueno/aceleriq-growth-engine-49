@@ -272,6 +272,7 @@ export function DiagnosticoModal({
         score,
         classificacao: cls.label,
         recomendacoes: recs,
+        origem: origem ?? null,
       });
       if (error) throw error;
 
