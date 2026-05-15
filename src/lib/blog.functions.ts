@@ -209,8 +209,8 @@ async function fetchOne(source: FeedSource): Promise<BlogPost[]> {
           : channel.entry
             ? [channel.entry]
             : [];
-    const posts: BlogPost[] = items.slice(0, 15).map((it) => {
-      const rawTitle = stripHtml(typeof it.title === "string" ? it.title : it.title?.["#text"] ?? "");
+    const posts: BlogPost[] = items.slice(0, 35).map((it) => {
+      const rawTitle = normalizeText(stripHtml(typeof it.title === "string" ? it.title : it.title?.["#text"] ?? ""));
       let title = rawTitle;
       let publisher = source.name;
       const dashSplit = rawTitle.match(/^(.*?)\s+-\s+([^-]{2,40})$/);
@@ -230,13 +230,13 @@ async function fetchOne(source: FeedSource): Promise<BlogPost[]> {
             ? it.link[0]?.["@_href"] || it.link[0]
             : it.link?.["@_href"] || it.link?.["#text"] || "";
       const descRaw = it.description || it.summary || it["content:encoded"] || "";
-      const desc = stripHtml(typeof descRaw === "string" ? descRaw : descRaw?.["#text"] ?? "");
+      const desc = normalizeText(stripHtml(typeof descRaw === "string" ? descRaw : descRaw?.["#text"] ?? ""));
       const dateStr = it.pubDate || it.published || it.updated || "";
       const date = dateStr ? new Date(dateStr) : new Date();
       const slug = `${source.id}-${shortHash(link || title)}-${slugify(title)}`.slice(0, 110);
       return {
         slug,
-        title: title.slice(0, 200),
+        title: normalizeText(title).slice(0, 200),
         excerpt: desc.slice(0, 320),
         image: extractImage(it),
         link,
@@ -301,8 +301,13 @@ async function loadAll(): Promise<BlogPost[]> {
     .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
   const unique = dedupe(merged).slice(0, 60);
 
-  // Para os 24 mais recentes sem imagem, busca og:image em paralelo (com timeout).
-  const needsImage = unique.filter((p) => !p.image).slice(0, 24);
+  // Resolve URLs do Google News para a fonte real e usa og:image/twitter:image da matéria original.
+  const hydrated = unique.slice(0, 50);
+  const resolved = await Promise.all(hydrated.map((p) => resolveGoogleNewsUrl(p.link)));
+  hydrated.forEach((p, i) => {
+    p.link = resolved[i];
+  });
+  const needsImage = hydrated.filter((p) => !p.image || isGoogleNewsUrl(p.link)).slice(0, 36);
   const imgs = await Promise.all(needsImage.map((p) => fetchOgImage(p.link)));
   needsImage.forEach((p, i) => {
     if (imgs[i]) p.image = imgs[i];
