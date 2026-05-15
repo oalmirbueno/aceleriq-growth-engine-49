@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -9,6 +9,7 @@ import { DiagnosticoModal } from "@/components/site/DiagnosticoModal";
 import { fetchBlogPost } from "@/lib/blog.functions";
 import { categoryCover } from "@/lib/blog-covers";
 import { whatsappLink, DEFAULT_WHATSAPP_MESSAGE } from "@/lib/contact";
+import { TableOfContents, extractToc, slugify } from "@/components/site/TableOfContents";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: async ({ params }) => {
@@ -279,11 +280,45 @@ function BlogPostPage() {
             </aside>
           )}
 
-          {hasMarkdown ? (
-            <div className="mt-12 article-prose">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content!}</ReactMarkdown>
-            </div>
-          ) : (
+          {hasMarkdown && (() => {
+            const toc = extractToc(post.content as string);
+            const counts = new Map<string, number>();
+            const idFor = (text: string) => {
+              let id = slugify(text);
+              const n = (counts.get(id) ?? 0) + 1;
+              counts.set(id, n);
+              return n > 1 ? `${id}-${n}` : id;
+            };
+            const flatten = (children: React.ReactNode): string =>
+              React.Children.toArray(children)
+                .map((c) => (typeof c === "string" ? c : typeof c === "number" ? String(c) : (c as { props?: { children?: React.ReactNode } })?.props?.children ? flatten((c as { props: { children: React.ReactNode } }).props.children) : ""))
+                .join("");
+            return (
+              <div className="relative mt-12">
+                <TableOfContents items={toc} />
+                <div className="article-prose scroll-mt-24">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      h2: ({ children, ...props }) => (
+                        <h2 id={idFor(flatten(children))} className="scroll-mt-24" {...props}>
+                          {children}
+                        </h2>
+                      ),
+                      h3: ({ children, ...props }) => (
+                        <h3 id={idFor(flatten(children))} className="scroll-mt-24" {...props}>
+                          {children}
+                        </h3>
+                      ),
+                    }}
+                  >
+                    {post.content!}
+                  </ReactMarkdown>
+                </div>
+              </div>
+            );
+          })()}
+          {!hasMarkdown && (
             <div className="max-w-none mt-12 leading-relaxed space-y-6">
               {fallbackBody.map((p: string, i: number) => (
                 <p
