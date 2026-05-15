@@ -75,6 +75,13 @@ export const Route = createFileRoute("/blog/$slug")({
 function BlogPostPage() {
   const [diagOpen, setDiagOpen] = useState(false);
   const { post, related } = Route.useLoaderData();
+  const internalBody = post.isLocal && post.content
+    ? post.content.split(/\n\s*\n/)
+    : [
+        `Esse movimento em ${post.category} importa porque indica uma mudança prática no jeito como empresas captam demanda, operam vendas e tomam decisões com dados. A notícia reforça que tecnologia só gera vantagem quando entra conectada ao funil, à oferta e à execução comercial.`,
+        post.excerpt,
+        `Na leitura da Aceleriq, o ponto central não é apenas acompanhar a tendência, mas transformar esse sinal de mercado em ação: revisar processos, automatizar etapas repetitivas, melhorar a mensuração e criar campanhas mais precisas para gerar receita previsível.`,
+      ].filter(Boolean);
 
   return (
     <div className="min-h-screen bg-background">
@@ -151,16 +158,13 @@ function BlogPostPage() {
             />
           </motion.div>
 
-          {/* Conteúdo do post local */}
-          {post.isLocal && post.content && (
-            <div className="prose prose-invert prose-lg max-w-none mt-12 text-foreground/90 leading-relaxed">
-              {post.content.split(/\n\s*\n/).map((p: string, i: number) => (
-                <p key={i} className="mb-6 text-base md:text-lg">
-                  {p.trim()}
-                </p>
-              ))}
-            </div>
-          )}
+          <div className="prose prose-invert prose-lg max-w-none mt-12 text-foreground/90 leading-relaxed">
+            {internalBody.map((p: string, i: number) => (
+              <p key={i} className="mb-6 text-base md:text-lg">
+                {p.trim()}
+              </p>
+            ))}
+          </div>
 
           {/* Aceleriq angle */}
           <div className="mt-12 border border-primary/25 bg-primary/[0.04] p-6 md:p-8 relative overflow-hidden">
@@ -178,17 +182,6 @@ function BlogPostPage() {
 
           {/* CTA buttons */}
           <div className="mt-10 flex flex-col sm:flex-row gap-3">
-            {!post.isLocal && (
-              <a
-                href={post.link}
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-white/15 bg-white/[0.04] text-foreground text-sm font-medium hover:border-primary/40 hover:text-primary transition-colors"
-              >
-                Ler matéria completa em {post.source}
-                <ArrowUpRight className="h-4 w-4" />
-              </a>
-            )}
             <a
               href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)}
               target="_blank"
@@ -202,7 +195,7 @@ function BlogPostPage() {
 
           {!post.isLocal && (
             <p className="mt-6 text-xs text-muted-foreground">
-              Conteúdo curado a partir de fontes confiáveis · O artigo original permanece em {post.source} (canonical).
+              Fonte consultada: <a href={post.link} target="_blank" rel="noopener noreferrer nofollow" className="text-primary hover:underline">{post.source}</a>.
             </p>
           )}
         </div>
