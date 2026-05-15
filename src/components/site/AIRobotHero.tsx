@@ -13,19 +13,9 @@ const LOGOS = [
 export function AIRobotHero() {
   return (
     <div
-      className="relative mx-auto w-full max-w-[620px] aspect-[3/4] overflow-hidden"
-      style={{ marginBottom: "-18%" }}
+      className="relative mx-auto w-full max-w-[760px] aspect-[3/4] overflow-visible"
+      style={{ marginBottom: "-20%", transform: "translateX(9%)" }}
     >
-      {/* Ambient green glow — blends with page background */}
-      <div
-        aria-hidden
-        className="absolute -inset-10 -z-10 blur-3xl opacity-70"
-        style={{
-          background:
-            "radial-gradient(55% 55% at 50% 45%, oklch(85% 0.22 145 / 0.32), transparent 72%)",
-        }}
-      />
-
       {/* Floating logos */}
       {LOGOS.map((l) => (
         <motion.img
@@ -55,19 +45,7 @@ export function AIRobotHero() {
         />
       ))}
 
-      {/* Tech light pulse behind the robot */}
-      <motion.div
-        aria-hidden
-        className="absolute inset-0 -z-[5] blur-2xl"
-        style={{
-          background:
-            "radial-gradient(40% 45% at 50% 48%, oklch(85% 0.22 145 / 0.45), transparent 70%)",
-        }}
-        animate={{ opacity: [0.55, 0.85, 0.55], scale: [1, 1.04, 1] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      {/* Robot — scaled up, overflows downward toward the marquee */}
+      {/* Robot — large 3D asset, shifted so the cropped arm exits the composition */}
       <motion.img
         src={robotImg}
         alt="Agente de IA 3D · Aceleriq"
@@ -75,7 +53,7 @@ export function AIRobotHero() {
         height={1280}
         loading="eager"
         decoding="async"
-        className="relative z-10 h-full w-full object-contain"
+        className="relative z-10 h-[122%] w-[122%] max-w-none object-contain"
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: [0, -8, 0] }}
         transition={{
@@ -83,30 +61,9 @@ export function AIRobotHero() {
           y: { duration: 7, repeat: Infinity, ease: "easeInOut" },
         }}
         style={{
+          transform: "translateX(7%)",
           filter:
             "drop-shadow(0 30px 50px oklch(0% 0 0 / 0.55)) drop-shadow(0 0 60px oklch(85% 0.22 145 / 0.28)) drop-shadow(0 0 110px oklch(85% 0.22 145 / 0.16))",
-        }}
-      />
-
-      {/* Soft horizontal scan behind the figure */}
-      <motion.div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-[10%] z-[6] h-[40%] top-[30%] blur-3xl mix-blend-screen"
-        style={{
-          background:
-            "linear-gradient(180deg, transparent, oklch(85% 0.22 145 / 0.18), transparent)",
-        }}
-        animate={{ opacity: [0.3, 0.7, 0.3] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      {/* Bottom fade — subtle blend so arms/legs are not clipped */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-[-20%] bottom-[-5%] z-[15] h-[14%]"
-        style={{
-          background:
-            "linear-gradient(to bottom, transparent 0%, color-mix(in oklab, var(--background) 70%, transparent) 60%, var(--background) 100%)",
         }}
       />
     </div>
