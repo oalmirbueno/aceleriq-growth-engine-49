@@ -154,7 +154,24 @@ export const saveBlogPost = createServerFn({ method: "POST" })
       .select("*")
       .single();
     if (error) throw new Error(error.message);
-    return mapRow(row as RawRow);
+    const saved = mapRow(row as RawRow);
+    if (saved.status === "published") {
+      // fire-and-forget: reenvio do sitemap ao GSC após publicação
+      submitSitemapToGsc().catch((e) =>
+        console.error("[saveBlogPost] sitemap resubmit failed:", e),
+      );
+    }
+    return saved;
+  });
+
+// ─── Resubmit sitemap manualmente (admin) ────────────
+export const resubmitSitemap = createServerFn({ method: "POST" })
+  .inputValidator((input: { password: string }) =>
+    z.object({ password: z.string().min(1) }).parse(input),
+  )
+  .handler(async ({ data }) => {
+    checkPassword(data.password);
+    return submitSitemapToGsc();
   });
 
 // ─── Delete ──────────────────────────────────────────
