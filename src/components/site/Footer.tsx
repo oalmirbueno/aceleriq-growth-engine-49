@@ -38,6 +38,7 @@ export function Footer() {
             <li><Link to="/trafego-pago" className="hover:text-foreground">Tráfego Pago</Link></li>
             <li><Link to="/automacao-e-ia" className="hover:text-foreground">Automação & IA</Link></li>
             <li><Link to="/sobre-a-aceleriq" className="hover:text-foreground">Sobre a Aceleriq</Link></li>
+            <li><Link to="/blog" className="hover:text-foreground">Blog</Link></li>
           </ul>
         </div>
 
