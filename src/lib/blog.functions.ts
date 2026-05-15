@@ -1,6 +1,12 @@
 import { createServerFn } from "@tanstack/react-start";
 import { XMLParser } from "fast-xml-parser";
-import { FEEDS, type FeedCategory, type FeedSource } from "./blog-feeds";
+import {
+  FEEDS,
+  RELEVANCE_KEYWORDS,
+  BLOCKLIST_KEYWORDS,
+  type FeedCategory,
+  type FeedSource,
+} from "./blog-feeds";
 
 export interface BlogPost {
   slug: string;
@@ -15,9 +21,9 @@ export interface BlogPost {
   publishedAt: string; // ISO
 }
 
-// In-memory cache (per worker instance)
+// In-memory cache (per worker instance) — curto p/ feel "tempo real"
 let cache: { at: number; posts: BlogPost[] } | null = null;
-const CACHE_MS = 1000 * 60 * 30; // 30 min
+const CACHE_MS = 1000 * 60 * 10; // 10 min
 
 function stripHtml(s: string): string {
   return s
@@ -99,8 +105,22 @@ async function fetchOne(source: FeedSource): Promise<BlogPost[]> {
           : channel.entry
             ? [channel.entry]
             : [];
-    const posts: BlogPost[] = items.slice(0, 10).map((it) => {
-      const title = stripHtml(typeof it.title === "string" ? it.title : it.title?.["#text"] ?? "");
+    const posts: BlogPost[] = items.slice(0, 15).map((it) => {
+      const rawTitle = stripHtml(typeof it.title === "string" ? it.title : it.title?.["#text"] ?? "");
+      // Google News title format: "Headline - Publisher" — separa publisher
+      let title = rawTitle;
+      let publisher = source.name;
+      const dashSplit = rawTitle.match(/^(.*?)\s+-\s+([^-]{2,40})$/);
+      if (dashSplit) {
+        title = dashSplit[1].trim();
+        publisher = dashSplit[2].trim();
+      }
+      // <source> tag (Google News fornece publisher real)
+      const srcTag = it.source;
+      if (srcTag) {
+        const s = typeof srcTag === "string" ? srcTag : srcTag?.["#text"];
+        if (s && typeof s === "string" && s.length > 1 && s.length < 60) publisher = s.trim();
+      }
       const link =
         typeof it.link === "string"
           ? it.link
@@ -118,7 +138,7 @@ async function fetchOne(source: FeedSource): Promise<BlogPost[]> {
         excerpt: desc.slice(0, 320),
         image: extractImage(it),
         link,
-        source: source.name,
+        source: publisher,
         sourceId: source.id,
         category: source.category,
         lang: source.lang,
@@ -131,12 +151,34 @@ async function fetchOne(source: FeedSource): Promise<BlogPost[]> {
   }
 }
 
+function isRelevant(p: BlogPost): boolean {
+  const hay = `${p.title} ${p.excerpt}`.toLowerCase();
+  if (BLOCKLIST_KEYWORDS.some((k) => hay.includes(k))) return false;
+  return RELEVANCE_KEYWORDS.some((k) => hay.includes(k));
+}
+
+function dedupe(posts: BlogPost[]): BlogPost[] {
+  const seen = new Set<string>();
+  const out: BlogPost[] = [];
+  for (const p of posts) {
+    const key = p.title.toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 60);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(p);
+  }
+  return out;
+}
+
 async function loadAll(): Promise<BlogPost[]> {
   if (cache && Date.now() - cache.at < CACHE_MS) return cache.posts;
   const results = await Promise.all(FEEDS.map(fetchOne));
-  const merged = results.flat().sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
-  cache = { at: Date.now(), posts: merged };
-  return merged;
+  const merged = results
+    .flat()
+    .filter(isRelevant)
+    .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
+  const unique = dedupe(merged).slice(0, 80);
+  cache = { at: Date.now(), posts: unique };
+  return unique;
 }
 
 export const fetchBlogPosts = createServerFn({ method: "GET" }).handler(async () => {
