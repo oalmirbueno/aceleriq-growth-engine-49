@@ -125,6 +125,7 @@ export type Database = {
           id: string
           interesse_principal: string
           nome: string
+          origem: string | null
           principal_gargalo: string
           recomendacoes: Json
           respostas: Json
@@ -140,6 +141,7 @@ export type Database = {
           id?: string
           interesse_principal: string
           nome: string
+          origem?: string | null
           principal_gargalo: string
           recomendacoes?: Json
           respostas?: Json
@@ -155,6 +157,7 @@ export type Database = {
           id?: string
           interesse_principal?: string
           nome?: string
+          origem?: string | null
           principal_gargalo?: string
           recomendacoes?: Json
           respostas?: Json
