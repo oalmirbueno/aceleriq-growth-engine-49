@@ -32,6 +32,7 @@ import { Route as AdminPostsIdRouteImport } from './routes/admin.posts.$id'
 import { Route as ApiPublicHooksWeeklyPostRouteImport } from './routes/api/public/hooks/weekly-post'
 import { Route as ApiPublicHooksWarmCacheRouteImport } from './routes/api/public/hooks/warm-cache'
 import { Route as ApiPublicHooksResubmitSitemapRouteImport } from './routes/api/public/hooks/resubmit-sitemap'
+import { Route as ApiPublicHooksCheckIndexationRouteImport } from './routes/api/public/hooks/check-indexation'
 
 const TrafegoPagoRoute = TrafegoPagoRouteImport.update({
   id: '/trafego-pago',
@@ -152,6 +153,12 @@ const ApiPublicHooksResubmitSitemapRoute =
     path: '/api/public/hooks/resubmit-sitemap',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicHooksCheckIndexationRoute =
+  ApiPublicHooksCheckIndexationRouteImport.update({
+    id: '/api/public/hooks/check-indexation',
+    path: '/api/public/hooks/check-indexation',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -174,6 +181,7 @@ export interface FileRoutesByFullPath {
   '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/admin/posts/$id': typeof AdminPostsIdRoute
+  '/api/public/hooks/check-indexation': typeof ApiPublicHooksCheckIndexationRoute
   '/api/public/hooks/resubmit-sitemap': typeof ApiPublicHooksResubmitSitemapRoute
   '/api/public/hooks/warm-cache': typeof ApiPublicHooksWarmCacheRoute
   '/api/public/hooks/weekly-post': typeof ApiPublicHooksWeeklyPostRoute
@@ -197,6 +205,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminIndexRoute
   '/blog': typeof BlogIndexRoute
   '/admin/posts/$id': typeof AdminPostsIdRoute
+  '/api/public/hooks/check-indexation': typeof ApiPublicHooksCheckIndexationRoute
   '/api/public/hooks/resubmit-sitemap': typeof ApiPublicHooksResubmitSitemapRoute
   '/api/public/hooks/warm-cache': typeof ApiPublicHooksWarmCacheRoute
   '/api/public/hooks/weekly-post': typeof ApiPublicHooksWeeklyPostRoute
@@ -223,6 +232,7 @@ export interface FileRoutesById {
   '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/admin/posts/$id': typeof AdminPostsIdRoute
+  '/api/public/hooks/check-indexation': typeof ApiPublicHooksCheckIndexationRoute
   '/api/public/hooks/resubmit-sitemap': typeof ApiPublicHooksResubmitSitemapRoute
   '/api/public/hooks/warm-cache': typeof ApiPublicHooksWarmCacheRoute
   '/api/public/hooks/weekly-post': typeof ApiPublicHooksWeeklyPostRoute
@@ -250,6 +260,7 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/blog/'
     | '/admin/posts/$id'
+    | '/api/public/hooks/check-indexation'
     | '/api/public/hooks/resubmit-sitemap'
     | '/api/public/hooks/warm-cache'
     | '/api/public/hooks/weekly-post'
@@ -273,6 +284,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/blog'
     | '/admin/posts/$id'
+    | '/api/public/hooks/check-indexation'
     | '/api/public/hooks/resubmit-sitemap'
     | '/api/public/hooks/warm-cache'
     | '/api/public/hooks/weekly-post'
@@ -298,6 +310,7 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/blog/'
     | '/admin/posts/$id'
+    | '/api/public/hooks/check-indexation'
     | '/api/public/hooks/resubmit-sitemap'
     | '/api/public/hooks/warm-cache'
     | '/api/public/hooks/weekly-post'
@@ -316,6 +329,7 @@ export interface RootRouteChildren {
   SobreAAceleriqRoute: typeof SobreAAceleriqRoute
   TrafegoPagoRoute: typeof TrafegoPagoRoute
   LpTemaRoute: typeof LpTemaRoute
+  ApiPublicHooksCheckIndexationRoute: typeof ApiPublicHooksCheckIndexationRoute
   ApiPublicHooksResubmitSitemapRoute: typeof ApiPublicHooksResubmitSitemapRoute
   ApiPublicHooksWarmCacheRoute: typeof ApiPublicHooksWarmCacheRoute
   ApiPublicHooksWeeklyPostRoute: typeof ApiPublicHooksWeeklyPostRoute
@@ -484,6 +498,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicHooksResubmitSitemapRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/hooks/check-indexation': {
+      id: '/api/public/hooks/check-indexation'
+      path: '/api/public/hooks/check-indexation'
+      fullPath: '/api/public/hooks/check-indexation'
+      preLoaderRoute: typeof ApiPublicHooksCheckIndexationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -544,6 +565,7 @@ const rootRouteChildren: RootRouteChildren = {
   SobreAAceleriqRoute: SobreAAceleriqRoute,
   TrafegoPagoRoute: TrafegoPagoRoute,
   LpTemaRoute: LpTemaRoute,
+  ApiPublicHooksCheckIndexationRoute: ApiPublicHooksCheckIndexationRoute,
   ApiPublicHooksResubmitSitemapRoute: ApiPublicHooksResubmitSitemapRoute,
   ApiPublicHooksWarmCacheRoute: ApiPublicHooksWarmCacheRoute,
   ApiPublicHooksWeeklyPostRoute: ApiPublicHooksWeeklyPostRoute,
