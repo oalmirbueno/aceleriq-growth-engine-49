@@ -14,6 +14,7 @@ const LOGOS = [
 export function AIRobotHero() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Cursor (-1..1)
   const mx = useMotionValue(0);
