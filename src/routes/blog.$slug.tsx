@@ -87,24 +87,20 @@ function BlogPostPage() {
     <div className="min-h-screen bg-background">
       <Header onDiagnostico={() => setDiagOpen(true)} />
 
-      {/* Cover backdrop */}
-      <div className="relative pt-28 pb-0 overflow-hidden">
+      <article className="relative pt-32 md:pt-40 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(59,130,246,0.18),transparent_60%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(167,139,250,0.10),transparent_55%)]" />
         <div
           aria-hidden
-          className="absolute inset-0 opacity-25"
+          className="absolute inset-0 opacity-20"
           style={{
             backgroundImage: `url(${post.image || categoryCover(post.category)})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            filter: "blur(40px) saturate(1.2)",
+            filter: "blur(36px) saturate(1.2)",
           }}
         />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
-      </div>
-
-      <article className="-mt-24 pb-20 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/95 to-background" />
         <div className="container-aceleriq max-w-4xl">
           <Link
             to="/blog"
