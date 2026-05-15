@@ -8,7 +8,7 @@ import {
   type FeedSource,
 } from "./blog-feeds";
 import { LOCAL_POSTS } from "./blog-local-posts";
-import { scrapeArticle, translateArticleToPt, translateBatchTitles } from "./blog-enrich.server";
+import { scrapeArticle, translateArticleToPt } from "./blog-enrich.server";
 import { fetchPublishedAdminPosts } from "./blog-posts.functions";
 import type { AdminBlogPost } from "./blog-posts-types";
 
@@ -32,7 +32,8 @@ export interface BlogPost {
 }
 
 let cache: { at: number; posts: BlogPost[] } | null = null;
-const CACHE_MS = 1000 * 60 * 10; // 10 min
+const CACHE_MS = 1000 * 60 * 30; // 30 min
+const FEED_TIMEOUT_MS = 3500;
 
 function stripHtml(s: string): string {
   return s
@@ -191,7 +192,7 @@ async function fetchOne(source: FeedSource): Promise<BlogPost[]> {
         "User-Agent": "AceleriqBot/1.0 (+https://aceleriq.com.br)",
         Accept: "application/rss+xml, application/xml, text/xml, */*",
       },
-      signal: AbortSignal.timeout(8000),
+      signal: AbortSignal.timeout(FEED_TIMEOUT_MS),
     });
     if (!res.ok) return [];
     const xml = await res.text();
@@ -323,47 +324,29 @@ async function loadAdminPosts(): Promise<BlogPost[]> {
   }
 }
 
+async function loadOwnedPosts(): Promise<BlogPost[]> {
+  const adminPosts = await loadAdminPosts();
+  return [...adminPosts, ...buildLocalPosts()];
+}
+
+async function loadFeedPostsFast(): Promise<BlogPost[]> {
+  const results = await Promise.race([
+    Promise.all(FEEDS.map(fetchOne)),
+    new Promise<BlogPost[][]>((resolve) => setTimeout(() => resolve([]), FEED_TIMEOUT_MS + 400)),
+  ]);
+
+  return dedupe(
+    results
+      .flat()
+      .filter(isRelevant)
+      .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt)),
+  ).slice(0, 72);
+}
+
 async function loadAll(): Promise<BlogPost[]> {
   if (cache && Date.now() - cache.at < CACHE_MS) return cache.posts;
-  const results = await Promise.all(FEEDS.map(fetchOne));
-  const merged = results
-    .flat()
-    .filter(isRelevant)
-    .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
-  const unique = dedupe(merged).slice(0, 100);
-
-  // Resolve URLs do Google News para a fonte real e usa og:image/twitter:image da matéria original.
-  const hydrated = unique.slice(0, 50);
-  const resolved = await Promise.all(hydrated.map((p) => resolveGoogleNewsUrl(p.link)));
-  hydrated.forEach((p, i) => {
-    p.link = resolved[i];
-  });
-  const needsImage = hydrated.slice(0, 36);
-  const imgs = await Promise.all(needsImage.map((p) => fetchOgImage(p.link)));
-  needsImage.forEach((p, i) => {
-    if (imgs[i]) p.image = imgs[i];
-  });
-
-  // Traduz títulos/resumos de posts em inglês para PT-BR (lote único, best-effort).
-  const enItems = unique
-    .filter((p) => p.lang === "en")
-    .slice(0, 20)
-    .map((p) => ({ id: p.slug, title: p.title, excerpt: p.excerpt }));
-  if (enItems.length) {
-    const map = await translateBatchTitles(enItems);
-    if (map) {
-      for (const p of unique) {
-        const t = map[p.slug];
-        if (t?.title) p.title = t.title;
-        if (t?.excerpt) p.excerpt = t.excerpt;
-        if (t) p.lang = "pt";
-      }
-    }
-  }
-
-  // Posts autorais Aceleriq (admin) primeiro, depois locais hardcoded, depois feed.
-  const adminPosts = await loadAdminPosts();
-  const all = [...adminPosts, ...buildLocalPosts(), ...unique];
+  const [ownedPosts, feedPosts] = await Promise.all([loadOwnedPosts(), loadFeedPostsFast()]);
+  const all = [...ownedPosts, ...feedPosts];
   cache = { at: Date.now(), posts: all };
   return all;
 }
@@ -417,8 +400,10 @@ export async function loadSitemapPosts(): Promise<{ slug: string; publishedAt: s
 export const fetchBlogPost = createServerFn({ method: "GET" })
   .inputValidator((d: { slug: string }) => d)
   .handler(async ({ data }) => {
-    const posts = await loadAll();
-    const found = posts.find((p) => p.slug === data.slug) ?? null;
+    const ownedPosts = await loadOwnedPosts();
+    const owned = ownedPosts.find((p) => p.slug === data.slug) ?? null;
+    const posts = owned ? ownedPosts : await loadAll();
+    const found = owned ?? posts.find((p) => p.slug === data.slug) ?? null;
     const post = found ? await hydrateFullContent(found) : null;
     const related = post
       ? posts.filter((p) => p.slug !== post.slug && p.category === post.category).slice(0, 3)
