@@ -125,27 +125,27 @@ export function ServicePageLayout(props: ServicePageProps) {
 
       <main className="relative z-10">
         {/* HERO */}
-        <section className="relative overflow-hidden pt-28 pb-16 md:pt-32 md:pb-20">
+        <section className="relative overflow-hidden pt-24 pb-14 md:pt-32 md:pb-20">
           <div className="relative px-6 lg:px-16 max-w-[1600px] mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className={`flex items-center gap-3 mb-8 text-[11px] tracking-[0.2em] uppercase text-muted-foreground/80 ${props.heroAside ? "justify-start" : "justify-center"}`}
+              className={`flex items-center gap-3 mb-6 md:mb-8 text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-muted-foreground/80 ${props.heroAside ? "justify-start" : "justify-center"}`}
             >
-              <span className="w-8 h-px bg-primary" />
+              <span className="h-px w-7 md:w-8 bg-primary" />
               <span className="text-primary font-mono">{props.eyebrow}</span>
-              <span className="w-8 h-px bg-primary" />
+              <span className="h-px w-7 md:w-8 bg-primary" />
             </motion.div>
 
             {props.heroAside ? (
-              <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-center">
+              <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
                 <div className="lg:col-span-6 text-left">
                   <motion.h1
                     initial={{ opacity: 0, y: 14 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.05 }}
-                    className="font-display text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[4.5rem] leading-[1] uppercase tracking-[-0.035em]"
+                    className="font-display text-[2.05rem] sm:text-5xl md:text-6xl lg:text-[4.5rem] leading-[0.98] uppercase tracking-[-0.035em]"
                   >
                     {props.h1}
                   </motion.h1>
@@ -154,7 +154,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    className="mt-7 max-w-xl text-[14px] md:text-[15px] text-foreground/70 font-light leading-[1.65]"
+                    className="mt-6 max-w-xl text-[15px] md:text-[15px] text-foreground/70 font-light leading-[1.7]"
                   >
                     {props.intro}
                   </motion.p>
@@ -163,11 +163,11 @@ export function ServicePageLayout(props: ServicePageProps) {
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.32 }}
-                    className="mt-9 flex flex-wrap items-center gap-4"
+                    className="mt-8 flex flex-col items-stretch gap-4 sm:flex-row sm:flex-wrap sm:items-center"
                   >
                     <Button
                       onClick={open}
-                      className="group h-12 rounded-none bg-primary px-6 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-foreground hover:-translate-y-0.5 transition-all hover:shadow-[0_8px_30px_oklch(85%_0.2_145/0.4)]"
+                      className="group h-12 w-full sm:w-auto rounded-none bg-primary px-6 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-foreground hover:-translate-y-0.5 transition-all hover:shadow-[0_8px_30px_oklch(85%_0.2_145/0.4)]"
                     >
                       Diagnóstico Gratuito
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -187,7 +187,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                     </a>
                   </motion.div>
                 </div>
-                <div className="lg:col-span-6 relative">{props.heroAside}</div>
+                <div className="relative lg:col-span-6">{props.heroAside}</div>
               </div>
             ) : (
               <div className="mx-auto max-w-5xl text-center">
@@ -262,7 +262,7 @@ export function ServicePageLayout(props: ServicePageProps) {
 
         {/* METRICS */}
         <section className="px-6 lg:px-16 py-16 md:py-20 max-w-[1600px] mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-8">
             {[
               {
                 val: 312,
@@ -495,20 +495,20 @@ export function ServicePageLayout(props: ServicePageProps) {
                   key={f.q}
                   className="group border-b border-border/60 open:bg-card/10 transition-colors"
                 >
-                  <summary className="flex justify-between items-baseline gap-6 py-5 cursor-pointer list-none hover:text-primary transition-colors">
-                    <div className="flex items-baseline gap-5">
-                      <span className="font-mono text-[10px] text-muted-foreground/50 uppercase tracking-widest shrink-0">
+                  <summary className="flex items-start justify-between gap-4 py-5 cursor-pointer list-none hover:text-primary transition-colors">
+                    <div className="flex items-start gap-4">
+                      <span className="font-mono text-[10px] text-muted-foreground/50 uppercase tracking-widest shrink-0 pt-1">
                         0{i + 1}
                       </span>
                       <span className="font-display text-base md:text-lg uppercase tracking-[-0.02em] leading-[1.2]">
                         {f.q}
                       </span>
                     </div>
-                    <span className="text-primary font-mono text-xl group-open:rotate-45 transition-transform shrink-0 leading-none">
+                    <span className="pt-0.5 text-primary font-mono text-xl group-open:rotate-45 transition-transform shrink-0 leading-none">
                       +
                     </span>
                   </summary>
-                  <div className="pb-6 pl-[44px] pr-10 text-muted-foreground text-[14px] leading-[1.65] max-w-3xl">
+                  <div className="pb-6 pl-0 md:pl-[44px] pr-2 md:pr-10 text-muted-foreground text-[14px] leading-[1.65] max-w-3xl">
                     {f.a}
                   </div>
                 </details>
@@ -543,7 +543,7 @@ export function ServicePageLayout(props: ServicePageProps) {
             <div className="flex flex-col md:flex-row justify-center items-center gap-5">
               <Button
                 onClick={open}
-                className="group h-12 rounded-none bg-primary px-8 text-[11px] font-bold uppercase tracking-[0.2em] text-primary-foreground hover:-translate-y-0.5 transition-all hover:shadow-[0_12px_40px_oklch(85%_0.2_145/0.5)]"
+                className="group h-12 w-full sm:w-auto rounded-none bg-primary px-8 text-[11px] font-bold uppercase tracking-[0.2em] text-primary-foreground hover:-translate-y-0.5 transition-all hover:shadow-[0_12px_40px_oklch(85%_0.2_145/0.5)]"
               >
                 Fazer Diagnóstico Gratuito
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -552,7 +552,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                 href={wa}
                 target="_blank"
                 rel="noreferrer"
-                className="group inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/80 hover:text-primary transition-colors"
+                className="group inline-flex items-center justify-center gap-2.5 text-center text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/80 hover:text-primary transition-colors"
               >
                 <MessageCircle className="h-3.5 w-3.5 text-primary" />
                 WhatsApp da Aceleriq
