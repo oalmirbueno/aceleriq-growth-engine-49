@@ -44,7 +44,7 @@ function mapRow(r: RawRow): AdminBlogPost {
     seo_title: (r.seo_title as string) ?? null,
     seo_description: (r.seo_description as string) ?? null,
     focus_keyword: (r.focus_keyword as string) ?? null,
-    review_notes: ((r.review_notes as Record<string, unknown>) ?? {}),
+    review_notes: (r.review_notes as AdminBlogPost["review_notes"]) ?? {},
     author: (r.author as string) ?? "Equipe Aceleriq",
     published_at: (r.published_at as string) ?? null,
     created_at: r.created_at as string,
