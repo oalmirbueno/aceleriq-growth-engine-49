@@ -1,0 +1,156 @@
+import { createServerFn } from "@tanstack/react-start";
+import { XMLParser } from "fast-xml-parser";
+import { FEEDS, type FeedCategory, type FeedSource } from "./blog-feeds";
+
+export interface BlogPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  image: string | null;
+  link: string;
+  source: string;
+  sourceId: string;
+  category: FeedCategory;
+  lang: "pt" | "en";
+  publishedAt: string; // ISO
+}
+
+// In-memory cache (per worker instance)
+let cache: { at: number; posts: BlogPost[] } | null = null;
+const CACHE_MS = 1000 * 60 * 30; // 30 min
+
+function stripHtml(s: string): string {
+  return s
+    .replace(/<style[\s\S]*?<\/style>/gi, "")
+    .replace(/<script[\s\S]*?<\/script>/gi, "")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function extractImage(item: any): string | null {
+  // media:content / media:thumbnail
+  const media = item["media:content"] || item["media:thumbnail"];
+  if (media) {
+    const m = Array.isArray(media) ? media[0] : media;
+    if (m?.["@_url"]) return m["@_url"];
+  }
+  // enclosure
+  if (item.enclosure) {
+    const e = Array.isArray(item.enclosure) ? item.enclosure[0] : item.enclosure;
+    if (e?.["@_url"] && (e["@_type"]?.startsWith("image") || /\.(jpg|jpeg|png|webp|gif)/i.test(e["@_url"])))
+      return e["@_url"];
+  }
+  // image inside content:encoded or description
+  const html = item["content:encoded"] || item.description || "";
+  const m = typeof html === "string" ? html.match(/<img[^>]+src=["']([^"']+)["']/i) : null;
+  if (m) return m[1];
+  return null;
+}
+
+function slugify(s: string): string {
+  return s
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "")
+    .slice(0, 80);
+}
+
+function shortHash(s: string): string {
+  let h = 5381;
+  for (let i = 0; i < s.length; i++) h = (h * 33) ^ s.charCodeAt(i);
+  return (h >>> 0).toString(36);
+}
+
+async function fetchOne(source: FeedSource): Promise<BlogPost[]> {
+  try {
+    const res = await fetch(source.url, {
+      headers: {
+        "User-Agent": "AceleriqBot/1.0 (+https://aceleriq.com.br)",
+        Accept: "application/rss+xml, application/xml, text/xml, */*",
+      },
+      // 8s soft timeout via AbortSignal
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!res.ok) return [];
+    const xml = await res.text();
+    const parser = new XMLParser({
+      ignoreAttributes: false,
+      attributeNamePrefix: "@_",
+      trimValues: true,
+    });
+    const json: any = parser.parse(xml);
+    const channel = json?.rss?.channel ?? json?.feed;
+    if (!channel) return [];
+    const items: any[] = Array.isArray(channel.item)
+      ? channel.item
+      : channel.item
+        ? [channel.item]
+        : Array.isArray(channel.entry)
+          ? channel.entry
+          : channel.entry
+            ? [channel.entry]
+            : [];
+    const posts: BlogPost[] = items.slice(0, 10).map((it) => {
+      const title = stripHtml(typeof it.title === "string" ? it.title : it.title?.["#text"] ?? "");
+      const link =
+        typeof it.link === "string"
+          ? it.link
+          : Array.isArray(it.link)
+            ? it.link[0]?.["@_href"] || it.link[0]
+            : it.link?.["@_href"] || it.link?.["#text"] || "";
+      const descRaw = it.description || it.summary || it["content:encoded"] || "";
+      const desc = stripHtml(typeof descRaw === "string" ? descRaw : descRaw?.["#text"] ?? "");
+      const dateStr = it.pubDate || it.published || it.updated || "";
+      const date = dateStr ? new Date(dateStr) : new Date();
+      const slug = `${source.id}-${shortHash(link || title)}-${slugify(title)}`.slice(0, 110);
+      return {
+        slug,
+        title: title.slice(0, 200),
+        excerpt: desc.slice(0, 320),
+        image: extractImage(it),
+        link,
+        source: source.name,
+        sourceId: source.id,
+        category: source.category,
+        lang: source.lang,
+        publishedAt: isNaN(date.getTime()) ? new Date().toISOString() : date.toISOString(),
+      };
+    });
+    return posts.filter((p) => p.title && p.link);
+  } catch {
+    return [];
+  }
+}
+
+async function loadAll(): Promise<BlogPost[]> {
+  if (cache && Date.now() - cache.at < CACHE_MS) return cache.posts;
+  const results = await Promise.all(FEEDS.map(fetchOne));
+  const merged = results.flat().sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
+  cache = { at: Date.now(), posts: merged };
+  return merged;
+}
+
+export const fetchBlogPosts = createServerFn({ method: "GET" }).handler(async () => {
+  const posts = await loadAll();
+  return { posts };
+});
+
+export const fetchBlogPost = createServerFn({ method: "GET" })
+  .inputValidator((d: { slug: string }) => d)
+  .handler(async ({ data }) => {
+    const posts = await loadAll();
+    const post = posts.find((p) => p.slug === data.slug) ?? null;
+    const related = post
+      ? posts.filter((p) => p.slug !== post.slug && p.category === post.category).slice(0, 3)
+      : [];
+    return { post, related };
+  });
