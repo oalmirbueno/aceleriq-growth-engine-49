@@ -406,9 +406,11 @@ export async function loadSitemapPosts(): Promise<{ slug: string; publishedAt: s
     const merged = results.flat().filter(isRelevant);
     const unique = dedupe(merged).slice(0, 100);
     const local = buildLocalPosts();
-    return [...local, ...unique].map((p) => ({ slug: p.slug, publishedAt: p.publishedAt }));
+    const admin = await loadAdminPosts();
+    return [...admin, ...local, ...unique].map((p) => ({ slug: p.slug, publishedAt: p.publishedAt }));
   } catch {
-    return buildLocalPosts().map((p) => ({ slug: p.slug, publishedAt: p.publishedAt }));
+    const admin = await loadAdminPosts().catch(() => []);
+    return [...admin, ...buildLocalPosts()].map((p) => ({ slug: p.slug, publishedAt: p.publishedAt }));
   }
 }
 
