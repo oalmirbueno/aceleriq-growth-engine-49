@@ -120,7 +120,7 @@ function BlogIndex() {
     <div className="min-h-screen bg-background">
       <Header onDiagnostico={() => setDiagOpen(true)} />
 
-      <section className="relative pt-36 pb-16 md:pt-44 md:pb-20 overflow-hidden">
+      <section className="relative pt-28 pb-10 md:pt-44 md:pb-20 overflow-hidden">
         <div
           aria-hidden
           className="absolute inset-0 opacity-40"
@@ -151,10 +151,10 @@ function BlogIndex() {
                 Live Intelligence Feed
               </span>
             </div>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-semibold tracking-tight text-foreground max-w-4xl leading-[1.05]">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-display font-semibold tracking-tight text-foreground max-w-4xl leading-[1.08]">
               Inteligência de mercado <span className="text-primary">em tempo real</span>.
             </h1>
-            <p className="mt-6 max-w-2xl text-base md:text-lg text-muted-foreground leading-relaxed">
+            <p className="mt-4 md:mt-6 max-w-2xl text-sm md:text-lg text-muted-foreground leading-relaxed">
               Curadoria contínua das fontes mais confiáveis do mundo em IA aplicada, automação, tráfego pago, vendas e
               crescimento. Filtrado pela ótica da Aceleriq, sem ruído.
             </p>
@@ -168,8 +168,8 @@ function BlogIndex() {
             </div>
           </div>
 
-          <div className="mt-12 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div className="flex flex-wrap gap-2">
+          <div className="mt-8 md:mt-12 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div className="-mx-4 px-4 flex gap-2 overflow-x-auto md:overflow-visible md:mx-0 md:px-0 md:flex-wrap [&::-webkit-scrollbar]:hidden [scrollbar-width:none]">
               <FilterPill active={cat === "all"} onClick={() => setCat("all")}>
                 Tudo
               </FilterPill>
@@ -220,7 +220,7 @@ function FilterPill({ active, onClick, children }: { active: boolean; onClick: (
   return (
     <button
       onClick={onClick}
-      className={`px-3 py-1.5 text-[11px] font-mono uppercase tracking-[0.18em] border transition-colors ${
+      className={`shrink-0 whitespace-nowrap px-3 py-1.5 text-[11px] font-mono uppercase tracking-[0.18em] border transition-colors ${
         active
           ? "border-primary bg-primary/10 text-primary"
           : "border-white/10 bg-white/[0.02] text-muted-foreground hover:border-primary/30 hover:text-foreground"
@@ -249,18 +249,18 @@ function FeaturedCard({ post }: { post: BlogPost }) {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent" />
         </div>
-        <div className="p-8 md:p-10 flex flex-col justify-center">
-          <div className="flex items-center gap-3 mb-4">
+        <div className="p-5 sm:p-8 md:p-10 flex flex-col justify-center">
+          <div className="flex items-center gap-3 mb-3 md:mb-4">
             <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary">
               {post.isLocal ? "Aceleriq · Original" : "Em destaque"}
             </span>
             <span className="text-white/20">·</span>
-            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{post.source}</span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground truncate">{post.source}</span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-display font-semibold tracking-tight text-foreground group-hover:text-primary transition-colors">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-display font-semibold tracking-tight text-foreground group-hover:text-primary transition-colors leading-snug">
             {post.title}
           </h2>
-          <p className="mt-4 text-muted-foreground line-clamp-3">{post.excerpt}</p>
+          <p className="mt-3 md:mt-4 text-sm md:text-base text-muted-foreground line-clamp-3">{post.excerpt}</p>
           <div className="mt-6 flex items-center gap-4 text-xs text-muted-foreground">
             <span className="inline-flex items-center gap-1.5">
               <Clock className="h-3 w-3" /> {timeAgo(post.publishedAt)}
