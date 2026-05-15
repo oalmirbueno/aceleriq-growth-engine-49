@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Clock, MessageCircle, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock, MessageCircle, Sparkles } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { DiagnosticoModal } from "@/components/site/DiagnosticoModal";
@@ -37,21 +36,22 @@ export const Route = createFileRoute("/blog/$slug")({
         { name: "twitter:description", content: desc },
         ...(post.image ? [{ name: "twitter:image", content: post.image }] : []),
       ],
-      // Canonical: posts locais apontam para nossa URL; posts curados apontam para a fonte original.
-      links: [{ rel: "canonical", href: post.isLocal ? url : post.link }],
+      links: [{ rel: "canonical", href: url }],
       scripts: [
         {
           type: "application/ld+json",
           children: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "NewsArticle",
+            "@type": "BlogPosting",
             headline: post.title,
             description: desc,
             image: post.image ? [post.image] : undefined,
             datePublished: post.publishedAt,
-            mainEntityOfPage: post.link,
-            publisher: { "@type": "Organization", name: post.source },
-            isBasedOn: post.link,
+            dateModified: post.publishedAt,
+            mainEntityOfPage: url,
+            author: { "@type": "Organization", name: post.author || "Aceleriq" },
+            publisher: { "@type": "Organization", name: "Aceleriq", url: "https://aceleriq.com.br" },
+            citation: post.isLocal ? undefined : post.link,
           }),
         },
       ],
@@ -74,30 +74,33 @@ export const Route = createFileRoute("/blog/$slug")({
 function BlogPostPage() {
   const [diagOpen, setDiagOpen] = useState(false);
   const { post, related } = Route.useLoaderData();
+  const internalBody = post.isLocal && post.content
+    ? post.content.split(/\n\s*\n/)
+    : [
+        `Esse movimento em ${post.category} importa porque indica uma mudança prática no jeito como empresas captam demanda, operam vendas e tomam decisões com dados. A notícia reforça que tecnologia só gera vantagem quando entra conectada ao funil, à oferta e à execução comercial.`,
+        post.excerpt,
+        `Na leitura da Aceleriq, o ponto central não é apenas acompanhar a tendência, mas transformar esse sinal de mercado em ação: revisar processos, automatizar etapas repetitivas, melhorar a mensuração e criar campanhas mais precisas para gerar receita previsível.`,
+      ].filter(Boolean);
 
   return (
     <div className="min-h-screen bg-background">
       <Header onDiagnostico={() => setDiagOpen(true)} />
 
-      {/* Cover backdrop */}
-      <div className="relative pt-28 pb-0 overflow-hidden">
+      <article className="relative pt-32 md:pt-40 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(59,130,246,0.18),transparent_60%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(167,139,250,0.10),transparent_55%)]" />
         <div
           aria-hidden
-          className="absolute inset-0 opacity-25"
+          className="absolute inset-0 opacity-20"
           style={{
             backgroundImage: `url(${post.image || categoryCover(post.category)})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            filter: "blur(40px) saturate(1.2)",
+            filter: "blur(36px) saturate(1.2)",
           }}
         />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
-      </div>
-
-      <article className="-mt-24 pb-20 relative">
-        <div className="container-aceleriq max-w-4xl">
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/95 to-background" />
+        <div className="container-aceleriq max-w-4xl relative z-10">
           <Link
             to="/blog"
             className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.22em] text-muted-foreground hover:text-primary transition-colors mb-10"
@@ -105,11 +108,7 @@ function BlogPostPage() {
             <ArrowLeft className="h-3 w-3" /> Voltar ao feed
           </Link>
 
-          <motion.header
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+          <header>
             <div className="flex flex-wrap items-center gap-3 mb-6">
               {post.isLocal && (
                 <span className="inline-flex items-center gap-1 border border-primary/40 bg-primary/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.22em] text-primary">
@@ -135,31 +134,23 @@ function BlogPostPage() {
             </h1>
 
             <p className="mt-6 text-lg md:text-xl text-muted-foreground leading-relaxed">{post.excerpt}</p>
-          </motion.header>
+          </header>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.15, duration: 0.6 }}
-            className="mt-10 border border-white/10 overflow-hidden aspect-[16/9] relative bg-black"
-          >
+          <div className="mt-10 border border-white/10 overflow-hidden aspect-[16/9] relative bg-black">
             <img
               src={post.image || categoryCover(post.category)}
               alt={post.title}
               className="absolute inset-0 w-full h-full object-cover"
             />
-          </motion.div>
+          </div>
 
-          {/* Conteúdo do post local */}
-          {post.isLocal && post.content && (
-            <div className="prose prose-invert prose-lg max-w-none mt-12 text-foreground/90 leading-relaxed">
-              {post.content.split(/\n\s*\n/).map((p: string, i: number) => (
-                <p key={i} className="mb-6 text-base md:text-lg">
-                  {p.trim()}
-                </p>
-              ))}
-            </div>
-          )}
+          <div className="prose prose-invert prose-lg max-w-none mt-12 text-foreground/90 leading-relaxed">
+            {internalBody.map((p: string, i: number) => (
+              <p key={i} className="mb-6 text-base md:text-lg">
+                {p.trim()}
+              </p>
+            ))}
+          </div>
 
           {/* Aceleriq angle */}
           <div className="mt-12 border border-primary/25 bg-primary/[0.04] p-6 md:p-8 relative overflow-hidden">
@@ -177,17 +168,6 @@ function BlogPostPage() {
 
           {/* CTA buttons */}
           <div className="mt-10 flex flex-col sm:flex-row gap-3">
-            {!post.isLocal && (
-              <a
-                href={post.link}
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-white/15 bg-white/[0.04] text-foreground text-sm font-medium hover:border-primary/40 hover:text-primary transition-colors"
-              >
-                Ler matéria completa em {post.source}
-                <ArrowUpRight className="h-4 w-4" />
-              </a>
-            )}
             <a
               href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)}
               target="_blank"
@@ -201,7 +181,7 @@ function BlogPostPage() {
 
           {!post.isLocal && (
             <p className="mt-6 text-xs text-muted-foreground">
-              Conteúdo curado a partir de fontes confiáveis · O artigo original permanece em {post.source} (canonical).
+              Fonte consultada: <a href={post.link} target="_blank" rel="noopener noreferrer nofollow" className="text-primary hover:underline">{post.source}</a>.
             </p>
           )}
         </div>

@@ -14,6 +14,7 @@ export interface BlogPost {
   title: string;
   excerpt: string;
   image: string | null;
+  /** URL da fonte original. A leitura principal acontece internamente em /blog/$slug. */
   link: string;
   source: string;
   sourceId: string;
@@ -43,6 +44,20 @@ function stripHtml(s: string): string {
     .replace(/&gt;/g, ">")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function decodeHtmlEntities(s: string): string {
+  return s
+    .replace(/&quot;/g, '"')
+    .replace(/&#34;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">");
+}
+
+function normalizeText(s: string): string {
+  return s.replace(/[—–]/g, ",").replace(/\s+/g, " ").trim();
 }
 
 function extractImage(item: any): string | null {
@@ -93,12 +108,12 @@ async function fetchOgImage(url: string): Promise<string | null> {
     const html = await res.text();
     // og:image / twitter:image
     const re =
-      /<meta[^>]+(?:property|name)=["'](?:og:image(?::secure_url)?|twitter:image)["'][^>]*content=["']([^"']+)["']/i;
+      /<meta[^>]+(?:property|name|itemprop)=["'](?:og:image(?::secure_url)?|twitter:image|image)["'][^>]*content=["']([^"']+)["']/i;
     const m = html.match(re) || html.match(
-      /<meta[^>]+content=["']([^"']+)["'][^>]*(?:property|name)=["'](?:og:image|twitter:image)["']/i,
+      /<meta[^>]+content=["']([^"']+)["'][^>]*(?:property|name|itemprop)=["'](?:og:image(?::secure_url)?|twitter:image|image)["']/i,
     );
     if (m) {
-      const src = m[1];
+      const src = decodeHtmlEntities(m[1]);
       // Resolve relative
       try {
         const abs = new URL(src, res.url).toString();
@@ -109,6 +124,61 @@ async function fetchOgImage(url: string): Promise<string | null> {
   } catch {
     return null;
   }
+}
+
+function isGoogleNewsUrl(url: string): boolean {
+  try {
+    return new URL(url).hostname.endsWith("news.google.com");
+  } catch {
+    return false;
+  }
+}
+
+async function resolveGoogleNewsUrl(url: string): Promise<string> {
+  if (!isGoogleNewsUrl(url)) return url;
+
+  try {
+    const page = await fetch(url, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (compatible; AceleriqBot/1.0; +https://aceleriq.com.br)",
+        Accept: "text/html,application/xhtml+xml",
+      },
+      signal: AbortSignal.timeout(5000),
+    });
+    if (!page.ok) return url;
+
+    const html = await page.text();
+    const payloadMatch = html.match(/<c-wiz[^>]+data-p=["']([^"']+)["']/i);
+    if (!payloadMatch) return url;
+
+    const payload = JSON.parse(decodeHtmlEntities(payloadMatch[1]).replace("%.@.", '["garturlreq",'));
+    const fReq = JSON.stringify([
+      [["Fbv4je", JSON.stringify([...payload.slice(0, -6), ...payload.slice(-2)]), null, "generic"]],
+    ]);
+
+    const res = await fetch("https://news.google.com/_/DotsSplashUi/data/batchexecute", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+        "User-Agent":
+          "Mozilla/5.0 (compatible; AceleriqBot/1.0; +https://aceleriq.com.br)",
+      },
+      body: new URLSearchParams({ "f.req": fReq }).toString(),
+      signal: AbortSignal.timeout(5000),
+    });
+    if (!res.ok) return url;
+
+    const text = await res.text();
+    const parsed = JSON.parse(text.replace(/^\)\]\}'\s*/, ""));
+    const inner = parsed?.[0]?.[2] ? JSON.parse(parsed[0][2]) : null;
+    const resolved = typeof inner?.[1] === "string" ? inner[1] : null;
+    if (resolved && /^https?:\/\//i.test(resolved)) return resolved;
+  } catch {
+    return url;
+  }
+
+  return url;
 }
 
 async function fetchOne(source: FeedSource): Promise<BlogPost[]> {
@@ -139,8 +209,8 @@ async function fetchOne(source: FeedSource): Promise<BlogPost[]> {
           : channel.entry
             ? [channel.entry]
             : [];
-    const posts: BlogPost[] = items.slice(0, 15).map((it) => {
-      const rawTitle = stripHtml(typeof it.title === "string" ? it.title : it.title?.["#text"] ?? "");
+    const posts: BlogPost[] = items.slice(0, 35).map((it) => {
+      const rawTitle = normalizeText(stripHtml(typeof it.title === "string" ? it.title : it.title?.["#text"] ?? ""));
       let title = rawTitle;
       let publisher = source.name;
       const dashSplit = rawTitle.match(/^(.*?)\s+-\s+([^-]{2,40})$/);
@@ -160,13 +230,13 @@ async function fetchOne(source: FeedSource): Promise<BlogPost[]> {
             ? it.link[0]?.["@_href"] || it.link[0]
             : it.link?.["@_href"] || it.link?.["#text"] || "";
       const descRaw = it.description || it.summary || it["content:encoded"] || "";
-      const desc = stripHtml(typeof descRaw === "string" ? descRaw : descRaw?.["#text"] ?? "");
+      const desc = normalizeText(stripHtml(typeof descRaw === "string" ? descRaw : descRaw?.["#text"] ?? ""));
       const dateStr = it.pubDate || it.published || it.updated || "";
       const date = dateStr ? new Date(dateStr) : new Date();
       const slug = `${source.id}-${shortHash(link || title)}-${slugify(title)}`.slice(0, 110);
       return {
         slug,
-        title: title.slice(0, 200),
+        title: normalizeText(title).slice(0, 200),
         excerpt: desc.slice(0, 320),
         image: extractImage(it),
         link,
@@ -229,10 +299,15 @@ async function loadAll(): Promise<BlogPost[]> {
     .flat()
     .filter(isRelevant)
     .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
-  const unique = dedupe(merged).slice(0, 60);
+  const unique = dedupe(merged).slice(0, 100);
 
-  // Para os 24 mais recentes sem imagem, busca og:image em paralelo (com timeout).
-  const needsImage = unique.filter((p) => !p.image).slice(0, 24);
+  // Resolve URLs do Google News para a fonte real e usa og:image/twitter:image da matéria original.
+  const hydrated = unique.slice(0, 50);
+  const resolved = await Promise.all(hydrated.map((p) => resolveGoogleNewsUrl(p.link)));
+  hydrated.forEach((p, i) => {
+    p.link = resolved[i];
+  });
+  const needsImage = hydrated.slice(0, 36);
   const imgs = await Promise.all(needsImage.map((p) => fetchOgImage(p.link)));
   needsImage.forEach((p, i) => {
     if (imgs[i]) p.image = imgs[i];
