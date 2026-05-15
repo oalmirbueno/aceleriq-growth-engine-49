@@ -78,7 +78,7 @@ export const triggerIndexationCheck = createServerFn({ method: "POST" })
   .inputValidator((input: { password: string }) =>
     z.object({ password: z.string().min(1) }).parse(input),
   )
-  .handler(async ({ data }): Promise<{ ok: boolean; summary: unknown }> => {
+  .handler(async ({ data }): Promise<{ ok: boolean; summary: Record<string, unknown> }> => {
     checkPassword(data.password);
     const url =
       "https://aceleriq.com.br/api/public/hooks/check-indexation";
