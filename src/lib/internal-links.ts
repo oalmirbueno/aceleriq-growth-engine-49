@@ -166,8 +166,8 @@ export function injectInternalLinks(
               to: m.target.href,
               title: m.target.title,
               className: "internal-link",
+              children: matched,
             },
-            matched,
           ),
         );
         state.used.set(m.target.href, (state.used.get(m.target.href) ?? 0) + 1);
