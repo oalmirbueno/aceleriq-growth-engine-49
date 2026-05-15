@@ -10,6 +10,12 @@ import { fetchBlogPost } from "@/lib/blog.functions";
 import { categoryCover } from "@/lib/blog-covers";
 import { whatsappLink, DEFAULT_WHATSAPP_MESSAGE } from "@/lib/contact";
 import { TableOfContents, extractToc, slugify } from "@/components/site/TableOfContents";
+import {
+  SERVICE_LINK_TARGETS,
+  buildPostLinkTargets,
+  createLinkerState,
+  injectInternalLinks,
+} from "@/lib/internal-links";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: async ({ params }) => {
@@ -293,6 +299,23 @@ function BlogPostPage() {
               React.Children.toArray(children)
                 .map((c) => (typeof c === "string" ? c : typeof c === "number" ? String(c) : (c as { props?: { children?: React.ReactNode } })?.props?.children ? flatten((c as { props: { children: React.ReactNode } }).props.children) : ""))
                 .join("");
+
+            // Internal-link auto-injector. Service pages first (high authority),
+            // then related posts. State is shared across all paragraphs/lists
+            // so we cap total links per article.
+            const linkTargets = [
+              ...SERVICE_LINK_TARGETS,
+              ...buildPostLinkTargets(related.map((r: { slug: string; title: string }) => ({ slug: r.slug, title: r.title }))),
+            ];
+            const linker = createLinkerState(6);
+            const InternalLink = ({ to, title, className, children }: { to: string; title?: string; className?: string; children: React.ReactNode }) => (
+              <Link to={to} title={title} className={className}>
+                {children}
+              </Link>
+            );
+            const autolink = (children: React.ReactNode) =>
+              injectInternalLinks(children, linkTargets, linker, InternalLink);
+
             return (
               <div className="relative mt-12">
                 <TableOfContents items={toc} />
@@ -310,6 +333,8 @@ function BlogPostPage() {
                           {children}
                         </h3>
                       ),
+                      p: ({ children, ...props }) => <p {...props}>{autolink(children)}</p>,
+                      li: ({ children, ...props }) => <li {...props}>{autolink(children)}</li>,
                     }}
                   >
                     {post.content!}

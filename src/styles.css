@@ -327,6 +327,8 @@
 .article-prose p { color: hsl(var(--foreground) / 0.88); }
 .article-prose a { color: hsl(var(--primary)); text-decoration: underline; text-underline-offset: 3px; }
 .article-prose a:hover { opacity: 0.85; }
+.article-prose a.internal-link { text-decoration: none; color: hsl(var(--foreground)); background-image: linear-gradient(to right, hsl(var(--primary) / 0.45), hsl(var(--primary) / 0.45)); background-repeat: no-repeat; background-size: 100% 1px; background-position: 0 95%; transition: background-size 0.2s ease, color 0.2s ease; padding-bottom: 1px; }
+.article-prose a.internal-link:hover { color: hsl(var(--primary)); background-size: 100% 2px; opacity: 1; }
 .article-prose strong { color: hsl(var(--foreground)); font-weight: 600; }
 .article-prose ul, .article-prose ol { padding-left: 1.4rem; }
 .article-prose ul { list-style: disc; }
