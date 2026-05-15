@@ -263,7 +263,7 @@ function FeaturedCard({ post }: { post: BlogPost }) {
           <p className="mt-4 text-muted-foreground line-clamp-3">{post.excerpt}</p>
           <div className="mt-6 flex items-center gap-4 text-xs text-muted-foreground">
             <span className="inline-flex items-center gap-1.5">
-              <Clock className="h-3 w-3" /> {timeAgo(post.publishedAt)} atrás
+              <Clock className="h-3 w-3" /> {timeAgo(post.publishedAt)}
             </span>
             <span className="inline-flex items-center gap-1.5 text-primary group-hover:gap-2.5 transition-all">
               Ler análise <ArrowRight className="h-3.5 w-3.5" />
@@ -275,7 +275,7 @@ function FeaturedCard({ post }: { post: BlogPost }) {
   );
 }
 
-function PostCard({ post, index }: { post: BlogPost; index: number }) {
+function PostCard({ post }: { post: BlogPost; index: number }) {
   return (
     <div style={{ contentVisibility: "auto", containIntrinsicSize: "360px" }}>
       <Link
