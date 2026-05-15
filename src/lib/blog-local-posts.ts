@@ -24,7 +24,7 @@ export const LOCAL_POSTS: LocalPost[] = [
     excerpt:
       "Estratégia, dados, automação e IA aplicados em sequência. O framework que usamos para transformar marketing em receita previsível.",
     category: "crescimento",
-    publishedAt: new Date().toISOString(),
+    publishedAt: "2026-05-15T12:00:00.000Z",
     author: "Equipe Aceleriq",
     content: `O mercado está saturado de promessas em torno de IA, mas pouquíssimas empresas conseguem traduzir essas promessas em receita real. A diferença está no método.
 
