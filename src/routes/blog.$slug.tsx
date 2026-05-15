@@ -311,11 +311,13 @@ function BlogPostPage() {
               ...buildPostLinkTargets(related.map((r: { slug: string; title: string }) => ({ slug: r.slug, title: r.title }))),
             ];
             const linker = createLinkerState(8);
-            const InternalLink = ({ to, title, className, children }: { to: string; title?: string; className?: string; children: React.ReactNode }) => (
-              <Link to={to} title={title} className={className}>
-                {children}
-              </Link>
-            );
+            const InternalLink = ({ to, title, className, children }: { to: string; title?: string; className?: string; children: React.ReactNode }) => {
+              // Hash anchors (/#metodo, /#diagnostico) precisam de <a> para a navegação + scroll funcionar.
+              if (to.includes("#")) {
+                return <a href={to} title={title} className={className}>{children}</a>;
+              }
+              return <Link to={to} title={title} className={className}>{children}</Link>;
+            };
             const autolink = (children: React.ReactNode) =>
               injectInternalLinks(children, linkTargets, linker, InternalLink);
 
