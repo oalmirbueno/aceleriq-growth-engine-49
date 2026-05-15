@@ -9,6 +9,7 @@ import { DiagnosticoModal } from "@/components/site/DiagnosticoModal";
 import { fetchBlogPost } from "@/lib/blog.functions";
 import { categoryCover } from "@/lib/blog-covers";
 import { whatsappLink, DEFAULT_WHATSAPP_MESSAGE } from "@/lib/contact";
+import { TableOfContents, extractToc, slugify } from "@/components/site/TableOfContents";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: async ({ params }) => {
