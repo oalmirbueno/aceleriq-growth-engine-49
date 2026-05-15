@@ -221,8 +221,7 @@ export function AIRobotHero() {
         }}
       />
 
-      {/* Robot — black bg keyed out via mix-blend-mode: screen (no mask, no rectangle) */}
-      <motion.video
+      <video
         ref={videoRef}
         src={robotVideo.url}
         muted
@@ -230,6 +229,12 @@ export function AIRobotHero() {
         autoPlay
         loop
         preload="auto"
+        className="sr-only"
+      />
+
+      {/* Robot — transparent canvas output, no moving black rectangle */}
+      <motion.canvas
+        ref={canvasRef}
         width={1024}
         height={1280}
         className="relative z-10 h-[120%] w-auto max-w-none object-contain object-bottom select-none pointer-events-none"
@@ -239,9 +244,8 @@ export function AIRobotHero() {
           x: xShift,
           transformOrigin: "50% 100%",
           transformStyle: "preserve-3d",
-          mixBlendMode: "screen",
           filter:
-            "drop-shadow(0 0 40px oklch(85% 0.22 145 / 0.22)) drop-shadow(0 18px 30px oklch(0% 0 0 / 0.35))",
+            "drop-shadow(0 0 28px oklch(85% 0.22 145 / 0.16)) drop-shadow(0 14px 24px oklch(0% 0 0 / 0.28))",
         }}
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
