@@ -100,13 +100,13 @@ export function AIRobotHero() {
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Bottom fade — blends robot legs into the page background, no hard shadow */}
+      {/* Bottom fade — subtle blend so arms/legs are not clipped */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[15] h-[22%]"
+        className="pointer-events-none absolute inset-x-[-20%] bottom-[-5%] z-[15] h-[14%]"
         style={{
           background:
-            "linear-gradient(to bottom, transparent 0%, var(--background) 85%)",
+            "linear-gradient(to bottom, transparent 0%, color-mix(in oklab, var(--background) 70%, transparent) 60%, var(--background) 100%)",
         }}
       />
     </div>
