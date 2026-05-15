@@ -11,10 +11,11 @@ import { categoryCover } from "@/lib/blog-covers";
 import { whatsappLink, DEFAULT_WHATSAPP_MESSAGE } from "@/lib/contact";
 import { TableOfContents, extractToc, slugify } from "@/components/site/TableOfContents";
 import {
-  SERVICE_LINK_TARGETS,
-  buildPostLinkTargets,
-  createLinkerState,
-  injectInternalLinks,
+ SERVICE_LINK_TARGETS,
+ LANDING_LINK_TARGETS,
+ buildPostLinkTargets,
+ createLinkerState,
+ injectInternalLinks,
 } from "@/lib/internal-links";
 
 export const Route = createFileRoute("/blog/$slug")({
@@ -300,14 +301,16 @@ function BlogPostPage() {
                 .map((c) => (typeof c === "string" ? c : typeof c === "number" ? String(c) : (c as { props?: { children?: React.ReactNode } })?.props?.children ? flatten((c as { props: { children: React.ReactNode } }).props.children) : ""))
                 .join("");
 
-            // Internal-link auto-injector. Service pages first (high authority),
-            // then related posts. State is shared across all paragraphs/lists
-            // so we cap total links per article.
+            // Internal-link auto-injector. Ordem de prioridade:
+            // 1) Páginas de serviço (alta autoridade comercial)
+            // 2) Hubs da landing — Diagnóstico, Método, Sobre (passagem de autoridade)
+            // 3) Posts relacionados (engajamento + topic cluster)
             const linkTargets = [
               ...SERVICE_LINK_TARGETS,
+              ...LANDING_LINK_TARGETS,
               ...buildPostLinkTargets(related.map((r: { slug: string; title: string }) => ({ slug: r.slug, title: r.title }))),
             ];
-            const linker = createLinkerState(6);
+            const linker = createLinkerState(8);
             const InternalLink = ({ to, title, className, children }: { to: string; title?: string; className?: string; children: React.ReactNode }) => (
               <Link to={to} title={title} className={className}>
                 {children}
