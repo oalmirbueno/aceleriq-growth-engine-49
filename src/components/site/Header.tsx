@@ -5,7 +5,9 @@ import { cn } from "@/lib/utils";
 import logoAceleriq from "@/assets/logo-aceleriq.png";
 
 const NAV = [
+  { label: "Home", to: "/", hash: undefined },
   { label: "Sobre", to: "/sobre-a-aceleriq", hash: undefined },
+  { label: "Marketing", to: "/agencia-de-marketing-digital-curitiba", hash: undefined },
   { label: "Sites", to: "/criacao-de-sites", hash: undefined },
   { label: "Tráfego", to: "/trafego-pago", hash: undefined },
   { label: "Automação & IA", to: "/automacao-e-ia", hash: undefined },
