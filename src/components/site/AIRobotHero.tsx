@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import robotImage from "@/assets/ai-robot-3d.png";
+import { useEffect, useRef, useState } from "react";
+import robotVideoAsset from "@/assets/ai-robot-alive-v5.mp4.asset.json";
 
 const LOGOS = [
   { slug: "huggingface",  label: "Hugging Face", x: "2%",  y: "8%",  size: 40 },
@@ -32,13 +32,60 @@ function loadTransform(): Transform {
 
 export function AIRobotHero() {
   const [transform, setTransform] = useState<Transform>(DEFAULT_TRANSFORM);
+  const wrapRef = useRef<HTMLDivElement | null>(null);
+  const robotRef = useRef<HTMLDivElement | null>(null);
+  const target = useRef({ x: 0, y: 0 });
+  const current = useRef({ x: 0, y: 0 });
+  const raf = useRef<number | null>(null);
 
   useEffect(() => {
     setTransform(loadTransform());
   }, []);
 
+  // Subtle mouse-follow CSS layer on top of the video
+  useEffect(() => {
+    const onMove = (e: PointerEvent) => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      // -1..1 normalized, then scaled
+      target.current.x = ((e.clientX / w) - 0.5) * 2;
+      target.current.y = ((e.clientY / h) - 0.5) * 2;
+      if (raf.current == null) loop();
+    };
+    const loop = () => {
+      const dx = target.current.x - current.current.x;
+      const dy = target.current.y - current.current.y;
+      current.current.x += dx * 0.08;
+      current.current.y += dy * 0.08;
+      const tx = current.current.x * 8; // px
+      const ty = current.current.y * 5;
+      const rx = -current.current.y * 4; // deg
+      const ry = current.current.x * 6;
+      if (robotRef.current) {
+        robotRef.current.style.setProperty("--mx", `${tx}px`);
+        robotRef.current.style.setProperty("--my", `${ty}px`);
+        robotRef.current.style.setProperty("--rx", `${rx}deg`);
+        robotRef.current.style.setProperty("--ry", `${ry}deg`);
+      }
+      if (Math.abs(dx) + Math.abs(dy) > 0.001) {
+        raf.current = requestAnimationFrame(loop);
+      } else {
+        raf.current = null;
+      }
+    };
+    window.addEventListener("pointermove", onMove);
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      if (raf.current != null) cancelAnimationFrame(raf.current);
+    };
+  }, []);
+
   return (
-    <div className="relative w-full aspect-[4/5] sm:aspect-[5/6] lg:aspect-[4/5] overflow-visible flex items-end justify-center">
+    <div
+      ref={wrapRef}
+      className="relative w-full aspect-[4/5] sm:aspect-[5/6] lg:aspect-[4/5] overflow-visible flex items-end justify-center"
+      style={{ perspective: "900px" }}
+    >
       {LOGOS.map((l) => (
         <img
           key={l.slug}
@@ -89,8 +136,9 @@ export function AIRobotHero() {
         }}
       />
 
-      {/* Robot — fixed transform from saved settings */}
+      {/* Robot — saved transform + subtle mouse-follow tilt. Video uses screen blend so the black bg disappears on the dark site. */}
       <div
+        ref={robotRef}
         className="relative z-10 flex items-end justify-center h-[112%] w-auto"
         style={{
           transform: `translate(${transform.x}px, ${transform.y}px) scale(${transform.scale})`,
@@ -98,21 +146,31 @@ export function AIRobotHero() {
           willChange: "transform",
         }}
       >
-        <img
-          src={robotImage}
-          alt="Robô de IA 3D da Aceleriq"
-          loading="eager"
-          decoding="async"
-          width={1024}
-          height={1280}
-          className="h-full w-auto max-w-none object-contain object-bottom select-none pointer-events-none"
+        <div
+          className="h-full w-auto"
           style={{
-            transformOrigin: "50% 100%",
-            filter:
-              "brightness(1.06) contrast(1.08) saturate(1.08) drop-shadow(0 0 22px oklch(85% 0.22 145 / 0.16)) drop-shadow(0 10px 18px oklch(0% 0 0 / 0.28))",
+            transform:
+              "translate3d(var(--mx,0px), var(--my,0px), 0) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))",
+            transformStyle: "preserve-3d",
+            transition: "transform 120ms linear",
+            willChange: "transform",
           }}
-          draggable={false}
-        />
+        >
+          <video
+            src={robotVideoAsset.url}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="h-full w-auto max-w-none object-contain object-bottom select-none pointer-events-none"
+            style={{
+              mixBlendMode: "screen",
+              filter:
+                "brightness(1.08) contrast(1.10) saturate(1.10) drop-shadow(0 0 22px oklch(85% 0.22 145 / 0.16)) drop-shadow(0 10px 18px oklch(0% 0 0 / 0.28))",
+            }}
+          />
+        </div>
       </div>
     </div>
   );
