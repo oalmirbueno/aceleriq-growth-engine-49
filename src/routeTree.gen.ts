@@ -16,8 +16,10 @@ import { Route as CriacaoDeSitesRouteImport } from './routes/criacao-de-sites'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AutomacaoEIaRouteImport } from './routes/automacao-e-ia'
 import { Route as AgenciaDeMarketingDigitalCuritibaRouteImport } from './routes/agencia-de-marketing-digital-curitiba'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as LpTemaRouteImport } from './routes/lp.$tema'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminBacklinksRouteImport } from './routes/admin.backlinks'
@@ -58,6 +60,11 @@ const AgenciaDeMarketingDigitalCuritibaRoute =
     path: '/agencia-de-marketing-digital-curitiba',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -67,6 +74,11 @@ const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => BlogRoute,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
 } as any)
 const LpTemaRoute = LpTemaRouteImport.update({
   id: '/lp/$tema',
@@ -79,13 +91,14 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   getParentRoute: () => BlogRoute,
 } as any)
 const AdminBacklinksRoute = AdminBacklinksRouteImport.update({
-  id: '/admin/backlinks',
-  path: '/admin/backlinks',
-  getParentRoute: () => rootRouteImport,
+  id: '/backlinks',
+  path: '/backlinks',
+  getParentRoute: () => AdminRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/agencia-de-marketing-digital-curitiba': typeof AgenciaDeMarketingDigitalCuritibaRoute
   '/automacao-e-ia': typeof AutomacaoEIaRoute
   '/blog': typeof BlogRouteWithChildren
@@ -96,6 +109,7 @@ export interface FileRoutesByFullPath {
   '/admin/backlinks': typeof AdminBacklinksRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lp/$tema': typeof LpTemaRoute
+  '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
@@ -109,11 +123,13 @@ export interface FileRoutesByTo {
   '/admin/backlinks': typeof AdminBacklinksRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lp/$tema': typeof LpTemaRoute
+  '/admin': typeof AdminIndexRoute
   '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/agencia-de-marketing-digital-curitiba': typeof AgenciaDeMarketingDigitalCuritibaRoute
   '/automacao-e-ia': typeof AutomacaoEIaRoute
   '/blog': typeof BlogRouteWithChildren
@@ -124,12 +140,14 @@ export interface FileRoutesById {
   '/admin/backlinks': typeof AdminBacklinksRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lp/$tema': typeof LpTemaRoute
+  '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/agencia-de-marketing-digital-curitiba'
     | '/automacao-e-ia'
     | '/blog'
@@ -140,6 +158,7 @@ export interface FileRouteTypes {
     | '/admin/backlinks'
     | '/blog/$slug'
     | '/lp/$tema'
+    | '/admin/'
     | '/blog/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -153,10 +172,12 @@ export interface FileRouteTypes {
     | '/admin/backlinks'
     | '/blog/$slug'
     | '/lp/$tema'
+    | '/admin'
     | '/blog'
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/agencia-de-marketing-digital-curitiba'
     | '/automacao-e-ia'
     | '/blog'
@@ -167,11 +188,13 @@ export interface FileRouteTypes {
     | '/admin/backlinks'
     | '/blog/$slug'
     | '/lp/$tema'
+    | '/admin/'
     | '/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
   AgenciaDeMarketingDigitalCuritibaRoute: typeof AgenciaDeMarketingDigitalCuritibaRoute
   AutomacaoEIaRoute: typeof AutomacaoEIaRoute
   BlogRoute: typeof BlogRouteWithChildren
@@ -179,7 +202,6 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreAAceleriqRoute: typeof SobreAAceleriqRoute
   TrafegoPagoRoute: typeof TrafegoPagoRoute
-  AdminBacklinksRoute: typeof AdminBacklinksRoute
   LpTemaRoute: typeof LpTemaRoute
 }
 
@@ -234,6 +256,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AgenciaDeMarketingDigitalCuritibaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -247,6 +276,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/blog/'
       preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof BlogRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/lp/$tema': {
       id: '/lp/$tema'
@@ -264,13 +300,25 @@ declare module '@tanstack/react-router' {
     }
     '/admin/backlinks': {
       id: '/admin/backlinks'
-      path: '/admin/backlinks'
+      path: '/backlinks'
       fullPath: '/admin/backlinks'
       preLoaderRoute: typeof AdminBacklinksRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AdminRoute
     }
   }
 }
+
+interface AdminRouteChildren {
+  AdminBacklinksRoute: typeof AdminBacklinksRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminBacklinksRoute: AdminBacklinksRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface BlogRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
@@ -286,6 +334,7 @@ const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
   AgenciaDeMarketingDigitalCuritibaRoute:
     AgenciaDeMarketingDigitalCuritibaRoute,
   AutomacaoEIaRoute: AutomacaoEIaRoute,
@@ -294,9 +343,17 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreAAceleriqRoute: SobreAAceleriqRoute,
   TrafegoPagoRoute: TrafegoPagoRoute,
-  AdminBacklinksRoute: AdminBacklinksRoute,
   LpTemaRoute: LpTemaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
