@@ -14,7 +14,6 @@ const LOGOS = [
 export function AIRobotHero() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Cursor (-1..1)
   const mx = useMotionValue(0);
@@ -99,91 +98,6 @@ export function AIRobotHero() {
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [mx, my]);
-
-  // Remove the dark video plate frame-by-frame and render only the robot.
-  useEffect(() => {
-    const v = videoRef.current;
-    const canvas = canvasRef.current;
-    if (!v || !canvas) return;
-
-    const ctx = canvas.getContext("2d", { willReadFrequently: true });
-    if (!ctx) return;
-
-    let raf = 0;
-    let lastW = 0;
-    let lastH = 0;
-
-    const resize = () => {
-      const rect = canvas.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-      const w = Math.max(360, Math.round(rect.width * dpr));
-      const h = Math.max(450, Math.round(rect.height * dpr));
-      if (w !== lastW || h !== lastH) {
-        lastW = w;
-        lastH = h;
-        canvas.width = w;
-        canvas.height = h;
-      }
-    };
-
-    const draw = () => {
-      resize();
-      if (v.readyState >= 2 && canvas.width && canvas.height) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(v, 0, 0, canvas.width, canvas.height);
-
-        const frame = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const { width: w, height: h, data } = frame;
-        const outside = new Uint8Array(w * h);
-        const stack: number[] = [];
-        const isPlate = (p: number) => {
-          const i = p * 4;
-          const r = data[i];
-          const g = data[i + 1];
-          const b = data[i + 2];
-          const max = Math.max(r, g, b);
-          const min = Math.min(r, g, b);
-          return max < 82 && max - min < 34;
-        };
-        const push = (p: number) => {
-          if (!outside[p] && isPlate(p)) {
-            outside[p] = 1;
-            stack.push(p);
-          }
-        };
-
-        for (let x = 0; x < w; x++) {
-          push(x);
-          push((h - 1) * w + x);
-        }
-        for (let y = 0; y < h; y++) {
-          push(y * w);
-          push(y * w + w - 1);
-        }
-        while (stack.length) {
-          const p = stack.pop()!;
-          const x = p % w;
-          if (x > 0) push(p - 1);
-          if (x < w - 1) push(p + 1);
-          if (p >= w) push(p - w);
-          if (p < w * (h - 1)) push(p + w);
-        }
-
-        for (let p = 0; p < outside.length; p++) {
-          if (outside[p]) data[p * 4 + 3] = 0;
-        }
-        ctx.putImageData(frame, 0, 0);
-      }
-      raf = requestAnimationFrame(draw);
-    };
-
-    raf = requestAnimationFrame(draw);
-    window.addEventListener("resize", resize);
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
 
   return (
     <div
