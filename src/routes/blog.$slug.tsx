@@ -290,17 +290,38 @@ function BlogPostPage() {
 
           {hasMarkdown && (() => {
             const toc = extractToc(post.content as string);
-            const counts = new Map<string, number>();
+            // Fila de ids do TOC consumida em ordem de renderização. Headings
+            // dentro de blocos de código/indented já foram filtrados em extractToc,
+            // então a sequência aqui bate 1:1 com o que o ReactMarkdown emite.
+            const tocQueue: { id: string; slug: string }[] = toc.map((t) => ({
+              id: t.id,
+              slug: slugify(t.text),
+            }));
+            const seen = new Map<string, number>();
+            // Pré-popula `seen` com os ids já reservados pelo TOC para garantir
+            // unicidade quando aparecerem headings extras fora do TOC.
+            for (const t of toc) {
+              const base = t.id.replace(/-(\d+)$/, "");
+              seen.set(base, Math.max(seen.get(base) ?? 0, t.id === base ? 1 : Number(t.id.match(/-(\d+)$/)?.[1] ?? 1)));
+            }
             const idFor = (text: string) => {
-              let id = slugify(text);
-              const n = (counts.get(id) ?? 0) + 1;
-              counts.set(id, n);
-              return n > 1 ? `${id}-${n}` : id;
+              const slug = slugify(text);
+              const idx = tocQueue.findIndex((t) => t.slug === slug);
+              if (idx >= 0) {
+                const [match] = tocQueue.splice(idx, 1);
+                return match.id;
+              }
+              // Heading não previsto pelo TOC (ex.: dentro de blockquote) —
+              // gera id único usando o mesmo contador compartilhado.
+              const n = (seen.get(slug) ?? 0) + 1;
+              seen.set(slug, n);
+              return n > 1 ? `${slug}-${n}` : slug;
             };
             const flatten = (children: React.ReactNode): string =>
               React.Children.toArray(children)
                 .map((c) => (typeof c === "string" ? c : typeof c === "number" ? String(c) : (c as { props?: { children?: React.ReactNode } })?.props?.children ? flatten((c as { props: { children: React.ReactNode } }).props.children) : ""))
                 .join("");
+
 
             // Internal-link auto-injector. Ordem de prioridade:
             // 1) Páginas de serviço (alta autoridade comercial)
