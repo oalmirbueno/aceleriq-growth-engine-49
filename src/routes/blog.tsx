@@ -85,8 +85,18 @@ function BlogIndex() {
     <div className="min-h-screen bg-background">
       <Header onDiagnostico={() => setDiagOpen(true)} />
 
-      {/* Hero com capa */}
+      {/* Hero com capa AI */}
       <section className="relative pt-36 pb-16 md:pt-44 md:pb-20 overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-40"
+          style={{
+            backgroundImage: `url(${heroAi})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/85 to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(59,130,246,0.18),transparent_60%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(167,139,250,0.10),transparent_55%)]" />
         <div
