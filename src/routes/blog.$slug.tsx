@@ -153,7 +153,7 @@ function BlogPostPage() {
           {/* Conteúdo do post local */}
           {post.isLocal && post.content && (
             <div className="prose prose-invert prose-lg max-w-none mt-12 text-foreground/90 leading-relaxed">
-              {post.content.split(/\n\s*\n/).map((p, i) => (
+              {post.content.split(/\n\s*\n/).map((p: string, i: number) => (
                 <p key={i} className="mb-6 text-base md:text-lg">
                   {p.trim()}
                 </p>
