@@ -108,12 +108,12 @@ async function fetchOgImage(url: string): Promise<string | null> {
     const html = await res.text();
     // og:image / twitter:image
     const re =
-      /<meta[^>]+(?:property|name)=["'](?:og:image(?::secure_url)?|twitter:image)["'][^>]*content=["']([^"']+)["']/i;
+      /<meta[^>]+(?:property|name|itemprop)=["'](?:og:image(?::secure_url)?|twitter:image|image)["'][^>]*content=["']([^"']+)["']/i;
     const m = html.match(re) || html.match(
-      /<meta[^>]+content=["']([^"']+)["'][^>]*(?:property|name)=["'](?:og:image|twitter:image)["']/i,
+      /<meta[^>]+content=["']([^"']+)["'][^>]*(?:property|name|itemprop)=["'](?:og:image(?::secure_url)?|twitter:image|image)["']/i,
     );
     if (m) {
-      const src = m[1];
+      const src = decodeHtmlEntities(m[1]);
       // Resolve relative
       try {
         const abs = new URL(src, res.url).toString();
@@ -299,7 +299,7 @@ async function loadAll(): Promise<BlogPost[]> {
     .flat()
     .filter(isRelevant)
     .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
-  const unique = dedupe(merged).slice(0, 60);
+  const unique = dedupe(merged).slice(0, 100);
 
   // Resolve URLs do Google News para a fonte real e usa og:image/twitter:image da matéria original.
   const hydrated = unique.slice(0, 50);
@@ -307,7 +307,7 @@ async function loadAll(): Promise<BlogPost[]> {
   hydrated.forEach((p, i) => {
     p.link = resolved[i];
   });
-  const needsImage = hydrated.filter((p) => !p.image || isGoogleNewsUrl(p.link)).slice(0, 36);
+  const needsImage = hydrated.slice(0, 36);
   const imgs = await Promise.all(needsImage.map((p) => fetchOgImage(p.link)));
   needsImage.forEach((p, i) => {
     if (imgs[i]) p.image = imgs[i];
