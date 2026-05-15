@@ -148,8 +148,15 @@ export const saveBlogPost = createServerFn({ method: "POST" })
       if (error) throw new Error(error.message);
       const updated = mapRow(row as RawRow);
       if (updated.status === "published") {
+        // fire-and-forget: GSC + IndexNow + ping clássico de sitemap
         submitSitemapToGsc().catch((e) =>
           console.error("[saveBlogPost] sitemap resubmit failed:", e),
+        );
+        notifyPostPublished(updated.slug).catch((e) =>
+          console.error("[saveBlogPost] IndexNow failed:", e),
+        );
+        pingSitemap().catch((e) =>
+          console.error("[saveBlogPost] sitemap ping failed:", e),
         );
       }
       return updated;
@@ -163,9 +170,15 @@ export const saveBlogPost = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     const saved = mapRow(row as RawRow);
     if (saved.status === "published") {
-      // fire-and-forget: reenvio do sitemap ao GSC após publicação
+      // fire-and-forget: GSC + IndexNow + ping clássico de sitemap
       submitSitemapToGsc().catch((e) =>
         console.error("[saveBlogPost] sitemap resubmit failed:", e),
+      );
+      notifyPostPublished(saved.slug).catch((e) =>
+        console.error("[saveBlogPost] IndexNow failed:", e),
+      );
+      pingSitemap().catch((e) =>
+        console.error("[saveBlogPost] sitemap ping failed:", e),
       );
     }
     return saved;
