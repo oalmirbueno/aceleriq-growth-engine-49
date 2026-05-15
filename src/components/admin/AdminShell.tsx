@@ -15,6 +15,7 @@ import {
   Lock,
   LogOut,
   ScanSearch,
+  Sparkles,
 } from "lucide-react";
 
 const PASSWORD_KEY = "aceleriq_admin_password";
@@ -35,6 +36,7 @@ export function useAdmin(): AdminCtx {
 const NAV = [
   { to: "/admin", label: "Visão geral", icon: LayoutDashboard, exact: true },
   { to: "/admin/posts", label: "Posts", icon: FileText },
+  { to: "/admin/conteudo", label: "Conteúdo IA", icon: Sparkles },
   { to: "/admin/seo", label: "SEO", icon: Search },
   { to: "/admin/indexacao", label: "Indexação", icon: ScanSearch },
   { to: "/admin/leads", label: "Leads", icon: Users },
