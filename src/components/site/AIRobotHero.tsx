@@ -166,8 +166,9 @@ export function AIRobotHero() {
             className="h-full w-auto max-w-none object-contain object-bottom select-none pointer-events-none"
             style={{
               mixBlendMode: "screen",
+              // Crush near-black pixels to pure black so `screen` removes them cleanly
               filter:
-                "brightness(1.08) contrast(1.10) saturate(1.10) drop-shadow(0 0 22px oklch(85% 0.22 145 / 0.16)) drop-shadow(0 10px 18px oklch(0% 0 0 / 0.28))",
+                "brightness(1.15) contrast(1.35) saturate(1.12) drop-shadow(0 0 22px oklch(85% 0.22 145 / 0.16)) drop-shadow(0 10px 18px oklch(0% 0 0 / 0.28))",
             }}
           />
         </div>
