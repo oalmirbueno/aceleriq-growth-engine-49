@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
-import robotVideo from "@/assets/ai-robot-alive-v3.mp4.asset.json";
+import robotImage from "@/assets/ai-robot-3d.png";
 
 const LOGOS = [
   { slug: "huggingface",  label: "Hugging Face", x: "2%",  y: "8%",  size: 40, delay: 0 },
@@ -13,7 +13,6 @@ const LOGOS = [
 
 export function AIRobotHero() {
   const wrapRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   // Cursor (-1..1)
   const mx = useMotionValue(0);
@@ -67,37 +66,6 @@ export function AIRobotHero() {
       cancelAnimationFrame(raf);
     };
   }, [scrollTilt]);
-
-  // Hybrid playback: ambient looped playback + cursor adds offset (more variety, never freezes)
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    v.loop = true;
-    v.muted = true;
-    v.playbackRate = 0.85;
-    v.play().catch(() => {});
-
-    let raf = 0;
-    let baseT = 0;
-    let lastReal = performance.now();
-
-    const tick = (now: number) => {
-      const dur = v.duration;
-      if (dur && isFinite(dur)) {
-        const dt = (now - lastReal) / 1000;
-        lastReal = now;
-        // Ambient time advances on its own → continuous variety
-        baseT = (baseT + dt * v.playbackRate) % dur;
-        // Cursor adds a small offset so the robot reacts to mouse without freezing the loop
-        const offset = mx.get() * 0.6 + my.get() * 0.3;
-        const target = ((baseT + offset) % dur + dur) % dur;
-        try { v.currentTime = target; } catch { /* noop */ }
-      }
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [mx, my]);
 
   return (
     <div
@@ -161,15 +129,12 @@ export function AIRobotHero() {
         }}
       />
 
-      {/* Robot — new render without the black studio plate */}
-      <motion.video
-        ref={videoRef}
-        src={robotVideo.url}
-        muted
-        playsInline
-        autoPlay
-        loop
-        preload="auto"
+      {/* Robot — transparent asset, no black video plate */}
+      <motion.img
+        src={robotImage}
+        alt="Robô de IA 3D da Aceleriq"
+        loading="eager"
+        decoding="async"
         width={1024}
         height={1280}
         className="relative z-10 h-[120%] w-auto max-w-none object-contain object-bottom select-none pointer-events-none"
@@ -179,10 +144,6 @@ export function AIRobotHero() {
           x: xShift,
           transformOrigin: "50% 100%",
           transformStyle: "preserve-3d",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 68% 88% at 50% 50%, black 0 76%, rgba(0,0,0,.8) 88%, transparent 100%)",
-          maskImage:
-            "radial-gradient(ellipse 68% 88% at 50% 50%, black 0 76%, rgba(0,0,0,.8) 88%, transparent 100%)",
           filter:
             "brightness(1.06) contrast(1.08) saturate(1.08) drop-shadow(0 0 26px oklch(85% 0.22 145 / 0.14)) drop-shadow(0 14px 24px oklch(0% 0 0 / 0.26))",
         }}
