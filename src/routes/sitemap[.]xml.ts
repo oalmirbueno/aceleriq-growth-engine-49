@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { loadSitemapPosts } from "@/lib/blog.functions";
+import { LP_TEMA_SLUGS } from "@/lib/lp-temas";
 
 const BASE_URL = "https://aceleriq.com.br";
 const TODAY = new Date().toISOString().slice(0, 10);
