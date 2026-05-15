@@ -18,7 +18,7 @@ export interface DiagnosticoLeadRow {
   faturamento_mensal: string;
   principal_gargalo: string;
   interesse_principal: string;
-  respostas: Record<string, unknown>;
+  respostas: Record<string, never>;
   score: number;
   classificacao: string;
   recomendacoes: unknown;
