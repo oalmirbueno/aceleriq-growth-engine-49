@@ -101,7 +101,7 @@ function BlogPostPage() {
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/95 to-background" />
-        <div className="container-aceleriq max-w-4xl">
+        <div className="container-aceleriq max-w-4xl relative z-10">
           <Link
             to="/blog"
             className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.22em] text-muted-foreground hover:text-primary transition-colors mb-10"
