@@ -12,7 +12,7 @@ const LOGOS = [
 
 export function AIRobotHero() {
   return (
-    <div className="relative mx-auto w-full max-w-[560px] aspect-[4/5]">
+    <div className="relative mx-auto w-full max-w-[560px] aspect-[3/4] overflow-visible">
       {/* Ambient green glow */}
       <div
         aria-hidden
