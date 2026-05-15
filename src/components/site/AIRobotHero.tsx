@@ -100,6 +100,65 @@ export function AIRobotHero() {
     return () => cancelAnimationFrame(raf);
   }, [mx, my]);
 
+  // Remove the dark video plate frame-by-frame and render only the robot.
+  useEffect(() => {
+    const v = videoRef.current;
+    const canvas = canvasRef.current;
+    if (!v || !canvas) return;
+
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    if (!ctx) return;
+
+    let raf = 0;
+    let lastW = 0;
+    let lastH = 0;
+
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      const w = Math.max(360, Math.round(rect.width * dpr));
+      const h = Math.max(450, Math.round(rect.height * dpr));
+      if (w !== lastW || h !== lastH) {
+        lastW = w;
+        lastH = h;
+        canvas.width = w;
+        canvas.height = h;
+      }
+    };
+
+    const draw = () => {
+      resize();
+      if (v.readyState >= 2 && canvas.width && canvas.height) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(v, 0, 0, canvas.width, canvas.height);
+
+        const frame = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = frame.data;
+        for (let i = 0; i < data.length; i += 4) {
+          const r = data[i];
+          const g = data[i + 1];
+          const b = data[i + 2];
+          const max = Math.max(r, g, b);
+          const greenGlow = g > r * 1.15 && g > b * 1.08;
+          if (max < 36) {
+            data[i + 3] = 0;
+          } else if (max < 76 && !greenGlow) {
+            data[i + 3] = Math.max(0, (max - 36) * 5);
+          }
+        }
+        ctx.putImageData(frame, 0, 0);
+      }
+      raf = requestAnimationFrame(draw);
+    };
+
+    raf = requestAnimationFrame(draw);
+    window.addEventListener("resize", resize);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
+
   return (
     <div
       ref={wrapRef}
