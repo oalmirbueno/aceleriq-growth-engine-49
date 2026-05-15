@@ -173,7 +173,7 @@ function BlogPostPage() {
           <div className="container-aceleriq max-w-5xl">
             <h2 className="text-2xl font-display font-semibold mb-6">Continue lendo</h2>
             <div className="grid gap-5 md:grid-cols-3">
-              {related.map((r) => (
+              {related.map((r: typeof related[number]) => (
                 <Link
                   key={r.slug}
                   to="/blog/$slug"
@@ -197,7 +197,7 @@ function BlogPostPage() {
       )}
 
       <Footer />
-      <DiagnosticoModal open={diagOpen} onClose={() => setDiagOpen(false)} />
+      <DiagnosticoModal open={diagOpen} onOpenChange={setDiagOpen} />
     </div>
   );
 }

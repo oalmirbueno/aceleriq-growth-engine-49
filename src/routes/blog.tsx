@@ -164,7 +164,7 @@ function BlogIndex() {
       </section>
 
       <Footer />
-      <DiagnosticoModal open={diagOpen} onClose={() => setDiagOpen(false)} />
+      <DiagnosticoModal open={diagOpen} onOpenChange={setDiagOpen} />
     </div>
   );
 }
