@@ -2,19 +2,17 @@ import { motion } from "framer-motion";
 import robotImg from "@/assets/ai-robot-3d.png";
 
 const LOGOS = [
-  { slug: "n8n",          label: "n8n",      x: "4%",  y: "10%", size: 44, delay: 0   },
-  { slug: "openai",       label: "OpenAI",   x: "86%", y: "8%",  size: 50, delay: 0.4 },
-  { slug: "anthropic",    label: "Claude",   x: "92%", y: "40%", size: 40, delay: 0.8 },
-  { slug: "make",         label: "Make",     x: "88%", y: "70%", size: 38, delay: 1.2 },
-  { slug: "zapier",       label: "Zapier",   x: "2%",  y: "44%", size: 42, delay: 1.6 },
-  { slug: "googlegemini", label: "Gemini",   x: "6%",  y: "74%", size: 44, delay: 2.0 },
-  { slug: "whatsapp",     label: "WhatsApp", x: "78%", y: "88%", size: 38, delay: 2.4 },
-  { slug: "meta",         label: "Meta",     x: "18%", y: "92%", size: 40, delay: 2.8 },
+  { slug: "openai",       label: "OpenAI",   x: "10%", y: "20%", size: 46, delay: 0   },
+  { slug: "anthropic",    label: "Claude",   x: "80%", y: "16%", size: 42, delay: 0.4 },
+  { slug: "n8n",          label: "n8n",      x: "84%", y: "50%", size: 40, delay: 0.8 },
+  { slug: "make",         label: "Make",     x: "14%", y: "54%", size: 38, delay: 1.2 },
+  { slug: "googlegemini", label: "Gemini",   x: "74%", y: "80%", size: 42, delay: 1.6 },
+  { slug: "whatsapp",     label: "WhatsApp", x: "20%", y: "84%", size: 38, delay: 2.0 },
 ];
 
 export function AIRobotHero() {
   return (
-    <div className="relative mx-auto w-full max-w-[560px] aspect-[4/5]">
+    <div className="relative mx-auto w-full max-w-[560px] aspect-[3/4] overflow-visible">
       {/* Ambient green glow */}
       <div
         aria-hidden
@@ -84,10 +82,6 @@ export function AIRobotHero() {
         style={{
           filter:
             "drop-shadow(0 40px 60px oklch(0% 0 0 / 0.7)) drop-shadow(0 0 50px oklch(85% 0.22 145 / 0.3)) drop-shadow(0 0 90px oklch(85% 0.22 145 / 0.18))",
-          maskImage:
-            "radial-gradient(ellipse 75% 85% at 50% 45%, black 55%, rgba(0,0,0,0.85) 70%, transparent 100%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 75% 85% at 50% 45%, black 55%, rgba(0,0,0,0.85) 70%, transparent 100%)",
         }}
       />
 
