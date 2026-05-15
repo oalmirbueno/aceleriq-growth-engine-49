@@ -453,7 +453,7 @@ function BlogPostPage() {
       )}
 
       <Footer />
-      <DiagnosticoModal open={diagOpen} onOpenChange={setDiagOpen} />
+      <DiagnosticoModal open={diagOpen} onOpenChange={setDiagOpen} origem={`blog:${post.slug}`} />
     </div>
   );
 }
