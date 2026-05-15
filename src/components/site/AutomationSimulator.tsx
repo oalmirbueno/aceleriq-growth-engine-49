@@ -40,7 +40,7 @@ export function AutomationSimulator() {
   const removeNode = (i: number) => { if (!running) setFlow((f) => f.filter((_, idx) => idx !== i)); };
 
   return (
-    <section className="relative px-6 lg:px-16 py-20 md:py-28 border-t border-border/60 max-w-7xl mx-auto">
+    <section className="relative px-6 lg:px-16 py-20 md:py-28 border-t border-border/60 max-w-[1600px] mx-auto">
       <div className="grid lg:grid-cols-12 gap-8 mb-10">
         <div className="lg:col-span-2 font-mono text-[10px] text-primary uppercase tracking-[0.2em] lg:pt-2">
           ⚙ Sandbox
