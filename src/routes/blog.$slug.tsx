@@ -37,8 +37,8 @@ export const Route = createFileRoute("/blog/$slug")({
         { name: "twitter:description", content: desc },
         ...(post.image ? [{ name: "twitter:image", content: post.image }] : []),
       ],
-      // Canonical aponta para a fonte original (boa prática para conteúdo sindicado).
-      links: [{ rel: "canonical", href: post.link }],
+      // Canonical: posts locais apontam para nossa URL; posts curados apontam para a fonte original.
+      links: [{ rel: "canonical", href: post.isLocal ? url : post.link }],
       scripts: [
         {
           type: "application/ld+json",
