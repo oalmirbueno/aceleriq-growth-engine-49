@@ -17,6 +17,7 @@ import {
  createLinkerState,
  injectInternalLinks,
 } from "@/lib/internal-links";
+import { LP_TEMAS, temaForCategory } from "@/lib/lp-temas";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: async ({ params }) => {
