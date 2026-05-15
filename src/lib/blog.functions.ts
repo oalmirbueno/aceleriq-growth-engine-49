@@ -8,6 +8,7 @@ import {
   type FeedSource,
 } from "./blog-feeds";
 import { LOCAL_POSTS } from "./blog-local-posts";
+import { scrapeArticle, translateArticleToPt, translateBatchTitles } from "./blog-enrich.server";
 
 export interface BlogPost {
   slug: string;
