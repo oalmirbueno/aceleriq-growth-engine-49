@@ -1,16 +1,16 @@
 import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, Clock, ExternalLink, Rss, Search } from "lucide-react";
+import { ArrowRight, Clock, Rss, Search, Sparkles } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { DiagnosticoModal } from "@/components/site/DiagnosticoModal";
 import { CATEGORIES, type FeedCategory } from "@/lib/blog-feeds";
 import { fetchBlogPosts, type BlogPost } from "@/lib/blog.functions";
 
-const PAGE_TITLE = "Blog Aceleriq · IA, Automação e Crescimento";
+const PAGE_TITLE = "Blog Aceleriq · IA, Automação, Tráfego e Crescimento";
 const PAGE_DESCRIPTION =
-  "Curadoria diária das melhores fontes do mundo sobre IA, automação, marketing, vendas e crescimento — com a leitura da Aceleriq.";
+  "Curadoria em tempo real sobre IA aplicada, automação, tráfego pago, vendas e crescimento, com a leitura estratégica da Aceleriq.";
 const PAGE_URL = "https://aceleriq.com.br/blog";
 const OG_IMAGE = "https://aceleriq.com.br/og-image.jpg";
 
@@ -83,26 +83,51 @@ function BlogIndex() {
     <div className="min-h-screen bg-background">
       <Header onDiagnostico={() => setDiagOpen(true)} />
 
-      {/* Hero */}
+      {/* Hero com capa */}
       <section className="relative pt-36 pb-16 md:pt-44 md:pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(59,130,246,0.12),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(59,130,246,0.18),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(167,139,250,0.10),transparent_55%)]" />
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.6) 1px, transparent 1px)",
+            backgroundSize: "56px 56px",
+            maskImage: "radial-gradient(ellipse at center, black 40%, transparent 75%)",
+          }}
+        />
         <div className="container-aceleriq relative">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <div className="inline-flex items-center gap-2 border border-primary/30 bg-primary/5 px-3 py-1 mb-6">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
+              </span>
               <Rss className="h-3 w-3 text-primary" />
-              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary">Live Intelligence Feed</span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary">
+                Live Intelligence Feed
+              </span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-display font-semibold tracking-tight text-foreground max-w-4xl">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-semibold tracking-tight text-foreground max-w-4xl leading-[1.05]">
               Inteligência de mercado <span className="text-primary">em tempo real</span>.
             </h1>
-            <p className="mt-5 max-w-2xl text-base md:text-lg text-muted-foreground">
-              Curadoria contínua das fontes mais confiáveis do mundo em IA, automação, crescimento e negócios — com a
-              leitura da Aceleriq.
+            <p className="mt-6 max-w-2xl text-base md:text-lg text-muted-foreground leading-relaxed">
+              Curadoria contínua das fontes mais confiáveis do mundo em IA aplicada, automação, tráfego pago, vendas e
+              crescimento. Filtrado pela ótica da Aceleriq, sem ruído.
             </p>
+            <div className="mt-6 flex flex-wrap items-center gap-4 text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">
+              <span className="inline-flex items-center gap-1.5">
+                <Sparkles className="h-3 w-3 text-primary" /> Curadoria por IA
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <Clock className="h-3 w-3 text-primary" /> Atualizado a cada 10 min
+              </span>
+            </div>
           </motion.div>
 
           {/* Filters */}
-          <div className="mt-10 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div className="mt-12 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div className="flex flex-wrap gap-2">
               <FilterPill active={cat === "all"} onClick={() => setCat("all")}>
                 Tudo
@@ -274,7 +299,7 @@ function PostCard({ post, index }: { post: BlogPost; index: number }) {
               <Clock className="h-3 w-3" /> {timeAgo(post.publishedAt)}
             </span>
             <span className="inline-flex items-center gap-1 text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-              Abrir <ExternalLink className="h-3 w-3" />
+              Ler análise <ArrowRight className="h-3 w-3" />
             </span>
           </div>
         </div>
