@@ -133,18 +133,44 @@ export function AIRobotHero() {
         ctx.drawImage(v, 0, 0, canvas.width, canvas.height);
 
         const frame = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const data = frame.data;
-        for (let i = 0; i < data.length; i += 4) {
+        const { width: w, height: h, data } = frame;
+        const outside = new Uint8Array(w * h);
+        const stack: number[] = [];
+        const isPlate = (p: number) => {
+          const i = p * 4;
           const r = data[i];
           const g = data[i + 1];
           const b = data[i + 2];
           const max = Math.max(r, g, b);
-          const greenGlow = g > r * 1.15 && g > b * 1.08;
-          if (max < 36) {
-            data[i + 3] = 0;
-          } else if (max < 76 && !greenGlow) {
-            data[i + 3] = Math.max(0, (max - 36) * 5);
+          const min = Math.min(r, g, b);
+          return max < 82 && max - min < 34;
+        };
+        const push = (p: number) => {
+          if (!outside[p] && isPlate(p)) {
+            outside[p] = 1;
+            stack.push(p);
           }
+        };
+
+        for (let x = 0; x < w; x++) {
+          push(x);
+          push((h - 1) * w + x);
+        }
+        for (let y = 0; y < h; y++) {
+          push(y * w);
+          push(y * w + w - 1);
+        }
+        while (stack.length) {
+          const p = stack.pop()!;
+          const x = p % w;
+          if (x > 0) push(p - 1);
+          if (x < w - 1) push(p + 1);
+          if (p >= w) push(p - w);
+          if (p < w * (h - 1)) push(p + w);
+        }
+
+        for (let p = 0; p < outside.length; p++) {
+          if (outside[p]) data[p * 4 + 3] = 0;
         }
         ctx.putImageData(frame, 0, 0);
       }
