@@ -21,7 +21,7 @@ export interface DiagnosticoLeadRow {
   respostas: Record<string, never>;
   score: number;
   classificacao: string;
-  recomendacoes: unknown;
+  recomendacoes: string[] | Record<string, never>;
   origem: string | null;
 }
 
