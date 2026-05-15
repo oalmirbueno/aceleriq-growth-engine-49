@@ -51,6 +51,24 @@ const FAQS_JSONLD = {
   })),
 };
 
+const BREADCRUMB_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://aceleriq.com.br/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Aceleriq",
+    },
+  ],
+};
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -66,6 +84,10 @@ export const Route = createFileRoute("/")({
       {
         type: "application/ld+json",
         children: JSON.stringify(FAQS_JSONLD),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(BREADCRUMB_JSONLD),
       },
     ],
   }),
