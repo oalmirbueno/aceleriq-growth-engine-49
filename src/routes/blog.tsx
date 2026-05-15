@@ -7,6 +7,8 @@ import { Footer } from "@/components/site/Footer";
 import { DiagnosticoModal } from "@/components/site/DiagnosticoModal";
 import { CATEGORIES, type FeedCategory } from "@/lib/blog-feeds";
 import { fetchBlogPosts, type BlogPost } from "@/lib/blog.functions";
+import { categoryCover } from "@/lib/blog-covers";
+import heroAi from "@/assets/blog-hero-ai.jpg";
 
 const PAGE_TITLE = "Blog Aceleriq · IA, Automação, Tráfego e Crescimento";
 const PAGE_DESCRIPTION =
