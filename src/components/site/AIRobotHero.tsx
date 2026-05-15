@@ -42,7 +42,7 @@ export function AIRobotHero() {
         />
       ))}
 
-      {/* Robot — large 3D asset, shifted so the cropped arm exits the composition */}
+      {/* Robot — centered in its column, properly proportional */}
       <motion.img
         src={robotImg}
         alt="Agente de IA 3D · Aceleriq"
@@ -50,7 +50,7 @@ export function AIRobotHero() {
         height={1280}
         loading="eager"
         decoding="async"
-        className="relative z-10 h-[122%] w-[122%] max-w-none object-contain py-[10px] mx-[297px]"
+        className="relative z-10 h-full w-full max-w-none object-contain"
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: [0, -8, 0] }}
         transition={{
@@ -58,8 +58,6 @@ export function AIRobotHero() {
           y: { duration: 7, repeat: Infinity, ease: "easeInOut" },
         }}
         style={{
-          transform: "scale(1.15) translateX(8%)",
-          transformOrigin: "right center",
           filter:
             "drop-shadow(0 30px 50px oklch(0% 0 0 / 0.55)) drop-shadow(0 0 60px oklch(85% 0.22 145 / 0.28)) drop-shadow(0 0 110px oklch(85% 0.22 145 / 0.16))",
         }}
