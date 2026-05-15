@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import robotImg from "@/assets/ai-robot-3d.png";
 
 const LOGOS = [
-  { slug: "openai",       label: "OpenAI",   x: "10%", y: "20%", size: 46, delay: 0   },
+  { slug: "huggingface",  label: "Hugging Face", x: "10%", y: "20%", size: 46, delay: 0 },
   { slug: "anthropic",    label: "Claude",   x: "80%", y: "16%", size: 42, delay: 0.4 },
   { slug: "n8n",          label: "n8n",      x: "84%", y: "50%", size: 40, delay: 0.8 },
   { slug: "make",         label: "Make",     x: "14%", y: "54%", size: 38, delay: 1.2 },
@@ -97,13 +97,23 @@ export function AIRobotHero() {
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Soft contact shadow */}
+      {/* Bottom shadow overlay — fades the lower area into the page (above the robot) */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 bottom-[6%] z-[5] h-10 w-[60%] -translate-x-1/2 blur-2xl"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-[40%]"
         style={{
           background:
-            "radial-gradient(ellipse at center, oklch(0% 0 0 / 0.7), transparent 70%)",
+            "linear-gradient(to top, oklch(0% 0 0 / 0.85) 0%, oklch(0% 0 0 / 0.55) 35%, oklch(0% 0 0 / 0.2) 70%, transparent 100%)",
+        }}
+      />
+
+      {/* Soft contact shadow ellipse */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 bottom-[4%] z-[21] h-12 w-[65%] -translate-x-1/2 blur-2xl"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, oklch(0% 0 0 / 0.85), transparent 70%)",
         }}
       />
     </div>
