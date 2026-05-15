@@ -64,6 +64,51 @@ export const SERVICE_LINK_TARGETS: LinkTarget[] = [
   },
 ];
 
+/** Landing-page key sections (Diagnóstico, Método, Sobre) — concentra autoridade nos hubs de conversão. */
+export const LANDING_LINK_TARGETS: LinkTarget[] = [
+  {
+    href: "/#diagnostico",
+    title: "Diagnóstico Aceleriq gratuito",
+    keywords: [
+      "diagnóstico gratuito",
+      "diagnostico gratuito",
+      "diagnóstico de marketing",
+      "diagnostico de marketing",
+      "diagnóstico estratégico",
+      "diagnostico estrategico",
+      "diagnóstico aceleriq",
+      "diagnostico aceleriq",
+    ],
+  },
+  {
+    href: "/#metodo",
+    title: "Método Aceleriq",
+    keywords: [
+      "método aceleriq",
+      "metodo aceleriq",
+      "método de aceleração",
+      "metodo de aceleracao",
+      "framework de crescimento",
+      "framework comercial",
+      "processo de aceleração",
+      "processo de aceleracao",
+    ],
+  },
+  {
+    href: "/sobre-a-aceleriq",
+    title: "Sobre a Aceleriq",
+    keywords: [
+      "sobre a aceleriq",
+      "quem é a aceleriq",
+      "quem e a aceleriq",
+      "história da aceleriq",
+      "historia da aceleriq",
+      "agência aceleriq",
+      "agencia aceleriq",
+    ],
+  },
+];
+
 /** Build keyword targets from related posts (title-based, conservative). */
 export function buildPostLinkTargets(
   posts: { slug: string; title: string }[],
