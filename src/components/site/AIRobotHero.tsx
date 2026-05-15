@@ -97,20 +97,20 @@ export function AIRobotHero() {
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Bottom shadow overlay — fades the lower area into the page (above the robot) */}
+      {/* Bottom soft shadow — radial ellipse, no square edges */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-[40%]"
+        className="pointer-events-none absolute left-1/2 bottom-[2%] z-20 h-[28%] w-[85%] -translate-x-1/2 blur-2xl"
         style={{
           background:
-            "linear-gradient(to top, oklch(0% 0 0 / 0.85) 0%, oklch(0% 0 0 / 0.55) 35%, oklch(0% 0 0 / 0.2) 70%, transparent 100%)",
+            "radial-gradient(ellipse 60% 90% at 50% 100%, oklch(0% 0 0 / 0.9) 0%, oklch(0% 0 0 / 0.55) 35%, transparent 75%)",
         }}
       />
 
-      {/* Soft contact shadow ellipse */}
+      {/* Contact shadow ellipse — tight under the robot */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 bottom-[4%] z-[21] h-12 w-[65%] -translate-x-1/2 blur-2xl"
+        className="pointer-events-none absolute left-1/2 bottom-[3%] z-[21] h-8 w-[55%] -translate-x-1/2 blur-xl"
         style={{
           background:
             "radial-gradient(ellipse at center, oklch(0% 0 0 / 0.85), transparent 70%)",
