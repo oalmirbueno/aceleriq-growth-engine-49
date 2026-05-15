@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useLocation } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowRight, Clock, Rss, Search, Sparkles } from "lucide-react";
 import { Header } from "@/components/site/Header";
@@ -53,8 +53,14 @@ export const Route = createFileRoute("/blog")({
       },
     ],
   }),
-  component: BlogIndex,
+  component: BlogRouteShell,
 });
+
+function BlogRouteShell() {
+  const { pathname } = useLocation();
+  if (pathname.startsWith("/blog/") && pathname !== "/blog") return <Outlet />;
+  return <BlogIndex />;
+}
 
 function timeAgo(iso: string): string {
   const diff = (Date.now() - +new Date(iso)) / 1000;
