@@ -9,6 +9,8 @@ import {
 } from "./blog-feeds";
 import { LOCAL_POSTS } from "./blog-local-posts";
 import { scrapeArticle, translateArticleToPt, translateBatchTitles } from "./blog-enrich.server";
+import { fetchPublishedAdminPosts } from "./blog-posts.functions";
+import type { AdminBlogPost } from "./blog-posts-types";
 
 export interface BlogPost {
   slug: string;
