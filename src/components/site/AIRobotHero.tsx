@@ -3,14 +3,14 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import robotImg from "@/assets/ai-robot-3d.png";
 
 const LOGOS = [
-  { slug: "n8n", label: "n8n", x: "4%", y: "8%", size: 44, delay: 0 },
-  { slug: "openai", label: "OpenAI", x: "82%", y: "6%", size: 50, delay: 0.4 },
-  { slug: "anthropic", label: "Claude", x: "90%", y: "38%", size: 42, delay: 0.8 },
-  { slug: "make", label: "Make", x: "88%", y: "70%", size: 40, delay: 1.2 },
-  { slug: "zapier", label: "Zapier", x: "2%", y: "44%", size: 42, delay: 1.6 },
-  { slug: "googlegemini", label: "Gemini", x: "6%", y: "74%", size: 44, delay: 2.0 },
-  { slug: "whatsapp", label: "WhatsApp", x: "70%", y: "88%", size: 38, delay: 2.4 },
-  { slug: "meta", label: "Meta", x: "20%", y: "92%", size: 40, delay: 2.8 },
+  { slug: "n8n",          label: "n8n",      x: "2%",  y: "6%",  size: 54, depth: -120, delay: 0,   drift: 14 },
+  { slug: "openai",       label: "OpenAI",   x: "84%", y: "4%",  size: 60, depth:   60, delay: 0.5, drift: 18 },
+  { slug: "anthropic",    label: "Claude",   x: "92%", y: "34%", size: 48, depth: -80,  delay: 1.0, drift: 12 },
+  { slug: "make",         label: "Make",     x: "90%", y: "66%", size: 46, depth:  40,  delay: 1.5, drift: 16 },
+  { slug: "zapier",       label: "Zapier",   x: "0%",  y: "40%", size: 50, depth:  80,  delay: 2.0, drift: 14 },
+  { slug: "googlegemini", label: "Gemini",   x: "4%",  y: "70%", size: 52, depth: -60,  delay: 2.5, drift: 18 },
+  { slug: "whatsapp",     label: "WhatsApp", x: "72%", y: "84%", size: 44, depth: -40,  delay: 3.0, drift: 12 },
+  { slug: "meta",         label: "Meta",     x: "16%", y: "88%", size: 46, depth:  100, delay: 3.5, drift: 16 },
 ];
 
 export function AIRobotHero() {
