@@ -23,7 +23,7 @@ export interface AdminBlogPost {
   seo_title: string | null;
   seo_description: string | null;
   focus_keyword: string | null;
-  review_notes: Record<string, unknown>;
+  review_notes: SeoCheckReport | Record<string, never>;
   author: string;
   published_at: string | null;
   created_at: string;
