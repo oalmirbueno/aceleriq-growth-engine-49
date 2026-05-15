@@ -143,12 +143,6 @@ function BlogIndex() {
   );
 }
 
-// Read parent /blog loader data via the route hierarchy.
-import { useLoaderData } from "@tanstack/react-router";
-function useParentLoaderData(): { posts: BlogPost[] } {
-  return useLoaderData({ from: "/blog" }) as { posts: BlogPost[] };
-}
-
 function FilterPill({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
   return (
     <button
