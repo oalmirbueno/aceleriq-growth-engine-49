@@ -14,7 +14,7 @@ export function AIRobotHero() {
   return (
     <div
       className="relative mx-auto w-full max-w-[680px] aspect-[3/4] overflow-visible"
-      style={{ marginBottom: "-12%" }}
+      style={{ marginBottom: "-22%" }}
     >
       {/* Ambient green glow — blends with page background */}
       <div
