@@ -64,6 +64,51 @@ export const SERVICE_LINK_TARGETS: LinkTarget[] = [
   },
 ];
 
+/** Landing-page key sections (Diagnóstico, Método, Sobre) — concentra autoridade nos hubs de conversão. */
+export const LANDING_LINK_TARGETS: LinkTarget[] = [
+  {
+    href: "/#diagnostico",
+    title: "Diagnóstico Aceleriq gratuito",
+    keywords: [
+      "diagnóstico gratuito",
+      "diagnostico gratuito",
+      "diagnóstico de marketing",
+      "diagnostico de marketing",
+      "diagnóstico estratégico",
+      "diagnostico estrategico",
+      "diagnóstico aceleriq",
+      "diagnostico aceleriq",
+    ],
+  },
+  {
+    href: "/#metodo",
+    title: "Método Aceleriq",
+    keywords: [
+      "método aceleriq",
+      "metodo aceleriq",
+      "método de aceleração",
+      "metodo de aceleracao",
+      "framework de crescimento",
+      "framework comercial",
+      "processo de aceleração",
+      "processo de aceleracao",
+    ],
+  },
+  {
+    href: "/sobre-a-aceleriq",
+    title: "Sobre a Aceleriq",
+    keywords: [
+      "sobre a aceleriq",
+      "quem é a aceleriq",
+      "quem e a aceleriq",
+      "história da aceleriq",
+      "historia da aceleriq",
+      "agência aceleriq",
+      "agencia aceleriq",
+    ],
+  },
+];
+
 /** Build keyword targets from related posts (title-based, conservative). */
 export function buildPostLinkTargets(
   posts: { slug: string; title: string }[],
@@ -206,4 +251,56 @@ export function injectInternalLinks(
 
     return child;
   });
+}
+
+/**
+ * Sugere (sem inserir) os primeiros N links internos que o auto-linker injetaria
+ * dado um texto bruto (markdown/string). Útil para pré-visualização editorial.
+ */
+export function suggestInternalLinks(
+  text: string,
+  targets: LinkTarget[],
+  maxLinks = 8,
+): Array<{ href: string; title?: string; matchedKeyword: string; context: string }> {
+  const state = createLinkerState(maxLinks);
+  const out: Array<{ href: string; title?: string; matchedKeyword: string; context: string }> = [];
+  let rest = text;
+  while (rest && state.total < state.maxLinks) {
+    const m = findFirstMatchExternal(rest, targets, state);
+    if (!m) break;
+    const ctxStart = Math.max(0, m.start - 40);
+    const ctxEnd = Math.min(rest.length, m.end + 40);
+    out.push({
+      href: m.target.href,
+      title: m.target.title,
+      matchedKeyword: rest.slice(m.start, m.end),
+      context: (ctxStart > 0 ? "…" : "") + rest.slice(ctxStart, ctxEnd) + (ctxEnd < rest.length ? "…" : ""),
+    });
+    state.used.set(m.target.href, 1);
+    state.total += 1;
+    rest = rest.slice(m.end);
+  }
+  return out;
+}
+
+// Re-export the matcher for the suggest helper (mirror of internal findFirstMatch).
+function findFirstMatchExternal(
+  text: string,
+  targets: LinkTarget[],
+  state: State,
+): { start: number; end: number; target: LinkTarget } | null {
+  let best: { start: number; end: number; target: LinkTarget } | null = null;
+  for (const t of targets) {
+    if (state.used.has(t.href)) continue;
+    for (const kw of t.keywords) {
+      const re = new RegExp(`\\b${kw.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "i");
+      const m = re.exec(text);
+      if (m && m.index >= 0) {
+        if (!best || m.index < best.start) {
+          best = { start: m.index, end: m.index + m[0].length, target: t };
+        }
+      }
+    }
+  }
+  return best;
 }
