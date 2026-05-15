@@ -218,7 +218,20 @@ function ResultCard({ r }: { r: UrlIndexCheck }) {
 function IndexCheckPage() {
   const { password } = useAdmin();
   const check = useServerFn(checkUrlsIndexation);
+  const overviewFn = useServerFn(getIndexationOverview);
+  const triggerFn = useServerFn(triggerIndexationCheck);
   const [customUrls, setCustomUrls] = useState("");
+
+  const overview = useQuery({
+    queryKey: ["indexation-overview"],
+    queryFn: () => overviewFn({ data: { password } }),
+    refetchOnWindowFocus: false,
+  });
+
+  const triggerMut = useMutation({
+    mutationFn: () => triggerFn({ data: { password } }),
+    onSuccess: () => overview.refetch(),
+  });
 
   const mut = useMutation({
     mutationFn: async (urls?: string[]) => check({ data: { password, urls } }),
