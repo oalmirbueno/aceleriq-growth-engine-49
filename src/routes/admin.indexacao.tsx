@@ -1,9 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState } from "react";
 import { useAdmin } from "@/components/admin/AdminShell";
 import { checkUrlsIndexation, type UrlIndexCheck } from "@/lib/index-check.functions";
+import {
+  getIndexationOverview,
+  triggerIndexationCheck,
+  type IndexationAlert,
+} from "@/lib/indexation-alerts.functions";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
@@ -14,7 +19,9 @@ import {
   CheckCircle2,
   XCircle,
   AlertCircle,
+  AlertTriangle,
   ImageIcon,
+  Bell,
 } from "lucide-react";
 
 export const Route = createFileRoute("/admin/indexacao")({
