@@ -97,10 +97,6 @@ export const Route = createFileRoute("/blog/")({
 });
 
 function timeAgo(iso: string): string {
-  const diff = (Date.now() - +new Date(iso)) / 1000;
-  if (diff < 3600) return `${Math.max(1, Math.round(diff / 60))} min`;
-  if (diff < 86400) return `${Math.round(diff / 3600)} h`;
-  if (diff < 86400 * 30) return `${Math.round(diff / 86400)} d`;
   return new Date(iso).toLocaleDateString("pt-BR", { day: "2-digit", month: "short" });
 }
 
@@ -108,7 +104,7 @@ function BlogIndex() {
   const [diagOpen, setDiagOpen] = useState(false);
   const [cat, setCat] = useState<FeedCategory | "all">("all");
   const [q, setQ] = useState("");
-  const { posts } = Route.useLoaderData() as { posts: BlogPost[] };
+  const { posts = [] } = (Route.useLoaderData() ?? {}) as { posts?: BlogPost[] };
   const filtered = useMemo(() => {
     return posts.filter((p) => {
       if (cat !== "all" && p.category !== cat) return false;
@@ -247,7 +243,8 @@ function FeaturedCard({ post }: { post: BlogPost }) {
           <img
             src={post.image || categoryCover(post.category)}
             alt=""
-            loading="lazy"
+              loading="eager"
+              fetchPriority="high"
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent" />
