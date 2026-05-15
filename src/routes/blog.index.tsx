@@ -1,21 +1,98 @@
 import { useMemo, useState } from "react";
-import { createFileRoute, Link, useLoaderData } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Clock, Rss, Search, Sparkles } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { DiagnosticoModal } from "@/components/site/DiagnosticoModal";
 import { CATEGORIES, type FeedCategory } from "@/lib/blog-feeds";
-import { type BlogPost } from "@/lib/blog.functions";
+import { fetchBlogPosts, type BlogPost } from "@/lib/blog.functions";
 import { categoryCover } from "@/lib/blog-covers";
 import heroAi from "@/assets/blog-hero-ai.jpg";
 
+const PAGE_TITLE = "Blog Aceleriq · IA, Automação, Tráfego e Crescimento";
+const PAGE_DESCRIPTION =
+  "Curadoria em tempo real sobre IA aplicada, automação, tráfego pago, vendas e crescimento, com a leitura estratégica da Aceleriq.";
 const PAGE_URL = "https://aceleriq.com.br/blog";
+const OG_IMAGE = "https://aceleriq.com.br/og-image.jpg";
 
 export const Route = createFileRoute("/blog/")({
-  head: () => ({
-    links: [{ rel: "canonical", href: PAGE_URL }],
-  }),
+  loader: async () => {
+    try {
+      return await fetchBlogPosts();
+    } catch {
+      return { posts: [] as BlogPost[] };
+    }
+  },
+  head: ({ loaderData }) => {
+    const posts = (loaderData?.posts ?? []).slice(0, 12);
+    const blogJsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      name: "Blog Aceleriq",
+      url: PAGE_URL,
+      description: PAGE_DESCRIPTION,
+      inLanguage: "pt-BR",
+      publisher: {
+        "@type": "Organization",
+        name: "Aceleriq",
+        url: "https://aceleriq.com.br",
+        logo: { "@type": "ImageObject", url: "https://aceleriq.com.br/icon-512.png" },
+      },
+      blogPost: posts.map((p) => ({
+        "@type": "BlogPosting",
+        headline: p.title.slice(0, 110),
+        url: `${PAGE_URL}/${p.slug}`,
+        datePublished: p.publishedAt,
+        articleSection: p.category,
+        image: p.image || undefined,
+        author: {
+          "@type": p.isLocal ? "Organization" : "Person",
+          name: p.author || (p.isLocal ? "Aceleriq" : p.source),
+        },
+      })),
+    };
+    const itemListJsonLd = {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      itemListOrder: "https://schema.org/ItemListOrderDescending",
+      numberOfItems: posts.length,
+      itemListElement: posts.map((p, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: `${PAGE_URL}/${p.slug}`,
+        name: p.title,
+      })),
+    };
+    const breadcrumbJsonLd = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://aceleriq.com.br" },
+        { "@type": "ListItem", position: 2, name: "Blog", item: PAGE_URL },
+      ],
+    };
+    return {
+      meta: [
+        { title: PAGE_TITLE },
+        { name: "description", content: PAGE_DESCRIPTION },
+        { property: "og:title", content: PAGE_TITLE },
+        { property: "og:description", content: PAGE_DESCRIPTION },
+        { property: "og:url", content: PAGE_URL },
+        { property: "og:type", content: "website" },
+        { property: "og:image", content: OG_IMAGE },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: PAGE_TITLE },
+        { name: "twitter:description", content: PAGE_DESCRIPTION },
+        { name: "twitter:image", content: OG_IMAGE },
+      ],
+      links: [{ rel: "canonical", href: PAGE_URL }],
+      scripts: [
+        { type: "application/ld+json", children: JSON.stringify(blogJsonLd) },
+        { type: "application/ld+json", children: JSON.stringify(itemListJsonLd) },
+        { type: "application/ld+json", children: JSON.stringify(breadcrumbJsonLd) },
+      ],
+    };
+  },
   component: BlogIndex,
 });
 
@@ -31,7 +108,7 @@ function BlogIndex() {
   const [diagOpen, setDiagOpen] = useState(false);
   const [cat, setCat] = useState<FeedCategory | "all">("all");
   const [q, setQ] = useState("");
-  const { posts } = useLoaderData({ from: "/blog" }) as { posts: BlogPost[] };
+  const { posts } = Route.useLoaderData() as { posts: BlogPost[] };
   const filtered = useMemo(() => {
     return posts.filter((p) => {
       if (cat !== "all" && p.category !== cat) return false;
@@ -67,7 +144,7 @@ function BlogIndex() {
           }}
         />
         <div className="container-aceleriq relative">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+          <div>
             <div className="inline-flex items-center gap-2 border border-primary/30 bg-primary/5 px-3 py-1 mb-6">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60" />
@@ -93,7 +170,7 @@ function BlogIndex() {
                 <Clock className="h-3 w-3 text-primary" /> Atualizado a cada 10 min
               </span>
             </div>
-          </motion.div>
+          </div>
 
           <div className="mt-12 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div className="flex flex-wrap gap-2">
@@ -203,12 +280,7 @@ function FeaturedCard({ post }: { post: BlogPost }) {
 
 function PostCard({ post, index }: { post: BlogPost; index: number }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.4, delay: Math.min(index, 6) * 0.04 }}
-    >
+    <div style={{ contentVisibility: "auto", containIntrinsicSize: "360px" }}>
       <Link
         to="/blog/$slug"
         params={{ slug: post.slug }}
@@ -249,6 +321,6 @@ function PostCard({ post, index }: { post: BlogPost; index: number }) {
           </div>
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 }
