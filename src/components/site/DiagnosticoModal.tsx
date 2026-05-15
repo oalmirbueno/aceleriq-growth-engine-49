@@ -129,9 +129,12 @@ type Phase = "captura" | "quiz" | "resultado";
 export function DiagnosticoModal({
   open,
   onOpenChange,
+  origem,
 }: {
   open: boolean;
   onOpenChange: (v: boolean) => void;
+  /** Marca de origem do lead, ex: "lp:ia", "blog:slug-x", "header". */
+  origem?: string;
 }) {
   const [phase, setPhase] = useState<Phase>("captura");
   const [capturaIdx, setCapturaIdx] = useState(0);
@@ -269,6 +272,7 @@ export function DiagnosticoModal({
         score,
         classificacao: cls.label,
         recomendacoes: recs,
+        origem: origem ?? null,
       });
       if (error) throw error;
 

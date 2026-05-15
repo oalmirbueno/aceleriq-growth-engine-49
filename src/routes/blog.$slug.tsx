@@ -17,6 +17,7 @@ import {
  createLinkerState,
  injectInternalLinks,
 } from "@/lib/internal-links";
+import { LP_TEMAS, temaForCategory } from "@/lib/lp-temas";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: async ({ params }) => {
@@ -376,18 +377,41 @@ function BlogPostPage() {
             </p>
           </div>
 
-          {/* CTA buttons */}
-          <div className="mt-10 flex flex-col sm:flex-row gap-3">
-            <a
-              href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
-            >
-              <MessageCircle className="h-4 w-4" />
-              Quero aplicar isso no meu negócio
-            </a>
-          </div>
+          {/* Tema-specific Landing Page CTA */}
+          {(() => {
+            const temaSlug = temaForCategory(post.category);
+            const tema = LP_TEMAS[temaSlug];
+            if (!tema) return null;
+            return (
+              <div className="mt-10 border border-primary/30 bg-gradient-to-br from-primary/[0.08] via-primary/[0.03] to-transparent p-6 md:p-8">
+                <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary mb-3">
+                  Diagnóstico Aceleriq · {tema.eyebrow.split("·")[1]?.trim()}
+                </div>
+                <h3 className="text-xl md:text-2xl font-display font-semibold text-foreground leading-tight mb-3">
+                  {tema.h1} <span className="text-primary">{tema.highlight}</span>.
+                </h3>
+                <p className="text-sm text-muted-foreground mb-5 max-w-2xl">{tema.subhead}</p>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <a
+                    href={`/lp/${temaSlug}?origem=blog:${post.slug}`}
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
+                  >
+                    {tema.ctaLabel}
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                  <a
+                    href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-white/15 text-foreground text-sm font-medium hover:border-primary/40 transition-colors"
+                  >
+                    <MessageCircle className="h-4 w-4" />
+                    Falar no WhatsApp
+                  </a>
+                </div>
+              </div>
+            );
+          })()}
 
           {!post.isLocal && (
             <p className="mt-6 text-xs text-muted-foreground">
@@ -427,7 +451,7 @@ function BlogPostPage() {
       )}
 
       <Footer />
-      <DiagnosticoModal open={diagOpen} onOpenChange={setDiagOpen} />
+      <DiagnosticoModal open={diagOpen} onOpenChange={setDiagOpen} origem={`blog:${post.slug}`} />
     </div>
   );
 }

@@ -18,6 +18,7 @@ import { Route as AutomacaoEIaRouteImport } from './routes/automacao-e-ia'
 import { Route as AgenciaDeMarketingDigitalCuritibaRouteImport } from './routes/agencia-de-marketing-digital-curitiba'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as LpTemaRouteImport } from './routes/lp.$tema'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminBacklinksRouteImport } from './routes/admin.backlinks'
 
@@ -67,6 +68,11 @@ const BlogIndexRoute = BlogIndexRouteImport.update({
   path: '/',
   getParentRoute: () => BlogRoute,
 } as any)
+const LpTemaRoute = LpTemaRouteImport.update({
+  id: '/lp/$tema',
+  path: '/lp/$tema',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -89,6 +95,7 @@ export interface FileRoutesByFullPath {
   '/trafego-pago': typeof TrafegoPagoRoute
   '/admin/backlinks': typeof AdminBacklinksRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/lp/$tema': typeof LpTemaRoute
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
@@ -101,6 +108,7 @@ export interface FileRoutesByTo {
   '/trafego-pago': typeof TrafegoPagoRoute
   '/admin/backlinks': typeof AdminBacklinksRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/lp/$tema': typeof LpTemaRoute
   '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
@@ -115,6 +123,7 @@ export interface FileRoutesById {
   '/trafego-pago': typeof TrafegoPagoRoute
   '/admin/backlinks': typeof AdminBacklinksRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/lp/$tema': typeof LpTemaRoute
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
@@ -130,6 +139,7 @@ export interface FileRouteTypes {
     | '/trafego-pago'
     | '/admin/backlinks'
     | '/blog/$slug'
+    | '/lp/$tema'
     | '/blog/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -142,6 +152,7 @@ export interface FileRouteTypes {
     | '/trafego-pago'
     | '/admin/backlinks'
     | '/blog/$slug'
+    | '/lp/$tema'
     | '/blog'
   id:
     | '__root__'
@@ -155,6 +166,7 @@ export interface FileRouteTypes {
     | '/trafego-pago'
     | '/admin/backlinks'
     | '/blog/$slug'
+    | '/lp/$tema'
     | '/blog/'
   fileRoutesById: FileRoutesById
 }
@@ -168,6 +180,7 @@ export interface RootRouteChildren {
   SobreAAceleriqRoute: typeof SobreAAceleriqRoute
   TrafegoPagoRoute: typeof TrafegoPagoRoute
   AdminBacklinksRoute: typeof AdminBacklinksRoute
+  LpTemaRoute: typeof LpTemaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -235,6 +248,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof BlogRoute
     }
+    '/lp/$tema': {
+      id: '/lp/$tema'
+      path: '/lp/$tema'
+      fullPath: '/lp/$tema'
+      preLoaderRoute: typeof LpTemaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/$slug': {
       id: '/blog/$slug'
       path: '/$slug'
@@ -275,6 +295,7 @@ const rootRouteChildren: RootRouteChildren = {
   SobreAAceleriqRoute: SobreAAceleriqRoute,
   TrafegoPagoRoute: TrafegoPagoRoute,
   AdminBacklinksRoute: AdminBacklinksRoute,
+  LpTemaRoute: LpTemaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
