@@ -400,8 +400,10 @@ export async function loadSitemapPosts(): Promise<{ slug: string; publishedAt: s
 export const fetchBlogPost = createServerFn({ method: "GET" })
   .inputValidator((d: { slug: string }) => d)
   .handler(async ({ data }) => {
-    const posts = await loadAll();
-    const found = posts.find((p) => p.slug === data.slug) ?? null;
+    const ownedPosts = await loadOwnedPosts();
+    const owned = ownedPosts.find((p) => p.slug === data.slug) ?? null;
+    const posts = owned ? ownedPosts : await loadAll();
+    const found = owned ?? posts.find((p) => p.slug === data.slug) ?? null;
     const post = found ? await hydrateFullContent(found) : null;
     const related = post
       ? posts.filter((p) => p.slug !== post.slug && p.category === post.category).slice(0, 3)
