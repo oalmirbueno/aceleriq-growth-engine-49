@@ -364,6 +364,23 @@ export const fetchBlogPosts = createServerFn({ method: "GET" }).handler(async ()
   return { posts };
 });
 
+/**
+ * Versão enxuta para o sitemap — apenas slug + publishedAt.
+ * Sem tradução, scraping ou og:image (essas etapas pesadas estouravam o tempo
+ * do worker e o sitemap acabava saindo só com os posts locais).
+ */
+export async function loadSitemapPosts(): Promise<{ slug: string; publishedAt: string }[]> {
+  try {
+    const results = await Promise.all(FEEDS.map(fetchOne));
+    const merged = results.flat().filter(isRelevant);
+    const unique = dedupe(merged).slice(0, 100);
+    const local = buildLocalPosts();
+    return [...local, ...unique].map((p) => ({ slug: p.slug, publishedAt: p.publishedAt }));
+  } catch {
+    return buildLocalPosts().map((p) => ({ slug: p.slug, publishedAt: p.publishedAt }));
+  }
+}
+
 export const fetchBlogPost = createServerFn({ method: "GET" })
   .inputValidator((d: { slug: string }) => d)
   .handler(async ({ data }) => {
