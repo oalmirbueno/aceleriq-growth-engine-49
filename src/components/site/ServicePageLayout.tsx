@@ -139,8 +139,8 @@ export function ServicePageLayout(props: ServicePageProps) {
             </motion.div>
 
             {props.heroAside ? (
-              <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-                <div className="lg:col-span-7 text-left">
+              <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-center">
+                <div className="lg:col-span-6 text-left">
                   <motion.h1
                     initial={{ opacity: 0, y: 14 }}
                     animate={{ opacity: 1, y: 0 }}
