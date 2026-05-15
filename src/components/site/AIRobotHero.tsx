@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
-import robotImg from "@/assets/ai-robot-3d.png";
+import robotVideo from "@/assets/ai-robot-alive.mp4.asset.json";
 
 const LOGOS = [
   { slug: "huggingface",  label: "Hugging Face", x: "2%",  y: "8%",  size: 40, delay: 0 },
@@ -13,19 +13,18 @@ const LOGOS = [
 
 export function AIRobotHero() {
   const wrapRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Cursor-tracked motion values → "alive" parallax (no flying)
+  // Cursor-tracked motion values → very subtle parallax (the video carries the "alive" motion)
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
 
-  const sx = useSpring(mx, { stiffness: 70, damping: 18, mass: 0.7 });
-  const sy = useSpring(my, { stiffness: 70, damping: 18, mass: 0.7 });
+  const sx = useSpring(mx, { stiffness: 60, damping: 20, mass: 0.8 });
+  const sy = useSpring(my, { stiffness: 60, damping: 20, mass: 0.8 });
 
-  // Body twist + head nod — feet stay anchored at the bottom
-  const rotateY = useTransform(sx, [-1, 1], [-10, 10]);
-  const rotateZ = useTransform(sx, [-1, 1], [-1.5, 1.5]);
-  const skewLean = useTransform(sy, [-1, 1], [3, -3]); // subtle forward/back lean
-  const xShift = useTransform(sx, [-1, 1], [-8, 8]);
+  const rotateY = useTransform(sx, [-1, 1], [-5, 5]);
+  const rotateZ = useTransform(sx, [-1, 1], [-0.8, 0.8]);
+  const xShift = useTransform(sx, [-1, 1], [-4, 4]);
 
   useEffect(() => {
     const el = wrapRef.current;
@@ -47,6 +46,16 @@ export function AIRobotHero() {
       window.removeEventListener("pointerleave", onLeave);
     };
   }, [mx, my]);
+
+  // Ensure autoplay on mobile (iOS requires muted + playsInline + a play() nudge)
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    const tryPlay = () => v.play().catch(() => {});
+    tryPlay();
+    document.addEventListener("visibilitychange", tryPlay);
+    return () => document.removeEventListener("visibilitychange", tryPlay);
+  }, []);
 
   return (
     <div
@@ -82,19 +91,21 @@ export function AIRobotHero() {
         />
       ))}
 
-      {/* Robot — anchored to the bottom edge, body twists with cursor (feet stay planted) */}
-      <motion.img
-        src={robotImg}
-        alt="Agente de IA 3D · Aceleriq"
+      {/* Robot — looping AI-generated video, feet planted on the marquee band below */}
+      <motion.video
+        ref={videoRef}
+        src={robotVideo.url}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
         width={1024}
         height={1280}
-        loading="eager"
-        decoding="async"
-        className="relative z-10 h-[115%] w-auto max-w-none object-contain object-bottom select-none pointer-events-none"
+        className="relative z-10 h-[118%] w-auto max-w-none object-contain object-bottom select-none pointer-events-none"
         style={{
           rotateY,
           rotateZ,
-          skewX: skewLean,
           x: xShift,
           transformOrigin: "50% 100%",
           transformStyle: "preserve-3d",
