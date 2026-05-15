@@ -1,7 +1,5 @@
 import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
-import { useServerFn } from "@tanstack/react-start";
 import { motion } from "framer-motion";
 import { ArrowRight, Clock, ExternalLink, Rss, Search } from "lucide-react";
 import { Header } from "@/components/site/Header";
@@ -17,6 +15,13 @@ const PAGE_URL = "https://aceleriq.com.br/blog";
 const OG_IMAGE = "https://aceleriq.com.br/og-image.jpg";
 
 export const Route = createFileRoute("/blog")({
+  loader: async () => {
+    try {
+      return await fetchBlogPosts();
+    } catch {
+      return { posts: [] as BlogPost[] };
+    }
+  },
   head: () => ({
     meta: [
       { title: PAGE_TITLE },
@@ -61,14 +66,8 @@ function BlogIndex() {
   const [diagOpen, setDiagOpen] = useState(false);
   const [cat, setCat] = useState<FeedCategory | "all">("all");
   const [q, setQ] = useState("");
-  const fetchPosts = useServerFn(fetchBlogPosts);
-  const { data, isLoading } = useQuery({
-    queryKey: ["blog-posts"],
-    queryFn: () => fetchPosts(),
-    staleTime: 1000 * 60 * 10,
-  });
-
-  const posts = data?.posts ?? [];
+  const { posts } = Route.useLoaderData() as { posts: BlogPost[] };
+  const isLoading = false;
   const filtered = useMemo(() => {
     return posts.filter((p) => {
       if (cat !== "all" && p.category !== cat) return false;
