@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useLoaderData } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowRight, Clock, Rss, Search, Sparkles } from "lucide-react";
 import { Header } from "@/components/site/Header";
@@ -31,21 +31,14 @@ function BlogIndex() {
   const [diagOpen, setDiagOpen] = useState(false);
   const [cat, setCat] = useState<FeedCategory | "all">("all");
   const [q, setQ] = useState("");
-  // Parent route /blog owns the loader.
-  const { posts } = Route.useRouteContext({ select: () => ({}) }) as never;
-  const parent = (Route as any).useLoaderData
-    ? ((Route as any).useLoaderData() as { posts: BlogPost[] })
-    : { posts: [] as BlogPost[] };
-  void posts;
-  const data = useParentLoaderData();
+  const { posts } = useLoaderData({ from: "/blog" }) as { posts: BlogPost[] };
   const filtered = useMemo(() => {
-    return data.posts.filter((p) => {
+    return posts.filter((p) => {
       if (cat !== "all" && p.category !== cat) return false;
       if (q && !`${p.title} ${p.excerpt} ${p.source}`.toLowerCase().includes(q.toLowerCase())) return false;
       return true;
     });
-  }, [data.posts, cat, q]);
-  void parent;
+  }, [posts, cat, q]);
 
   const featured = filtered[0];
   const rest = filtered.slice(1);

@@ -17,6 +17,7 @@ import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AutomacaoEIaRouteImport } from './routes/automacao-e-ia'
 import { Route as AgenciaDeMarketingDigitalCuritibaRouteImport } from './routes/agencia-de-marketing-digital-curitiba'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
 const TrafegoPagoRoute = TrafegoPagoRouteImport.update({
@@ -60,6 +61,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BlogRoute,
+} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -76,17 +82,18 @@ export interface FileRoutesByFullPath {
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
   '/trafego-pago': typeof TrafegoPagoRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agencia-de-marketing-digital-curitiba': typeof AgenciaDeMarketingDigitalCuritibaRoute
   '/automacao-e-ia': typeof AutomacaoEIaRoute
-  '/blog': typeof BlogRouteWithChildren
   '/criacao-de-sites': typeof CriacaoDeSitesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
   '/trafego-pago': typeof TrafegoPagoRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -99,6 +106,7 @@ export interface FileRoutesById {
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
   '/trafego-pago': typeof TrafegoPagoRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -112,17 +120,18 @@ export interface FileRouteTypes {
     | '/sobre-a-aceleriq'
     | '/trafego-pago'
     | '/blog/$slug'
+    | '/blog/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/agencia-de-marketing-digital-curitiba'
     | '/automacao-e-ia'
-    | '/blog'
     | '/criacao-de-sites'
     | '/sitemap.xml'
     | '/sobre-a-aceleriq'
     | '/trafego-pago'
     | '/blog/$slug'
+    | '/blog'
   id:
     | '__root__'
     | '/'
@@ -134,6 +143,7 @@ export interface FileRouteTypes {
     | '/sobre-a-aceleriq'
     | '/trafego-pago'
     | '/blog/$slug'
+    | '/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -205,6 +215,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof BlogRoute
+    }
     '/blog/$slug': {
       id: '/blog/$slug'
       path: '/$slug'
@@ -217,10 +234,12 @@ declare module '@tanstack/react-router' {
 
 interface BlogRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
 }
 
 const BlogRouteChildren: BlogRouteChildren = {
   BlogSlugRoute: BlogSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
 }
 
 const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
