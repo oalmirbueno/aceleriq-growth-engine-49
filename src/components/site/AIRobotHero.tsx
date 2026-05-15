@@ -13,8 +13,8 @@ const LOGOS = [
 export function AIRobotHero() {
   return (
     <div
-      className="relative mx-auto w-full max-w-[760px] aspect-[3/4] overflow-visible"
-      style={{ marginBottom: "-20%", transform: "translateX(9%)" }}
+      className="relative w-full aspect-[4/5] lg:aspect-auto lg:h-[min(95vh,900px)] overflow-visible"
+      style={{ marginBottom: "-12%", marginRight: "-15%" }}
     >
       {/* Floating logos */}
       {LOGOS.map((l) => (
