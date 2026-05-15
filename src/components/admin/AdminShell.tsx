@@ -14,6 +14,7 @@ import {
   Link2,
   Lock,
   LogOut,
+  ScanSearch,
 } from "lucide-react";
 
 const PASSWORD_KEY = "aceleriq_admin_password";
@@ -35,6 +36,7 @@ const NAV = [
   { to: "/admin", label: "Visão geral", icon: LayoutDashboard, exact: true },
   { to: "/admin/posts", label: "Posts", icon: FileText },
   { to: "/admin/seo", label: "SEO", icon: Search },
+  { to: "/admin/indexacao", label: "Indexação", icon: ScanSearch },
   { to: "/admin/leads", label: "Leads", icon: Users },
   { to: "/admin/backlinks", label: "Backlinks", icon: Link2 },
 ];
