@@ -277,17 +277,16 @@ function PostCard({ post, index }: { post: BlogPost; index: number }) {
         className="group block h-full border border-white/10 bg-white/[0.02] hover:border-primary/40 transition-colors overflow-hidden"
       >
         <div className="relative aspect-[16/9] bg-gradient-to-br from-primary/15 via-violet-500/10 to-transparent overflow-hidden">
-          {post.image ? (
-            <img
-              src={post.image}
-              alt=""
-              loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center text-primary/25 font-mono text-[10px] uppercase tracking-widest">
-              {post.source}
-            </div>
+          <img
+            src={post.image || categoryCover(post.category)}
+            alt=""
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          {post.isLocal && (
+            <span className="absolute top-3 left-3 z-10 inline-flex items-center gap-1 border border-primary/40 bg-background/80 backdrop-blur px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.22em] text-primary">
+              <Sparkles className="h-2.5 w-2.5" /> Aceleriq
+            </span>
           )}
         </div>
         <div className="p-5">
