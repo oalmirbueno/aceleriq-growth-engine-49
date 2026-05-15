@@ -33,47 +33,64 @@ export function AIRobotHero() {
       className="relative mx-auto w-full max-w-[560px] aspect-[4/5]"
       style={{ perspective: "1200px" }}
     >
-      {/* Floating tech logos behind robot */}
-      <div className="absolute inset-0 -z-[1]">
-        {LOGOS.map((l) => (
-          <motion.div
-            key={l.slug}
-            className="absolute flex items-center justify-center"
-            style={{ left: l.x, top: l.y, width: l.size, height: l.size }}
-            initial={{ opacity: 0, scale: 0.6 }}
-            animate={{
-              opacity: [0, 0.85, 0.85, 0],
-              scale: [0.6, 1, 1, 0.6],
-              y: [0, -14, -14, 0],
-            }}
-            transition={{
-              duration: 8,
-              delay: l.delay,
-              repeat: Infinity,
-              repeatDelay: 0,
-              ease: "easeInOut",
-              times: [0, 0.15, 0.85, 1],
-            }}
-          >
-            <div className="relative grid h-full w-full place-items-center rounded-xl border border-primary/20 bg-background/60 backdrop-blur-md shadow-[0_8px_30px_oklch(0%_0_0/0.4)]">
-              <img
-                src={`https://cdn.simpleicons.org/${l.slug}/ffffff`}
-                alt={l.label}
-                width={l.size}
-                height={l.size}
-                loading="lazy"
-                className="h-[55%] w-[55%] object-contain opacity-90"
-              />
-              <span
-                aria-hidden
-                className="absolute inset-0 rounded-xl"
-                style={{
-                  boxShadow: "inset 0 0 16px oklch(85% 0.22 145 / 0.18)",
+      {/* Floating 3D tech logos — no frames, just glowing icons drifting in space */}
+      <div className="absolute inset-0 -z-[1]" style={{ transformStyle: "preserve-3d" }}>
+        {LOGOS.map((l) => {
+          const tilt = l.depth > 0 ? 12 : -12;
+          return (
+            <motion.div
+              key={l.slug}
+              className="absolute"
+              style={{
+                left: l.x,
+                top: l.y,
+                width: l.size,
+                height: l.size,
+                transformStyle: "preserve-3d",
+              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.2, delay: l.delay * 0.2 }}
+            >
+              <motion.div
+                className="h-full w-full"
+                style={{ transformStyle: "preserve-3d" }}
+                animate={{
+                  y: [0, -l.drift, 0, l.drift * 0.6, 0],
+                  x: [0, l.drift * 0.4, 0, -l.drift * 0.4, 0],
+                  rotateY: [tilt, -tilt, tilt],
+                  rotateX: [-tilt * 0.4, tilt * 0.4, -tilt * 0.4],
+                  rotateZ: [-2, 2, -2],
                 }}
-              />
-            </div>
-          </motion.div>
-        ))}
+                transition={{
+                  duration: 9 + (l.size % 4),
+                  delay: l.delay,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <img
+                  src={`https://cdn.simpleicons.org/${l.slug}/ffffff`}
+                  alt={l.label}
+                  width={l.size}
+                  height={l.size}
+                  loading="lazy"
+                  className="h-full w-full object-contain select-none"
+                  style={{
+                    transform: `translateZ(${l.depth}px)`,
+                    opacity: 0.92,
+                    filter: [
+                      "drop-shadow(0 0 8px oklch(85% 0.22 145 / 0.55))",
+                      "drop-shadow(0 0 22px oklch(85% 0.22 145 / 0.35))",
+                      "drop-shadow(0 18px 28px oklch(0% 0 0 / 0.55))",
+                    ].join(" "),
+                  }}
+                  draggable={false}
+                />
+              </motion.div>
+            </motion.div>
+          );
+        })}
       </div>
 
       {/* Ambient green glow */}
