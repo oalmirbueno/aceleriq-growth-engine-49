@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
-import robotVideo from "@/assets/ai-robot-alive-v2.mp4.asset.json";
+import robotVideo from "@/assets/ai-robot-alive-v3.mp4.asset.json";
 
 const LOGOS = [
   { slug: "huggingface",  label: "Hugging Face", x: "2%",  y: "8%",  size: 40, delay: 0 },
@@ -161,7 +161,7 @@ export function AIRobotHero() {
         }}
       />
 
-      {/* Robot — black plate visually keyed out and tightly feathered */}
+      {/* Robot — new render without the black studio plate */}
       <motion.video
         ref={videoRef}
         src={robotVideo.url}
@@ -179,13 +179,12 @@ export function AIRobotHero() {
           x: xShift,
           transformOrigin: "50% 100%",
           transformStyle: "preserve-3d",
-          mixBlendMode: "screen",
           WebkitMaskImage:
-            "radial-gradient(ellipse 58% 76% at 50% 50%, black 0 72%, rgba(0,0,0,.75) 82%, transparent 96%)",
+            "radial-gradient(ellipse 68% 88% at 50% 50%, black 0 76%, rgba(0,0,0,.8) 88%, transparent 100%)",
           maskImage:
-            "radial-gradient(ellipse 58% 76% at 50% 50%, black 0 72%, rgba(0,0,0,.75) 82%, transparent 96%)",
+            "radial-gradient(ellipse 68% 88% at 50% 50%, black 0 76%, rgba(0,0,0,.8) 88%, transparent 100%)",
           filter:
-            "brightness(1.18) contrast(1.1) saturate(1.12) drop-shadow(0 0 26px oklch(85% 0.22 145 / 0.14)) drop-shadow(0 14px 24px oklch(0% 0 0 / 0.26))",
+            "brightness(1.06) contrast(1.08) saturate(1.08) drop-shadow(0 0 26px oklch(85% 0.22 145 / 0.14)) drop-shadow(0 14px 24px oklch(0% 0 0 / 0.26))",
         }}
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
