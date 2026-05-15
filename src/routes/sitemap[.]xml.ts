@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
-import { fetchBlogPosts } from "@/lib/blog.functions";
+import { loadSitemapPosts } from "@/lib/blog.functions";
 
 const BASE_URL = "https://aceleriq.com.br";
+const TODAY = new Date().toISOString().slice(0, 10);
 
 interface SitemapEntry {
   path: string;
@@ -11,33 +12,41 @@ interface SitemapEntry {
   priority?: string;
 }
 
+function safeLastmod(iso: string | undefined): string {
+  if (!iso) return TODAY;
+  const d = new Date(iso);
+  if (isNaN(d.getTime()) || d.getTime() < Date.parse("2000-01-01")) return TODAY;
+  return d.toISOString().slice(0, 10);
+}
+
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
         const staticEntries: SitemapEntry[] = [
-          { path: "/", changefreq: "weekly", priority: "1.0" },
-          { path: "/sobre-a-aceleriq", changefreq: "monthly", priority: "0.8" },
-          { path: "/agencia-de-marketing-digital-curitiba", changefreq: "monthly", priority: "0.9" },
-          { path: "/criacao-de-sites", changefreq: "monthly", priority: "0.9" },
-          { path: "/trafego-pago", changefreq: "monthly", priority: "0.9" },
-          { path: "/automacao-e-ia", changefreq: "monthly", priority: "0.9" },
-          { path: "/blog", changefreq: "daily", priority: "0.8" },
+          { path: "/", changefreq: "weekly", priority: "1.0", lastmod: TODAY },
+          { path: "/sobre-a-aceleriq", changefreq: "monthly", priority: "0.8", lastmod: TODAY },
+          { path: "/agencia-de-marketing-digital-curitiba", changefreq: "monthly", priority: "0.9", lastmod: TODAY },
+          { path: "/criacao-de-sites", changefreq: "monthly", priority: "0.9", lastmod: TODAY },
+          { path: "/trafego-pago", changefreq: "monthly", priority: "0.9", lastmod: TODAY },
+          { path: "/automacao-e-ia", changefreq: "monthly", priority: "0.9", lastmod: TODAY },
+          { path: "/blog", changefreq: "daily", priority: "0.8", lastmod: TODAY },
         ];
 
-        let blogEntries: SitemapEntry[] = [];
-        try {
-          const { posts } = await fetchBlogPosts();
-          blogEntries = posts.map((p) => ({
-            path: `/blog/${p.slug}`,
-            lastmod: p.publishedAt,
-            changefreq: "weekly",
-            priority: "0.7",
-          }));
-        } catch {
-          // If feeds fail, still return static sitemap so Google has something.
-          blogEntries = [];
-        }
+        // Limite duro de 8s para garantir que o sitemap sempre é entregue.
+        const blogPosts = await Promise.race([
+          loadSitemapPosts(),
+          new Promise<{ slug: string; publishedAt: string }[]>((resolve) =>
+            setTimeout(() => resolve([]), 8000),
+          ),
+        ]);
+
+        const blogEntries: SitemapEntry[] = blogPosts.map((p) => ({
+          path: `/blog/${p.slug}`,
+          lastmod: safeLastmod(p.publishedAt),
+          changefreq: "weekly",
+          priority: "0.7",
+        }));
 
         const entries = [...staticEntries, ...blogEntries];
 
@@ -63,8 +72,9 @@ export const Route = createFileRoute("/sitemap.xml")({
 
         return new Response(xml, {
           headers: {
-            "Content-Type": "application/xml",
-            "Cache-Control": "public, max-age=1800",
+            "Content-Type": "application/xml; charset=utf-8",
+            "X-Content-Type-Options": "nosniff",
+            "Cache-Control": "public, max-age=1800, s-maxage=1800",
           },
         });
       },
