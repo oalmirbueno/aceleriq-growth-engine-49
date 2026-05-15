@@ -28,6 +28,7 @@ import { Route as AdminPostsRouteImport } from './routes/admin.posts'
 import { Route as AdminIndexacaoRouteImport } from './routes/admin.indexacao'
 import { Route as AdminBacklinksRouteImport } from './routes/admin.backlinks'
 import { Route as AdminPostsIdRouteImport } from './routes/admin.posts.$id'
+import { Route as ApiPublicHooksWeeklyPostRouteImport } from './routes/api/public/hooks/weekly-post'
 import { Route as ApiPublicHooksWarmCacheRouteImport } from './routes/api/public/hooks/warm-cache'
 import { Route as ApiPublicHooksResubmitSitemapRouteImport } from './routes/api/public/hooks/resubmit-sitemap'
 
@@ -128,6 +129,12 @@ const AdminPostsIdRoute = AdminPostsIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => AdminPostsRoute,
 } as any)
+const ApiPublicHooksWeeklyPostRoute =
+  ApiPublicHooksWeeklyPostRouteImport.update({
+    id: '/api/public/hooks/weekly-post',
+    path: '/api/public/hooks/weekly-post',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicHooksWarmCacheRoute = ApiPublicHooksWarmCacheRouteImport.update({
   id: '/api/public/hooks/warm-cache',
   path: '/api/public/hooks/warm-cache',
@@ -162,6 +169,7 @@ export interface FileRoutesByFullPath {
   '/admin/posts/$id': typeof AdminPostsIdRoute
   '/api/public/hooks/resubmit-sitemap': typeof ApiPublicHooksResubmitSitemapRoute
   '/api/public/hooks/warm-cache': typeof ApiPublicHooksWarmCacheRoute
+  '/api/public/hooks/weekly-post': typeof ApiPublicHooksWeeklyPostRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -183,6 +191,7 @@ export interface FileRoutesByTo {
   '/admin/posts/$id': typeof AdminPostsIdRoute
   '/api/public/hooks/resubmit-sitemap': typeof ApiPublicHooksResubmitSitemapRoute
   '/api/public/hooks/warm-cache': typeof ApiPublicHooksWarmCacheRoute
+  '/api/public/hooks/weekly-post': typeof ApiPublicHooksWeeklyPostRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -207,6 +216,7 @@ export interface FileRoutesById {
   '/admin/posts/$id': typeof AdminPostsIdRoute
   '/api/public/hooks/resubmit-sitemap': typeof ApiPublicHooksResubmitSitemapRoute
   '/api/public/hooks/warm-cache': typeof ApiPublicHooksWarmCacheRoute
+  '/api/public/hooks/weekly-post': typeof ApiPublicHooksWeeklyPostRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -232,6 +242,7 @@ export interface FileRouteTypes {
     | '/admin/posts/$id'
     | '/api/public/hooks/resubmit-sitemap'
     | '/api/public/hooks/warm-cache'
+    | '/api/public/hooks/weekly-post'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -253,6 +264,7 @@ export interface FileRouteTypes {
     | '/admin/posts/$id'
     | '/api/public/hooks/resubmit-sitemap'
     | '/api/public/hooks/warm-cache'
+    | '/api/public/hooks/weekly-post'
   id:
     | '__root__'
     | '/'
@@ -276,6 +288,7 @@ export interface FileRouteTypes {
     | '/admin/posts/$id'
     | '/api/public/hooks/resubmit-sitemap'
     | '/api/public/hooks/warm-cache'
+    | '/api/public/hooks/weekly-post'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -293,6 +306,7 @@ export interface RootRouteChildren {
   LpTemaRoute: typeof LpTemaRoute
   ApiPublicHooksResubmitSitemapRoute: typeof ApiPublicHooksResubmitSitemapRoute
   ApiPublicHooksWarmCacheRoute: typeof ApiPublicHooksWarmCacheRoute
+  ApiPublicHooksWeeklyPostRoute: typeof ApiPublicHooksWeeklyPostRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -430,6 +444,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPostsIdRouteImport
       parentRoute: typeof AdminPostsRoute
     }
+    '/api/public/hooks/weekly-post': {
+      id: '/api/public/hooks/weekly-post'
+      path: '/api/public/hooks/weekly-post'
+      fullPath: '/api/public/hooks/weekly-post'
+      preLoaderRoute: typeof ApiPublicHooksWeeklyPostRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/hooks/warm-cache': {
       id: '/api/public/hooks/warm-cache'
       path: '/api/public/hooks/warm-cache'
@@ -504,6 +525,7 @@ const rootRouteChildren: RootRouteChildren = {
   LpTemaRoute: LpTemaRoute,
   ApiPublicHooksResubmitSitemapRoute: ApiPublicHooksResubmitSitemapRoute,
   ApiPublicHooksWarmCacheRoute: ApiPublicHooksWarmCacheRoute,
+  ApiPublicHooksWeeklyPostRoute: ApiPublicHooksWeeklyPostRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
