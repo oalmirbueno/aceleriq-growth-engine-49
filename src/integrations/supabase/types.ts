@@ -14,6 +14,108 @@ export type Database = {
   }
   public: {
     Tables: {
+      backlink_goals: {
+        Row: {
+          created_at: string
+          id: string
+          month: string
+          notes: string | null
+          target_avg_da: number
+          target_count: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          month: string
+          notes?: string | null
+          target_avg_da?: number
+          target_count?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          month?: string
+          notes?: string | null
+          target_avg_da?: number
+          target_count?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      backlink_targets: {
+        Row: {
+          contact_email: string | null
+          contact_name: string | null
+          contact_url: string | null
+          created_at: string
+          dofollow: boolean
+          domain: string
+          domain_authority: number | null
+          id: string
+          next_action_at: string | null
+          notes: string | null
+          pitch_angle: string | null
+          priority: Database["public"]["Enums"]["backlink_priority"]
+          proposed_anchor: string | null
+          published_anchor: string | null
+          published_at: string | null
+          published_url: string | null
+          status: Database["public"]["Enums"]["backlink_status"]
+          target_blog_slug: string | null
+          type: Database["public"]["Enums"]["backlink_type"]
+          updated_at: string
+          value_estimated_brl: number | null
+        }
+        Insert: {
+          contact_email?: string | null
+          contact_name?: string | null
+          contact_url?: string | null
+          created_at?: string
+          dofollow?: boolean
+          domain: string
+          domain_authority?: number | null
+          id?: string
+          next_action_at?: string | null
+          notes?: string | null
+          pitch_angle?: string | null
+          priority?: Database["public"]["Enums"]["backlink_priority"]
+          proposed_anchor?: string | null
+          published_anchor?: string | null
+          published_at?: string | null
+          published_url?: string | null
+          status?: Database["public"]["Enums"]["backlink_status"]
+          target_blog_slug?: string | null
+          type?: Database["public"]["Enums"]["backlink_type"]
+          updated_at?: string
+          value_estimated_brl?: number | null
+        }
+        Update: {
+          contact_email?: string | null
+          contact_name?: string | null
+          contact_url?: string | null
+          created_at?: string
+          dofollow?: boolean
+          domain?: string
+          domain_authority?: number | null
+          id?: string
+          next_action_at?: string | null
+          notes?: string | null
+          pitch_angle?: string | null
+          priority?: Database["public"]["Enums"]["backlink_priority"]
+          proposed_anchor?: string | null
+          published_anchor?: string | null
+          published_at?: string | null
+          published_url?: string | null
+          status?: Database["public"]["Enums"]["backlink_status"]
+          target_blog_slug?: string | null
+          type?: Database["public"]["Enums"]["backlink_type"]
+          updated_at?: string
+          value_estimated_brl?: number | null
+        }
+        Relationships: []
+      }
       diagnostico_leads: {
         Row: {
           classificacao: string
@@ -109,7 +211,21 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      backlink_priority: "alta" | "media" | "baixa"
+      backlink_status:
+        | "prospect"
+        | "contatado"
+        | "negociando"
+        | "aceito"
+        | "publicado"
+        | "recusado"
+        | "arquivado"
+      backlink_type:
+        | "parceria"
+        | "guest_post"
+        | "publicacao"
+        | "mencao"
+        | "diretorio"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -236,6 +352,24 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      backlink_priority: ["alta", "media", "baixa"],
+      backlink_status: [
+        "prospect",
+        "contatado",
+        "negociando",
+        "aceito",
+        "publicado",
+        "recusado",
+        "arquivado",
+      ],
+      backlink_type: [
+        "parceria",
+        "guest_post",
+        "publicacao",
+        "mencao",
+        "diretorio",
+      ],
+    },
   },
 } as const

@@ -1,120 +1,88 @@
-# Landing Page Aceleriq — Engenharia de Crescimento
+# Sistema de captação de backlinks — Aceleriq Blog
 
-Landing page premium, moderna e responsiva para captar leads qualificados via **Diagnóstico de Maturidade em Crescimento e IA**, com formulário no estilo **Typeform** (uma pergunta por tela, transições suaves, barra de progresso) e armazenamento real dos leads no Lovable Cloud (Supabase).
+Pipeline interno (CRM enxuto) para prospectar, executar e acompanhar backlinks qualificados, com metas mensais e métricas de execução.
 
-## Identidade visual 
+## Arquitetura
 
-- **Tema dark premium** — fundo `#0A0B12` com gradientes profundos azul/violeta
-- **Acentos**: azul elétrico `#3B82F6` + violeta `#8B5CF6` + verde-lima `#A3E635` (CTA conversão)
-- **Tipografia**: Inter (corpo) + Space Grotesk (headlines) — pesos 400/600/700
-- **Estética**: Stripe + Linear + Vercel — glass morphism sutil, gradientes vivos, grid lines, glow em CTAs
-- **Microinterações**: fade/slide on scroll, hover lift em cards, gradient animado no hero, números contando, cursor glow no diagnóstico
+### 1. Banco (Lovable Cloud)
 
-## Contatos integrados
+**`backlink_targets`** — cada oportunidade de backlink
+- `domain` (text) — ex.: `g1.globo.com`
+- `domain_authority` (int, 0–100) — preenchido manualmente ou via Semrush depois
+- `type` (enum): `parceria` | `guest_post` | `publicacao` | `menção` | `diretorio`
+- `status` (enum): `prospect` | `contatado` | `negociando` | `aceito` | `publicado` | `recusado` | `arquivado`
+- `priority` (enum): `alta` | `media` | `baixa`
+- `contact_name`, `contact_email`, `contact_url` (text, opcionais)
+- `pitch_angle` (text) — ângulo da proposta
+- `target_blog_slug` (text) — qual post da Aceleriq é o alvo do link
+- `proposed_anchor` (text) — texto âncora desejado
+- `published_url` (text) — URL final onde o link foi publicado
+- `published_anchor` (text) — âncora real publicada
+- `dofollow` (bool)
+- `value_estimated_brl` (numeric) — valor de mídia equivalente (opcional)
+- `notes` (text)
+- `next_action_at` (timestamptz) — próximo follow-up
+- `published_at` (timestamptz)
+- `created_at`, `updated_at`
 
-- WhatsApp: `41 99748-3429` (links `wa.me` com mensagem pré-preenchida)
-- E-mail: `aceleriq@gmail.com`
-- Instagram: `@aceleriq`
+**`backlink_goals`** — metas mensais
+- `month` (date, primeiro dia do mês, único)
+- `target_count` (int) — quantos backlinks publicados no mês
+- `target_avg_da` (int) — DA médio mínimo
+- `notes` (text)
 
-## Estrutura da página (15 seções)
+**RLS**: ambas tabelas públicas para leitura/escrita por enquanto (sem auth no projeto). Vou propor proteger por senha simples no UI ou implementar Supabase Auth — escolha sua.
 
-1. **Header fixo** — logo Aceleriq, navegação (Método, Resultados, Diagnóstico, FAQ), CTA "Diagnóstico Gratuito"
-2. **Hero** — headline "Engenharia de Crescimento para empresas que querem escalar com método, dados e IA", subheadline, dois CTAs (primário "Fazer Diagnóstico Gratuito" / secundário WhatsApp), badge de prova social, visual de dashboard/grid animado
-3. **Faixa de dores** — "Você reconhece algum destes sintomas?" (6 cards com ícones: leads ruins, time comercial sem método, ferramentas desconectadas, sem dados, dependência do dono, marketing sem ROI)
-4. **O que é a Aceleriq** — bloco institucional posicionando como engenharia de crescimento (não agência), com 4 pilares
-5. **Método A.C.E.L.E.R.A** — sequência horizontal interativa, cada letra expande com descrição (Análise, Clareza, Estratégia, Lançamento, Execução, Resultado, Aceleração)
-6. **Áreas de atuação** — grid de 8 cards (Diagnóstico, Estratégia, Tráfego, CRM, IA & Automação, Processos comerciais, Dados, Estruturação operacional)
-7. **Para quem é** — duas colunas: "É para você se..." vs "Não é para você se..."
-8. **Diagnóstico de Maturidade (Typeform-style)** — seção âncora destacada, ver detalhamento abaixo
-9. **Resultados / Prova social** — 4 métricas animadas + 3 mini-cases (segmento, desafio, resultado)
-10. **Depoimentos** — carrossel com 3-4 depoimentos
-11. **Comparativo** — tabela "Agência comum vs Aceleriq" (8 linhas)
-12. **Por que agora** — bloco de urgência sobre IA + janela de mercado
-13. **FAQ** — accordion com 8 perguntas (preço, prazo, segmentos, garantia, diferença vs agência, como funciona o diagnóstico, atendimento, contrato)
-14. **CTA final** — bloco full-width gradiente, "Pronto para acelerar?" + botão diagnóstico + WhatsApp
-15. **Footer** — logo, tagline, navegação, contatos clicáveis (WhatsApp/e-mail/Instagram), copyright
+### 2. Server functions (`src/lib/backlinks.functions.ts`)
+- `listBacklinks({ status?, type?, search? })`
+- `createBacklink(data)`
+- `updateBacklink({ id, patch })`
+- `deleteBacklink({ id })`
+- `listGoals()` / `upsertGoal({ month, target_count, target_avg_da })`
+- `getBacklinkMetrics()` — agrega: total publicados no mês, DA médio, % vs meta, breakdown por status/tipo, próximas ações vencidas
 
-## Diagnóstico Typeform-style (peça central)
+### 3. UI — `/admin/backlinks` (oculto do menu público)
+- **Header com KPIs**: Publicados no mês / Meta · DA médio · Pipeline ativo · Vencidos
+- **Tabs**: Pipeline (kanban) · Lista (table com filtros) · Metas
+- **Kanban** com 6 colunas (prospect → publicado), drag-to-update status
+- **Drawer de edição** ao clicar em card: form completo + histórico de alterações
+- **Botão "Nova oportunidade"** — modal com form
+- **Tab Metas**: gráfico simples (barras) publicados vs meta mensal últimos 6 meses
+- **Export CSV** — para enviar pra equipe externa de outreach
 
-Modal ou rota dedicada `/diagnostico` que abre em **fullscreen escuro premium**, uma pergunta por tela, com:
+Estética coerente com o resto: dark, mono uppercase tracking-wide nos labels, primary em destaques, sem decorações.
 
-- **Barra de progresso** no topo + contador "Pergunta 3 de 12"
-- **Transições** slide+fade entre perguntas (framer-motion)
-- **Navegação**: Enter para avançar, setas/botão "Voltar", atalhos numéricos para múltipla escolha
-- **Tipos de input**: múltipla escolha (cards clicáveis), escala 1-5 (botões grandes), texto curto, e-mail, telefone
-- **Auto-advance** em escolhas únicas, com micro-delay de 300ms
-- **Visual** "ferramenta inteligente": ícone animado da Aceleriq pulsando, hint contextual por pergunta
+## Detalhes técnicos
 
-### Fluxo de perguntas (12 etapas)
+```text
+src/
+  routes/
+    admin.backlinks.tsx           # rota oculta protegida
+  lib/
+    backlinks.functions.ts        # createServerFn (admin via supabaseAdmin)
+    backlinks-types.ts            # enums + tipos compartilhados
+  components/admin/backlinks/
+    BacklinkKanban.tsx
+    BacklinkTable.tsx
+    BacklinkForm.tsx              # drawer/modal
+    BacklinkMetrics.tsx           # KPIs + gráfico de metas
+    GoalsEditor.tsx
+```
 
-1. Nome
-2. E-mail corporativo
-3. WhatsApp
-4. Empresa + cargo
-5. Segmento (escolha)
-6. Faturamento mensal (faixas)
-7. Tamanho do time comercial
-8. Maturidade do processo comercial (escala 1-5)
-9. Uso atual de tráfego pago (escolha)
-10. Maturidade em CRM/dados (escala 1-5)
-11. Uso atual de IA/automação (escolha)
-12. Principal gargalo hoje (escolha) + campo livre opcional
+- Server fns usam `supabaseAdmin` (sem RLS) já que rota é admin.
+- Mutations invalidam `useQuery` keys: `['backlinks']`, `['backlink-metrics']`, `['backlink-goals']`.
+- Drag-and-drop no kanban com `@dnd-kit/core` (já usado em outros projetos; instalar se faltar).
+- Gráfico com SVG simples inline — sem Recharts pra manter bundle leve.
 
-### Tela de resultado
+## Decisões que preciso confirmar antes de codar
 
-Após submit, calcula **score 0-100** ponderando perguntas 8-11 + faturamento, e classifica:
+1. **Proteção da rota `/admin/backlinks`**:
+   a) Senha simples em variável de ambiente (`ADMIN_PASSWORD`) — rápido, sem fluxo de signup.
+   b) Supabase Auth completo (email/senha, você cria sua conta admin).
+   c) Sem proteção por enquanto (só URL não-listada).
 
-- **0-39 — Estágio Inicial**: "Sua operação precisa de fundação estratégica antes de escalar"
-- **40-69 — Estágio Estruturação**: "Você tem base, mas falta método e integração"
-- **70-100 — Estágio Aceleração**: "Pronto para escalar com IA e automação avançada"
+2. **Integração com Semrush**: já temos a tool conectada — quer que eu busque DA/Authority Score automaticamente quando você cadastrar um domínio? (Adiciona um botão "Atualizar métricas" no card.)
 
-Tela mostra: classificação, gráfico radar das 4 dimensões, 3 recomendações personalizadas, CTA grande "Agendar conversa estratégica" (WhatsApp pré-preenchido com nome e classificação) + opção de receber por e-mail.
+3. **Seed inicial**: quer que eu pré-popule com ~15–20 alvos relevantes pro nicho (mídias de marketing/IA brasileiras: Resultados Digitais, RockContent, AdNews, Meio & Mensagem, ProXXIma, etc.)?
 
-## Backend (Lovable Cloud / Supabase)
-
-Tabela `leads`:
-
-- `id`, `created_at`
-- `nome`, `email`, `whatsapp`, `empresa`, `cargo`
-- `segmento`, `faturamento`, `tamanho_time`
-- `maturidade_comercial`, `trafego_pago`, `maturidade_crm`, `uso_ia`, `gargalo_principal`, `observacao`
-- `score` (int), `classificacao` (enum: inicial/estruturacao/aceleracao)
-- `status` (enum: novo/contato_feito/qualificado/agendado/cliente/descartado, default `novo`)
-- `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `referrer`, `user_agent`
-
-RLS:
-
-- INSERT público (anônimo) permitido — landing precisa gravar
-- SELECT/UPDATE/DELETE apenas para usuários autenticados com role `admin` (tabela `user_roles` separada)
-
-Server function valida payload com Zod antes de inserir, captura UTMs do `window.location.search` e referrer no client e envia junto.
-
-## Responsividade & performance
-
-- Mobile-first; breakpoints sm/md/lg/xl
-- Header colapsa em menu hamburger; diagnóstico fullscreen mobile com botões grandes (touch targets 48px+)
-- Lazy load de seções abaixo da dobra; imagens em WebP; sem libs pesadas
-- Lighthouse alvo: 90+ em todas as categorias
-
-## SEO & metadata
-
-- Title, description, og:image, Twitter card no `__root.tsx`
-- Schema.org Organization + FAQPage
-- Favicon e apple-touch-icon
-
-## Stack técnica
-
-- TanStack Start (já instalado), Tailwind v4, shadcn/ui
-- **framer-motion** para transições do Typeform e scroll animations
-- **react-hook-form + zod** para validação
-- **lucide-react** para ícones
-- Supabase via Lovable Cloud (cliente browser para INSERT)
-- Server function para envio + validação server-side
-
-## Entregáveis
-
-- Landing single-page em `/` com todas as 15 seções
-- Rota `/diagnostico` com experiência Typeform fullscreen
-- Tabela `leads` + `user_roles` + RLS configuradas
-- Todos os CTAs e contatos clicáveis com `wa.me` / `mailto:` / Instagram
-- Captura de UTMs e referrer automática
+Confirma essas 3 e eu já implemento na sequência: migração → server fns → UI.
