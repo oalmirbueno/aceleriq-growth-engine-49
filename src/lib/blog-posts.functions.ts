@@ -133,7 +133,7 @@ export const saveBlogPost = createServerFn({ method: "POST" })
       seo_description: p.seo_description ?? null,
       focus_keyword: p.focus_keyword ?? null,
       author: p.author,
-      review_notes: report as unknown as Record<string, unknown>,
+      review_notes: JSON.parse(JSON.stringify(report)) as never,
     };
 
     if (p.id) {
