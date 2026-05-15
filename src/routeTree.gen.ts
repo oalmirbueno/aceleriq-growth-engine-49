@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TrafegoPagoRouteImport } from './routes/trafego-pago'
 import { Route as SobreAAceleriqRouteImport } from './routes/sobre-a-aceleriq'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as DiagnosticoRouteImport } from './routes/diagnostico'
 import { Route as CriacaoDeSitesRouteImport } from './routes/criacao-de-sites'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AutomacaoEIaRouteImport } from './routes/automacao-e-ia'
@@ -41,6 +42,11 @@ const SobreAAceleriqRoute = SobreAAceleriqRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DiagnosticoRoute = DiagnosticoRouteImport.update({
+  id: '/diagnostico',
+  path: '/diagnostico',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CriacaoDeSitesRoute = CriacaoDeSitesRouteImport.update({
@@ -128,6 +134,7 @@ export interface FileRoutesByFullPath {
   '/automacao-e-ia': typeof AutomacaoEIaRoute
   '/blog': typeof BlogRouteWithChildren
   '/criacao-de-sites': typeof CriacaoDeSitesRoute
+  '/diagnostico': typeof DiagnosticoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
   '/trafego-pago': typeof TrafegoPagoRoute
@@ -146,6 +153,7 @@ export interface FileRoutesByTo {
   '/agencia-de-marketing-digital-curitiba': typeof AgenciaDeMarketingDigitalCuritibaRoute
   '/automacao-e-ia': typeof AutomacaoEIaRoute
   '/criacao-de-sites': typeof CriacaoDeSitesRoute
+  '/diagnostico': typeof DiagnosticoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
   '/trafego-pago': typeof TrafegoPagoRoute
@@ -167,6 +175,7 @@ export interface FileRoutesById {
   '/automacao-e-ia': typeof AutomacaoEIaRoute
   '/blog': typeof BlogRouteWithChildren
   '/criacao-de-sites': typeof CriacaoDeSitesRoute
+  '/diagnostico': typeof DiagnosticoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
   '/trafego-pago': typeof TrafegoPagoRoute
@@ -189,6 +198,7 @@ export interface FileRouteTypes {
     | '/automacao-e-ia'
     | '/blog'
     | '/criacao-de-sites'
+    | '/diagnostico'
     | '/sitemap.xml'
     | '/sobre-a-aceleriq'
     | '/trafego-pago'
@@ -207,6 +217,7 @@ export interface FileRouteTypes {
     | '/agencia-de-marketing-digital-curitiba'
     | '/automacao-e-ia'
     | '/criacao-de-sites'
+    | '/diagnostico'
     | '/sitemap.xml'
     | '/sobre-a-aceleriq'
     | '/trafego-pago'
@@ -227,6 +238,7 @@ export interface FileRouteTypes {
     | '/automacao-e-ia'
     | '/blog'
     | '/criacao-de-sites'
+    | '/diagnostico'
     | '/sitemap.xml'
     | '/sobre-a-aceleriq'
     | '/trafego-pago'
@@ -248,6 +260,7 @@ export interface RootRouteChildren {
   AutomacaoEIaRoute: typeof AutomacaoEIaRoute
   BlogRoute: typeof BlogRouteWithChildren
   CriacaoDeSitesRoute: typeof CriacaoDeSitesRoute
+  DiagnosticoRoute: typeof DiagnosticoRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreAAceleriqRoute: typeof SobreAAceleriqRoute
   TrafegoPagoRoute: typeof TrafegoPagoRoute
@@ -276,6 +289,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/diagnostico': {
+      id: '/diagnostico'
+      path: '/diagnostico'
+      fullPath: '/diagnostico'
+      preLoaderRoute: typeof DiagnosticoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/criacao-de-sites': {
@@ -434,6 +454,7 @@ const rootRouteChildren: RootRouteChildren = {
   AutomacaoEIaRoute: AutomacaoEIaRoute,
   BlogRoute: BlogRouteWithChildren,
   CriacaoDeSitesRoute: CriacaoDeSitesRoute,
+  DiagnosticoRoute: DiagnosticoRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreAAceleriqRoute: SobreAAceleriqRoute,
   TrafegoPagoRoute: TrafegoPagoRoute,
@@ -443,3 +464,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
