@@ -201,17 +201,23 @@ function BlogPostPage() {
             />
           </div>
 
-          <div className="max-w-none mt-12 leading-relaxed space-y-6">
-            {internalBody.map((p: string, i: number) => (
-              <p
-                key={i}
-                className="text-base md:text-lg text-foreground/90"
-                style={{ color: "hsl(var(--foreground) / 0.9)" }}
-              >
-                {p.trim()}
-              </p>
-            ))}
-          </div>
+          {hasMarkdown ? (
+            <div className="mt-12 article-prose">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content!}</ReactMarkdown>
+            </div>
+          ) : (
+            <div className="max-w-none mt-12 leading-relaxed space-y-6">
+              {fallbackBody.map((p: string, i: number) => (
+                <p
+                  key={i}
+                  className="text-base md:text-lg text-foreground/90"
+                  style={{ color: "hsl(var(--foreground) / 0.9)" }}
+                >
+                  {p.trim()}
+                </p>
+              ))}
+            </div>
+          )}
 
           {/* Aceleriq angle */}
           <div className="mt-12 border border-primary/25 bg-primary/[0.04] p-6 md:p-8 relative overflow-hidden">
