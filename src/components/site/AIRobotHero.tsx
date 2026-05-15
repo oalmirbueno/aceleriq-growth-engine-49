@@ -183,7 +183,7 @@ export function AIRobotHero() {
         className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[28%]"
         style={{
           background:
-            "linear-gradient(to top, hsl(var(--background)) 0%, hsl(var(--background) / 0.9) 30%, hsl(var(--background) / 0.5) 65%, transparent 100%)",
+            "linear-gradient(to top, var(--background) 0%, color-mix(in oklab, var(--background) 90%, transparent) 30%, color-mix(in oklab, var(--background) 50%, transparent) 65%, transparent 100%)",
         }}
       />
       {/* Soft contact shadow ellipse */}
