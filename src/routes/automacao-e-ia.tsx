@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout, buildServiceHead } from "@/components/site/ServicePageLayout";
 import { AutomationSimulator } from "@/components/site/AutomationSimulator";
+import { AIRobotHero } from "@/components/site/AIRobotHero";
 
 const URL = "https://aceleriq.com.br/automacao-e-ia";
 const TITLE = "Automação e IA para Empresas · Aceleriq";
@@ -62,6 +63,7 @@ function Page() {
       faqs={FAQS}
       whatsappMessage="Olá! Quero conversar sobre automação e IA com a Aceleriq."
       extraSection={<AutomationSimulator />}
+      heroAside={<AIRobotHero />}
     />
   );
 }
