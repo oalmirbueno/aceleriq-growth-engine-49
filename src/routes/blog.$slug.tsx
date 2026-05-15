@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Clock, MessageCircle, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock, MessageCircle, Sparkles } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { DiagnosticoModal } from "@/components/site/DiagnosticoModal";
@@ -37,21 +37,22 @@ export const Route = createFileRoute("/blog/$slug")({
         { name: "twitter:description", content: desc },
         ...(post.image ? [{ name: "twitter:image", content: post.image }] : []),
       ],
-      // Canonical: posts locais apontam para nossa URL; posts curados apontam para a fonte original.
-      links: [{ rel: "canonical", href: post.isLocal ? url : post.link }],
+      links: [{ rel: "canonical", href: url }],
       scripts: [
         {
           type: "application/ld+json",
           children: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "NewsArticle",
+            "@type": "BlogPosting",
             headline: post.title,
             description: desc,
             image: post.image ? [post.image] : undefined,
             datePublished: post.publishedAt,
-            mainEntityOfPage: post.link,
-            publisher: { "@type": "Organization", name: post.source },
-            isBasedOn: post.link,
+            dateModified: post.publishedAt,
+            mainEntityOfPage: url,
+            author: { "@type": "Organization", name: post.author || "Aceleriq" },
+            publisher: { "@type": "Organization", name: "Aceleriq", url: "https://aceleriq.com.br" },
+            citation: post.isLocal ? undefined : post.link,
           }),
         },
       ],
