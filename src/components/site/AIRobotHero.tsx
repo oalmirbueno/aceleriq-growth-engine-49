@@ -3,14 +3,14 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import robotImg from "@/assets/ai-robot-3d.png";
 
 const LOGOS = [
-  { slug: "n8n", label: "n8n", x: "4%", y: "8%", size: 44, delay: 0 },
-  { slug: "openai", label: "OpenAI", x: "82%", y: "6%", size: 50, delay: 0.4 },
-  { slug: "anthropic", label: "Claude", x: "90%", y: "38%", size: 42, delay: 0.8 },
-  { slug: "make", label: "Make", x: "88%", y: "70%", size: 40, delay: 1.2 },
-  { slug: "zapier", label: "Zapier", x: "2%", y: "44%", size: 42, delay: 1.6 },
-  { slug: "googlegemini", label: "Gemini", x: "6%", y: "74%", size: 44, delay: 2.0 },
-  { slug: "whatsapp", label: "WhatsApp", x: "70%", y: "88%", size: 38, delay: 2.4 },
-  { slug: "meta", label: "Meta", x: "20%", y: "92%", size: 40, delay: 2.8 },
+  { slug: "n8n",          label: "n8n",      x: "2%",  y: "6%",  size: 54, depth: -120, delay: 0,   drift: 14 },
+  { slug: "openai",       label: "OpenAI",   x: "84%", y: "4%",  size: 60, depth:   60, delay: 0.5, drift: 18 },
+  { slug: "anthropic",    label: "Claude",   x: "92%", y: "34%", size: 48, depth: -80,  delay: 1.0, drift: 12 },
+  { slug: "make",         label: "Make",     x: "90%", y: "66%", size: 46, depth:  40,  delay: 1.5, drift: 16 },
+  { slug: "zapier",       label: "Zapier",   x: "0%",  y: "40%", size: 50, depth:  80,  delay: 2.0, drift: 14 },
+  { slug: "googlegemini", label: "Gemini",   x: "4%",  y: "70%", size: 52, depth: -60,  delay: 2.5, drift: 18 },
+  { slug: "whatsapp",     label: "WhatsApp", x: "72%", y: "84%", size: 44, depth: -40,  delay: 3.0, drift: 12 },
+  { slug: "meta",         label: "Meta",     x: "16%", y: "88%", size: 46, depth:  100, delay: 3.5, drift: 16 },
 ];
 
 export function AIRobotHero() {
@@ -33,47 +33,64 @@ export function AIRobotHero() {
       className="relative mx-auto w-full max-w-[560px] aspect-[4/5]"
       style={{ perspective: "1200px" }}
     >
-      {/* Floating tech logos behind robot */}
-      <div className="absolute inset-0 -z-[1]">
-        {LOGOS.map((l) => (
-          <motion.div
-            key={l.slug}
-            className="absolute flex items-center justify-center"
-            style={{ left: l.x, top: l.y, width: l.size, height: l.size }}
-            initial={{ opacity: 0, scale: 0.6 }}
-            animate={{
-              opacity: [0, 0.85, 0.85, 0],
-              scale: [0.6, 1, 1, 0.6],
-              y: [0, -14, -14, 0],
-            }}
-            transition={{
-              duration: 8,
-              delay: l.delay,
-              repeat: Infinity,
-              repeatDelay: 0,
-              ease: "easeInOut",
-              times: [0, 0.15, 0.85, 1],
-            }}
-          >
-            <div className="relative grid h-full w-full place-items-center rounded-xl border border-primary/20 bg-background/60 backdrop-blur-md shadow-[0_8px_30px_oklch(0%_0_0/0.4)]">
-              <img
-                src={`https://cdn.simpleicons.org/${l.slug}/ffffff`}
-                alt={l.label}
-                width={l.size}
-                height={l.size}
-                loading="lazy"
-                className="h-[55%] w-[55%] object-contain opacity-90"
-              />
-              <span
-                aria-hidden
-                className="absolute inset-0 rounded-xl"
-                style={{
-                  boxShadow: "inset 0 0 16px oklch(85% 0.22 145 / 0.18)",
+      {/* Floating 3D tech logos — no frames, just glowing icons drifting in space */}
+      <div className="absolute inset-0 -z-[1]" style={{ transformStyle: "preserve-3d" }}>
+        {LOGOS.map((l) => {
+          const tilt = l.depth > 0 ? 12 : -12;
+          return (
+            <motion.div
+              key={l.slug}
+              className="absolute"
+              style={{
+                left: l.x,
+                top: l.y,
+                width: l.size,
+                height: l.size,
+                transformStyle: "preserve-3d",
+              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.2, delay: l.delay * 0.2 }}
+            >
+              <motion.div
+                className="h-full w-full"
+                style={{ transformStyle: "preserve-3d" }}
+                animate={{
+                  y: [0, -l.drift, 0, l.drift * 0.6, 0],
+                  x: [0, l.drift * 0.4, 0, -l.drift * 0.4, 0],
+                  rotateY: [tilt, -tilt, tilt],
+                  rotateX: [-tilt * 0.4, tilt * 0.4, -tilt * 0.4],
+                  rotateZ: [-2, 2, -2],
                 }}
-              />
-            </div>
-          </motion.div>
-        ))}
+                transition={{
+                  duration: 9 + (l.size % 4),
+                  delay: l.delay,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <img
+                  src={`https://cdn.simpleicons.org/${l.slug}/ffffff`}
+                  alt={l.label}
+                  width={l.size}
+                  height={l.size}
+                  loading="lazy"
+                  className="h-full w-full object-contain select-none"
+                  style={{
+                    transform: `translateZ(${l.depth}px)`,
+                    opacity: 0.92,
+                    filter: [
+                      "drop-shadow(0 0 8px oklch(85% 0.22 145 / 0.55))",
+                      "drop-shadow(0 0 22px oklch(85% 0.22 145 / 0.35))",
+                      "drop-shadow(0 18px 28px oklch(0% 0 0 / 0.55))",
+                    ].join(" "),
+                  }}
+                  draggable={false}
+                />
+              </motion.div>
+            </motion.div>
+          );
+        })}
       </div>
 
       {/* Ambient green glow */}
