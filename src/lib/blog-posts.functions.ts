@@ -4,6 +4,7 @@ import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import type { AdminBlogPost, BlogPostStatus } from "./blog-posts-types";
 import { runSeoChecklist, slugify } from "./seo-checklist";
 import { submitSitemapToGsc } from "./sitemap-submit.server";
+import { notifyPostPublished, pingSitemap } from "./indexnow.server";
 
 // ─── Auth ────────────────────────────────────────────
 function checkPassword(password: string) {

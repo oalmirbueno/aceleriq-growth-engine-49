@@ -18,6 +18,7 @@ import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AutomacaoEIaRouteImport } from './routes/automacao-e-ia'
 import { Route as AgenciaDeMarketingDigitalCuritibaRouteImport } from './routes/agencia-de-marketing-digital-curitiba'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRouteImport } from './routes/a7f3c91e8b2d4506e1ad9f72c8b3e5d1[.]txt'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
@@ -75,6 +76,12 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRoute =
+  A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRouteImport.update({
+    id: '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt',
+    path: '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -129,6 +136,7 @@ const ApiPublicHooksResubmitSitemapRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt': typeof A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRoute
   '/admin': typeof AdminRouteWithChildren
   '/agencia-de-marketing-digital-curitiba': typeof AgenciaDeMarketingDigitalCuritibaRoute
   '/automacao-e-ia': typeof AutomacaoEIaRoute
@@ -150,6 +158,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt': typeof A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRoute
   '/agencia-de-marketing-digital-curitiba': typeof AgenciaDeMarketingDigitalCuritibaRoute
   '/automacao-e-ia': typeof AutomacaoEIaRoute
   '/criacao-de-sites': typeof CriacaoDeSitesRoute
@@ -170,6 +179,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt': typeof A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRoute
   '/admin': typeof AdminRouteWithChildren
   '/agencia-de-marketing-digital-curitiba': typeof AgenciaDeMarketingDigitalCuritibaRoute
   '/automacao-e-ia': typeof AutomacaoEIaRoute
@@ -193,6 +203,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt'
     | '/admin'
     | '/agencia-de-marketing-digital-curitiba'
     | '/automacao-e-ia'
@@ -214,6 +225,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt'
     | '/agencia-de-marketing-digital-curitiba'
     | '/automacao-e-ia'
     | '/criacao-de-sites'
@@ -233,6 +245,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt'
     | '/admin'
     | '/agencia-de-marketing-digital-curitiba'
     | '/automacao-e-ia'
@@ -255,6 +268,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRoute: typeof A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRoute
   AdminRoute: typeof AdminRouteWithChildren
   AgenciaDeMarketingDigitalCuritibaRoute: typeof AgenciaDeMarketingDigitalCuritibaRoute
   AutomacaoEIaRoute: typeof AutomacaoEIaRoute
@@ -331,6 +345,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt': {
+      id: '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt'
+      path: '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt'
+      fullPath: '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt'
+      preLoaderRoute: typeof A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -448,6 +469,8 @@ const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRoute:
+    A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRoute,
   AdminRoute: AdminRouteWithChildren,
   AgenciaDeMarketingDigitalCuritibaRoute:
     AgenciaDeMarketingDigitalCuritibaRoute,

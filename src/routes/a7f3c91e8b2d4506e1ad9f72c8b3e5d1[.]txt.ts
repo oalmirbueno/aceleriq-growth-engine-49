@@ -5,7 +5,7 @@ import { INDEXNOW_KEY } from "@/lib/indexnow.server";
 // Servido em /a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt — conteúdo deve ser
 // exatamente a chave (sem quebras de linha, sem aspas).
 
-export const Route = createFileRoute("/a7f3c91e8b2d4506e1ad9f72c8b3e5d1[.]txt")({
+export const Route = createFileRoute("/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt")({
   server: {
     handlers: {
       GET: async () =>
