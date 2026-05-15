@@ -295,6 +295,34 @@ function buildLocalPosts(): BlogPost[] {
   });
 }
 
+function adminPostToBlogPost(p: AdminBlogPost): BlogPost {
+  return {
+    slug: p.slug,
+    title: p.title,
+    excerpt: p.seo_description || p.excerpt,
+    image: p.cover_image,
+    link: `https://aceleriq.com.br/blog/${p.slug}`,
+    source: "Aceleriq",
+    sourceId: "aceleriq-admin",
+    category: p.category,
+    lang: "pt",
+    publishedAt: p.published_at || p.updated_at,
+    isLocal: true,
+    content: p.content,
+    author: p.author,
+  };
+}
+
+async function loadAdminPosts(): Promise<BlogPost[]> {
+  try {
+    const rows = await fetchPublishedAdminPosts();
+    return rows.map(adminPostToBlogPost);
+  } catch (e) {
+    console.error("[loadAdminPosts]", e);
+    return [];
+  }
+}
+
 async function loadAll(): Promise<BlogPost[]> {
   if (cache && Date.now() - cache.at < CACHE_MS) return cache.posts;
   const results = await Promise.all(FEEDS.map(fetchOne));
