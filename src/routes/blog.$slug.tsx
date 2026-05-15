@@ -132,13 +132,12 @@ export const Route = createFileRoute("/blog/$slug")({
 function BlogPostPage() {
   const [diagOpen, setDiagOpen] = useState(false);
   const { post, related } = Route.useLoaderData();
-  const internalBody = post.isLocal && post.content
-    ? post.content.split(/\n\s*\n/)
-    : [
-        `Esse movimento em ${post.category} importa porque indica uma mudança prática no jeito como empresas captam demanda, operam vendas e tomam decisões com dados. A notícia reforça que tecnologia só gera vantagem quando entra conectada ao funil, à oferta e à execução comercial.`,
-        post.excerpt,
-        `Na leitura da Aceleriq, o ponto central não é apenas acompanhar a tendência, mas transformar esse sinal de mercado em ação: revisar processos, automatizar etapas repetitivas, melhorar a mensuração e criar campanhas mais precisas para gerar receita previsível.`,
-      ].filter(Boolean);
+  const hasMarkdown = Boolean(post.content && post.content.length > 0);
+  const fallbackBody = [
+    `Esse movimento em ${post.category} importa porque indica uma mudança prática no jeito como empresas captam demanda, operam vendas e tomam decisões com dados. A notícia reforça que tecnologia só gera vantagem quando entra conectada ao funil, à oferta e à execução comercial.`,
+    post.excerpt,
+    `Na leitura da Aceleriq, o ponto central não é apenas acompanhar a tendência, mas transformar esse sinal de mercado em ação: revisar processos, automatizar etapas repetitivas, melhorar a mensuração e criar campanhas mais precisas para gerar receita previsível.`,
+  ].filter(Boolean);
 
   return (
     <div className="min-h-screen bg-background">
