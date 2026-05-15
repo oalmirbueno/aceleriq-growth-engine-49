@@ -31,6 +31,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/criacao-de-sites", changefreq: "monthly", priority: "0.9", lastmod: TODAY },
           { path: "/trafego-pago", changefreq: "monthly", priority: "0.9", lastmod: TODAY },
           { path: "/automacao-e-ia", changefreq: "monthly", priority: "0.9", lastmod: TODAY },
+          { path: "/diagnostico", changefreq: "monthly", priority: "0.95", lastmod: TODAY },
           { path: "/blog", changefreq: "daily", priority: "0.8", lastmod: TODAY },
           ...LP_TEMA_SLUGS.map((slug) => ({
             path: `/lp/${slug}`,
