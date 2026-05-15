@@ -6,6 +6,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { DiagnosticoModal } from "@/components/site/DiagnosticoModal";
 import { fetchBlogPost } from "@/lib/blog.functions";
+import { categoryCover } from "@/lib/blog-covers";
 import { whatsappLink, DEFAULT_WHATSAPP_MESSAGE } from "@/lib/contact";
 
 export const Route = createFileRoute("/blog/$slug")({
@@ -36,8 +37,8 @@ export const Route = createFileRoute("/blog/$slug")({
         { name: "twitter:description", content: desc },
         ...(post.image ? [{ name: "twitter:image", content: post.image }] : []),
       ],
-      // Canonical aponta para a fonte original (boa prática para conteúdo sindicado).
-      links: [{ rel: "canonical", href: post.link }],
+      // Canonical: posts locais apontam para nossa URL; posts curados apontam para a fonte original.
+      links: [{ rel: "canonical", href: post.isLocal ? url : post.link }],
       scripts: [
         {
           type: "application/ld+json",
@@ -82,18 +83,16 @@ function BlogPostPage() {
       <div className="relative pt-28 pb-0 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(59,130,246,0.18),transparent_60%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(167,139,250,0.10),transparent_55%)]" />
-        {post.image && (
-          <div
-            aria-hidden
-            className="absolute inset-0 opacity-20"
-            style={{
-              backgroundImage: `url(${post.image})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              filter: "blur(40px) saturate(1.2)",
-            }}
-          />
-        )}
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-25"
+          style={{
+            backgroundImage: `url(${post.image || categoryCover(post.category)})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            filter: "blur(40px) saturate(1.2)",
+          }}
+        />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
       </div>
 
@@ -112,6 +111,11 @@ function BlogPostPage() {
             transition={{ duration: 0.5 }}
           >
             <div className="flex flex-wrap items-center gap-3 mb-6">
+              {post.isLocal && (
+                <span className="inline-flex items-center gap-1 border border-primary/40 bg-primary/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.22em] text-primary">
+                  <Sparkles className="h-3 w-3" /> Original Aceleriq
+                </span>
+              )}
               <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary">{post.category}</span>
               <span className="text-white/20">·</span>
               <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{post.source}</span>
@@ -133,15 +137,28 @@ function BlogPostPage() {
             <p className="mt-6 text-lg md:text-xl text-muted-foreground leading-relaxed">{post.excerpt}</p>
           </motion.header>
 
-          {post.image && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.15, duration: 0.6 }}
-              className="mt-10 border border-white/10 overflow-hidden"
-            >
-              <img src={post.image} alt={post.title} className="w-full h-auto" />
-            </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.15, duration: 0.6 }}
+            className="mt-10 border border-white/10 overflow-hidden aspect-[16/9] relative bg-black"
+          >
+            <img
+              src={post.image || categoryCover(post.category)}
+              alt={post.title}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </motion.div>
+
+          {/* Conteúdo do post local */}
+          {post.isLocal && post.content && (
+            <div className="prose prose-invert prose-lg max-w-none mt-12 text-foreground/90 leading-relaxed">
+              {post.content.split(/\n\s*\n/).map((p: string, i: number) => (
+                <p key={i} className="mb-6 text-base md:text-lg">
+                  {p.trim()}
+                </p>
+              ))}
+            </div>
           )}
 
           {/* Aceleriq angle */}
@@ -152,23 +169,25 @@ function BlogPostPage() {
               <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary">Leitura Aceleriq</span>
             </div>
             <p className="text-foreground/90 leading-relaxed relative">
-              Tendências como esta mostram por que estratégia, dados e IA precisam andar juntos. Na Aceleriq aplicamos
-              esse tipo de movimento dentro do método A.C.E.L.E.R.A para gerar receita previsível, não apenas tecnologia
-              isolada.
+              {post.isLocal
+                ? "Estratégia, dados e IA precisam andar juntos. É exatamente isso que aplicamos no método A.C.E.L.E.R.A para transformar marketing em receita previsível."
+                : "Tendências como esta mostram por que estratégia, dados e IA precisam andar juntos. Na Aceleriq aplicamos esse tipo de movimento dentro do método A.C.E.L.E.R.A para gerar receita previsível, não apenas tecnologia isolada."}
             </p>
           </div>
 
           {/* CTA buttons */}
           <div className="mt-10 flex flex-col sm:flex-row gap-3">
-            <a
-              href={post.link}
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-white/15 bg-white/[0.04] text-foreground text-sm font-medium hover:border-primary/40 hover:text-primary transition-colors"
-            >
-              Ler matéria completa em {post.source}
-              <ArrowUpRight className="h-4 w-4" />
-            </a>
+            {!post.isLocal && (
+              <a
+                href={post.link}
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-white/15 bg-white/[0.04] text-foreground text-sm font-medium hover:border-primary/40 hover:text-primary transition-colors"
+              >
+                Ler matéria completa em {post.source}
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            )}
             <a
               href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)}
               target="_blank"
@@ -180,9 +199,11 @@ function BlogPostPage() {
             </a>
           </div>
 
-          <p className="mt-6 text-xs text-muted-foreground">
-            Conteúdo curado a partir de fontes confiáveis · O artigo original permanece em {post.source} (canonical).
-          </p>
+          {!post.isLocal && (
+            <p className="mt-6 text-xs text-muted-foreground">
+              Conteúdo curado a partir de fontes confiáveis · O artigo original permanece em {post.source} (canonical).
+            </p>
+          )}
         </div>
       </article>
 

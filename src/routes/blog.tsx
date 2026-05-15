@@ -7,6 +7,8 @@ import { Footer } from "@/components/site/Footer";
 import { DiagnosticoModal } from "@/components/site/DiagnosticoModal";
 import { CATEGORIES, type FeedCategory } from "@/lib/blog-feeds";
 import { fetchBlogPosts, type BlogPost } from "@/lib/blog.functions";
+import { categoryCover } from "@/lib/blog-covers";
+import heroAi from "@/assets/blog-hero-ai.jpg";
 
 const PAGE_TITLE = "Blog Aceleriq · IA, Automação, Tráfego e Crescimento";
 const PAGE_DESCRIPTION =
@@ -83,8 +85,18 @@ function BlogIndex() {
     <div className="min-h-screen bg-background">
       <Header onDiagnostico={() => setDiagOpen(true)} />
 
-      {/* Hero com capa */}
+      {/* Hero com capa AI */}
       <section className="relative pt-36 pb-16 md:pt-44 md:pb-20 overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-40"
+          style={{
+            backgroundImage: `url(${heroAi})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/85 to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(59,130,246,0.18),transparent_60%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(167,139,250,0.10),transparent_55%)]" />
         <div
@@ -217,23 +229,19 @@ function FeaturedCard({ post }: { post: BlogPost }) {
     >
       <div className="grid md:grid-cols-2">
         <div className="relative aspect-[16/10] md:aspect-auto bg-gradient-to-br from-primary/20 via-violet-500/10 to-transparent overflow-hidden">
-          {post.image ? (
-            <img
-              src={post.image}
-              alt=""
-              loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center text-primary/30 font-mono text-xs uppercase tracking-widest">
-              {post.source}
-            </div>
-          )}
+          <img
+            src={post.image || categoryCover(post.category)}
+            alt=""
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent" />
         </div>
         <div className="p-8 md:p-10 flex flex-col justify-center">
           <div className="flex items-center gap-3 mb-4">
-            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary">Em destaque</span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary">
+              {post.isLocal ? "Aceleriq · Original" : "Em destaque"}
+            </span>
             <span className="text-white/20">·</span>
             <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{post.source}</span>
           </div>
@@ -269,17 +277,16 @@ function PostCard({ post, index }: { post: BlogPost; index: number }) {
         className="group block h-full border border-white/10 bg-white/[0.02] hover:border-primary/40 transition-colors overflow-hidden"
       >
         <div className="relative aspect-[16/9] bg-gradient-to-br from-primary/15 via-violet-500/10 to-transparent overflow-hidden">
-          {post.image ? (
-            <img
-              src={post.image}
-              alt=""
-              loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center text-primary/25 font-mono text-[10px] uppercase tracking-widest">
-              {post.source}
-            </div>
+          <img
+            src={post.image || categoryCover(post.category)}
+            alt=""
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          {post.isLocal && (
+            <span className="absolute top-3 left-3 z-10 inline-flex items-center gap-1 border border-primary/40 bg-background/80 backdrop-blur px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.22em] text-primary">
+              <Sparkles className="h-2.5 w-2.5" /> Aceleriq
+            </span>
           )}
         </div>
         <div className="p-5">
