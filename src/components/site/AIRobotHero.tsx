@@ -13,8 +13,8 @@ const LOGOS = [
 export function AIRobotHero() {
   return (
     <div
-      className="relative mx-auto w-full max-w-[760px] aspect-[3/4] overflow-visible"
-      style={{ marginBottom: "-20%", transform: "translateX(9%)" }}
+      className="relative w-full aspect-[4/5] lg:aspect-auto lg:h-[min(95vh,900px)] overflow-visible"
+      style={{ marginBottom: "-12%", marginRight: "-15%" }}
     >
       {/* Floating logos */}
       {LOGOS.map((l) => (
@@ -53,7 +53,7 @@ export function AIRobotHero() {
         height={1280}
         loading="eager"
         decoding="async"
-        className="relative z-10 h-[122%] w-[122%] max-w-none object-contain"
+        className="relative z-10 h-full w-full max-w-none object-contain object-right"
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: [0, -8, 0] }}
         transition={{
@@ -61,7 +61,8 @@ export function AIRobotHero() {
           y: { duration: 7, repeat: Infinity, ease: "easeInOut" },
         }}
         style={{
-          transform: "translateX(7%)",
+          transform: "scale(1.15) translateX(8%)",
+          transformOrigin: "right center",
           filter:
             "drop-shadow(0 30px 50px oklch(0% 0 0 / 0.55)) drop-shadow(0 0 60px oklch(85% 0.22 145 / 0.28)) drop-shadow(0 0 110px oklch(85% 0.22 145 / 0.16))",
         }}
