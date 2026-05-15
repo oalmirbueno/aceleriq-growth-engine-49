@@ -125,7 +125,7 @@ export function ServicePageLayout(props: ServicePageProps) {
 
       <main className="relative z-10">
         {/* HERO */}
-        <section className="relative overflow-hidden pt-24 pb-14 md:pt-32 md:pb-20">
+        <section className="relative pt-24 pb-14 md:pt-32 md:pb-20">
           <div className="relative px-6 lg:px-16 max-w-[1600px] mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
