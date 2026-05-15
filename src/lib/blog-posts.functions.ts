@@ -3,6 +3,7 @@ import { z } from "zod";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import type { AdminBlogPost, BlogPostStatus } from "./blog-posts-types";
 import { runSeoChecklist, slugify } from "./seo-checklist";
+import { submitSitemapToGsc } from "./sitemap-submit.server";
 
 // ─── Auth ────────────────────────────────────────────
 function checkPassword(password: string) {
@@ -144,7 +145,13 @@ export const saveBlogPost = createServerFn({ method: "POST" })
         .select("*")
         .single();
       if (error) throw new Error(error.message);
-      return mapRow(row as RawRow);
+      const updated = mapRow(row as RawRow);
+      if (updated.status === "published") {
+        submitSitemapToGsc().catch((e) =>
+          console.error("[saveBlogPost] sitemap resubmit failed:", e),
+        );
+      }
+      return updated;
     }
 
     const { data: row, error } = await supabaseAdmin
@@ -153,7 +160,24 @@ export const saveBlogPost = createServerFn({ method: "POST" })
       .select("*")
       .single();
     if (error) throw new Error(error.message);
-    return mapRow(row as RawRow);
+    const saved = mapRow(row as RawRow);
+    if (saved.status === "published") {
+      // fire-and-forget: reenvio do sitemap ao GSC após publicação
+      submitSitemapToGsc().catch((e) =>
+        console.error("[saveBlogPost] sitemap resubmit failed:", e),
+      );
+    }
+    return saved;
+  });
+
+// ─── Resubmit sitemap manualmente (admin) ────────────
+export const resubmitSitemap = createServerFn({ method: "POST" })
+  .inputValidator((input: { password: string }) =>
+    z.object({ password: z.string().min(1) }).parse(input),
+  )
+  .handler(async ({ data }) => {
+    checkPassword(data.password);
+    return submitSitemapToGsc();
   });
 
 // ─── Delete ──────────────────────────────────────────
