@@ -19,6 +19,7 @@ import { Route as AgenciaDeMarketingDigitalCuritibaRouteImport } from './routes/
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as AdminBacklinksRouteImport } from './routes/admin.backlinks'
 
 const TrafegoPagoRoute = TrafegoPagoRouteImport.update({
   id: '/trafego-pago',
@@ -71,6 +72,11 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => BlogRoute,
 } as any)
+const AdminBacklinksRoute = AdminBacklinksRouteImport.update({
+  id: '/admin/backlinks',
+  path: '/admin/backlinks',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -81,6 +87,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
   '/trafego-pago': typeof TrafegoPagoRoute
+  '/admin/backlinks': typeof AdminBacklinksRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
 }
@@ -92,6 +99,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
   '/trafego-pago': typeof TrafegoPagoRoute
+  '/admin/backlinks': typeof AdminBacklinksRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog': typeof BlogIndexRoute
 }
@@ -105,6 +113,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
   '/trafego-pago': typeof TrafegoPagoRoute
+  '/admin/backlinks': typeof AdminBacklinksRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
 }
@@ -119,6 +128,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sobre-a-aceleriq'
     | '/trafego-pago'
+    | '/admin/backlinks'
     | '/blog/$slug'
     | '/blog/'
   fileRoutesByTo: FileRoutesByTo
@@ -130,6 +140,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sobre-a-aceleriq'
     | '/trafego-pago'
+    | '/admin/backlinks'
     | '/blog/$slug'
     | '/blog'
   id:
@@ -142,6 +153,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sobre-a-aceleriq'
     | '/trafego-pago'
+    | '/admin/backlinks'
     | '/blog/$slug'
     | '/blog/'
   fileRoutesById: FileRoutesById
@@ -155,6 +167,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreAAceleriqRoute: typeof SobreAAceleriqRoute
   TrafegoPagoRoute: typeof TrafegoPagoRoute
+  AdminBacklinksRoute: typeof AdminBacklinksRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -229,6 +242,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof BlogRoute
     }
+    '/admin/backlinks': {
+      id: '/admin/backlinks'
+      path: '/admin/backlinks'
+      fullPath: '/admin/backlinks'
+      preLoaderRoute: typeof AdminBacklinksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -254,6 +274,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreAAceleriqRoute: SobreAAceleriqRoute,
   TrafegoPagoRoute: TrafegoPagoRoute,
+  AdminBacklinksRoute: AdminBacklinksRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
