@@ -392,15 +392,13 @@ function BlogPostPage() {
                 </h3>
                 <p className="text-sm text-muted-foreground mb-5 max-w-2xl">{tema.subhead}</p>
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <Link
-                    to="/lp/$tema"
-                    params={{ tema: temaSlug }}
-                    search={{ origem: `blog:${post.slug}` } as never}
+                  <a
+                    href={`/lp/${temaSlug}?origem=blog:${post.slug}`}
                     className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
                   >
                     {tema.ctaLabel}
                     <ArrowRight className="h-4 w-4" />
-                  </Link>
+                  </a>
                   <a
                     href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)}
                     target="_blank"
