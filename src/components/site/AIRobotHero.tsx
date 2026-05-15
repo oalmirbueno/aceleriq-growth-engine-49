@@ -2,20 +2,17 @@ import { motion } from "framer-motion";
 import robotImg from "@/assets/ai-robot-3d.png";
 
 const LOGOS = [
-  { slug: "huggingface",  label: "Hugging Face", x: "62%", y: "12%", size: 38, delay: 0 },
-  { slug: "anthropic",    label: "Claude",       x: "88%", y: "22%", size: 36, delay: 0.4 },
-  { slug: "n8n",          label: "n8n",          x: "94%", y: "52%", size: 34, delay: 0.8 },
-  { slug: "make",         label: "Make",         x: "58%", y: "70%", size: 32, delay: 1.2 },
-  { slug: "googlegemini", label: "Gemini",       x: "86%", y: "82%", size: 36, delay: 1.6 },
-  { slug: "whatsapp",     label: "WhatsApp",     x: "70%", y: "44%", size: 32, delay: 2.0 },
+  { slug: "huggingface",  label: "Hugging Face", x: "4%",  y: "10%", size: 40, delay: 0 },
+  { slug: "anthropic",    label: "Claude",       x: "86%", y: "16%", size: 38, delay: 0.4 },
+  { slug: "n8n",          label: "n8n",          x: "92%", y: "58%", size: 36, delay: 0.8 },
+  { slug: "make",         label: "Make",         x: "2%",  y: "62%", size: 34, delay: 1.2 },
+  { slug: "googlegemini", label: "Gemini",       x: "82%", y: "86%", size: 38, delay: 1.6 },
+  { slug: "whatsapp",     label: "WhatsApp",     x: "8%",  y: "88%", size: 34, delay: 2.0 },
 ];
 
 export function AIRobotHero() {
   return (
-    <div
-      className="relative w-full aspect-[4/5] lg:aspect-auto lg:h-[min(95vh,900px)] overflow-visible"
-      style={{ marginBottom: "-12%", marginRight: "-15%" }}
-    >
+    <div className="relative w-full aspect-[4/5] lg:aspect-[5/6] lg:h-auto overflow-visible flex items-center justify-center">
       {/* Floating logos */}
       {LOGOS.map((l) => (
         <motion.img
@@ -45,7 +42,7 @@ export function AIRobotHero() {
         />
       ))}
 
-      {/* Robot — large 3D asset, shifted so the cropped arm exits the composition */}
+      {/* Robot — centered in its column, properly proportional */}
       <motion.img
         src={robotImg}
         alt="Agente de IA 3D · Aceleriq"
@@ -53,7 +50,7 @@ export function AIRobotHero() {
         height={1280}
         loading="eager"
         decoding="async"
-        className="relative z-10 h-[122%] w-[122%] max-w-none object-contain py-[10px] mx-[297px]"
+        className="relative z-10 h-full w-full max-w-none object-contain"
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: [0, -8, 0] }}
         transition={{
@@ -61,8 +58,6 @@ export function AIRobotHero() {
           y: { duration: 7, repeat: Infinity, ease: "easeInOut" },
         }}
         style={{
-          transform: "scale(1.15) translateX(8%)",
-          transformOrigin: "right center",
           filter:
             "drop-shadow(0 30px 50px oklch(0% 0 0 / 0.55)) drop-shadow(0 0 60px oklch(85% 0.22 145 / 0.28)) drop-shadow(0 0 110px oklch(85% 0.22 145 / 0.16))",
         }}
