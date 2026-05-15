@@ -8,7 +8,7 @@ export interface TocItem {
 }
 
 export function slugify(text: string): string {
-  return text
+  const s = text
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
@@ -17,6 +17,19 @@ export function slugify(text: string): string {
     .replace(/\s+/g, "-")
     .replace(/-+/g, "-")
     .slice(0, 80);
+  return s || "section";
+}
+
+/**
+ * Garante unicidade de ids num conjunto. Reutilize a mesma instância de `seen`
+ * para o TOC e o renderizador para que as âncoras coincidam mesmo com headings
+ * repetidos.
+ */
+export function uniqueId(rawText: string, seen: Map<string, number>): string {
+  const base = slugify(rawText);
+  const n = (seen.get(base) ?? 0) + 1;
+  seen.set(base, n);
+  return n > 1 ? `${base}-${n}` : base;
 }
 
 export function extractToc(markdown: string): TocItem[] {
@@ -25,23 +38,37 @@ export function extractToc(markdown: string): TocItem[] {
   const items: TocItem[] = [];
   const seen = new Map<string, number>();
   let inFence = false;
-  for (const line of lines) {
-    if (/^```/.test(line)) {
-      inFence = !inFence;
+  let fenceMarker: "```" | "~~~" | null = null;
+  for (const rawLine of lines) {
+    // Fenced code blocks (``` ou ~~~) — qualquer comprimento >= 3
+    const fence = /^(\s{0,3})(`{3,}|~{3,})/.exec(rawLine);
+    if (fence) {
+      const marker = fence[2].startsWith("`") ? "```" : "~~~";
+      if (!inFence) {
+        inFence = true;
+        fenceMarker = marker;
+      } else if (marker === fenceMarker) {
+        inFence = false;
+        fenceMarker = null;
+      }
       continue;
     }
     if (inFence) continue;
+    // Indented code blocks (4 espaços ou tab)
+    if (/^( {4}|\t)/.test(rawLine)) continue;
+    // Ignora headings dentro de blockquotes ou listas
+    const line = rawLine;
     const m = /^(#{2,3})\s+(.+?)\s*#*\s*$/.exec(line);
     if (!m) continue;
     const level = m[1].length as 2 | 3;
-    const text = m[2].replace(/[*_`]/g, "").trim();
+    // Remove formatação inline (negrito, itálico, code spans, links markdown)
+    const text = m[2]
+      .replace(/`([^`]+)`/g, "$1")
+      .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+      .replace(/[*_]/g, "")
+      .trim();
     if (!text) continue;
-    let id = slugify(text);
-    if (!id) continue;
-    const n = (seen.get(id) ?? 0) + 1;
-    seen.set(id, n);
-    if (n > 1) id = `${id}-${n}`;
-    items.push({ id, text, level });
+    items.push({ id: uniqueId(text, seen), text, level });
   }
   return items;
 }
