@@ -272,6 +272,75 @@ export type Database = {
         }
         Relationships: []
       }
+      indexation_status: {
+        Row: {
+          alert_active: boolean
+          alert_since: string | null
+          consecutive_failures: number
+          coverage_state: string | null
+          created_at: string
+          first_seen_at: string
+          google_canonical: string | null
+          indexing_state: string | null
+          inspection_url: string | null
+          last_checked_at: string | null
+          last_crawl_time: string | null
+          last_error: string | null
+          page_fetch_state: string | null
+          published_at: string | null
+          robots_txt_state: string | null
+          source: string
+          updated_at: string
+          url: string
+          user_canonical: string | null
+          verdict: string | null
+        }
+        Insert: {
+          alert_active?: boolean
+          alert_since?: string | null
+          consecutive_failures?: number
+          coverage_state?: string | null
+          created_at?: string
+          first_seen_at?: string
+          google_canonical?: string | null
+          indexing_state?: string | null
+          inspection_url?: string | null
+          last_checked_at?: string | null
+          last_crawl_time?: string | null
+          last_error?: string | null
+          page_fetch_state?: string | null
+          published_at?: string | null
+          robots_txt_state?: string | null
+          source?: string
+          updated_at?: string
+          url: string
+          user_canonical?: string | null
+          verdict?: string | null
+        }
+        Update: {
+          alert_active?: boolean
+          alert_since?: string | null
+          consecutive_failures?: number
+          coverage_state?: string | null
+          created_at?: string
+          first_seen_at?: string
+          google_canonical?: string | null
+          indexing_state?: string | null
+          inspection_url?: string | null
+          last_checked_at?: string | null
+          last_crawl_time?: string | null
+          last_error?: string | null
+          page_fetch_state?: string | null
+          published_at?: string | null
+          robots_txt_state?: string | null
+          source?: string
+          updated_at?: string
+          url?: string
+          user_canonical?: string | null
+          verdict?: string | null
+        }
+        Relationships: []
+      }
       layout_overrides: {
         Row: {
           height: number | null
