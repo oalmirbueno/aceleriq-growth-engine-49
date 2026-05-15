@@ -161,7 +161,8 @@ export function AIRobotHero() {
         }}
       />
 
-      <video
+      {/* Robot — black plate visually keyed out and tightly feathered */}
+      <motion.video
         ref={videoRef}
         src={robotVideo.url}
         muted
@@ -169,12 +170,6 @@ export function AIRobotHero() {
         autoPlay
         loop
         preload="auto"
-        className="sr-only"
-      />
-
-      {/* Robot — transparent canvas output, no moving black rectangle */}
-      <motion.canvas
-        ref={canvasRef}
         width={1024}
         height={1280}
         className="relative z-10 h-[120%] w-auto max-w-none object-contain object-bottom select-none pointer-events-none"
@@ -184,8 +179,13 @@ export function AIRobotHero() {
           x: xShift,
           transformOrigin: "50% 100%",
           transformStyle: "preserve-3d",
+          mixBlendMode: "screen",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 42% 58% at 50% 51%, black 0 58%, rgba(0,0,0,.86) 66%, rgba(0,0,0,.35) 74%, transparent 84%)",
+          maskImage:
+            "radial-gradient(ellipse 42% 58% at 50% 51%, black 0 58%, rgba(0,0,0,.86) 66%, rgba(0,0,0,.35) 74%, transparent 84%)",
           filter:
-            "drop-shadow(0 0 28px oklch(85% 0.22 145 / 0.16)) drop-shadow(0 14px 24px oklch(0% 0 0 / 0.28))",
+            "brightness(0.92) contrast(1.22) saturate(1.08) drop-shadow(0 0 26px oklch(85% 0.22 145 / 0.14)) drop-shadow(0 14px 24px oklch(0% 0 0 / 0.26))",
         }}
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
