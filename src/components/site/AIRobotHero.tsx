@@ -53,7 +53,7 @@ export function AIRobotHero() {
         height={1280}
         loading="eager"
         decoding="async"
-        className="relative z-10 h-full w-full max-w-none object-contain object-right"
+        className="relative z-10 h-[122%] w-[122%] max-w-none object-contain py-[10px] mx-[297px]"
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: [0, -8, 0] }}
         transition={{
