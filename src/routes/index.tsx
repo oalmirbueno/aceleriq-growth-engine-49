@@ -85,6 +85,10 @@ export const Route = createFileRoute("/")({
         type: "application/ld+json",
         children: JSON.stringify(FAQS_JSONLD),
       },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(BREADCRUMB_JSONLD),
+      },
     ],
   }),
   component: Index,
