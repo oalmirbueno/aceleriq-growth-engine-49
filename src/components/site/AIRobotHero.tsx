@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import robotImg from "@/assets/ai-robot-3d.png";
 
 const LOGOS = [
-  { slug: "googlebard",   label: "Gemini AI",x: "10%", y: "20%", size: 46, delay: 0   },
+  { slug: "huggingface",  label: "Hugging Face", x: "10%", y: "20%", size: 46, delay: 0 },
   { slug: "anthropic",    label: "Claude",   x: "80%", y: "16%", size: 42, delay: 0.4 },
   { slug: "n8n",          label: "n8n",      x: "84%", y: "50%", size: 40, delay: 0.8 },
   { slug: "make",         label: "Make",     x: "14%", y: "54%", size: 38, delay: 1.2 },
