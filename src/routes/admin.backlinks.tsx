@@ -163,7 +163,7 @@ function AdminDashboard({ password, onLogout }: { password: string; onLogout: ()
       const s = v === null || v === undefined ? "" : String(v);
       return `"${s.replace(/"/g, '""')}"`;
     };
-    const rows = targets.map((t) => headers.map((h) => escape((t as Record<string, unknown>)[h])).join(","));
+    const rows = targets.map((t) => headers.map((h) => escape((t as unknown as Record<string, unknown>)[h])).join(","));
     const csv = [headers.join(","), ...rows].join("\n");
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
