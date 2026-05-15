@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
-import robotVideo from "@/assets/ai-robot-alive.mp4.asset.json";
+import robotVideo from "@/assets/ai-robot-alive-v2.mp4.asset.json";
 
 const LOGOS = [
   { slug: "huggingface",  label: "Hugging Face", x: "2%",  y: "8%",  size: 40, delay: 0 },
@@ -15,16 +15,15 @@ export function AIRobotHero() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Cursor (-1..1) drives video scrubbing + subtle body twist
+  // Cursor (-1..1)
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
   const sx = useSpring(mx, { stiffness: 65, damping: 20, mass: 0.7 });
-  const sy = useSpring(my, { stiffness: 65, damping: 20, mass: 0.7 });
 
   const rotateY = useTransform(sx, [-1, 1], [-6, 6]);
   const xShift  = useTransform(sx, [-1, 1], [-4, 4]);
 
-  // Scroll velocity → head tilt (look up when scrolling up, down when scrolling down)
+  // Scroll velocity → head tilt
   const scrollTilt = useMotionValue(0);
   const sTilt = useSpring(scrollTilt, { stiffness: 90, damping: 22, mass: 0.8 });
   const rotateX = useTransform(sTilt, [-1, 1], [10, -10]);
@@ -46,7 +45,7 @@ export function AIRobotHero() {
     return () => window.removeEventListener("pointermove", onMove);
   }, [mx, my]);
 
-  // Scroll-direction tilt with decay
+  // Scroll tilt with decay
   useEffect(() => {
     let last = window.scrollY;
     let raf = 0;
@@ -69,28 +68,34 @@ export function AIRobotHero() {
     };
   }, [scrollTilt]);
 
-  // Scrub the video frame from cursor position (X dominant, Y biases toward end)
+  // Hybrid playback: ambient looped playback + cursor adds offset (more variety, never freezes)
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-    v.pause();
+    v.loop = true;
+    v.muted = true;
+    v.playbackRate = 0.85;
+    v.play().catch(() => {});
+
     let raf = 0;
-    let current = 0;
-    const tick = () => {
+    let baseT = 0;
+    let lastReal = performance.now();
+
+    const tick = (now: number) => {
       const dur = v.duration;
       if (dur && isFinite(dur)) {
-        // cursor X (-1..1) → 0..1, plus a touch of Y so vertical motion advances the frame
-        const xn = (mx.get() + 1) / 2;
-        const yn = (my.get() + 1) / 2;
-        const target = Math.max(0, Math.min(1, xn * 0.75 + yn * 0.25)) * (dur - 0.05);
-        current += (target - current) * 0.14;
-        try { v.currentTime = current; } catch { /* noop */ }
+        const dt = (now - lastReal) / 1000;
+        lastReal = now;
+        // Ambient time advances on its own → continuous variety
+        baseT = (baseT + dt * v.playbackRate) % dur;
+        // Cursor adds a small offset so the robot reacts to mouse without freezing the loop
+        const offset = mx.get() * 0.6 + my.get() * 0.3;
+        const target = ((baseT + offset) % dur + dur) % dur;
+        try { v.currentTime = target; } catch { /* noop */ }
       }
       raf = requestAnimationFrame(tick);
     };
-    const start = () => { tick(); };
-    if (v.readyState >= 1) start();
-    else v.addEventListener("loadedmetadata", start, { once: true });
+    raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [mx, my]);
 
@@ -99,7 +104,7 @@ export function AIRobotHero() {
       ref={wrapRef}
       className="relative w-full aspect-[4/5] sm:aspect-[5/6] lg:aspect-[4/5] overflow-visible flex items-end justify-center [perspective:1600px]"
     >
-      {/* Floating tech logos around the robot */}
+      {/* Floating tech logos */}
       {LOGOS.map((l) => (
         <motion.img
           key={l.slug}
@@ -128,54 +133,55 @@ export function AIRobotHero() {
         />
       ))}
 
-      {/* Ground platform — sits under the feet, ambient with the marquee band below */}
+      {/* Ground platform — depth into the scene */}
       <div
         aria-hidden
-        className="absolute left-1/2 -translate-x-1/2 bottom-[2%] z-0 pointer-events-none"
+        className="absolute left-1/2 -translate-x-1/2 bottom-[1.5%] z-0 pointer-events-none"
         style={{
-          width: "62%",
-          height: "26px",
+          width: "70%",
+          height: "32px",
           background:
-            "radial-gradient(ellipse at center, oklch(85% 0.22 145 / 0.55) 0%, oklch(85% 0.22 145 / 0.18) 45%, transparent 75%)",
-          filter: "blur(6px)",
+            "radial-gradient(ellipse at center, oklch(85% 0.22 145 / 0.45) 0%, oklch(85% 0.22 145 / 0.14) 45%, transparent 78%)",
+          filter: "blur(8px)",
+          transform: "perspective(400px) rotateX(62deg)",
+          transformOrigin: "center bottom",
         }}
       />
       <div
         aria-hidden
-        className="absolute left-1/2 -translate-x-1/2 bottom-[1%] z-0 pointer-events-none"
+        className="absolute left-1/2 -translate-x-1/2 bottom-[0.5%] z-0 pointer-events-none"
         style={{
-          width: "44%",
-          height: "10px",
+          width: "48%",
+          height: "14px",
           background:
-            "radial-gradient(ellipse at center, oklch(0% 0 0 / 0.7) 0%, oklch(0% 0 0 / 0.3) 60%, transparent 90%)",
-          filter: "blur(4px)",
+            "radial-gradient(ellipse at center, oklch(0% 0 0 / 0.65) 0%, oklch(0% 0 0 / 0.25) 60%, transparent 92%)",
+          filter: "blur(5px)",
+          transform: "perspective(400px) rotateX(62deg)",
+          transformOrigin: "center bottom",
         }}
       />
 
-      {/* Robot — video frame is scrubbed by the cursor (no auto loop) */}
+      {/* Robot — black bg keyed out via mix-blend-mode: screen (no mask, no rectangle) */}
       <motion.video
         ref={videoRef}
         src={robotVideo.url}
         muted
         playsInline
+        autoPlay
+        loop
         preload="auto"
         width={1024}
         height={1280}
-        className="relative z-10 h-[118%] w-auto max-w-none object-contain object-bottom select-none pointer-events-none"
+        className="relative z-10 h-[120%] w-auto max-w-none object-contain object-bottom select-none pointer-events-none"
         style={{
           rotateX,
           rotateY,
           x: xShift,
           transformOrigin: "50% 100%",
           transformStyle: "preserve-3d",
-          // Soft radial mask hides the rectangular video bg into the hero
-          WebkitMaskImage:
-            "radial-gradient(ellipse 62% 90% at 50% 52%, #000 58%, rgba(0,0,0,0.6) 78%, transparent 94%)",
-          maskImage:
-            "radial-gradient(ellipse 62% 90% at 50% 52%, #000 58%, rgba(0,0,0,0.6) 78%, transparent 94%)",
-          mixBlendMode: "lighten",
+          mixBlendMode: "screen",
           filter:
-            "drop-shadow(0 30px 50px oklch(0% 0 0 / 0.55)) drop-shadow(0 0 60px oklch(85% 0.22 145 / 0.28)) drop-shadow(0 0 110px oklch(85% 0.22 145 / 0.16))",
+            "drop-shadow(0 0 40px oklch(85% 0.22 145 / 0.22)) drop-shadow(0 18px 30px oklch(0% 0 0 / 0.35))",
         }}
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
