@@ -28,6 +28,7 @@ import { Route as AdminPostsRouteImport } from './routes/admin.posts'
 import { Route as AdminIndexacaoRouteImport } from './routes/admin.indexacao'
 import { Route as AdminBacklinksRouteImport } from './routes/admin.backlinks'
 import { Route as AdminPostsIdRouteImport } from './routes/admin.posts.$id'
+import { Route as ApiPublicHooksWarmCacheRouteImport } from './routes/api/public/hooks/warm-cache'
 import { Route as ApiPublicHooksResubmitSitemapRouteImport } from './routes/api/public/hooks/resubmit-sitemap'
 
 const TrafegoPagoRoute = TrafegoPagoRouteImport.update({
@@ -127,6 +128,11 @@ const AdminPostsIdRoute = AdminPostsIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => AdminPostsRoute,
 } as any)
+const ApiPublicHooksWarmCacheRoute = ApiPublicHooksWarmCacheRouteImport.update({
+  id: '/api/public/hooks/warm-cache',
+  path: '/api/public/hooks/warm-cache',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicHooksResubmitSitemapRoute =
   ApiPublicHooksResubmitSitemapRouteImport.update({
     id: '/api/public/hooks/resubmit-sitemap',
@@ -155,6 +161,7 @@ export interface FileRoutesByFullPath {
   '/blog/': typeof BlogIndexRoute
   '/admin/posts/$id': typeof AdminPostsIdRoute
   '/api/public/hooks/resubmit-sitemap': typeof ApiPublicHooksResubmitSitemapRoute
+  '/api/public/hooks/warm-cache': typeof ApiPublicHooksWarmCacheRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -175,6 +182,7 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogIndexRoute
   '/admin/posts/$id': typeof AdminPostsIdRoute
   '/api/public/hooks/resubmit-sitemap': typeof ApiPublicHooksResubmitSitemapRoute
+  '/api/public/hooks/warm-cache': typeof ApiPublicHooksWarmCacheRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -198,6 +206,7 @@ export interface FileRoutesById {
   '/blog/': typeof BlogIndexRoute
   '/admin/posts/$id': typeof AdminPostsIdRoute
   '/api/public/hooks/resubmit-sitemap': typeof ApiPublicHooksResubmitSitemapRoute
+  '/api/public/hooks/warm-cache': typeof ApiPublicHooksWarmCacheRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -222,6 +231,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/admin/posts/$id'
     | '/api/public/hooks/resubmit-sitemap'
+    | '/api/public/hooks/warm-cache'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -242,6 +252,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/admin/posts/$id'
     | '/api/public/hooks/resubmit-sitemap'
+    | '/api/public/hooks/warm-cache'
   id:
     | '__root__'
     | '/'
@@ -264,6 +275,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/admin/posts/$id'
     | '/api/public/hooks/resubmit-sitemap'
+    | '/api/public/hooks/warm-cache'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -280,6 +292,7 @@ export interface RootRouteChildren {
   TrafegoPagoRoute: typeof TrafegoPagoRoute
   LpTemaRoute: typeof LpTemaRoute
   ApiPublicHooksResubmitSitemapRoute: typeof ApiPublicHooksResubmitSitemapRoute
+  ApiPublicHooksWarmCacheRoute: typeof ApiPublicHooksWarmCacheRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -417,6 +430,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPostsIdRouteImport
       parentRoute: typeof AdminPostsRoute
     }
+    '/api/public/hooks/warm-cache': {
+      id: '/api/public/hooks/warm-cache'
+      path: '/api/public/hooks/warm-cache'
+      fullPath: '/api/public/hooks/warm-cache'
+      preLoaderRoute: typeof ApiPublicHooksWarmCacheRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/hooks/resubmit-sitemap': {
       id: '/api/public/hooks/resubmit-sitemap'
       path: '/api/public/hooks/resubmit-sitemap'
@@ -483,6 +503,7 @@ const rootRouteChildren: RootRouteChildren = {
   TrafegoPagoRoute: TrafegoPagoRoute,
   LpTemaRoute: LpTemaRoute,
   ApiPublicHooksResubmitSitemapRoute: ApiPublicHooksResubmitSitemapRoute,
+  ApiPublicHooksWarmCacheRoute: ApiPublicHooksWarmCacheRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
