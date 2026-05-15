@@ -1,88 +1,100 @@
-# Sistema de captação de backlinks — Aceleriq Blog
+# Painel Admin Aceleriq — SEO, Posts e Leads
 
-Pipeline interno (CRM enxuto) para prospectar, executar e acompanhar backlinks qualificados, com metas mensais e métricas de execução.
+Um único hub em `/admin` com navegação lateral, reusando o gate de senha (`ADMIN_PASSWORD`) já em uso em `/admin/backlinks`. Tudo via `createServerFn` + `supabaseAdmin`. RLS continua bloqueando acesso público.
 
-## Arquitetura
+## 1. Estrutura de rotas
 
-### 1. Banco (Lovable Cloud)
+- `/admin` → dashboard com KPIs + alertas (entry point)
+- `/admin/seo` → métricas Search Console + sitemap + indexação
+- `/admin/posts` → lista + editor com workflow de revisão
+- `/admin/posts/novo` e `/admin/posts/$id` → editor markdown com preview
+- `/admin/leads` → leads do Diagnóstico + leads dos LPs (filtro por origem)
+- `/admin/backlinks` → mantém o que já existe
 
-**`backlink_targets`** — cada oportunidade de backlink
-- `domain` (text) — ex.: `g1.globo.com`
-- `domain_authority` (int, 0–100) — preenchido manualmente ou via Semrush depois
-- `type` (enum): `parceria` | `guest_post` | `publicacao` | `menção` | `diretorio`
-- `status` (enum): `prospect` | `contatado` | `negociando` | `aceito` | `publicado` | `recusado` | `arquivado`
-- `priority` (enum): `alta` | `media` | `baixa`
-- `contact_name`, `contact_email`, `contact_url` (text, opcionais)
-- `pitch_angle` (text) — ângulo da proposta
-- `target_blog_slug` (text) — qual post da Aceleriq é o alvo do link
-- `proposed_anchor` (text) — texto âncora desejado
-- `published_url` (text) — URL final onde o link foi publicado
-- `published_anchor` (text) — âncora real publicada
-- `dofollow` (bool)
-- `value_estimated_brl` (numeric) — valor de mídia equivalente (opcional)
-- `notes` (text)
-- `next_action_at` (timestamptz) — próximo follow-up
-- `published_at` (timestamptz)
-- `created_at`, `updated_at`
+Layout compartilhado em `src/routes/admin.tsx` (sidebar + gate de senha único, evita repetir o login).
 
-**`backlink_goals`** — metas mensais
-- `month` (date, primeiro dia do mês, único)
-- `target_count` (int) — quantos backlinks publicados no mês
-- `target_avg_da` (int) — DA médio mínimo
-- `notes` (text)
+## 2. Banco de dados
 
-**RLS**: ambas tabelas públicas para leitura/escrita por enquanto (sem auth no projeto). Vou propor proteger por senha simples no UI ou implementar Supabase Auth — escolha sua.
+Nova tabela `blog_posts`:
+- `slug` (unique), `title`, `excerpt`, `content` (markdown), `cover_image`
+- `category` (enum existente do blog: ia/automacao/trafego/marketing/vendas/crescimento)
+- `status` (`draft` | `in_review` | `approved` | `published`)
+- `seo_title`, `seo_description`, `focus_keyword`
+- `review_notes` (jsonb — checklist SEO automático)
+- `author`, `published_at`, `created_at`, `updated_at`
 
-### 2. Server functions (`src/lib/backlinks.functions.ts`)
-- `listBacklinks({ status?, type?, search? })`
-- `createBacklink(data)`
-- `updateBacklink({ id, patch })`
-- `deleteBacklink({ id })`
-- `listGoals()` / `upsertGoal({ month, target_count, target_avg_da })`
-- `getBacklinkMetrics()` — agrega: total publicados no mês, DA médio, % vs meta, breakdown por status/tipo, próximas ações vencidas
+Trigger: ao mudar `status` para `published`, seta `published_at = now()`.
 
-### 3. UI — `/admin/backlinks` (oculto do menu público)
-- **Header com KPIs**: Publicados no mês / Meta · DA médio · Pipeline ativo · Vencidos
-- **Tabs**: Pipeline (kanban) · Lista (table com filtros) · Metas
-- **Kanban** com 6 colunas (prospect → publicado), drag-to-update status
-- **Drawer de edição** ao clicar em card: form completo + histórico de alterações
-- **Botão "Nova oportunidade"** — modal com form
-- **Tab Metas**: gráfico simples (barras) publicados vs meta mensal últimos 6 meses
-- **Export CSV** — para enviar pra equipe externa de outreach
+`blog.functions.ts` passa a mesclar `LOCAL_POSTS` (legado) + `blog_posts` com `status='published'` no feed. Sitemap também.
 
-Estética coerente com o resto: dark, mono uppercase tracking-wide nos labels, primary em destaques, sem decorações.
+## 3. Editor de posts com revisão
+
+Editor markdown lado a lado com preview renderizado (mesmo `ReactMarkdown` do blog, então o autor vê o resultado real).
+
+Painel de revisão automática antes de publicar — checklist visual com pass/fail:
+- Título: 30–60 chars
+- SEO description: 120–160 chars
+- Focus keyword presente em H1, primeiros 100 chars, slug e meta
+- Densidade da focus keyword 0.5–2.5%
+- Pelo menos 1 H2 e 3 H2/H3 no total
+- Mínimo 600 palavras
+- Pelo menos 2 links internos detectados (`/lp/`, `/blog/`, `/servicos/`)
+- Imagem de capa definida
+
+Workflow: `draft → in_review → approved → published`. Botão "Publicar" só fica ativo quando ≥80% do checklist passa OU o admin força com nota.
+
+## 4. SEO — Search Console
+
+Server function que chama o connector Google Search Console (`GOOGLE_SEARCH_CONSOLE_API_KEY` já configurado) e devolve para `aceleriq.com.br`:
+
+- KPIs últimos 28 dias: cliques, impressões, CTR, posição média
+- Top 10 queries (cliques + posição)
+- Top 10 páginas (cliques + impressões)
+- Status de indexação por URL do sitemap (sitemaps API + URL inspection quando disponível)
+- Tendência diária (gráfico de linha — clicks + impressions)
+
+Cache server-side de 30 min para não estourar quota.
+
+### Alertas automáticos (na home do admin)
+- Posição média piorou >3 posições em 7 dias
+- Páginas com CTR <1% e posição 1–10 (oportunidade de title/meta)
+- Posts publicados há >7 dias sem nenhuma impressão (problema de indexação)
+- Queries com posição 11–20 ("almost there" — empurrar com link interno)
+
+## 5. Leads do Diagnóstico
+
+Tabela com:
+- Filtro por origem (`lp:ia`, `blog:slug`, direto, etc.) — usa a coluna `origem` que adicionei
+- Filtro por classificação (verde/amarelo/vermelho)
+- Detalhe expandido com todas as respostas + score + recomendações
+- Export CSV
+- KPIs: total, conversão por origem, score médio, leads "quentes" (>70)
+- Link direto WhatsApp pré-preenchido com resumo
+
+## 6. Dashboard `/admin` (home)
+
+Hero com 4 KPIs compactos:
+- Cliques orgânicos 28d (vs 28d anteriores)
+- Posição média 28d (vs anterior)
+- Leads do mês (vs mês anterior)
+- Posts publicados (vs mês anterior)
+
+Lista de alertas SEO acionáveis + atalhos para "novo post", "ver leads", "publicar rascunhos".
 
 ## Detalhes técnicos
 
-```text
-src/
-  routes/
-    admin.backlinks.tsx           # rota oculta protegida
-  lib/
-    backlinks.functions.ts        # createServerFn (admin via supabaseAdmin)
-    backlinks-types.ts            # enums + tipos compartilhados
-  components/admin/backlinks/
-    BacklinkKanban.tsx
-    BacklinkTable.tsx
-    BacklinkForm.tsx              # drawer/modal
-    BacklinkMetrics.tsx           # KPIs + gráfico de metas
-    GoalsEditor.tsx
-```
+- `src/lib/blog-posts.functions.ts` — CRUD + checklist SEO server-side
+- `src/lib/seo-gsc.functions.ts` — wrapper do connector com cache
+- `src/lib/admin-auth.ts` — extrai a verificação de senha já existente para reuso
+- `src/components/admin/AdminShell.tsx` — sidebar + gate compartilhado
+- `src/components/admin/MarkdownEditor.tsx` — textarea + preview lado-a-lado (sem dependência nova)
+- Recharts para os gráficos (já está no projeto se eu verificar — caso contrário, gráficos SVG simples sem nova dep)
+- Migração `blog_posts` + trigger
+- Atualizar `blog.functions.ts` e sitemap para incluir posts da nova tabela
 
-- Server fns usam `supabaseAdmin` (sem RLS) já que rota é admin.
-- Mutations invalidam `useQuery` keys: `['backlinks']`, `['backlink-metrics']`, `['backlink-goals']`.
-- Drag-and-drop no kanban com `@dnd-kit/core` (já usado em outros projetos; instalar se faltar).
-- Gráfico com SVG simples inline — sem Recharts pra manter bundle leve.
+## Fora do escopo deste plano
+- Multi-usuário (continua single password)
+- Upload de imagens (usa URL externa por enquanto — posso adicionar storage depois se quiser)
+- Versionamento/histórico de posts (mantém só o estado atual)
 
-## Decisões que preciso confirmar antes de codar
-
-1. **Proteção da rota `/admin/backlinks`**:
-   a) Senha simples em variável de ambiente (`ADMIN_PASSWORD`) — rápido, sem fluxo de signup.
-   b) Supabase Auth completo (email/senha, você cria sua conta admin).
-   c) Sem proteção por enquanto (só URL não-listada).
-
-2. **Integração com Semrush**: já temos a tool conectada — quer que eu busque DA/Authority Score automaticamente quando você cadastrar um domínio? (Adiciona um botão "Atualizar métricas" no card.)
-
-3. **Seed inicial**: quer que eu pré-popule com ~15–20 alvos relevantes pro nicho (mídias de marketing/IA brasileiras: Resultados Digitais, RockContent, AdNews, Meio & Mensagem, ProXXIma, etc.)?
-
-Confirma essas 3 e eu já implemento na sequência: migração → server fns → UI.
+Confirma e eu mando ver?

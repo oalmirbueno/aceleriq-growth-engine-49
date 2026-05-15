@@ -116,6 +116,63 @@ export type Database = {
         }
         Relationships: []
       }
+      blog_posts: {
+        Row: {
+          author: string
+          category: string
+          content: string
+          cover_image: string | null
+          created_at: string
+          excerpt: string
+          focus_keyword: string | null
+          id: string
+          published_at: string | null
+          review_notes: Json
+          seo_description: string | null
+          seo_title: string | null
+          slug: string
+          status: Database["public"]["Enums"]["blog_post_status"]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author?: string
+          category?: string
+          content?: string
+          cover_image?: string | null
+          created_at?: string
+          excerpt?: string
+          focus_keyword?: string | null
+          id?: string
+          published_at?: string | null
+          review_notes?: Json
+          seo_description?: string | null
+          seo_title?: string | null
+          slug: string
+          status?: Database["public"]["Enums"]["blog_post_status"]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author?: string
+          category?: string
+          content?: string
+          cover_image?: string | null
+          created_at?: string
+          excerpt?: string
+          focus_keyword?: string | null
+          id?: string
+          published_at?: string | null
+          review_notes?: Json
+          seo_description?: string | null
+          seo_title?: string | null
+          slug?: string
+          status?: Database["public"]["Enums"]["blog_post_status"]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       diagnostico_leads: {
         Row: {
           classificacao: string
@@ -229,6 +286,7 @@ export type Database = {
         | "publicacao"
         | "mencao"
         | "diretorio"
+      blog_post_status: "draft" | "in_review" | "approved" | "published"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -373,6 +431,7 @@ export const Constants = {
         "mencao",
         "diretorio",
       ],
+      blog_post_status: ["draft", "in_review", "approved", "published"],
     },
   },
 } as const
