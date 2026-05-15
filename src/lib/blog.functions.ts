@@ -9,6 +9,8 @@ import {
 } from "./blog-feeds";
 import { LOCAL_POSTS } from "./blog-local-posts";
 import { scrapeArticle, translateArticleToPt, translateBatchTitles } from "./blog-enrich.server";
+import { fetchPublishedAdminPosts } from "./blog-posts.functions";
+import type { AdminBlogPost } from "./blog-posts-types";
 
 export interface BlogPost {
   slug: string;
@@ -293,6 +295,34 @@ function buildLocalPosts(): BlogPost[] {
   });
 }
 
+function adminPostToBlogPost(p: AdminBlogPost): BlogPost {
+  return {
+    slug: p.slug,
+    title: p.title,
+    excerpt: p.seo_description || p.excerpt,
+    image: p.cover_image,
+    link: `https://aceleriq.com.br/blog/${p.slug}`,
+    source: "Aceleriq",
+    sourceId: "aceleriq-admin",
+    category: p.category,
+    lang: "pt",
+    publishedAt: p.published_at || p.updated_at,
+    isLocal: true,
+    content: p.content,
+    author: p.author,
+  };
+}
+
+async function loadAdminPosts(): Promise<BlogPost[]> {
+  try {
+    const rows = await fetchPublishedAdminPosts();
+    return rows.map(adminPostToBlogPost);
+  } catch (e) {
+    console.error("[loadAdminPosts]", e);
+    return [];
+  }
+}
+
 async function loadAll(): Promise<BlogPost[]> {
   if (cache && Date.now() - cache.at < CACHE_MS) return cache.posts;
   const results = await Promise.all(FEEDS.map(fetchOne));
@@ -331,8 +361,9 @@ async function loadAll(): Promise<BlogPost[]> {
     }
   }
 
-  // Locais primeiro (autoridade), depois feed.
-  const all = [...buildLocalPosts(), ...unique];
+  // Posts autorais Aceleriq (admin) primeiro, depois locais hardcoded, depois feed.
+  const adminPosts = await loadAdminPosts();
+  const all = [...adminPosts, ...buildLocalPosts(), ...unique];
   cache = { at: Date.now(), posts: all };
   return all;
 }
@@ -375,9 +406,11 @@ export async function loadSitemapPosts(): Promise<{ slug: string; publishedAt: s
     const merged = results.flat().filter(isRelevant);
     const unique = dedupe(merged).slice(0, 100);
     const local = buildLocalPosts();
-    return [...local, ...unique].map((p) => ({ slug: p.slug, publishedAt: p.publishedAt }));
+    const admin = await loadAdminPosts();
+    return [...admin, ...local, ...unique].map((p) => ({ slug: p.slug, publishedAt: p.publishedAt }));
   } catch {
-    return buildLocalPosts().map((p) => ({ slug: p.slug, publishedAt: p.publishedAt }));
+    const admin = await loadAdminPosts().catch(() => []);
+    return [...admin, ...buildLocalPosts()].map((p) => ({ slug: p.slug, publishedAt: p.publishedAt }));
   }
 }
 
