@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowUpRight, Clock, ExternalLink, MessageCircle, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Clock, MessageCircle, Sparkles } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { DiagnosticoModal } from "@/components/site/DiagnosticoModal";
@@ -36,7 +36,7 @@ export const Route = createFileRoute("/blog/$slug")({
         { name: "twitter:description", content: desc },
         ...(post.image ? [{ name: "twitter:image", content: post.image }] : []),
       ],
-      // Canonical points to the original source — best-practice for syndicated/excerpted content (no duplicate-content penalty).
+      // Canonical aponta para a fonte original (boa prática para conteúdo sindicado).
       links: [{ rel: "canonical", href: post.link }],
       scripts: [
         {
@@ -134,7 +134,7 @@ function BlogPostPage() {
             </div>
             <p className="text-foreground/90 leading-relaxed relative">
               Tendências como esta mostram por que estratégia, dados e IA precisam andar juntos. Na Aceleriq aplicamos
-              esse tipo de movimento dentro do método A.C.E.L.E.R.A para gerar receita previsível — não apenas tecnologia
+              esse tipo de movimento dentro do método A.C.E.L.E.R.A para gerar receita previsível, não apenas tecnologia
               isolada.
             </p>
           </div>
@@ -186,8 +186,8 @@ function BlogPostPage() {
                   <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-3">
                     {r.title}
                   </h3>
-                  <div className="mt-3 inline-flex items-center gap-1 text-[11px] text-primary opacity-70 group-hover:opacity-100">
-                    Abrir <ExternalLink className="h-3 w-3" />
+                  <div className="mt-3 inline-flex items-center gap-1 text-[11px] text-primary opacity-70 group-hover:opacity-100 group-hover:gap-2 transition-all">
+                    Ler análise <ArrowRight className="h-3 w-3" />
                   </div>
                 </Link>
               ))}
