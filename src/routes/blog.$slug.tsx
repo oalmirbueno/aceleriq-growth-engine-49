@@ -6,6 +6,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { DiagnosticoModal } from "@/components/site/DiagnosticoModal";
 import { fetchBlogPost } from "@/lib/blog.functions";
+import { categoryCover } from "@/lib/blog-covers";
 import { whatsappLink, DEFAULT_WHATSAPP_MESSAGE } from "@/lib/contact";
 
 export const Route = createFileRoute("/blog/$slug")({
