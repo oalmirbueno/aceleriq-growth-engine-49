@@ -173,6 +173,54 @@ export type Database = {
         }
         Relationships: []
       }
+      blog_topic_queue: {
+        Row: {
+          angle: string
+          attempts: number
+          category: string
+          created_at: string
+          focus_keyword: string
+          generated_post_id: string | null
+          id: string
+          last_error: string | null
+          priority: number
+          scheduled_for: string | null
+          status: Database["public"]["Enums"]["topic_queue_status"]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          angle?: string
+          attempts?: number
+          category?: string
+          created_at?: string
+          focus_keyword: string
+          generated_post_id?: string | null
+          id?: string
+          last_error?: string | null
+          priority?: number
+          scheduled_for?: string | null
+          status?: Database["public"]["Enums"]["topic_queue_status"]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          angle?: string
+          attempts?: number
+          category?: string
+          created_at?: string
+          focus_keyword?: string
+          generated_post_id?: string | null
+          id?: string
+          last_error?: string | null
+          priority?: number
+          scheduled_for?: string | null
+          status?: Database["public"]["Enums"]["topic_queue_status"]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       diagnostico_leads: {
         Row: {
           classificacao: string
@@ -287,6 +335,12 @@ export type Database = {
         | "mencao"
         | "diretorio"
       blog_post_status: "draft" | "in_review" | "approved" | "published"
+      topic_queue_status:
+        | "pending"
+        | "generating"
+        | "published"
+        | "skipped"
+        | "failed"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -432,6 +486,13 @@ export const Constants = {
         "diretorio",
       ],
       blog_post_status: ["draft", "in_review", "approved", "published"],
+      topic_queue_status: [
+        "pending",
+        "generating",
+        "published",
+        "skipped",
+        "failed",
+      ],
     },
   },
 } as const

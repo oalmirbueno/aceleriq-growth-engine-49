@@ -26,8 +26,10 @@ import { Route as LpTemaRouteImport } from './routes/lp.$tema'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminPostsRouteImport } from './routes/admin.posts'
 import { Route as AdminIndexacaoRouteImport } from './routes/admin.indexacao'
+import { Route as AdminConteudoRouteImport } from './routes/admin.conteudo'
 import { Route as AdminBacklinksRouteImport } from './routes/admin.backlinks'
 import { Route as AdminPostsIdRouteImport } from './routes/admin.posts.$id'
+import { Route as ApiPublicHooksWeeklyPostRouteImport } from './routes/api/public/hooks/weekly-post'
 import { Route as ApiPublicHooksWarmCacheRouteImport } from './routes/api/public/hooks/warm-cache'
 import { Route as ApiPublicHooksResubmitSitemapRouteImport } from './routes/api/public/hooks/resubmit-sitemap'
 
@@ -118,6 +120,11 @@ const AdminIndexacaoRoute = AdminIndexacaoRouteImport.update({
   path: '/indexacao',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminConteudoRoute = AdminConteudoRouteImport.update({
+  id: '/conteudo',
+  path: '/conteudo',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminBacklinksRoute = AdminBacklinksRouteImport.update({
   id: '/backlinks',
   path: '/backlinks',
@@ -128,6 +135,12 @@ const AdminPostsIdRoute = AdminPostsIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => AdminPostsRoute,
 } as any)
+const ApiPublicHooksWeeklyPostRoute =
+  ApiPublicHooksWeeklyPostRouteImport.update({
+    id: '/api/public/hooks/weekly-post',
+    path: '/api/public/hooks/weekly-post',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicHooksWarmCacheRoute = ApiPublicHooksWarmCacheRouteImport.update({
   id: '/api/public/hooks/warm-cache',
   path: '/api/public/hooks/warm-cache',
@@ -153,6 +166,7 @@ export interface FileRoutesByFullPath {
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
   '/trafego-pago': typeof TrafegoPagoRoute
   '/admin/backlinks': typeof AdminBacklinksRoute
+  '/admin/conteudo': typeof AdminConteudoRoute
   '/admin/indexacao': typeof AdminIndexacaoRoute
   '/admin/posts': typeof AdminPostsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
@@ -162,6 +176,7 @@ export interface FileRoutesByFullPath {
   '/admin/posts/$id': typeof AdminPostsIdRoute
   '/api/public/hooks/resubmit-sitemap': typeof ApiPublicHooksResubmitSitemapRoute
   '/api/public/hooks/warm-cache': typeof ApiPublicHooksWarmCacheRoute
+  '/api/public/hooks/weekly-post': typeof ApiPublicHooksWeeklyPostRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -174,6 +189,7 @@ export interface FileRoutesByTo {
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
   '/trafego-pago': typeof TrafegoPagoRoute
   '/admin/backlinks': typeof AdminBacklinksRoute
+  '/admin/conteudo': typeof AdminConteudoRoute
   '/admin/indexacao': typeof AdminIndexacaoRoute
   '/admin/posts': typeof AdminPostsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
@@ -183,6 +199,7 @@ export interface FileRoutesByTo {
   '/admin/posts/$id': typeof AdminPostsIdRoute
   '/api/public/hooks/resubmit-sitemap': typeof ApiPublicHooksResubmitSitemapRoute
   '/api/public/hooks/warm-cache': typeof ApiPublicHooksWarmCacheRoute
+  '/api/public/hooks/weekly-post': typeof ApiPublicHooksWeeklyPostRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -198,6 +215,7 @@ export interface FileRoutesById {
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
   '/trafego-pago': typeof TrafegoPagoRoute
   '/admin/backlinks': typeof AdminBacklinksRoute
+  '/admin/conteudo': typeof AdminConteudoRoute
   '/admin/indexacao': typeof AdminIndexacaoRoute
   '/admin/posts': typeof AdminPostsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
@@ -207,6 +225,7 @@ export interface FileRoutesById {
   '/admin/posts/$id': typeof AdminPostsIdRoute
   '/api/public/hooks/resubmit-sitemap': typeof ApiPublicHooksResubmitSitemapRoute
   '/api/public/hooks/warm-cache': typeof ApiPublicHooksWarmCacheRoute
+  '/api/public/hooks/weekly-post': typeof ApiPublicHooksWeeklyPostRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -223,6 +242,7 @@ export interface FileRouteTypes {
     | '/sobre-a-aceleriq'
     | '/trafego-pago'
     | '/admin/backlinks'
+    | '/admin/conteudo'
     | '/admin/indexacao'
     | '/admin/posts'
     | '/blog/$slug'
@@ -232,6 +252,7 @@ export interface FileRouteTypes {
     | '/admin/posts/$id'
     | '/api/public/hooks/resubmit-sitemap'
     | '/api/public/hooks/warm-cache'
+    | '/api/public/hooks/weekly-post'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -244,6 +265,7 @@ export interface FileRouteTypes {
     | '/sobre-a-aceleriq'
     | '/trafego-pago'
     | '/admin/backlinks'
+    | '/admin/conteudo'
     | '/admin/indexacao'
     | '/admin/posts'
     | '/blog/$slug'
@@ -253,6 +275,7 @@ export interface FileRouteTypes {
     | '/admin/posts/$id'
     | '/api/public/hooks/resubmit-sitemap'
     | '/api/public/hooks/warm-cache'
+    | '/api/public/hooks/weekly-post'
   id:
     | '__root__'
     | '/'
@@ -267,6 +290,7 @@ export interface FileRouteTypes {
     | '/sobre-a-aceleriq'
     | '/trafego-pago'
     | '/admin/backlinks'
+    | '/admin/conteudo'
     | '/admin/indexacao'
     | '/admin/posts'
     | '/blog/$slug'
@@ -276,6 +300,7 @@ export interface FileRouteTypes {
     | '/admin/posts/$id'
     | '/api/public/hooks/resubmit-sitemap'
     | '/api/public/hooks/warm-cache'
+    | '/api/public/hooks/weekly-post'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -293,6 +318,7 @@ export interface RootRouteChildren {
   LpTemaRoute: typeof LpTemaRoute
   ApiPublicHooksResubmitSitemapRoute: typeof ApiPublicHooksResubmitSitemapRoute
   ApiPublicHooksWarmCacheRoute: typeof ApiPublicHooksWarmCacheRoute
+  ApiPublicHooksWeeklyPostRoute: typeof ApiPublicHooksWeeklyPostRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -416,6 +442,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexacaoRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/conteudo': {
+      id: '/admin/conteudo'
+      path: '/conteudo'
+      fullPath: '/admin/conteudo'
+      preLoaderRoute: typeof AdminConteudoRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/backlinks': {
       id: '/admin/backlinks'
       path: '/backlinks'
@@ -429,6 +462,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/posts/$id'
       preLoaderRoute: typeof AdminPostsIdRouteImport
       parentRoute: typeof AdminPostsRoute
+    }
+    '/api/public/hooks/weekly-post': {
+      id: '/api/public/hooks/weekly-post'
+      path: '/api/public/hooks/weekly-post'
+      fullPath: '/api/public/hooks/weekly-post'
+      preLoaderRoute: typeof ApiPublicHooksWeeklyPostRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/public/hooks/warm-cache': {
       id: '/api/public/hooks/warm-cache'
@@ -461,6 +501,7 @@ const AdminPostsRouteWithChildren = AdminPostsRoute._addFileChildren(
 
 interface AdminRouteChildren {
   AdminBacklinksRoute: typeof AdminBacklinksRoute
+  AdminConteudoRoute: typeof AdminConteudoRoute
   AdminIndexacaoRoute: typeof AdminIndexacaoRoute
   AdminPostsRoute: typeof AdminPostsRouteWithChildren
   AdminIndexRoute: typeof AdminIndexRoute
@@ -468,6 +509,7 @@ interface AdminRouteChildren {
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminBacklinksRoute: AdminBacklinksRoute,
+  AdminConteudoRoute: AdminConteudoRoute,
   AdminIndexacaoRoute: AdminIndexacaoRoute,
   AdminPostsRoute: AdminPostsRouteWithChildren,
   AdminIndexRoute: AdminIndexRoute,
@@ -504,16 +546,8 @@ const rootRouteChildren: RootRouteChildren = {
   LpTemaRoute: LpTemaRoute,
   ApiPublicHooksResubmitSitemapRoute: ApiPublicHooksResubmitSitemapRoute,
   ApiPublicHooksWarmCacheRoute: ApiPublicHooksWarmCacheRoute,
+  ApiPublicHooksWeeklyPostRoute: ApiPublicHooksWeeklyPostRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
