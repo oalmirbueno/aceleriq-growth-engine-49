@@ -63,6 +63,7 @@ function Page() {
       faqs={FAQS}
       whatsappMessage="Olá! Quero conversar sobre automação e IA com a Aceleriq."
       extraSection={<AutomationSimulator />}
+      heroAside={<AIRobotHero />}
     />
   );
 }
