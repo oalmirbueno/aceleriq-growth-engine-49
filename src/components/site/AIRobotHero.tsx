@@ -82,10 +82,6 @@ export function AIRobotHero() {
         style={{
           filter:
             "drop-shadow(0 40px 60px oklch(0% 0 0 / 0.7)) drop-shadow(0 0 50px oklch(85% 0.22 145 / 0.3)) drop-shadow(0 0 90px oklch(85% 0.22 145 / 0.18))",
-          maskImage:
-            "radial-gradient(ellipse 75% 85% at 50% 45%, black 55%, rgba(0,0,0,0.85) 70%, transparent 100%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 75% 85% at 50% 45%, black 55%, rgba(0,0,0,0.85) 70%, transparent 100%)",
         }}
       />
 
