@@ -599,10 +599,34 @@ export function buildServiceHead(opts: {
     "@type": "Service",
     name: opts.serviceName,
     serviceType: opts.serviceName,
-    provider: { "@type": "Organization", name: "Aceleriq", url: "https://aceleriq.com.br" },
+    provider: {
+      "@type": "Organization",
+      name: "Aceleriq",
+      url: "https://aceleriq.com.br",
+      logo: "https://aceleriq.com.br/icon-512.png",
+    },
     areaServed: { "@type": "Country", name: "Brasil" },
     url: opts.url,
     description: opts.description,
+    offers: {
+      "@type": "Offer",
+      url: opts.url,
+      priceCurrency: "BRL",
+      availability: "https://schema.org/InStock",
+      priceSpecification: {
+        "@type": "PriceSpecification",
+        priceCurrency: "BRL",
+        description: "Sob consulta · diagnóstico gratuito",
+      },
+    },
+  };
+  const BREADCRUMB_JSONLD = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://aceleriq.com.br" },
+      { "@type": "ListItem", position: 2, name: opts.serviceName, item: opts.url },
+    ],
   };
   return {
     meta: [
@@ -622,6 +646,7 @@ export function buildServiceHead(opts: {
     scripts: [
       { type: "application/ld+json", children: JSON.stringify(SERVICE_JSONLD) },
       { type: "application/ld+json", children: JSON.stringify(FAQ_JSONLD) },
+      { type: "application/ld+json", children: JSON.stringify(BREADCRUMB_JSONLD) },
     ],
   };
 }
