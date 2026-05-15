@@ -32,6 +32,7 @@ export type ServicePageProps = {
   whatsappMessage?: string;
   extraSection?: ReactNode;
   principle?: ServicePrinciple;
+  heroAside?: ReactNode;
 };
 
 const DEFAULT_PRINCIPLES: Record<ServiceVariant, ServicePrinciple> = {
