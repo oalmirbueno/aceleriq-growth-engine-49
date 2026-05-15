@@ -7,6 +7,7 @@ import {
   type FeedCategory,
   type FeedSource,
 } from "./blog-feeds";
+import { LOCAL_POSTS } from "./blog-local-posts";
 
 export interface BlogPost {
   slug: string;
@@ -19,9 +20,13 @@ export interface BlogPost {
   category: FeedCategory;
   lang: "pt" | "en";
   publishedAt: string; // ISO
+  /** Quando true, é conteúdo autoral da Aceleriq (renderiza dentro do site). */
+  isLocal?: boolean;
+  /** Markdown simples — apenas para posts locais. */
+  content?: string;
+  author?: string;
 }
 
-// In-memory cache (per worker instance) — curto p/ feel "tempo real"
 let cache: { at: number; posts: BlogPost[] } | null = null;
 const CACHE_MS = 1000 * 60 * 10; // 10 min
 
@@ -41,19 +46,16 @@ function stripHtml(s: string): string {
 }
 
 function extractImage(item: any): string | null {
-  // media:content / media:thumbnail
   const media = item["media:content"] || item["media:thumbnail"];
   if (media) {
     const m = Array.isArray(media) ? media[0] : media;
     if (m?.["@_url"]) return m["@_url"];
   }
-  // enclosure
   if (item.enclosure) {
     const e = Array.isArray(item.enclosure) ? item.enclosure[0] : item.enclosure;
     if (e?.["@_url"] && (e["@_type"]?.startsWith("image") || /\.(jpg|jpeg|png|webp|gif)/i.test(e["@_url"])))
       return e["@_url"];
   }
-  // image inside content:encoded or description
   const html = item["content:encoded"] || item.description || "";
   const m = typeof html === "string" ? html.match(/<img[^>]+src=["']([^"']+)["']/i) : null;
   if (m) return m[1];
@@ -76,6 +78,39 @@ function shortHash(s: string): string {
   return (h >>> 0).toString(36);
 }
 
+async function fetchOgImage(url: string): Promise<string | null> {
+  try {
+    const res = await fetch(url, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (compatible; AceleriqBot/1.0; +https://aceleriq.com.br)",
+        Accept: "text/html,application/xhtml+xml",
+      },
+      redirect: "follow",
+      signal: AbortSignal.timeout(5000),
+    });
+    if (!res.ok) return null;
+    const html = await res.text();
+    // og:image / twitter:image
+    const re =
+      /<meta[^>]+(?:property|name)=["'](?:og:image(?::secure_url)?|twitter:image)["'][^>]*content=["']([^"']+)["']/i;
+    const m = html.match(re) || html.match(
+      /<meta[^>]+content=["']([^"']+)["'][^>]*(?:property|name)=["'](?:og:image|twitter:image)["']/i,
+    );
+    if (m) {
+      const src = m[1];
+      // Resolve relative
+      try {
+        const abs = new URL(src, res.url).toString();
+        if (/^https?:\/\//i.test(abs)) return abs;
+      } catch {}
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 async function fetchOne(source: FeedSource): Promise<BlogPost[]> {
   try {
     const res = await fetch(source.url, {
@@ -83,7 +118,6 @@ async function fetchOne(source: FeedSource): Promise<BlogPost[]> {
         "User-Agent": "AceleriqBot/1.0 (+https://aceleriq.com.br)",
         Accept: "application/rss+xml, application/xml, text/xml, */*",
       },
-      // 8s soft timeout via AbortSignal
       signal: AbortSignal.timeout(8000),
     });
     if (!res.ok) return [];
@@ -107,7 +141,6 @@ async function fetchOne(source: FeedSource): Promise<BlogPost[]> {
             : [];
     const posts: BlogPost[] = items.slice(0, 15).map((it) => {
       const rawTitle = stripHtml(typeof it.title === "string" ? it.title : it.title?.["#text"] ?? "");
-      // Google News title format: "Headline - Publisher" — separa publisher
       let title = rawTitle;
       let publisher = source.name;
       const dashSplit = rawTitle.match(/^(.*?)\s+-\s+([^-]{2,40})$/);
@@ -115,7 +148,6 @@ async function fetchOne(source: FeedSource): Promise<BlogPost[]> {
         title = dashSplit[1].trim();
         publisher = dashSplit[2].trim();
       }
-      // <source> tag (Google News fornece publisher real)
       const srcTag = it.source;
       if (srcTag) {
         const s = typeof srcTag === "string" ? srcTag : srcTag?.["#text"];
@@ -169,6 +201,27 @@ function dedupe(posts: BlogPost[]): BlogPost[] {
   return out;
 }
 
+function buildLocalPosts(): BlogPost[] {
+  return LOCAL_POSTS.map((p) => {
+    const slug = `aceleriq-${slugify(p.title)}`.slice(0, 110);
+    return {
+      slug,
+      title: p.title,
+      excerpt: p.excerpt,
+      image: p.image ?? null,
+      link: `https://aceleriq.com.br/blog/${slug}`,
+      source: "Aceleriq",
+      sourceId: "aceleriq-local",
+      category: p.category,
+      lang: "pt" as const,
+      publishedAt: p.publishedAt,
+      isLocal: true,
+      content: p.content,
+      author: p.author,
+    };
+  });
+}
+
 async function loadAll(): Promise<BlogPost[]> {
   if (cache && Date.now() - cache.at < CACHE_MS) return cache.posts;
   const results = await Promise.all(FEEDS.map(fetchOne));
@@ -176,9 +229,19 @@ async function loadAll(): Promise<BlogPost[]> {
     .flat()
     .filter(isRelevant)
     .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
-  const unique = dedupe(merged).slice(0, 80);
-  cache = { at: Date.now(), posts: unique };
-  return unique;
+  const unique = dedupe(merged).slice(0, 60);
+
+  // Para os 24 mais recentes sem imagem, busca og:image em paralelo (com timeout).
+  const needsImage = unique.filter((p) => !p.image).slice(0, 24);
+  const imgs = await Promise.all(needsImage.map((p) => fetchOgImage(p.link)));
+  needsImage.forEach((p, i) => {
+    if (imgs[i]) p.image = imgs[i];
+  });
+
+  // Locais primeiro (autoridade), depois feed.
+  const all = [...buildLocalPosts(), ...unique];
+  cache = { at: Date.now(), posts: all };
+  return all;
 }
 
 export const fetchBlogPosts = createServerFn({ method: "GET" }).handler(async () => {
