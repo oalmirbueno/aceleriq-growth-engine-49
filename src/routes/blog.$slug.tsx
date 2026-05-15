@@ -305,7 +305,7 @@ function BlogPostPage() {
             // so we cap total links per article.
             const linkTargets = [
               ...SERVICE_LINK_TARGETS,
-              ...buildPostLinkTargets(related.map((r) => ({ slug: r.slug, title: r.title }))),
+              ...buildPostLinkTargets(related.map((r: { slug: string; title: string }) => ({ slug: r.slug, title: r.title }))),
             ];
             const linker = createLinkerState(6);
             const InternalLink = ({ to, title, className, children }: { to: string; title?: string; className?: string; children: React.ReactNode }) => (
