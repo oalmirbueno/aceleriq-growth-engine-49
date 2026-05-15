@@ -229,23 +229,19 @@ function FeaturedCard({ post }: { post: BlogPost }) {
     >
       <div className="grid md:grid-cols-2">
         <div className="relative aspect-[16/10] md:aspect-auto bg-gradient-to-br from-primary/20 via-violet-500/10 to-transparent overflow-hidden">
-          {post.image ? (
-            <img
-              src={post.image}
-              alt=""
-              loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center text-primary/30 font-mono text-xs uppercase tracking-widest">
-              {post.source}
-            </div>
-          )}
+          <img
+            src={post.image || categoryCover(post.category)}
+            alt=""
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent" />
         </div>
         <div className="p-8 md:p-10 flex flex-col justify-center">
           <div className="flex items-center gap-3 mb-4">
-            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary">Em destaque</span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary">
+              {post.isLocal ? "Aceleriq · Original" : "Em destaque"}
+            </span>
             <span className="text-white/20">·</span>
             <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{post.source}</span>
           </div>
