@@ -131,8 +131,47 @@ export const Route = createFileRoute("/blog/$slug")({
 
 function BlogPostPage() {
   const [diagOpen, setDiagOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
   const { post, related } = Route.useLoaderData();
   const hasMarkdown = Boolean(post.content && post.content.length > 0);
+
+  const wordSource = (post.content || post.excerpt || "").replace(/[#*_>`\-]/g, " ");
+  const words = wordSource.trim().split(/\s+/).filter(Boolean).length;
+  const readingMinutes = Math.max(2, Math.round(words / 220));
+
+  const shareUrl = `https://aceleriq.com.br/blog/${post.slug}`;
+  const shareText = `${post.title} — via Aceleriq`;
+  const shareLinks = {
+    whatsapp: `https://wa.me/?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}`,
+    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`,
+    twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`,
+  };
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {}
+  };
+
+  const keyPoints: string[] = (() => {
+    if (!hasMarkdown) return [];
+    const headings = (post.content || "")
+      .split("\n")
+      .filter((l) => /^#{2,3}\s+/.test(l))
+      .map((l) => l.replace(/^#{2,3}\s+/, "").trim())
+      .filter((l) => l.length > 6 && l.length < 110)
+      .slice(0, 3);
+    if (headings.length >= 2) return headings;
+    const sentences = (post.content || "")
+      .replace(/[#*_>`]/g, "")
+      .split(/(?<=[.!?])\s+/)
+      .map((s) => s.trim())
+      .filter((s) => s.length > 40 && s.length < 180)
+      .slice(0, 3);
+    return sentences;
+  })();
+
   const fallbackBody = [
     `Esse movimento em ${post.category} importa porque indica uma mudança prática no jeito como empresas captam demanda, operam vendas e tomam decisões com dados. A notícia reforça que tecnologia só gera vantagem quando entra conectada ao funil, à oferta e à execução comercial.`,
     post.excerpt,
@@ -184,6 +223,10 @@ function BlogPostPage() {
                   year: "numeric",
                 })}
               </span>
+              <span className="text-white/20">·</span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                {readingMinutes} min de leitura
+              </span>
             </div>
 
             <h1 className="text-3xl md:text-5xl font-display font-semibold tracking-tight text-foreground leading-tight">
@@ -191,6 +234,24 @@ function BlogPostPage() {
             </h1>
 
             <p className="mt-6 text-lg md:text-xl text-muted-foreground leading-relaxed">{post.excerpt}</p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-[0.22em] text-muted-foreground mr-1">
+                <Share2 className="h-3 w-3" /> Compartilhar
+              </span>
+              <a href={shareLinks.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="Compartilhar no WhatsApp" className="inline-flex items-center justify-center h-8 w-8 border border-white/10 hover:border-primary/50 hover:bg-primary/10 hover:text-primary transition-colors text-muted-foreground">
+                <MessageCircle className="h-3.5 w-3.5" />
+              </a>
+              <a href={shareLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="Compartilhar no LinkedIn" className="inline-flex items-center justify-center h-8 w-8 border border-white/10 hover:border-primary/50 hover:bg-primary/10 hover:text-primary transition-colors text-muted-foreground">
+                <Linkedin className="h-3.5 w-3.5" />
+              </a>
+              <a href={shareLinks.twitter} target="_blank" rel="noopener noreferrer" aria-label="Compartilhar no X" className="inline-flex items-center justify-center h-8 w-8 border border-white/10 hover:border-primary/50 hover:bg-primary/10 hover:text-primary transition-colors text-muted-foreground">
+                <Twitter className="h-3.5 w-3.5" />
+              </a>
+              <button type="button" onClick={handleCopy} aria-label="Copiar link" className="inline-flex items-center justify-center h-8 w-8 border border-white/10 hover:border-primary/50 hover:bg-primary/10 hover:text-primary transition-colors text-muted-foreground">
+                {copied ? <Check className="h-3.5 w-3.5 text-primary" /> : <Link2 className="h-3.5 w-3.5" />}
+              </button>
+            </div>
           </header>
 
           <div className="mt-10 border border-white/10 overflow-hidden aspect-[16/9] relative bg-black">
@@ -200,6 +261,22 @@ function BlogPostPage() {
               className="absolute inset-0 w-full h-full object-cover"
             />
           </div>
+
+          {keyPoints.length > 0 && (
+            <aside className="mt-10 border-l-2 border-primary/60 bg-white/[0.02] pl-5 pr-4 py-5">
+              <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary mb-3">
+                Pontos-chave
+              </div>
+              <ul className="space-y-2">
+                {keyPoints.map((k, i) => (
+                  <li key={i} className="flex gap-3 text-sm text-foreground/85 leading-relaxed">
+                    <span className="font-mono text-[11px] text-primary/80 mt-0.5">0{i + 1}</span>
+                    <span>{k}</span>
+                  </li>
+                ))}
+              </ul>
+            </aside>
+          )}
 
           {hasMarkdown ? (
             <div className="mt-12 article-prose">
