@@ -26,6 +26,7 @@ import { Route as LpTemaRouteImport } from './routes/lp.$tema'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminPostsRouteImport } from './routes/admin.posts'
 import { Route as AdminIndexacaoRouteImport } from './routes/admin.indexacao'
+import { Route as AdminConteudoRouteImport } from './routes/admin.conteudo'
 import { Route as AdminBacklinksRouteImport } from './routes/admin.backlinks'
 import { Route as AdminPostsIdRouteImport } from './routes/admin.posts.$id'
 import { Route as ApiPublicHooksWeeklyPostRouteImport } from './routes/api/public/hooks/weekly-post'
@@ -119,6 +120,11 @@ const AdminIndexacaoRoute = AdminIndexacaoRouteImport.update({
   path: '/indexacao',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminConteudoRoute = AdminConteudoRouteImport.update({
+  id: '/conteudo',
+  path: '/conteudo',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminBacklinksRoute = AdminBacklinksRouteImport.update({
   id: '/backlinks',
   path: '/backlinks',
@@ -160,6 +166,7 @@ export interface FileRoutesByFullPath {
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
   '/trafego-pago': typeof TrafegoPagoRoute
   '/admin/backlinks': typeof AdminBacklinksRoute
+  '/admin/conteudo': typeof AdminConteudoRoute
   '/admin/indexacao': typeof AdminIndexacaoRoute
   '/admin/posts': typeof AdminPostsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
@@ -182,6 +189,7 @@ export interface FileRoutesByTo {
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
   '/trafego-pago': typeof TrafegoPagoRoute
   '/admin/backlinks': typeof AdminBacklinksRoute
+  '/admin/conteudo': typeof AdminConteudoRoute
   '/admin/indexacao': typeof AdminIndexacaoRoute
   '/admin/posts': typeof AdminPostsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
@@ -207,6 +215,7 @@ export interface FileRoutesById {
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
   '/trafego-pago': typeof TrafegoPagoRoute
   '/admin/backlinks': typeof AdminBacklinksRoute
+  '/admin/conteudo': typeof AdminConteudoRoute
   '/admin/indexacao': typeof AdminIndexacaoRoute
   '/admin/posts': typeof AdminPostsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
@@ -233,6 +242,7 @@ export interface FileRouteTypes {
     | '/sobre-a-aceleriq'
     | '/trafego-pago'
     | '/admin/backlinks'
+    | '/admin/conteudo'
     | '/admin/indexacao'
     | '/admin/posts'
     | '/blog/$slug'
@@ -255,6 +265,7 @@ export interface FileRouteTypes {
     | '/sobre-a-aceleriq'
     | '/trafego-pago'
     | '/admin/backlinks'
+    | '/admin/conteudo'
     | '/admin/indexacao'
     | '/admin/posts'
     | '/blog/$slug'
@@ -279,6 +290,7 @@ export interface FileRouteTypes {
     | '/sobre-a-aceleriq'
     | '/trafego-pago'
     | '/admin/backlinks'
+    | '/admin/conteudo'
     | '/admin/indexacao'
     | '/admin/posts'
     | '/blog/$slug'
@@ -430,6 +442,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexacaoRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/conteudo': {
+      id: '/admin/conteudo'
+      path: '/conteudo'
+      fullPath: '/admin/conteudo'
+      preLoaderRoute: typeof AdminConteudoRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/backlinks': {
       id: '/admin/backlinks'
       path: '/backlinks'
@@ -482,6 +501,7 @@ const AdminPostsRouteWithChildren = AdminPostsRoute._addFileChildren(
 
 interface AdminRouteChildren {
   AdminBacklinksRoute: typeof AdminBacklinksRoute
+  AdminConteudoRoute: typeof AdminConteudoRoute
   AdminIndexacaoRoute: typeof AdminIndexacaoRoute
   AdminPostsRoute: typeof AdminPostsRouteWithChildren
   AdminIndexRoute: typeof AdminIndexRoute
@@ -489,6 +509,7 @@ interface AdminRouteChildren {
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminBacklinksRoute: AdminBacklinksRoute,
+  AdminConteudoRoute: AdminConteudoRoute,
   AdminIndexacaoRoute: AdminIndexacaoRoute,
   AdminPostsRoute: AdminPostsRouteWithChildren,
   AdminIndexRoute: AdminIndexRoute,
