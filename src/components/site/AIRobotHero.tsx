@@ -54,7 +54,19 @@ export function AIRobotHero() {
         />
       ))}
 
-      {/* Robot — fluid, no frame, no cutout. Mask fades the bottom into the page. */}
+      {/* Tech light pulse behind the robot */}
+      <motion.div
+        aria-hidden
+        className="absolute inset-0 -z-[5] blur-2xl"
+        style={{
+          background:
+            "radial-gradient(40% 45% at 50% 48%, oklch(85% 0.22 145 / 0.45), transparent 70%)",
+        }}
+        animate={{ opacity: [0.55, 0.85, 0.55], scale: [1, 1.04, 1] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Robot — fully fluid, masked on all sides so nothing is clipped */}
       <motion.img
         src={robotImg}
         alt="Agente de IA 3D · Aceleriq"
@@ -71,21 +83,33 @@ export function AIRobotHero() {
         }}
         style={{
           filter:
-            "drop-shadow(0 30px 50px oklch(0% 0 0 / 0.55)) drop-shadow(0 0 40px oklch(85% 0.22 145 / 0.22))",
+            "drop-shadow(0 40px 60px oklch(0% 0 0 / 0.7)) drop-shadow(0 0 50px oklch(85% 0.22 145 / 0.3)) drop-shadow(0 0 90px oklch(85% 0.22 145 / 0.18))",
           maskImage:
-            "linear-gradient(to bottom, black 0%, black 78%, transparent 100%)",
+            "radial-gradient(ellipse 75% 85% at 50% 45%, black 55%, rgba(0,0,0,0.85) 70%, transparent 100%)",
           WebkitMaskImage:
-            "linear-gradient(to bottom, black 0%, black 78%, transparent 100%)",
+            "radial-gradient(ellipse 75% 85% at 50% 45%, black 55%, rgba(0,0,0,0.85) 70%, transparent 100%)",
         }}
+      />
+
+      {/* Tech light sweep — soft horizontal scan behind the figure */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-[10%] z-[6] h-[40%] top-[30%] blur-3xl mix-blend-screen"
+        style={{
+          background:
+            "linear-gradient(180deg, transparent, oklch(85% 0.22 145 / 0.18), transparent)",
+        }}
+        animate={{ opacity: [0.3, 0.7, 0.3] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {/* Soft contact shadow */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 bottom-[8%] z-[5] h-8 w-[55%] -translate-x-1/2 blur-2xl"
+        className="pointer-events-none absolute left-1/2 bottom-[6%] z-[5] h-10 w-[60%] -translate-x-1/2 blur-2xl"
         style={{
           background:
-            "radial-gradient(ellipse at center, oklch(0% 0 0 / 0.55), transparent 70%)",
+            "radial-gradient(ellipse at center, oklch(0% 0 0 / 0.7), transparent 70%)",
         }}
       />
     </div>
