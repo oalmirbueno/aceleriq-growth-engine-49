@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TrafegoPagoRouteImport } from './routes/trafego-pago'
 import { Route as SobreAAceleriqRouteImport } from './routes/sobre-a-aceleriq'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as CriacaoDeSitesRouteImport } from './routes/criacao-de-sites'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AutomacaoEIaRouteImport } from './routes/automacao-e-ia'
@@ -26,6 +27,11 @@ const TrafegoPagoRoute = TrafegoPagoRouteImport.update({
 const SobreAAceleriqRoute = SobreAAceleriqRouteImport.update({
   id: '/sobre-a-aceleriq',
   path: '/sobre-a-aceleriq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CriacaoDeSitesRoute = CriacaoDeSitesRouteImport.update({
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/automacao-e-ia': typeof AutomacaoEIaRoute
   '/blog': typeof BlogRouteWithChildren
   '/criacao-de-sites': typeof CriacaoDeSitesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
   '/trafego-pago': typeof TrafegoPagoRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -76,6 +83,7 @@ export interface FileRoutesByTo {
   '/automacao-e-ia': typeof AutomacaoEIaRoute
   '/blog': typeof BlogRouteWithChildren
   '/criacao-de-sites': typeof CriacaoDeSitesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
   '/trafego-pago': typeof TrafegoPagoRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -87,6 +95,7 @@ export interface FileRoutesById {
   '/automacao-e-ia': typeof AutomacaoEIaRoute
   '/blog': typeof BlogRouteWithChildren
   '/criacao-de-sites': typeof CriacaoDeSitesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
   '/trafego-pago': typeof TrafegoPagoRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -99,6 +108,7 @@ export interface FileRouteTypes {
     | '/automacao-e-ia'
     | '/blog'
     | '/criacao-de-sites'
+    | '/sitemap.xml'
     | '/sobre-a-aceleriq'
     | '/trafego-pago'
     | '/blog/$slug'
@@ -109,6 +119,7 @@ export interface FileRouteTypes {
     | '/automacao-e-ia'
     | '/blog'
     | '/criacao-de-sites'
+    | '/sitemap.xml'
     | '/sobre-a-aceleriq'
     | '/trafego-pago'
     | '/blog/$slug'
@@ -119,6 +130,7 @@ export interface FileRouteTypes {
     | '/automacao-e-ia'
     | '/blog'
     | '/criacao-de-sites'
+    | '/sitemap.xml'
     | '/sobre-a-aceleriq'
     | '/trafego-pago'
     | '/blog/$slug'
@@ -130,6 +142,7 @@ export interface RootRouteChildren {
   AutomacaoEIaRoute: typeof AutomacaoEIaRoute
   BlogRoute: typeof BlogRouteWithChildren
   CriacaoDeSitesRoute: typeof CriacaoDeSitesRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreAAceleriqRoute: typeof SobreAAceleriqRoute
   TrafegoPagoRoute: typeof TrafegoPagoRoute
 }
@@ -148,6 +161,13 @@ declare module '@tanstack/react-router' {
       path: '/sobre-a-aceleriq'
       fullPath: '/sobre-a-aceleriq'
       preLoaderRoute: typeof SobreAAceleriqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/criacao-de-sites': {
@@ -212,6 +232,7 @@ const rootRouteChildren: RootRouteChildren = {
   AutomacaoEIaRoute: AutomacaoEIaRoute,
   BlogRoute: BlogRouteWithChildren,
   CriacaoDeSitesRoute: CriacaoDeSitesRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreAAceleriqRoute: SobreAAceleriqRoute,
   TrafegoPagoRoute: TrafegoPagoRoute,
 }
