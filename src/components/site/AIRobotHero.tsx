@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useAnimationControls, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
 import robotImage from "@/assets/ai-robot-3d.png";
 
@@ -14,20 +14,19 @@ const LOGOS = [
 export function AIRobotHero() {
   const wrapRef = useRef<HTMLDivElement>(null);
 
-  // Cursor (-1..1)
+  // Cursor (-1..1) — drives subtle parallax rotation
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
-  const sx = useSpring(mx, { stiffness: 65, damping: 20, mass: 0.7 });
+  const sx = useSpring(mx, { stiffness: 55, damping: 18, mass: 0.8 });
+  const sy = useSpring(my, { stiffness: 55, damping: 18, mass: 0.8 });
 
-  const rotateY = useTransform(sx, [-1, 1], [-6, 6]);
-  const xShift  = useTransform(sx, [-1, 1], [-4, 4]);
+  const rotateY = useTransform(sx, [-1.2, 1.2], [-9, 9]);
+  const rotateX = useTransform(sy, [-1.2, 1.2], [6, -6]);
+  const xShift  = useTransform(sx, [-1.2, 1.2], [-6, 6]);
 
-  // Scroll velocity → head tilt
-  const scrollTilt = useMotionValue(0);
-  const sTilt = useSpring(scrollTilt, { stiffness: 90, damping: 22, mass: 0.8 });
-  const rotateX = useTransform(sTilt, [-1, 1], [10, -10]);
+  // Idle "alive" choreography — varied, non-repeating sequence
+  const controls = useAnimationControls();
 
-  // Pointer tracking
   useEffect(() => {
     const el = wrapRef.current;
     if (!el) return;
@@ -37,35 +36,57 @@ export function AIRobotHero() {
       const cy = r.top + r.height / 2;
       const dx = (e.clientX - cx) / (Math.max(r.width, 1) / 2);
       const dy = (e.clientY - cy) / (Math.max(r.height, 1) / 2);
-      mx.set(Math.max(-1.2, Math.min(1.2, dx)));
-      my.set(Math.max(-1.2, Math.min(1.2, dy)));
+      mx.set(Math.max(-1.4, Math.min(1.4, dx)));
+      my.set(Math.max(-1.4, Math.min(1.4, dy)));
     };
     window.addEventListener("pointermove", onMove);
     return () => window.removeEventListener("pointermove", onMove);
   }, [mx, my]);
 
-  // Scroll tilt with decay
+  // Loop a random "alive" gesture with breathing baseline
   useEffect(() => {
-    let last = window.scrollY;
-    let raf = 0;
-    const onScroll = () => {
-      const curr = window.scrollY;
-      const dy = curr - last;
-      last = curr;
-      const next = Math.max(-1, Math.min(1, scrollTilt.get() + dy / 80));
-      scrollTilt.set(next);
+    let cancelled = false;
+
+    // Distinct micro-gestures — never the same twice in a row
+    const gestures: Array<{ y: number[]; rotZ: number[]; scale: number[]; dur: number }> = [
+      // soft breath
+      { y: [0, -3, 0, -2, 0], rotZ: [0, 0, 0, 0, 0], scale: [1, 1.012, 1, 1.008, 1], dur: 4.2 },
+      // gentle lean left + sway
+      { y: [0, -2, 0],         rotZ: [0, -1.4, 0],    scale: [1, 1.006, 1],          dur: 3.4 },
+      // lean right + subtle bob
+      { y: [0, -2, 0],         rotZ: [0, 1.4, 0],     scale: [1, 1.006, 1],          dur: 3.6 },
+      // little hop / bounce
+      { y: [0, -6, 0, -2, 0],  rotZ: [0, 0.4, -0.4, 0.2, 0], scale: [1, 1.02, 1, 1.005, 1], dur: 2.6 },
+      // attentive nod
+      { y: [0, 1, 0, -1, 0],   rotZ: [0, 0, 0, 0, 0],  scale: [1, 1, 1, 1, 1],         dur: 2.2 },
+    ];
+
+    let lastIdx = -1;
+    const pick = () => {
+      let i = Math.floor(Math.random() * gestures.length);
+      if (i === lastIdx) i = (i + 1) % gestures.length;
+      lastIdx = i;
+      return gestures[i];
     };
-    const decay = () => {
-      scrollTilt.set(scrollTilt.get() * 0.92);
-      raf = requestAnimationFrame(decay);
+
+    const run = async () => {
+      while (!cancelled) {
+        const g = pick();
+        await controls.start({
+          y: g.y,
+          rotateZ: g.rotZ,
+          scale: g.scale,
+          transition: { duration: g.dur, ease: "easeInOut", times: g.y.map((_, k, arr) => k / (arr.length - 1)) },
+        });
+        // tiny pause so it doesn't feel mechanical
+        await new Promise((r) => setTimeout(r, 350 + Math.random() * 900));
+      }
     };
-    decay();
-    window.addEventListener("scroll", onScroll, { passive: true });
+    run();
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      cancelAnimationFrame(raf);
+      cancelled = true;
     };
-  }, [scrollTilt]);
+  }, [controls]);
 
   return (
     <div
@@ -129,29 +150,36 @@ export function AIRobotHero() {
         }}
       />
 
-      {/* Robot — transparent asset, no black video plate */}
-      <motion.img
-        src={robotImage}
-        alt="Robô de IA 3D da Aceleriq"
-        loading="eager"
-        decoding="async"
-        width={1024}
-        height={1280}
-        className="relative z-10 h-[120%] w-auto max-w-none object-contain object-bottom select-none pointer-events-none"
+      {/* Robot — transparent asset, mouse parallax + lifelike idle loop */}
+      <motion.div
+        className="relative z-10 flex items-end justify-center h-[112%] w-auto"
         style={{
           rotateX,
           rotateY,
           x: xShift,
           transformOrigin: "50% 100%",
           transformStyle: "preserve-3d",
-          filter:
-            "brightness(1.06) contrast(1.08) saturate(1.08) drop-shadow(0 0 26px oklch(85% 0.22 145 / 0.14)) drop-shadow(0 14px 24px oklch(0% 0 0 / 0.26))",
+          willChange: "transform",
         }}
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
-        draggable={false}
-      />
+      >
+        <motion.img
+          src={robotImage}
+          alt="Robô de IA 3D da Aceleriq"
+          loading="eager"
+          decoding="async"
+          width={1024}
+          height={1280}
+          className="h-full w-auto max-w-none object-contain object-bottom select-none pointer-events-none"
+          style={{
+            transformOrigin: "50% 100%",
+            filter:
+              "brightness(1.06) contrast(1.08) saturate(1.08) drop-shadow(0 0 22px oklch(85% 0.22 145 / 0.16)) drop-shadow(0 10px 18px oklch(0% 0 0 / 0.28))",
+          }}
+          initial={{ opacity: 1, y: 0 }}
+          animate={controls}
+          draggable={false}
+        />
+      </motion.div>
     </div>
   );
 }
