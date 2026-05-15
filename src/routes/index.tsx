@@ -23,9 +23,9 @@ import { GoogleReviews } from "@/components/site/GoogleReviews";
 import { PortfolioShowcase } from "@/components/site/PortfolioShowcase";
 
 const HOME_TITLE =
-  "Aceleriq · Agência de Marketing Digital, Sites, Tráfego, Automação e IA em Curitiba";
+  "Marketing Digital, Sites e Tráfego em Curitiba · Aceleriq";
 const HOME_DESCRIPTION =
-  "Agência de marketing digital em Curitiba: criação de sites, tráfego pago, automação, IA, CRM, sistemas, dados e consultoria de crescimento. Diagnóstico gratuito + Método Acelera.";
+  "Agência de marketing digital em Curitiba: sites, tráfego, automação, IA, CRM e consultoria. Diagnóstico gratuito + Método Acelera.";
 
 const FAQS_JSONLD = {
   "@context": "https://schema.org",

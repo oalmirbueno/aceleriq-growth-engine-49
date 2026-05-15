@@ -5,7 +5,7 @@ import { PortfolioShowcase } from "@/components/site/PortfolioShowcase";
 const URL = "https://aceleriq.com.br/criacao-de-sites";
 const TITLE = "Criação de Sites em Curitiba · Aceleriq";
 const DESCRIPTION =
-  "Criação de sites institucionais, landing pages e plataformas sob medida em Curitiba. Sites otimizados para SEO, performance e conversão, integrados a CRM e tráfego pago.";
+  "Criação de sites institucionais, landing pages e plataformas em Curitiba. SEO, performance e conversão, integrados a CRM e tráfego pago.";
 
 const FAQS = [
   { q: "Que tipo de site a Aceleriq cria?", a: "Sites institucionais, landing pages de captura, sites de produto/SaaS e plataformas sob medida, todos com foco em conversão e integração ao CRM." },
