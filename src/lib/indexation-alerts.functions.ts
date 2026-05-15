@@ -78,10 +78,9 @@ export const triggerIndexationCheck = createServerFn({ method: "POST" })
   .inputValidator((input: { password: string }) =>
     z.object({ password: z.string().min(1) }).parse(input),
   )
-  .handler(async ({ data }): Promise<{ ok: boolean; summary: Record<string, unknown> }> => {
+  .handler(async ({ data }) => {
     checkPassword(data.password);
-    const url =
-      "https://aceleriq.com.br/api/public/hooks/check-indexation";
+    const url = "https://aceleriq.com.br/api/public/hooks/check-indexation";
     const anon =
       process.env.SUPABASE_PUBLISHABLE_KEY ??
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNnYXpyY2ZhaGt4eHd2d3plY2VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc1MDQxNjAsImV4cCI6MjA5MzA4MDE2MH0._kqx9ts0P-_r_eXy0Lr4vwIjC8qDlSlgqrz69jqJbis";
@@ -90,6 +89,6 @@ export const triggerIndexationCheck = createServerFn({ method: "POST" })
       headers: { "Content-Type": "application/json", apikey: anon },
       body: "{}",
     });
-    const summary = await res.json().catch(() => ({}));
+    const summary = (await res.json().catch(() => ({}))) as Record<string, number | string | boolean>;
     return { ok: res.ok, summary };
   });
