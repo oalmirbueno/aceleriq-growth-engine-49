@@ -66,7 +66,7 @@ function BlogIndex() {
   const [diagOpen, setDiagOpen] = useState(false);
   const [cat, setCat] = useState<FeedCategory | "all">("all");
   const [q, setQ] = useState("");
-  const { posts } = Route.useLoaderData();
+  const { posts } = Route.useLoaderData() as { posts: BlogPost[] };
   const isLoading = false;
   const filtered = useMemo(() => {
     return posts.filter((p) => {
