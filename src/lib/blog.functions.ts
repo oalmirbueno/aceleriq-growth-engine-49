@@ -314,10 +314,49 @@ async function loadAll(): Promise<BlogPost[]> {
     if (imgs[i]) p.image = imgs[i];
   });
 
+  // Traduz títulos/resumos de posts em inglês para PT-BR (lote único, best-effort).
+  const enItems = unique
+    .filter((p) => p.lang === "en")
+    .slice(0, 20)
+    .map((p) => ({ id: p.slug, title: p.title, excerpt: p.excerpt }));
+  if (enItems.length) {
+    const map = await translateBatchTitles(enItems);
+    if (map) {
+      for (const p of unique) {
+        const t = map[p.slug];
+        if (t?.title) p.title = t.title;
+        if (t?.excerpt) p.excerpt = t.excerpt;
+        if (t) p.lang = "pt";
+      }
+    }
+  }
+
   // Locais primeiro (autoridade), depois feed.
   const all = [...buildLocalPosts(), ...unique];
   cache = { at: Date.now(), posts: all };
   return all;
+}
+
+// Cache por slug do conteúdo completo já traduzido (1h).
+const articleCache = new Map<string, { at: number; markdown: string; title: string }>();
+const ARTICLE_TTL = 1000 * 60 * 60;
+
+async function hydrateFullContent(post: BlogPost): Promise<BlogPost> {
+  if (post.isLocal || post.content) return post;
+  const cached = articleCache.get(post.slug);
+  if (cached && Date.now() - cached.at < ARTICLE_TTL) {
+    return { ...post, content: cached.markdown, title: cached.title || post.title };
+  }
+  const scraped = await scrapeArticle(post.link);
+  if (!scraped) return post;
+  const translated = await translateArticleToPt({
+    title: post.title,
+    markdown: scraped.markdown,
+    source: post.source,
+  });
+  if (!translated) return post;
+  articleCache.set(post.slug, { at: Date.now(), markdown: translated.markdown, title: translated.title });
+  return { ...post, content: translated.markdown, title: translated.title || post.title };
 }
 
 export const fetchBlogPosts = createServerFn({ method: "GET" }).handler(async () => {
