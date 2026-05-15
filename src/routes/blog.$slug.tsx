@@ -86,7 +86,7 @@ function BlogPostPage() {
     <div className="min-h-screen bg-background">
       <Header onDiagnostico={() => setDiagOpen(true)} />
 
-      <article className="relative pt-32 md:pt-40 pb-20 overflow-hidden">
+      <article className="relative pt-24 md:pt-28 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(59,130,246,0.18),transparent_60%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(167,139,250,0.10),transparent_55%)]" />
         <div
@@ -144,9 +144,13 @@ function BlogPostPage() {
             />
           </div>
 
-          <div className="prose prose-invert prose-lg max-w-none mt-12 text-foreground/90 leading-relaxed">
+          <div className="max-w-none mt-12 leading-relaxed space-y-6">
             {internalBody.map((p: string, i: number) => (
-              <p key={i} className="mb-6 text-base md:text-lg">
+              <p
+                key={i}
+                className="text-base md:text-lg text-foreground/90"
+                style={{ color: "hsl(var(--foreground) / 0.9)" }}
+              >
                 {p.trim()}
               </p>
             ))}
