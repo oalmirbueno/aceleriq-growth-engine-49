@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Clock, MessageCircle, Sparkles } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -109,11 +108,7 @@ function BlogPostPage() {
             <ArrowLeft className="h-3 w-3" /> Voltar ao feed
           </Link>
 
-          <motion.header
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+          <header>
             <div className="flex flex-wrap items-center gap-3 mb-6">
               {post.isLocal && (
                 <span className="inline-flex items-center gap-1 border border-primary/40 bg-primary/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.22em] text-primary">
@@ -139,20 +134,15 @@ function BlogPostPage() {
             </h1>
 
             <p className="mt-6 text-lg md:text-xl text-muted-foreground leading-relaxed">{post.excerpt}</p>
-          </motion.header>
+          </header>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.15, duration: 0.6 }}
-            className="mt-10 border border-white/10 overflow-hidden aspect-[16/9] relative bg-black"
-          >
+          <div className="mt-10 border border-white/10 overflow-hidden aspect-[16/9] relative bg-black">
             <img
               src={post.image || categoryCover(post.category)}
               alt={post.title}
               className="absolute inset-0 w-full h-full object-cover"
             />
-          </motion.div>
+          </div>
 
           <div className="prose prose-invert prose-lg max-w-none mt-12 text-foreground/90 leading-relaxed">
             {internalBody.map((p: string, i: number) => (
