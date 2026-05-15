@@ -18,23 +18,51 @@ export const Route = createFileRoute("/blog/$slug")({
     const post = loaderData?.post;
     const url = `https://aceleriq.com.br/blog/${params.slug}`;
     if (!post) {
-      return { meta: [{ title: "Artigo · Blog Aceleriq" }] };
+      return {
+        meta: [
+          { title: "Artigo · Blog Aceleriq" },
+          { name: "robots", content: "noindex,follow" },
+        ],
+      };
     }
     const title = `${post.title} · Aceleriq`;
-    const desc = post.excerpt || `Leitura sobre ${post.category} no blog da Aceleriq.`;
+    const desc = (post.excerpt || `Análise sobre ${post.category} no blog da Aceleriq.`).slice(0, 158);
+    const rawImage = post.image || `https://aceleriq.com.br/og-default.jpg`;
+    const image = rawImage.startsWith("http") ? rawImage : `https://aceleriq.com.br${rawImage}`;
+    const keywords = [
+      post.category,
+      "inteligência artificial",
+      "automação",
+      "marketing",
+      "Aceleriq",
+      post.source,
+    ]
+      .filter(Boolean)
+      .join(", ");
+
     return {
       meta: [
         { title },
         { name: "description", content: desc },
+        { name: "keywords", content: keywords },
+        { name: "author", content: post.author || "Aceleriq" },
+        { name: "robots", content: "index,follow,max-image-preview:large,max-snippet:-1" },
         { property: "og:title", content: title },
         { property: "og:description", content: desc },
         { property: "og:url", content: url },
         { property: "og:type", content: "article" },
-        ...(post.image ? [{ property: "og:image", content: post.image }] : []),
+        { property: "og:site_name", content: "Aceleriq" },
+        { property: "og:locale", content: "pt_BR" },
+        { property: "og:image", content: image },
+        { property: "og:image:alt", content: post.title },
+        { property: "article:published_time", content: post.publishedAt },
+        { property: "article:modified_time", content: post.publishedAt },
+        { property: "article:section", content: post.category },
+        { property: "article:author", content: post.author || "Aceleriq" },
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: desc },
-        ...(post.image ? [{ name: "twitter:image", content: post.image }] : []),
+        { name: "twitter:image", content: image },
       ],
       links: [{ rel: "canonical", href: url }],
       scripts: [
@@ -43,15 +71,43 @@ export const Route = createFileRoute("/blog/$slug")({
           children: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "BlogPosting",
-            headline: post.title,
+            headline: post.title.slice(0, 110),
             description: desc,
-            image: post.image ? [post.image] : undefined,
+            image: [image],
             datePublished: post.publishedAt,
             dateModified: post.publishedAt,
-            mainEntityOfPage: url,
-            author: { "@type": "Organization", name: post.author || "Aceleriq" },
-            publisher: { "@type": "Organization", name: "Aceleriq", url: "https://aceleriq.com.br" },
+            inLanguage: post.lang === "en" ? "en" : "pt-BR",
+            articleSection: post.category,
+            keywords,
+            mainEntityOfPage: { "@type": "WebPage", "@id": url },
+            url,
+            author: {
+              "@type": post.isLocal ? "Organization" : "Person",
+              name: post.author || (post.isLocal ? "Aceleriq" : post.source),
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "Aceleriq",
+              url: "https://aceleriq.com.br",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://aceleriq.com.br/icon-512.png",
+              },
+            },
+            isAccessibleForFree: true,
             citation: post.isLocal ? undefined : post.link,
+          }),
+        },
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://aceleriq.com.br" },
+              { "@type": "ListItem", position: 2, name: "Blog", item: "https://aceleriq.com.br/blog" },
+              { "@type": "ListItem", position: 3, name: post.title, item: url },
+            ],
           }),
         },
       ],
