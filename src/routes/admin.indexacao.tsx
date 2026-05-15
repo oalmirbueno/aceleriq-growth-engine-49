@@ -391,3 +391,155 @@ function Stat({
     </div>
   );
 }
+
+function IndexationMonitorPanel({
+  data,
+  isLoading,
+  error,
+  onRefresh,
+  onRunNow,
+  runningNow,
+}: {
+  data?: { alerts: IndexationAlert[]; totals: { tracked: number; indexed: number; alerts: number }; lastRunAt: string | null };
+  isLoading: boolean;
+  error: string | null;
+  onRefresh: () => void;
+  onRunNow: () => void;
+  runningNow: boolean;
+}) {
+  const alerts = data?.alerts ?? [];
+  const hasAlerts = alerts.length > 0;
+  const accent = hasAlerts
+    ? "border-amber-500/40 bg-amber-500/[0.04]"
+    : "border-white/10 bg-white/[0.02]";
+
+  return (
+    <section className={`border ${accent} p-4 md:p-5 mb-6`}>
+      <div className="flex items-start justify-between gap-4 flex-wrap mb-3">
+        <div className="flex items-start gap-3">
+          <div
+            className={`mt-0.5 h-9 w-9 flex items-center justify-center border ${
+              hasAlerts ? "border-amber-500/40 text-amber-400" : "border-white/10 text-muted-foreground"
+            }`}
+          >
+            {hasAlerts ? <AlertTriangle className="h-4 w-4" /> : <Bell className="h-4 w-4" />}
+          </div>
+          <div>
+            <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary mb-0.5">
+              Monitoramento contínuo · diário
+            </div>
+            <h2 className="font-display text-lg md:text-xl font-semibold">
+              {hasAlerts
+                ? `${alerts.length} URL${alerts.length > 1 ? "s" : ""} sem indexação`
+                : "Nenhum alerta de indexação"}
+            </h2>
+            <p className="text-xs text-muted-foreground mt-1">
+              Cron diário às 05:30 BRT inspeciona posts publicados nos últimos 60 dias.
+              Alerta dispara após 4 dias sem indexação no Google.
+            </p>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <Button size="sm" variant="outline" onClick={onRefresh} disabled={isLoading}>
+            <RefreshCw className={`h-3.5 w-3.5 mr-2 ${isLoading ? "animate-spin" : ""}`} />
+            Recarregar
+          </Button>
+          <Button size="sm" onClick={onRunNow} disabled={runningNow}>
+            <Search className={`h-3.5 w-3.5 mr-2 ${runningNow ? "animate-pulse" : ""}`} />
+            {runningNow ? "Verificando..." : "Verificar agora"}
+          </Button>
+        </div>
+      </div>
+
+      {data && (
+        <div className="grid grid-cols-3 gap-3 mb-3">
+          <Stat label="URLs monitoradas" value={data.totals.tracked} tone="ok" />
+          <Stat label="Indexadas (Google)" value={data.totals.indexed} tone="ok" />
+          <Stat
+            label="Alertas ativos"
+            value={data.totals.alerts}
+            tone={data.totals.alerts > 0 ? "warn" : "ok"}
+          />
+        </div>
+      )}
+
+      {error && (
+        <div className="border border-red-500/30 bg-red-500/5 p-3 text-xs text-red-400 mb-3">
+          <XCircle className="h-3.5 w-3.5 inline mr-2" />
+          {error}
+        </div>
+      )}
+
+      {hasAlerts && (
+        <ul className="divide-y divide-white/5 border border-white/10">
+          {alerts.map((a) => (
+            <li key={a.url} className="p-3 md:p-4 flex items-start gap-3">
+              <AlertCircle className="h-4 w-4 text-amber-400 mt-0.5 flex-shrink-0" />
+              <div className="flex-1 min-w-0">
+                <a
+                  href={a.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sm font-mono text-primary hover:underline truncate inline-flex items-center gap-1"
+                >
+                  {a.url.replace(/^https?:\/\//, "")}
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-[11px] text-muted-foreground">
+                  {a.coverageState && (
+                    <span>
+                      <span className="text-muted-foreground/60">cobertura:</span>{" "}
+                      {a.coverageState}
+                    </span>
+                  )}
+                  {a.verdict && (
+                    <span>
+                      <span className="text-muted-foreground/60">verdict:</span>{" "}
+                      {a.verdict}
+                    </span>
+                  )}
+                  {a.publishedAt && (
+                    <span>
+                      <span className="text-muted-foreground/60">publicada:</span>{" "}
+                      {new Date(a.publishedAt).toLocaleDateString("pt-BR")}
+                    </span>
+                  )}
+                  {a.alertSince && (
+                    <span>
+                      <span className="text-muted-foreground/60">em alerta desde:</span>{" "}
+                      {new Date(a.alertSince).toLocaleDateString("pt-BR")}
+                    </span>
+                  )}
+                  {a.consecutiveFailures > 0 && (
+                    <Badge variant="destructive" className="text-[10px]">
+                      {a.consecutiveFailures} falhas seguidas na API
+                    </Badge>
+                  )}
+                </div>
+                {a.lastError && (
+                  <p className="text-[11px] text-amber-400/80 mt-1">{a.lastError}</p>
+                )}
+              </div>
+              {a.inspectionUrl && (
+                <a
+                  href={a.inspectionUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[11px] text-primary hover:underline whitespace-nowrap inline-flex items-center gap-1"
+                >
+                  GSC <ExternalLink className="h-3 w-3" />
+                </a>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <p className="text-[10px] text-muted-foreground mt-3 font-mono">
+        {data?.lastRunAt
+          ? `Última varredura automática: ${new Date(data.lastRunAt).toLocaleString("pt-BR")}`
+          : "Aguardando primeira varredura automática."}
+      </p>
+    </section>
+  );
+}
