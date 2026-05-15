@@ -25,6 +25,7 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminPostsRouteImport } from './routes/admin.posts'
 import { Route as AdminBacklinksRouteImport } from './routes/admin.backlinks'
 import { Route as AdminPostsIdRouteImport } from './routes/admin.posts.$id'
+import { Route as ApiPublicHooksResubmitSitemapRouteImport } from './routes/api/public/hooks/resubmit-sitemap'
 
 const TrafegoPagoRoute = TrafegoPagoRouteImport.update({
   id: '/trafego-pago',
@@ -107,6 +108,12 @@ const AdminPostsIdRoute = AdminPostsIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => AdminPostsRoute,
 } as any)
+const ApiPublicHooksResubmitSitemapRoute =
+  ApiPublicHooksResubmitSitemapRouteImport.update({
+    id: '/api/public/hooks/resubmit-sitemap',
+    path: '/api/public/hooks/resubmit-sitemap',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -125,6 +132,7 @@ export interface FileRoutesByFullPath {
   '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/admin/posts/$id': typeof AdminPostsIdRoute
+  '/api/public/hooks/resubmit-sitemap': typeof ApiPublicHooksResubmitSitemapRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -141,6 +149,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminIndexRoute
   '/blog': typeof BlogIndexRoute
   '/admin/posts/$id': typeof AdminPostsIdRoute
+  '/api/public/hooks/resubmit-sitemap': typeof ApiPublicHooksResubmitSitemapRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -160,6 +169,7 @@ export interface FileRoutesById {
   '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/admin/posts/$id': typeof AdminPostsIdRoute
+  '/api/public/hooks/resubmit-sitemap': typeof ApiPublicHooksResubmitSitemapRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -180,6 +190,7 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/blog/'
     | '/admin/posts/$id'
+    | '/api/public/hooks/resubmit-sitemap'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -196,6 +207,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/blog'
     | '/admin/posts/$id'
+    | '/api/public/hooks/resubmit-sitemap'
   id:
     | '__root__'
     | '/'
@@ -214,6 +226,7 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/blog/'
     | '/admin/posts/$id'
+    | '/api/public/hooks/resubmit-sitemap'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -227,6 +240,7 @@ export interface RootRouteChildren {
   SobreAAceleriqRoute: typeof SobreAAceleriqRoute
   TrafegoPagoRoute: typeof TrafegoPagoRoute
   LpTemaRoute: typeof LpTemaRoute
+  ApiPublicHooksResubmitSitemapRoute: typeof ApiPublicHooksResubmitSitemapRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -343,6 +357,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPostsIdRouteImport
       parentRoute: typeof AdminPostsRoute
     }
+    '/api/public/hooks/resubmit-sitemap': {
+      id: '/api/public/hooks/resubmit-sitemap'
+      path: '/api/public/hooks/resubmit-sitemap'
+      fullPath: '/api/public/hooks/resubmit-sitemap'
+      preLoaderRoute: typeof ApiPublicHooksResubmitSitemapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -396,7 +417,17 @@ const rootRouteChildren: RootRouteChildren = {
   SobreAAceleriqRoute: SobreAAceleriqRoute,
   TrafegoPagoRoute: TrafegoPagoRoute,
   LpTemaRoute: LpTemaRoute,
+  ApiPublicHooksResubmitSitemapRoute: ApiPublicHooksResubmitSitemapRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
