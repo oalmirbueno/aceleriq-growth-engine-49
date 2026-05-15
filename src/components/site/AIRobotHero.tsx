@@ -175,7 +175,7 @@ export function AIRobotHero() {
             filter:
               "brightness(1.06) contrast(1.08) saturate(1.08) drop-shadow(0 0 22px oklch(85% 0.22 145 / 0.16)) drop-shadow(0 10px 18px oklch(0% 0 0 / 0.28))",
           }}
-          initial={{ opacity: 0, y: 14 }}
+          initial={{ opacity: 1, y: 0 }}
           animate={controls}
           draggable={false}
         />
