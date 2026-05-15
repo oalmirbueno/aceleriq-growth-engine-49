@@ -117,6 +117,11 @@ const WEBSITE_JSONLD = {
   url: SITE_URL,
   inLanguage: "pt-BR",
   publisher: { "@type": "Organization", name: "Aceleriq" },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: `${SITE_URL}/blog?q={search_term_string}`,
+    "query-input": "required name=search_term_string",
+  },
 };
 
 export const Route = createRootRoute({
