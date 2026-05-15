@@ -187,7 +187,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                     </a>
                   </motion.div>
                 </div>
-                <div className="lg:col-span-5">{props.heroAside}</div>
+                <div className="lg:col-span-6 relative">{props.heroAside}</div>
               </div>
             ) : (
               <div className="mx-auto max-w-5xl text-center">
