@@ -126,7 +126,7 @@ export function ServicePageLayout(props: ServicePageProps) {
       <main className="relative z-10">
         {/* HERO */}
         <section className="relative overflow-hidden pt-28 pb-16 md:pt-32 md:pb-20">
-          <div className="relative px-6 lg:px-16 max-w-7xl mx-auto">
+          <div className="relative px-6 lg:px-16 max-w-[1600px] mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -261,7 +261,7 @@ export function ServicePageLayout(props: ServicePageProps) {
         </section>
 
         {/* METRICS */}
-        <section className="px-6 lg:px-16 py-16 md:py-20 max-w-7xl mx-auto">
+        <section className="px-6 lg:px-16 py-16 md:py-20 max-w-[1600px] mx-auto">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
             {[
               {
@@ -309,7 +309,7 @@ export function ServicePageLayout(props: ServicePageProps) {
         </section>
 
         {/* WHY / BENEFITS */}
-        <section className="px-6 lg:px-16 py-16 md:py-24 border-t border-border/60 max-w-7xl mx-auto">
+        <section className="px-6 lg:px-16 py-16 md:py-24 border-t border-border/60 max-w-[1600px] mx-auto">
           <div className="grid lg:grid-cols-12 gap-8 mb-12">
             <div className="lg:col-span-2 font-mono text-[10px] text-primary uppercase tracking-[0.2em] lg:pt-2">
               01 / Por que
@@ -345,7 +345,7 @@ export function ServicePageLayout(props: ServicePageProps) {
         </section>
 
         {/* DELIVERABLES, refined two-column list */}
-        <section className="relative px-6 lg:px-16 py-16 md:py-24 max-w-7xl mx-auto">
+        <section className="relative px-6 lg:px-16 py-16 md:py-24 max-w-[1600px] mx-auto">
           <div className="grid lg:grid-cols-12 gap-8 mb-12">
             <div className="lg:col-span-2 font-mono text-[10px] text-primary uppercase tracking-[0.2em] lg:pt-2">
               02 / Escopo
@@ -392,7 +392,7 @@ export function ServicePageLayout(props: ServicePageProps) {
               background: "radial-gradient(circle, oklch(85% 0.2 145 / 0.4), transparent 70%)",
             }}
           />
-          <div className="relative max-w-7xl mx-auto px-6 lg:px-16 py-20 md:py-28 grid lg:grid-cols-12 gap-10">
+          <div className="relative max-w-[1600px] mx-auto px-6 lg:px-16 py-20 md:py-28 grid lg:grid-cols-12 gap-10">
             <div className="lg:col-span-2 font-mono text-[10px] uppercase tracking-[0.25em] opacity-60">
               {principle.eyebrow}
             </div>
@@ -421,7 +421,7 @@ export function ServicePageLayout(props: ServicePageProps) {
         </section>
 
         {/* PROCESS */}
-        <section className="px-6 lg:px-16 py-16 md:py-24 border-t border-border/60 max-w-7xl mx-auto">
+        <section className="px-6 lg:px-16 py-16 md:py-24 border-t border-border/60 max-w-[1600px] mx-auto">
           <div className="grid lg:grid-cols-12 gap-8 mb-12 items-end">
             <div className="lg:col-span-2 font-mono text-[10px] text-primary uppercase tracking-[0.2em] lg:pb-2">
               03 / Método
@@ -466,7 +466,7 @@ export function ServicePageLayout(props: ServicePageProps) {
         {props.extraSection}
 
         {/* FAQ */}
-        <section className="px-6 lg:px-16 py-16 md:py-24 border-t border-border/60 max-w-7xl mx-auto">
+        <section className="px-6 lg:px-16 py-16 md:py-24 border-t border-border/60 max-w-[1600px] mx-auto">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
             <div className="lg:col-span-4">
               <div className="font-mono text-primary text-[10px] uppercase tracking-[0.2em] mb-4">

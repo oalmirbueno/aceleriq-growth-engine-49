@@ -46,7 +46,7 @@ export function TrafegoCalculator() {
   return (
     <>
       {/* ============ CERTIFICAÇÕES ============ */}
-      <section className="relative px-6 lg:px-16 py-20 md:py-28 max-w-7xl mx-auto">
+      <section className="relative px-6 lg:px-16 py-20 md:py-28 max-w-[1600px] mx-auto">
         <div className="grid lg:grid-cols-12 gap-8 mb-12">
           <div className="lg:col-span-2 font-mono text-[10px] text-primary uppercase tracking-[0.2em] lg:pt-2">
             ⌖ Certificações
@@ -72,7 +72,7 @@ export function TrafegoCalculator() {
       </section>
 
       {/* ============ PROJEÇÃO ============ */}
-      <section className="relative px-6 lg:px-16 py-20 md:py-28 max-w-7xl mx-auto">
+      <section className="relative px-6 lg:px-16 py-20 md:py-28 max-w-[1600px] mx-auto">
         <div
           aria-hidden
           className="absolute inset-x-0 top-12 bottom-12 -z-10 bg-[oklch(96%_0.02_145)]"
@@ -205,7 +205,7 @@ export function TrafegoCalculator() {
       </section>
 
       {/* ============ ESTRATÉGIA ============ */}
-      <section className="relative px-6 lg:px-16 py-20 md:py-28 max-w-7xl mx-auto">
+      <section className="relative px-6 lg:px-16 py-20 md:py-28 max-w-[1600px] mx-auto">
         <div className="grid lg:grid-cols-12 gap-8 mb-12">
           <div className="lg:col-span-2 font-mono text-[10px] text-primary uppercase tracking-[0.2em] lg:pt-2">
             ⌖ Estratégia
