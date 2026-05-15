@@ -289,7 +289,17 @@ function IndexCheckPage() {
         </Button>
       </div>
 
-      {/* Summary */}
+      {/* Painel de monitoramento contínuo (cron diário) */}
+      <IndexationMonitorPanel
+        data={overview.data}
+        isLoading={overview.isLoading}
+        error={overview.error instanceof Error ? overview.error.message : null}
+        onRefresh={() => overview.refetch()}
+        onRunNow={() => triggerMut.mutate()}
+        runningNow={triggerMut.isPending}
+      />
+
+
       {summary && (
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
           <Stat label="Google indexadas" value={summary.gIndexed} tone="ok" />
