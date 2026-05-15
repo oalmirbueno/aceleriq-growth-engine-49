@@ -145,7 +145,13 @@ export const saveBlogPost = createServerFn({ method: "POST" })
         .select("*")
         .single();
       if (error) throw new Error(error.message);
-      return mapRow(row as RawRow);
+      const updated = mapRow(row as RawRow);
+      if (updated.status === "published") {
+        submitSitemapToGsc().catch((e) =>
+          console.error("[saveBlogPost] sitemap resubmit failed:", e),
+        );
+      }
+      return updated;
     }
 
     const { data: row, error } = await supabaseAdmin
