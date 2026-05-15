@@ -51,11 +51,11 @@ export function AIRobotHero() {
         loading="eager"
         decoding="async"
         className="relative z-10 h-full w-full max-w-none object-contain"
-        initial={{ opacity: 0, y: 14 }}
-        animate={{ opacity: 1, y: [0, -8, 0] }}
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: [0, -2.5, 0] }}
         transition={{
           opacity: { duration: 1.0, ease: [0.22, 1, 0.36, 1] },
-          y: { duration: 7, repeat: Infinity, ease: "easeInOut" },
+          y: { duration: 9, repeat: Infinity, ease: "easeInOut" },
         }}
         style={{
           filter:
