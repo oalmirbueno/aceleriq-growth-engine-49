@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { List } from "lucide-react";
 
 export interface TocItem {
@@ -81,6 +81,7 @@ export function TableOfContents({ items }: TableOfContentsProps) {
   const [activeId, setActiveId] = useState<string | null>(items[0]?.id ?? null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const ids = useMemo(() => items.map((i) => i.id), [items]);
+  const itemRefs = useRef<Map<string, HTMLAnchorElement>>(new Map());
 
   useEffect(() => {
     if (ids.length === 0) return;
@@ -128,6 +129,8 @@ export function TableOfContents({ items }: TableOfContentsProps) {
 
   if (items.length < 2) return null;
 
+  const activeIndex = items.findIndex((it) => it.id === activeId);
+
   return (
     <>
       {/* Desktop sticky sidebar */}
@@ -136,22 +139,77 @@ export function TableOfContents({ items }: TableOfContentsProps) {
           <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary mb-4">
             Sumário
           </div>
-          <nav>
-            <ul className="space-y-1.5 border-l border-white/10">
+          <nav className="relative">
+            {/* Faixa de progresso sutil */}
+            <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/5 to-transparent" />
+            
+            {/* Indicador de progresso animado */}
+            <div
+              className="absolute left-0 w-px bg-primary transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]"
+              style={{
+                top: activeIndex >= 0 
+                  ? `${(activeIndex / Math.max(items.length - 1, 1)) * 100}%` 
+                  : "0%",
+                height: activeIndex >= 0 
+                  ? `${(1 / Math.max(items.length, 1)) * 100}%` 
+                  : "0%",
+                opacity: activeIndex >= 0 ? 1 : 0,
+                boxShadow: "0 0 8px var(--primary), 0 0 16px var(--primary)",
+              }}
+            />
+
+            <ul className="space-y-0.5">
               {items.map((it) => {
                 const isActive = activeId === it.id;
                 return (
-                  <li key={it.id} className={it.level === 3 ? "pl-4" : ""}>
+                  <li 
+                    key={it.id} 
+                    className={it.level === 3 ? "pl-4" : ""}
+                  >
                     <a
+                      ref={(el) => {
+                        if (el) itemRefs.current.set(it.id, el);
+                        else itemRefs.current.delete(it.id);
+                      }}
                       href={`#${it.id}`}
                       onClick={(e) => handleClick(e, it.id)}
-                      className={`block -ml-px border-l-2 py-1 pl-3 text-xs leading-snug transition-colors ${
-                        isActive
-                          ? "border-primary text-primary"
-                          : "border-transparent text-muted-foreground hover:text-foreground hover:border-white/30"
-                      }`}
+                      className={`
+                        group relative block py-1.5 pl-3 text-xs leading-snug
+                        transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]
+                        ${isActive 
+                          ? "text-primary translate-x-0.5" 
+                          : "text-muted-foreground/70 hover:text-foreground/90 hover:translate-x-0.5"
+                        }
+                      `}
                     >
-                      {it.text}
+                      {/* Fundo sutil no item ativo */}
+                      <span 
+                        className={`
+                          absolute inset-0 -mx-1 rounded-sm
+                          transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]
+                          ${isActive 
+                            ? "bg-primary/[0.06] opacity-100" 
+                            : "bg-transparent opacity-0 group-hover:bg-white/[0.02] group-hover:opacity-100"
+                          }
+                        `}
+                      />
+                      
+                      {/* Borda esquerda ativa */}
+                      <span 
+                        className={`
+                          absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-3 rounded-full
+                          transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]
+                          ${isActive 
+                            ? "bg-primary opacity-100 scale-100" 
+                            : "bg-transparent opacity-0 scale-50 group-hover:bg-white/20 group-hover:opacity-60 group-hover:scale-75"
+                          }
+                        `}
+                      />
+
+                      {/* Texto */}
+                      <span className="relative z-10">
+                        {it.text}
+                      </span>
                     </a>
                   </li>
                 );
@@ -186,11 +244,14 @@ export function TableOfContents({ items }: TableOfContentsProps) {
                     <a
                       href={`#${it.id}`}
                       onClick={(e) => handleClick(e, it.id)}
-                      className={`block -ml-px border-l-2 py-1.5 pl-3 text-sm transition-colors ${
-                        isActive
-                          ? "border-primary text-primary"
-                          : "border-transparent text-foreground/80 hover:text-primary"
-                      }`}
+                      className={`
+                        group relative block -ml-px border-l-2 py-1.5 pl-3 text-sm
+                        transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]
+                        ${isActive
+                          ? "border-primary text-primary translate-x-0.5"
+                          : "border-transparent text-foreground/80 hover:text-primary hover:border-white/30 hover:translate-x-0.5"
+                        }
+                      `}
                     >
                       {it.text}
                     </a>
