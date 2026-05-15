@@ -10,6 +10,12 @@ import { fetchBlogPost } from "@/lib/blog.functions";
 import { categoryCover } from "@/lib/blog-covers";
 import { whatsappLink, DEFAULT_WHATSAPP_MESSAGE } from "@/lib/contact";
 import { TableOfContents, extractToc, slugify } from "@/components/site/TableOfContents";
+import {
+  SERVICE_LINK_TARGETS,
+  buildPostLinkTargets,
+  createLinkerState,
+  injectInternalLinks,
+} from "@/lib/internal-links";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: async ({ params }) => {
