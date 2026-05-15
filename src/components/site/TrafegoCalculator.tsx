@@ -63,7 +63,7 @@ export function TrafegoCalculator() {
         </div>
 
         {/* Todos os cards em fundo claro, mesma diagonal, alinhados */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-5 items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 items-stretch">
           <PlatformCard name="Google Ads" badge="Partner" code="google" />
           <PlatformCard name="Meta Business" badge="Partner" code="meta" />
           <PlatformCard name="LinkedIn Ads" badge="Marketing" code="linkedin" />
@@ -181,7 +181,7 @@ export function TrafegoCalculator() {
               </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-px bg-black/8 border border-black/10 overflow-hidden">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-black/8 border border-black/10 overflow-hidden">
               <MetricCell label="Leads" value={fmt(leads)} unit="/mês" />
               <MetricCell label="Vendas" value={fmt(sales)} unit="/mês" />
               <MetricCell label="CAC" value={`R$ ${fmt(cac)}`} unit="" />

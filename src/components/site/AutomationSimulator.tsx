@@ -57,26 +57,28 @@ export function AutomationSimulator() {
       </div>
 
       {/* Palette */}
-      <div className="mb-6 flex flex-wrap items-center gap-2">
-        <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/60">
-          ＋ Adicionar:
-        </span>
-        {PALETTE.map((p) => (
-          <button
-            key={p.kind}
-            onClick={() => addNode(p.kind)}
-            disabled={running}
-            className="group inline-flex items-center gap-2 border border-border bg-card/40 px-3 py-1.5 text-[11px] uppercase tracking-widest hover:border-primary/60 hover:bg-card transition-all disabled:opacity-40"
-          >
-            <p.Icon className="h-3 w-3" style={{ color: p.color }} />
-            <span>{p.label}</span>
-          </button>
-        ))}
-        <div className="ml-auto flex items-center gap-2">
+      <div className="mb-6 flex flex-col gap-4">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/60">
+            ＋ Adicionar:
+          </span>
+          {PALETTE.map((p) => (
+            <button
+              key={p.kind}
+              onClick={() => addNode(p.kind)}
+              disabled={running}
+              className="group inline-flex items-center gap-2 border border-border bg-card/40 px-3 py-1.5 text-[11px] uppercase tracking-widest hover:border-primary/60 hover:bg-card transition-all disabled:opacity-40"
+            >
+              <p.Icon className="h-3 w-3" style={{ color: p.color }} />
+              <span>{p.label}</span>
+            </button>
+          ))}
+        </div>
+        <div className="flex flex-col gap-2 sm:ml-auto sm:flex-row sm:items-center">
           <button
             onClick={reset}
             disabled={running}
-            className="inline-flex items-center gap-1.5 border border-border px-3 py-1.5 text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-all disabled:opacity-40"
+            className="inline-flex items-center justify-center gap-1.5 border border-border px-3 py-2 text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-all disabled:opacity-40"
           >
             <RotateCw className="h-3 w-3" />
             Reset
@@ -84,7 +86,7 @@ export function AutomationSimulator() {
           <button
             onClick={run}
             disabled={running || flow.length === 0}
-            className="inline-flex items-center gap-2 bg-primary px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-foreground hover:-translate-y-0.5 transition-all disabled:opacity-40 disabled:translate-y-0"
+            className="inline-flex items-center justify-center gap-2 bg-primary px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-foreground hover:-translate-y-0.5 transition-all disabled:opacity-40 disabled:translate-y-0"
           >
             <Play className="h-3 w-3" />
             {running ? "Executando..." : "Executar"}
@@ -100,19 +102,19 @@ export function AutomationSimulator() {
             backgroundSize: "20px 20px",
           }}
         >
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-6">
+          <div className="flex flex-col gap-4 md:flex-row md:flex-wrap md:items-center md:gap-x-3 md:gap-y-6">
             {flow.map((kind, i) => {
               const def = PALETTE.find((p) => p.kind === kind)!;
               const isActive = active === i;
               const isDone = active > i;
               return (
-                <div key={i} className="flex items-center gap-3">
+                <div key={i} className="flex flex-col items-stretch gap-3 md:flex-row md:items-center">
                   <motion.button
                     onClick={() => removeNode(i)}
                     whileHover={{ scale: 1.02 }}
                     animate={isActive ? { scale: [1, 1.06, 1] } : { scale: 1 }}
                     transition={isActive ? { duration: 0.6, repeat: Infinity } : {}}
-                    className="group relative flex w-[180px] flex-col items-start gap-2 border bg-background/80 p-4 backdrop-blur-md transition-all"
+                    className="group relative flex w-full md:w-[180px] flex-col items-start gap-2 border bg-background/80 p-4 backdrop-blur-md transition-all"
                     style={{
                       borderColor: isActive || isDone ? def.color : "oklch(25% 0 0 / 0.8)",
                       boxShadow: isActive ? `0 0 24px ${def.color}` : "none",
@@ -146,7 +148,7 @@ export function AutomationSimulator() {
                       <div className="text-[10px] text-muted-foreground">{def.sub}</div>
                     </div>
                     {!running && (
-                      <span className="absolute -right-1.5 -top-1.5 hidden h-4 w-4 items-center justify-center rounded-full border border-border bg-background text-[10px] text-muted-foreground group-hover:flex">
+                      <span className="absolute -right-1.5 -top-1.5 hidden h-4 w-4 items-center justify-center rounded-full border border-border bg-background text-[10px] text-muted-foreground group-hover:flex md:flex">
                         ×
                       </span>
                     )}
