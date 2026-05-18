@@ -27,6 +27,8 @@ export const Route = createFileRoute("/blog/")({
   },
   head: ({ loaderData }) => {
     const posts: BlogPost[] = (loaderData?.posts ?? []).slice(0, 12);
+    const featuredImage = posts[0]?.image;
+
     const blogJsonLd = {
       "@context": "https://schema.org",
       "@type": "Blog",
@@ -87,7 +89,13 @@ export const Route = createFileRoute("/blog/")({
         { name: "twitter:description", content: PAGE_DESCRIPTION },
         { name: "twitter:image", content: OG_IMAGE },
       ],
-      links: [{ rel: "canonical", href: PAGE_URL }],
+      links: [
+        { rel: "canonical", href: PAGE_URL },
+        ...(featuredImage
+          ? [{ rel: "preload" as const, as: "image" as const, href: featuredImage, fetchPriority: "high" as const }]
+          : []),
+      ],
+
       scripts: [
         { type: "application/ld+json", children: JSON.stringify(blogJsonLd) },
         { type: "application/ld+json", children: JSON.stringify(itemListJsonLd) },
@@ -167,17 +175,18 @@ function BlogIndex() {
       <Header onDiagnostico={() => setDiagOpen(true)} />
 
       <section className="relative pt-28 pb-10 md:pt-44 md:pb-20 overflow-hidden">
+        {/* BG decorativo — só carrega em md+ para não pesar no mobile */}
         <div
           aria-hidden
-          className="absolute inset-0 opacity-40"
+          className="hidden md:block absolute inset-0 opacity-40"
           style={{ backgroundImage: `url(${heroAi})`, backgroundSize: "cover", backgroundPosition: "center" }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/85 to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(59,130,246,0.18),transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(167,139,250,0.10),transparent_55%)]" />
+        <div className="hidden md:block absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(167,139,250,0.10),transparent_55%)]" />
         <div
           aria-hidden
-          className="absolute inset-0 opacity-[0.04]"
+          className="hidden md:block absolute inset-0 opacity-[0.04]"
           style={{
             backgroundImage:
               "linear-gradient(to right, rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.6) 1px, transparent 1px)",
@@ -185,6 +194,7 @@ function BlogIndex() {
             maskImage: "radial-gradient(ellipse at center, black 40%, transparent 75%)",
           }}
         />
+
         <div className="container-aceleriq relative">
           <div>
             <div className="inline-flex items-center gap-2 border border-primary/30 bg-primary/5 px-3 py-1 mb-6">
@@ -289,12 +299,17 @@ function FeaturedCard({ post }: { post: BlogPost }) {
           <img
             src={post.image || categoryCover(post.category)}
             alt=""
-              loading="eager"
-              fetchPriority="high"
+            width={1280}
+            height={800}
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+            sizes="(min-width: 768px) 50vw, 100vw"
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent" />
         </div>
+
         <div className="p-5 sm:p-8 md:p-10 flex flex-col justify-center">
           <div className="flex items-center gap-3 mb-3 md:mb-4">
             <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary">
@@ -333,9 +348,14 @@ function PostCard({ post }: { post: BlogPost; index: number }) {
           <img
             src={post.image || categoryCover(post.category)}
             alt=""
+            width={800}
+            height={450}
             loading="lazy"
+            decoding="async"
+            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
+
           {post.isLocal && (
             <span className="absolute top-3 left-3 z-10 inline-flex items-center gap-1 border border-primary/40 bg-background/80 backdrop-blur px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.22em] text-primary">
               <Sparkles className="h-2.5 w-2.5" /> Aceleriq
