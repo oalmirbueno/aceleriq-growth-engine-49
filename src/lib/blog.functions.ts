@@ -393,6 +393,10 @@ export const fetchOwnedBlogPosts = createServerFn({ method: "GET" }).handler(asy
 
 /** Apenas posts vindos de feeds externos — pode levar alguns segundos. */
 export const fetchFeedBlogPosts = createServerFn({ method: "GET" }).handler(async () => {
+  const { setResponseHeaders } = await import("@tanstack/react-start/server");
+  setResponseHeaders(
+    new Headers({ "Cache-Control": "public, max-age=300, s-maxage=600, stale-while-revalidate=86400" }),
+  );
   const posts = await loadFeedPostsFast();
   return { posts };
 });
