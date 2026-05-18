@@ -5,6 +5,12 @@
 // Slug é derivado do title (slugify). Mantenha único.
 
 import type { FeedCategory } from "./blog-feeds";
+import coverMetodoAcelera from "@/assets/blog-cover-metodo-acelera.jpg";
+import coverAgentesIa from "@/assets/blog-cover-agentes-ia.jpg";
+import coverAiOverviews from "@/assets/blog-cover-ai-overviews.jpg";
+import coverTrafegoCuritiba from "@/assets/blog-cover-trafego-curitiba.jpg";
+import coverWhatsappAutomacao from "@/assets/blog-cover-whatsapp-automacao.jpg";
+import coverMaquinaAquisicao from "@/assets/blog-cover-maquina-aquisicao.jpg";
 
 export interface LocalPost {
   title: string;
@@ -24,6 +30,7 @@ export const LOCAL_POSTS: LocalPost[] = [
     excerpt:
       "Estratégia, dados, automação e IA aplicados em sequência. O framework que usamos para transformar marketing em receita previsível.",
     category: "crescimento",
+    image: coverMetodoAcelera,
     publishedAt: "2026-05-15T12:00:00.000Z",
     author: "Equipe Aceleriq",
     content: `O mercado está saturado de promessas em torno de IA, mas pouquíssimas empresas conseguem traduzir essas promessas em receita real. A diferença está no método.
@@ -40,6 +47,7 @@ O resultado é previsibilidade. Em vez de campanhas isoladas, o cliente passa a 
     excerpt:
       "Como agentes de IA estão substituindo dashboards, atendentes e SDRs em 2026, e o passo a passo para implantar na sua empresa sem virar refém de uma plataforma.",
     category: "ia",
+    image: coverAgentesIa,
     publishedAt: "2026-05-16T09:00:00.000Z",
     author: "Equipe Aceleriq",
     content: `2026 é o ano em que **agentes de IA para empresas** deixaram de ser tendência e viraram infraestrutura. Não estamos mais falando de chatbots que respondem FAQ: estamos falando de sistemas autônomos que qualificam leads, agendam reuniões, escrevem propostas, atualizam CRM e fecham vendas sem intervenção humana em boa parte do funil.
@@ -134,6 +142,7 @@ Se quiser mapear onde IA gera receita na sua operação, faça nosso [Diagnósti
     excerpt:
       "O Google mudou. Os AI Overviews dominam a primeira tela e estão derrubando o tráfego orgânico clássico. Veja o que muda no SEO em 2026 e como rankear nas respostas com IA.",
     category: "marketing",
+    image: coverAiOverviews,
     publishedAt: "2026-05-17T09:00:00.000Z",
     author: "Equipe Aceleriq",
     content: `Se você ainda mede SEO só por posição no Google, está medindo o jogo errado.
@@ -245,6 +254,7 @@ Quer auditar onde sua marca está nessa nova realidade? Comece pelo nosso [Diagn
     excerpt:
       "Custos por clique nas alturas, AI Overviews comendo o orgânico, criativos com IA mudando tudo. Veja como escalar tráfego pago em Curitiba em 2026 sem queimar verba.",
     category: "trafego",
+    image: coverTrafegoCuritiba,
     publishedAt: "2026-05-17T15:00:00.000Z",
     author: "Equipe Aceleriq",
     content: `O CPC médio no Brasil subiu mais de 40% em dois anos. Meta e Google estão usando mais IA do que nunca para precificar leilões em tempo real. E o anunciante que ainda otimiza campanha por palavra-chave e ajuste manual está perdendo dinheiro todo dia.
@@ -368,6 +378,7 @@ Se quiser uma análise gratuita do seu funil e da sua mensuração, faça nosso 
     excerpt:
       "WhatsApp é o canal de vendas mais subaproveitado do Brasil. Veja o passo a passo para automatizar atendimento, qualificação e fechamento sem perder o tom humano.",
     category: "automacao",
+    image: coverWhatsappAutomacao,
     publishedAt: "2026-05-18T09:00:00.000Z",
     author: "Equipe Aceleriq",
     content: `Mais de 96% dos brasileiros usam WhatsApp todo dia. É o canal com a maior taxa de abertura, a melhor latência de resposta e o menor custo por mensagem do mercado. E ainda assim, a maioria das empresas usa WhatsApp como se fosse SMS dos anos 2000: alguém digitando no celular, sem CRM, sem fluxo, sem mensuração.
@@ -477,6 +488,7 @@ Se quiser entender quais fluxos de WhatsApp gerariam mais receita na sua operaç
     excerpt:
       "Pare de tratar marketing como custo e vendas como esforço. Veja como integrar CRM, dados, automação e IA para construir uma máquina de aquisição que cresce de forma composta.",
     category: "vendas",
+    image: coverMaquinaAquisicao,
     publishedAt: "2026-05-18T15:00:00.000Z",
     author: "Equipe Aceleriq",
     content: `A maior parte das empresas brasileiras opera marketing e vendas como duas áreas que se odeiam. Marketing gera "leads", vendas reclama da qualidade, marketing reclama do follow-up, e ninguém sabe direito quanto custa adquirir um cliente.
