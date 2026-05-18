@@ -22,6 +22,7 @@ import { GoogleReviews } from "@/components/site/GoogleReviews";
 
 import { PortfolioShowcase } from "@/components/site/PortfolioShowcase";
 import { PainelComunidade } from "@/components/site/PainelComunidade";
+import aiEngineerImg from "@/assets/ai-engineer.jpg";
 
 const HOME_TITLE =
   "Marketing Digital, Sites e Tráfego em Curitiba · Aceleriq";
