@@ -32,8 +32,10 @@ export interface BlogPost {
 }
 
 let cache: { at: number; posts: BlogPost[] } | null = null;
+let feedCache: { at: number; posts: BlogPost[] } | null = null;
 const CACHE_MS = 1000 * 60 * 30; // 30 min
-const FEED_TIMEOUT_MS = 3500;
+const FEED_CACHE_MS = 1000 * 60 * 10; // 10 min — feeds externos
+const FEED_TIMEOUT_MS = 2500;
 
 function stripHtml(s: string): string {
   return s
@@ -330,17 +332,22 @@ async function loadOwnedPosts(): Promise<BlogPost[]> {
 }
 
 async function loadFeedPostsFast(): Promise<BlogPost[]> {
+  if (feedCache && Date.now() - feedCache.at < FEED_CACHE_MS) return feedCache.posts;
+
   const results = await Promise.race([
     Promise.all(FEEDS.map(fetchOne)),
     new Promise<BlogPost[][]>((resolve) => setTimeout(() => resolve([]), FEED_TIMEOUT_MS + 400)),
   ]);
 
-  return dedupe(
+  const posts = dedupe(
     results
       .flat()
       .filter(isRelevant)
       .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt)),
   ).slice(0, 72);
+
+  if (posts.length) feedCache = { at: Date.now(), posts };
+  return posts;
 }
 
 async function loadAll(): Promise<BlogPost[]> {
@@ -386,6 +393,10 @@ export const fetchOwnedBlogPosts = createServerFn({ method: "GET" }).handler(asy
 
 /** Apenas posts vindos de feeds externos — pode levar alguns segundos. */
 export const fetchFeedBlogPosts = createServerFn({ method: "GET" }).handler(async () => {
+  const { setResponseHeaders } = await import("@tanstack/react-start/server");
+  setResponseHeaders(
+    new Headers({ "Cache-Control": "public, max-age=300, s-maxage=600, stale-while-revalidate=86400" }),
+  );
   const posts = await loadFeedPostsFast();
   return { posts };
 });
