@@ -5,6 +5,12 @@
 // Slug é derivado do title (slugify). Mantenha único.
 
 import type { FeedCategory } from "./blog-feeds";
+import coverMetodoAcelera from "@/assets/blog-cover-metodo-acelera.jpg";
+import coverAgentesIa from "@/assets/blog-cover-agentes-ia.jpg";
+import coverAiOverviews from "@/assets/blog-cover-ai-overviews.jpg";
+import coverTrafegoCuritiba from "@/assets/blog-cover-trafego-curitiba.jpg";
+import coverWhatsappAutomacao from "@/assets/blog-cover-whatsapp-automacao.jpg";
+import coverMaquinaAquisicao from "@/assets/blog-cover-maquina-aquisicao.jpg";
 
 export interface LocalPost {
   title: string;
