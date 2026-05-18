@@ -332,17 +332,22 @@ async function loadOwnedPosts(): Promise<BlogPost[]> {
 }
 
 async function loadFeedPostsFast(): Promise<BlogPost[]> {
+  if (feedCache && Date.now() - feedCache.at < FEED_CACHE_MS) return feedCache.posts;
+
   const results = await Promise.race([
     Promise.all(FEEDS.map(fetchOne)),
     new Promise<BlogPost[][]>((resolve) => setTimeout(() => resolve([]), FEED_TIMEOUT_MS + 400)),
   ]);
 
-  return dedupe(
+  const posts = dedupe(
     results
       .flat()
       .filter(isRelevant)
       .sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt)),
   ).slice(0, 72);
+
+  if (posts.length) feedCache = { at: Date.now(), posts };
+  return posts;
 }
 
 async function loadAll(): Promise<BlogPost[]> {
