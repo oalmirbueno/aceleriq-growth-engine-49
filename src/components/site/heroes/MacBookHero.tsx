@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import laptopBase from "@/assets/aceleriq-laptop-base-transparent.png";
-import laptopLid from "@/assets/aceleriq-laptop-lid-transparent.png";
+import laptopBase from "@/assets/aceleriq-laptop-base-transparent.webp";
+import laptopLid from "@/assets/aceleriq-laptop-lid-transparent.webp";
 
 export function MacBookHero() {
   const sectionRef = useRef<HTMLDivElement>(null);

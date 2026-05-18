@@ -1,5 +1,5 @@
 import { ArrowUpRight, BarChart3, Bell, FileText, Headphones, LineChart, MessageCircle, Users } from "lucide-react";
-import painelImg from "@/assets/painel-aceleriq-online.png";
+import painelImg from "@/assets/painel-aceleriq-online.jpg";
 import grupoImg from "@/assets/grupo-whatsapp-aceleriq.jpg";
 
 const PAINEL_URL = "https://aceleriq.online";
