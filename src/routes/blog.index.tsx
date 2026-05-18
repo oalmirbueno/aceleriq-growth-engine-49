@@ -291,12 +291,17 @@ function FeaturedCard({ post }: { post: BlogPost }) {
           <img
             src={post.image || categoryCover(post.category)}
             alt=""
-              loading="eager"
-              fetchPriority="high"
+            width={1280}
+            height={800}
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+            sizes="(min-width: 768px) 50vw, 100vw"
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent" />
         </div>
+
         <div className="p-5 sm:p-8 md:p-10 flex flex-col justify-center">
           <div className="flex items-center gap-3 mb-3 md:mb-4">
             <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary">
