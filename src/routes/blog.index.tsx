@@ -19,7 +19,8 @@ const OG_IMAGE = "https://aceleriq.com.br/og-image.jpg";
 export const Route = createFileRoute("/blog/")({
   loader: async () => {
     try {
-      return await fetchBlogPosts();
+      // Apenas posts próprios (admin + locais) — resposta instantânea.
+      return await fetchOwnedBlogPosts();
     } catch {
       return { posts: [] as BlogPost[] };
     }
