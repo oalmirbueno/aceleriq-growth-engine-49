@@ -107,7 +107,19 @@ function BlogIndex() {
   const [cat, setCat] = useState<FeedCategory | "all">("all");
   const [q, setQ] = useState("");
   const { posts: ownedPosts = [] } = (Route.useLoaderData() ?? {}) as { posts?: BlogPost[] };
-  const [feedPosts, setFeedPosts] = useState<BlogPost[]>([]);
+  const [feedPosts, setFeedPosts] = useState<BlogPost[]>(() => {
+    if (typeof window === "undefined") return [];
+    try {
+      const raw = window.localStorage.getItem("aceleriq:blog:feed");
+      if (!raw) return [];
+      const parsed = JSON.parse(raw) as { at: number; posts: BlogPost[] };
+      if (!parsed?.posts?.length) return [];
+      // Mostra cache imediatamente; revalida em background abaixo.
+      return parsed.posts;
+    } catch {
+      return [];
+    }
+  });
   const loadFeed = useServerFn(fetchFeedBlogPosts);
 
   useEffect(() => {
@@ -116,7 +128,14 @@ function BlogIndex() {
     const t = setTimeout(() => {
       loadFeed()
         .then((res) => {
-          if (!cancelled && res?.posts?.length) setFeedPosts(res.posts);
+          if (cancelled || !res?.posts?.length) return;
+          setFeedPosts(res.posts);
+          try {
+            window.localStorage.setItem(
+              "aceleriq:blog:feed",
+              JSON.stringify({ at: Date.now(), posts: res.posts }),
+            );
+          } catch {}
         })
         .catch(() => {});
     }, 50);
