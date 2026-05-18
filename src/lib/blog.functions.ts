@@ -378,6 +378,18 @@ export const fetchBlogPosts = createServerFn({ method: "GET" }).handler(async ()
   return { posts };
 });
 
+/** Apenas posts próprios (admin + locais) — resposta instantânea, ideal para SSR. */
+export const fetchOwnedBlogPosts = createServerFn({ method: "GET" }).handler(async () => {
+  const posts = await loadOwnedPosts();
+  return { posts };
+});
+
+/** Apenas posts vindos de feeds externos — pode levar alguns segundos. */
+export const fetchFeedBlogPosts = createServerFn({ method: "GET" }).handler(async () => {
+  const posts = await loadFeedPostsFast();
+  return { posts };
+});
+
 /**
  * Versão enxuta para o sitemap — apenas slug + publishedAt.
  * Sem tradução, scraping ou og:image (essas etapas pesadas estouravam o tempo

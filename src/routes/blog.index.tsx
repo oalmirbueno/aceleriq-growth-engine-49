@@ -1,11 +1,12 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { ArrowRight, Clock, Rss, Search, Sparkles } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { DiagnosticoModal } from "@/components/site/DiagnosticoModal";
 import { CATEGORIES, type FeedCategory } from "@/lib/blog-feeds";
-import { fetchBlogPosts, type BlogPost } from "@/lib/blog.functions";
+import { fetchOwnedBlogPosts, fetchFeedBlogPosts, type BlogPost } from "@/lib/blog.functions";
 import { categoryCover } from "@/lib/blog-covers";
 import heroAi from "@/assets/blog-hero-ai.jpg";
 
@@ -18,13 +19,14 @@ const OG_IMAGE = "https://aceleriq.com.br/og-image.jpg";
 export const Route = createFileRoute("/blog/")({
   loader: async () => {
     try {
-      return await fetchBlogPosts();
+      // Apenas posts próprios (admin + locais) — resposta instantânea.
+      return await fetchOwnedBlogPosts();
     } catch {
       return { posts: [] as BlogPost[] };
     }
   },
   head: ({ loaderData }) => {
-    const posts = (loaderData?.posts ?? []).slice(0, 12);
+    const posts: BlogPost[] = (loaderData?.posts ?? []).slice(0, 12);
     const blogJsonLd = {
       "@context": "https://schema.org",
       "@type": "Blog",
@@ -104,7 +106,32 @@ function BlogIndex() {
   const [diagOpen, setDiagOpen] = useState(false);
   const [cat, setCat] = useState<FeedCategory | "all">("all");
   const [q, setQ] = useState("");
-  const { posts = [] } = (Route.useLoaderData() ?? {}) as { posts?: BlogPost[] };
+  const { posts: ownedPosts = [] } = (Route.useLoaderData() ?? {}) as { posts?: BlogPost[] };
+  const [feedPosts, setFeedPosts] = useState<BlogPost[]>([]);
+  const loadFeed = useServerFn(fetchFeedBlogPosts);
+
+  useEffect(() => {
+    let cancelled = false;
+    // Carrega feeds externos no client após hidratação — não bloqueia o TTFB.
+    const t = setTimeout(() => {
+      loadFeed()
+        .then((res) => {
+          if (!cancelled && res?.posts?.length) setFeedPosts(res.posts);
+        })
+        .catch(() => {});
+    }, 50);
+    return () => {
+      cancelled = true;
+      clearTimeout(t);
+    };
+  }, [loadFeed]);
+
+  const posts = useMemo(() => {
+    if (!feedPosts.length) return ownedPosts;
+    const seen = new Set(ownedPosts.map((p) => p.slug));
+    return [...ownedPosts, ...feedPosts.filter((p) => !seen.has(p.slug))];
+  }, [ownedPosts, feedPosts]);
+
   const filtered = useMemo(() => {
     return posts.filter((p) => {
       if (cat !== "all" && p.category !== cat) return false;
