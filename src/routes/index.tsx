@@ -81,7 +81,10 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "https://aceleriq.com.br" },
       { property: "og:type", content: "website" },
     ],
-    links: [{ rel: "canonical", href: "https://aceleriq.com.br" }],
+    links: [
+      { rel: "canonical", href: "https://aceleriq.com.br" },
+      { rel: "preload", as: "image", href: aiEngineerImg, fetchPriority: "high" },
+    ],
     scripts: [
       {
         type: "application/ld+json",
