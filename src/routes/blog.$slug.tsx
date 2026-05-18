@@ -268,9 +268,16 @@ function BlogPostPage() {
             <img
               src={post.image || categoryCover(post.category)}
               alt={post.title}
+              width={1600}
+              height={900}
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              sizes="(min-width: 1024px) 960px, 100vw"
               className="absolute inset-0 w-full h-full object-cover"
             />
           </div>
+
 
           {keyPoints.length > 0 && (
             <aside className="mt-10 border-l-2 border-primary/60 bg-white/[0.02] pl-5 pr-4 py-5">
