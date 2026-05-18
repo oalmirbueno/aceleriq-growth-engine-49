@@ -340,9 +340,14 @@ function PostCard({ post }: { post: BlogPost; index: number }) {
           <img
             src={post.image || categoryCover(post.category)}
             alt=""
+            width={800}
+            height={450}
             loading="lazy"
+            decoding="async"
+            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
+
           {post.isLocal && (
             <span className="absolute top-3 left-3 z-10 inline-flex items-center gap-1 border border-primary/40 bg-background/80 backdrop-blur px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.22em] text-primary">
               <Sparkles className="h-2.5 w-2.5" /> Aceleriq
