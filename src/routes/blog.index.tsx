@@ -106,7 +106,32 @@ function BlogIndex() {
   const [diagOpen, setDiagOpen] = useState(false);
   const [cat, setCat] = useState<FeedCategory | "all">("all");
   const [q, setQ] = useState("");
-  const { posts = [] } = (Route.useLoaderData() ?? {}) as { posts?: BlogPost[] };
+  const { posts: ownedPosts = [] } = (Route.useLoaderData() ?? {}) as { posts?: BlogPost[] };
+  const [feedPosts, setFeedPosts] = useState<BlogPost[]>([]);
+  const loadFeed = useServerFn(fetchFeedBlogPosts);
+
+  useEffect(() => {
+    let cancelled = false;
+    // Carrega feeds externos no client após hidratação — não bloqueia o TTFB.
+    const t = setTimeout(() => {
+      loadFeed()
+        .then((res) => {
+          if (!cancelled && res?.posts?.length) setFeedPosts(res.posts);
+        })
+        .catch(() => {});
+    }, 50);
+    return () => {
+      cancelled = true;
+      clearTimeout(t);
+    };
+  }, [loadFeed]);
+
+  const posts = useMemo(() => {
+    if (!feedPosts.length) return ownedPosts;
+    const seen = new Set(ownedPosts.map((p) => p.slug));
+    return [...ownedPosts, ...feedPosts.filter((p) => !seen.has(p.slug))];
+  }, [ownedPosts, feedPosts]);
+
   const filtered = useMemo(() => {
     return posts.filter((p) => {
       if (cat !== "all" && p.category !== cat) return false;
