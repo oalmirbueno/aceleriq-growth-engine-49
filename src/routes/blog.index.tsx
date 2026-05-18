@@ -1,11 +1,12 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { ArrowRight, Clock, Rss, Search, Sparkles } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { DiagnosticoModal } from "@/components/site/DiagnosticoModal";
 import { CATEGORIES, type FeedCategory } from "@/lib/blog-feeds";
-import { fetchBlogPosts, type BlogPost } from "@/lib/blog.functions";
+import { fetchOwnedBlogPosts, fetchFeedBlogPosts, type BlogPost } from "@/lib/blog.functions";
 import { categoryCover } from "@/lib/blog-covers";
 import heroAi from "@/assets/blog-hero-ai.jpg";
 
