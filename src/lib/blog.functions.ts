@@ -32,8 +32,10 @@ export interface BlogPost {
 }
 
 let cache: { at: number; posts: BlogPost[] } | null = null;
+let feedCache: { at: number; posts: BlogPost[] } | null = null;
 const CACHE_MS = 1000 * 60 * 30; // 30 min
-const FEED_TIMEOUT_MS = 3500;
+const FEED_CACHE_MS = 1000 * 60 * 10; // 10 min — feeds externos
+const FEED_TIMEOUT_MS = 2500;
 
 function stripHtml(s: string): string {
   return s
