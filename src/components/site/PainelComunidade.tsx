@@ -1,8 +1,8 @@
-import { ArrowUpRight, BarChart3, Bell, LineChart, MessageCircle, Sparkles, Users } from "lucide-react";
-import painelImg from "@/assets/painel-cliente-aceleriq.jpg";
+import { ArrowUpRight, BarChart3, Bell, FileText, HeadphonesIcon, LineChart, MessageCircle, Users } from "lucide-react";
+import painelImg from "@/assets/painel-aceleriq-online.png";
 import comunidadeImg from "@/assets/comunidade-whatsapp-aceleriq.jpg";
 
-const COMUNIDADE_URL = "https://aceleriq.online";
+const PAINEL_URL = "https://aceleriq.online";
 
 export function PainelComunidade() {
   return (
