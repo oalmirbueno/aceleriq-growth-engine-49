@@ -26,7 +26,7 @@ export const Route = createFileRoute("/blog/")({
     }
   },
   head: ({ loaderData }) => {
-    const posts = (loaderData?.posts ?? []).slice(0, 12);
+    const posts: BlogPost[] = (loaderData?.posts ?? []).slice(0, 12);
     const blogJsonLd = {
       "@context": "https://schema.org",
       "@type": "Blog",
