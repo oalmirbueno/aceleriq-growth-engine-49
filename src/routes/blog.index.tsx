@@ -89,7 +89,13 @@ export const Route = createFileRoute("/blog/")({
         { name: "twitter:description", content: PAGE_DESCRIPTION },
         { name: "twitter:image", content: OG_IMAGE },
       ],
-      links: [{ rel: "canonical", href: PAGE_URL }],
+      links: [
+        { rel: "canonical", href: PAGE_URL },
+        ...(featuredImage
+          ? [{ rel: "preload" as const, as: "image" as const, href: featuredImage, fetchPriority: "high" as const }]
+          : []),
+      ],
+
       scripts: [
         { type: "application/ld+json", children: JSON.stringify(blogJsonLd) },
         { type: "application/ld+json", children: JSON.stringify(itemListJsonLd) },
