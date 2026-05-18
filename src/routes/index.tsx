@@ -21,6 +21,7 @@ import {
 import { GoogleReviews } from "@/components/site/GoogleReviews";
 
 import { PortfolioShowcase } from "@/components/site/PortfolioShowcase";
+import { PainelComunidade } from "@/components/site/PainelComunidade";
 
 const HOME_TITLE =
   "Marketing Digital, Sites e Tráfego em Curitiba · Aceleriq";
@@ -110,6 +111,7 @@ function Index() {
         <FitFor />
         <DiagnosticoCTA onDiagnostico={openDiagnostico} />
         <Results />
+        <PainelComunidade />
         <Testimonials />
         <PortfolioShowcase />
         <Compare />
