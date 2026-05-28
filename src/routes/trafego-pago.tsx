@@ -31,8 +31,8 @@ function Page() {
     <ServicePageLayout
       variant="trafego"
       eyebrow="Google · Meta · LinkedIn · TikTok"
-      h1={<>Gestão de <span className="text-primary neon-text-glow">Tráfego Pago</span> orientada a receita</>}
-      intro="Tráfego pago lido por pipeline, não por clique. Integramos Meta CAPI, Google Enhanced Conversions e CRM para você decidir investimento com base em CAC e LTV reais, não em métricas de vaidade."
+      h1={<>Tráfego Pago para <span className="text-primary neon-text-glow">escalar</span> operações maduras</>}
+      intro="Planejamos, configuramos e otimizamos campanhas no Meta Ads e Google Ads conectadas à sua oferta, página, CRM e atendimento. Tráfego sem processo comercial vira desperdício."
       benefits={[
         { title: "Lido por receita", desc: "CRM + tracking server-side. Você vê quanto cada campanha gerou em vendas, não só leads." },
         { title: "Estratégia + execução", desc: "Mídia conversa com copy, criativo, landing e nutrição. Zero ilha." },
