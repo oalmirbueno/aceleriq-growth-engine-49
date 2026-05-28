@@ -37,9 +37,10 @@ function Page() {
         { title: "Tráfego sem processo é desperdício", desc: "Antes de aumentar verba, avaliamos se a página, o atendimento e o CRM estão prontos para receber demanda." },
         { title: "Campanhas Locais Assistidas", desc: "Para empresas que estão começando a organizar a aquisição e precisam de leads qualificados no WhatsApp." },
         { title: "Gestão de Mídia e Escala", desc: "Para empresas com verba maior e operação comercial madura que buscam escala nacional." },
-        { title: "Meta Ads e Google Ads", desc: "Operamos nos canais onde seu cliente realmente está, com criativos e copy de alta performance." },
-        { title: "Leitura por Pipeline e Receita", desc: "Integramos o tracking ao seu CRM para que você saiba exatamente o lucro gerado por cada real investido." },
-        { title: "Otimização Contínua", desc: "Testes A/B constantes em criativos, públicos e landing pages para reduzir o seu custo por lead." },
+        { title: "Meta Ads e Google Ads", desc: "Operamos nos canais onde seu cliente realmente está, com criativos e copy ajustados ao funil." },
+        { title: "Leitura por Pipeline e Receita", desc: "Integramos o tracking ao seu CRM para acompanhar o que cada real investido gera em pipeline e oportunidade." },
+        { title: "Otimização Contínua", desc: "Testes A/B constantes em criativos, públicos e landing pages para reduzir o custo por contato qualificado." },
+
       ]}
       deliverables={[
         "Auditoria inicial das contas de mídia",
