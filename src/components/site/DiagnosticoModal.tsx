@@ -173,7 +173,7 @@ export function DiagnosticoModal({
   const [phase, setPhase] = useState<Phase>("captura");
   const [capturaIdx, setCapturaIdx] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1);
-  const [captura, setCaptura] = useState<Partial<CapturaForm>>({
+  const [captura, setCaptura] = useState<CapturaForm>({
     nome: "",
     whatsapp: "",
     empresa: "",
@@ -299,15 +299,22 @@ export function DiagnosticoModal({
       const recs = recomendar(finalAnswers, captura.interesse_principal);
 
       const { error } = await supabase.from("diagnostico_leads").insert({
-        nome: captura.nome?.trim() || "",
-        whatsapp: captura.whatsapp?.trim() || "",
-        empresa: captura.empresa?.trim() || "",
+        nome: captura.nome.trim(),
+        whatsapp: captura.whatsapp.trim(),
+        empresa: captura.empresa.trim(),
         cidade: captura.cidade?.trim() || "",
         segmento: captura.segmento?.trim() || "",
         usa_crm: captura.usa_crm || "nao",
         investe_trafego: captura.investe_trafego || "nao",
         tem_equipe_comercial: captura.tem_equipe_comercial || "nao",
-        principal_gargalo: captura.principal_gargalo?.trim() || "",
+        principal_gargalo: captura.principal_gargalo.trim(),
+        interesse_principal: captura.interesse_principal,
+        respostas: finalAnswers,
+        score,
+        classificacao: cls.label,
+        recomendacoes: recs,
+        origem: origem ?? null,
+      });
         interesse_principal: captura.interesse_principal,
         respostas: finalAnswers,
         score,
@@ -389,7 +396,7 @@ export function DiagnosticoModal({
                     step={CAPTURA_STEPS[capturaIdx]}
                     idx={capturaIdx}
                     total={totalCaptura}
-                    value={(captura[CAPTURA_STEPS[capturaIdx].key] ?? "") as string}
+                    value={captura[CAPTURA_STEPS[capturaIdx].key] as string}
                     onChange={(v) =>
                       setCaptura({ ...captura, [CAPTURA_STEPS[capturaIdx].key]: v })
                     }
