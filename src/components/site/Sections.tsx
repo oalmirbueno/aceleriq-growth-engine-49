@@ -189,7 +189,7 @@ export function Pains() {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
       <div className="container-aceleriq">
         <SectionHeader
-          eyebrow="Sintomas comuns"
+          eyebrow="[ 01 ] · Sintomas comuns"
           title="Você reconhece algum destes problemas?"
           description="São os gargalos que travam empresas entre R$ 100k e R$ 5M/mês. Todos têm solução com a engenharia certa."
         />
