@@ -260,29 +260,29 @@ export function ServicePageLayout(props: ServicePageProps) {
           `}</style>
         </section>
 
-        {/* METRICS */}
         <section className="px-6 lg:px-16 py-16 md:py-20 max-w-[1600px] mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-8">
             {[
               {
-                val: 312,
-                suffix: "%",
-                label: "lift médio em conversão",
-                note: "vs. baseline do cliente",
+                val: 1,
+                label: "Estratégia antes da execução",
+                note: "Diagnóstico e prioridade",
               },
               {
-                val: 14,
-                suffix: "d",
-                label: "go-live para landing pages",
-                note: "do briefing ao deploy",
+                val: 2,
+                label: "Implantação sob medida",
+                note: "Processos e automações",
               },
               {
-                val: 96,
-                suffix: "+",
-                label: "Lighthouse performance",
-                note: "Core Web Vitals verdes",
+                val: 3,
+                label: "Operação acompanhada",
+                note: "Indicadores documentados",
               },
-              { val: 40, suffix: "+", label: "operações em produção", note: "verticais B2B e B2C" },
+              { 
+                val: 4, 
+                label: "Melhoria contínua", 
+                note: "Ajustes guiados por dados" 
+              },
             ].map((m, i) => (
               <motion.div
                 key={i}
@@ -292,12 +292,8 @@ export function ServicePageLayout(props: ServicePageProps) {
                 transition={{ duration: 0.4, delay: i * 0.06 }}
                 className="group"
               >
-                <div className="font-display text-4xl md:text-5xl tracking-[-0.04em] leading-none">
-                  <CountUp
-                    to={m.val}
-                    suffix={m.suffix}
-                    className="bg-gradient-to-b from-foreground to-foreground/50 bg-clip-text text-transparent"
-                  />
+                <div className="font-display text-4xl md:text-5xl tracking-[-0.04em] leading-none text-primary">
+                  0{m.val}
                 </div>
                 <div className="mt-3 pt-3 border-t border-border/60 group-hover:border-primary/60 transition-colors">
                   <div className="text-[13px] text-foreground/90 leading-snug">{m.label}</div>
@@ -307,6 +303,7 @@ export function ServicePageLayout(props: ServicePageProps) {
             ))}
           </div>
         </section>
+
 
         {/* WHY / BENEFITS */}
         <section className="px-6 lg:px-16 py-16 md:py-24 border-t border-border/60 max-w-[1600px] mx-auto">

@@ -293,8 +293,8 @@ type Props = {
 export function PortfolioShowcase({
   items = DEFAULT_PORTFOLIO,
   eyebrow = "[ · ] · Portfólio",
-  title = "Cases recentes da Aceleriq",
-  intro = "Selecionamos os projetos que melhor representam nosso padrão: design editorial, performance real e estratégia integrada ao funil. Clique e navegue pelo case dentro do nosso ambiente.",
+  title = "Projetos e estruturas digitais em produção",
+  intro = "Uma seleção de sites, landing pages, plataformas e projetos digitais desenvolvidos ou estruturados pela Aceleriq e seu ecossistema.",
 }: Props) {
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement | null>(null);

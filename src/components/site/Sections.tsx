@@ -171,37 +171,38 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                   </div>
                 </div>
 
-                {/* RIGHT-MIDDLE: ROI Mensal grande */}
+                {/* RIGHT-MIDDLE: Card 1 */}
                 <div className="absolute top-1/3 right-2 md:-right-14 float-c z-20">
-                  <div className="bg-black/90 backdrop-blur-md border border-primary/40 p-2 md:p-4 shadow-[0_0_40px_rgba(20,255,0,0.25)]">
+                  <div className="bg-black/90 backdrop-blur-md border border-primary/40 p-3 md:p-5 shadow-[0_0_40px_rgba(20,255,0,0.25)] rounded-lg">
                     <div className="flex flex-col items-center">
-                      <TrendingUp className="h-5 w-5 text-primary mb-1" />
-                      <span className="text-[7px] md:text-[9px] font-mono uppercase tracking-widest text-white/60 block text-center">ROI orientado a dados</span>
+                      <Search className="h-5 w-5 text-primary mb-2" />
+                      <span className="text-[9px] md:text-[10px] font-mono uppercase tracking-widest text-white block text-center font-bold">Diagnóstico orientado por dados</span>
+                      <span className="text-[8px] md:text-[9px] uppercase tracking-widest text-white/60 block text-center mt-1">Análise clara antes de qualquer execução.</span>
                     </div>
                   </div>
                 </div>
 
-                {/* BOTTOM-LEFT: Precisão */}
+                {/* BOTTOM-LEFT: Card 2 */}
                 <div className="absolute -bottom-2 left-2 md:-bottom-6 md:-left-12 float-b z-20">
-                  <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-2 py-1.5 md:px-3 md:py-2.5 min-w-[78px] md:min-w-[110px]">
-                    <span className="text-[7px] md:text-[8px] uppercase tracking-widest text-white/50 font-mono block">Status</span>
-                    <span className="text-sm md:text-base font-mono text-primary font-bold">Operacional</span>
+                  <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-3 py-3 md:px-5 md:py-4 rounded-lg min-w-[140px] md:min-w-[180px]">
+                    <span className="text-[8px] uppercase tracking-widest text-primary font-mono block mb-1">CRM e funil conectados</span>
+                    <span className="text-xs font-mono text-white/80">Leads organizados do primeiro contato ao fechamento.</span>
                   </div>
                 </div>
 
-                {/* BOTTOM-CENTER: Automação, só desktop */}
-                <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 float-a z-20 hidden md:block">
-                  <div className="bg-black/85 backdrop-blur-md border border-white/15 px-3 py-2.5 min-w-[110px]">
-                    <span className="text-[8px] uppercase tracking-widest text-white/50 font-mono block">Métricas</span>
-                    <span className="text-sm md:text-base font-mono text-primary font-bold">Dashboard Vivo</span>
+                {/* BOTTOM-CENTER: Card 3 */}
+                <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 float-a z-20 hidden md:block">
+                  <div className="bg-black/85 backdrop-blur-md border border-white/15 px-4 py-3 rounded-lg min-w-[160px]">
+                    <span className="text-[8px] uppercase tracking-widest text-primary font-mono block mb-1">Automação aplicada</span>
+                    <span className="text-xs font-mono text-white/80">WhatsApp, follow-up e tarefas com menos improviso.</span>
                   </div>
                 </div>
 
-                {/* BOTTOM-RIGHT: Leads */}
+                {/* BOTTOM-RIGHT: Card 4 */}
                 <div className="absolute -bottom-2 right-2 md:-bottom-6 md:-right-10 float-c z-20">
-                  <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-2 py-1.5 md:px-3 md:py-2.5 min-w-[78px] md:min-w-[110px]">
-                    <span className="text-[7px] md:text-[8px] uppercase tracking-widest text-white/50 font-mono block">Funil</span>
-                    <span className="text-sm md:text-base font-mono text-primary font-bold">Conectado</span>
+                  <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-3 py-3 md:px-5 md:py-4 rounded-lg min-w-[140px] md:min-w-[180px]">
+                    <span className="text-[8px] uppercase tracking-widest text-primary font-mono block mb-1">Marketing conectado à receita</span>
+                    <span className="text-xs font-mono text-white/80">Campanhas pensadas para gerar oportunidades reais.</span>
                   </div>
                 </div>
               </motion.div>
@@ -324,32 +325,36 @@ export function OperationsFirst() {
 
 // ─────────────────────────────────────────────────────────────
 // COMECE PELO SEU ESTÁGIO ATUAL
-// ─────────────────────────────────────────────────────────────
 const STAGES = [
   {
     title: "Tenho leads, mas não vendo bem",
-    desc: "Vamos organizar CRM, atendimento, scripts e follow-up.",
+    desc: "Organizamos CRM, atendimento, scripts, qualificação e follow-up para reduzir perda de oportunidades.",
     icon: Users2,
+    cta: "Diagnosticar meu comercial"
   },
   {
     title: "Quero anunciar, mas operação bagunçada",
-    desc: "Primeiro estruturamos a base comercial, depois escalamos com mídia.",
+    desc: "Antes de aumentar verba, estruturamos página, oferta, WhatsApp, CRM e rotina de acompanhamento.",
     icon: Target,
+    cta: "Preparar minha operação"
   },
   {
     title: "Preciso de site ou landing page",
-    desc: "Criamos páginas para captar, explicar e converter oportunidades.",
+    desc: "Criamos páginas para explicar sua oferta, captar contatos e conectar campanhas ao WhatsApp ou CRM.",
     icon: Layers,
+    cta: "Criar minha estrutura digital"
   },
   {
     title: "Quero automatizar atendimento",
-    desc: "Conectamos WhatsApp, CRM, IA e tarefas para reduzir atraso operacional.",
+    desc: "Conectamos WhatsApp, CRM, formulários, tarefas e IA para reduzir atrasos e esquecimentos.",
     icon: Bot,
+    cta: "Automatizar meu atendimento"
   },
   {
-    title: "Quero estruturar para crescer",
-    desc: "Integramos comercial, marketing, processos, dados e automação.",
+    title: "Quero crescer com mais controle",
+    desc: "Integramos comercial, marketing, processos, dados e automação em uma operação mais clara.",
     icon: Rocket,
+    cta: "Fazer diagnóstico"
   },
 ];
 
@@ -366,7 +371,7 @@ export function EstagiosCrescimento({ onDiagnostico }: { onDiagnostico: () => vo
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {STAGES.map((s, i) => (
             <motion.div
-              key={s.title}
+              key={i}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -382,9 +387,9 @@ export function EstagiosCrescimento({ onDiagnostico }: { onDiagnostico: () => vo
                 variant="ghost" 
                 size="sm" 
                 onClick={onDiagnostico}
-                className="self-start text-xs font-mono tracking-widest p-0 h-auto hover:bg-transparent hover:text-primary"
+                className="self-start text-xs font-bold font-mono tracking-widest p-0 h-auto hover:bg-transparent hover:text-primary transition-colors"
               >
-                SOLICITAR DIAGNÓSTICO <ArrowRight className="ml-2 h-3 w-3" />
+                {s.cta} <ArrowRight className="ml-2 h-3 w-3" />
               </Button>
             </motion.div>
           ))}
@@ -393,6 +398,7 @@ export function EstagiosCrescimento({ onDiagnostico }: { onDiagnostico: () => vo
     </section>
   );
 }
+
 
 // ─────────────────────────────────────────────────────────────
 // MATURIDADE COMERCIAL
@@ -759,112 +765,70 @@ export function Areas() {
 // ─────────────────────────────────────────────────────────────
 // PARA QUEM É
 // ─────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────
+// PARA QUEM É
+// ─────────────────────────────────────────────────────────────
 const FIT_YES = [
-  "Faturamento mensal a partir de R$ 100 mil",
-  "Produto/serviço validado e pronto para escalar",
-  "Quer profissionalizar marketing, vendas e operação",
-  "Acredita em método, dados e IA, não em achismo",
-  "Pronto para construir um sistema, não comprar mágica",
+  "Sua empresa quer organizar comercial, marketing ou operação",
+  "Você recebe leads, mas sente que perde oportunidades",
+  "Quer parar de depender só do dono para vender",
+  "Precisa estruturar CRM, WhatsApp, site, tráfego ou automações",
+  "Quer crescer com processo, não com improviso",
+  "Está disposto a construir base antes de acelerar",
 ];
 const FIT_NO = [
-  "Procurando solução milagrosa de curto prazo",
-  "Não quer investir em estratégia, só em mídia",
-  "Não está aberto a estruturar processos internos",
-  "Espera resultado em 7 dias sem fundação",
-  "Não quer envolver o time comercial e operacional",
+  "Procura milagre em poucos dias",
+  "Quer apenas posts sem estratégia",
+  "Não quer organizar atendimento, oferta ou processo",
+  "Espera resultado sem participar da estruturação",
+  "Quer tráfego sem corrigir a base comercial",
 ];
 
 export function FitFor() {
   return (
     <section className="relative py-12 md:py-16 overflow-hidden bg-grid-ambient">
-      {/* Glow ambiente verde achatado e sutil */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 h-[130px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.025] blur-[90px]" />
 
       <div className="container-aceleriq relative">
         <SectionHeader
-          eyebrow="· 05 · Para quem é · R$ 100k+ · Produto validado · Quer profissionalizar"
-          title="É parceria séria. Vale a pena saber se serve para você."
+          eyebrow="[ 05 ] · Fit de Parceria"
+          title="É parceria séria. Mas cada empresa começa de um ponto."
         />
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5 }}
-          className="mt-8 md:mt-10 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.03] to-transparent shadow-[0_30px_80px_-30px_oklch(0%_0_0/0.6)]"
-        >
-          {/* Cabeçalho da tabela */}
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            <div className="relative flex items-center gap-3 border-b border-white/10 bg-primary/[0.08] p-6 md:border-b-0 md:border-r">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-background shadow-[0_0_20px_oklch(85%_0.2_145/0.6)]">
-                <Check className="h-4 w-4" strokeWidth={3} />
-              </span>
-              <div>
-                <h3 className="font-display text-base font-semibold uppercase tracking-[0.14em] text-primary">
-                  É para você
-                </h3>
-                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary/60">
-                  Match · vamos crescer juntos
-                </p>
-              </div>
-            </div>
-            <div className="relative flex items-center gap-3 bg-white/[0.02] p-6">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-muted-foreground">
-                <X className="h-4 w-4" strokeWidth={3} />
-              </span>
-              <div>
-                <h3 className="font-display text-base font-semibold uppercase tracking-[0.14em] text-foreground/80">
-                  Não é para você
-                </h3>
-                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                  Melhor procurar outro parceiro
-                </p>
-              </div>
-            </div>
+        <div className="mt-8 md:mt-10 grid gap-6 md:grid-cols-2">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-8">
+            <h3 className="text-lg font-semibold text-primary mb-6 flex items-center gap-2">
+              <Check className="h-5 w-5" /> É para você se:
+            </h3>
+            <ul className="space-y-4">
+              {FIT_YES.map((t, i) => (
+                <li key={i} className="flex items-start gap-3 text-[14px] text-foreground/80 leading-relaxed">
+                  <div className="mt-1 h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0" />
+                  {t}
+                </li>
+              ))}
+            </ul>
           </div>
 
-          {/* Linhas da tabela */}
-          <div className="grid grid-cols-1 divide-y divide-white/[0.06] md:grid-cols-2 md:divide-y-0">
-            <ul className="md:border-r md:border-white/10">
-              {FIT_YES.map((t, i) => (
-                <motion.li
-                  key={t}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.35, delay: 0.1 + i * 0.05 }}
-                  className="group flex items-start gap-4 border-b border-white/[0.06] p-5 transition-colors hover:bg-primary/[0.04] last:border-b-0"
-                >
-                  <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary transition-all group-hover:scale-110 group-hover:bg-primary/25">
-                    <Check className="h-3.5 w-3.5" strokeWidth={3} />
-                  </span>
-                  <span className="text-[14px] leading-relaxed text-foreground/90">
-                    {t}
-                  </span>
-                </motion.li>
-              ))}
-            </ul>
-            <ul>
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-8">
+            <h3 className="text-lg font-semibold text-foreground/80 mb-6 flex items-center gap-2">
+              <X className="h-5 w-5" /> Não é para você se:
+            </h3>
+            <ul className="space-y-4">
               {FIT_NO.map((t, i) => (
-                <motion.li
-                  key={t}
-                  initial={{ opacity: 0, x: 10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.35, delay: 0.1 + i * 0.05 }}
-                  className="group flex items-start gap-4 border-b border-white/[0.06] p-5 transition-colors hover:bg-white/[0.03] last:border-b-0"
-                >
-                  <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-muted-foreground transition-all group-hover:scale-110">
-                    <X className="h-3.5 w-3.5" strokeWidth={3} />
-                  </span>
-                  <span className="text-[14px] leading-relaxed text-muted-foreground">
-                    {t}
-                  </span>
-                </motion.li>
+                <li key={i} className="flex items-start gap-3 text-[14px] text-muted-foreground leading-relaxed">
+                  <div className="mt-1 h-1.5 w-1.5 rounded-full bg-muted-foreground/30 flex-shrink-0" />
+                  {t}
+                </li>
               ))}
             </ul>
           </div>
-        </motion.div>
+        </div>
+        
+        <p className="mt-8 text-center text-xs text-muted-foreground">
+          Nota: Projetos completos de engenharia de crescimento costumam fazer mais sentido para empresas com operação validada. <br />
+          Para negócios em estruturação, a entrada pode começar por site, CRM, automação, diagnóstico ou organização comercial.
+        </p>
       </div>
     </section>
   );
@@ -970,22 +934,22 @@ export function DiagnosticoCTA({ onDiagnostico }: { onDiagnostico: () => void })
 // RESULTADOS
 // ─────────────────────────────────────────────────────────────
 const METRICS = [
-  { value: "Diagnóstico", label: "Orientado por dados" },
-  { value: "CRM", label: "Operação conectada" },
-  { value: "Métricas", label: "Sempre acompanhadas" },
+  { value: "Estratégia", label: "Antes da execução" },
   { value: "Implantação", label: "Sob medida" },
+  { value: "Operação", label: "Acompanhada" },
+  { value: "Melhoria", label: "Contínua" },
 ];
 
 const CASES = [
   {
     segment: "SaaS B2B",
     challenge: "Processo comercial dependente do dono e sem previsibilidade de fechamento.",
-    result: "Operação estruturada com CRM, playbook e previsibilidade comercial em 4 meses.",
+    result: "Operação estruturada com CRM, playbook e previsibilidade comercial.",
   },
   {
     segment: "E-commerce Premium",
     challenge: "Dependência total de mídia paga e nenhuma automação de retenção ou CRM.",
-    result: "Processo de recompra automatizado e dados integrados para escala de faturamento.",
+    result: "Processo de recompra automatizado e dados integrados para escala.",
   },
   {
     segment: "Serviços High-ticket",
@@ -1001,22 +965,22 @@ export function Results() {
         <SectionHeader
           eyebrow="[ 07 ] · Resultados"
           title="Quando a engenharia entra, o resultado aparece."
-          description="Indicadores médios e mini-cases reais de empresas que estruturaram seu sistema de crescimento com a Aceleriq."
+          description="Indicadores reais e mini-cases de empresas que estruturaram seu sistema de crescimento com a Aceleriq."
         />
 
         <div className="mt-8 md:mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
           {METRICS.map((m, i) => (
             <motion.div
-              key={m.label}
+              key={i}
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
               className="bg-background p-6"
             >
-              <span className="label-eyebrow">{m.label}</span>
-              <div className="mt-3 text-mono text-[40px] font-semibold leading-none tracking-tight text-primary md:text-[44px]">
-                {m.value}
+              <span className="label-eyebrow">{m.value}</span>
+              <div className="mt-3 text-[18px] font-semibold tracking-tight text-primary">
+                {m.label}
               </div>
             </motion.div>
           ))}
@@ -1025,7 +989,7 @@ export function Results() {
         <div className="mt-4 grid gap-3 md:grid-cols-3">
           {CASES.map((c, i) => (
             <motion.div
-              key={c.segment}
+              key={i}
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -1057,64 +1021,29 @@ export function Results() {
 }
 
 // ─────────────────────────────────────────────────────────────
-// DEPOIMENTOS
+// PROVAS REAIS (Substitui Testimonials)
 // ─────────────────────────────────────────────────────────────
-const TESTIMONIALS = [
-  {
-    name: "Rafael M.",
-    role: "Fundador · SaaS B2B",
-    quote:
-      "A Aceleriq trouxe ordem para o caos. Hoje temos um motor de vendas rodando com playbook e CRM limpo. A previsibilidade que temos hoje é o que nos permite crescer com segurança.",
-  },
-  {
-    name: "Camila R.",
-    role: "Empresária · Educação",
-    quote:
-      "O grande diferencial foi a estruturação. Saímos do heroísmo para o processo. O time comercial agora trabalha com método e os indicadores mostram exatamente onde investir.",
-  },
-  {
-    name: "Diego S.",
-    role: "Diretor · E-commerce",
-    quote:
-      "Uma consultoria que entra no seu negócio de verdade. Não entregam apenas anúncios, entregam um sistema de vendas que integra marketing, comercial e dados.",
-  },
-];
-
 export function Testimonials() {
   return (
     <section className="relative py-12 md:py-16 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
-          eyebrow="[ 08 ] · Depoimentos"
-          title="O que dizem os fundadores que aceleraram conosco."
+          eyebrow="[ 08 ] · Provas Reais"
+          title="Provas reais, não promessas bonitas."
+          description="A Aceleriq está construindo sua reputação com projetos reais, presença local e avaliações verificadas no Google."
         />
 
-        <div className="mt-8 md:mt-10 grid gap-3 md:grid-cols-3">
-          {TESTIMONIALS.map((t, i) => (
-            <motion.figure
-              key={t.name}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="hairline relative rounded-2xl bg-card/40 p-6 card-hover"
-            >
-              <Quote className="h-5 w-5 text-primary/60" />
-              <blockquote className="mt-3 text-[14px] leading-relaxed text-foreground/90">
-                "{t.quote}"
-              </blockquote>
-              <figcaption className="mt-5 flex items-center gap-3 border-t border-border pt-5">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/15 text-mono text-sm font-semibold text-primary">
-                  {t.name.charAt(0)}
-                </div>
-                <div>
-                  <div className="text-[14px] font-medium">{t.name}</div>
-                  <div className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
-                    {t.role}
-                  </div>
-                </div>
-              </figcaption>
-            </motion.figure>
+        <div className="mt-8 md:mt-10 grid gap-3 md:grid-cols-4">
+          {[
+            { title: "Avaliações no Google", text: "A reputação pública da Aceleriq começa com clientes e parceiros que já avaliaram nossa atuação." },
+            { title: "Projetos publicados", text: "Sites, landing pages e estruturas digitais que podem ser acessadas, navegadas e verificadas." },
+            { title: "Presença local", text: "Participação em eventos, parcerias e relacionamento com empresários da região." },
+            { title: "Operação transparente", text: "Processos, automações e sistemas sendo estruturados com clareza, sem inflar números." },
+          ].map((card, i) => (
+            <div key={i} className="hairline relative rounded-2xl bg-card/40 p-6 transition-all hover:border-primary/40">
+              <h3 className="font-display text-[15px] font-medium text-primary mb-3">{card.title}</h3>
+              <p className="text-[13px] leading-relaxed text-muted-foreground">{card.text}</p>
+            </div>
           ))}
         </div>
       </div>
@@ -1146,24 +1075,14 @@ export function Compare() {
           description="A diferença entre contratar entregáveis e contratar um sistema de crescimento."
         />
 
-        {/* Desktop: tabela em grid */}
         <div className="mt-8 md:mt-10 hidden md:block overflow-hidden rounded-2xl border border-border">
           <div className="grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-border bg-card/40">
-            <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-              Dimensão
-            </div>
-            <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-              Agência comum
-            </div>
-            <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-primary">
-              Aceleriq
-            </div>
+            <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Dimensão</div>
+            <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Agência comum</div>
+            <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-primary">Aceleriq</div>
           </div>
           {COMPARE.map(([dim, agency, us], i) => (
-            <div
-              key={i}
-              className="grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-border last:border-b-0 text-sm transition-colors hover:bg-card/30"
-            >
+            <div key={i} className="grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-border last:border-b-0 text-sm transition-colors hover:bg-card/30">
               <div className="px-5 py-5 font-medium text-foreground/95">{dim}</div>
               <div className="px-5 py-5 text-muted-foreground">{agency}</div>
               <div className="flex items-start gap-2 px-5 py-5 text-foreground">
@@ -1174,7 +1093,6 @@ export function Compare() {
           ))}
         </div>
 
-        {/* Mobile: cards empilhados */}
         <div className="mt-8 grid gap-3 md:hidden">
           {COMPARE.map(([dim, agency, us], i) => (
             <div key={i} className="overflow-hidden rounded-xl border border-border bg-card/40">
@@ -1223,33 +1141,27 @@ export function WhyNow() {
             <div>
               <span className="label-eyebrow flex items-center gap-2">
                 <Rocket className="h-3.5 w-3.5 text-primary" />
-                [ 10 ] · Janela de mercado
+                [ 10 ] · Por que estruturar agora?
               </span>
               <h2 className="mt-3 font-display text-3xl font-medium leading-[1.08] tracking-[-0.03em] md:text-5xl">
-                Por que agora? A janela é{" "}
-                <span className="text-primary neon-text-glow">curta</span>.
+                O custo de vender no improviso está cada vez maior.
               </h2>
               <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground md:text-base">
-                Empresas que estruturarem dados, processo e IA nos próximos
-                12-18 meses vão competir num patamar diferente. Quem ficar
-                no modelo antigo de marketing vai ver margem, CAC e
-                produtividade trabalharem contra.
+                Empresas que organizam atendimento, CRM, dados, automação e marketing conseguem entender melhor seus gargalos, responder mais rápido e tomar decisões com menos achismo.
               </p>
             </div>
-            <div className="grid gap-2.5">
+            <div className="grid gap-2.5 sm:grid-cols-2">
               {[
-                { k: "Custo de aquisição", v: "+27% a.a." },
-                { k: "Empresas com IA aplicada", v: "Crescem 2.4x" },
-                { k: "Tempo médio de implantação", v: "60 a 120 dias" },
-              ].map((s) => (
-                <div
-                  key={s.k}
-                  className="flex items-center justify-between rounded-xl border border-border bg-background/50 px-5 py-4"
-                >
-                  <span className="text-[13px] text-muted-foreground">{s.k}</span>
-                  <span className="text-mono text-[14px] font-semibold text-foreground">
-                    {s.v}
-                  </span>
+                "Menos perda de lead",
+                "Mais clareza no funil",
+                "Atendimento mais rápido",
+                "Follow-up com rotina",
+                "Marketing conectado",
+                "Decisões com dados",
+              ].map((benefit) => (
+                <div key={benefit} className="flex items-center gap-2 rounded-xl border border-border bg-background/50 px-5 py-4">
+                  <Check className="h-4 w-4 text-primary" />
+                  <span className="text-[13px] text-foreground font-medium">{benefit}</span>
                 </div>
               ))}
             </div>
@@ -1266,35 +1178,27 @@ export function WhyNow() {
 const FAQS = [
   {
     q: "Quanto custa trabalhar com a Aceleriq?",
-    a: "O investimento varia conforme o estágio da empresa e o escopo do programa (estratégia, vendas, dados, IA, mídia). Operamos com programas mensais de engenharia de crescimento que partem de faixas compatíveis com empresas a partir de R$ 100k/mês de faturamento. No Diagnóstico Gratuito mapeamos sua maturidade e desenhamos juntos o investimento que faz sentido para o seu momento, sem proposta padronizada e sem inflar escopo.",
+    a: "O investimento varia conforme o estágio da empresa e o escopo do programa. Operamos com programas mensais que partem de faixas compatíveis com empresas a partir de R$ 100k/mês de faturamento. No Diagnóstico Gratuito mapeamos sua maturidade e desenhamos o investimento ideal.",
   },
   {
     q: "Em quanto tempo eu vejo resultado?",
-    a: "Resultados táticos (limpeza de CRM, automações, primeiros ajustes de mídia, reorganização de funil) aparecem nas primeiras 2 a 4 semanas. Resultado estrutural: previsibilidade comercial, redução real de CAC, processo de vendas rodando sem o fundador, IA gerando alavancagem, costuma se consolidar entre 60 e 120 dias. Empresas que chegam mais maduras aceleram mais rápido. Nenhuma promessa de 7 dias: construímos sistema, não milagre.",
+    a: "Resultados táticos aparecem em 2 a 4 semanas. Resultado estrutural, previsibilidade comercial e redução de CAC costumam se consolidar entre 60 e 120 dias. Construímos sistema, não milagre.",
   },
   {
     q: "Vocês atendem qualquer segmento?",
-    a: "Atuamos com SaaS, e-commerce, educação, infoprodutos, serviços profissionais B2B e indústrias com vendas consultivas. O critério não é o segmento, é a maturidade: produto/serviço validado, faturamento mensal a partir de R$ 100k e disposição para profissionalizar marketing, vendas e operação. Se você é early-stage validando oferta, não somos o parceiro certo agora, e dizemos isso com clareza no diagnóstico.",
+    a: "Atuamos com SaaS, e-commerce, educação, infoprodutos, serviços B2B e indústrias. O critério é a maturidade: produto validado e disposição para profissionalizar a operação.",
   },
   {
     q: "Existe contrato de fidelidade?",
-    a: "Trabalhamos com ciclos mínimos de 6 meses. Não é amarração comercial: é honestidade técnica: construir um sistema de crescimento (estratégia + dados + processo comercial + IA + operação) não acontece em 30 dias. Quem promete isso está vendendo entregável avulso, não engenharia. Após o ciclo inicial, a relação segue mensal, sem multa, enquanto fizer sentido para os dois lados.",
+    a: "Trabalhamos com ciclos mínimos de 6 meses para construir um sistema real. Após isso, a relação segue mensal, sem multa, enquanto fizer sentido.",
   },
   {
     q: "Qual a diferença real para uma agência?",
-    a: "Agência entrega peças isoladas (criativo, post, anúncio, relatório). A Aceleriq entrega um sistema integrado: diagnóstico estratégico, estruturação de CRM e processo comercial, dashboards de receita, agentes de IA conectados ao seu negócio, mídia orientada a pipeline e operação que roda dentro dos seus times e ferramentas. O entregável final é receita previsível e operação sistemizada, não impressões, alcance ou relatórios bonitos.",
+    a: "Agência entrega peças isoladas. A Aceleriq entrega um sistema integrado: CRM, processo comercial, dashboards, IA e mídia orientada a pipeline. O entregável final é receita previsível.",
   },
   {
     q: "Como funciona o Diagnóstico Gratuito?",
-    a: "Você preenche um formulário curto (nome, empresa, faturamento, principal gargalo) e responde 12 perguntas estratégicas sobre estratégia, vendas, dados, IA e operação. Leva ~5 minutos. Na hora você recebe: seu Score de Maturidade (0-100), sua classificação de estágio (Inicial, Estruturação, Avançado ou Otimizado) e 3 recomendações personalizadas. Sem custo, sem cartão, sem compromisso. Se houver fit, agendamos uma conversa estratégica para aprofundar.",
-  },
-  {
-    q: "Vocês substituem meu time interno?",
-    a: "Não. A Aceleriq atua como engenharia parceira do seu time, não como terceirização. Estruturamos processos, treinamos pessoas, implementamos ferramentas e aceleramos a operação para que ela rode com seu time, não dependendo de heróis nem da nossa presença diária. O objetivo final é deixar sua empresa autônoma com método, não criar dependência. Quando você não precisar mais da gente em algumas frentes, a gente comemora junto.",
-  },
-  {
-    q: "Como começa o trabalho depois do diagnóstico?",
-    a: "Após o Diagnóstico, agendamos uma sessão estratégica de aprofundamento (60-90 min) para entender seu negócio, números, time, ferramentas e prioridades reais. Se houver fit técnico e estratégico nos dois lados, montamos uma proposta personalizada com escopo de programa, cronograma de 90 dias, KPIs alvo e investimento. A partir do aceite, começamos com onboarding técnico, mapeamento de stack e o primeiro sprint em até 7 dias.",
+    a: "Você responde 12 perguntas estratégicas em ~5 minutos e recebe seu Score de Maturidade, classificação de estágio e 3 recomendações. Sem custo e sem compromisso.",
   },
 ];
 
@@ -1311,11 +1215,7 @@ export function FAQ() {
         <div className="mx-auto mt-8 md:mt-10 max-w-3xl">
           <Accordion type="single" collapsible className="space-y-2.5">
             {FAQS.map((f, i) => (
-              <AccordionItem
-                key={i}
-                value={`item-${i}`}
-                className="overflow-hidden rounded-xl border border-border bg-card/40 px-5 transition-colors data-[state=open]:border-primary/30"
-              >
+              <AccordionItem key={i} value={`item-${i}`} className="overflow-hidden rounded-xl border border-border bg-card/40 px-5 transition-colors data-[state=open]:border-primary/30">
                 <AccordionTrigger className="py-5 text-left text-[15px] font-medium hover:no-underline">
                   <span className="flex items-center gap-3">
                     <HelpCircle className="h-4 w-4 flex-shrink-0 text-primary" />
@@ -1357,35 +1257,19 @@ export function FinalCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
               [ 12 ] · Próximo passo
             </span>
             <h2 className="mx-auto mt-5 max-w-3xl font-display text-3xl font-medium leading-[1.05] tracking-[-0.03em] md:text-6xl">
-              Pare de improvisar. Comece a{" "}
-              <span className="text-primary neon-text-glow">escalar com engenharia</span>.
+              Pare de improvisar. Comece a <span className="text-primary neon-text-glow">escalar com engenharia</span>.
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-muted-foreground md:text-base">
-              Faça o Diagnóstico Gratuito em 5 minutos e descubra exatamente
-              em que estágio sua operação está, o que está travando o crescimento
-              e os próximos passos para destravar receita previsível.
+              Faça o Diagnóstico Gratuito em 5 minutos e descubra exatamente em que estágio sua operação está e os próximos passos para destravar receita.
             </p>
 
             <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Button
-                onClick={onDiagnostico}
-                size="lg"
-                className="group h-12 rounded-md bg-primary px-7 text-[14px] font-semibold text-primary-foreground btn-interactive"
-              >
+              <Button onClick={onDiagnostico} size="lg" className="group h-12 rounded-md bg-primary px-7 text-[14px] font-semibold text-primary-foreground btn-interactive">
                 Fazer Diagnóstico Gratuito
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="h-12 rounded-md border-border bg-transparent px-7 text-[14px] font-medium hover:bg-card"
-              >
-                <a
-                  href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)}
-                  target="_blank"
-                  rel="noreferrer"
-                >
+              <Button asChild size="lg" variant="outline" className="h-12 rounded-md border-border bg-transparent px-7 text-[14px] font-medium hover:bg-card">
+                <a href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)} target="_blank" rel="noreferrer">
                   <MessageCircle className="h-4 w-4 text-primary" />
                   Falar com especialista
                 </a>
@@ -1393,20 +1277,12 @@ export function FinalCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
             </div>
 
             <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[12px] text-muted-foreground">
-              <a
-                href={`mailto:${EMAIL}`}
-                className="inline-flex items-center gap-2 hover:text-foreground"
-              >
+              <a href={`mailto:${EMAIL}`} className="inline-flex items-center gap-2 hover:text-foreground">
                 <Mail className="h-3.5 w-3.5 text-primary" />
                 {EMAIL}
               </a>
               <span className="text-border">·</span>
-              <a
-                href={INSTAGRAM_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 hover:text-foreground"
-              >
+              <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-foreground">
                 <Instagram className="h-3.5 w-3.5 text-primary" />
                 {INSTAGRAM_HANDLE}
               </a>
