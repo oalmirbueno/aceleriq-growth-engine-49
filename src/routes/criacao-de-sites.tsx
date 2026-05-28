@@ -31,8 +31,8 @@ function Page() {
     <ServicePageLayout
       variant="sites"
       eyebrow="Sites · Landing pages · Plataformas"
-      h1={<>Criação de <span className="text-primary neon-text-glow">Sites</span> que vendem</>}
-      intro="Sites e landing pages projetados como ativo comercial, não como folder online. Integrados ao CRM, otimizados para SEO e construídos para converter o tráfego que você paga ou ganha."
+      h1={<>Sites e Landing Pages feitos para <span className="text-primary neon-text-glow">vender</span></>}
+      intro="Criamos sites e landing pages como ativos comerciais, não como vitrines bonitas. Páginas rápidas, responsivas e estratégicas para apresentar sua oferta, captar leads e integrar com WhatsApp, CRM e campanhas."
       benefits={[
         { title: "Performance real", desc: "Lighthouse 90+, Core Web Vitals verdes, carregamento sub-segundo." },
         { title: "SEO técnico nativo", desc: "Schema.org, sitemap, meta tags, semântica, conteúdo otimizado por palavra-chave." },
