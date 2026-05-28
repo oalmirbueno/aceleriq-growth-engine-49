@@ -276,6 +276,55 @@ export function Pains() {
 }
 
 // ─────────────────────────────────────────────────────────────
+// OPERAÇÃO PRIMEIRO
+// ─────────────────────────────────────────────────────────────
+const OPERATIONS_BLOCKS = [
+  { icon: MessageCircle, title: "Atendimento que não perde lead", desc: "Velocidade e qualidade no primeiro contato." },
+  { icon: Target, title: "CRM com pipeline claro", desc: "Visualização total de onde cada venda está travada." },
+  { icon: Bot, title: "Follow-up automatizado", desc: "IA e automação para nunca deixar um contato esfriar." },
+  { icon: Layers, title: "Oferta e funil organizados", desc: "Páginas e promessas alinhadas ao que o cliente busca." },
+  { icon: Megaphone, title: "Tráfego conectado ao comercial", desc: "Mídia paga que traz quem realmente pode comprar." },
+  { icon: LineChart, title: "Dados para tomada de decisão", desc: "Dashboards que mostram o lucro, não só o clique." },
+];
+
+export function OperationsFirst() {
+  return (
+    <section className="relative py-12 md:py-20 bg-grid-ambient overflow-hidden">
+      <div className="container-aceleriq relative">
+        <div className="max-w-3xl">
+          <span className="label-eyebrow">[ 01 ] · A lógica da aceleração</span>
+          <h2 className="mt-4 font-display text-3xl font-medium leading-[1.1] tracking-[-0.03em] md:text-5xl">
+            Antes de anunciar, arrume a operação.
+          </h2>
+          <p className="mt-5 text-base leading-relaxed text-muted-foreground md:text-lg">
+            Anunciar sem processo comercial é acelerar um carro sem freio. Antes de colocar dinheiro em tráfego, a Aceleriq organiza atendimento, CRM, follow-up, oferta, métricas e automações. Depois disso, o marketing passa a escalar uma operação que já tem base para converter.
+          </p>
+        </div>
+
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {OPERATIONS_BLOCKS.map((block, i) => (
+            <motion.div
+              key={block.title}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.05 }}
+              className="hairline rounded-xl bg-card/30 p-6 card-hover group"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary border border-primary/20 transition-all group-hover:scale-110">
+                <block.icon className="h-5 w-5" />
+              </div>
+              <h3 className="mt-5 font-display text-lg font-medium">{block.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{block.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
 // SOBRE / PILARES
 // ─────────────────────────────────────────────────────────────
 const PILLARS = [
