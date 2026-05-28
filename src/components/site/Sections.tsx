@@ -325,33 +325,38 @@ export function OperationsFirst() {
 
 // ─────────────────────────────────────────────────────────────
 // COMECE PELO SEU ESTÁGIO ATUAL
-// ─────────────────────────────────────────────────────────────
 const STAGES = [
   {
     title: "Tenho leads, mas não vendo bem",
-    desc: "Vamos organizar CRM, atendimento, scripts e follow-up.",
+    desc: "Organizamos CRM, atendimento, scripts, qualificação e follow-up para reduzir perda de oportunidades.",
     icon: Users2,
+    cta: "Diagnosticar meu comercial"
   },
   {
     title: "Quero anunciar, mas operação bagunçada",
-    desc: "Primeiro estruturamos a base comercial, depois escalamos com mídia.",
+    desc: "Antes de aumentar verba, estruturamos página, oferta, WhatsApp, CRM e rotina de acompanhamento.",
     icon: Target,
+    cta: "Preparar minha operação"
   },
   {
     title: "Preciso de site ou landing page",
-    desc: "Criamos páginas para captar, explicar e converter oportunidades.",
+    desc: "Criamos páginas para explicar sua oferta, captar contatos e conectar campanhas ao WhatsApp ou CRM.",
     icon: Layers,
+    cta: "Criar minha estrutura digital"
   },
   {
     title: "Quero automatizar atendimento",
-    desc: "Conectamos WhatsApp, CRM, IA e tarefas para reduzir atraso operacional.",
+    desc: "Conectamos WhatsApp, CRM, formulários, tarefas e IA para reduzir atrasos e esquecimentos.",
     icon: Bot,
+    cta: "Automatizar meu atendimento"
   },
   {
-    title: "Quero estruturar para crescer",
-    desc: "Integramos comercial, marketing, processos, dados e automação.",
+    title: "Quero crescer com mais controle",
+    desc: "Integramos comercial, marketing, processos, dados e automação em uma operação mais clara.",
     icon: Rocket,
+    cta: "Fazer diagnóstico"
   },
+];
 ];
 
 export function EstagiosCrescimento({ onDiagnostico }: { onDiagnostico: () => void }) {
@@ -383,8 +388,9 @@ export function EstagiosCrescimento({ onDiagnostico }: { onDiagnostico: () => vo
                 variant="ghost" 
                 size="sm" 
                 onClick={onDiagnostico}
-                className="self-start text-xs font-mono tracking-widest p-0 h-auto hover:bg-transparent hover:text-primary"
+                className="self-start text-xs font-bold font-mono tracking-widest p-0 h-auto hover:bg-transparent hover:text-primary transition-colors"
               >
+                {s.cta} <ArrowRight className="ml-2 h-3 w-3" />
                 SOLICITAR DIAGNÓSTICO <ArrowRight className="ml-2 h-3 w-3" />
               </Button>
             </motion.div>

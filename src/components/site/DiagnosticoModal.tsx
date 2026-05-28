@@ -322,6 +322,7 @@ export function DiagnosticoModal({
       if (error) throw error;
 
       setResultado({
+      setResultado({
         score,
         classificacao: cls.label,
         classResumo: cls.resumo,
@@ -329,7 +330,7 @@ export function DiagnosticoModal({
       });
       setDirection(1);
       setPhase("resultado");
-    } catch (e) {
+      toast.success("Diagnóstico recebido. A equipe da Aceleriq vai analisar suas respostas e entrar em contato.");
       console.error(e);
       toast.error("Não foi possível salvar. Tente novamente em instantes.");
     } finally {

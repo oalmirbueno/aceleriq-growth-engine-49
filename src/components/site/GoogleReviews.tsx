@@ -21,46 +21,17 @@ export type GoogleReview = {
 // (cliente vai enviar). Cada item: copie author + date + text exatamente como aparece
 // no perfil. Manter apenas 5★. Quando a Google Places API for ativada, este array é
 // substituído pela busca automática.
+/** 
+ * ⚠️ Somente avaliações REAIS do Google Meu Negócio.
+ * A Aceleriq possui 8 avaliações verificadas (todas 5 estrelas).
+ */
 export const REVIEWS: GoogleReview[] = [
-  {
-    author: "Ricardo Almeida",
-    initials: "RA",
-    rating: 5,
-    date: "há 2 semanas",
-    text: "A Aceleriq estruturou todo o nosso comercial do zero. Em 90 dias o CRM estava rodando, automações ativas e o time finalmente vendendo com previsibilidade. Parceria de outro nível.",
-  },
-  {
-    author: "Mariana Costa",
-    initials: "MC",
-    rating: 5,
-    date: "há 1 mês",
-    text: "Profissionais extremamente técnicos e estratégicos. Implementaram IA nos nossos fluxos e o impacto em produtividade foi imediato. Recomendo sem pensar duas vezes.",
-  },
-  {
-    author: "Felipe Andrade",
-    initials: "FA",
-    rating: 5,
-    date: "há 1 mês",
-    text: "Tráfego pago + CRM integrado mudou nosso jogo. Saímos do achismo para decisões baseadas em dados reais. A engenharia de crescimento que prometem é entregue.",
-  },
-  {
-    author: "Juliana Reis",
-    initials: "JR",
-    rating: 5,
-    date: "há 2 meses",
-    text: "Atendimento consultivo de verdade. Não vendem pacote pronto, entendem o negócio e desenham a operação certa. ROI claro já no primeiro trimestre.",
-  },
-  {
-    author: "Bruno Tavares",
-    initials: "BT",
-    rating: 5,
-    date: "há 3 meses",
-    text: "Equipe sênior, processo claro e execução impecável. Dashboards, automações e IA funcionando em conjunto. Saímos de um caos comercial para uma máquina previsível.",
-  },
+  // Listagem individual removida para focar no resumo verificado conforme solicitado, 
+  // evitando placeholders até que o cliente forneça os textos exatos.
 ];
 
 const AVERAGE = 5.0;
-const COUNT = REVIEWS.length;
+const COUNT = 8;
 
 export function GoogleReviews() {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -130,7 +101,8 @@ export function GoogleReviews() {
                 {AVERAGE.toFixed(1)}
               </span>
               <span className="text-sm text-muted-foreground">
-                · baseado em {COUNT}+ avaliações verificadas
+                · baseado em {COUNT} avaliações reais
+
               </span>
             </div>
           </div>
@@ -147,104 +119,24 @@ export function GoogleReviews() {
           </a>
         </div>
 
-        <div className="relative mt-12">
-          <div
-            ref={trackRef}
-            className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        <div className="mt-12 flex flex-col items-center justify-center rounded-2xl border border-primary/20 bg-card/40 p-12 text-center backdrop-blur-sm">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 text-primary mb-6">
+            <Star className="h-10 w-10 fill-primary" />
+          </div>
+          <div className="text-5xl font-bold text-white mb-2">{AVERAGE.toFixed(1)}</div>
+          <p className="text-lg text-primary font-medium mb-4">{COUNT} avaliações verificadas no Google</p>
+          <p className="max-w-md text-sm text-muted-foreground mb-8">
+            Preferimos mostrar provas reais e verificáveis do que preencher o site com depoimentos genéricos.
+          </p>
+          <a
+            href={GOOGLE_REVIEW_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="btn-tech"
           >
-            {REVIEWS.map((r, i) => (
-              <article
-                key={i}
-                className="snap-start shrink-0 basis-[88%] sm:basis-[60%] md:basis-[42%] lg:basis-[32%]"
-              >
-                <div className="flex h-full flex-col rounded-2xl border border-border/60 bg-card/40 p-7 backdrop-blur-sm transition-all hover:border-primary/40 hover:bg-card/60">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-primary/30 to-primary/10 text-sm font-semibold text-foreground">
-                        {r.initials}
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium">{r.author}</p>
-                        <p className="text-xs text-muted-foreground">{r.date}</p>
-                      </div>
-                    </div>
-                    <svg
-                      viewBox="0 0 48 48"
-                      className="h-5 w-5 opacity-80"
-                      aria-label="Google"
-                    >
-                      <path
-                        fill="#FFC107"
-                        d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.3-.4-3.5z"
-                      />
-                      <path
-                        fill="#FF3D00"
-                        d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"
-                      />
-                      <path
-                        fill="#4CAF50"
-                        d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.6 39.6 16.2 44 24 44z"
-                      />
-                      <path
-                        fill="#1976D2"
-                        d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.2 4.2-4.1 5.6l6.2 5.2C41.8 35 44 30 44 24c0-1.3-.1-2.3-.4-3.5z"
-                      />
-                    </svg>
-                  </div>
-
-                  <div className="mt-4 flex items-center gap-0.5">
-                    {Array.from({ length: 5 }).map((_, idx) => (
-                      <Star
-                        key={idx}
-                        className="h-4 w-4 fill-yellow-400 text-yellow-400"
-                      />
-                    ))}
-                  </div>
-
-                  <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
-                    "{r.text}"
-                  </p>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <div className="mt-6 flex items-center justify-between gap-4">
-            <div className="flex items-center gap-1.5">
-              {REVIEWS.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => scrollTo(i)}
-                  aria-label={`Ir para avaliação ${i + 1}`}
-                  className={`h-1.5 rounded-full transition-all ${
-                    i === activeIndex
-                      ? "w-8 bg-primary"
-                      : "w-1.5 bg-muted-foreground/30 hover:bg-muted-foreground/60"
-                  }`}
-                />
-              ))}
-            </div>
-
-            <div className="flex items-center gap-2">
-              <button
-                onClick={prev}
-                disabled={activeIndex === 0}
-                aria-label="Anterior"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-background/60 text-foreground transition-all hover:border-primary/60 hover:bg-primary/10 disabled:opacity-30"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-              <button
-                onClick={next}
-                disabled={activeIndex === REVIEWS.length - 1}
-                aria-label="Próximo"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-background/60 text-foreground transition-all hover:border-primary/60 hover:bg-primary/10 disabled:opacity-30"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
-
+            Ver avaliações no Google
+          </a>
+        </div>
           {/* Map + location card */}
           <div className="mt-16 grid gap-6 lg:grid-cols-12 lg:gap-8">
             <div className="lg:col-span-4 flex flex-col justify-between rounded-2xl border border-border/60 bg-card/40 p-7">

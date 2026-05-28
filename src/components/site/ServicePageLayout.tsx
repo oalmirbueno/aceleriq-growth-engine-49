@@ -265,25 +265,41 @@ export function ServicePageLayout(props: ServicePageProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-8">
             {[
               {
-                val: 312,
-                suffix: "%",
-                label: "lift médio em conversão",
-                note: "vs. baseline do cliente",
+                val: 1,
+                suffix: "",
+                label: "Estratégia antes da execução",
+                note: "Diagnóstico e prioridade",
               },
               {
-                val: 14,
-                suffix: "d",
-                label: "go-live para landing pages",
-                note: "do briefing ao deploy",
+                val: 2,
+                suffix: "",
+                label: "Implantação sob medida",
+                note: "Processos e automações",
               },
               {
-                val: 96,
-                suffix: "+",
-                label: "Lighthouse performance",
-                note: "Core Web Vitals verdes",
+                val: 3,
+                suffix: "",
+                label: "Operação acompanhada",
+                note: "Indicadores documentados",
               },
-              { val: 40, suffix: "+", label: "operações em produção", note: "verticais B2B e B2C" },
+              { 
+                val: 4, 
+                suffix: "", 
+                label: "Melhoria contínua", 
+                note: "Ajustes guiados por dados" 
+              },
             ].map((m, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.4, delay: i * 0.06 }}
+                className="group"
+              >
+                <div className="font-display text-4xl md:text-5xl tracking-[-0.04em] leading-none text-primary">
+                  0{m.val}
+                </div>
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 12 }}
