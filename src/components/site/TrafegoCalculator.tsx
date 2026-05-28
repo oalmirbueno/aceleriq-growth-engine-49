@@ -86,13 +86,15 @@ export function TrafegoCalculator() {
           </div>
           <div className="lg:col-span-10">
             <h2 className="font-display text-2xl md:text-4xl lg:text-5xl uppercase leading-[1.05] tracking-[-0.035em] text-[oklch(15%_0_0)]">
-              Simulação de investimento, <em className="italic font-light text-[oklch(45%_0.18_145)]">não promessa de resultado</em>.
+              Simulação de cenário <em className="italic font-light text-[oklch(45%_0.18_145)]">para planejamento</em>.
             </h2>
             <p className="mt-4 max-w-2xl text-[15px] text-[oklch(35%_0_0)] leading-relaxed">
-              A estimativa ajuda a visualizar cenários possíveis, mas o resultado real depende da oferta,
-              verba, atendimento, página, funil, CRM, maturidade da conta e qualidade comercial.
+              Use esta estimativa para visualizar volume de contatos, esforço comercial e necessidade
+              de estrutura. O resultado real depende de oferta, atendimento, página, verba, CRM e
+              qualidade do follow-up.
             </p>
           </div>
+
         </div>
 
         {/* Seletor de nicho */}
