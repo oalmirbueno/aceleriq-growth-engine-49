@@ -3,9 +3,9 @@ import { ServicePageLayout, buildServiceHead } from "@/components/site/ServicePa
 import { PortfolioShowcase } from "@/components/site/PortfolioShowcase";
 
 const URL = "https://aceleriq.com.br/agencia-de-marketing-digital-curitiba";
-const TITLE = "Agência de Marketing Digital em Curitiba · Aceleriq";
+const TITLE = "Marketing de Crescimento conectado ao Comercial | Aceleriq";
 const DESCRIPTION =
-  "Agência de marketing digital em Curitiba: sites, tráfego, automação, IA, CRM e consultoria. Diagnóstico gratuito e Método Acelera.";
+  "Marketing de crescimento focado em lucro, não em curtidas. Unimos sites, tráfego, automação, IA, CRM e consultoria estratégica conectadas ao seu comercial.";
 
 const FAQS = [
   { q: "A Aceleriq é uma agência de marketing digital completa?", a: "Sim. Operamos as frentes de uma agência completa, sites, tráfego pago, social, conteúdo, automação, CRM, dados, integradas em um sistema de crescimento, não em entregas avulsas." },
