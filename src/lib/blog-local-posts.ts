@@ -26,10 +26,10 @@ export interface LocalPost {
 
 export const LOCAL_POSTS: LocalPost[] = [
   {
-    title: "O Método A.C.E.L.E.R.A: como a Aceleriq estrutura crescimento previsível com IA",
+    title: "Como organizar atendimento, follow-up e vendas antes de escalar",
     excerpt:
       "Estratégia, dados, automação e IA aplicados em sequência. O framework que usamos para transformar marketing em receita previsível.",
-    category: "crescimento",
+    category: "processos",
     image: coverMetodoAcelera,
     publishedAt: "2026-05-15T12:00:00.000Z",
     author: "Equipe Aceleriq",
