@@ -1,12 +1,12 @@
 import type { FeedCategory } from "@/lib/blog-feeds";
 
 export type LpTemaSlug =
-  | "ia"
-  | "automacao"
+  | "ia_automacao"
   | "trafego"
   | "marketing"
-  | "vendas"
-  | "crescimento";
+  | "comercial"
+  | "locais"
+  | "processos";
 
 export interface LpTema {
   slug: LpTemaSlug;
@@ -30,173 +30,173 @@ export interface LpTema {
 }
 
 export const LP_TEMAS: Record<LpTemaSlug, LpTema> = {
-  ia: {
-    slug: "ia",
-    category: "ia",
-    eyebrow: "Diagnóstico Aceleriq · IA aplicada",
-    h1: "Inteligência Artificial que",
-    highlight: "vende, atende e qualifica",
+  ia_automacao: {
+    slug: "ia_automacao",
+    category: "ia_automacao",
+    eyebrow: "Diagnóstico Aceleriq · IA e Automação",
+    h1: "Automação e IA que",
+    highlight: "organiza e acelera",
     subhead:
-      "Mapeamos onde a IA generativa e os agentes podem destravar receita no seu negócio em 30 dias — sem trocar o time, sem reescrever o stack.",
+      "Mapeamos onde a IA generativa e as automações podem reduzir atrasos e organizar o atendimento no seu negócio em 30 dias.",
     dores: [
-      "Time gastando horas em tarefas que IA já resolve em segundos",
-      "Leads esfriando entre o clique no anúncio e a primeira resposta",
-      "Conhecimento da empresa preso em PDF, planilha e cabeça de gente",
+      "Lead chega pelo WhatsApp e demora para ser atendido",
+      "Time comercial perdendo tempo com tarefas manuais e repetitivas",
+      "CRM desatualizado por falta de automação entre ferramentas",
     ],
     entregaveis: [
-      "Diagnóstico de processos com maior ROI para automatizar com IA",
-      "Sugestão de agentes (atendimento, qualificação, copy, ops)",
-      "Roadmap de 30/60/90 dias com prioridade por impacto x esforço",
+      "Diagnóstico de fluxos que podem ser automatizados agora",
+      "Sugestão de agentes de IA para qualificação e suporte",
+      "Roadmap de implantação de n8n, Make e integradores",
     ],
     provas: [
-      { kpi: "↓ 73%", label: "tempo médio de resposta a lead" },
-      { kpi: "+ 2.4x", label: "qualificação por SDR humano + agente" },
-      { kpi: "30 dias", label: "do diagnóstico ao primeiro agente em produção" },
+      { kpi: "↓ 70%", label: "tempo de resposta a novos leads" },
+      { kpi: "24/7", label: "atendimento e qualificação ativa" },
+      { kpi: "100%", label: "dos leads registrados no CRM" },
     ],
-    ctaLabel: "Quero meu mapa de IA gratuito",
-    seoTitle: "IA para empresas — Diagnóstico Aceleriq gratuito",
+    ctaLabel: "Quero meu mapa de automação",
+    seoTitle: "Automação e IA para empresas — Diagnóstico Aceleriq",
     seoDescription:
-      "Descubra em 7 minutos onde a Inteligência Artificial pode gerar receita no seu negócio. Diagnóstico gratuito da Aceleriq, especializado em IA aplicada a marketing, vendas e operações.",
-  },
-  automacao: {
-    slug: "automacao",
-    category: "automacao",
-    eyebrow: "Diagnóstico Aceleriq · Automação",
-    h1: "Automação que tira",
-    highlight: "trabalho repetitivo do seu time",
-    subhead:
-      "Identificamos os fluxos que mais sangram tempo e receita — WhatsApp, CRM, marketing, ops — e mostramos o que automatizar primeiro com n8n, Make e IA.",
-    dores: [
-      "Lead chega pelo WhatsApp e morre antes do SDR responder",
-      "CRM desatualizado porque ninguém quer preencher campo manual",
-      "Cada campanha exige 3 pessoas para subir, acompanhar e relatar",
-    ],
-    entregaveis: [
-      "Mapa dos 5 fluxos prioritários para automatizar no seu negócio",
-      "Estimativa de horas/mês recuperadas por automação",
-      "Stack recomendado (n8n, Make, WhatsApp API, RD, HubSpot, etc.)",
-    ],
-    provas: [
-      { kpi: "+ 60h/mês", label: "recuperadas por equipe comercial média" },
-      { kpi: "< 60s", label: "primeira resposta automática a lead novo" },
-      { kpi: "100%", label: "dos leads no CRM sem digitação manual" },
-    ],
-    ctaLabel: "Quero meu mapa de automações",
-    seoTitle: "Automação de marketing e vendas — Diagnóstico Aceleriq",
-    seoDescription:
-      "Mapeamos os fluxos que mais consomem tempo no seu time comercial e de marketing e mostramos o que automatizar primeiro. Diagnóstico gratuito da Aceleriq.",
+      "Descubra como a IA e a automação podem organizar seu atendimento e acelerar suas vendas. Diagnóstico gratuito da Aceleriq.",
   },
   trafego: {
     slug: "trafego",
     category: "trafego",
     eyebrow: "Diagnóstico Aceleriq · Tráfego pago",
     h1: "Tráfego pago que",
-    highlight: "paga a própria conta",
+    highlight: "escala com base",
     subhead:
-      "Auditoria gratuita das suas contas Google Ads e Meta Ads + plano de mídia para escalar CAC saudável nos próximos 90 dias.",
+      "Aumente seu investimento em Google e Meta Ads com a segurança de uma operação pronta para converter os leads.",
     dores: [
-      "Custo por lead subindo todo mês sem explicação clara",
-      "Campanhas no automático, sem hipótese de criativo nem oferta",
-      "Não sabe quanto cada canal realmente trouxe de receita fechada",
+      "Investimento em anúncios sem leitura clara de retorno real",
+      "Muitos cliques e leads, mas poucas vendas fechadas",
+      "Sensação de que está jogando dinheiro fora em tráfego",
     ],
     entregaveis: [
-      "Auditoria das contas Meta Ads e Google Ads (estrutura, criativos, lances)",
-      "Diagnóstico de funil: clique → lead → reunião → fechamento",
-      "Plano de mídia 90 dias com meta de CAC e LTV alvo",
+      "Auditoria de contas Meta Ads e Google Ads",
+      "Diagnóstico de funil: clique até a venda no CRM",
+      "Plano de aceleração de mídia para escala saudável",
     ],
     provas: [
-      { kpi: "↓ 38%", label: "CPA médio após reestruturação" },
-      { kpi: "+ 2.1x", label: "ROAS em contas com auditoria + criativo novo" },
-      { kpi: "7 dias", label: "para entregar o plano de mídia" },
+      { kpi: "+ 40%", label: "eficiência em conversão de leads" },
+      { kpi: "Real", label: "leitura de ROI integrada ao CRM" },
+      { kpi: "Data", label: "decisões baseadas em lucro, não clique" },
     ],
-    ctaLabel: "Quero auditoria de tráfego gratuita",
-    seoTitle: "Auditoria de tráfego pago gratuita — Aceleriq",
+    ctaLabel: "Quero escalar meu tráfego",
+    seoTitle: "Gestão de Tráfego Pago Estratégico — Aceleriq",
     seoDescription:
-      "Auditoria gratuita das suas campanhas Google Ads e Meta Ads + plano de mídia para escalar com CAC saudável. Diagnóstico Aceleriq, sem compromisso.",
+      "Escalamos seu tráfego pago conectando anúncios ao seu processo comercial. Auditoria gratuita da Aceleriq.",
   },
   marketing: {
     slug: "marketing",
     category: "marketing",
-    eyebrow: "Diagnóstico Aceleriq · Marketing digital",
-    h1: "Marketing digital com",
-    highlight: "previsibilidade de receita",
+    eyebrow: "Diagnóstico Aceleriq · Marketing",
+    h1: "Marketing conectado ao",
+    highlight: "comercial e vendas",
     subhead:
-      "Diagnóstico do seu funil de marketing — site, SEO, conteúdo, mídia paga e CRM — com plano de ação focado em receita, não em vaidade.",
+      "Pare de postar por postar. Crie uma estratégia de conteúdo e campanhas focadas em gerar oportunidades reais.",
     dores: [
-      "Marketing produz muito, mas vendas não vê impacto no pipeline",
-      "Site recebe tráfego mas converte menos de 1% em lead qualificado",
-      "Decisões tomadas no achismo porque os dados estão espalhados",
+      "Marketing entrega muito conteúdo que não vira venda",
+      "Site desatualizado ou que não capta leads de qualidade",
+      "Falta de integração entre o que é postado e o que é vendido",
     ],
     entregaveis: [
-      "Diagnóstico de site, SEO técnico, conteúdo e mídia paga",
-      "Mapa de jornada do lead: do primeiro toque ao fechamento",
-      "Plano de marketing previsível com KPIs de receita atrelados",
+      "Diagnóstico de presença digital e posicionamento",
+      "Plano de conteúdo orientado a conversão e funil",
+      "Estratégia de captura e integração com CRM",
     ],
     provas: [
-      { kpi: "+ 3.5x", label: "leads qualificados em 90 dias" },
-      { kpi: "↓ 41%", label: "CAC após integrar mkt + vendas" },
-      { kpi: "Top 3", label: "Google em palavras-chave de receita" },
+      { kpi: "+ 3x", label: "mais leads qualificados via site" },
+      { kpi: "Zero", label: "posts sem objetivo comercial" },
+      { kpi: "100%", label: "foco em autoridade e lucro" },
     ],
-    ctaLabel: "Quero diagnóstico do meu marketing",
-    seoTitle: "Diagnóstico de marketing digital gratuito — Aceleriq",
+    ctaLabel: "Quero marketing com resultado",
+    seoTitle: "Marketing de Crescimento e Conteúdo — Aceleriq",
     seoDescription:
-      "Diagnóstico estratégico do seu marketing digital com foco em receita: site, SEO, conteúdo, mídia paga e CRM. Plano de ação gratuito da Aceleriq.",
+      "Marketing digital estratégico focado em gerar negócios, não apenas curtidas. Diagnóstico gratuito.",
   },
-  vendas: {
-    slug: "vendas",
-    category: "vendas",
-    eyebrow: "Diagnóstico Aceleriq · Vendas e CRM",
-    h1: "Vendas com pipeline",
-    highlight: "previsível e CRM vivo",
+  comercial: {
+    slug: "comercial",
+    category: "comercial",
+    eyebrow: "Diagnóstico Aceleriq · Comercial",
+    h1: "Vendas com processo e",
+    highlight: "previsibilidade real",
     subhead:
-      "Diagnóstico do seu processo comercial — qualificação, cadência, CRM e handoff com marketing — para destravar receita parada no funil.",
+      "Organizamos seu CRM, scripts, follow-up e rotina para você ter controle total sobre seu pipeline de vendas.",
     dores: [
-      "Pipeline cheio, mas a previsão do mês nunca bate",
-      "SDR e closer trabalhando no instinto, sem playbook nem cadência",
-      "Marketing entrega lead, vendas reclama de qualidade — ninguém ganha",
+      "Perda de leads por falta de acompanhamento (follow-up)",
+      "Vendedores sem processo claro, cada um faz de um jeito",
+      "Dono da empresa centralizando todas as vendas importantes",
     ],
     entregaveis: [
-      "Diagnóstico de funil comercial (volume, conversão, ciclo)",
-      "Avaliação do CRM atual (RD, HubSpot, Pipedrive, Sales Hub)",
-      "Plano de SLA marketing↔vendas e cadência de SDR",
+      "Auditoria de processo comercial e uso de CRM",
+      "Desenho de etapas de funil e cadência de contato",
+      "Sugestão de scripts e treinamento para o time",
     ],
     provas: [
-      { kpi: "+ 47%", label: "taxa lead → reunião realizada" },
-      { kpi: "↓ 22%", label: "ciclo de venda médio" },
-      { kpi: "100%", label: "dos deals com etapa, motivo e próxima ação" },
+      { kpi: "+ 50%", label: "organização do pipeline de vendas" },
+      { kpi: "Zero", label: "leads esquecidos no WhatsApp" },
+      { kpi: "Método", label: "independência do dono na operação" },
     ],
-    ctaLabel: "Quero diagnóstico comercial",
-    seoTitle: "Diagnóstico comercial e CRM gratuito — Aceleriq",
+    ctaLabel: "Quero organizar meu comercial",
+    seoTitle: "Estruturação Comercial e CRM — Aceleriq",
     seoDescription:
-      "Diagnóstico do seu processo comercial e CRM com plano para destravar receita parada no pipeline. Gratuito, entregue em até 7 dias pela Aceleriq.",
+      "Pare de vender no improviso. Estruturamos seu comercial para crescer com previsibilidade. Diagnóstico Aceleriq.",
   },
-  crescimento: {
-    slug: "crescimento",
-    category: "crescimento",
-    eyebrow: "Diagnóstico Aceleriq · Crescimento",
-    h1: "Crescimento com método,",
-    highlight: "não com sorte",
+  locais: {
+    slug: "locais",
+    category: "locais",
+    eyebrow: "Diagnóstico Aceleriq · Negócios Locais",
+    h1: "Dominância local com",
+    highlight: "Google e WhatsApp",
     subhead:
-      "Diagnóstico estratégico de crescimento — receita, canais, CAC, LTV e oferta — com plano de 90 dias para escalar com unit economics saudável.",
+      "Coloque sua empresa no mapa e transforme buscas locais em clientes chamando no seu WhatsApp todos os dias.",
     dores: [
-      "Cresceu por inércia e agora não sabe qual canal puxar",
-      "Receita previsível só existe na planilha do CFO, não na operação",
-      "Cada nova iniciativa começa do zero, sem aprendizado acumulado",
+      "Sua empresa não aparece quando buscam pelo seu serviço",
+      "Concorrentes com perfil no Google melhor que o seu",
+      "Dificuldade em atrair clientes da sua própria região",
     ],
     entregaveis: [
-      "Análise de canais por contribuição real de receita",
-      "Diagnóstico de unit economics: CAC, LTV, payback, margem",
-      "Plano de crescimento 90 dias com hipóteses priorizadas",
+      "Otimização de Google Meu Negócio (GMN)",
+      "Estratégia de anúncios locais para WhatsApp",
+      "Configuração de automação básica de atendimento",
     ],
     provas: [
-      { kpi: "+ 2.8x", label: "receita previsível em 12 meses" },
-      { kpi: "< 6 meses", label: "payback de CAC alvo" },
-      { kpi: "1 plano", label: "consolidando marketing, vendas e produto" },
+      { kpi: "Top 3", label: "no Google para buscas locais" },
+      { kpi: "+ 80%", label: "mais chamadas no WhatsApp local" },
+      { kpi: "Fácil", label: "gestão de reputação e avaliações" },
     ],
-    ctaLabel: "Quero plano de crescimento",
-    seoTitle: "Plano de crescimento previsível — Diagnóstico Aceleriq",
+    ctaLabel: "Quero dominar minha região",
+    seoTitle: "Marketing para Negócios Locais — Aceleriq",
     seoDescription:
-      "Diagnóstico estratégico de crescimento com análise de CAC, LTV, canais e oferta. Plano gratuito de 90 dias para escalar com unit economics saudável.",
+      "Atraia mais clientes da sua cidade com Google Meu Negócio e anúncios locais. Diagnóstico gratuito.",
+  },
+  processos: {
+    slug: "processos",
+    category: "processos",
+    eyebrow: "Diagnóstico Aceleriq · Processos",
+    h1: "Operação estruturada para",
+    highlight: "escalar sem caos",
+    subhead:
+      "Arrumamos a casa, documentamos processos e instalamos a cultura de dados para sua empresa parar de apagar incêndios.",
+    dores: [
+      "Empresa cresce mas a bagunça interna aumenta junto",
+      "Falta de clareza sobre quem faz o que na operação",
+      "Decisões tomadas no 'feeling' sem dados confiáveis",
+    ],
+    entregaveis: [
+      "Mapeamento de processos e gargalos operacionais",
+      "Sugestão de rituais de gestão e dashboards de BI",
+      "Plano de descentralização e profissionalização",
+    ],
+    provas: [
+      { kpi: "Claro", label: "visão semanal de todos os números" },
+      { kpi: "Escala", label: "preparação para crescimento acelerado" },
+      { kpi: "Saúde", label: "menos estresse operacional para os sócios" },
+    ],
+    ctaLabel: "Quero arrumar minha operação",
+    seoTitle: "Eficiência Operacional e Processos — Aceleriq",
+    seoDescription:
+      "Estruture sua operação para crescer com saúde e dados. Diagnóstico operacional gratuito da Aceleriq.",
   },
 };
 
