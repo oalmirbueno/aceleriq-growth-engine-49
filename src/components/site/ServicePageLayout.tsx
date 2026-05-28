@@ -61,11 +61,11 @@ const DEFAULT_PRINCIPLES: Record<ServiceVariant, ServicePrinciple> = {
         não loteria de clique.
       </>
     ),
-    body: "Tráfego sem CRM e sem rastreio sério é aposta. A Aceleriq conecta Meta, Google e LinkedIn ao seu pipeline real e organiza o investimento por receita gerada, não por métrica de vaidade.",
+    body: "Tráfego sem CRM e sem rastreio sério é aposta. A Aceleriq conecta Meta, Google e LinkedIn ao seu pipeline real e organiza o investimento por oportunidade, não por métrica de vaidade.",
     stats: [
       { v: "CRM", l: "como fonte da verdade" },
       { v: "Tracking", l: "server-side" },
-      { v: "Receita", l: "como métrica final" },
+      { v: "Pipeline", l: "como leitura final" },
     ],
   },
   ia: {
@@ -279,13 +279,13 @@ export function ServicePageLayout(props: ServicePageProps) {
                 label: "Melhoria contínua",
                 note: "Ajustes guiados por dados",
               },
-            ].map((m, i) => (
+            ].map((m) => (
               <motion.div
-                key={i}
+                key={m.label}
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: i * 0.06 }}
+                transition={{ duration: 0.4 }}
                 className="group"
               >
                 <div className="h-px w-10 bg-primary mb-5 group-hover:w-16 transition-all" />
@@ -306,7 +306,7 @@ export function ServicePageLayout(props: ServicePageProps) {
               01 / Por que
             </div>
             <h2 className="lg:col-span-10 font-display text-2xl md:text-4xl lg:text-5xl uppercase leading-[1.05] tracking-[-0.035em] max-w-[24ch]">
-              Resultado lido por <em className="italic font-light text-primary">receita</em>, não
+              Resultado lido por <em className="italic font-light text-primary">processo</em>, não
               por entregável avulso.
             </h2>
           </div>
