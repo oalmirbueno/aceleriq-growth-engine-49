@@ -338,9 +338,9 @@ Se você ainda olha "leads pelo gerenciador da Meta" como métrica principal, es
 
 - **MQL e SQL** vindos do CRM.
 - **Pipeline gerado** (R$) por canal e por campanha.
-- **CAC e LTV** segmentados por origem.
+- **Custo de aquisição e valor por origem** segmentados por canal.
 - **Tempo médio de resposta ao lead** (a métrica mais subestimada de todas).
-- **ROAS de pipeline**, não só de lead.
+- **Retorno por pipeline**, não só volume de lead.
 
 Isso exige integração entre GA4, GTM server-side, CAPI, CRM e BI. Não é trivial, mas é o que separa investimento de aposta.
 
@@ -504,7 +504,7 @@ Previsibilidade não é vender muito. É saber com antecedência **quanto vai ve
 Empresa previsível sabe responder, sem dúvida, perguntas como:
 
 - Se eu investir mais R$ 50 mil em mídia este mês, quantos clientes a mais fecho?
-- Qual canal traz lead com maior LTV?
+- Qual canal traz lead com maior valor estratégico?
 - Quanto custa cada lead, MQL, SQL e cliente?
 - Qual é o tempo médio do funil, por origem?
 - Onde estão os gargalos hoje?
