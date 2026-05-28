@@ -154,57 +154,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                   </div>
                 </div>
 
-                {/* ───────── Cards flutuantes FORA da foto ───────── */}
-
-                {/* TOP-LEFT: Operador Ao Vivo */}
-                <div className="absolute top-2 left-2 md:-top-6 md:-left-10 float-a z-20">
-                  <div className="bg-black/85 backdrop-blur-md border border-primary/40 px-2 py-1 md:px-3 md:py-2 shadow-[0_0_30px_rgba(20,255,0,0.2)] flex items-center gap-1.5 md:gap-2">
-                    <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-primary animate-pulse" />
-                    <span className="font-mono text-[8px] md:text-[10px] tracking-[0.15em] md:tracking-[0.2em] text-primary uppercase">Ao Vivo</span>
-                  </div>
-                </div>
-
-                {/* TOP-RIGHT: NÓ_04, só desktop */}
-                <div className="absolute -top-5 -right-8 float-b z-20 hidden lg:block">
-                  <div className="bg-black/85 backdrop-blur-md border border-white/15 px-3 py-2">
-                    <span className="font-mono text-[10px] text-white/80 tracking-tight">NÓ_04 // SEGURO</span>
-                  </div>
-                </div>
-
-                {/* RIGHT-MIDDLE: Card 1 */}
-                <div className="absolute top-1/3 right-2 md:-right-14 float-c z-20">
-                  <div className="bg-black/90 backdrop-blur-md border border-primary/40 p-3 md:p-5 shadow-[0_0_40px_rgba(20,255,0,0.25)] rounded-lg">
-                    <div className="flex flex-col items-center">
-                      <Search className="h-5 w-5 text-primary mb-2" />
-                      <span className="text-[9px] md:text-[10px] font-mono uppercase tracking-widest text-white block text-center font-bold">Diagnóstico orientado por dados</span>
-                      <span className="text-[8px] md:text-[9px] uppercase tracking-widest text-white/60 block text-center mt-1">Análise clara antes de qualquer execução.</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* BOTTOM-LEFT: Card 2 */}
-                <div className="absolute -bottom-2 left-2 md:-bottom-6 md:-left-12 float-b z-20">
-                  <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-3 py-3 md:px-5 md:py-4 rounded-lg min-w-[140px] md:min-w-[180px]">
-                    <span className="text-[8px] uppercase tracking-widest text-primary font-mono block mb-1">CRM e funil conectados</span>
-                    <span className="text-xs font-mono text-white/80">Leads organizados do primeiro contato ao fechamento.</span>
-                  </div>
-                </div>
-
-                {/* BOTTOM-CENTER: Card 3 */}
-                <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 float-a z-20 hidden md:block">
-                  <div className="bg-black/85 backdrop-blur-md border border-white/15 px-4 py-3 rounded-lg min-w-[160px]">
-                    <span className="text-[8px] uppercase tracking-widest text-primary font-mono block mb-1">Automação aplicada</span>
-                    <span className="text-xs font-mono text-white/80">WhatsApp, follow-up e tarefas com menos improviso.</span>
-                  </div>
-                </div>
-
-                {/* BOTTOM-RIGHT: Card 4 */}
-                <div className="absolute -bottom-2 right-2 md:-bottom-6 md:-right-10 float-c z-20">
-                  <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-3 py-3 md:px-5 md:py-4 rounded-lg min-w-[140px] md:min-w-[180px]">
-                    <span className="text-[8px] uppercase tracking-widest text-primary font-mono block mb-1">Marketing conectado à receita</span>
-                    <span className="text-xs font-mono text-white/80">Campanhas pensadas para gerar oportunidades reais.</span>
-                  </div>
-                </div>
+                {/* ───────── Cards flutuantes removidos conforme solicitado ───────── */}
               </motion.div>
             </div>
           </div>

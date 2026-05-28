@@ -35,37 +35,7 @@ function AceleriqOS() {
     <ServicePageLayout
       variant="ia"
       eyebrow="O Sistema Operacional do Crescimento"
-      heroAside={
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: "circOut" }}
-          className="relative group mt-8 lg:mt-0"
-        >
-          {/* Decorative glows */}
-          <div className="absolute -inset-4 bg-primary/10 blur-3xl rounded-full opacity-50 group-hover:opacity-80 transition-opacity" />
-          
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-2xl">
-            <img
-              src={painelImg}
-              alt="Painel Aceleriq OS"
-              className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-              width={1600}
-              height={900}
-            />
-            {/* Glossy overlay */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-white/5 pointer-events-none" />
-          </div>
-          
-          {/* Floating badge */}
-          <div className="absolute -bottom-4 -right-4 bg-primary px-4 py-2 rounded-lg shadow-lg border border-primary/20 backdrop-blur-md">
-            <span className="text-[10px] font-mono font-bold text-black uppercase tracking-wider flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-black animate-pulse" />
-              Portal Ativo
-            </span>
-          </div>
-        </motion.div>
-      }
+      heroAside={null}
       h1={
         <>
           Aceleriq OS: a <span className="text-primary italic">central de crescimento</span> da sua operação.
