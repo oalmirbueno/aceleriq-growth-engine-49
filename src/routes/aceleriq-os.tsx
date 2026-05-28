@@ -40,7 +40,7 @@ function AceleriqOS() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "circOut" }}
-          className="relative group"
+          className="relative group mt-8 lg:mt-0"
         >
           {/* Decorative glows */}
           <div className="absolute -inset-4 bg-primary/10 blur-3xl rounded-full opacity-50 group-hover:opacity-80 transition-opacity" />
