@@ -44,7 +44,7 @@ export function PainelComunidade() {
             </p>
             <ul className="mt-7 space-y-3.5">
               {[
-                { icon: LineChart, label: "Receita, ROAS, CAC e LTV atualizados ao vivo" },
+                { icon: LineChart, label: "Receita, conversão e indicadores comerciais atualizados ao vivo" },
                 { icon: Users, label: "Funil completo: visitante, lead, MQL, SQL e cliente" },
                 { icon: FileText, label: "Cada entrega, automação e ajuste registrados com data e responsável" },
                 { icon: Bell, label: "Alertas automáticos quando uma métrica sai da meta" },

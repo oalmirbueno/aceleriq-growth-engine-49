@@ -120,7 +120,7 @@ function Index() {
         <Areas />
         <FitFor />
         <DiagnosticoCTA onDiagnostico={openDiagnostico} />
-        <Results />
+        <Results onDiagnostico={openDiagnostico} />
         <PainelComunidade />
         <Testimonials />
         <PortfolioShowcase />

@@ -10,7 +10,7 @@ const DESCRIPTION =
 const FAQS = [
   { q: "Em quais plataformas vocês operam?", a: "Google Ads (Search, PMax, YouTube), Meta Ads (Facebook/Instagram), LinkedIn Ads, TikTok Ads e remarketing programático." },
   { q: "Vocês trabalham com qual investimento mínimo?", a: "Operamos a partir de R$ 10 mil/mês de mídia. Abaixo disso, não conseguimos sustentar a curva de aprendizado dos algoritmos." },
-  { q: "Como medem o ROI?", a: "Toda campanha integrada ao CRM via UTM + Meta CAPI + Google Enhanced Conversions. Você acompanha CPL, CAC, LTV e ROAS reais." },
+  { q: "Como medem o ROI?", a: "Toda campanha integrada ao CRM via UTM e eventos de conversão. Você acompanha pipeline, custo por lead, oportunidades e receita gerada por canal." },
   { q: "Tem fee de gestão fixo ou percentual?", a: "Trabalhamos com fee fixo mensal proporcional ao escopo. Sem percentual sobre mídia (alinhamos incentivo com o seu resultado, não com o seu gasto)." },
   { q: "Existe contrato de fidelidade?", a: "Ciclo mínimo de 6 meses para sustentar a curva de aprendizado. Após o ciclo, segue mensal sem multa." },
 ];
