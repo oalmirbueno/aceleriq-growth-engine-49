@@ -953,32 +953,8 @@ const CASES = [
   },
 ];
 
-const METRICS = [
-  { value: "Estratégia", label: "Antes da execução" },
-  { value: "Implantação", label: "Sob medida" },
-  { value: "Operação", label: "Acompanhada" },
-  { value: "Melhoria", label: "Contínua" },
-];
+// METRICS already defined above
 
-export function Results() {
-  return (
-    <section id="resultados" className="relative py-12 md:py-16 bg-grid-ambient">
-      <div className="container-aceleriq">
-        <SectionHeader
-          eyebrow="[ 07 ] · Resultados"
-          title="Quando a engenharia entra, o resultado aparece."
-          description="Indicadores reais e mini-cases de empresas que estruturaram seu sistema de crescimento com a Aceleriq."
-        />
-
-        <div className="mt-8 md:mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-          {METRICS.map((m, i) => (
-            <motion.div
-              key={m.label}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="bg-background p-6"
             >
               <span className="label-eyebrow">{m.value}</span>
               <div className="mt-3 text-[18px] font-semibold tracking-tight text-primary">
@@ -1159,57 +1135,8 @@ export function WhyNow() {
     </section>
   );
 }
-export function WhyNow() {
-  return (
-    <section className="relative py-12 md:py-16 bg-grid-ambient">
-      <div className="container-aceleriq">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="relative overflow-hidden rounded-3xl border border-border bg-card/40 p-6 md:p-8"
-        >
-          <div className="absolute -right-32 -top-32 h-72 w-72 rounded-full bg-primary/[0.06] blur-3xl" />
-          <div className="absolute inset-0 dot-grid opacity-40" />
+// Duplicated WhyNow removed
 
-          <div className="relative grid gap-6 lg:grid-cols-[1.2fr_1fr] lg:items-center">
-            <div>
-              <span className="label-eyebrow flex items-center gap-2">
-                <Rocket className="h-3.5 w-3.5 text-primary" />
-                [ 10 ] · Por que estruturar agora?
-              </span>
-              <h2 className="mt-3 font-display text-3xl font-medium leading-[1.08] tracking-[-0.03em] md:text-5xl">
-                O custo de vender no improviso está cada vez maior.
-              </h2>
-              <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground md:text-base">
-                Empresas que organizam atendimento, CRM, dados, automação e marketing conseguem entender melhor seus gargalos, responder mais rápido e tomar decisões com menos achismo.
-              </p>
-            </div>
-            <div className="grid gap-2.5 sm:grid-cols-2">
-              {[
-                "Menos perda de lead",
-                "Mais clareza no funil",
-                "Atendimento mais rápido",
-                "Follow-up com rotina",
-                "Marketing conectado",
-                "Decisões com dados",
-              ].map((benefit) => (
-                <div
-                  key={benefit}
-                  className="flex items-center gap-2 rounded-xl border border-border bg-background/50 px-5 py-4"
-                >
-                  <Check className="h-4 w-4 text-primary" />
-                  <span className="text-[13px] text-foreground font-medium">{benefit}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
 
 // ─────────────────────────────────────────────────────────────
 // FAQ
