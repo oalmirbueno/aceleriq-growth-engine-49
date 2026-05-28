@@ -1,43 +1,32 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { ShieldCheck, Target, LineChart, Layers, Sparkles } from "lucide-react";
 
 
-/**
- * Tráfego — Projeção por nicho + certificações + estratégia.
- * Cards alinhados na mesma diagonal, paleta clara dominante,
- * benchmarks reais variando por vertical.
- */
+/** Simulação educativa de demanda para planejamento de mídia. */
 
 type NicheKey = "servicos" | "ecommerce" | "imobiliario" | "saude" | "educacao" | "b2b";
 
 const NICHES: Record<NicheKey, {
   label: string;
-  cpl: number;        // R$ por lead
-  convRate: number;   // lead → venda
-  ticket: number;     // ticket médio sugerido
-  ticketRange: [number, number];
+  contactCost: number;
+  opportunityRate: number;
   note: string;
 }> = {
-  servicos:    { label: "Serviços locais",    cpl: 22, convRate: 0.14, ticket: 1800,  ticketRange: [300, 15000],  note: "Demanda quente, ciclo curto" },
-  ecommerce:   { label: "E-commerce",         cpl: 9,  convRate: 0.022,ticket: 280,   ticketRange: [80, 2500],    note: "Volume alto, ticket menor" },
-  imobiliario: { label: "Imobiliário / Alto ticket", cpl: 65, convRate: 0.04, ticket: 28000, ticketRange: [5000, 200000], note: "Lead caro, ciclo consultivo" },
-  saude:       { label: "Saúde / Estética",   cpl: 28, convRate: 0.18, ticket: 1200,  ticketRange: [200, 12000],  note: "Conversão por agendamento" },
-  educacao:    { label: "Educação / Cursos",  cpl: 14, convRate: 0.08, ticket: 1900,  ticketRange: [300, 25000],  note: "Janela de matrícula" },
-  b2b:         { label: "B2B / Tecnologia",   cpl: 95, convRate: 0.06, ticket: 18000, ticketRange: [2000, 150000],note: "Ciclo longo, qualificação comercial" },
+  servicos: { label: "Serviços locais", contactCost: 22, opportunityRate: 0.14, note: "Demanda com atendimento rápido e triagem simples" },
+  ecommerce: { label: "E-commerce", contactCost: 9, opportunityRate: 0.08, note: "Volume alto, exige resposta e oferta bem claras" },
+  imobiliario: { label: "Imobiliário / Alto ticket", contactCost: 65, opportunityRate: 0.04, note: "Ciclo consultivo, qualificação cuidadosa" },
+  saude: { label: "Saúde / Estética", contactCost: 28, opportunityRate: 0.16, note: "Demanda por agendamento e confirmação rápida" },
+  educacao: { label: "Educação / Cursos", contactCost: 14, opportunityRate: 0.1, note: "Janela de decisão concentrada por campanha" },
+  b2b: { label: "B2B / Tecnologia", contactCost: 95, opportunityRate: 0.06, note: "Ciclo longo, qualificação comercial necessária" },
 };
 
 export function TrafegoCalculator() {
   const [niche, setNiche] = useState<NicheKey>("servicos");
   const [invest, setInvest] = useState(15000);
   const cfg = NICHES[niche];
-  const [ticket, setTicket] = useState(cfg.ticket);
-
-  // ao trocar nicho, sugere ticket do nicho
-  useMemo(() => { setTicket(cfg.ticket); }, [niche]); // eslint-disable-line
-
-  const leads = Math.round(invest / cfg.cpl);
-  const sales = Math.max(1, Math.round(leads * cfg.convRate));
+  const leads = Math.round(invest / cfg.contactCost);
+  const opportunities = Math.max(1, Math.round(leads * cfg.opportunityRate));
 
 
 
@@ -127,14 +116,6 @@ export function TrafegoCalculator() {
               min={5000} max={150000} step={1000}
               raw={invest} onChange={setInvest}
             />
-            <ControlCard
-              label="Ticket médio"
-              value={`R$ ${fmt(ticket)}`}
-              hint={`sugerido: R$ ${fmt(cfg.ticket)}`}
-              min={cfg.ticketRange[0]} max={cfg.ticketRange[1]}
-              step={Math.max(50, Math.round(cfg.ticketRange[1] / 200))}
-              raw={ticket} onChange={setTicket}
-            />
 
             {/* Referências aproximadas */}
             <div className="bg-white border border-black/8 p-6 relative shadow-[0_15px_40px_-25px_rgba(0,0,0,0.2)] flex-1"
@@ -143,8 +124,8 @@ export function TrafegoCalculator() {
                 Referências de planejamento · {cfg.label}
               </div>
               <div className="space-y-2 text-sm">
-                <BenchRow k="Custo por contato estimado" v={`R$ ${cfg.cpl}`} />
-                <BenchRow k="Contato → conversão" v={`${(cfg.convRate * 100).toFixed(1)}%`} />
+                <BenchRow k="Custo por contato estimado" v={`R$ ${cfg.contactCost}`} />
+                <BenchRow k="Contato → oportunidade possível" v={`${(cfg.opportunityRate * 100).toFixed(1)}%`} />
                 <BenchRow k="Janela típica" v="30 dias" />
               </div>
               <div className="mt-4 pt-4 border-t border-black/8 text-[11px] text-[oklch(50%_0_0)] italic">
@@ -181,9 +162,9 @@ export function TrafegoCalculator() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-black/8 border border-black/10 overflow-hidden">
               <MetricCell label="Investimento estimado" value={`R$ ${fmt(invest)}`} unit="mensal" />
-              <MetricCell label="Custo por contato estimado" value={`R$ ${cfg.cpl}`} unit="referência" />
+              <MetricCell label="Custo por contato estimado" value={`R$ ${cfg.contactCost}`} unit="referência" />
               <MetricCell label="Volume potencial de contatos" value={fmt(leads)} unit="/mês" />
-              <MetricCell label="Potenciais oportunidades comerciais" value={fmt(sales)} unit="/mês" />
+              <MetricCell label="Potenciais oportunidades comerciais" value={fmt(opportunities)} unit="/mês" />
             </div>
 
             <div className="mt-6 bg-[oklch(97%_0_0)] border border-black/8 p-5">
@@ -193,7 +174,7 @@ export function TrafegoCalculator() {
               <div className="text-[14px] text-[oklch(25%_0_0)] leading-relaxed">
                 Para sustentar esse volume com qualidade, sua operação precisa de
                 CRM ativo, time ou agente respondendo em poucos minutos, scripts de qualificação
-                e rotina de follow-up. Sem essa base, o investimento em mídia perde retorno.
+                e rotina de follow-up. Sem essa base, o investimento em mídia perde eficiência.
               </div>
             </div>
 
@@ -203,17 +184,15 @@ export function TrafegoCalculator() {
               </div>
               <FunnelBar pct={100} label="Investimento" sub={`R$ ${fmt(invest)}`} tone="dark" />
               <FunnelBar pct={75} label="Contatos" sub={`${fmt(leads)} estimados`} tone="mid" />
-              <FunnelBar pct={50} label="Oportunidades" sub={`${fmt(Math.round(leads * 0.4))} qualificadas`} tone="mid" />
-              <FunnelBar pct={28} label="Conversões potenciais" sub={`${fmt(sales)} estimadas`} tone="green" />
+              <FunnelBar pct={50} label="Triagem comercial" sub="qualificação necessária" tone="mid" />
+              <FunnelBar pct={28} label="Oportunidades possíveis" sub={`${fmt(opportunities)} estimadas`} tone="green" />
             </div>
 
 
 
             <div className="mt-6 rounded-md border border-[oklch(85%_0.05_60)] bg-[oklch(97%_0.03_85)] p-4 text-[12px] text-[oklch(35%_0.05_60)] leading-relaxed">
-              <strong className="font-semibold">Aviso:</strong> esta simulação não garante resultado.
-              Ela serve para orientar planejamento inicial e priorização estratégica. Os números são
-              referências aproximadas e variam conforme oferta, criativo, atendimento, página, CRM e
-              maturidade da operação.
+              <strong className="font-semibold">Aviso:</strong> Esta simulação não garante resultado.
+              Ela serve para orientar planejamento inicial, estrutura comercial e priorização estratégica.
             </div>
           </div>
         </div>
