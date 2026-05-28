@@ -264,24 +264,20 @@ export function ServicePageLayout(props: ServicePageProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-8">
             {[
               {
-                val: 1,
                 label: "Estratégia antes da execução",
                 note: "Diagnóstico e prioridade",
               },
               {
-                val: 2,
                 label: "Implantação sob medida",
                 note: "Processos e automações",
               },
               {
-                val: 3,
                 label: "Operação acompanhada",
                 note: "Indicadores documentados",
               },
-              { 
-                val: 4, 
-                label: "Melhoria contínua", 
-                note: "Ajustes guiados por dados" 
+              {
+                label: "Melhoria contínua",
+                note: "Ajustes guiados por dados",
               },
             ].map((m, i) => (
               <motion.div
@@ -292,12 +288,10 @@ export function ServicePageLayout(props: ServicePageProps) {
                 transition={{ duration: 0.4, delay: i * 0.06 }}
                 className="group"
               >
-                <div className="font-display text-4xl md:text-5xl tracking-[-0.04em] leading-none text-primary">
-                  0{m.val}
-                </div>
-                <div className="mt-3 pt-3 border-t border-border/60 group-hover:border-primary/60 transition-colors">
-                  <div className="text-[13px] text-foreground/90 leading-snug">{m.label}</div>
-                  <div className="mt-0.5 text-[11px] text-muted-foreground/60">{m.note}</div>
+                <div className="h-px w-10 bg-primary mb-5 group-hover:w-16 transition-all" />
+                <div className="pt-1">
+                  <div className="text-[14px] md:text-[15px] text-foreground/90 leading-snug font-medium">{m.label}</div>
+                  <div className="mt-1.5 text-[11px] text-muted-foreground/60">{m.note}</div>
                 </div>
               </motion.div>
             ))}

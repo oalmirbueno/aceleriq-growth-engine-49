@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import { ShieldCheck, TrendingUp, Target, LineChart, Layers, Sparkles } from "lucide-react";
+import { ShieldCheck, Target, LineChart, Layers, Sparkles } from "lucide-react";
+
 
 /**
  * Tráfego — Projeção por nicho + certificações + estratégia.
@@ -37,9 +38,8 @@ export function TrafegoCalculator() {
 
   const leads = Math.round(invest / cfg.cpl);
   const sales = Math.max(1, Math.round(leads * cfg.convRate));
-  const revenue = sales * ticket;
-  const returnIndex = revenue / Math.max(invest, 1);
-  const acquisitionCost = sales > 0 ? Math.round(invest / sales) : 0;
+
+
 
   const fmt = (v: number) => v.toLocaleString("pt-BR");
 
@@ -86,13 +86,15 @@ export function TrafegoCalculator() {
           </div>
           <div className="lg:col-span-10">
             <h2 className="font-display text-2xl md:text-4xl lg:text-5xl uppercase leading-[1.05] tracking-[-0.035em] text-[oklch(15%_0_0)]">
-              Simulação de investimento, <em className="italic font-light text-[oklch(45%_0.18_145)]">não promessa de resultado</em>.
+              Simulação de cenário <em className="italic font-light text-[oklch(45%_0.18_145)]">para planejamento</em>.
             </h2>
             <p className="mt-4 max-w-2xl text-[15px] text-[oklch(35%_0_0)] leading-relaxed">
-              A estimativa ajuda a visualizar cenários possíveis, mas o resultado real depende da oferta,
-              verba, atendimento, página, funil, CRM, maturidade da conta e qualidade comercial.
+              Use esta estimativa para visualizar volume de contatos, esforço comercial e necessidade
+              de estrutura. O resultado real depende de oferta, atendimento, página, verba, CRM e
+              qualidade do follow-up.
             </p>
           </div>
+
         </div>
 
         {/* Seletor de nicho */}
@@ -157,40 +159,42 @@ export function TrafegoCalculator() {
             style={{ clipPath: "polygon(0 3%, 100% 0, 100% 97%, 0 100%)" }}
           >
             <div className="flex items-start justify-between mb-8 gap-4">
+
               <div>
                 <div className="text-[10px] uppercase tracking-[0.25em] text-[oklch(45%_0.18_145)] font-mono mb-2">
-                  → Cenário estimado · mensal
+                  → Cenário de oportunidades · mensal
                 </div>
                 <motion.div
-                  key={revenue}
+                  key={leads}
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.25 }}
-                  className="font-display text-5xl md:text-7xl font-bold tracking-[-0.045em] text-[oklch(15%_0_0)] leading-none"
+                  className="font-display text-5xl md:text-6xl font-bold tracking-[-0.045em] text-[oklch(15%_0_0)] leading-none"
                 >
-                  R$ {fmt(revenue)}
+                  {fmt(leads)} <span className="text-2xl md:text-3xl font-light text-[oklch(40%_0_0)]">contatos potenciais</span>
                 </motion.div>
-                <div className="mt-2 text-sm text-[oklch(40%_0_0)]">
-                  ≈ <span className="font-semibold text-[oklch(20%_0_0)]">R$ {fmt(revenue * 12)}</span> / ano (cenário anualizado)
+                <div className="mt-3 text-sm text-[oklch(40%_0_0)] max-w-md leading-relaxed">
+                  A simulação mostra volume potencial de demanda, não previsão de receita.
                 </div>
-              </div>
-              <div className="hidden md:flex flex-col items-end gap-1 px-3 py-1.5 bg-[oklch(95%_0.05_145)] border border-[oklch(85%_0.18_145)/0.4] rounded-md shrink-0 max-w-[200px]">
-                <div className="flex items-center gap-1.5">
-                  <TrendingUp className="h-3.5 w-3.5 text-[oklch(45%_0.18_145)]" />
-                  <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[oklch(35%_0.15_145)]">
-                    Relação estimada
-                  </span>
-                </div>
-                <span className="font-mono text-[11px] text-[oklch(30%_0_0)]">
-                  investimento × oportunidade
-                </span>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-black/8 border border-black/10 overflow-hidden">
-              <MetricCell label="Contatos estimados" value={fmt(leads)} unit="/mês" />
-              <MetricCell label="Potenciais conversões" value={fmt(sales)} unit="/mês" />
-              <MetricCell label="Custo por conversão" value={`R$ ${fmt(acquisitionCost)}`} unit="estimado" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-black/8 border border-black/10 overflow-hidden">
+              <MetricCell label="Investimento estimado" value={`R$ ${fmt(invest)}`} unit="mensal" />
+              <MetricCell label="Custo por contato estimado" value={`R$ ${cfg.cpl}`} unit="referência" />
+              <MetricCell label="Volume potencial de contatos" value={fmt(leads)} unit="/mês" />
+              <MetricCell label="Potenciais oportunidades comerciais" value={fmt(sales)} unit="/mês" />
+            </div>
+
+            <div className="mt-6 bg-[oklch(97%_0_0)] border border-black/8 p-5">
+              <div className="text-[10px] uppercase tracking-[0.25em] text-[oklch(45%_0_0)] font-mono mb-2">
+                Estrutura recomendada para atendimento
+              </div>
+              <div className="text-[14px] text-[oklch(25%_0_0)] leading-relaxed">
+                Para sustentar esse volume com qualidade, sua operação precisa de
+                CRM ativo, time ou agente respondendo em poucos minutos, scripts de qualificação
+                e rotina de follow-up. Sem essa base, o investimento em mídia perde retorno.
+              </div>
             </div>
 
             <div className="mt-8">
@@ -200,8 +204,10 @@ export function TrafegoCalculator() {
               <FunnelBar pct={100} label="Investimento" sub={`R$ ${fmt(invest)}`} tone="dark" />
               <FunnelBar pct={75} label="Contatos" sub={`${fmt(leads)} estimados`} tone="mid" />
               <FunnelBar pct={50} label="Oportunidades" sub={`${fmt(Math.round(leads * 0.4))} qualificadas`} tone="mid" />
-              <FunnelBar pct={28} label="Conversões" sub={`${fmt(sales)} potenciais`} tone="green" />
+              <FunnelBar pct={28} label="Conversões potenciais" sub={`${fmt(sales)} estimadas`} tone="green" />
             </div>
+
+
 
             <div className="mt-6 rounded-md border border-[oklch(85%_0.05_60)] bg-[oklch(97%_0.03_85)] p-4 text-[12px] text-[oklch(35%_0.05_60)] leading-relaxed">
               <strong className="font-semibold">Aviso:</strong> esta simulação não garante resultado.
