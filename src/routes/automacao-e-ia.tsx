@@ -31,8 +31,8 @@ function Page() {
     <ServicePageLayout
       variant="ia"
       eyebrow="n8n · OpenAI · CRM · Workflows"
-      h1={<>Automação e <span className="text-primary neon-text-glow">IA</span> que escala sem contratar</>}
-      intro="Agentes de IA, fluxos automatizados e integrações sob medida para tirar o operacional repetitivo do colo do seu time. A Aceleriq instala automação real, não receita pronta de YouTube."
+      h1={<>Automação e <span className="text-primary neon-text-glow">IA</span> para reduzir atraso e acelerar decisões</>}
+      intro="Criamos fluxos, agentes, integrações e automações conectadas ao WhatsApp, CRM, formulários, atendimento e rotina comercial da sua empresa. IA não substitui a empresa, ela organiza e apoia processos bem desenhados."
       benefits={[
         { title: "Agentes de IA reais", desc: "Atendimento, qualificação, SDR e suporte com modelos da OpenAI/Anthropic + RAG da sua base." },
         { title: "Fluxos n8n/Make", desc: "Automações enterprise self-hosted, sem teto de operações ou refém de SaaS caro." },
