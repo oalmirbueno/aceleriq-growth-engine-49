@@ -232,8 +232,9 @@ export function DiagnosticoModal({
     setCapturaIdx(0);
     setDirection(1);
     setCaptura({
-      nome: "", whatsapp: "", empresa: "", site_instagram: "",
-      faturamento_mensal: "100k_300k", principal_gargalo: "", interesse_principal: "vendas",
+      nome: "", whatsapp: "", empresa: "", cidade: "", segmento: "", site_instagram: "",
+      faturamento_mensal: "100k_300k", usa_crm: "nao", investe_trafego: "nao", tem_equipe_comercial: "so_dono",
+      principal_gargalo: "", interesse_principal: "vendas",
     });
     setAnswers({});
     setQuizIdx(0);
