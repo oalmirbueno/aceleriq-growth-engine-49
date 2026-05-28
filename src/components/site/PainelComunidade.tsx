@@ -1,4 +1,4 @@
-import { ArrowUpRight, BarChart3, Bell, FileText, Headphones, LineChart, MessageCircle, Users } from "lucide-react";
+import { ArrowUpRight, BarChart3, CheckCircle2, FileText, Headphones, LineChart, MessageCircle, Users } from "lucide-react";
 
 const PAINEL_URL = "https://aceleriq.online";
 
@@ -44,10 +44,10 @@ export function PainelComunidade() {
             </p>
             <ul className="mt-7 space-y-3.5">
               {[
-                { icon: LineChart, label: "Receita, conversão e indicadores comerciais atualizados ao vivo" },
-                { icon: Users, label: "Funil completo: visitante, lead, MQL, SQL e cliente" },
-                { icon: FileText, label: "Cada entrega, automação e ajuste registrados com data e responsável" },
-                { icon: Bell, label: "Alertas automáticos quando uma métrica sai da meta" },
+                { icon: LineChart, label: "Indicadores comerciais e operacionais acompanhados" },
+                { icon: Users, label: "Funil, tarefas, entregas e automações documentadas" },
+                { icon: FileText, label: "Cada entrega, ajuste e decisão registrado com data e responsável" },
+                { icon: CheckCircle2, label: "Próximos passos organizados para o cliente acompanhar sem depender de relatório solto" },
               ].map(({ icon: Icon, label }) => (
                 <li key={label} className="flex items-start gap-3">
                   <span className="mt-0.5 flex h-6 w-6 items-center justify-center border border-primary/40 bg-primary/10 shrink-0">
@@ -86,7 +86,7 @@ export function PainelComunidade() {
               {[
                 { icon: Headphones, label: "Suporte direto com quem opera a sua conta" },
                 { icon: MessageCircle, label: "Dúvidas estratégicas, técnicas e comerciais no mesmo canal" },
-                { icon: Bell, label: "Avisos do que mudou no painel e no funil" },
+                { icon: CheckCircle2, label: "Avisos do que mudou no painel e no funil" },
                 { icon: FileText, label: "Tudo registrado e linkado ao Aceleriq OS" },
               ].map(({ icon: Icon, label }) => (
                 <li key={label} className="flex items-start gap-3">

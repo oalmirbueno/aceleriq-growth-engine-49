@@ -79,8 +79,8 @@ const SERVICES = [
   { icon: Target, title: "Engenharia de Crescimento", desc: "Plano integrado de crescimento com metas, alavancas e priorização." },
   { icon: Settings2, title: "CRM e Funil Comercial", desc: "Estruturação completa de CRM, automações e cadência de vendas." },
   { icon: Bot, title: "Automação com IA", desc: "Agentes de IA, fluxos n8n/Make e integrações sob medida." },
-  { icon: LineChart, title: "Tráfego Pago orientado a receita", desc: "Meta, Google e LinkedIn lidos por pipeline e receita." },
-  { icon: Database, title: "Dados e Dashboards", desc: "BI executivo com CAC, LTV, conversão e visão semanal do negócio." },
+  { icon: LineChart, title: "Tráfego Pago orientado ao funil", desc: "Meta, Google e LinkedIn conectados ao pipeline e ao acompanhamento comercial." },
+  { icon: Database, title: "Dados e Dashboards", desc: "BI executivo com conversão, funil e visão semanal do negócio." },
   { icon: Workflow, title: "Processos Comerciais", desc: "Playbook, scripts, qualificação e ritual de vendas." },
 ];
 

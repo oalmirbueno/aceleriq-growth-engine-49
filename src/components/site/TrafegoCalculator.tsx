@@ -20,10 +20,10 @@ const NICHES: Record<NicheKey, {
 }> = {
   servicos:    { label: "Serviços locais",    cpl: 22, convRate: 0.14, ticket: 1800,  ticketRange: [300, 15000],  note: "Demanda quente, ciclo curto" },
   ecommerce:   { label: "E-commerce",         cpl: 9,  convRate: 0.022,ticket: 280,   ticketRange: [80, 2500],    note: "Volume alto, ticket menor" },
-  imobiliario: { label: "Imobiliário / Alto ticket", cpl: 65, convRate: 0.04, ticket: 28000, ticketRange: [5000, 200000], note: "Lead caro, LTV altíssimo" },
+  imobiliario: { label: "Imobiliário / Alto ticket", cpl: 65, convRate: 0.04, ticket: 28000, ticketRange: [5000, 200000], note: "Lead caro, ciclo consultivo" },
   saude:       { label: "Saúde / Estética",   cpl: 28, convRate: 0.18, ticket: 1200,  ticketRange: [200, 12000],  note: "Conversão por agendamento" },
   educacao:    { label: "Educação / Cursos",  cpl: 14, convRate: 0.08, ticket: 1900,  ticketRange: [300, 25000],  note: "Janela de matrícula" },
-  b2b:         { label: "B2B / SaaS",         cpl: 95, convRate: 0.06, ticket: 18000, ticketRange: [2000, 150000],note: "Ciclo longo, MQL → SQL" },
+  b2b:         { label: "B2B / Tecnologia",   cpl: 95, convRate: 0.06, ticket: 18000, ticketRange: [2000, 150000],note: "Ciclo longo, qualificação comercial" },
 };
 
 export function TrafegoCalculator() {
@@ -38,8 +38,8 @@ export function TrafegoCalculator() {
   const leads = Math.round(invest / cfg.cpl);
   const sales = Math.max(1, Math.round(leads * cfg.convRate));
   const revenue = sales * ticket;
-  const roas = revenue / Math.max(invest, 1);
-  const cac = sales > 0 ? Math.round(invest / sales) : 0;
+  const returnIndex = revenue / Math.max(invest, 1);
+  const acquisitionCost = sales > 0 ? Math.round(invest / sales) : 0;
 
   const fmt = (v: number) => v.toLocaleString("pt-BR");
 
@@ -176,7 +176,7 @@ export function TrafegoCalculator() {
               <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-[oklch(95%_0.05_145)] border border-[oklch(85%_0.18_145)/0.4] rounded-full shrink-0">
                 <TrendingUp className="h-3.5 w-3.5 text-[oklch(45%_0.18_145)]" />
                 <span className="font-mono text-[11px] uppercase tracking-widest text-[oklch(35%_0.15_145)]">
-                  {roas.toFixed(1)}x ROAS
+                  {returnIndex.toFixed(1)}x retorno
                 </span>
               </div>
             </div>
@@ -184,7 +184,7 @@ export function TrafegoCalculator() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-black/8 border border-black/10 overflow-hidden">
               <MetricCell label="Leads" value={fmt(leads)} unit="/mês" />
               <MetricCell label="Vendas" value={fmt(sales)} unit="/mês" />
-              <MetricCell label="CAC" value={`R$ ${fmt(cac)}`} unit="" />
+              <MetricCell label="Custo por cliente" value={`R$ ${fmt(acquisitionCost)}`} unit="" />
             </div>
 
             <div className="mt-8">

@@ -268,20 +268,20 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
     results: ["Captação digital ativa", "Modernização de marca tradicional", "Atendimento direto via WhatsApp"],
   },
   {
-    slug: "appplaybet",
-    name: "App Playbet",
-    segment: "App · Entretenimento",
-    origin: "https://appplaybet.lovable.app",
-    accent: "from-purple-500/30 via-indigo-500/20 to-transparent",
+    slug: "operacaodigital",
+    name: "Operação Digital",
+    segment: "Sistema · Organização",
+    origin: "https://aceleriq.online",
+    accent: "from-emerald-500/30 via-cyan-500/20 to-transparent",
     overview:
-      "Landing de aplicativo com narrativa de produto, prova de uso e CTA direto para download.",
+      "Estrutura operacional para centralizar rotinas, acompanhamento de entregas e documentação de próximos passos.",
     challenge:
-      "Ativar conversões de download em um nicho competitivo, comunicando diferenciais com clareza.",
+      "Reduzir dependência de mensagens soltas e dar mais clareza para acompanhamento de projetos e decisões.",
     solution:
-      "Landing focada em benefício, prova social, screenshots do app e CTAs distribuídos na jornada.",
-    highlights: ["Hero focado em conversão", "Screenshots do app em destaque", "CTAs distribuídos", "Performance mobile"],
-    stack: ["React", "Tailwind", "Edge deploy"],
-    results: ["Pronta para campanhas pagas", "Mensagem clara de produto", "Conversão otimizada"],
+      "Organização de painel, cadência de acompanhamento, documentação de entregas e visão simples de status por frente de trabalho.",
+    highlights: ["Rotinas documentadas", "Acompanhamento de entregas", "Visão de próximos passos", "Base para operação contínua"],
+    stack: ["Painel operacional", "Documentação", "Automações", "CRM"],
+    results: ["Mais clareza operacional", "Menos dependência de relatório solto", "Decisões registradas em um só lugar"],
   },
 ];
 
@@ -295,7 +295,7 @@ type Props = {
 export function PortfolioShowcase({
   items = DEFAULT_PORTFOLIO,
   eyebrow = "[ 13 ] · Portfólio",
-  title = "Projetos e estruturas digitais em produção.",
+  title = "Projetos e estruturas digitais em produção",
   intro = "Uma seleção de sites, landing pages, plataformas e estruturas digitais desenvolvidas ou organizadas pela Aceleriq e seu ecossistema.",
 }: Props) {
   const [activeSlug, setActiveSlug] = useState<string | null>(null);

@@ -150,7 +150,7 @@ function LpTemaPage() {
                 className="border border-white/10 bg-white/[0.02] p-6"
               >
                 <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground mb-3">
-                  Sintoma 0{i + 1}
+                  Sintoma {String(i + 1).padStart(2, "0")}
                 </div>
                 <p className="text-base text-foreground leading-relaxed">{d}</p>
               </motion.div>

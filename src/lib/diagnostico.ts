@@ -99,7 +99,7 @@ export const QUIZ: QuizQuestion[] = [
   {
     id: "dados_dashboard",
     area: "ia_dados",
-    pergunta: "Você tem dashboards confiáveis (CAC, LTV, conversão, pipeline) para decidir?",
+    pergunta: "Você tem dashboards confiáveis de conversão, funil e operação para decidir?",
     hintMin: "Planilha solta",
     hintMax: "BI executivo",
   },
@@ -200,7 +200,7 @@ const RECS: Record<QuizQuestion["area"], string> = {
   vendas:
     "Estruturar CRM, playbook comercial, cadência e ritual de pipeline para gerar previsibilidade de receita.",
   ia_dados:
-    "Construir camada de dados (dashboards CAC/LTV/pipeline) e iniciar IA aplicada em qualificação e atendimento.",
+    "Construir camada de dados com dashboards comerciais e iniciar IA aplicada em qualificação e atendimento.",
   operacao:
     "Documentar processos, distribuir responsabilidades e criar automações que tirem o dono da operação.",
 };
@@ -215,7 +215,7 @@ const INTERESSE_REC: Record<Interesse, string> = {
   ia:
     "Implantar IA aplicada (agentes, qualificação, atendimento) integrada ao seu CRM e ao seu funil.",
   dados:
-    "Camada de dados e BI executivo: CAC, LTV, conversão por etapa, dashboards de receita semanais.",
+    "Camada de dados e BI executivo: conversão por etapa, acompanhamento comercial e dashboards operacionais.",
   automacao:
     "Mapear gargalos e instalar automações entre marketing, CRM, atendimento e operação (n8n / Make / nativas).",
   operacao:

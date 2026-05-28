@@ -179,7 +179,7 @@ function DiagnosticoCrescimento() {
                 <div className="mt-8 space-y-6">
                   {[
                     { title: "Empresas B2B e Serviços", desc: "Negócios que dependem de propostas, reuniões e vendas consultivas." },
-                    { title: "E-commerces em Escala", desc: "Operações que precisam otimizar ROAS e retenção via CRM." },
+                    { title: "E-commerces em Escala", desc: "Operações que precisam organizar campanhas, retenção e CRM." },
                     { title: "Infoprodutos e Educação", desc: "Empresas com alto volume de leads que precisam de automação." },
                     { title: "Negócios Locais Maduros", desc: "Empresas que já faturam e querem profissionalizar a aquisição." }
                   ].map((item, i) => (
