@@ -304,15 +304,10 @@ export function About() {
               Não é agência. É a engenharia de crescimento do seu negócio.
             </h2>
             <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground md:text-base">
-              Agências entregam peças soltas: criativo, post, anúncio. A
-              Aceleriq entrega <span className="text-foreground">um sistema</span>:
-              diagnóstico, estratégia, execução, dados e IA integrados ao seu
-              negócio para gerar resultado previsível.
+              A Aceleriq nasceu para resolver um problema claro: empresas não quebram só por falta de marketing. Muitas travam porque crescem no improviso, sem processo comercial, sem dados, sem automação e sem clareza.
             </p>
             <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground md:text-base">
-              Trabalhamos como engenharia: levantamos a planta da operação,
-              identificamos os gargalos, projetamos a solução e instalamos o
-              que precisa funcionar.
+              Unimos marketing, comercial, tecnologia e IA para criar motores de crescimento organizados. Levantamos a planta da operação, identificamos gargalos, projetamos a solução e instalamos o que precisa funcionar.
             </p>
 
             <div className="divider-neon mt-5" />
