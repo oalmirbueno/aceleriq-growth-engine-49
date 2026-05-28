@@ -171,37 +171,38 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                   </div>
                 </div>
 
-                {/* RIGHT-MIDDLE: ROI Mensal grande */}
+                {/* RIGHT-MIDDLE: Card 1 */}
                 <div className="absolute top-1/3 right-2 md:-right-14 float-c z-20">
-                  <div className="bg-black/90 backdrop-blur-md border border-primary/40 p-2 md:p-4 shadow-[0_0_40px_rgba(20,255,0,0.25)]">
+                  <div className="bg-black/90 backdrop-blur-md border border-primary/40 p-3 md:p-5 shadow-[0_0_40px_rgba(20,255,0,0.25)] rounded-lg">
                     <div className="flex flex-col items-center">
-                      <TrendingUp className="h-5 w-5 text-primary mb-1" />
-                      <span className="text-[7px] md:text-[9px] font-mono uppercase tracking-widest text-white/60 block text-center">ROI orientado a dados</span>
+                      <Search className="h-5 w-5 text-primary mb-2" />
+                      <span className="text-[9px] md:text-[10px] font-mono uppercase tracking-widest text-white block text-center font-bold">Diagnóstico orientado por dados</span>
+                      <span className="text-[8px] md:text-[9px] uppercase tracking-widest text-white/60 block text-center mt-1">Análise clara antes de qualquer execução.</span>
                     </div>
                   </div>
                 </div>
 
-                {/* BOTTOM-LEFT: Precisão */}
+                {/* BOTTOM-LEFT: Card 2 */}
                 <div className="absolute -bottom-2 left-2 md:-bottom-6 md:-left-12 float-b z-20">
-                  <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-2 py-1.5 md:px-3 md:py-2.5 min-w-[78px] md:min-w-[110px]">
-                    <span className="text-[7px] md:text-[8px] uppercase tracking-widest text-white/50 font-mono block">Status</span>
-                    <span className="text-sm md:text-base font-mono text-primary font-bold">Operacional</span>
+                  <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-3 py-3 md:px-5 md:py-4 rounded-lg min-w-[140px] md:min-w-[180px]">
+                    <span className="text-[8px] uppercase tracking-widest text-primary font-mono block mb-1">CRM e funil conectados</span>
+                    <span className="text-xs font-mono text-white/80">Leads organizados do primeiro contato ao fechamento.</span>
                   </div>
                 </div>
 
-                {/* BOTTOM-CENTER: Automação, só desktop */}
-                <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 float-a z-20 hidden md:block">
-                  <div className="bg-black/85 backdrop-blur-md border border-white/15 px-3 py-2.5 min-w-[110px]">
-                    <span className="text-[8px] uppercase tracking-widest text-white/50 font-mono block">Métricas</span>
-                    <span className="text-sm md:text-base font-mono text-primary font-bold">Dashboard Vivo</span>
+                {/* BOTTOM-CENTER: Card 3 */}
+                <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 float-a z-20 hidden md:block">
+                  <div className="bg-black/85 backdrop-blur-md border border-white/15 px-4 py-3 rounded-lg min-w-[160px]">
+                    <span className="text-[8px] uppercase tracking-widest text-primary font-mono block mb-1">Automação aplicada</span>
+                    <span className="text-xs font-mono text-white/80">WhatsApp, follow-up e tarefas com menos improviso.</span>
                   </div>
                 </div>
 
-                {/* BOTTOM-RIGHT: Leads */}
+                {/* BOTTOM-RIGHT: Card 4 */}
                 <div className="absolute -bottom-2 right-2 md:-bottom-6 md:-right-10 float-c z-20">
-                  <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-2 py-1.5 md:px-3 md:py-2.5 min-w-[78px] md:min-w-[110px]">
-                    <span className="text-[7px] md:text-[8px] uppercase tracking-widest text-white/50 font-mono block">Funil</span>
-                    <span className="text-sm md:text-base font-mono text-primary font-bold">Conectado</span>
+                  <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-3 py-3 md:px-5 md:py-4 rounded-lg min-w-[140px] md:min-w-[180px]">
+                    <span className="text-[8px] uppercase tracking-widest text-primary font-mono block mb-1">Marketing conectado à receita</span>
+                    <span className="text-xs font-mono text-white/80">Campanhas pensadas para gerar oportunidades reais.</span>
                   </div>
                 </div>
               </motion.div>
@@ -759,112 +760,70 @@ export function Areas() {
 // ─────────────────────────────────────────────────────────────
 // PARA QUEM É
 // ─────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────
+// PARA QUEM É
+// ─────────────────────────────────────────────────────────────
 const FIT_YES = [
-  "Faturamento mensal a partir de R$ 100 mil",
-  "Produto/serviço validado e pronto para escalar",
-  "Quer profissionalizar marketing, vendas e operação",
-  "Acredita em método, dados e IA, não em achismo",
-  "Pronto para construir um sistema, não comprar mágica",
+  "Sua empresa quer organizar comercial, marketing ou operação",
+  "Você recebe leads, mas sente que perde oportunidades",
+  "Quer parar de depender só do dono para vender",
+  "Precisa estruturar CRM, WhatsApp, site, tráfego ou automações",
+  "Quer crescer com processo, não com improviso",
+  "Está disposto a construir base antes de acelerar",
 ];
 const FIT_NO = [
-  "Procurando solução milagrosa de curto prazo",
-  "Não quer investir em estratégia, só em mídia",
-  "Não está aberto a estruturar processos internos",
-  "Espera resultado em 7 dias sem fundação",
-  "Não quer envolver o time comercial e operacional",
+  "Procura milagre em poucos dias",
+  "Quer apenas posts sem estratégia",
+  "Não quer organizar atendimento, oferta ou processo",
+  "Espera resultado sem participar da estruturação",
+  "Quer tráfego sem corrigir a base comercial",
 ];
 
 export function FitFor() {
   return (
     <section className="relative py-12 md:py-16 overflow-hidden bg-grid-ambient">
-      {/* Glow ambiente verde achatado e sutil */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 h-[130px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.025] blur-[90px]" />
 
       <div className="container-aceleriq relative">
         <SectionHeader
-          eyebrow="· 05 · Para quem é · R$ 100k+ · Produto validado · Quer profissionalizar"
-          title="É parceria séria. Vale a pena saber se serve para você."
+          eyebrow="[ 05 ] · Fit de Parceria"
+          title="É parceria séria. Mas cada empresa começa de um ponto."
         />
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5 }}
-          className="mt-8 md:mt-10 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.03] to-transparent shadow-[0_30px_80px_-30px_oklch(0%_0_0/0.6)]"
-        >
-          {/* Cabeçalho da tabela */}
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            <div className="relative flex items-center gap-3 border-b border-white/10 bg-primary/[0.08] p-6 md:border-b-0 md:border-r">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-background shadow-[0_0_20px_oklch(85%_0.2_145/0.6)]">
-                <Check className="h-4 w-4" strokeWidth={3} />
-              </span>
-              <div>
-                <h3 className="font-display text-base font-semibold uppercase tracking-[0.14em] text-primary">
-                  É para você
-                </h3>
-                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary/60">
-                  Match · vamos crescer juntos
-                </p>
-              </div>
-            </div>
-            <div className="relative flex items-center gap-3 bg-white/[0.02] p-6">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-muted-foreground">
-                <X className="h-4 w-4" strokeWidth={3} />
-              </span>
-              <div>
-                <h3 className="font-display text-base font-semibold uppercase tracking-[0.14em] text-foreground/80">
-                  Não é para você
-                </h3>
-                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                  Melhor procurar outro parceiro
-                </p>
-              </div>
-            </div>
+        <div className="mt-8 md:mt-10 grid gap-6 md:grid-cols-2">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-8">
+            <h3 className="text-lg font-semibold text-primary mb-6 flex items-center gap-2">
+              <Check className="h-5 w-5" /> É para você se:
+            </h3>
+            <ul className="space-y-4">
+              {FIT_YES.map((t, i) => (
+                <li key={i} className="flex items-start gap-3 text-[14px] text-foreground/80 leading-relaxed">
+                  <div className="mt-1 h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0" />
+                  {t}
+                </li>
+              ))}
+            </ul>
           </div>
 
-          {/* Linhas da tabela */}
-          <div className="grid grid-cols-1 divide-y divide-white/[0.06] md:grid-cols-2 md:divide-y-0">
-            <ul className="md:border-r md:border-white/10">
-              {FIT_YES.map((t, i) => (
-                <motion.li
-                  key={t}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.35, delay: 0.1 + i * 0.05 }}
-                  className="group flex items-start gap-4 border-b border-white/[0.06] p-5 transition-colors hover:bg-primary/[0.04] last:border-b-0"
-                >
-                  <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary transition-all group-hover:scale-110 group-hover:bg-primary/25">
-                    <Check className="h-3.5 w-3.5" strokeWidth={3} />
-                  </span>
-                  <span className="text-[14px] leading-relaxed text-foreground/90">
-                    {t}
-                  </span>
-                </motion.li>
-              ))}
-            </ul>
-            <ul>
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-8">
+            <h3 className="text-lg font-semibold text-foreground/80 mb-6 flex items-center gap-2">
+              <X className="h-5 w-5" /> Não é para você se:
+            </h3>
+            <ul className="space-y-4">
               {FIT_NO.map((t, i) => (
-                <motion.li
-                  key={t}
-                  initial={{ opacity: 0, x: 10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.35, delay: 0.1 + i * 0.05 }}
-                  className="group flex items-start gap-4 border-b border-white/[0.06] p-5 transition-colors hover:bg-white/[0.03] last:border-b-0"
-                >
-                  <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-muted-foreground transition-all group-hover:scale-110">
-                    <X className="h-3.5 w-3.5" strokeWidth={3} />
-                  </span>
-                  <span className="text-[14px] leading-relaxed text-muted-foreground">
-                    {t}
-                  </span>
-                </motion.li>
+                <li key={i} className="flex items-start gap-3 text-[14px] text-muted-foreground leading-relaxed">
+                  <div className="mt-1 h-1.5 w-1.5 rounded-full bg-muted-foreground/30 flex-shrink-0" />
+                  {t}
+                </li>
               ))}
             </ul>
           </div>
-        </motion.div>
+        </div>
+        
+        <p className="mt-8 text-center text-xs text-muted-foreground">
+          Nota: Projetos completos de engenharia de crescimento costumam fazer mais sentido para empresas com operação validada. <br />
+          Para negócios em estruturação, a entrada pode começar por site, CRM, automação, diagnóstico ou organização comercial.
+        </p>
       </div>
     </section>
   );
@@ -1059,62 +1018,30 @@ export function Results() {
 // ─────────────────────────────────────────────────────────────
 // DEPOIMENTOS
 // ─────────────────────────────────────────────────────────────
-const TESTIMONIALS = [
-  {
-    name: "Rafael M.",
-    role: "Fundador · SaaS B2B",
-    quote:
-      "A Aceleriq trouxe ordem para o caos. Hoje temos um motor de vendas rodando com playbook e CRM limpo. A previsibilidade que temos hoje é o que nos permite crescer com segurança.",
-  },
-  {
-    name: "Camila R.",
-    role: "Empresária · Educação",
-    quote:
-      "O grande diferencial foi a estruturação. Saímos do heroísmo para o processo. O time comercial agora trabalha com método e os indicadores mostram exatamente onde investir.",
-  },
-  {
-    name: "Diego S.",
-    role: "Diretor · E-commerce",
-    quote:
-      "Uma consultoria que entra no seu negócio de verdade. Não entregam apenas anúncios, entregam um sistema de vendas que integra marketing, comercial e dados.",
-  },
-];
-
+// ─────────────────────────────────────────────────────────────
+// DEPOIMENTOS
+// ─────────────────────────────────────────────────────────────
 export function Testimonials() {
   return (
     <section className="relative py-12 md:py-16 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
-          eyebrow="[ 08 ] · Depoimentos"
-          title="O que dizem os fundadores que aceleraram conosco."
+          eyebrow="[ 08 ] · Provas Reais"
+          title="Provas reais, não promessas bonitas."
+          description="A Aceleriq está construindo sua reputação com projetos reais, presença local, entregas em produção e avaliações verificadas no Google."
         />
 
-        <div className="mt-8 md:mt-10 grid gap-3 md:grid-cols-3">
-          {TESTIMONIALS.map((t, i) => (
-            <motion.figure
-              key={t.name}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="hairline relative rounded-2xl bg-card/40 p-6 card-hover"
-            >
-              <Quote className="h-5 w-5 text-primary/60" />
-              <blockquote className="mt-3 text-[14px] leading-relaxed text-foreground/90">
-                "{t.quote}"
-              </blockquote>
-              <figcaption className="mt-5 flex items-center gap-3 border-t border-border pt-5">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/15 text-mono text-sm font-semibold text-primary">
-                  {t.name.charAt(0)}
-                </div>
-                <div>
-                  <div className="text-[14px] font-medium">{t.name}</div>
-                  <div className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
-                    {t.role}
-                  </div>
-                </div>
-              </figcaption>
-            </motion.figure>
+        <div className="mt-8 md:mt-10 grid gap-3 md:grid-cols-4">
+          {[
+            { title: "Avaliações no Google", text: "A reputação pública da Aceleriq começa com clientes e parceiros que já avaliaram nossa atuação." },
+            { title: "Projetos publicados", text: "Sites, landing pages e estruturas digitais que podem ser acessadas, navegadas e verificadas." },
+            { title: "Presença local", text: "Participação em eventos, parcerias e relacionamento com empresários da região." },
+            { title: "Operação transparente", text: "Processos, automações e sistemas sendo estruturados com clareza, sem inflar números." },
+          ].map((card, i) => (
+            <div key={i} className="hairline relative rounded-2xl bg-card/40 p-6">
+              <h3 className="font-display text-[15px] font-medium text-primary mb-3">{card.title}</h3>
+              <p className="text-[13px] leading-relaxed text-muted-foreground">{card.text}</p>
+            </div>
           ))}
         </div>
       </div>
