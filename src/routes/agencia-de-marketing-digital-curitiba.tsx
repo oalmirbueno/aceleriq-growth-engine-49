@@ -31,8 +31,8 @@ function Page() {
     <ServicePageLayout
       variant="agencia"
       eyebrow="Curitiba · PR · Atendimento nacional"
-      h1={<>Agência de <span className="text-primary neon-text-glow">Marketing Digital</span> em Curitiba</>}
-      intro="A Aceleriq é a agência de marketing digital de Curitiba para empresas que cansaram de receber relatório bonito sem impacto em receita. Unimos sites, tráfego, automação, IA, CRM e consultoria estratégica no mesmo sistema."
+      h1={<>Marketing conectado ao <span className="text-primary neon-text-glow">comercial</span>, não posts soltos no feed.</>}
+      intro="Criamos estratégias de conteúdo, campanhas, páginas, tráfego e automações conectadas ao funil de vendas da sua empresa. Marketing só funciona de verdade quando está conectado ao comercial, à oferta, ao atendimento e aos dados."
       benefits={[
         { title: "Time multidisciplinar", desc: "Estratégia, mídia, copy, design, dev, dados e IA atuando juntos no mesmo planejamento." },
         { title: "Lido por receita", desc: "Toda campanha conectada ao CRM. Você acompanha pipeline, CAC e LTV, não só cliques." },
