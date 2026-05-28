@@ -207,8 +207,7 @@ export function TrafegoCalculator() {
               <FunnelBar pct={28} label="Conversões potenciais" sub={`${fmt(sales)} estimadas`} tone="green" />
             </div>
 
-              <FunnelBar pct={28} label="Conversões" sub={`${fmt(sales)} potenciais`} tone="green" />
-            </div>
+
 
             <div className="mt-6 rounded-md border border-[oklch(85%_0.05_60)] bg-[oklch(97%_0.03_85)] p-4 text-[12px] text-[oklch(35%_0.05_60)] leading-relaxed">
               <strong className="font-semibold">Aviso:</strong> esta simulação não garante resultado.
