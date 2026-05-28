@@ -377,7 +377,7 @@ Se quiser uma análise gratuita do seu funil e da sua mensuração, faça nosso 
     title: "Automação de WhatsApp para vendas: o playbook completo com n8n, IA e CRM em 2026",
     excerpt:
       "WhatsApp é o canal de vendas mais subaproveitado do Brasil. Veja o passo a passo para automatizar atendimento, qualificação e fechamento sem perder o tom humano.",
-    category: "automacao",
+    category: "ia_automacao",
     image: coverWhatsappAutomacao,
     publishedAt: "2026-05-18T09:00:00.000Z",
     author: "Equipe Aceleriq",
