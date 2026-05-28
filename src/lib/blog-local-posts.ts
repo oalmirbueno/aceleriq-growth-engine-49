@@ -487,7 +487,7 @@ Se quiser entender quais fluxos de WhatsApp gerariam mais receita na sua operaç
     title: "Como construir uma máquina de aquisição previsível: CRM, dados e IA em 2026",
     excerpt:
       "Pare de tratar marketing como custo e vendas como esforço. Veja como integrar CRM, dados, automação e IA para construir uma máquina de aquisição que cresce de forma composta.",
-    category: "vendas",
+    category: "comercial",
     image: coverMaquinaAquisicao,
     publishedAt: "2026-05-18T15:00:00.000Z",
     author: "Equipe Aceleriq",
