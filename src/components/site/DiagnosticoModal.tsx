@@ -59,11 +59,10 @@ const CAPTURA_STEPS: {
 }[] = [
   {
     key: "nome",
-    pergunta: "Antes de começar, qual o seu nome?",
-    hint: "Como você gostaria de ser chamado.",
+    pergunta: "Qual o seu nome?",
     required: true,
     type: "text",
-    placeholder: "Seu nome completo",
+    placeholder: "Seu nome",
   },
   {
     key: "empresa",
@@ -74,8 +73,7 @@ const CAPTURA_STEPS: {
   },
   {
     key: "whatsapp",
-    pergunta: "Qual o seu melhor WhatsApp?",
-    hint: "Usaremos para enviar o resultado e entrar em contato.",
+    pergunta: "Qual o seu WhatsApp?",
     required: true,
     type: "tel",
     placeholder: "(00) 00000-0000",
@@ -85,77 +83,58 @@ const CAPTURA_STEPS: {
     pergunta: "Em qual cidade sua empresa está?",
     required: true,
     type: "text",
-    placeholder: "Ex: Curitiba, PR",
+    placeholder: "Cidade/UF",
   },
   {
     key: "segmento",
-    pergunta: "Qual o segmento da empresa?",
+    pergunta: "Qual o segmento do seu negócio?",
     required: true,
     type: "text",
     placeholder: "Ex: SaaS, E-commerce, Serviços B2B...",
   },
   {
-    key: "site_instagram",
-    pergunta: "Tem site ou Instagram da empresa?",
-    hint: "Opcional · ajuda na nossa pré-análise.",
-    required: false,
-    type: "text",
-    placeholder: "empresa.com.br ou @empresa",
-  },
-  {
-    key: "faturamento_mensal",
-    pergunta: "Qual o faturamento mensal aproximado?",
+    key: "principal_gargalo",
+    pergunta: "Qual o seu principal desafio atual?",
     required: true,
-    type: "select",
-    options: FATURAMENTO_OPTIONS as unknown as { value: string; label: string }[],
+    type: "textarea",
+    placeholder: "O que mais trava seu crescimento hoje?",
   },
   {
     key: "usa_crm",
-    pergunta: "Sua empresa já utiliza algum CRM?",
+    pergunta: "Sua empresa usa CRM?",
     required: true,
     type: "select",
     options: [
-      { value: "sim", label: "Sim, utilizamos ativamente" },
-      { value: "parcial", label: "Sim, mas não é bem usado" },
-      { value: "nao", label: "Não, usamos planilhas/papel" },
+      { value: "sim", label: "Sim, usamos ativamente" },
+      { value: "nao", label: "Não, usamos planilhas ou nada" },
     ],
   },
   {
     key: "investe_trafego",
-    pergunta: "Sua empresa investe em tráfego pago hoje?",
+    pergunta: "Investe em tráfego pago?",
     required: true,
     type: "select",
     options: [
-      { value: "sim", label: "Sim, investimos mensalmente" },
-      { value: "esporadico", label: "Sim, mas de forma esporádica" },
-      { value: "nao", label: "Não investimos" },
+      { value: "sim", label: "Sim, mensalmente" },
+      { value: "nao", label: "Não investimos ainda" },
     ],
   },
   {
     key: "tem_equipe_comercial",
-    pergunta: "Sua empresa tem equipe comercial interna?",
+    pergunta: "Tem equipe comercial?",
     required: true,
     type: "select",
     options: [
       { value: "sim", label: "Sim, time estruturado" },
-      { value: "pequena", label: "Apenas 1 ou 2 pessoas" },
-      { value: "so_dono", label: "Apenas o sócio/dono vende" },
+      { value: "nao", label: "Apenas o sócio ou não tem" },
     ],
   },
   {
     key: "interesse_principal",
-    pergunta: "O que você busca estruturar primeiro?",
+    pergunta: "O que você quer estruturar primeiro?",
     required: true,
     type: "select",
     options: INTERESSE_OPTIONS as unknown as { value: string; label: string }[],
-  },
-  {
-    key: "principal_gargalo",
-    pergunta: "Qual o seu principal desafio atual?",
-    hint: "O que mais impede sua empresa de vender mais hoje?",
-    required: true,
-    type: "textarea",
-    placeholder: "Ex: muitos leads mas poucos fecham, falta de tempo do dono...",
   },
 ];
 
@@ -170,8 +149,6 @@ const capturaSchema = z.object({
   empresa: z.string().trim().min(2, "Informe sua empresa").max(160),
   cidade: z.string().trim().min(2, "Informe sua cidade").max(100),
   segmento: z.string().trim().min(2, "Informe o segmento").max(100),
-  site_instagram: z.string().trim().max(200).optional().or(z.literal("")),
-  faturamento_mensal: z.enum(["ate_100k", "100k_300k", "300k_1m", "1m_5m", "acima_5m"]),
   usa_crm: z.string().min(1),
   investe_trafego: z.string().min(1),
   tem_equipe_comercial: z.string().min(1),
@@ -202,13 +179,13 @@ export function DiagnosticoModal({
     empresa: "",
     cidade: "",
     segmento: "",
-    site_instagram: "",
-    faturamento_mensal: "100k_300k",
     usa_crm: "nao",
     investe_trafego: "nao",
-    tem_equipe_comercial: "so_dono",
+    tem_equipe_comercial: "nao",
     principal_gargalo: "",
     interesse_principal: "vendas",
+    faturamento_mensal: "100k_300k",
+    site_instagram: "",
   });
   const [answers, setAnswers] = useState<QuizAnswers>({});
   const [quizIdx, setQuizIdx] = useState(0);
@@ -232,8 +209,8 @@ export function DiagnosticoModal({
     setCapturaIdx(0);
     setDirection(1);
     setCaptura({
-      nome: "", whatsapp: "", empresa: "", cidade: "", segmento: "", site_instagram: "",
-      faturamento_mensal: "100k_300k", usa_crm: "nao", investe_trafego: "nao", tem_equipe_comercial: "so_dono",
+      nome: "", whatsapp: "", empresa: "", cidade: "", segmento: "",
+      usa_crm: "nao", investe_trafego: "nao", tem_equipe_comercial: "nao",
       principal_gargalo: "", interesse_principal: "vendas",
     });
     setAnswers({});
@@ -324,22 +301,22 @@ export function DiagnosticoModal({
       const recs = recomendar(finalAnswers, captura.interesse_principal);
 
       const { error } = await supabase.from("diagnostico_leads").insert({
-        nome: captura.nome.trim(),
-        whatsapp: captura.whatsapp.trim(),
-        empresa: captura.empresa.trim(),
+        nome: captura.nome?.trim() || "",
+        whatsapp: captura.whatsapp?.trim() || "",
+        empresa: captura.empresa?.trim() || "",
         cidade: captura.cidade?.trim() || "",
         segmento: captura.segmento?.trim() || "",
-        site_instagram: captura.site_instagram?.trim() || null,
-        faturamento_mensal: captura.faturamento_mensal,
         usa_crm: captura.usa_crm || "nao",
         investe_trafego: captura.investe_trafego || "nao",
-        tem_equipe_comercial: captura.tem_equipe_comercial || "so_dono",
-        principal_gargalo: captura.principal_gargalo.trim(),
-        interesse_principal: captura.interesse_principal,
-        respostas: finalAnswers,
+        tem_equipe_comercial: captura.tem_equipe_comercial || "nao",
+        principal_gargalo: captura.principal_gargalo?.trim() || "",
+        interesse_principal: captura.interesse_principal || "vendas",
+        faturamento_mensal: captura.faturamento_mensal || "100k_300k",
+        site_instagram: captura.site_instagram || null,
+        respostas: finalAnswers as any,
         score,
         classificacao: cls.label,
-        recomendacoes: recs,
+        recomendacoes: recs as any,
         origem: origem ?? null,
       });
       if (error) throw error;
@@ -416,7 +393,7 @@ export function DiagnosticoModal({
                     step={CAPTURA_STEPS[capturaIdx]}
                     idx={capturaIdx}
                     total={totalCaptura}
-                    value={(captura[CAPTURA_STEPS[capturaIdx].key] ?? "") as string}
+                    value={captura[CAPTURA_STEPS[capturaIdx].key] as string}
                     onChange={(v) =>
                       setCaptura({ ...captura, [CAPTURA_STEPS[capturaIdx].key]: v })
                     }

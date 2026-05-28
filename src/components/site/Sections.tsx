@@ -174,36 +174,34 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                 {/* RIGHT-MIDDLE: ROI Mensal grande */}
                 <div className="absolute top-1/3 right-2 md:-right-14 float-c z-20">
                   <div className="bg-black/90 backdrop-blur-md border border-primary/40 p-2 md:p-4 shadow-[0_0_40px_rgba(20,255,0,0.25)]">
-                    <div className="flex items-baseline gap-0.5 md:gap-1">
-                      <span className="text-xl md:text-4xl font-mono font-bold text-primary leading-none">+</span>
-                      <CountUp to={245} duration={1800} className="text-xl md:text-4xl font-mono font-bold text-primary leading-none" />
-                      <span className="text-lg md:text-3xl font-mono font-bold text-primary leading-none">%</span>
+                    <div className="flex flex-col items-center">
+                      <TrendingUp className="h-5 w-5 text-primary mb-1" />
+                      <span className="text-[7px] md:text-[9px] font-mono uppercase tracking-widest text-white/60 block text-center">ROI orientado a dados</span>
                     </div>
-                    <span className="text-[7px] md:text-[9px] font-mono uppercase tracking-widest text-white/60 mt-0.5 md:mt-1 block">ROI Mensal</span>
                   </div>
                 </div>
 
                 {/* BOTTOM-LEFT: Precisão */}
                 <div className="absolute -bottom-2 left-2 md:-bottom-6 md:-left-12 float-b z-20">
                   <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-2 py-1.5 md:px-3 md:py-2.5 min-w-[78px] md:min-w-[110px]">
-                    <span className="text-[7px] md:text-[8px] uppercase tracking-widest text-white/50 font-mono block">Precisão</span>
-                    <CountUp to={98.2} decimals={1} duration={1600} suffix="%" className="text-sm md:text-lg font-mono text-primary font-bold" />
+                    <span className="text-[7px] md:text-[8px] uppercase tracking-widest text-white/50 font-mono block">Status</span>
+                    <span className="text-sm md:text-base font-mono text-primary font-bold">Operacional</span>
                   </div>
                 </div>
 
                 {/* BOTTOM-CENTER: Automação, só desktop */}
                 <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 float-a z-20 hidden md:block">
                   <div className="bg-black/85 backdrop-blur-md border border-white/15 px-3 py-2.5 min-w-[110px]">
-                    <span className="text-[8px] uppercase tracking-widest text-white/50 font-mono block">Automação</span>
-                    <CountUp to={88} duration={1500} suffix="%" className="text-lg font-mono text-primary font-bold" />
+                    <span className="text-[8px] uppercase tracking-widest text-white/50 font-mono block">Métricas</span>
+                    <span className="text-sm md:text-base font-mono text-primary font-bold">Dashboard Vivo</span>
                   </div>
                 </div>
 
                 {/* BOTTOM-RIGHT: Leads */}
                 <div className="absolute -bottom-2 right-2 md:-bottom-6 md:-right-10 float-c z-20">
                   <div className="bg-black/85 backdrop-blur-md border border-primary/30 px-2 py-1.5 md:px-3 md:py-2.5 min-w-[78px] md:min-w-[110px]">
-                    <span className="text-[7px] md:text-[8px] uppercase tracking-widest text-white/50 font-mono block">Leads</span>
-                    <CountUp to={3.2} decimals={1} duration={1400} suffix="x" className="text-sm md:text-lg font-mono text-primary font-bold" />
+                    <span className="text-[7px] md:text-[8px] uppercase tracking-widest text-white/50 font-mono block">Funil</span>
+                    <span className="text-sm md:text-base font-mono text-primary font-bold">Conectado</span>
                   </div>
                 </div>
               </motion.div>
@@ -318,6 +316,137 @@ export function OperationsFirst() {
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{block.desc}</p>
             </motion.div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// COMECE PELO SEU ESTÁGIO ATUAL
+// ─────────────────────────────────────────────────────────────
+const STAGES = [
+  {
+    title: "Tenho leads, mas não vendo bem",
+    desc: "Vamos organizar CRM, atendimento, scripts e follow-up.",
+    icon: Users2,
+  },
+  {
+    title: "Quero anunciar, mas operação bagunçada",
+    desc: "Primeiro estruturamos a base comercial, depois escalamos com mídia.",
+    icon: Target,
+  },
+  {
+    title: "Preciso de site ou landing page",
+    desc: "Criamos páginas para captar, explicar e converter oportunidades.",
+    icon: Layers,
+  },
+  {
+    title: "Quero automatizar atendimento",
+    desc: "Conectamos WhatsApp, CRM, IA e tarefas para reduzir atraso operacional.",
+    icon: Bot,
+  },
+  {
+    title: "Quero estruturar para crescer",
+    desc: "Integramos comercial, marketing, processos, dados e automação.",
+    icon: Rocket,
+  },
+];
+
+export function EstagiosCrescimento({ onDiagnostico }: { onDiagnostico: () => void }) {
+  return (
+    <section className="relative py-12 md:py-20 bg-grid-ambient overflow-hidden">
+      <div className="container-aceleriq relative">
+        <SectionHeader
+          eyebrow="[ 02 ] · Ponto de Partida"
+          title="Comece pelo seu estágio atual"
+          description="Identificamos o melhor caminho de acordo com o momento da sua empresa."
+        />
+
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {STAGES.map((s, i) => (
+            <motion.div
+              key={s.title}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.05 }}
+              className="hairline rounded-xl bg-card/30 p-6 card-hover group flex flex-col h-full"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary border border-primary/20 transition-all group-hover:scale-110 mb-5">
+                <s.icon className="h-5 w-5" />
+              </div>
+              <h3 className="font-display text-lg font-medium">{s.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground mb-6 flex-grow">{s.desc}</p>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={onDiagnostico}
+                className="self-start text-xs font-mono tracking-widest p-0 h-auto hover:bg-transparent hover:text-primary"
+              >
+                SOLICITAR DIAGNÓSTICO <ArrowRight className="ml-2 h-3 w-3" />
+              </Button>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// MATURIDADE COMERCIAL
+// ─────────────────────────────────────────────────────────────
+const MATURITY_LEVELS = [
+  {
+    level: "Base Local",
+    desc: "Empresa que já vende mas depende de indicação ou tráfego sem processo. Atendimento manual e sem CRM.",
+  },
+  {
+    level: "Comercial Organizado",
+    desc: "Uso de CRM, scripts definidos e leitura básica de métricas. O processo começa a ser independente do dono.",
+  },
+  {
+    level: "Growth Integrado",
+    desc: "Marketing e vendas conectados. Automações de follow-up, dashboards de CAC e previsibilidade de pipeline.",
+  },
+  {
+    level: "Engenharia Completa",
+    desc: "Operação escalável com agentes de IA, dados em tempo real e automação avançada em toda a jornada.",
+  },
+];
+
+export function MaturidadeComercial({ onDiagnostico }: { onDiagnostico: () => void }) {
+  return (
+    <section className="relative py-12 md:py-20 bg-grid-ambient border-t border-white/10 overflow-hidden">
+      <div className="container-aceleriq relative">
+        <SectionHeader
+          eyebrow="[ 03 ] · Evolução"
+          title="Níveis de Maturidade Comercial"
+          description="O diagnóstico define o melhor caminho para cada nível. Não existe receita pronta, existe engenharia sob medida."
+        />
+
+        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {MATURITY_LEVELS.map((m, i) => (
+            <motion.div
+              key={m.level}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.1 }}
+              className="relative p-6 rounded-xl border border-white/10 bg-white/[0.03] group hover:border-primary/40 transition-colors"
+            >
+              <div className="text-mono text-[10px] text-primary/60 mb-4 tracking-widest uppercase">Nível 0{i + 1}</div>
+              <h3 className="font-display text-xl font-medium mb-3 group-hover:text-primary transition-colors">{m.level}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{m.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+        
+        <div className="mt-12 text-center">
+          <Button onClick={onDiagnostico} className="btn-tech">
+            Descobrir meu nível de maturidade
+          </Button>
         </div>
       </div>
     </section>
@@ -841,27 +970,27 @@ export function DiagnosticoCTA({ onDiagnostico }: { onDiagnostico: () => void })
 // RESULTADOS
 // ─────────────────────────────────────────────────────────────
 const METRICS = [
-  { value: "+184%", label: "ROI médio · 90 dias" },
-  { value: "3.2x", label: "Leads qualificados" },
-  { value: "-42%", label: "Redução de CAC" },
-  { value: "97%", label: "Renovação de programa" },
+  { value: "Diagnóstico", label: "Orientado por dados" },
+  { value: "CRM", label: "Operação conectada" },
+  { value: "Métricas", label: "Sempre acompanhadas" },
+  { value: "Implantação", label: "Sob medida" },
 ];
 
 const CASES = [
   {
-    segment: "SaaS B2B · Gestão financeira",
-    challenge: "SDRs sem playbook, CRM desatualizado e ciclo de venda de 90+ dias sem previsibilidade de fechamento.",
-    result: "Pipeline qualificado +220% e ciclo de venda reduzido para 42 dias em 4 meses.",
+    segment: "SaaS B2B",
+    challenge: "Processo comercial dependente do dono e sem previsibilidade de fechamento.",
+    result: "Operação estruturada com CRM, playbook e previsibilidade comercial em 4 meses.",
   },
   {
-    segment: "E-commerce · Moda premium",
-    challenge: "ROAS travado em 1.8, dependência total de mídia paga e nenhuma automação de retenção pós-compra.",
-    result: "ROAS escalado para 4.6, LTV +63% com fluxos de IA em CRM e e-mail comportamental.",
+    segment: "E-commerce Premium",
+    challenge: "Dependência total de mídia paga e nenhuma automação de retenção ou CRM.",
+    result: "Processo de recompra automatizado e dados integrados para escala de faturamento.",
   },
   {
-    segment: "Educação · Cursos high-ticket",
-    challenge: "Funil quebrado entre marketing e vendas, operação dependente do fundador e CAC subindo todo mês.",
-    result: "Operação 100% sistemizada, CAC -38% e fundador fora da operação comercial em 5 meses.",
+    segment: "Serviços High-ticket",
+    challenge: "Funil de vendas desorganizado e lead perdendo temperatura no WhatsApp.",
+    result: "Atendimento profissionalizado e funil de vendas sob controle absoluto.",
   },
 ];
 
@@ -932,22 +1061,22 @@ export function Results() {
 // ─────────────────────────────────────────────────────────────
 const TESTIMONIALS = [
   {
-    name: "Rafael Mendonça",
-    role: "CEO · SaaS B2B Fintech",
+    name: "Rafael M.",
+    role: "Fundador · SaaS B2B",
     quote:
-      "Antes da Aceleriq, a gente vendia no esforço. Hoje temos um motor: SDR com playbook, CRM limpo e dashboard de receita em tempo real. Em 90 dias, previsibilidade que a gente nunca tinha visto em 4 anos de empresa.",
+      "A Aceleriq trouxe ordem para o caos. Hoje temos um motor de vendas rodando com playbook e CRM limpo. A previsibilidade que temos hoje é o que nos permite crescer com segurança.",
   },
   {
-    name: "Camila Rocha",
-    role: "Co-fundadora · EdTech high-ticket",
+    name: "Camila R.",
+    role: "Empresária · Educação",
     quote:
-      "O que mudou não foi o tráfego, foi o sistema. Diagnóstico, plano de 90 dias, sprints semanais. Saí da operação em 5 meses, o time vende com método e o CAC caiu 38%. É outro patamar de negócio.",
+      "O grande diferencial foi a estruturação. Saímos do heroísmo para o processo. O time comercial agora trabalha com método e os indicadores mostram exatamente onde investir.",
   },
   {
-    name: "Diego Salles",
-    role: "Diretor · E-commerce DTC",
+    name: "Diego S.",
+    role: "Diretor · E-commerce",
     quote:
-      "Já passei por 3 agências grandes. A Aceleriq é a primeira que entrou no meu CRM, no meu Shopify e nos meus dados. Não entrega post, entrega receita. ROAS 1.8 → 4.6 e LTV +63% com IA aplicada de verdade.",
+      "Uma consultoria que entra no seu negócio de verdade. Não entregam apenas anúncios, entregam um sistema de vendas que integra marketing, comercial e dados.",
   },
 ];
 

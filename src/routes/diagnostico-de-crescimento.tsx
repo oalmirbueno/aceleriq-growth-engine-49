@@ -26,7 +26,8 @@ import {
   Instagram,
   Database,
   Workflow,
-  Bot
+  Bot,
+  X
 } from "lucide-react";
 import { useState } from "react";
 import { whatsappLink, DEFAULT_WHATSAPP_MESSAGE } from "@/lib/contact";
@@ -102,11 +103,11 @@ function DiagnosticoCrescimento() {
               <span className="label-eyebrow">Análise de Maturidade Comercial</span>
 
               <h1 className="mt-6 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] tracking-tight">
-                Descubra onde sua empresa está <span className="text-primary italic">perdendo vendas</span>.
+                Descubra onde sua empresa está <span className="text-primary italic">perdendo vendas</span> no marketing, WhatsApp e comercial.
               </h1>
 
               <p className="mx-auto mt-6 max-w-2xl text-base md:text-lg text-muted-foreground leading-relaxed">
-                Em um diagnóstico estratégico, analisamos sua presença digital, atendimento, funil, CRM, tráfego e oportunidades para mostrar o que precisa ser ajustado antes de acelerar.
+                Avaliamos sua presença digital, atendimento, funil, CRM, tráfego, automações e operação para mostrar quais ajustes precisam ser feitos antes de acelerar.
               </p>
 
               <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -163,6 +164,88 @@ function DiagnosticoCrescimento() {
                 </motion.div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* PARA QUEM É */}
+        <section className="relative py-12 md:py-20 bg-grid-ambient border-t border-white/10">
+          <div className="container-aceleriq">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <span className="label-eyebrow">Público-alvo</span>
+                <h2 className="mt-4 font-display text-3xl md:text-5xl font-medium tracking-tight">
+                  Para quem é este diagnóstico?
+                </h2>
+                <div className="mt-8 space-y-6">
+                  {[
+                    { title: "Empresas B2B e Serviços", desc: "Negócios que dependem de propostas, reuniões e vendas consultivas." },
+                    { title: "E-commerces em Escala", desc: "Operações que precisam otimizar ROAS e retenção via CRM." },
+                    { title: "Infoprodutos e Educação", desc: "Empresas com alto volume de leads que precisam de automação." },
+                    { title: "Negócios Locais Maduros", desc: "Empresas que já faturam e querem profissionalizar a aquisição." }
+                  ].map((item, i) => (
+                    <div key={i} className="flex gap-4 p-5 rounded-xl border border-white/5 bg-white/[0.02]">
+                      <div className="h-2 w-2 rounded-full bg-primary mt-2 shrink-0" />
+                      <div>
+                        <h3 className="font-display text-lg font-medium">{item.title}</h3>
+                        <p className="text-sm text-muted-foreground">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="bg-primary/5 border border-primary/20 rounded-2xl p-8">
+                <h3 className="font-display text-2xl mb-6 italic">Não é para você se:</h3>
+                <ul className="space-y-4 text-muted-foreground">
+                  <li className="flex gap-3"><X className="h-5 w-5 text-red-500 shrink-0" /> Você ainda não tem um produto validado.</li>
+                  <li className="flex gap-3"><X className="h-5 w-5 text-red-500 shrink-0" /> Você busca uma "fórmula mágica" sem esforço.</li>
+                  <li className="flex gap-3"><X className="h-5 w-5 text-red-500 shrink-0" /> Você não está disposto a investir em processos.</li>
+                </ul>
+                <div className="mt-10">
+                  <Button onClick={() => setOpen(true)} className="w-full btn-tech">Fazer minha pré-análise</Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* COMO FUNCIONA */}
+        <section className="relative py-12 md:py-20 bg-grid-ambient border-t border-white/10">
+          <div className="container-aceleriq">
+            <div className="mx-auto max-w-2xl text-center mb-12">
+              <span className="label-eyebrow">Metodologia</span>
+              <h2 className="mt-3 font-display text-3xl font-medium tracking-tight md:text-5xl">
+                Como funciona o processo
+              </h2>
+            </div>
+            <div className="grid md:grid-cols-4 gap-4">
+              {[
+                { step: "01", title: "Formulário", desc: "Você responde perguntas estratégicas sobre seu negócio." },
+                { step: "02", title: "Score", desc: "Recebe na hora seu nível de maturidade comercial." },
+                { step: "03", title: "Análise", desc: "Nosso time revisa seus dados e sua presença digital." },
+                { step: "04", title: "Devolutiva", desc: "Se houver fit, agendamos uma call técnica profunda." }
+              ].map((s, i) => (
+                <div key={i} className="p-6 rounded-xl border border-white/10 bg-card/40">
+                  <div className="text-mono text-primary text-2xl font-bold mb-4 opacity-40">{s.step}</div>
+                  <h3 className="font-display text-lg font-medium mb-2">{s.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* PRÓXIMO PASSO (Final CTA) */}
+        <section className="relative py-12 md:py-20 bg-grid-ambient border-t border-white/10 text-center">
+          <div className="container-aceleriq">
+            <h2 className="font-display text-3xl md:text-5xl font-medium tracking-tight mb-6">
+              Pronto para ter clareza total?
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-muted-foreground mb-10">
+              O diagnóstico é o primeiro passo para parar de improvisar e começar a escalar com engenharia.
+            </p>
+            <Button onClick={() => setOpen(true)} size="lg" className="btn-tech px-10">
+              Solicitar Diagnóstico Agora
+            </Button>
           </div>
         </section>
 

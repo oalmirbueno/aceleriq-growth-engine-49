@@ -31,15 +31,15 @@ function Page() {
     <ServicePageLayout
       variant="agencia"
       eyebrow="Curitiba · PR · Atendimento nacional"
-      h1={<>Marketing conectado ao <span className="text-primary neon-text-glow">comercial</span>, não posts soltos no feed.</>}
-      intro="Criamos estratégias de conteúdo, campanhas, páginas, tráfego e automações conectadas ao funil de vendas da sua empresa. Marketing só funciona de verdade quando está conectado ao comercial, à oferta, ao atendimento e aos dados."
+      h1={<>Marketing estratégico conectado ao <span className="text-primary neon-text-glow">comercial</span>.</>}
+      intro="Não fazemos apenas posts ou anúncios isolados. A Aceleriq estrutura sua presença digital, conteúdo e tráfego integrados ao seu CRM e ao seu processo de vendas, garantindo que cada real investido trabalhe para o seu lucro."
       benefits={[
         { title: "Estratégia antes de conteúdo", desc: "Não postamos por postar. Cada peça de conteúdo tem um papel claro no funil de vendas do seu negócio." },
         { title: "Conteúdo com direção comercial", desc: "Copywriting e design focados em converter desconhecidos em oportunidades reais no seu CRM." },
         { title: "Campanhas conectadas ao CRM", desc: "Toda mídia paga é lida por pipeline e receita, não apenas por cliques e métricas de vaidade." },
         { title: "Google, Instagram e WhatsApp", desc: "Trabalhamos os principais canais de forma integrada para que a jornada do cliente seja fluida." },
         { title: "Relatórios de decisão", desc: "Relatórios que mostram o que precisa ser feito para lucrar mais, sem termos técnicos desnecessários." },
-        { title: "Stack moderno e IA", desc: "Usamos inteligência artificial para acelerar a produção e otimizar campanhas em tempo real." },
+        { title: "IA para alavancagem", desc: "Usamos inteligência artificial para responder mais rápido, organizar leads e garantir que nenhum follow-up seja esquecido." },
       ]}
       deliverables={[
         "Diagnóstico estratégico inicial",

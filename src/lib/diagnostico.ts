@@ -20,8 +20,6 @@ export interface CapturaForm {
   nome: string;
   whatsapp: string;
   empresa: string;
-  site_instagram: string;
-  faturamento_mensal: Faturamento;
   principal_gargalo: string;
   interesse_principal: Interesse;
   cidade?: string;
@@ -29,6 +27,8 @@ export interface CapturaForm {
   usa_crm?: string;
   investe_trafego?: string;
   tem_equipe_comercial?: string;
+  site_instagram?: string;
+  faturamento_mensal?: Faturamento;
 }
 
 export interface QuizQuestion {
@@ -275,9 +275,9 @@ export function formatResumoWhatsapp(args: {
     ``,
     `*Empresa:* ${captura.empresa}`,
     `*Nome:* ${captura.nome}`,
-    `*Faturamento:* ${
+    captura.faturamento_mensal ? `*Faturamento:* ${
       FATURAMENTO_OPTIONS.find((o) => o.value === captura.faturamento_mensal)?.label
-    }`,
+    }` : "",
     `*Interesse principal:* ${
       INTERESSE_OPTIONS.find((o) => o.value === captura.interesse_principal)?.label
     }`,
