@@ -338,6 +338,11 @@ export function PortfolioShowcase({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(ITEMLIST_JSONLD) }}
       />
       <div className="container-aceleriq">
+        <SectionHeader
+          eyebrow="[ 12 ] · Portfólio"
+          title="Casos reais de engenharia aplicada."
+          description="Alguns projetos onde estruturamos o sistema de crescimento de ponta a ponta."
+        />
         {!active && (
           <div className="max-w-2xl animate-fade-in">
             <span className="label-eyebrow">{eyebrow}</span>
