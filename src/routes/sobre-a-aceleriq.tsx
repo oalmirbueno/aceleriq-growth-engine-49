@@ -128,10 +128,7 @@ function SobreAceleriq() {
               </h2>
               <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-muted-foreground md:text-base">
                 <p>
-                  A Aceleriq nasceu para resolver o problema central das
-                  empresas que cresceram sem método: operações fragmentadas,
-                  marketing sem leitura de receita, vendas dependendo de
-                  esforço pessoal e zero estrutura de dados para decidir.
+                  A Aceleriq nasceu para resolver um problema claro: empresas não quebram só por falta de marketing. Muitas travam porque crescem no improviso, sem processo comercial, sem dados, sem automação, sem rotina e sem clareza.
                 </p>
                 <p>
                   Diferente de uma agência tradicional, que entrega peças
@@ -141,15 +138,11 @@ function SobreAceleriq() {
                   seu negócio.
                 </p>
                 <p>
-                  Operamos como engenharia de crescimento: levantamos a planta
-                  da operação, identificamos os gargalos, projetamos a solução
-                  e instalamos o que precisa funcionar. O entregável final
-                  nunca é entregável avulso, é receita previsível.
+                  Acreditamos que antes de acelerar, é preciso arrumar a casa. Une marketing, comercial, tecnologia, IA e operação para criar motores de crescimento mais organizados.
                 </p>
                 <p>
                   Com sede em Curitiba, PR, a Aceleriq atende empresas em todo
-                  o Brasil que faturam a partir de R$ 100 mil/mês e querem
-                  profissionalizar marketing, vendas e operação.
+                  o Brasil que querem profissionalizar sua estrutura para escalar com saúde e previsibilidade.
                 </p>
               </div>
             </div>
