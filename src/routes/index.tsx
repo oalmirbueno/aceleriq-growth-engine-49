@@ -8,6 +8,7 @@ import {
   Pains,
   About,
   Method,
+  OperationsFirst,
   Areas,
   FitFor,
   DiagnosticoCTA,
