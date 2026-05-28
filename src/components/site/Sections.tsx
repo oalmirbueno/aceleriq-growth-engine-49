@@ -929,22 +929,22 @@ export function DiagnosticoCTA({ onDiagnostico }: { onDiagnostico: () => void })
 // RESULTADOS
 // ─────────────────────────────────────────────────────────────
 const METRICS = [
-  { value: "Diagnóstico", label: "Orientado por dados" },
-  { value: "CRM", label: "Operação conectada" },
-  { value: "Métricas", label: "Sempre acompanhadas" },
+  { value: "Estratégia", label: "Antes da execução" },
   { value: "Implantação", label: "Sob medida" },
+  { value: "Operação", label: "Acompanhada" },
+  { value: "Melhoria", label: "Contínua" },
 ];
 
 const CASES = [
   {
     segment: "SaaS B2B",
     challenge: "Processo comercial dependente do dono e sem previsibilidade de fechamento.",
-    result: "Operação estruturada com CRM, playbook e previsibilidade comercial em 4 meses.",
+    result: "Operação estruturada com CRM, playbook e previsibilidade comercial.",
   },
   {
     segment: "E-commerce Premium",
     challenge: "Dependência total de mídia paga e nenhuma automação de retenção ou CRM.",
-    result: "Processo de recompra automatizado e dados integrados para escala de faturamento.",
+    result: "Processo de recompra automatizado e dados integrados para escala.",
   },
   {
     segment: "Serviços High-ticket",
@@ -953,8 +953,25 @@ const CASES = [
   },
 ];
 
-// METRICS already defined above
+export function Results() {
+  return (
+    <section id="resultados" className="relative py-12 md:py-16 bg-grid-ambient">
+      <div className="container-aceleriq">
+        <SectionHeader
+          eyebrow="[ 07 ] · Resultados"
+          title="Quando a engenharia entra, o resultado aparece."
+          description="Indicadores reais e mini-cases de empresas que estruturaram seu sistema de crescimento com a Aceleriq."
+        />
 
+        <div className="mt-8 md:mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+          {METRICS.map((m, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.05 }}
+              className="bg-background p-6"
             >
               <span className="label-eyebrow">{m.value}</span>
               <div className="mt-3 text-[18px] font-semibold tracking-tight text-primary">
@@ -967,7 +984,7 @@ const CASES = [
         <div className="mt-4 grid gap-3 md:grid-cols-3">
           {CASES.map((c, i) => (
             <motion.div
-              key={c.segment}
+              key={i}
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -999,6 +1016,37 @@ const CASES = [
 }
 
 // ─────────────────────────────────────────────────────────────
+// PROVAS REAIS (Substitui Testimonials)
+// ─────────────────────────────────────────────────────────────
+export function Testimonials() {
+  return (
+    <section className="relative py-12 md:py-16 bg-grid-ambient">
+      <div className="container-aceleriq">
+        <SectionHeader
+          eyebrow="[ 08 ] · Provas Reais"
+          title="Provas reais, não promessas bonitas."
+          description="A Aceleriq está construindo sua reputação com projetos reais, presença local e avaliações verificadas no Google."
+        />
+
+        <div className="mt-8 md:mt-10 grid gap-3 md:grid-cols-4">
+          {[
+            { title: "Avaliações no Google", text: "A reputação pública da Aceleriq começa com clientes e parceiros que já avaliaram nossa atuação." },
+            { title: "Projetos publicados", text: "Sites, landing pages e estruturas digitais que podem ser acessadas, navegadas e verificadas." },
+            { title: "Presença local", text: "Participação em eventos, parcerias e relacionamento com empresários da região." },
+            { title: "Operação transparente", text: "Processos, automações e sistemas sendo estruturados com clareza, sem inflar números." },
+          ].map((card, i) => (
+            <div key={i} className="hairline relative rounded-2xl bg-card/40 p-6 transition-all hover:border-primary/40">
+              <h3 className="font-display text-[15px] font-medium text-primary mb-3">{card.title}</h3>
+              <p className="text-[13px] leading-relaxed text-muted-foreground">{card.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
 // COMPARATIVO
 // ─────────────────────────────────────────────────────────────
 const COMPARE: [string, string, string][] = [
@@ -1022,24 +1070,14 @@ export function Compare() {
           description="A diferença entre contratar entregáveis e contratar um sistema de crescimento."
         />
 
-        {/* Desktop: tabela em grid */}
         <div className="mt-8 md:mt-10 hidden md:block overflow-hidden rounded-2xl border border-border">
           <div className="grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-border bg-card/40">
-            <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-              Dimensão
-            </div>
-            <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-              Agência comum
-            </div>
-            <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-primary">
-              Aceleriq
-            </div>
+            <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Dimensão</div>
+            <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Agência comum</div>
+            <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-primary">Aceleriq</div>
           </div>
           {COMPARE.map(([dim, agency, us], i) => (
-            <div
-              key={i}
-              className="grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-border last:border-b-0 text-sm transition-colors hover:bg-card/30"
-            >
+            <div key={i} className="grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-border last:border-b-0 text-sm transition-colors hover:bg-card/30">
               <div className="px-5 py-5 font-medium text-foreground/95">{dim}</div>
               <div className="px-5 py-5 text-muted-foreground">{agency}</div>
               <div className="flex items-start gap-2 px-5 py-5 text-foreground">
@@ -1050,7 +1088,6 @@ export function Compare() {
           ))}
         </div>
 
-        {/* Mobile: cards empilhados */}
         <div className="mt-8 grid gap-3 md:hidden">
           {COMPARE.map(([dim, agency, us], i) => (
             <div key={i} className="overflow-hidden rounded-xl border border-border bg-card/40">
@@ -1099,33 +1136,27 @@ export function WhyNow() {
             <div>
               <span className="label-eyebrow flex items-center gap-2">
                 <Rocket className="h-3.5 w-3.5 text-primary" />
-                [ 10 ] · Janela de mercado
+                [ 10 ] · Por que estruturar agora?
               </span>
               <h2 className="mt-3 font-display text-3xl font-medium leading-[1.08] tracking-[-0.03em] md:text-5xl">
-                Por que agora? A janela é{" "}
-                <span className="text-primary neon-text-glow">curta</span>.
+                O custo de vender no improviso está cada vez maior.
               </h2>
               <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground md:text-base">
-                Empresas que estruturarem dados, processo e IA nos próximos
-                12-18 meses vão competir num patamar diferente. Quem ficar
-                no modelo antigo de marketing vai ver margem, CAC e
-                produtividade trabalharem contra.
+                Empresas que organizam atendimento, CRM, dados, automação e marketing conseguem entender melhor seus gargalos, responder mais rápido e tomar decisões com menos achismo.
               </p>
             </div>
-            <div className="grid gap-2.5">
+            <div className="grid gap-2.5 sm:grid-cols-2">
               {[
-                { k: "Custo de aquisição", v: "+27% a.a." },
-                { k: "Empresas com IA aplicada", v: "Crescem 2.4x" },
-                { k: "Tempo médio de implantação", v: "60 a 120 dias" },
-              ].map((s) => (
-                <div
-                  key={s.k}
-                  className="flex items-center justify-between rounded-xl border border-border bg-background/50 px-5 py-4"
-                >
-                  <span className="text-[13px] text-muted-foreground">{s.k}</span>
-                  <span className="text-mono text-[14px] font-semibold text-foreground">
-                    {s.v}
-                  </span>
+                "Menos perda de lead",
+                "Mais clareza no funil",
+                "Atendimento mais rápido",
+                "Follow-up com rotina",
+                "Marketing conectado",
+                "Decisões com dados",
+              ].map((benefit) => (
+                <div key={benefit} className="flex items-center gap-2 rounded-xl border border-border bg-background/50 px-5 py-4">
+                  <Check className="h-4 w-4 text-primary" />
+                  <span className="text-[13px] text-foreground font-medium">{benefit}</span>
                 </div>
               ))}
             </div>
@@ -1135,8 +1166,6 @@ export function WhyNow() {
     </section>
   );
 }
-// Duplicated WhyNow removed
-
 
 // ─────────────────────────────────────────────────────────────
 // FAQ
@@ -1144,35 +1173,27 @@ export function WhyNow() {
 const FAQS = [
   {
     q: "Quanto custa trabalhar com a Aceleriq?",
-    a: "O investimento varia conforme o estágio da empresa e o escopo do programa (estratégia, vendas, dados, IA, mídia). Operamos com programas mensais de engenharia de crescimento que partem de faixas compatíveis com empresas a partir de R$ 100k/mês de faturamento. No Diagnóstico Gratuito mapeamos sua maturidade e desenhamos juntos o investimento que faz sentido para o seu momento, sem proposta padronizada e sem inflar escopo.",
+    a: "O investimento varia conforme o estágio da empresa e o escopo do programa. Operamos com programas mensais que partem de faixas compatíveis com empresas a partir de R$ 100k/mês de faturamento. No Diagnóstico Gratuito mapeamos sua maturidade e desenhamos o investimento ideal.",
   },
   {
     q: "Em quanto tempo eu vejo resultado?",
-    a: "Resultados táticos (limpeza de CRM, automações, primeiros ajustes de mídia, reorganização de funil) aparecem nas primeiras 2 a 4 semanas. Resultado estrutural: previsibilidade comercial, redução real de CAC, processo de vendas rodando sem o fundador, IA gerando alavancagem, costuma se consolidar entre 60 e 120 dias. Empresas que chegam mais maduras aceleram mais rápido. Nenhuma promessa de 7 dias: construímos sistema, não milagre.",
+    a: "Resultados táticos aparecem em 2 a 4 semanas. Resultado estrutural, previsibilidade comercial e redução de CAC costumam se consolidar entre 60 e 120 dias. Construímos sistema, não milagre.",
   },
   {
     q: "Vocês atendem qualquer segmento?",
-    a: "Atuamos com SaaS, e-commerce, educação, infoprodutos, serviços profissionais B2B e indústrias com vendas consultivas. O critério não é o segmento, é a maturidade: produto/serviço validado, faturamento mensal a partir de R$ 100k e disposição para profissionalizar marketing, vendas e operação. Se você é early-stage validando oferta, não somos o parceiro certo agora, e dizemos isso com clareza no diagnóstico.",
+    a: "Atuamos com SaaS, e-commerce, educação, infoprodutos, serviços B2B e indústrias. O critério é a maturidade: produto validado e disposição para profissionalizar a operação.",
   },
   {
     q: "Existe contrato de fidelidade?",
-    a: "Trabalhamos com ciclos mínimos de 6 meses. Não é amarração comercial: é honestidade técnica: construir um sistema de crescimento (estratégia + dados + processo comercial + IA + operação) não acontece em 30 dias. Quem promete isso está vendendo entregável avulso, não engenharia. Após o ciclo inicial, a relação segue mensal, sem multa, enquanto fizer sentido para os dois lados.",
+    a: "Trabalhamos com ciclos mínimos de 6 meses para construir um sistema real. Após isso, a relação segue mensal, sem multa, enquanto fizer sentido.",
   },
   {
     q: "Qual a diferença real para uma agência?",
-    a: "Agência entrega peças isoladas (criativo, post, anúncio, relatório). A Aceleriq entrega um sistema integrado: diagnóstico estratégico, estruturação de CRM e processo comercial, dashboards de receita, agentes de IA conectados ao seu negócio, mídia orientada a pipeline e operação que roda dentro dos seus times e ferramentas. O entregável final é receita previsível e operação sistemizada, não impressões, alcance ou relatórios bonitos.",
+    a: "Agência entrega peças isoladas. A Aceleriq entrega um sistema integrado: CRM, processo comercial, dashboards, IA e mídia orientada a pipeline. O entregável final é receita previsível.",
   },
   {
     q: "Como funciona o Diagnóstico Gratuito?",
-    a: "Você preenche um formulário curto (nome, empresa, faturamento, principal gargalo) e responde 12 perguntas estratégicas sobre estratégia, vendas, dados, IA e operação. Leva ~5 minutos. Na hora você recebe: seu Score de Maturidade (0-100), sua classificação de estágio (Inicial, Estruturação, Avançado ou Otimizado) e 3 recomendações personalizadas. Sem custo, sem cartão, sem compromisso. Se houver fit, agendamos uma conversa estratégica para aprofundar.",
-  },
-  {
-    q: "Vocês substituem meu time interno?",
-    a: "Não. A Aceleriq atua como engenharia parceira do seu time, não como terceirização. Estruturamos processos, treinamos pessoas, implementamos ferramentas e aceleramos a operação para que ela rode com seu time, não dependendo de heróis nem da nossa presença diária. O objetivo final é deixar sua empresa autônoma com método, não criar dependência. Quando você não precisar mais da gente em algumas frentes, a gente comemora junto.",
-  },
-  {
-    q: "Como começa o trabalho depois do diagnóstico?",
-    a: "Após o Diagnóstico, agendamos uma sessão estratégica de aprofundamento (60-90 min) para entender seu negócio, números, time, ferramentas e prioridades reais. Se houver fit técnico e estratégico nos dois lados, montamos uma proposta personalizada com escopo de programa, cronograma de 90 dias, KPIs alvo e investimento. A partir do aceite, começamos com onboarding técnico, mapeamento de stack e o primeiro sprint em até 7 dias.",
+    a: "Você responde 12 perguntas estratégicas em ~5 minutos e recebe seu Score de Maturidade, classificação de estágio e 3 recomendações. Sem custo e sem compromisso.",
   },
 ];
 
@@ -1189,11 +1210,7 @@ export function FAQ() {
         <div className="mx-auto mt-8 md:mt-10 max-w-3xl">
           <Accordion type="single" collapsible className="space-y-2.5">
             {FAQS.map((f, i) => (
-              <AccordionItem
-                key={i}
-                value={`item-${i}`}
-                className="overflow-hidden rounded-xl border border-border bg-card/40 px-5 transition-colors data-[state=open]:border-primary/30"
-              >
+              <AccordionItem key={i} value={`item-${i}`} className="overflow-hidden rounded-xl border border-border bg-card/40 px-5 transition-colors data-[state=open]:border-primary/30">
                 <AccordionTrigger className="py-5 text-left text-[15px] font-medium hover:no-underline">
                   <span className="flex items-center gap-3">
                     <HelpCircle className="h-4 w-4 flex-shrink-0 text-primary" />
@@ -1211,6 +1228,7 @@ export function FAQ() {
     </section>
   );
 }
+
 // ─────────────────────────────────────────────────────────────
 // CTA FINAL
 // ─────────────────────────────────────────────────────────────
@@ -1234,35 +1252,19 @@ export function FinalCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
               [ 12 ] · Próximo passo
             </span>
             <h2 className="mx-auto mt-5 max-w-3xl font-display text-3xl font-medium leading-[1.05] tracking-[-0.03em] md:text-6xl">
-              Pare de improvisar. Comece a{" "}
-              <span className="text-primary neon-text-glow">escalar com engenharia</span>.
+              Pare de improvisar. Comece a <span className="text-primary neon-text-glow">escalar com engenharia</span>.
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-muted-foreground md:text-base">
-              Faça o Diagnóstico Gratuito em 5 minutos e descubra exatamente
-              em que estágio sua operação está, o que está travando o crescimento
-              e os próximos passos para destravar receita previsível.
+              Faça o Diagnóstico Gratuito em 5 minutos e descubra exatamente em que estágio sua operação está e os próximos passos para destravar receita.
             </p>
 
             <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Button
-                onClick={onDiagnostico}
-                size="lg"
-                className="group h-12 rounded-md bg-primary px-7 text-[14px] font-semibold text-primary-foreground btn-interactive"
-              >
+              <Button onClick={onDiagnostico} size="lg" className="group h-12 rounded-md bg-primary px-7 text-[14px] font-semibold text-primary-foreground btn-interactive">
                 Fazer Diagnóstico Gratuito
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="h-12 rounded-md border-border bg-transparent px-7 text-[14px] font-medium hover:bg-card"
-              >
-                <a
-                  href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)}
-                  target="_blank"
-                  rel="noreferrer"
-                >
+              <Button asChild size="lg" variant="outline" className="h-12 rounded-md border-border bg-transparent px-7 text-[14px] font-medium hover:bg-card">
+                <a href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)} target="_blank" rel="noreferrer">
                   <MessageCircle className="h-4 w-4 text-primary" />
                   Falar com especialista
                 </a>
@@ -1270,20 +1272,12 @@ export function FinalCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
             </div>
 
             <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[12px] text-muted-foreground">
-              <a
-                href={`mailto:${EMAIL}`}
-                className="inline-flex items-center gap-2 hover:text-foreground"
-              >
+              <a href={`mailto:${EMAIL}`} className="inline-flex items-center gap-2 hover:text-foreground">
                 <Mail className="h-3.5 w-3.5 text-primary" />
                 {EMAIL}
               </a>
               <span className="text-border">·</span>
-              <a
-                href={INSTAGRAM_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 hover:text-foreground"
-              >
+              <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-foreground">
                 <Instagram className="h-3.5 w-3.5 text-primary" />
                 {INSTAGRAM_HANDLE}
               </a>
