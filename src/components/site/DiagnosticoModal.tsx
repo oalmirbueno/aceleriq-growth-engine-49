@@ -168,8 +168,13 @@ const capturaSchema = z.object({
     .max(30, "WhatsApp muito longo")
     .regex(/^[\d\s()+\-]+$/, "Use apenas números e ( ) + -"),
   empresa: z.string().trim().min(2, "Informe sua empresa").max(160),
+  cidade: z.string().trim().min(2, "Informe sua cidade").max(100),
+  segmento: z.string().trim().min(2, "Informe o segmento").max(100),
   site_instagram: z.string().trim().max(200).optional().or(z.literal("")),
   faturamento_mensal: z.enum(["ate_100k", "100k_300k", "300k_1m", "1m_5m", "acima_5m"]),
+  usa_crm: z.string().min(1),
+  investe_trafego: z.string().min(1),
+  tem_equipe_comercial: z.string().min(1),
   principal_gargalo: z.string().trim().min(5, "Conte um pouco mais").max(500),
   interesse_principal: z.enum([
     "marketing", "vendas", "crm", "ia", "dados", "automacao", "operacao",
