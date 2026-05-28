@@ -313,7 +313,7 @@ export function EstagiosCrescimento({ onDiagnostico }: { onDiagnostico: () => vo
     <section className="relative py-12 md:py-20 bg-grid-ambient overflow-hidden">
       <div className="container-aceleriq relative">
         <SectionHeader
-          eyebrow="[ 02 ] · Ponto de Partida"
+          eyebrow="[ 03 ] · Ponto de Partida"
           title="Comece pelo seu estágio atual"
           description="Identificamos o melhor caminho de acordo com o momento da sua empresa."
         />
@@ -377,7 +377,7 @@ export function MaturidadeComercial({ onDiagnostico }: { onDiagnostico: () => vo
     <section className="relative py-12 md:py-20 bg-grid-ambient border-t border-white/10 overflow-hidden">
       <div className="container-aceleriq relative">
         <SectionHeader
-          eyebrow="[ 03 ] · Evolução"
+          eyebrow="[ 04 ] · Evolução"
           title="Níveis de Maturidade Comercial"
           description="O diagnóstico define o melhor caminho para cada nível. Não existe receita pronta, existe engenharia sob medida."
         />
@@ -433,7 +433,7 @@ export function About() {
             transition={{ duration: 0.5 }}
             className="lg:col-span-6"
           >
-            <span className="label-eyebrow">[ 04 ] · O que é a Aceleriq</span>
+            <span className="label-eyebrow">[ 05 ] · O que é a Aceleriq</span>
             <h2 className="mt-3 font-display text-3xl font-medium leading-[1.08] tracking-[-0.03em] md:text-5xl">
               Não é agência. É a engenharia de crescimento do seu negócio.
             </h2>
@@ -512,7 +512,7 @@ export function Method() {
 
       <div className="container-aceleriq relative">
         <SectionHeader
-          eyebrow="[ 05 ] · Método A.C.E.L.E.R.A"
+          eyebrow="[ 06 ] · Método A.C.E.L.E.R.A"
           title="Sete etapas. Uma linha do tempo."
           description="Do diagnóstico à escala, com método de engenharia, não com palpite criativo."
         />
@@ -665,7 +665,7 @@ export function Areas() {
 
       <div className="container-aceleriq relative">
         <SectionHeader
-          eyebrow="[ 06 ] · Áreas de atuação"
+          eyebrow="[ 07 ] · Áreas de atuação"
           title="Tudo que sustenta o crescimento de uma empresa moderna."
           description="As 8 dimensões que separam empresas que crescem por sorte de empresas que crescem por engenharia."
         />
@@ -741,7 +741,7 @@ export function FitFor() {
 
       <div className="container-aceleriq relative">
         <SectionHeader
-          eyebrow="[ 07 ] · Fit de Parceria"
+          eyebrow="[ 08 ] · Fit de Parceria"
           title="É parceria séria. Mas cada empresa começa de um ponto."
         />
 
@@ -805,7 +805,7 @@ export function DiagnosticoCTA({ onDiagnostico }: { onDiagnostico: () => void })
             <div>
               <span className="label-eyebrow flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary pulse-dot" />
-                [ 08 ] · Diagnóstico inteligente
+                [ 09 ] · Diagnóstico inteligente
               </span>
               <h2 className="mt-3 font-display text-3xl font-medium leading-[1.08] tracking-[-0.03em] md:text-5xl">
                 Descubra a maturidade do seu negócio em crescimento e IA.
@@ -913,7 +913,7 @@ export function Results() {
     <section id="resultados" className="relative py-12 md:py-16 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
-          eyebrow="[ 09 ] · Resultados"
+          eyebrow="[ 10 ] · Resultados"
           title="Quando a engenharia entra, o resultado aparece."
           description="Indicadores reais e mini-cases de empresas que estruturaram seu sistema de crescimento com a Aceleriq."
         />
@@ -978,7 +978,7 @@ export function Testimonials() {
     <section className="relative py-12 md:py-16 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
-          eyebrow="[ 11 ] · Provas Reais"
+          eyebrow="[ 12 ] · Provas Reais"
           title="Provas reais, não promessas bonitas."
           description="A Aceleriq está construindo sua reputação com projetos reais, presença local e avaliações verificadas no Google."
         />
@@ -1020,7 +1020,7 @@ export function Compare() {
     <section className="relative py-12 md:py-16 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
-          eyebrow="[ 13 ] · Comparativo"
+          eyebrow="[ 14 ] · Comparativo"
           title="Agência comum vs. Aceleriq"
           description="A diferença entre contratar entregáveis e contratar um sistema de crescimento."
         />
@@ -1091,7 +1091,7 @@ export function WhyNow() {
             <div>
               <span className="label-eyebrow flex items-center gap-2">
                 <Rocket className="h-3.5 w-3.5 text-primary" />
-                [ 14 ] · Por que estruturar agora?
+                [ 15 ] · Por que estruturar agora?
               </span>
               <h2 className="mt-3 font-display text-3xl font-medium leading-[1.08] tracking-[-0.03em] md:text-5xl">
                 O custo de vender no improviso está cada vez maior.
@@ -1157,7 +1157,7 @@ export function FAQ() {
     <section id="faq" className="relative py-12 md:py-16 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
-          eyebrow="[ 15 ] · Perguntas frequentes"
+          eyebrow="[ 16 ] · Perguntas frequentes"
           title="Dúvidas comuns antes de acelerar."
           description="Não achou sua resposta? Fale com a gente no WhatsApp."
         />
@@ -1204,7 +1204,7 @@ export function FinalCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
           <div className="relative">
             <span className="label-eyebrow inline-flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-primary pulse-dot" />
-              [ 16 ] · Próximo passo
+              [ 17 ] · Próximo passo
             </span>
             <h2 className="mx-auto mt-5 max-w-3xl font-display text-3xl font-medium leading-[1.05] tracking-[-0.03em] md:text-6xl">
               Pare de improvisar. Comece a <span className="text-primary neon-text-glow">escalar com engenharia</span>.

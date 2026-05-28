@@ -341,7 +341,7 @@ export function PortfolioShowcase({
       />
       <div className="container-aceleriq">
         <SectionHeader
-          eyebrow="[ 12 ] · Portfólio"
+          eyebrow="[ 13 ] · Portfólio"
           title="Casos reais de engenharia aplicada."
           description="Alguns projetos onde estruturamos o sistema de crescimento de ponta a ponta."
         />
