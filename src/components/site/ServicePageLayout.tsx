@@ -260,31 +260,26 @@ export function ServicePageLayout(props: ServicePageProps) {
           `}</style>
         </section>
 
-        {/* METRICS */}
         <section className="px-6 lg:px-16 py-16 md:py-20 max-w-[1600px] mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-8">
             {[
               {
                 val: 1,
-                suffix: "",
                 label: "Estratégia antes da execução",
                 note: "Diagnóstico e prioridade",
               },
               {
                 val: 2,
-                suffix: "",
                 label: "Implantação sob medida",
                 note: "Processos e automações",
               },
               {
                 val: 3,
-                suffix: "",
                 label: "Operação acompanhada",
                 note: "Indicadores documentados",
               },
               { 
                 val: 4, 
-                suffix: "", 
                 label: "Melhoria contínua", 
                 note: "Ajustes guiados por dados" 
               },
@@ -305,21 +300,10 @@ export function ServicePageLayout(props: ServicePageProps) {
                   <div className="mt-0.5 text-[11px] text-muted-foreground/60">{m.note}</div>
                 </div>
               </motion.div>
-                <div className="font-display text-4xl md:text-5xl tracking-[-0.04em] leading-none">
-                  <CountUp
-                    to={m.val}
-                    suffix={m.suffix}
-                    className="bg-gradient-to-b from-foreground to-foreground/50 bg-clip-text text-transparent"
-                  />
-                </div>
-                <div className="mt-3 pt-3 border-t border-border/60 group-hover:border-primary/60 transition-colors">
-                  <div className="text-[13px] text-foreground/90 leading-snug">{m.label}</div>
-                  <div className="mt-0.5 text-[11px] text-muted-foreground/60">{m.note}</div>
-                </div>
-              </motion.div>
             ))}
           </div>
         </section>
+
 
         {/* WHY / BENEFITS */}
         <section className="px-6 lg:px-16 py-16 md:py-24 border-t border-border/60 max-w-[1600px] mx-auto">
