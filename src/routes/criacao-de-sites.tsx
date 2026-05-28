@@ -3,9 +3,9 @@ import { ServicePageLayout, buildServiceHead } from "@/components/site/ServicePa
 import { PortfolioShowcase } from "@/components/site/PortfolioShowcase";
 
 const URL = "https://aceleriq.com.br/criacao-de-sites";
-const TITLE = "Criação de Sites em Curitiba · Aceleriq";
+const TITLE = "Criação de Sites e Landing Pages para Vendas | Aceleriq";
 const DESCRIPTION =
-  "Criação de sites institucionais, landing pages e plataformas em Curitiba. SEO, performance e conversão, integrados a CRM e tráfego pago.";
+  "Sites e landing pages feitos para vender, captar e organizar oportunidades. Páginas rápidas, responsivas e integradas ao seu CRM e WhatsApp.";
 
 const FAQS = [
   { q: "Que tipo de site a Aceleriq cria?", a: "Sites institucionais, landing pages de captura, sites de produto/SaaS e plataformas sob medida, todos com foco em conversão e integração ao CRM." },
