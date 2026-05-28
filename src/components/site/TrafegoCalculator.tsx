@@ -45,33 +45,34 @@ export function TrafegoCalculator() {
 
   return (
     <>
-      {/* ============ CERTIFICAÇÕES ============ */}
+      {/* ============ PLATAFORMAS QUE OPERAMOS ============ */}
       <section className="relative px-6 lg:px-16 py-20 md:py-28 max-w-[1600px] mx-auto">
         <div className="grid lg:grid-cols-12 gap-8 mb-12">
           <div className="lg:col-span-2 font-mono text-[10px] text-primary uppercase tracking-[0.2em] lg:pt-2">
-            ⌖ Certificações
+            ⌖ Plataformas
           </div>
           <div className="lg:col-span-10">
             <h2 className="font-display text-2xl md:text-4xl uppercase leading-[1.05] tracking-[-0.035em]">
-              Agência <em className="italic font-light text-primary">credenciada</em> nas plataformas que importam
+              Plataformas que <em className="italic font-light text-primary">operamos</em>
             </h2>
             <p className="mt-4 max-w-2xl text-[15px] text-muted-foreground leading-relaxed">
-              Acesso direto a suporte estratégico, betas de produto e benchmarks por vertical.
-              Sem intermediário, sem revenda.
+              A Aceleriq estrutura campanhas e integrações nas principais plataformas de mídia,
+              sempre conectando tráfego, página, CRM e atendimento.
             </p>
           </div>
         </div>
 
-        {/* Todos os cards em fundo claro, mesma diagonal, alinhados */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 items-stretch">
-          <PlatformCard name="Google Ads" badge="Partner" code="google" />
-          <PlatformCard name="Meta Business" badge="Partner" code="meta" />
-          <PlatformCard name="LinkedIn Ads" badge="Marketing" code="linkedin" />
-          <PlatformCard name="TikTok Ads" badge="Manager" code="tiktok" />
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 items-stretch">
+          <PlatformCard name="Google Ads" code="google" />
+          <PlatformCard name="Meta Ads" code="meta" />
+          <PlatformCard name="LinkedIn Ads" code="linkedin" />
+          <PlatformCard name="TikTok Ads" code="tiktok" />
+          <PlatformCard name="Google Analytics" code="ga" />
+          <PlatformCard name="Meta Pixel / CAPI" code="capi" />
         </div>
       </section>
 
-      {/* ============ PROJEÇÃO ============ */}
+      {/* ============ SIMULAÇÃO ============ */}
       <section className="relative px-6 lg:px-16 py-20 md:py-28 max-w-[1600px] mx-auto">
         <div
           aria-hidden
@@ -81,15 +82,15 @@ export function TrafegoCalculator() {
 
         <div className="grid lg:grid-cols-12 gap-8 mb-10">
           <div className="lg:col-span-2 font-mono text-[10px] text-primary uppercase tracking-[0.2em] lg:pt-2">
-            ⌖ Projeção
+            ⌖ Simulação
           </div>
           <div className="lg:col-span-10">
             <h2 className="font-display text-2xl md:text-4xl lg:text-5xl uppercase leading-[1.05] tracking-[-0.035em] text-[oklch(15%_0_0)]">
-              Quanto sua mídia <em className="italic font-light text-[oklch(45%_0.18_145)]">deveria gerar</em>?
+              Simulação de investimento, <em className="italic font-light text-[oklch(45%_0.18_145)]">não promessa de resultado</em>.
             </h2>
             <p className="mt-4 max-w-2xl text-[15px] text-[oklch(35%_0_0)] leading-relaxed">
-              Selecione seu nicho. Os benchmarks (custo por contato, conversão e ticket) ajustam
-              automaticamente com base em operações reais Aceleriq.
+              A estimativa ajuda a visualizar cenários possíveis, mas o resultado real depende da oferta,
+              verba, atendimento, página, funil, CRM, maturidade da conta e qualidade comercial.
             </p>
           </div>
         </div>
@@ -133,15 +134,15 @@ export function TrafegoCalculator() {
               raw={ticket} onChange={setTicket}
             />
 
-            {/* Bench card — agora claro, segue a paleta */}
+            {/* Referências aproximadas */}
             <div className="bg-white border border-black/8 p-6 relative shadow-[0_15px_40px_-25px_rgba(0,0,0,0.2)] flex-1"
                  style={{ clipPath: "polygon(0 4%, 100% 0, 100% 96%, 0 100%)" }}>
               <div className="text-[10px] uppercase tracking-[0.25em] text-[oklch(45%_0_0)] mb-3 font-mono">
-                benchmarks · {cfg.label}
+                Referências de planejamento · {cfg.label}
               </div>
               <div className="space-y-2 text-sm">
-                <BenchRow k="Custo por contato" v={`R$ ${cfg.cpl}`} />
-                <BenchRow k="Lead → venda" v={`${(cfg.convRate * 100).toFixed(1)}%`} />
+                <BenchRow k="Custo por contato estimado" v={`R$ ${cfg.cpl}`} />
+                <BenchRow k="Contato → conversão" v={`${(cfg.convRate * 100).toFixed(1)}%`} />
                 <BenchRow k="Janela típica" v="30 dias" />
               </div>
               <div className="mt-4 pt-4 border-t border-black/8 text-[11px] text-[oklch(50%_0_0)] italic">
@@ -158,7 +159,7 @@ export function TrafegoCalculator() {
             <div className="flex items-start justify-between mb-8 gap-4">
               <div>
                 <div className="text-[10px] uppercase tracking-[0.25em] text-[oklch(45%_0.18_145)] font-mono mb-2">
-                  → receita projetada · mensal
+                  → Cenário estimado · mensal
                 </div>
                 <motion.div
                   key={revenue}
@@ -170,39 +171,48 @@ export function TrafegoCalculator() {
                   R$ {fmt(revenue)}
                 </motion.div>
                 <div className="mt-2 text-sm text-[oklch(40%_0_0)]">
-                  ≈ <span className="font-semibold text-[oklch(20%_0_0)]">R$ {fmt(revenue * 12)}</span> / ano
+                  ≈ <span className="font-semibold text-[oklch(20%_0_0)]">R$ {fmt(revenue * 12)}</span> / ano (cenário anualizado)
                 </div>
               </div>
-              <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-[oklch(95%_0.05_145)] border border-[oklch(85%_0.18_145)/0.4] rounded-full shrink-0">
-                <TrendingUp className="h-3.5 w-3.5 text-[oklch(45%_0.18_145)]" />
-                <span className="font-mono text-[11px] uppercase tracking-widest text-[oklch(35%_0.15_145)]">
-                  {returnIndex.toFixed(1)}x retorno
+              <div className="hidden md:flex flex-col items-end gap-1 px-3 py-1.5 bg-[oklch(95%_0.05_145)] border border-[oklch(85%_0.18_145)/0.4] rounded-md shrink-0 max-w-[200px]">
+                <div className="flex items-center gap-1.5">
+                  <TrendingUp className="h-3.5 w-3.5 text-[oklch(45%_0.18_145)]" />
+                  <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[oklch(35%_0.15_145)]">
+                    Relação estimada
+                  </span>
+                </div>
+                <span className="font-mono text-[11px] text-[oklch(30%_0_0)]">
+                  investimento × oportunidade
                 </span>
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-black/8 border border-black/10 overflow-hidden">
-              <MetricCell label="Leads" value={fmt(leads)} unit="/mês" />
-              <MetricCell label="Vendas" value={fmt(sales)} unit="/mês" />
-              <MetricCell label="Custo por cliente" value={`R$ ${fmt(acquisitionCost)}`} unit="" />
+              <MetricCell label="Contatos estimados" value={fmt(leads)} unit="/mês" />
+              <MetricCell label="Potenciais conversões" value={fmt(sales)} unit="/mês" />
+              <MetricCell label="Custo por conversão" value={`R$ ${fmt(acquisitionCost)}`} unit="estimado" />
             </div>
 
             <div className="mt-8">
               <div className="text-[10px] uppercase tracking-[0.25em] text-[oklch(45%_0_0)] font-mono mb-3">
-                funil
+                funil estimado
               </div>
               <FunnelBar pct={100} label="Investimento" sub={`R$ ${fmt(invest)}`} tone="dark" />
-              <FunnelBar pct={75} label="Leads" sub={`${fmt(leads)} contatos`} tone="mid" />
+              <FunnelBar pct={75} label="Contatos" sub={`${fmt(leads)} estimados`} tone="mid" />
               <FunnelBar pct={50} label="Oportunidades" sub={`${fmt(Math.round(leads * 0.4))} qualificadas`} tone="mid" />
-              <FunnelBar pct={28} label="Vendas" sub={`${fmt(sales)} fechadas`} tone="green" />
+              <FunnelBar pct={28} label="Conversões" sub={`${fmt(sales)} potenciais`} tone="green" />
             </div>
 
-            <p className="mt-6 text-[11px] text-[oklch(50%_0_0)]">
-              * Benchmarks médios reais por vertical. Resultado depende de oferta, criativo, funil comercial e maturidade do algoritmo.
-            </p>
+            <div className="mt-6 rounded-md border border-[oklch(85%_0.05_60)] bg-[oklch(97%_0.03_85)] p-4 text-[12px] text-[oklch(35%_0.05_60)] leading-relaxed">
+              <strong className="font-semibold">Aviso:</strong> esta simulação não garante resultado.
+              Ela serve para orientar planejamento inicial e priorização estratégica. Os números são
+              referências aproximadas e variam conforme oferta, criativo, atendimento, página, CRM e
+              maturidade da operação.
+            </div>
           </div>
         </div>
       </section>
+
 
       {/* ============ ESTRATÉGIA ============ */}
       <section className="relative px-6 lg:px-16 py-20 md:py-28 max-w-[1600px] mx-auto">
