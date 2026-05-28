@@ -88,8 +88,8 @@ export function TrafegoCalculator() {
               Quanto sua mídia <em className="italic font-light text-[oklch(45%_0.18_145)]">deveria gerar</em>?
             </h2>
             <p className="mt-4 max-w-2xl text-[15px] text-[oklch(35%_0_0)] leading-relaxed">
-              Selecione seu nicho. Os benchmarks (CPL, conversão e ticket) ajustam automaticamente
-              com base em operações reais Aceleriq.
+              Selecione seu nicho. Os benchmarks (custo por contato, conversão e ticket) ajustam
+              automaticamente com base em operações reais Aceleriq.
             </p>
           </div>
         </div>
@@ -140,7 +140,7 @@ export function TrafegoCalculator() {
                 benchmarks · {cfg.label}
               </div>
               <div className="space-y-2 text-sm">
-                <BenchRow k="CPL médio" v={`R$ ${cfg.cpl}`} />
+                <BenchRow k="Custo por contato" v={`R$ ${cfg.cpl}`} />
                 <BenchRow k="Lead → venda" v={`${(cfg.convRate * 100).toFixed(1)}%`} />
                 <BenchRow k="Janela típica" v="30 dias" />
               </div>

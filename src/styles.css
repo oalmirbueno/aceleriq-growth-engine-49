@@ -252,6 +252,13 @@
   .text-mono {
     font-family: var(--font-mono);
   }
+
+  /* Tight numeric span: overrides parent letter-spacing so "01" never visually breaks into "0 1" */
+  .num-tight {
+    letter-spacing: 0 !important;
+    font-variant-numeric: tabular-nums;
+    word-spacing: 0;
+  }
 }
 
 /* Animações Realistas */

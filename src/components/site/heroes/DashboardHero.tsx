@@ -121,7 +121,7 @@ export function DashboardHero() {
         </div>
       </motion.div>
 
-      {/* CPL chip — small floating */}
+      {/* SLA chip — small floating */}
       <motion.div
         initial={{ opacity: 0, scale: 0.7 }}
         animate={{ opacity: 1, scale: 1, y: [0, -6, 0] }}
@@ -129,10 +129,10 @@ export function DashboardHero() {
         style={{ transform: "translateZ(80px)" }}
         className="absolute left-16 bottom-0 rounded-xl border border-border bg-card/90 px-4 py-3 backdrop-blur-md shadow-[0_20px_40px_-15px_oklch(0%_0_0/0.8)]"
       >
-        <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-muted-foreground/70">CPL médio</div>
+        <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-muted-foreground/70">Tempo de resposta</div>
         <div className="mt-1 flex items-baseline gap-1.5">
-          <span className="font-display text-2xl font-bold tracking-[-0.03em] text-foreground">R$ 12,40</span>
-          <span className="font-mono text-[10px] text-primary">▼ 38%</span>
+          <span className="font-display text-2xl font-bold tracking-[-0.03em] text-foreground">{"< 2 min"}</span>
+          <span className="font-mono text-[10px] text-primary">SLA</span>
         </div>
       </motion.div>
     </div>

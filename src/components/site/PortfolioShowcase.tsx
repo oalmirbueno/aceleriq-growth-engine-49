@@ -475,7 +475,7 @@ function CaseView({
           Portfólio
         </button>
         <span className="hidden font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground md:inline">
-          [ Case · {String(currentIndex + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")} ]
+          [ Case · <span className="num-tight">{String(currentIndex + 1).padStart(2, "0")}</span> / <span className="num-tight">{String(items.length).padStart(2, "0")}</span> ]
         </span>
       </div>
 
@@ -571,7 +571,7 @@ function CaseView({
         <div className="mb-4 flex items-center justify-between">
           <span className="label-eyebrow">Outros cases</span>
           <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-            {items.length.toString().padStart(2, "0")} projetos · clique para trocar
+            <span className="num-tight">{items.length.toString().padStart(2, "0")}</span> projetos · clique para trocar
           </span>
         </div>
         <div
@@ -719,7 +719,7 @@ function RailThumb({
       />
 
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent" />
-      <span className="absolute left-2 top-2 rounded-md border border-white/15 bg-background/70 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-foreground/85 backdrop-blur">
+      <span className="num-tight absolute left-2 top-2 rounded-md border border-white/15 bg-background/70 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-foreground/85 backdrop-blur">
         {String(index + 1).padStart(2, "0")}
       </span>
       {isActive && (

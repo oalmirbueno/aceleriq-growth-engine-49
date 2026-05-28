@@ -206,7 +206,7 @@ export function Pains() {
             >
               <div className="flex items-start justify-between">
                 <p.icon className="h-5 w-5 text-primary" />
-                <span className="text-mono text-[11px] text-muted-foreground whitespace-nowrap">
+                <span className="num-tight text-mono text-[11px] text-muted-foreground whitespace-nowrap">
                   {String(i + 1).padStart(2, "0")}
                 </span>
               </div>
@@ -392,7 +392,7 @@ export function MaturidadeComercial({ onDiagnostico }: { onDiagnostico: () => vo
               transition={{ duration: 0.4, delay: i * 0.1 }}
               className="relative p-6 rounded-xl border border-white/10 bg-white/[0.03] group hover:border-primary/40 transition-colors"
             >
-              <div className="text-mono text-[10px] text-primary/60 mb-4 tracking-widest uppercase whitespace-nowrap">Nível {String(i + 1).padStart(2, "0")}</div>
+              <div className="text-mono text-[10px] text-primary/60 mb-4 tracking-widest uppercase whitespace-nowrap">Nível <span className="num-tight">{String(i + 1).padStart(2, "0")}</span></div>
               <h3 className="font-display text-xl font-medium mb-3 group-hover:text-primary transition-colors">{m.level}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{m.desc}</p>
             </motion.div>
@@ -541,7 +541,7 @@ export function Method() {
                 </div>
                 <div className="lg:mt-6 lg:text-center">
                   <div className="flex items-baseline gap-3 lg:block">
-                    <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground whitespace-nowrap transition-colors group-hover:text-primary/80">
+                    <span className="num-tight font-mono text-[10px] tracking-[0.3em] text-muted-foreground whitespace-nowrap transition-colors group-hover:text-primary/80">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <h3 className="font-display text-sm font-medium uppercase tracking-[0.14em] text-foreground transition-colors group-hover:text-primary lg:mt-3 lg:text-[13px] lg:tracking-[0.16em]">
@@ -611,7 +611,7 @@ export function Areas() {
                 <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-primary/30 bg-primary/10 text-primary transition-all duration-300 group-hover:scale-110 group-hover:border-primary group-hover:bg-primary/20 group-hover:shadow-[0_0_20px_oklch(85%_0.2_145/0.5)]">
                   <a.icon className="h-5 w-5" />
                 </div>
-                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground whitespace-nowrap">
+                <span className="num-tight font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground whitespace-nowrap">
                   {String(i + 1).padStart(2, "0")}
                 </span>
               </div>
@@ -843,7 +843,7 @@ export function Results({ onDiagnostico }: { onDiagnostico?: () => void } = {}) 
               transition={{ duration: 0.4, delay: i * 0.06 }}
               className="hairline rounded-2xl bg-card/40 p-6 card-hover"
             >
-              <span className="text-mono text-[11px] uppercase tracking-[0.18em] text-primary whitespace-nowrap">
+              <span className="num-tight text-mono text-[11px] uppercase tracking-[0.18em] text-primary whitespace-nowrap">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <h3 className="mt-4 font-display text-[17px] font-medium tracking-tight">
@@ -923,7 +923,7 @@ export function Compare() {
           description="A diferença entre contratar entregáveis e contratar um sistema de crescimento."
         />
 
-        <div className="mt-8 md:mt-10 hidden md:block overflow-hidden rounded-2xl border border-border">
+        <div aria-label="Comparativo agência comum vs. Aceleriq" className="mt-8 md:mt-10 hidden md:block overflow-hidden rounded-2xl border border-border">
           <div className="grid grid-cols-[1fr_1.4fr_1.4fr] border-b border-border bg-card/40">
             <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Dimensão</div>
             <div className="px-5 py-4 text-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Agência comum</div>
