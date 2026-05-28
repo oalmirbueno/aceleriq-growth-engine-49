@@ -941,7 +941,7 @@ export function Compare() {
           ))}
         </div>
 
-        <div aria-hidden="true" className="mt-8 grid gap-3 md:hidden">
+        <div className="mt-8 grid gap-3 md:hidden">
           {COMPARE.map(([dim, agency, us], i) => (
             <div key={i} className="overflow-hidden rounded-xl border border-border bg-card/40">
               <div className="border-b border-border bg-card/60 px-4 py-2.5">
