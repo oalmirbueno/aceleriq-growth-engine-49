@@ -15,7 +15,7 @@ export function PainelComunidade() {
       <div className="container-aceleriq relative z-10">
         <div className="max-w-3xl mb-16 md:mb-20">
           <span className="font-mono text-[10px] tracking-[0.4em] uppercase py-1 border-b border-primary text-primary">
-            03 // Operação ao Vivo
+            [ 10 ] // Operação ao Vivo
           </span>
           <h2 className="mt-6 text-3xl md:text-5xl lg:text-6xl font-bold leading-[1.05]">
             <span className="text-white">Tudo o que fazemos é</span>

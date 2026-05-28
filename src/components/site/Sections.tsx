@@ -978,7 +978,7 @@ export function Testimonials() {
     <section className="relative py-12 md:py-16 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
-          eyebrow="[ 08 ] · Provas Reais"
+          eyebrow="[ 11 ] · Provas Reais"
           title="Provas reais, não promessas bonitas."
           description="A Aceleriq está construindo sua reputação com projetos reais, presença local e avaliações verificadas no Google."
         />
@@ -1020,7 +1020,7 @@ export function Compare() {
     <section className="relative py-12 md:py-16 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
-          eyebrow="[ 10 ] · Comparativo"
+          eyebrow="[ 13 ] · Comparativo"
           title="Agência comum vs. Aceleriq"
           description="A diferença entre contratar entregáveis e contratar um sistema de crescimento."
         />
@@ -1157,7 +1157,7 @@ export function FAQ() {
     <section id="faq" className="relative py-12 md:py-16 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
-          eyebrow="[ 12 ] · Perguntas frequentes"
+          eyebrow="[ 15 ] · Perguntas frequentes"
           title="Dúvidas comuns antes de acelerar."
           description="Não achou sua resposta? Fale com a gente no WhatsApp."
         />
