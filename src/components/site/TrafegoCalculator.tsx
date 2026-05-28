@@ -156,7 +156,10 @@ export function TrafegoCalculator() {
           {/* Output */}
           <div
             className="lg:col-span-3 relative bg-white p-8 md:p-10 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.25)] border border-black/5"
+            style={{ clipPath: "polygon(0 3%, 100% 0, 100% 97%, 0 100%)" }}
+          >
             <div className="flex items-start justify-between mb-8 gap-4">
+
               <div>
                 <div className="text-[10px] uppercase tracking-[0.25em] text-[oklch(45%_0.18_145)] font-mono mb-2">
                   → Cenário de oportunidades · mensal
