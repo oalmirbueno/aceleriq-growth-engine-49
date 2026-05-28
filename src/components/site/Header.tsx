@@ -78,7 +78,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
             onClick={onDiagnostico}
             className="btn-tech text-[11px] px-6 py-2"
           >
-            Inaugurate Protocol
+            Fazer Diagnóstico
           </button>
         </div>
 
