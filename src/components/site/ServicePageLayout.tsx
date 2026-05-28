@@ -292,7 +292,11 @@ export function ServicePageLayout(props: ServicePageProps) {
                 <div className="pt-1">
                   <div className="text-[14px] md:text-[15px] text-foreground/90 leading-snug font-medium">{m.label}</div>
                   <div className="mt-1.5 text-[11px] text-muted-foreground/60">{m.note}</div>
-
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
 
 
         {/* WHY / BENEFITS */}
