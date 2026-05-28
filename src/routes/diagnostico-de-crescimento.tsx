@@ -26,7 +26,8 @@ import {
   Instagram,
   Database,
   Workflow,
-  Bot
+  Bot,
+  X
 } from "lucide-react";
 import { useState } from "react";
 import { whatsappLink, DEFAULT_WHATSAPP_MESSAGE } from "@/lib/contact";

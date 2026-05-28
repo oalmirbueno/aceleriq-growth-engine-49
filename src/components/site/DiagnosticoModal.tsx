@@ -149,8 +149,6 @@ const capturaSchema = z.object({
   empresa: z.string().trim().min(2, "Informe sua empresa").max(160),
   cidade: z.string().trim().min(2, "Informe sua cidade").max(100),
   segmento: z.string().trim().min(2, "Informe o segmento").max(100),
-  site_instagram: z.string().trim().max(200).optional().or(z.literal("")),
-  faturamento_mensal: z.enum(["ate_100k", "100k_300k", "300k_1m", "1m_5m", "acima_5m"]),
   usa_crm: z.string().min(1),
   investe_trafego: z.string().min(1),
   tem_equipe_comercial: z.string().min(1),
@@ -175,17 +173,15 @@ export function DiagnosticoModal({
   const [phase, setPhase] = useState<Phase>("captura");
   const [capturaIdx, setCapturaIdx] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1);
-  const [captura, setCaptura] = useState<CapturaForm>({
+  const [captura, setCaptura] = useState<Partial<CapturaForm>>({
     nome: "",
     whatsapp: "",
     empresa: "",
     cidade: "",
     segmento: "",
-    site_instagram: "",
-    faturamento_mensal: "100k_300k",
     usa_crm: "nao",
     investe_trafego: "nao",
-    tem_equipe_comercial: "so_dono",
+    tem_equipe_comercial: "nao",
     principal_gargalo: "",
     interesse_principal: "vendas",
   });
@@ -211,8 +207,8 @@ export function DiagnosticoModal({
     setCapturaIdx(0);
     setDirection(1);
     setCaptura({
-      nome: "", whatsapp: "", empresa: "", cidade: "", segmento: "", site_instagram: "",
-      faturamento_mensal: "100k_300k", usa_crm: "nao", investe_trafego: "nao", tem_equipe_comercial: "so_dono",
+      nome: "", whatsapp: "", empresa: "", cidade: "", segmento: "",
+      usa_crm: "nao", investe_trafego: "nao", tem_equipe_comercial: "nao",
       principal_gargalo: "", interesse_principal: "vendas",
     });
     setAnswers({});
@@ -303,17 +299,15 @@ export function DiagnosticoModal({
       const recs = recomendar(finalAnswers, captura.interesse_principal);
 
       const { error } = await supabase.from("diagnostico_leads").insert({
-        nome: captura.nome.trim(),
-        whatsapp: captura.whatsapp.trim(),
-        empresa: captura.empresa.trim(),
+        nome: captura.nome?.trim() || "",
+        whatsapp: captura.whatsapp?.trim() || "",
+        empresa: captura.empresa?.trim() || "",
         cidade: captura.cidade?.trim() || "",
         segmento: captura.segmento?.trim() || "",
-        site_instagram: captura.site_instagram?.trim() || null,
-        faturamento_mensal: captura.faturamento_mensal,
         usa_crm: captura.usa_crm || "nao",
         investe_trafego: captura.investe_trafego || "nao",
-        tem_equipe_comercial: captura.tem_equipe_comercial || "so_dono",
-        principal_gargalo: captura.principal_gargalo.trim(),
+        tem_equipe_comercial: captura.tem_equipe_comercial || "nao",
+        principal_gargalo: captura.principal_gargalo?.trim() || "",
         interesse_principal: captura.interesse_principal,
         respostas: finalAnswers,
         score,
