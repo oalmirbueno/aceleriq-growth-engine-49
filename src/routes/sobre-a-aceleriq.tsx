@@ -124,7 +124,7 @@ function SobreAceleriq() {
         <section className="relative py-12 md:py-16 bg-grid-ambient">
           <div className="container-aceleriq grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-7">
-              <span className="label-eyebrow">[ 01 ] · O que é a Aceleriq</span>
+              <span className="label-eyebrow">Sobre a Aceleriq</span>
               <h2 className="mt-3 font-display text-3xl font-medium leading-[1.1] tracking-[-0.03em] md:text-4xl">
                 Não é agência tradicional. É a engenharia de crescimento da sua empresa.
               </h2>
@@ -176,7 +176,7 @@ function SobreAceleriq() {
         <section className="relative py-12 md:py-16 bg-grid-ambient">
           <div className="container-aceleriq">
             <div className="max-w-2xl">
-              <span className="label-eyebrow">[ 02 ] · O que a Aceleriq faz</span>
+              <span className="label-eyebrow">Atuação</span>
               <h2 className="mt-3 font-display text-3xl font-medium leading-[1.1] tracking-[-0.03em] md:text-4xl">
                 Frentes de atuação da Aceleriq
               </h2>
