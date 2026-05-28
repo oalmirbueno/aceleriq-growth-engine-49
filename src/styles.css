@@ -253,13 +253,18 @@
     font-family: var(--font-mono);
   }
 
-  /* Tight numeric span: overrides parent letter-spacing so "01" never visually breaks into "0 1" */
-  .num-tight {
-    letter-spacing: 0 !important;
-    font-variant-numeric: tabular-nums;
-    word-spacing: 0;
-  }
 }
+
+/* Tight numeric span: outside @layer so !important beats every Tailwind tracking-* utility. */
+.num-tight,
+.num-tight * {
+  letter-spacing: 0 !important;
+  word-spacing: 0 !important;
+  font-variant-numeric: tabular-nums !important;
+  font-feature-settings: "tnum" 1 !important;
+  white-space: nowrap !important;
+}
+
 
 /* Animações Realistas */
 @keyframes float {

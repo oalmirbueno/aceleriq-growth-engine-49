@@ -46,7 +46,7 @@ export function DashboardHero() {
         </div>
       </motion.div>
 
-      {/* GREEN neon card — retorno */}
+      {/* GREEN neon card — visão operacional */}
       <motion.div
         initial={{ opacity: 0, y: -20, rotate: -3 }}
         animate={{ opacity: 1, y: [0, 12, 0], rotate: -3 }}
@@ -61,16 +61,17 @@ export function DashboardHero() {
           }}
         />
         <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-background/70">
-          retorno
+          pipeline ativo
         </div>
-        <div className="mt-3 flex items-baseline gap-1">
-          <CountTo value={6.8} suffix="x" className="font-display text-6xl font-bold tracking-[-0.04em] text-background" />
+        <div className="mt-3 font-display text-3xl font-bold tracking-[-0.03em] text-background leading-tight">
+          Visão única
         </div>
-        <div className="mt-2 text-[11px] text-background/80">vs. baseline 2.1x</div>
+        <div className="mt-2 text-[11px] text-background/80">CRM · mídia · atendimento</div>
         <div className="mt-3 inline-flex items-center gap-1 rounded-full bg-background/15 px-2 py-0.5 font-mono text-[9px] uppercase tracking-widest text-background">
-          ▲ 224%
+          tempo real
         </div>
       </motion.div>
+
 
       {/* DARK card — funnel */}
       <motion.div
