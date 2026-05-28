@@ -3,9 +3,9 @@ import { ServicePageLayout, buildServiceHead } from "@/components/site/ServicePa
 import { AutomationSimulator } from "@/components/site/AutomationSimulator";
 
 const URL = "https://aceleriq.com.br/automacao-e-ia";
-const TITLE = "Automação e IA para Empresas · Aceleriq";
+const TITLE = "Automação e IA para WhatsApp, CRM e Comercial | Aceleriq";
 const DESCRIPTION =
-  "Automação de marketing, vendas e operação com IA. Agentes inteligentes, fluxos n8n/Make, integrações e CRM automatizado para escalar sem contratar.";
+  "Automação e IA para reduzir atraso, organizar atendimento e acelerar decisões. Criamos agentes e integrações conectadas ao seu WhatsApp e CRM.";
 
 const FAQS = [
   { q: "Que tipo de automação vocês implementam?", a: "Automação comercial (qualificação, follow-up, agendamento), de marketing (nutrição, segmentação, scoring), operacional (financeiro, atendimento, BI) e agentes de IA customizados." },
