@@ -8,6 +8,8 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
+import { SectionHeader } from "./Sections";
+
 export type PortfolioItem = {
   slug: string;
   name: string;

@@ -1247,7 +1247,7 @@ export function FinalCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
 // ─────────────────────────────────────────────────────────────
 // Helper
 // ─────────────────────────────────────────────────────────────
-function SectionHeader({
+export function SectionHeader({
   eyebrow,
   title,
   description,
