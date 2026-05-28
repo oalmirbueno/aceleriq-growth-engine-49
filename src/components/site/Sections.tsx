@@ -805,7 +805,7 @@ export function DiagnosticoCTA({ onDiagnostico }: { onDiagnostico: () => void })
             <div>
               <span className="label-eyebrow flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary pulse-dot" />
-                [ 06 ] · Diagnóstico inteligente
+                [ 08 ] · Diagnóstico inteligente
               </span>
               <h2 className="mt-3 font-display text-3xl font-medium leading-[1.08] tracking-[-0.03em] md:text-5xl">
                 Descubra a maturidade do seu negócio em crescimento e IA.
@@ -1091,7 +1091,7 @@ export function WhyNow() {
             <div>
               <span className="label-eyebrow flex items-center gap-2">
                 <Rocket className="h-3.5 w-3.5 text-primary" />
-                [ 10 ] · Por que estruturar agora?
+                [ 11 ] · Por que estruturar agora?
               </span>
               <h2 className="mt-3 font-display text-3xl font-medium leading-[1.08] tracking-[-0.03em] md:text-5xl">
                 O custo de vender no improviso está cada vez maior.
@@ -1204,7 +1204,7 @@ export function FinalCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
           <div className="relative">
             <span className="label-eyebrow inline-flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-primary pulse-dot" />
-              [ 12 ] · Próximo passo
+              [ 13 ] · Próximo passo
             </span>
             <h2 className="mx-auto mt-5 max-w-3xl font-display text-3xl font-medium leading-[1.05] tracking-[-0.03em] md:text-6xl">
               Pare de improvisar. Comece a <span className="text-primary neon-text-glow">escalar com engenharia</span>.
