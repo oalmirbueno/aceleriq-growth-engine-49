@@ -969,12 +969,12 @@ export function Results() {
               key={m.label}
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="bg-background p-6"
-            >
-              <span className="label-eyebrow">{m.label}</span>
-              <div className="mt-3 text-mono text-[40px] font-semibold leading-none tracking-tight text-primary md:text-[44px]">
+const METRICS = [
+  { value: "Estratégia", label: "Antes da execução" },
+  { value: "Implantação", label: "Sob medida" },
+  { value: "Operação", label: "Acompanhada" },
+  { value: "Melhoria", label: "Contínua" },
+];
                 {m.value}
               </div>
             </motion.div>
@@ -1014,10 +1014,10 @@ export function Results() {
     </section>
   );
 }
-
-// ─────────────────────────────────────────────────────────────
-// DEPOIMENTOS
-// ─────────────────────────────────────────────────────────────
+              <span className="label-eyebrow">{m.value}</span>
+              <div className="mt-3 text-[18px] font-semibold tracking-tight text-primary">
+                {m.label}
+              </div>
 // ─────────────────────────────────────────────────────────────
 // DEPOIMENTOS
 // ─────────────────────────────────────────────────────────────
@@ -1219,40 +1219,38 @@ const FAQS = [
     q: "Vocês substituem meu time interno?",
     a: "Não. A Aceleriq atua como engenharia parceira do seu time, não como terceirização. Estruturamos processos, treinamos pessoas, implementamos ferramentas e aceleramos a operação para que ela rode com seu time, não dependendo de heróis nem da nossa presença diária. O objetivo final é deixar sua empresa autônoma com método, não criar dependência. Quando você não precisar mais da gente em algumas frentes, a gente comemora junto.",
   },
-  {
-    q: "Como começa o trabalho depois do diagnóstico?",
-    a: "Após o Diagnóstico, agendamos uma sessão estratégica de aprofundamento (60-90 min) para entender seu negócio, números, time, ferramentas e prioridades reais. Se houver fit técnico e estratégico nos dois lados, montamos uma proposta personalizada com escopo de programa, cronograma de 90 dias, KPIs alvo e investimento. A partir do aceite, começamos com onboarding técnico, mapeamento de stack e o primeiro sprint em até 7 dias.",
-  },
-];
-
-export function FAQ() {
-  return (
-    <section id="faq" className="relative py-12 md:py-16 bg-grid-ambient">
-      <div className="container-aceleriq">
-        <SectionHeader
-          eyebrow="[ 11 ] · Perguntas frequentes"
-          title="Dúvidas comuns antes de acelerar."
-          description="Não achou sua resposta? Fale com a gente no WhatsApp."
-        />
-
-        <div className="mx-auto mt-8 md:mt-10 max-w-3xl">
-          <Accordion type="single" collapsible className="space-y-2.5">
-            {FAQS.map((f, i) => (
-              <AccordionItem
-                key={i}
-                value={`item-${i}`}
-                className="overflow-hidden rounded-xl border border-border bg-card/40 px-5 transition-colors data-[state=open]:border-primary/30"
-              >
-                <AccordionTrigger className="py-5 text-left text-[15px] font-medium hover:no-underline">
-                  <span className="flex items-center gap-3">
-                    <HelpCircle className="h-4 w-4 flex-shrink-0 text-primary" />
-                    {f.q}
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className="pb-5 pl-7 text-[14px] leading-relaxed text-muted-foreground">
-                  {f.a}
-                </AccordionContent>
-              </AccordionItem>
+          <div className="relative grid gap-6 lg:grid-cols-[1.2fr_1fr] lg:items-center">
+            <div>
+              <span className="label-eyebrow flex items-center gap-2">
+                <Rocket className="h-3.5 w-3.5 text-primary" />
+                [ 10 ] · Por que estruturar agora?
+              </span>
+              <h2 className="mt-3 font-display text-3xl font-medium leading-[1.08] tracking-[-0.03em] md:text-5xl">
+                O custo de vender no improviso está cada vez maior.
+              </h2>
+              <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground md:text-base">
+                Empresas que organizam atendimento, CRM, dados, automação e marketing conseguem entender melhor seus gargalos, responder mais rápido e tomar decisões com menos achismo.
+              </p>
+            </div>
+            <div className="grid gap-2.5 sm:grid-cols-2">
+              {[
+                "Menos perda de lead",
+                "Mais clareza no funil",
+                "Atendimento mais rápido",
+                "Follow-up com rotina",
+                "Marketing conectado",
+                "Decisões com dados",
+              ].map((benefit) => (
+                <div
+                  key={benefit}
+                  className="flex items-center gap-2 rounded-xl border border-border bg-background/50 px-5 py-4"
+                >
+                  <Check className="h-4 w-4 text-primary" />
+                  <span className="text-[13px] text-foreground font-medium">{benefit}</span>
+                </div>
+              ))}
+            </div>
+          </div>
             ))}
           </Accordion>
         </div>
