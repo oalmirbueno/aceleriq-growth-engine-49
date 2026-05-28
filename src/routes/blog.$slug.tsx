@@ -291,7 +291,7 @@ function BlogPostPage() {
               <ul className="space-y-2">
                 {keyPoints.map((k, i) => (
                   <li key={i} className="flex gap-3 text-sm text-foreground/85 leading-relaxed">
-                    <span className="font-mono text-[11px] text-primary/80 mt-0.5 whitespace-nowrap">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="num-tight font-mono text-[11px] text-primary/80 mt-0.5 whitespace-nowrap">{String(i + 1).padStart(2, "0")}</span>
                     <span>{k}</span>
                   </li>
                 ))}
