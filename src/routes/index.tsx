@@ -113,7 +113,6 @@ function Index() {
         <Hero onDiagnostico={openDiagnostico} />
         <OperationsFirst />
         <Pains />
-        <OperationsFirst />
         <EstagiosCrescimento onDiagnostico={openDiagnostico} />
         <MaturidadeComercial onDiagnostico={openDiagnostico} />
         <About />
