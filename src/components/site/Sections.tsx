@@ -433,7 +433,7 @@ export function About() {
             transition={{ duration: 0.5 }}
             className="lg:col-span-6"
           >
-            <span className="label-eyebrow">[ 02 ] · O que é a Aceleriq</span>
+            <span className="label-eyebrow">[ 04 ] · O que é a Aceleriq</span>
             <h2 className="mt-3 font-display text-3xl font-medium leading-[1.08] tracking-[-0.03em] md:text-5xl">
               Não é agência. É a engenharia de crescimento do seu negócio.
             </h2>
@@ -512,7 +512,7 @@ export function Method() {
 
       <div className="container-aceleriq relative">
         <SectionHeader
-          eyebrow="[ 03 ] · Método A.C.E.L.E.R.A"
+          eyebrow="[ 05 ] · Método A.C.E.L.E.R.A"
           title="Sete etapas. Uma linha do tempo."
           description="Do diagnóstico à escala, com método de engenharia, não com palpite criativo."
         />
@@ -665,7 +665,7 @@ export function Areas() {
 
       <div className="container-aceleriq relative">
         <SectionHeader
-          eyebrow="[ 04 ] · Áreas de atuação"
+          eyebrow="[ 06 ] · Áreas de atuação"
           title="Tudo que sustenta o crescimento de uma empresa moderna."
           description="As 8 dimensões que separam empresas que crescem por sorte de empresas que crescem por engenharia."
         />
@@ -741,7 +741,7 @@ export function FitFor() {
 
       <div className="container-aceleriq relative">
         <SectionHeader
-          eyebrow="[ 05 ] · Fit de Parceria"
+          eyebrow="[ 07 ] · Fit de Parceria"
           title="É parceria séria. Mas cada empresa começa de um ponto."
         />
 
@@ -913,7 +913,7 @@ export function Results() {
     <section id="resultados" className="relative py-12 md:py-16 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
-          eyebrow="[ 07 ] · Resultados"
+          eyebrow="[ 09 ] · Resultados"
           title="Quando a engenharia entra, o resultado aparece."
           description="Indicadores reais e mini-cases de empresas que estruturaram seu sistema de crescimento com a Aceleriq."
         />
@@ -1020,7 +1020,7 @@ export function Compare() {
     <section className="relative py-12 md:py-16 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
-          eyebrow="[ 09 ] · Comparativo"
+          eyebrow="[ 10 ] · Comparativo"
           title="Agência comum vs. Aceleriq"
           description="A diferença entre contratar entregáveis e contratar um sistema de crescimento."
         />
@@ -1157,7 +1157,7 @@ export function FAQ() {
     <section id="faq" className="relative py-12 md:py-16 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
-          eyebrow="[ 11 ] · Perguntas frequentes"
+          eyebrow="[ 12 ] · Perguntas frequentes"
           title="Dúvidas comuns antes de acelerar."
           description="Não achou sua resposta? Fale com a gente no WhatsApp."
         />
