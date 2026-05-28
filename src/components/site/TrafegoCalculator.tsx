@@ -37,9 +37,8 @@ export function TrafegoCalculator() {
 
   const leads = Math.round(invest / cfg.cpl);
   const sales = Math.max(1, Math.round(leads * cfg.convRate));
-  const revenue = sales * ticket;
-  const returnIndex = revenue / Math.max(invest, 1);
-  const acquisitionCost = sales > 0 ? Math.round(invest / sales) : 0;
+
+
 
   const fmt = (v: number) => v.toLocaleString("pt-BR");
 
