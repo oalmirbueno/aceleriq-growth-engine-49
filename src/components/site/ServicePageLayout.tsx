@@ -279,13 +279,13 @@ export function ServicePageLayout(props: ServicePageProps) {
                 label: "Melhoria contínua",
                 note: "Ajustes guiados por dados",
               },
-            ].map((m, i) => (
+            ].map((m) => (
               <motion.div
-                key={i}
+                key={m.label}
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: i * 0.06 }}
+                transition={{ duration: 0.4 }}
                 className="group"
               >
                 <div className="h-px w-10 bg-primary mb-5 group-hover:w-16 transition-all" />

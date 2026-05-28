@@ -274,7 +274,7 @@ export function OperationsFirst() {
 }
 
 // ─────────────────────────────────────────────────────────────
-// COMECE PELO SEU ESTÁGIO ATUAL
+// COMECE POR AQUI
 const STAGES = [
   {
     title: "Meu comercial está desorganizado",
