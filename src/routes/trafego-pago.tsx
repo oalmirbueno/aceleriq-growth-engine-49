@@ -3,9 +3,9 @@ import { ServicePageLayout, buildServiceHead } from "@/components/site/ServicePa
 import { TrafegoCalculator } from "@/components/site/TrafegoCalculator";
 
 const URL = "https://aceleriq.com.br/trafego-pago";
-const TITLE = "Gestão de Tráfego Pago em Curitiba · Aceleriq";
+const TITLE = "Gestão de Tráfego Pago com Estratégia Comercial | Aceleriq";
 const DESCRIPTION =
-  "Gestão de tráfego em Google, Meta e LinkedIn Ads orientada a pipeline e receita. Integra mídia, CRM e dados para escalar com previsibilidade.";
+  "Tráfego pago para escalar operações que já têm base para converter. Planejamos, configuramos e otimizamos campanhas no Meta Ads e Google Ads.";
 
 const FAQS = [
   { q: "Em quais plataformas vocês operam?", a: "Google Ads (Search, PMax, YouTube), Meta Ads (Facebook/Instagram), LinkedIn Ads, TikTok Ads e remarketing programático." },
