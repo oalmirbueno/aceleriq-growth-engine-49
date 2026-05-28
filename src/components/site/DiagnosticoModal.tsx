@@ -330,6 +330,7 @@ export function DiagnosticoModal({
       setDirection(1);
       setPhase("resultado");
       toast.success("Diagnóstico recebido. A equipe da Aceleriq vai analisar suas respostas e entrar em contato.");
+    } catch (e) {
       console.error(e);
       toast.error("Não foi possível salvar. Tente novamente em instantes.");
     } finally {
