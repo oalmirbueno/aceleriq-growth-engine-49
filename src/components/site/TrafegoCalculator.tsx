@@ -155,7 +155,7 @@ export function TrafegoCalculator() {
                   {fmt(leads)} <span className="text-2xl md:text-3xl font-light text-[oklch(40%_0_0)]">contatos potenciais</span>
                 </motion.div>
                 <div className="mt-3 text-sm text-[oklch(40%_0_0)] max-w-md leading-relaxed">
-                  A simulação mostra volume potencial de demanda, não previsão de receita.
+                  A simulação mostra volume potencial de demanda, não promessa de venda.
                 </div>
               </div>
             </div>
