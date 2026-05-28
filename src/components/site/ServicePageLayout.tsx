@@ -47,9 +47,9 @@ const DEFAULT_PRINCIPLES: Record<ServiceVariant, ServicePrinciple> = {
     ),
     body: "Cada bloco é desenhado para vender: hierarquia clara, performance brutal, SEO técnico nativo e CRM conectado. O site não termina no deploy, ele começa lá, alimentando tráfego, dados e funil em loop contínuo.",
     stats: [
-      { v: "<1s", l: "LCP em produção" },
-      { v: "98", l: "Lighthouse SEO" },
-      { v: "100%", l: "leads no CRM" },
+      { v: "Performance", l: "real em produção" },
+      { v: "SEO técnico", l: "nativo na entrega" },
+      { v: "CRM", l: "conectado ao funil" },
     ],
   },
   trafego: {
@@ -61,11 +61,11 @@ const DEFAULT_PRINCIPLES: Record<ServiceVariant, ServicePrinciple> = {
         não loteria de clique.
       </>
     ),
-    body: "Tráfego sem CRM e sem CAPI é aposta. A Aceleriq conecta Meta, Google e LinkedIn ao seu pipeline real, mede CAC e LTV por canal e otimiza o investimento por receita gerada, não por métrica de vaidade.",
+    body: "Tráfego sem CRM e sem rastreio sério é aposta. A Aceleriq conecta Meta, Google e LinkedIn ao seu pipeline real e organiza o investimento por receita gerada, não por métrica de vaidade.",
     stats: [
-      { v: "1", l: "fonte da verdade (CRM)" },
-      { v: "S2S", l: "tracking server-side" },
-      { v: "ROAS", l: "lido por receita" },
+      { v: "CRM", l: "como fonte da verdade" },
+      { v: "Tracking", l: "server-side" },
+      { v: "Receita", l: "como métrica final" },
     ],
   },
   ia: {
@@ -77,9 +77,9 @@ const DEFAULT_PRINCIPLES: Record<ServiceVariant, ServicePrinciple> = {
         não enfeite de pitch.
       </>
     ),
-    body: "Automação real tira tarefa repetitiva do colo do time e devolve foco em receita. Agentes de IA com RAG da sua base, fluxos n8n self-hosted e governança LGPD: tecnologia que opera, não que apenas demonstra.",
+    body: "Automação real tira tarefa repetitiva do colo do time e devolve foco em receita. Agentes de IA com base própria, fluxos n8n self-hosted e governança LGPD: tecnologia que opera, não que apenas demonstra.",
     stats: [
-      { v: "24/7", l: "operação contínua" },
+      { v: "Operação", l: "contínua" },
       { v: "RAG", l: "sobre sua base" },
       { v: "LGPD", l: "compliance nativo" },
     ],
@@ -95,9 +95,9 @@ const DEFAULT_PRINCIPLES: Record<ServiceVariant, ServicePrinciple> = {
     ),
     body: "Cada peça do programa conversa com a próxima. Site alimenta tráfego. Tráfego alimenta CRM. CRM alimenta IA. IA devolve receita pra dentro do P&L. Sem ilha, sem entregável solto.",
     stats: [
-      { v: "0", l: "departamentos isolados" },
-      { v: "1", l: "fonte da verdade" },
-      { v: "∞", l: "ciclos de melhoria" },
+      { v: "Sistema", l: "integrado de ponta a ponta" },
+      { v: "Fonte única", l: "da verdade" },
+      { v: "Melhoria", l: "contínua" },
     ],
   },
 };
@@ -405,9 +405,9 @@ export function ServicePageLayout(props: ServicePageProps) {
               {principle.stats.map((s) => (
                 <div
                   key={s.l}
-                  className="flex items-baseline gap-3 border-b border-background/15 pb-3"
+                  className="flex flex-col gap-1 border-b border-background/15 pb-3"
                 >
-                  <span className="font-display text-3xl font-bold tracking-[-0.03em] text-primary">
+                  <span className="font-display text-lg font-semibold tracking-[-0.02em] text-primary">
                     {s.v}
                   </span>
                   <span className="text-[12px] uppercase tracking-widest opacity-70">{s.l}</span>

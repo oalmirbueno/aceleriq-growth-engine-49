@@ -189,7 +189,7 @@ export function Pains() {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
       <div className="container-aceleriq">
         <SectionHeader
-          eyebrow="[ 01 ] · Sintomas comuns"
+          eyebrow="[ 02 ] · Sintomas comuns"
           title="Você reconhece algum destes problemas?"
           description="São os gargalos que travam empresas entre R$ 100k e R$ 5M/mês. Todos têm solução com a engenharia certa."
         />
@@ -241,7 +241,7 @@ export function OperationsFirst() {
     <section className="relative py-12 md:py-20 bg-grid-ambient overflow-hidden">
       <div className="container-aceleriq relative">
         <div className="max-w-3xl">
-          <span className="label-eyebrow">[ 02 ] · A lógica da aceleração</span>
+          <span className="label-eyebrow">[ 01 ] · A lógica da aceleração</span>
           <h2 className="mt-4 font-display text-3xl font-medium leading-[1.1] tracking-[-0.03em] md:text-5xl">
             Antes de anunciar, arrume a operação.
           </h2>
@@ -497,7 +497,7 @@ const METHOD = [
   { letter: "E", title: "Estruturar", desc: "Organizamos CRM, pipeline, atendimento, scripts e follow-up." },
   { letter: "L", title: "Lançar", desc: "Colocamos site, campanhas, automações e integrações para rodar." },
   { letter: "E", title: "Executar", desc: "Produzimos conteúdo, mídia, otimizações e acompanhamento." },
-  { letter: "R", title: "Revisar", desc: "Acompanhamos métricas, conversão, atendimento e CAC." },
+  { letter: "R", title: "Revisar", desc: "Acompanhamos métricas, conversão, atendimento e oportunidades." },
   { letter: "A", title: "Acelerar", desc: "Escalamos campanhas e processos com base no que provou tração." },
 ];
 
@@ -881,65 +881,41 @@ export function DiagnosticoCTA({ onDiagnostico }: { onDiagnostico: () => void })
 }
 
 // ─────────────────────────────────────────────────────────────
-// RESULTADOS
+// RESULTADOS — sem mini-cases inventados, foco em fundamentos
 // ─────────────────────────────────────────────────────────────
-const METRICS = [
-  { value: "Estratégia", label: "Antes da execução" },
-  { value: "Implantação", label: "Sob medida" },
-  { value: "Operação", label: "Acompanhada" },
-  { value: "Melhoria", label: "Contínua" },
-];
-
-const CASES = [
+const FOUNDATIONS = [
   {
-    segment: "SaaS B2B",
-    challenge: "Processo comercial dependente do dono e sem previsibilidade de fechamento.",
-    result: "Operação estruturada com CRM, playbook e previsibilidade comercial.",
+    title: "Comercial com mais controle",
+    desc: "CRM, pipeline, scripts e follow-up para reduzir perda de oportunidades.",
   },
   {
-    segment: "E-commerce Premium",
-    challenge: "Dependência total de mídia paga e nenhuma automação de retenção ou CRM.",
-    result: "Processo de recompra automatizado e dados integrados para escala.",
+    title: "Marketing com direção",
+    desc: "Conteúdo, páginas e campanhas conectadas ao funil de vendas.",
   },
   {
-    segment: "Serviços High-ticket",
-    challenge: "Funil de vendas desorganizado e lead perdendo temperatura no WhatsApp.",
-    result: "Atendimento profissionalizado e funil de vendas sob controle absoluto.",
+    title: "Atendimento mais organizado",
+    desc: "WhatsApp, formulários e automações com menos improviso.",
+  },
+  {
+    title: "Operação mais clara",
+    desc: "Tarefas, responsáveis, métricas e decisões documentadas.",
   },
 ];
 
-export function Results() {
+export function Results({ onDiagnostico }: { onDiagnostico?: () => void } = {}) {
   return (
     <section id="resultados" className="relative py-12 md:py-16 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
-          eyebrow="[ 10 ] · Resultados"
-          title="Quando a engenharia entra, o resultado aparece."
-          description="Indicadores reais e mini-cases de empresas que estruturaram seu sistema de crescimento com a Aceleriq."
+          eyebrow="[ 10 ] · Fundamentos"
+          title="Resultados começam pela estrutura."
+          description="Antes de prometer números, a Aceleriq organiza os fundamentos que permitem medir, vender e melhorar com consistência."
         />
 
-        <div className="mt-8 md:mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-          {METRICS.map((m, i) => (
+        <div className="mt-8 md:mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {FOUNDATIONS.map((f, i) => (
             <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="bg-background p-6"
-            >
-              <span className="label-eyebrow">{m.value}</span>
-              <div className="mt-3 text-[18px] font-semibold tracking-tight text-primary">
-                {m.label}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="mt-4 grid gap-3 md:grid-cols-3">
-          {CASES.map((c, i) => (
-            <motion.div
-              key={i}
+              key={f.title}
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -947,24 +923,25 @@ export function Results() {
               className="hairline rounded-2xl bg-card/40 p-6 card-hover"
             >
               <span className="text-mono text-[11px] uppercase tracking-[0.18em] text-primary">
-                {c.segment}
+                0{i + 1}
               </span>
-              <div className="mt-5">
-                <span className="label-eyebrow">Desafio</span>
-                <p className="mt-1.5 text-[14px] text-muted-foreground">
-                  {c.challenge}
-                </p>
-              </div>
-              <div className="divider-neon my-5" />
-              <div>
-                <span className="label-eyebrow">Resultado</span>
-                <p className="mt-1.5 text-[15px] font-medium text-foreground">
-                  {c.result}
-                </p>
-              </div>
+              <h3 className="mt-4 font-display text-[17px] font-medium tracking-tight">
+                {f.title}
+              </h3>
+              <p className="mt-2 text-[14px] leading-relaxed text-muted-foreground">
+                {f.desc}
+              </p>
             </motion.div>
           ))}
         </div>
+
+        {onDiagnostico && (
+          <div className="mt-10 text-center">
+            <button onClick={onDiagnostico} className="btn-tech">
+              Fazer Diagnóstico de Crescimento
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

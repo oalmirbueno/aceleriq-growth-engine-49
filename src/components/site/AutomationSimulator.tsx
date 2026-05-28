@@ -15,7 +15,7 @@ const PALETTE: NodeDef[] = [
 const SCRIPT: Record<NodeKind, string[]> = {
   trigger: ["✓ Lead capturado", "Origem: Meta Ads", "UTM: campanha-q4-frio"],
   ia: ["Analisando perfil...", "ICP: A · score 87/100", "Encaminhar para SDR sênior"],
-  crm: ["Card criado · pipeline Inbound", "Tag: hot-lead", "Owner: Camila R."],
+  crm: ["Card criado · pipeline Inbound", "Tag: hot-lead", "Responsável: time comercial"],
   whatsapp: ["Mensagem enviada às 14:02", "Resposta em 38s", "Reunião agendada terça 16h ✓"],
 };
 
