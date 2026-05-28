@@ -79,9 +79,9 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                 transition={{ duration: 1, ease: "circOut" }}
                 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] md:leading-[0.9] flex flex-col"
               >
-                <span className="text-stroke">Protocolo</span>
-                <span className="text-primary text-glow italic">de Engenharia</span>
-                <span className="text-white">de Crescimento</span>
+                <span className="text-white">Estruture seu</span>
+                <span className="text-primary text-glow italic">comercial, marketing</span>
+                <span className="text-white">e operação</span>
               </motion.h1>
 
               <motion.div
@@ -91,16 +91,16 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                 className="mt-8 md:mt-12 max-w-lg"
               >
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed border-l-2 border-primary/30 pl-4 md:pl-6">
-                  Escalamos empresas com estratégia, dados, IA e processos comerciais previsíveis, não com marketing de esperança.
+                  A Aceleriq organiza seu funil, CRM, WhatsApp, tráfego, conteúdo e automações para sua empresa parar de depender do improviso e começar a crescer com mais previsibilidade.
                 </p>
                 
                 <div className="mt-6 md:mt-7 flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 sm:items-center">
                   <button onClick={onDiagnostico} className="btn-tech self-start">
-                    Fazer Diagnóstico Gratuito
+                    Fazer Diagnóstico de Crescimento
                   </button>
-                  <a href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)} target="_blank" rel="noreferrer" className="group flex items-center gap-3 font-mono text-xs tracking-widest hover:text-primary transition-colors">
+                  <a href="#como-funciona" className="group flex items-center gap-3 font-mono text-xs tracking-widest hover:text-primary transition-colors">
                     <span className="h-px w-8 bg-white/20 group-hover:w-12 group-hover:bg-primary transition-all" />
-                    FALAR COM ESPECIALISTA
+                    VER COMO FUNCIONA
                   </a>
                 </div>
               </motion.div>
@@ -276,6 +276,55 @@ export function Pains() {
 }
 
 // ─────────────────────────────────────────────────────────────
+// OPERAÇÃO PRIMEIRO
+// ─────────────────────────────────────────────────────────────
+const OPERATIONS_BLOCKS = [
+  { icon: MessageCircle, title: "Atendimento que não perde lead", desc: "Velocidade e qualidade no primeiro contato." },
+  { icon: Target, title: "CRM com pipeline claro", desc: "Visualização total de onde cada venda está travada." },
+  { icon: Bot, title: "Follow-up automatizado", desc: "IA e automação para nunca deixar um contato esfriar." },
+  { icon: Layers, title: "Oferta e funil organizados", desc: "Páginas e promessas alinhadas ao que o cliente busca." },
+  { icon: Megaphone, title: "Tráfego conectado ao comercial", desc: "Mídia paga que traz quem realmente pode comprar." },
+  { icon: LineChart, title: "Dados para tomada de decisão", desc: "Dashboards que mostram o lucro, não só o clique." },
+];
+
+export function OperationsFirst() {
+  return (
+    <section className="relative py-12 md:py-20 bg-grid-ambient overflow-hidden">
+      <div className="container-aceleriq relative">
+        <div className="max-w-3xl">
+          <span className="label-eyebrow">[ 01 ] · A lógica da aceleração</span>
+          <h2 className="mt-4 font-display text-3xl font-medium leading-[1.1] tracking-[-0.03em] md:text-5xl">
+            Antes de anunciar, arrume a operação.
+          </h2>
+          <p className="mt-5 text-base leading-relaxed text-muted-foreground md:text-lg">
+            Anunciar sem processo comercial é acelerar um carro sem freio. Antes de colocar dinheiro em tráfego, a Aceleriq organiza atendimento, CRM, follow-up, oferta, métricas e automações. Depois disso, o marketing passa a escalar uma operação que já tem base para converter.
+          </p>
+        </div>
+
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {OPERATIONS_BLOCKS.map((block, i) => (
+            <motion.div
+              key={block.title}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.05 }}
+              className="hairline rounded-xl bg-card/30 p-6 card-hover group"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary border border-primary/20 transition-all group-hover:scale-110">
+                <block.icon className="h-5 w-5" />
+              </div>
+              <h3 className="mt-5 font-display text-lg font-medium">{block.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{block.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
 // SOBRE / PILARES
 // ─────────────────────────────────────────────────────────────
 const PILLARS = [
@@ -304,15 +353,10 @@ export function About() {
               Não é agência. É a engenharia de crescimento do seu negócio.
             </h2>
             <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground md:text-base">
-              Agências entregam peças soltas: criativo, post, anúncio. A
-              Aceleriq entrega <span className="text-foreground">um sistema</span>:
-              diagnóstico, estratégia, execução, dados e IA integrados ao seu
-              negócio para gerar resultado previsível.
+              A Aceleriq nasceu para resolver um problema claro: empresas não quebram só por falta de marketing. Muitas travam porque crescem no improviso, sem processo comercial, sem dados, sem automação e sem clareza.
             </p>
             <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground md:text-base">
-              Trabalhamos como engenharia: levantamos a planta da operação,
-              identificamos os gargalos, projetamos a solução e instalamos o
-              que precisa funcionar.
+              Unimos marketing, comercial, tecnologia e IA para criar motores de crescimento organizados. Levantamos a planta da operação, identificamos gargalos, projetamos a solução e instalamos o que precisa funcionar.
             </p>
 
             <div className="divider-neon mt-5" />
@@ -363,13 +407,13 @@ export function About() {
 // MÉTODO ACELERA
 // ─────────────────────────────────────────────────────────────
 const METHOD = [
-  { letter: "A", title: "Análise", desc: "Diagnóstico 360º da operação, dados, time e funil." },
-  { letter: "C", title: "Clareza", desc: "Posicionamento, oferta, ICP e narrativa que vendem." },
-  { letter: "E", title: "Estratégia", desc: "Plano de crescimento com prioridades, metas e KPIs." },
-  { letter: "L", title: "Lançamento", desc: "Construção de funil, criativos, CRM e automações." },
-  { letter: "E", title: "Execução", desc: "Tráfego, conteúdo, vendas e operação rodando com ritmo." },
-  { letter: "R", title: "Resultado", desc: "Dashboards, leitura semanal e otimização baseada em dados." },
-  { letter: "A", title: "Aceleração", desc: "Escala com IA, automação avançada e novos canais." },
+  { letter: "A", title: "Analisar", desc: "Mapeamos comercial, marketing, canais, atendimento e gargalos." },
+  { letter: "C", title: "Clarear", desc: "Definimos público, oferta, promessa e prioridades reais." },
+  { letter: "E", title: "Estruturar", desc: "Organizamos CRM, pipeline, atendimento, scripts e follow-up." },
+  { letter: "L", title: "Lançar", desc: "Colocamos site, campanhas, automações e integrações para rodar." },
+  { letter: "E", title: "Executar", desc: "Produzimos conteúdo, mídia, otimizações e acompanhamento." },
+  { letter: "R", title: "Revisar", desc: "Acompanhamos métricas, conversão, atendimento e CAC." },
+  { letter: "A", title: "Acelerar", desc: "Escalamos campanhas e processos com base no que provou tração." },
 ];
 
 export function Method() {

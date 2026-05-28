@@ -3,9 +3,9 @@ import { ServicePageLayout, buildServiceHead } from "@/components/site/ServicePa
 import { PortfolioShowcase } from "@/components/site/PortfolioShowcase";
 
 const URL = "https://aceleriq.com.br/criacao-de-sites";
-const TITLE = "Criação de Sites em Curitiba · Aceleriq";
+const TITLE = "Criação de Sites e Landing Pages para Vendas | Aceleriq";
 const DESCRIPTION =
-  "Criação de sites institucionais, landing pages e plataformas em Curitiba. SEO, performance e conversão, integrados a CRM e tráfego pago.";
+  "Sites e landing pages feitos para vender, captar e organizar oportunidades. Páginas rápidas, responsivas e integradas ao seu CRM e WhatsApp.";
 
 const FAQS = [
   { q: "Que tipo de site a Aceleriq cria?", a: "Sites institucionais, landing pages de captura, sites de produto/SaaS e plataformas sob medida, todos com foco em conversão e integração ao CRM." },
@@ -31,15 +31,15 @@ function Page() {
     <ServicePageLayout
       variant="sites"
       eyebrow="Sites · Landing pages · Plataformas"
-      h1={<>Criação de <span className="text-primary neon-text-glow">Sites</span> que vendem</>}
-      intro="Sites e landing pages projetados como ativo comercial, não como folder online. Integrados ao CRM, otimizados para SEO e construídos para converter o tráfego que você paga ou ganha."
+      h1={<>Sites e Landing Pages feitos para <span className="text-primary neon-text-glow">vender</span></>}
+      intro="Criamos sites e landing pages como ativos comerciais, não como vitrines bonitas. Páginas rápidas, responsivas e estratégicas para apresentar sua oferta, captar leads e integrar com WhatsApp, CRM e campanhas."
       benefits={[
-        { title: "Performance real", desc: "Lighthouse 90+, Core Web Vitals verdes, carregamento sub-segundo." },
-        { title: "SEO técnico nativo", desc: "Schema.org, sitemap, meta tags, semântica, conteúdo otimizado por palavra-chave." },
-        { title: "Foco em conversão", desc: "Arquitetura de funil, CTAs estratégicos, copy orientada a objeção." },
-        { title: "CRM integrado", desc: "Leads entram direto no CRM com fonte, UTM e qualificação inicial." },
-        { title: "Design premium", desc: "Identidade visual coerente com a marca, sem template engessado." },
-        { title: "Stack moderna", desc: "React/Next/TanStack, Tailwind, deploy edge, hospedagem incluída." },
+        { title: "Landing Pages de Alta Conversão", desc: "Páginas focadas em um único objetivo: transformar visitantes em leads qualificados." },
+        { title: "Sites Institucionais Estratégicos", desc: "Sua empresa apresentada com autoridade, clareza e design premium que gera confiança." },
+        { title: "Páginas para Tráfego Pago", desc: "Estruturas otimizadas para receber campanhas de Google Ads e Meta Ads com menor custo por lead." },
+        { title: "Integração Nativa com WhatsApp", desc: "Botões e fluxos que facilitam o contato direto do cliente com seu time comercial." },
+        { title: "CRM e Automação Conectados", desc: "Leads entram direto no seu pipeline comercial, sem perda de dados ou tempo." },
+        { title: "Velocidade e SEO Técnico", desc: "Sites que carregam instantaneamente e são encontrados pelo Google de forma orgânica." },
       ]}
       deliverables={[
         "Wireframe e arquitetura de informação orientada a conversão",

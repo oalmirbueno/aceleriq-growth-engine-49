@@ -26,10 +26,10 @@ export interface LocalPost {
 
 export const LOCAL_POSTS: LocalPost[] = [
   {
-    title: "O Método A.C.E.L.E.R.A: como a Aceleriq estrutura crescimento previsível com IA",
+    title: "Como organizar atendimento, follow-up e vendas antes de escalar",
     excerpt:
       "Estratégia, dados, automação e IA aplicados em sequência. O framework que usamos para transformar marketing em receita previsível.",
-    category: "crescimento",
+    category: "processos",
     image: coverMetodoAcelera,
     publishedAt: "2026-05-15T12:00:00.000Z",
     author: "Equipe Aceleriq",
@@ -43,10 +43,10 @@ O resultado é previsibilidade. Em vez de campanhas isoladas, o cliente passa a 
   },
 
   {
-    title: "Agentes de IA para empresas em 2026: o guia definitivo para automatizar vendas e atendimento",
+    title: "Por que postar no Instagram não resolve um comercial bagunçado",
     excerpt:
       "Como agentes de IA estão substituindo dashboards, atendentes e SDRs em 2026, e o passo a passo para implantar na sua empresa sem virar refém de uma plataforma.",
-    category: "ia",
+    category: "ia_automacao",
     image: coverAgentesIa,
     publishedAt: "2026-05-16T09:00:00.000Z",
     author: "Equipe Aceleriq",
@@ -377,7 +377,7 @@ Se quiser uma análise gratuita do seu funil e da sua mensuração, faça nosso 
     title: "Automação de WhatsApp para vendas: o playbook completo com n8n, IA e CRM em 2026",
     excerpt:
       "WhatsApp é o canal de vendas mais subaproveitado do Brasil. Veja o passo a passo para automatizar atendimento, qualificação e fechamento sem perder o tom humano.",
-    category: "automacao",
+    category: "ia_automacao",
     image: coverWhatsappAutomacao,
     publishedAt: "2026-05-18T09:00:00.000Z",
     author: "Equipe Aceleriq",
@@ -487,7 +487,7 @@ Se quiser entender quais fluxos de WhatsApp gerariam mais receita na sua operaç
     title: "Como construir uma máquina de aquisição previsível: CRM, dados e IA em 2026",
     excerpt:
       "Pare de tratar marketing como custo e vendas como esforço. Veja como integrar CRM, dados, automação e IA para construir uma máquina de aquisição que cresce de forma composta.",
-    category: "vendas",
+    category: "comercial",
     image: coverMaquinaAquisicao,
     publishedAt: "2026-05-18T15:00:00.000Z",
     author: "Equipe Aceleriq",

@@ -53,7 +53,7 @@ const EMPTY: FormState = {
   excerpt: "",
   content: "",
   cover_image: "",
-  category: "ia",
+  category: "ia_automacao",
   status: "draft",
   seo_title: "",
   seo_description: "",

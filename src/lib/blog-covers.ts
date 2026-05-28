@@ -1,20 +1,20 @@
 import type { FeedCategory } from "./blog-feeds";
-import coverIa from "@/assets/blog-cover-ia.jpg";
-import coverAuto from "@/assets/blog-cover-automacao.jpg";
-import coverTrafego from "@/assets/blog-cover-trafego.jpg";
-import coverMkt from "@/assets/blog-cover-marketing.jpg";
-import coverVendas from "@/assets/blog-cover-vendas.jpg";
-import coverCrescimento from "@/assets/blog-cover-crescimento.jpg";
+import coverIa from "@/assets/blog-cover-agentes-ia.jpg";
+import coverAuto from "@/assets/blog-cover-whatsapp-automacao.jpg";
+import coverTrafego from "@/assets/blog-cover-trafego-curitiba.jpg";
+import coverMkt from "@/assets/blog-cover-metodo-acelera.jpg";
+import coverVendas from "@/assets/blog-cover-maquina-aquisicao.jpg";
+import coverCrescimento from "@/assets/hero-ia.jpg";
 
 const MAP: Record<FeedCategory, string> = {
-  ia: coverIa,
-  automacao: coverAuto,
-  trafego: coverTrafego,
+  ia_automacao: coverIa,
   marketing: coverMkt,
-  vendas: coverVendas,
-  crescimento: coverCrescimento,
+  trafego: coverTrafego,
+  comercial: coverVendas,
+  locais: coverAuto,
+  processos: coverCrescimento,
 };
 
 export function categoryCover(category: FeedCategory): string {
-  return MAP[category] ?? coverIa;
+  return MAP[category] || coverIa;
 }

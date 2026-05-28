@@ -3,9 +3,9 @@ import { ServicePageLayout, buildServiceHead } from "@/components/site/ServicePa
 import { TrafegoCalculator } from "@/components/site/TrafegoCalculator";
 
 const URL = "https://aceleriq.com.br/trafego-pago";
-const TITLE = "Gestão de Tráfego Pago em Curitiba · Aceleriq";
+const TITLE = "Gestão de Tráfego Pago com Estratégia Comercial | Aceleriq";
 const DESCRIPTION =
-  "Gestão de tráfego em Google, Meta e LinkedIn Ads orientada a pipeline e receita. Integra mídia, CRM e dados para escalar com previsibilidade.";
+  "Tráfego pago para escalar operações que já têm base para converter. Planejamos, configuramos e otimizamos campanhas no Meta Ads e Google Ads.";
 
 const FAQS = [
   { q: "Em quais plataformas vocês operam?", a: "Google Ads (Search, PMax, YouTube), Meta Ads (Facebook/Instagram), LinkedIn Ads, TikTok Ads e remarketing programático." },
@@ -31,15 +31,15 @@ function Page() {
     <ServicePageLayout
       variant="trafego"
       eyebrow="Google · Meta · LinkedIn · TikTok"
-      h1={<>Gestão de <span className="text-primary neon-text-glow">Tráfego Pago</span> orientada a receita</>}
-      intro="Tráfego pago lido por pipeline, não por clique. Integramos Meta CAPI, Google Enhanced Conversions e CRM para você decidir investimento com base em CAC e LTV reais, não em métricas de vaidade."
+      h1={<>Tráfego Pago para <span className="text-primary neon-text-glow">escalar</span> operações maduras</>}
+      intro="Planejamos, configuramos e otimizamos campanhas no Meta Ads e Google Ads conectadas à sua oferta, página, CRM e atendimento. Tráfego sem processo comercial vira desperdício."
       benefits={[
-        { title: "Lido por receita", desc: "CRM + tracking server-side. Você vê quanto cada campanha gerou em vendas, não só leads." },
-        { title: "Estratégia + execução", desc: "Mídia conversa com copy, criativo, landing e nutrição. Zero ilha." },
-        { title: "Criativos em ritmo", desc: "Esteira de criativos semanais para alimentar o algoritmo e cortar fadiga." },
-        { title: "Tracking blindado", desc: "Meta CAPI, Google Enhanced Conversions, GA4 server-side, GTM bem implementado." },
-        { title: "Reporte executivo", desc: "Dashboard semanal com CPL, CAC, ROAS, pipeline e leitura por estágio do funil." },
-        { title: "Sem letra miúda", desc: "Fee fixo. Sem percentual sobre mídia. Sem amarra de plataforma." },
+        { title: "Tráfego sem processo é desperdício", desc: "Antes de aumentar verba, avaliamos se a página, o atendimento e o CRM estão prontos para receber demanda." },
+        { title: "Campanhas Locais Assistidas", desc: "Para empresas que estão começando a organizar a aquisição e precisam de leads qualificados no WhatsApp." },
+        { title: "Gestão de Mídia e Escala", desc: "Para empresas com verba maior e operação comercial madura que buscam escala nacional." },
+        { title: "Meta Ads e Google Ads", desc: "Operamos nos canais onde seu cliente realmente está, com criativos e copy de alta performance." },
+        { title: "Leitura por Pipeline e Receita", desc: "Integramos o tracking ao seu CRM para que você saiba exatamente o lucro gerado por cada real investido." },
+        { title: "Otimização Contínua", desc: "Testes A/B constantes em criativos, públicos e landing pages para reduzir o seu custo por lead." },
       ]}
       deliverables={[
         "Auditoria inicial das contas de mídia",

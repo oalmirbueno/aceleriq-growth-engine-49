@@ -3,9 +3,9 @@ import { ServicePageLayout, buildServiceHead } from "@/components/site/ServicePa
 import { PortfolioShowcase } from "@/components/site/PortfolioShowcase";
 
 const URL = "https://aceleriq.com.br/agencia-de-marketing-digital-curitiba";
-const TITLE = "Agência de Marketing Digital em Curitiba · Aceleriq";
+const TITLE = "Marketing de Crescimento conectado ao Comercial | Aceleriq";
 const DESCRIPTION =
-  "Agência de marketing digital em Curitiba: sites, tráfego, automação, IA, CRM e consultoria. Diagnóstico gratuito e Método Acelera.";
+  "Marketing de crescimento focado em lucro, não em curtidas. Unimos sites, tráfego, automação, IA, CRM e consultoria estratégica conectadas ao seu comercial.";
 
 const FAQS = [
   { q: "A Aceleriq é uma agência de marketing digital completa?", a: "Sim. Operamos as frentes de uma agência completa, sites, tráfego pago, social, conteúdo, automação, CRM, dados, integradas em um sistema de crescimento, não em entregas avulsas." },
@@ -31,15 +31,15 @@ function Page() {
     <ServicePageLayout
       variant="agencia"
       eyebrow="Curitiba · PR · Atendimento nacional"
-      h1={<>Agência de <span className="text-primary neon-text-glow">Marketing Digital</span> em Curitiba</>}
-      intro="A Aceleriq é a agência de marketing digital de Curitiba para empresas que cansaram de receber relatório bonito sem impacto em receita. Unimos sites, tráfego, automação, IA, CRM e consultoria estratégica no mesmo sistema."
+      h1={<>Marketing conectado ao <span className="text-primary neon-text-glow">comercial</span>, não posts soltos no feed.</>}
+      intro="Criamos estratégias de conteúdo, campanhas, páginas, tráfego e automações conectadas ao funil de vendas da sua empresa. Marketing só funciona de verdade quando está conectado ao comercial, à oferta, ao atendimento e aos dados."
       benefits={[
-        { title: "Time multidisciplinar", desc: "Estratégia, mídia, copy, design, dev, dados e IA atuando juntos no mesmo planejamento." },
-        { title: "Lido por receita", desc: "Toda campanha conectada ao CRM. Você acompanha pipeline, CAC e LTV, não só cliques." },
-        { title: "Diagnóstico Gratuito", desc: "Antes de qualquer proposta, mapeamos sua maturidade e entregamos plano de ação." },
-        { title: "Método Acelera", desc: "Framework próprio (A.C.E.L.E.R.A) que estrutura marketing, vendas e operação em conjunto." },
-        { title: "Sem terceirização cega", desc: "Time sênior de Curitiba, comunicação direta. Sem repasse para subagência." },
-        { title: "Stack moderno", desc: "GA4, GTM, Meta CAPI, RD/HubSpot, n8n, OpenAI, Supabase. Sem amarras de plataforma." },
+        { title: "Estratégia antes de conteúdo", desc: "Não postamos por postar. Cada peça de conteúdo tem um papel claro no funil de vendas do seu negócio." },
+        { title: "Conteúdo com direção comercial", desc: "Copywriting e design focados em converter desconhecidos em oportunidades reais no seu CRM." },
+        { title: "Campanhas conectadas ao CRM", desc: "Toda mídia paga é lida por pipeline e receita, não apenas por cliques e métricas de vaidade." },
+        { title: "Google, Instagram e WhatsApp", desc: "Trabalhamos os principais canais de forma integrada para que a jornada do cliente seja fluida." },
+        { title: "Relatórios de decisão", desc: "Relatórios que mostram o que precisa ser feito para lucrar mais, sem termos técnicos desnecessários." },
+        { title: "Stack moderno e IA", desc: "Usamos inteligência artificial para acelerar a produção e otimizar campanhas em tempo real." },
       ]}
       deliverables={[
         "Diagnóstico estratégico inicial",

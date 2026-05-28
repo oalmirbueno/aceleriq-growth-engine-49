@@ -3,9 +3,9 @@ import { ServicePageLayout, buildServiceHead } from "@/components/site/ServicePa
 import { AutomationSimulator } from "@/components/site/AutomationSimulator";
 
 const URL = "https://aceleriq.com.br/automacao-e-ia";
-const TITLE = "Automação e IA para Empresas · Aceleriq";
+const TITLE = "Automação e IA para WhatsApp, CRM e Comercial | Aceleriq";
 const DESCRIPTION =
-  "Automação de marketing, vendas e operação com IA. Agentes inteligentes, fluxos n8n/Make, integrações e CRM automatizado para escalar sem contratar.";
+  "Automação e IA para reduzir atraso, organizar atendimento e acelerar decisões. Criamos agentes e integrações conectadas ao seu WhatsApp e CRM.";
 
 const FAQS = [
   { q: "Que tipo de automação vocês implementam?", a: "Automação comercial (qualificação, follow-up, agendamento), de marketing (nutrição, segmentação, scoring), operacional (financeiro, atendimento, BI) e agentes de IA customizados." },
@@ -31,15 +31,15 @@ function Page() {
     <ServicePageLayout
       variant="ia"
       eyebrow="n8n · OpenAI · CRM · Workflows"
-      h1={<>Automação e <span className="text-primary neon-text-glow">IA</span> que escala sem contratar</>}
-      intro="Agentes de IA, fluxos automatizados e integrações sob medida para tirar o operacional repetitivo do colo do seu time. A Aceleriq instala automação real, não receita pronta de YouTube."
+      h1={<>Automação e <span className="text-primary neon-text-glow">IA</span> para reduzir atraso e acelerar decisões</>}
+      intro="Criamos fluxos, agentes, integrações e automações conectadas ao WhatsApp, CRM, formulários, atendimento e rotina comercial da sua empresa. IA não substitui a empresa, ela organiza e apoia processos bem desenhados."
       benefits={[
-        { title: "Agentes de IA reais", desc: "Atendimento, qualificação, SDR e suporte com modelos da OpenAI/Anthropic + RAG da sua base." },
-        { title: "Fluxos n8n/Make", desc: "Automações enterprise self-hosted, sem teto de operações ou refém de SaaS caro." },
-        { title: "WhatsApp profissional", desc: "Integração via API oficial com chatbot, qualificação automática e handoff humano." },
-        { title: "CRM automatizado", desc: "Roteamento, scoring, follow-up e nutrição rodando sozinhos dentro do seu CRM." },
-        { title: "Integrações sob medida", desc: "Conectamos qualquer sistema com API. Quando não tem API, escrevemos uma." },
-        { title: "Governança de dados", desc: "LGPD, logs, monitoramento, fallback humano. Automação responsável." },
+        { title: "Atendimento Ultra Rápido", desc: "Lead chegou? O sistema responde instantaneamente, qualifica e direciona para o vendedor certo." },
+        { title: "CRM sempre Atualizado", desc: "Contatos e oportunidades registrados automaticamente, sem depender da memória do vendedor." },
+        { title: "Follow-up que não Falha", desc: "Cadência de mensagens automáticas no WhatsApp e E-mail para manter o lead quente." },
+        { title: "Agentes de IA Especialistas", desc: "IA treinada com os dados da sua empresa para tirar dúvidas e agendar reuniões 24/7." },
+        { title: "Rotina Clara para a Equipe", desc: "Notificações e tarefas criadas automaticamente para que cada um saiba exatamente o que fazer." },
+        { title: "Métricas em Tempo Real", desc: "Acompanhe gargalos e performance sem precisar pedir relatórios manuais para o time." },
       ]}
       deliverables={[
         "Mapeamento de processos automatizáveis",

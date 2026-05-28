@@ -12,12 +12,15 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TrafegoPagoRouteImport } from './routes/trafego-pago'
 import { Route as SobreAAceleriqRouteImport } from './routes/sobre-a-aceleriq'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as EstruturacaoComercialRouteImport } from './routes/estruturacao-comercial'
+import { Route as DiagnosticoDeCrescimentoRouteImport } from './routes/diagnostico-de-crescimento'
 import { Route as DiagnosticoRouteImport } from './routes/diagnostico'
 import { Route as CriacaoDeSitesRouteImport } from './routes/criacao-de-sites'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AutomacaoEIaRouteImport } from './routes/automacao-e-ia'
 import { Route as AgenciaDeMarketingDigitalCuritibaRouteImport } from './routes/agencia-de-marketing-digital-curitiba'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AceleriqOsRouteImport } from './routes/aceleriq-os'
 import { Route as A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRouteImport } from './routes/a7f3c91e8b2d4506e1ad9f72c8b3e5d1[.]txt'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
@@ -49,6 +52,17 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EstruturacaoComercialRoute = EstruturacaoComercialRouteImport.update({
+  id: '/estruturacao-comercial',
+  path: '/estruturacao-comercial',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DiagnosticoDeCrescimentoRoute =
+  DiagnosticoDeCrescimentoRouteImport.update({
+    id: '/diagnostico-de-crescimento',
+    path: '/diagnostico-de-crescimento',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DiagnosticoRoute = DiagnosticoRouteImport.update({
   id: '/diagnostico',
   path: '/diagnostico',
@@ -78,6 +92,11 @@ const AgenciaDeMarketingDigitalCuritibaRoute =
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AceleriqOsRoute = AceleriqOsRouteImport.update({
+  id: '/aceleriq-os',
+  path: '/aceleriq-os',
   getParentRoute: () => rootRouteImport,
 } as any)
 const A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRoute =
@@ -163,12 +182,15 @@ const ApiPublicHooksCheckIndexationRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt': typeof A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRoute
+  '/aceleriq-os': typeof AceleriqOsRoute
   '/admin': typeof AdminRouteWithChildren
   '/agencia-de-marketing-digital-curitiba': typeof AgenciaDeMarketingDigitalCuritibaRoute
   '/automacao-e-ia': typeof AutomacaoEIaRoute
   '/blog': typeof BlogRouteWithChildren
   '/criacao-de-sites': typeof CriacaoDeSitesRoute
   '/diagnostico': typeof DiagnosticoRoute
+  '/diagnostico-de-crescimento': typeof DiagnosticoDeCrescimentoRoute
+  '/estruturacao-comercial': typeof EstruturacaoComercialRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
   '/trafego-pago': typeof TrafegoPagoRoute
@@ -189,10 +211,13 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt': typeof A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRoute
+  '/aceleriq-os': typeof AceleriqOsRoute
   '/agencia-de-marketing-digital-curitiba': typeof AgenciaDeMarketingDigitalCuritibaRoute
   '/automacao-e-ia': typeof AutomacaoEIaRoute
   '/criacao-de-sites': typeof CriacaoDeSitesRoute
   '/diagnostico': typeof DiagnosticoRoute
+  '/diagnostico-de-crescimento': typeof DiagnosticoDeCrescimentoRoute
+  '/estruturacao-comercial': typeof EstruturacaoComercialRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
   '/trafego-pago': typeof TrafegoPagoRoute
@@ -214,12 +239,15 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt': typeof A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRoute
+  '/aceleriq-os': typeof AceleriqOsRoute
   '/admin': typeof AdminRouteWithChildren
   '/agencia-de-marketing-digital-curitiba': typeof AgenciaDeMarketingDigitalCuritibaRoute
   '/automacao-e-ia': typeof AutomacaoEIaRoute
   '/blog': typeof BlogRouteWithChildren
   '/criacao-de-sites': typeof CriacaoDeSitesRoute
   '/diagnostico': typeof DiagnosticoRoute
+  '/diagnostico-de-crescimento': typeof DiagnosticoDeCrescimentoRoute
+  '/estruturacao-comercial': typeof EstruturacaoComercialRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
   '/trafego-pago': typeof TrafegoPagoRoute
@@ -242,12 +270,15 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt'
+    | '/aceleriq-os'
     | '/admin'
     | '/agencia-de-marketing-digital-curitiba'
     | '/automacao-e-ia'
     | '/blog'
     | '/criacao-de-sites'
     | '/diagnostico'
+    | '/diagnostico-de-crescimento'
+    | '/estruturacao-comercial'
     | '/sitemap.xml'
     | '/sobre-a-aceleriq'
     | '/trafego-pago'
@@ -268,10 +299,13 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt'
+    | '/aceleriq-os'
     | '/agencia-de-marketing-digital-curitiba'
     | '/automacao-e-ia'
     | '/criacao-de-sites'
     | '/diagnostico'
+    | '/diagnostico-de-crescimento'
+    | '/estruturacao-comercial'
     | '/sitemap.xml'
     | '/sobre-a-aceleriq'
     | '/trafego-pago'
@@ -292,12 +326,15 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt'
+    | '/aceleriq-os'
     | '/admin'
     | '/agencia-de-marketing-digital-curitiba'
     | '/automacao-e-ia'
     | '/blog'
     | '/criacao-de-sites'
     | '/diagnostico'
+    | '/diagnostico-de-crescimento'
+    | '/estruturacao-comercial'
     | '/sitemap.xml'
     | '/sobre-a-aceleriq'
     | '/trafego-pago'
@@ -319,12 +356,15 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRoute: typeof A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRoute
+  AceleriqOsRoute: typeof AceleriqOsRoute
   AdminRoute: typeof AdminRouteWithChildren
   AgenciaDeMarketingDigitalCuritibaRoute: typeof AgenciaDeMarketingDigitalCuritibaRoute
   AutomacaoEIaRoute: typeof AutomacaoEIaRoute
   BlogRoute: typeof BlogRouteWithChildren
   CriacaoDeSitesRoute: typeof CriacaoDeSitesRoute
   DiagnosticoRoute: typeof DiagnosticoRoute
+  DiagnosticoDeCrescimentoRoute: typeof DiagnosticoDeCrescimentoRoute
+  EstruturacaoComercialRoute: typeof EstruturacaoComercialRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreAAceleriqRoute: typeof SobreAAceleriqRoute
   TrafegoPagoRoute: typeof TrafegoPagoRoute
@@ -356,6 +396,20 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/estruturacao-comercial': {
+      id: '/estruturacao-comercial'
+      path: '/estruturacao-comercial'
+      fullPath: '/estruturacao-comercial'
+      preLoaderRoute: typeof EstruturacaoComercialRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/diagnostico-de-crescimento': {
+      id: '/diagnostico-de-crescimento'
+      path: '/diagnostico-de-crescimento'
+      fullPath: '/diagnostico-de-crescimento'
+      preLoaderRoute: typeof DiagnosticoDeCrescimentoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/diagnostico': {
@@ -398,6 +452,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/aceleriq-os': {
+      id: '/aceleriq-os'
+      path: '/aceleriq-os'
+      fullPath: '/aceleriq-os'
+      preLoaderRoute: typeof AceleriqOsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt': {
@@ -554,6 +615,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRoute:
     A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRoute,
+  AceleriqOsRoute: AceleriqOsRoute,
   AdminRoute: AdminRouteWithChildren,
   AgenciaDeMarketingDigitalCuritibaRoute:
     AgenciaDeMarketingDigitalCuritibaRoute,
@@ -561,6 +623,8 @@ const rootRouteChildren: RootRouteChildren = {
   BlogRoute: BlogRouteWithChildren,
   CriacaoDeSitesRoute: CriacaoDeSitesRoute,
   DiagnosticoRoute: DiagnosticoRoute,
+  DiagnosticoDeCrescimentoRoute: DiagnosticoDeCrescimentoRoute,
+  EstruturacaoComercialRoute: EstruturacaoComercialRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreAAceleriqRoute: SobreAAceleriqRoute,
   TrafegoPagoRoute: TrafegoPagoRoute,

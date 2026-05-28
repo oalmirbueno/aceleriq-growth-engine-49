@@ -24,6 +24,11 @@ export interface CapturaForm {
   faturamento_mensal: Faturamento;
   principal_gargalo: string;
   interesse_principal: Interesse;
+  cidade?: string;
+  segmento?: string;
+  usa_crm?: string;
+  investe_trafego?: string;
+  tem_equipe_comercial?: string;
 }
 
 export interface QuizQuestion {

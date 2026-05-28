@@ -3,12 +3,12 @@
 // Cada item já vem com fonte original (Exame, Olhar Digital, MIT, etc.).
 
 export type FeedCategory =
-  | "ia"
-  | "automacao"
-  | "trafego"
+  | "comercial"
+  | "ia_automacao"
   | "marketing"
-  | "vendas"
-  | "crescimento";
+  | "trafego"
+  | "locais"
+  | "processos";
 
 export interface FeedSource {
   id: string;
@@ -24,48 +24,38 @@ const gnews = (q: string, lang: "pt" | "en" = "pt") =>
     : `https://news.google.com/rss/search?q=${encodeURIComponent(q)}&hl=en-US&gl=US&ceid=US:en`;
 
 export const FEEDS: FeedSource[] = [
-  // IA aplicada a negócios
-  { id: "gn-ia-empresas", name: "Google News", category: "ia", lang: "pt",
-    url: gnews('"inteligência artificial" (empresas OR negócios OR marketing OR vendas) when:14d') },
-  { id: "gn-ia-generativa", name: "Google News", category: "ia", lang: "pt",
-    url: gnews('"IA generativa" OR "ChatGPT" OR "agentes de IA" when:14d') },
+  // IA e Automação
+  { id: "gn-ia-automacao", name: "Google News", category: "ia_automacao", lang: "pt",
+    url: gnews('"IA generativa" OR "ChatGPT" OR "agentes de IA" OR "n8n" OR "automação" when:14d') },
 
-  // Automação
-  { id: "gn-automacao-mkt", name: "Google News", category: "automacao", lang: "pt",
-    url: gnews('"automação de marketing" OR "marketing automation" OR "n8n" OR "workflow" when:14d') },
-  { id: "gn-automacao-comercial", name: "Google News", category: "automacao", lang: "pt",
-    url: gnews('"automação comercial" OR "automação de vendas" OR "WhatsApp Business API" when:14d') },
+  // Marketing e Conteúdo
+  { id: "gn-marketing", name: "Google News", category: "marketing", lang: "pt",
+    url: gnews('"marketing de conteúdo" OR "estratégia de marketing" OR "branding" when:14d') },
 
   // Tráfego pago
   { id: "gn-trafego", name: "Google News", category: "trafego", lang: "pt",
-    url: gnews('"tráfego pago" OR "Google Ads" OR "Meta Ads" OR "performance marketing" when:14d') },
+    url: gnews('"tráfego pago" OR "Google Ads" OR "Meta Ads" when:14d') },
 
-  // Marketing digital
-  { id: "gn-marketing", name: "Google News", category: "marketing", lang: "pt",
-    url: gnews('"marketing digital" OR "agência de marketing" OR "branding" when:14d') },
-  { id: "gn-seo", name: "Google News", category: "marketing", lang: "pt",
-    url: gnews('"SEO" OR "search engine optimization" OR "Google Search" when:14d') },
+  // Comercial e CRM
+  { id: "gn-comercial", name: "Google News", category: "comercial", lang: "pt",
+    url: gnews('"CRM" OR "pipeline de vendas" OR "vendas B2B" OR "estruturação comercial" when:14d') },
 
-  // Vendas / CRM
-  { id: "gn-vendas", name: "Google News", category: "vendas", lang: "pt",
-    url: gnews('"CRM" OR "pipeline de vendas" OR "vendas B2B" OR "RD Station" OR "HubSpot" when:14d') },
+  // Negócios Locais
+  { id: "gn-locais", name: "Google News", category: "locais", lang: "pt",
+    url: gnews('"marketing para negócios locais" OR "Google Meu Negócio" when:14d') },
 
-  // Crescimento / growth
-  { id: "gn-growth", name: "Google News", category: "crescimento", lang: "pt",
-    url: gnews('"growth marketing" OR "growth hacking" OR "receita previsível" when:14d') },
-
-  // EN — referências globais filtradas
-  { id: "gn-ai-business-en", name: "Google News", category: "ia", lang: "en",
-    url: gnews('"AI" (business OR marketing OR sales OR enterprise) when:7d', "en") },
+  // Processos e Operação
+  { id: "gn-processos", name: "Google News", category: "processos", lang: "pt",
+    url: gnews('"processos de negócio" OR "eficiência operacional" OR "gestão por dados" when:14d') },
 ];
 
 export const CATEGORIES: { id: FeedCategory; label: string }[] = [
-  { id: "ia", label: "IA" },
-  { id: "automacao", label: "Automação" },
+  { id: "comercial", label: "Comercial e CRM" },
+  { id: "ia_automacao", label: "Automação e IA" },
+  { id: "marketing", label: "Marketing e Conteúdo" },
   { id: "trafego", label: "Tráfego Pago" },
-  { id: "marketing", label: "Marketing" },
-  { id: "vendas", label: "Vendas & CRM" },
-  { id: "crescimento", label: "Crescimento" },
+  { id: "locais", label: "Negócios Locais" },
+  { id: "processos", label: "Processos e Operação" },
 ];
 
 // Whitelist: ao menos um termo precisa aparecer no título ou excerpt.

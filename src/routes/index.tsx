@@ -8,6 +8,7 @@ import {
   Pains,
   About,
   Method,
+  OperationsFirst,
   Areas,
   FitFor,
   DiagnosticoCTA,
@@ -25,9 +26,9 @@ import { PainelComunidade } from "@/components/site/PainelComunidade";
 import aiEngineerImg from "@/assets/ai-engineer.jpg";
 
 const HOME_TITLE =
-  "Marketing Digital, Sites e Tráfego em Curitiba · Aceleriq";
+  "Aceleriq | Engenharia de Crescimento com IA, CRM, Marketing e Automação";
 const HOME_DESCRIPTION =
-  "Agência de marketing digital em Curitiba: sites, tráfego, automação, IA, CRM e consultoria. Diagnóstico gratuito + Método Acelera.";
+  "Estruturamos comercial, marketing e operação para empresas crescerem com processo, CRM, automação, tráfego, conteúdo e IA aplicada ao lucro.";
 
 const FAQS_JSONLD = {
   "@context": "https://schema.org",
@@ -108,6 +109,7 @@ function Index() {
       <Header onDiagnostico={openDiagnostico} />
       <main>
         <Hero onDiagnostico={openDiagnostico} />
+        <OperationsFirst />
         <Pains />
         <About />
         <Method />

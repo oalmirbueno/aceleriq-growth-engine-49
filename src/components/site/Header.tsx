@@ -7,13 +7,13 @@ import logoAceleriq from "@/assets/logo-aceleriq.png";
 const NAV = [
   { label: "Home", to: "/", hash: undefined },
   { label: "Sobre", to: "/sobre-a-aceleriq", hash: undefined },
+  { label: "Comercial", to: "/estruturacao-comercial", hash: undefined },
   { label: "Marketing", to: "/agencia-de-marketing-digital-curitiba", hash: undefined },
   { label: "Sites", to: "/criacao-de-sites", hash: undefined },
   { label: "Tráfego", to: "/trafego-pago", hash: undefined },
   { label: "Automação & IA", to: "/automacao-e-ia", hash: undefined },
+  { label: "Aceleriq OS", to: "/aceleriq-os", hash: undefined },
   { label: "Blog", to: "/blog", hash: undefined },
-  { label: "Método", to: "/", hash: "metodo" },
-  { label: "FAQ", to: "/", hash: "faq" },
 ] as const;
 
 export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
@@ -78,7 +78,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
             onClick={onDiagnostico}
             className="btn-tech text-[11px] px-6 py-2"
           >
-            Inaugurate Protocol
+            Fazer Diagnóstico
           </button>
         </div>
 
