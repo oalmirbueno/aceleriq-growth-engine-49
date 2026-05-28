@@ -445,8 +445,8 @@ export function ServicePageLayout(props: ServicePageProps) {
                   {p.step}
                 </div>
                 <div className="lg:col-span-4">
-                  <div className="font-mono text-[9px] text-muted-foreground/60 uppercase tracking-widest mb-1.5">
-                    fase 0{i + 1}
+                  <div className="font-mono text-[9px] text-muted-foreground/60 uppercase tracking-widest mb-1.5 whitespace-nowrap">
+                    fase {String(i + 1).padStart(2, "0")}
                   </div>
                   <h3 className="font-display text-xl md:text-2xl uppercase tracking-[-0.025em] leading-[1.1]">
                     {p.title}
@@ -494,8 +494,8 @@ export function ServicePageLayout(props: ServicePageProps) {
                 >
                   <summary className="flex items-start justify-between gap-4 py-5 cursor-pointer list-none hover:text-primary transition-colors">
                     <div className="flex items-start gap-4">
-                      <span className="font-mono text-[10px] text-muted-foreground/50 uppercase tracking-widest shrink-0 pt-1">
-                        0{i + 1}
+                      <span className="font-mono text-[10px] text-muted-foreground/50 uppercase tracking-widest shrink-0 pt-1 whitespace-nowrap">
+                        {String(i + 1).padStart(2, "0")}
                       </span>
                       <span className="font-display text-base md:text-lg uppercase tracking-[-0.02em] leading-[1.2]">
                         {f.q}

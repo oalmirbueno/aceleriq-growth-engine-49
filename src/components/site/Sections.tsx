@@ -180,7 +180,7 @@ const PAINS = [
   { icon: Workflow, title: "Ferramentas desconectadas", desc: "CRM, planilhas, WhatsApp e automações que não conversam." },
   { icon: Database, title: "Decisão sem dados", desc: "Você sente o pulso do negócio, mas não tem dashboards confiáveis." },
   { icon: AlertTriangle, title: "Tudo depende do dono", desc: "Sem o sócio na operação, a empresa para. Existe heroísmo, não processo." },
-  { icon: Target, title: "Leads ruins, propostas frias", desc: "Volume sobe, qualidade desce. CAC alto, ciclo longo, conversão baixa." },
+  { icon: Target, title: "Leads ruins, propostas frias", desc: "Volume sobe, qualidade desce. Ciclo longo, conversão baixa e pouca clareza de prioridade." },
 ];
 
 export function Pains() {
@@ -206,8 +206,8 @@ export function Pains() {
             >
               <div className="flex items-start justify-between">
                 <p.icon className="h-5 w-5 text-primary" />
-                <span className="text-mono text-[11px] text-muted-foreground">
-                  0{i + 1}
+                <span className="text-mono text-[11px] text-muted-foreground whitespace-nowrap">
+                  {String(i + 1).padStart(2, "0")}
                 </span>
               </div>
               <h3 className="mt-4 font-display text-[17px] font-medium tracking-tight">
@@ -364,7 +364,7 @@ const MATURITY_LEVELS = [
   },
   {
     level: "Growth Integrado",
-    desc: "Marketing e vendas conectados. Automações de follow-up, dashboards de CAC e previsibilidade de pipeline.",
+    desc: "Marketing e vendas conectados. Automações de follow-up, dashboards comerciais e acompanhamento de pipeline.",
   },
   {
     level: "Engenharia Completa",
@@ -392,7 +392,7 @@ export function MaturidadeComercial({ onDiagnostico }: { onDiagnostico: () => vo
               transition={{ duration: 0.4, delay: i * 0.1 }}
               className="relative p-6 rounded-xl border border-white/10 bg-white/[0.03] group hover:border-primary/40 transition-colors"
             >
-              <div className="text-mono text-[10px] text-primary/60 mb-4 tracking-widest uppercase">Nível 0{i + 1}</div>
+              <div className="text-mono text-[10px] text-primary/60 mb-4 tracking-widest uppercase whitespace-nowrap">Nível {String(i + 1).padStart(2, "0")}</div>
               <h3 className="font-display text-xl font-medium mb-3 group-hover:text-primary transition-colors">{m.level}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{m.desc}</p>
             </motion.div>
@@ -446,15 +446,16 @@ export function About() {
 
             <div className="divider-neon mt-5" />
 
-            <dl className="mt-5 grid grid-cols-3 gap-6">
+            <dl className="mt-5 grid gap-4 sm:grid-cols-2">
               {[
-                { k: "Empresas", v: "+50" },
-                { k: "Setores", v: "8" },
-                { k: "Anos", v: "5" },
+                { k: "Base", v: "Processos comerciais" },
+                { k: "Aplicação", v: "Automações aplicadas" },
+                { k: "Entrega", v: "Projetos digitais" },
+                { k: "Rotina", v: "Operação em evolução" },
               ].map((s) => (
                 <div key={s.k}>
                   <dt className="label-eyebrow">{s.k}</dt>
-                  <dd className="mt-1.5 text-mono text-2xl font-semibold tracking-tight">
+                  <dd className="mt-1.5 text-sm font-medium leading-snug text-foreground md:text-base">
                     {s.v}
                   </dd>
                 </div>
@@ -517,123 +518,43 @@ export function Method() {
           description="Do diagnóstico à escala, com método de engenharia, não com palpite criativo."
         />
 
-        {/* ───────── Timeline horizontal (desktop) ───────── */}
-        <div className="mt-10 hidden lg:block">
-          <div className="relative">
-            {/* Trilho base, gradiente suave */}
-            <div className="absolute left-[7%] right-[7%] top-[44px] h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-
-            {/* Trilho ativo, animado, com brilho elegante */}
-            <motion.div
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true, margin: "-120px" }}
-              transition={{ duration: 2.2, ease: [0.22, 1, 0.36, 1] }}
-              style={{ transformOrigin: "left" }}
-              className="absolute left-[7%] right-[7%] top-[43px] h-[2px] bg-gradient-to-r from-primary/0 via-primary to-primary/0"
-            >
-              <div className="absolute inset-0 blur-[6px] bg-gradient-to-r from-primary/0 via-primary/80 to-primary/0" />
-            </motion.div>
-
-            {/* Pulso percorrendo o trilho */}
-            <motion.div
-              initial={{ left: "7%", opacity: 0 }}
-              whileInView={{ left: "93%", opacity: [0, 1, 1, 0] }}
-              viewport={{ once: true, margin: "-120px" }}
-              transition={{ duration: 2.2, ease: "easeInOut", times: [0, 0.1, 0.9, 1] }}
-              className="absolute top-[40px] h-[8px] w-[8px] rounded-full bg-primary shadow-[0_0_20px_oklch(85%_0.2_145/0.9)]"
-            />
-
-            <div className="relative grid grid-cols-7">
-              {METHOD.map((step, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{
-                    duration: 0.7,
-                    delay: 0.3 + i * 0.18,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="group flex flex-col items-center px-2"
-                >
-                  {/* Número discreto */}
-                  <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground transition-colors group-hover:text-primary/80">
-                    0{i + 1}
-                  </span>
-
-                  {/* Nó da timeline, design refinado em camadas */}
-                  <div className="relative mt-3 flex h-[64px] w-[64px] items-center justify-center">
-                    {/* Halo externo pulsante */}
-                    <motion.div
-                      initial={{ scale: 0.6, opacity: 0 }}
-                      whileInView={{ scale: 1, opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: 0.5 + i * 0.18 }}
-                      className="absolute inset-0 rounded-full bg-primary/[0.08] blur-md transition-all duration-500 group-hover:bg-primary/20 group-hover:blur-lg"
-                    />
-
-                    {/* Anel externo */}
-                    <div className="absolute inset-1 rounded-full border border-white/10 transition-colors group-hover:border-primary/40" />
-
-                    {/* Disco principal, gradiente sofisticado */}
-                    <div className="relative flex h-[48px] w-[48px] items-center justify-center rounded-full border border-primary/30 bg-gradient-to-br from-[oklch(16%_0.02_145)] to-[oklch(10%_0_0)] shadow-[0_0_0_5px_oklch(10%_0_0),inset_0_1px_0_oklch(100%_0_0/0.06)] transition-all duration-500 group-hover:border-primary/70 group-hover:shadow-[0_0_0_5px_oklch(10%_0_0),0_0_28px_oklch(85%_0.2_145/0.45),inset_0_1px_0_oklch(100%_0_0/0.1)]">
-                      <span className="font-display text-xl font-bold text-primary text-glow">
-                        {step.letter}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Conteúdo */}
-                  <h3 className="mt-6 text-center font-display text-[13px] font-medium uppercase tracking-[0.16em] text-foreground transition-colors group-hover:text-primary">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2.5 max-w-[150px] text-center text-[12px] leading-relaxed text-muted-foreground">
-                    {step.desc}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* ───────── Timeline vertical (mobile/tablet) ───────── */}
-        <div className="mt-8 lg:hidden">
-          <div className="relative pl-8">
-            <div className="absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-primary/60 via-primary/30 to-transparent" />
-            <ol className="space-y-8">
-              {METHOD.map((step, i) => (
-                <motion.li
-                  key={i}
-                  initial={{ opacity: 0, x: -16 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                  className="relative"
-                >
-                  <div className="absolute -left-8 top-0 flex h-10 w-10 items-center justify-center rounded-full border border-primary/40 bg-gradient-to-br from-[oklch(16%_0.02_145)] to-[oklch(10%_0_0)] shadow-[0_0_0_4px_oklch(10%_0_0),0_0_18px_oklch(85%_0.2_145/0.25)]">
-                    <span className="font-display text-lg font-bold text-primary text-glow">
+        <div className="relative mt-10">
+          <div className="absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-primary/60 via-primary/30 to-transparent lg:left-[7%] lg:right-[7%] lg:top-[44px] lg:bottom-auto lg:h-px lg:w-auto lg:bg-gradient-to-r" />
+          <ol className="relative grid gap-8 pl-14 lg:grid-cols-7 lg:gap-0 lg:pl-0">
+            {METHOD.map((step, i) => (
+              <motion.li
+                key={step.title}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                className="group relative lg:flex lg:flex-col lg:items-center lg:px-2"
+              >
+                <div className="absolute -left-14 top-0 flex h-10 w-10 items-center justify-center rounded-full border border-primary/40 bg-gradient-to-br from-[oklch(16%_0.02_145)] to-[oklch(10%_0_0)] shadow-[0_0_0_4px_oklch(10%_0_0),0_0_18px_oklch(85%_0.2_145/0.25)] lg:static lg:h-[64px] lg:w-[64px] lg:border-0 lg:bg-transparent lg:shadow-none">
+                  <div className="hidden absolute inset-0 rounded-full bg-primary/[0.08] blur-md transition-all duration-500 group-hover:bg-primary/20 group-hover:blur-lg lg:block" />
+                  <div className="hidden absolute inset-1 rounded-full border border-white/10 transition-colors group-hover:border-primary/40 lg:block" />
+                  <div className="relative flex h-full w-full items-center justify-center rounded-full lg:h-[48px] lg:w-[48px] lg:border lg:border-primary/30 lg:bg-gradient-to-br lg:from-[oklch(16%_0.02_145)] lg:to-[oklch(10%_0_0)] lg:shadow-[0_0_0_5px_oklch(10%_0_0),inset_0_1px_0_oklch(100%_0_0/0.06)]">
+                    <span className="font-display text-lg font-bold text-primary text-glow lg:text-xl">
                       {step.letter}
                     </span>
                   </div>
-                  <div className="ml-6">
-                    <div className="flex items-baseline gap-3">
-                      <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground">
-                        0{i + 1}
-                      </span>
-                      <h3 className="font-display text-sm font-medium uppercase tracking-[0.14em]">
-                        {step.title}
-                      </h3>
-                    </div>
-                    <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">
-                      {step.desc}
-                    </p>
+                </div>
+                <div className="lg:mt-6 lg:text-center">
+                  <div className="flex items-baseline gap-3 lg:block">
+                    <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground whitespace-nowrap transition-colors group-hover:text-primary/80">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="font-display text-sm font-medium uppercase tracking-[0.14em] text-foreground transition-colors group-hover:text-primary lg:mt-3 lg:text-[13px] lg:tracking-[0.16em]">
+                      {step.title}
+                    </h3>
                   </div>
-                </motion.li>
-              ))}
-            </ol>
-          </div>
+                  <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground lg:mx-auto lg:mt-2.5 lg:max-w-[150px] lg:text-center lg:text-[12px]">
+                    {step.desc}
+                  </p>
+                </div>
+              </motion.li>
+            ))}
+          </ol>
         </div>
       </div>
     </section>
@@ -690,8 +611,8 @@ export function Areas() {
                 <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-primary/30 bg-primary/10 text-primary transition-all duration-300 group-hover:scale-110 group-hover:border-primary group-hover:bg-primary/20 group-hover:shadow-[0_0_20px_oklch(85%_0.2_145/0.5)]">
                   <a.icon className="h-5 w-5" />
                 </div>
-                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                  0{i + 1}
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground whitespace-nowrap">
+                  {String(i + 1).padStart(2, "0")}
                 </span>
               </div>
 
@@ -881,7 +802,7 @@ export function DiagnosticoCTA({ onDiagnostico }: { onDiagnostico: () => void })
 }
 
 // ─────────────────────────────────────────────────────────────
-// RESULTADOS — sem mini-cases inventados, foco em fundamentos
+// RESULTADOS — foco em fundamentos
 // ─────────────────────────────────────────────────────────────
 const FOUNDATIONS = [
   {
@@ -922,8 +843,8 @@ export function Results({ onDiagnostico }: { onDiagnostico?: () => void } = {}) 
               transition={{ duration: 0.4, delay: i * 0.06 }}
               className="hairline rounded-2xl bg-card/40 p-6 card-hover"
             >
-              <span className="text-mono text-[11px] uppercase tracking-[0.18em] text-primary">
-                0{i + 1}
+              <span className="text-mono text-[11px] uppercase tracking-[0.18em] text-primary whitespace-nowrap">
+                {String(i + 1).padStart(2, "0")}
               </span>
               <h3 className="mt-4 font-display text-[17px] font-medium tracking-tight">
                 {f.title}
@@ -985,10 +906,10 @@ const COMPARE: [string, string, string][] = [
   ["Foco", "Entregar peças (criativo, post, ad)", "Construir sistema de crescimento"],
   ["Estratégia", "Reativa, baseada em pedidos", "Diagnóstico, plano e priorização"],
   ["Vendas", "Não envolve o comercial", "Estrutura CRM, processo e cadência"],
-  ["Dados", "Métricas de vaidade", "Dashboards de receita e LTV"],
+  ["Dados", "Métricas de vaidade", "Dashboards comerciais e operacionais"],
   ["IA & Automação", "Inexistente ou superficial", "Agentes, fluxos e integrações reais"],
   ["Operação", "Externa ao seu negócio", "Integrada aos seus times e ferramentas"],
-  ["Resultado", "Cliques, alcance, impressões", "Pipeline, receita e previsibilidade"],
+  ["Resultado", "Cliques, alcance, impressões", "Pipeline, acompanhamento e clareza de decisão"],
   ["Relação", "Fornecedor", "Engenharia parceira de longo prazo"],
 ];
 
@@ -1109,7 +1030,7 @@ const FAQS = [
   },
   {
     q: "Em quanto tempo eu vejo resultado?",
-    a: "Resultados táticos aparecem em 2 a 4 semanas. Resultado estrutural, previsibilidade comercial e redução de CAC costumam se consolidar entre 60 e 120 dias. Construímos sistema, não milagre.",
+    a: "Resultados táticos aparecem em 2 a 4 semanas. Resultado estrutural e melhoria do processo comercial costumam se consolidar entre 60 e 120 dias. Construímos sistema, não milagre.",
   },
   {
     q: "Vocês atendem qualquer segmento?",
@@ -1121,7 +1042,7 @@ const FAQS = [
   },
   {
     q: "Qual a diferença real para uma agência?",
-    a: "Agência entrega peças isoladas. A Aceleriq entrega um sistema integrado: CRM, processo comercial, dashboards, IA e mídia orientada a pipeline. O entregável final é receita previsível.",
+    a: "Agência entrega peças isoladas. A Aceleriq entrega um sistema integrado: CRM, processo comercial, dashboards, IA e mídia conectada ao pipeline. O entregável final é uma operação mais clara e acompanhável.",
   },
   {
     q: "Como funciona o Diagnóstico Gratuito?",

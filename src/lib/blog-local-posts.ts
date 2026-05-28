@@ -155,7 +155,7 @@ Este guia mostra o que mudou, o que continua valendo, e o playbook que a Aceleri
 
 ## O que é um AI Overview, na prática
 
-Quando você busca "como reduzir CAC em SaaS", o Google não te entrega mais dez links e pronto. Ele gera um resumo conversacional, citando 3 a 7 fontes, com links inline. É esse resumo que chamamos de AI Overview (antigo SGE).
+Quando você busca "como reduzir custo de aquisição em empresas de tecnologia", o Google não te entrega mais dez links e pronto. Ele gera um resumo conversacional, citando 3 a 7 fontes, com links inline. É esse resumo que chamamos de AI Overview (antigo SGE).
 
 Para o usuário, é ótimo: resposta na hora.
 
@@ -211,12 +211,12 @@ Não é à toa que a Aceleriq trata [criação de sites](/criacao-de-sites) como
 
 Esquece "palavra-chave de cauda curta". A busca virou conversacional:
 
-- "agência marketing digital curitiba" → "qual a melhor agência de marketing digital em Curitiba para SaaS B2B?"
+- "agência marketing digital curitiba" → "qual a melhor agência de marketing digital em Curitiba para empresas B2B?"
 - "tráfego pago" → "vale a pena rodar Google Ads se eu já tenho SEO bom?"
 
 Sua estratégia de conteúdo precisa cobrir:
 
-1. **Perguntas comerciais** (alta intenção, baixa busca, alto LTV).
+1. **Perguntas comerciais** (alta intenção, baixa busca, alto valor estratégico).
 2. **Perguntas comparativas** ("X vs Y", "alternativas ao Y").
 3. **Perguntas de implementação** ("como fazer X", "passo a passo de Y").
 4. **Perguntas de objeção** ("X funciona mesmo?", "quanto custa Y?").

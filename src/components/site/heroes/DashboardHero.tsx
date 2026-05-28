@@ -46,7 +46,7 @@ export function DashboardHero() {
         </div>
       </motion.div>
 
-      {/* GREEN neon card — ROAS */}
+      {/* GREEN neon card — retorno */}
       <motion.div
         initial={{ opacity: 0, y: -20, rotate: -3 }}
         animate={{ opacity: 1, y: [0, 12, 0], rotate: -3 }}
@@ -61,7 +61,7 @@ export function DashboardHero() {
           }}
         />
         <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-background/70">
-          roas
+          retorno
         </div>
         <div className="mt-3 flex items-baseline gap-1">
           <CountTo value={6.8} suffix="x" className="font-display text-6xl font-bold tracking-[-0.04em] text-background" />
