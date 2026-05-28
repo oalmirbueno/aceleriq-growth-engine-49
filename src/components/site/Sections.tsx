@@ -91,16 +91,16 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                 className="mt-8 md:mt-12 max-w-lg"
               >
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed border-l-2 border-primary/30 pl-4 md:pl-6">
-                  Escalamos empresas com estratégia, dados, IA e processos comerciais previsíveis, não com marketing de esperança.
+                  A Aceleriq organiza seu funil, CRM, WhatsApp, tráfego, conteúdo e automações para sua empresa parar de depender do improviso e começar a crescer com mais previsibilidade.
                 </p>
                 
                 <div className="mt-6 md:mt-7 flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 sm:items-center">
                   <button onClick={onDiagnostico} className="btn-tech self-start">
-                    Fazer Diagnóstico Gratuito
+                    Fazer Diagnóstico de Crescimento
                   </button>
-                  <a href={whatsappLink(DEFAULT_WHATSAPP_MESSAGE)} target="_blank" rel="noreferrer" className="group flex items-center gap-3 font-mono text-xs tracking-widest hover:text-primary transition-colors">
+                  <a href="#como-funciona" className="group flex items-center gap-3 font-mono text-xs tracking-widest hover:text-primary transition-colors">
                     <span className="h-px w-8 bg-white/20 group-hover:w-12 group-hover:bg-primary transition-all" />
-                    FALAR COM ESPECIALISTA
+                    VER COMO FUNCIONA
                   </a>
                 </div>
               </motion.div>
