@@ -323,6 +323,137 @@ export function OperationsFirst() {
 }
 
 // ─────────────────────────────────────────────────────────────
+// COMECE PELO SEU ESTÁGIO ATUAL
+// ─────────────────────────────────────────────────────────────
+const STAGES = [
+  {
+    title: "Tenho leads, mas não vendo bem",
+    desc: "Vamos organizar CRM, atendimento, scripts e follow-up.",
+    icon: Users2,
+  },
+  {
+    title: "Quero anunciar, mas operação bagunçada",
+    desc: "Primeiro estruturamos a base comercial, depois escalamos com mídia.",
+    icon: Target,
+  },
+  {
+    title: "Preciso de site ou landing page",
+    desc: "Criamos páginas para captar, explicar e converter oportunidades.",
+    icon: Layers,
+  },
+  {
+    title: "Quero automatizar atendimento",
+    desc: "Conectamos WhatsApp, CRM, IA e tarefas para reduzir atraso.",
+    icon: Bot,
+  },
+  {
+    title: "Quero estruturar para crescer",
+    desc: "Integramos comercial, marketing, processos, dados e automação.",
+    icon: Rocket,
+  },
+];
+
+export function EstagiosCrescimento({ onDiagnostico }: { onDiagnostico: () => void }) {
+  return (
+    <section className="relative py-12 md:py-20 bg-grid-ambient overflow-hidden">
+      <div className="container-aceleriq relative">
+        <SectionHeader
+          eyebrow="[ 02 ] · Ponto de Partida"
+          title="Comece pelo seu estágio atual"
+          description="Identificamos o melhor caminho de acordo com o momento da sua empresa."
+        />
+
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {STAGES.map((s, i) => (
+            <motion.div
+              key={s.title}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.05 }}
+              className="hairline rounded-xl bg-card/30 p-6 card-hover group flex flex-col h-full"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary border border-primary/20 transition-all group-hover:scale-110 mb-5">
+                <s.icon className="h-5 w-5" />
+              </div>
+              <h3 className="font-display text-lg font-medium">{s.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground mb-6 flex-grow">{s.desc}</p>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={onDiagnostico}
+                className="self-start text-xs font-mono tracking-widest p-0 h-auto hover:bg-transparent hover:text-primary"
+              >
+                SOLICITAR DIAGNÓSTICO <ArrowRight className="ml-2 h-3 w-3" />
+              </Button>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// MATURIDADE COMERCIAL
+// ─────────────────────────────────────────────────────────────
+const MATURITY_LEVELS = [
+  {
+    level: "Base Local",
+    desc: "Empresa que já vende mas depende de indicação ou tráfego sem processo. Atendimento manual e sem CRM.",
+  },
+  {
+    level: "Comercial Organizado",
+    desc: "Uso de CRM, scripts definidos e leitura básica de métricas. O processo começa a ser independente do dono.",
+  },
+  {
+    level: "Growth Integrado",
+    desc: "Marketing e vendas conectados. Automações de follow-up, dashboards de CAC e previsibilidade de pipeline.",
+  },
+  {
+    level: "Engenharia Completa",
+    desc: "Operação escalável com agentes de IA, dados em tempo real e automação avançada em toda a jornada.",
+  },
+];
+
+export function MaturidadeComercial({ onDiagnostico }: { onDiagnostico: () => void }) {
+  return (
+    <section className="relative py-12 md:py-20 bg-grid-ambient border-t border-white/10 overflow-hidden">
+      <div className="container-aceleriq relative">
+        <SectionHeader
+          eyebrow="[ 03 ] · Evolução"
+          title="Níveis de Maturidade Comercial"
+          description="O diagnóstico define o melhor caminho para cada nível. Não existe receita pronta, existe engenharia sob medida."
+        />
+
+        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {MATURITY_LEVELS.map((m, i) => (
+            <motion.div
+              key={m.level}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.1 }}
+              className="relative p-6 rounded-xl border border-white/10 bg-white/[0.03] group hover:border-primary/40 transition-colors"
+            >
+              <div className="text-mono text-[10px] text-primary/60 mb-4 tracking-widest uppercase">Nível 0{i + 1}</div>
+              <h3 className="font-display text-xl font-medium mb-3 group-hover:text-primary transition-colors">{m.level}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{m.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+        
+        <div className="mt-12 text-center">
+          <Button onClick={onDiagnostico} className="btn-tech">
+            Descobrir meu nível de maturidade
+          </Button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
 // SOBRE / PILARES
 // ─────────────────────────────────────────────────────────────
 const PILLARS = [

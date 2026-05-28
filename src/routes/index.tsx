@@ -9,6 +9,8 @@ import {
   About,
   Method,
   OperationsFirst,
+  EstagiosCrescimento,
+  MaturidadeComercial,
   Areas,
   FitFor,
   DiagnosticoCTA,
@@ -111,6 +113,9 @@ function Index() {
         <Hero onDiagnostico={openDiagnostico} />
         <OperationsFirst />
         <Pains />
+        <OperationsFirst />
+        <EstagiosCrescimento onDiagnostico={openDiagnostico} />
+        <MaturidadeComercial onDiagnostico={openDiagnostico} />
         <About />
         <Method />
         <Areas />
