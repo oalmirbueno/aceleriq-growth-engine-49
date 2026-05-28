@@ -189,7 +189,7 @@ export function Pains() {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
       <div className="container-aceleriq">
         <SectionHeader
-          eyebrow="[ 02 ] · Sintomas comuns"
+          eyebrow="[ 01 ] · Sintomas comuns"
           title="Você reconhece algum destes problemas?"
           description="São os gargalos que travam empresas entre R$ 100k e R$ 5M/mês. Todos têm solução com a engenharia certa."
         />
@@ -241,7 +241,7 @@ export function OperationsFirst() {
     <section className="relative py-12 md:py-20 bg-grid-ambient overflow-hidden">
       <div className="container-aceleriq relative">
         <div className="max-w-3xl">
-          <span className="label-eyebrow">[ 01 ] · A lógica da aceleração</span>
+          <span className="label-eyebrow">[ 02 ] · A lógica da aceleração</span>
           <h2 className="mt-4 font-display text-3xl font-medium leading-[1.1] tracking-[-0.03em] md:text-5xl">
             Antes de anunciar, arrume a operação.
           </h2>
