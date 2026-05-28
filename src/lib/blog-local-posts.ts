@@ -43,10 +43,10 @@ O resultado é previsibilidade. Em vez de campanhas isoladas, o cliente passa a 
   },
 
   {
-    title: "Agentes de IA para empresas em 2026: o guia definitivo para automatizar vendas e atendimento",
+    title: "Por que postar no Instagram não resolve um comercial bagunçado",
     excerpt:
       "Como agentes de IA estão substituindo dashboards, atendentes e SDRs em 2026, e o passo a passo para implantar na sua empresa sem virar refém de uma plataforma.",
-    category: "ia",
+    category: "ia_automacao",
     image: coverAgentesIa,
     publishedAt: "2026-05-16T09:00:00.000Z",
     author: "Equipe Aceleriq",
