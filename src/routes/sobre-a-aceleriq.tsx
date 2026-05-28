@@ -210,6 +210,61 @@ function SobreAceleriq() {
           </div>
         </section>
 
+        {/* O QUE NÃO FAZEMOS */}
+        <section className="relative py-12 md:py-16 bg-grid-ambient border-t border-border/20">
+          <div className="container-aceleriq">
+            <div className="grid lg:grid-cols-2 gap-12">
+              <div>
+                <span className="label-eyebrow">Diretrizes</span>
+                <h2 className="mt-3 font-display text-3xl font-medium tracking-tight md:text-5xl">
+                  O que <span className="text-primary">não</span> fazemos.
+                </h2>
+                <p className="mt-4 text-muted-foreground leading-relaxed">
+                  Para manter a qualidade e o foco no resultado real, temos clareza do que não faz parte da nossa entrega.
+                </p>
+                <div className="mt-8 space-y-4">
+                  {[
+                    "Não vendemos post solto como estratégia",
+                    "Não colocamos tráfego em operação bagunçada sem alertar",
+                    "Não prometemos resultado sem base em dados",
+                    "Não criamos automação sem processo bem desenhado",
+                    "Não tratamos marketing separado do comercial"
+                  ].map((text, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <X className="h-4 w-4 text-red-500 shrink-0" />
+                      <span className="text-sm text-foreground/80">{text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              <div>
+                <span className="label-eyebrow">Visão</span>
+                <h2 className="mt-3 font-display text-3xl font-medium tracking-tight md:text-5xl">
+                  Para quem existimos.
+                </h2>
+                <p className="mt-4 text-muted-foreground leading-relaxed">
+                  A Aceleriq é a parceira ideal para empresas que buscam um próximo nível de profissionalismo.
+                </p>
+                <div className="mt-8 space-y-4">
+                  {[
+                    "Empresários que querem sair do operacional",
+                    "Empresas que precisam de processos comerciais claros",
+                    "Negócios que querem usar IA para ganhar escala",
+                    "Times que buscam decisões baseadas em dados",
+                    "Empresas maduras prontas para acelerar o crescimento"
+                  ].map((text, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <ShieldCheck className="h-4 w-4 text-primary shrink-0" />
+                      <span className="text-sm text-foreground/80">{text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* CTA */}
         <section className="relative py-12 md:py-16 bg-grid-ambient">
           <div className="container-aceleriq">
@@ -223,11 +278,10 @@ function SobreAceleriq() {
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
 
               <h2 className="mx-auto max-w-3xl font-display text-3xl font-medium leading-[1.05] tracking-[-0.03em] md:text-5xl">
-                Quer saber em que estágio sua empresa está?
+                Pronto para estruturar seu crescimento?
               </h2>
               <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-muted-foreground">
-                Faça o Diagnóstico Gratuito da Aceleriq em 5 minutos e receba
-                seu Score, classificação e 3 recomendações personalizadas.
+                Faça o Diagnóstico de Crescimento da Aceleriq e descubra onde sua empresa está perdendo vendas hoje.
               </p>
 
               <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -236,7 +290,7 @@ function SobreAceleriq() {
                   size="lg"
                   className="group h-12 rounded-md bg-primary px-7 text-[14px] font-semibold text-primary-foreground btn-interactive"
                 >
-                  Fazer Diagnóstico Gratuito
+                  Fazer Diagnóstico de Crescimento
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </Button>
                 <Button
