@@ -223,51 +223,66 @@ export type Database = {
       }
       diagnostico_leads: {
         Row: {
+          cidade: string | null
           classificacao: string
           created_at: string
           empresa: string
           faturamento_mensal: string
           id: string
           interesse_principal: string
+          investe_trafego: string | null
           nome: string
           origem: string | null
           principal_gargalo: string
           recomendacoes: Json
           respostas: Json
           score: number
+          segmento: string | null
           site_instagram: string | null
+          tem_equipe_comercial: string | null
+          usa_crm: string | null
           whatsapp: string
         }
         Insert: {
+          cidade?: string | null
           classificacao?: string
           created_at?: string
           empresa: string
           faturamento_mensal: string
           id?: string
           interesse_principal: string
+          investe_trafego?: string | null
           nome: string
           origem?: string | null
           principal_gargalo: string
           recomendacoes?: Json
           respostas?: Json
           score?: number
+          segmento?: string | null
           site_instagram?: string | null
+          tem_equipe_comercial?: string | null
+          usa_crm?: string | null
           whatsapp: string
         }
         Update: {
+          cidade?: string | null
           classificacao?: string
           created_at?: string
           empresa?: string
           faturamento_mensal?: string
           id?: string
           interesse_principal?: string
+          investe_trafego?: string | null
           nome?: string
           origem?: string | null
           principal_gargalo?: string
           recomendacoes?: Json
           respostas?: Json
           score?: number
+          segmento?: string | null
           site_instagram?: string | null
+          tem_equipe_comercial?: string | null
+          usa_crm?: string | null
           whatsapp?: string
         }
         Relationships: []
