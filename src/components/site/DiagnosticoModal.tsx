@@ -315,13 +315,6 @@ export function DiagnosticoModal({
         recomendacoes: recs,
         origem: origem ?? null,
       });
-        interesse_principal: captura.interesse_principal,
-        respostas: finalAnswers,
-        score,
-        classificacao: cls.label,
-        recomendacoes: recs,
-        origem: origem ?? null,
-      });
       if (error) throw error;
 
       setResultado({
