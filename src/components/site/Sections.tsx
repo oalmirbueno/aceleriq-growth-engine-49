@@ -277,32 +277,32 @@ export function OperationsFirst() {
 // COMECE PELO SEU ESTÁGIO ATUAL
 const STAGES = [
   {
-    title: "Tenho leads, mas não vendo bem",
-    desc: "Organizamos CRM, atendimento, scripts, qualificação e follow-up para reduzir perda de oportunidades.",
+    title: "Meu comercial está desorganizado",
+    desc: "Você recebe contatos, mas perde oportunidades por falta de CRM, follow-up, scripts ou rotina comercial.",
     icon: Users2,
     cta: "Diagnosticar meu comercial"
   },
   {
-    title: "Quero anunciar, mas operação bagunçada",
-    desc: "Antes de aumentar verba, estruturamos página, oferta, WhatsApp, CRM e rotina de acompanhamento.",
+    title: "Quero anunciar, mas minha base está fraca",
+    desc: "Antes de investir mais em tráfego, organizamos página, oferta, WhatsApp, CRM e atendimento.",
     icon: Target,
     cta: "Preparar minha operação"
   },
   {
     title: "Preciso de site ou landing page",
-    desc: "Criamos páginas para explicar sua oferta, captar contatos e conectar campanhas ao WhatsApp ou CRM.",
+    desc: "Criamos uma estrutura digital para explicar sua oferta, captar contatos e conectar campanhas ao WhatsApp ou CRM.",
     icon: Layers,
     cta: "Criar minha estrutura digital"
   },
   {
-    title: "Quero automatizar atendimento",
-    desc: "Conectamos WhatsApp, CRM, formulários, tarefas e IA para reduzir atrasos e esquecimentos.",
+    title: "Quero automatizar meu atendimento",
+    desc: "Conectamos WhatsApp, formulários, CRM, tarefas e IA para reduzir atrasos e esquecimentos.",
     icon: Bot,
-    cta: "Automatizar meu atendimento"
+    cta: "Automatizar atendimento"
   },
   {
     title: "Quero crescer com mais controle",
-    desc: "Integramos comercial, marketing, processos, dados e automação em uma operação mais clara.",
+    desc: "Integramos comercial, marketing, processos, dados e automação para sua empresa operar com mais clareza.",
     icon: Rocket,
     cta: "Fazer diagnóstico"
   },
@@ -314,9 +314,10 @@ export function EstagiosCrescimento({ onDiagnostico }: { onDiagnostico: () => vo
       <div className="container-aceleriq relative">
         <SectionHeader
           eyebrow="[ 03 ] · Ponto de Partida"
-          title="Comece pelo seu estágio atual"
-          description="Identificamos o melhor caminho de acordo com o momento da sua empresa."
+          title="Comece por aqui."
+          description="Cada empresa trava em um ponto diferente. Escolha o cenário mais parecido com o seu e solicite um diagnóstico para entender o próximo passo."
         />
+
 
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {STAGES.map((s, i) => (
