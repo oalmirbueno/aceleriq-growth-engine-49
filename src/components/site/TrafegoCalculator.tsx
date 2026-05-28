@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import { ShieldCheck, TrendingUp, Target, LineChart, Layers, Sparkles } from "lucide-react";
+import { ShieldCheck, Target, LineChart, Layers, Sparkles } from "lucide-react";
+
 
 /**
  * Tráfego — Projeção por nicho + certificações + estratégia.
