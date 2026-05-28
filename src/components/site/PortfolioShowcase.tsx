@@ -47,7 +47,7 @@ export const DEFAULT_PORTFOLIO: PortfolioItem[] = [
     highlights: [
       "Identidade digital coerente entre institucional e e-commerce",
       "Catálogo dinâmico com filtros por categoria e marca",
-      "SEO técnico e Core Web Vitals verde",
+      "SEO técnico forte e performance cuidada",
       "Integração com WhatsApp, GA4 e pixels de conversão",
     ],
     stack: ["Next.js", "Tailwind", "Headless commerce", "GA4"],
@@ -294,16 +294,15 @@ type Props = {
 
 export function PortfolioShowcase({
   items = DEFAULT_PORTFOLIO,
-  eyebrow = "[ · ] · Portfólio",
-  title = "Projetos e estruturas digitais em produção",
-  intro = "Uma seleção de sites, landing pages, plataformas e projetos digitais desenvolvidos ou estruturados pela Aceleriq e seu ecossistema.",
+  eyebrow = "[ 13 ] · Portfólio",
+  title = "Projetos e estruturas digitais em produção.",
+  intro = "Uma seleção de sites, landing pages, plataformas e estruturas digitais desenvolvidas ou organizadas pela Aceleriq e seu ecossistema.",
 }: Props) {
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement | null>(null);
   const active = activeSlug ? items.find((i) => i.slug === activeSlug) ?? null : null;
 
   // Scroll para o topo da seção APENAS na abertura inicial do case.
-  // Usamos "auto" (instantâneo) para abrir muito mais rápido — sem animação lenta.
   const wasActiveRef = useRef(false);
   useEffect(() => {
     const isActive = !!active;
@@ -340,21 +339,12 @@ export function PortfolioShowcase({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(ITEMLIST_JSONLD) }}
       />
       <div className="container-aceleriq">
-        <SectionHeader
-          eyebrow="[ 13 ] · Portfólio"
-          title="Casos reais de engenharia aplicada."
-          description="Alguns projetos onde estruturamos o sistema de crescimento de ponta a ponta."
-        />
         {!active && (
-          <div className="max-w-2xl animate-fade-in">
-            <span className="label-eyebrow">{eyebrow}</span>
-            <h2 className="mt-3 font-display text-3xl font-medium leading-[1.05] tracking-[-0.03em] md:text-5xl">
-              {title}
-            </h2>
-            <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
-              {intro}
-            </p>
-          </div>
+          <SectionHeader
+            eyebrow={eyebrow}
+            title={title}
+            description={intro}
+          />
         )}
 
         {active ? (
