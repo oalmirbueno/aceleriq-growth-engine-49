@@ -358,13 +358,13 @@ export function About() {
 // MÉTODO ACELERA
 // ─────────────────────────────────────────────────────────────
 const METHOD = [
-  { letter: "A", title: "Análise", desc: "Diagnóstico 360º da operação, dados, time e funil." },
-  { letter: "C", title: "Clareza", desc: "Posicionamento, oferta, ICP e narrativa que vendem." },
-  { letter: "E", title: "Estratégia", desc: "Plano de crescimento com prioridades, metas e KPIs." },
-  { letter: "L", title: "Lançamento", desc: "Construção de funil, criativos, CRM e automações." },
-  { letter: "E", title: "Execução", desc: "Tráfego, conteúdo, vendas e operação rodando com ritmo." },
-  { letter: "R", title: "Resultado", desc: "Dashboards, leitura semanal e otimização baseada em dados." },
-  { letter: "A", title: "Aceleração", desc: "Escala com IA, automação avançada e novos canais." },
+  { letter: "A", title: "Analisar", desc: "Mapeamos comercial, marketing, canais, atendimento e gargalos." },
+  { letter: "C", title: "Clarear", desc: "Definimos público, oferta, promessa e prioridades reais." },
+  { letter: "E", title: "Estruturar", desc: "Organizamos CRM, pipeline, atendimento, scripts e follow-up." },
+  { letter: "L", title: "Lançar", desc: "Colocamos site, campanhas, automações e integrações para rodar." },
+  { letter: "E", title: "Executar", desc: "Produzimos conteúdo, mídia, otimizações e acompanhamento." },
+  { letter: "R", title: "Revisar", desc: "Acompanhamos métricas, conversão, atendimento e CAC." },
+  { letter: "A", title: "Acelerar", desc: "Escalamos campanhas e processos com base no que provou tração." },
 ];
 
 export function Method() {
