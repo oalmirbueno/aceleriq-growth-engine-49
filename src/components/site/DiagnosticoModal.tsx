@@ -200,8 +200,13 @@ export function DiagnosticoModal({
     nome: "",
     whatsapp: "",
     empresa: "",
+    cidade: "",
+    segmento: "",
     site_instagram: "",
     faturamento_mensal: "100k_300k",
+    usa_crm: "nao",
+    investe_trafego: "nao",
+    tem_equipe_comercial: "so_dono",
     principal_gargalo: "",
     interesse_principal: "vendas",
   });
