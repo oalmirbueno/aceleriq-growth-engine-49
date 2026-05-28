@@ -337,45 +337,34 @@ function FunnelBar({ pct, label, sub, tone }: { pct: number; label: string; sub:
       <div className="h-2 bg-[oklch(94%_0_0)] overflow-hidden rounded-full">
         <motion.div
           initial={{ width: 0 }}
-          animate={{ width: `${pct}%` }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="h-full rounded-full"
-          style={{ background: fill }}
-        />
-      </div>
-    </div>
-  );
-}
+type PlatformCode = "google" | "meta" | "linkedin" | "tiktok" | "ga" | "capi";
 
 function PlatformCard({
-  name, badge, code,
+  name, code,
 }: {
-  name: string; badge: string;
-  code: "google" | "meta" | "linkedin" | "tiktok";
+  name: string;
+  code: PlatformCode;
 }) {
   return (
     <div
-      className="group relative bg-white text-[oklch(15%_0_0)] border border-black/8 p-6 flex flex-col gap-5 transition-all duration-300 hover:-translate-y-1 hover:border-[oklch(45%_0.18_145)/0.5] shadow-[0_15px_40px_-20px_rgba(0,0,0,0.18)] h-full"
+      className="group relative bg-white text-[oklch(15%_0_0)] border border-black/8 p-5 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-1 hover:border-[oklch(45%_0.18_145)/0.5] shadow-[0_15px_40px_-20px_rgba(0,0,0,0.18)] h-full"
       style={{ clipPath: "polygon(0 6%, 100% 0, 100% 94%, 0 100%)" }}
     >
       <div className="flex items-center justify-between">
         <PlatformLogo code={code} />
-        <ShieldCheck className="h-4 w-4 text-[oklch(45%_0.18_145)]" />
+        <ShieldCheck className="h-4 w-4 text-[oklch(45%_0.18_145)]/70" />
       </div>
       <div className="mt-auto">
-        <div className="font-display text-base font-bold tracking-tight">{name}</div>
-        <div className="font-mono text-[10px] uppercase tracking-[0.2em] mt-0.5 text-[oklch(50%_0_0)]">
-          Certified · {badge}
+        <div className="font-display text-sm md:text-base font-bold tracking-tight leading-tight">{name}</div>
+        <div className="font-mono text-[9px] uppercase tracking-[0.18em] mt-1 text-[oklch(50%_0_0)]">
+          Plataforma operada
         </div>
-      </div>
-      <div className="font-mono text-[10px] text-[oklch(60%_0_0)]">
-        ID: AQ-{code.toUpperCase().slice(0, 3)}-{(code.length * 4721).toString().slice(0, 4)}
       </div>
     </div>
   );
 }
 
-function PlatformLogo({ code }: { code: "google" | "meta" | "linkedin" | "tiktok" }) {
+function PlatformLogo({ code }: { code: PlatformCode }) {
   switch (code) {
     case "google":
       return (
@@ -404,8 +393,25 @@ function PlatformLogo({ code }: { code: "google" | "meta" | "linkedin" | "tiktok
           <path fill="#111111" d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.3 0 .58.04.85.13V9.4a6.34 6.34 0 0 0-5.94 10.46A6.34 6.34 0 0 0 15.7 15.7V8.83a8.16 8.16 0 0 0 4.77 1.52V6.93c-.3 0-.59-.08-.88-.24z"/>
         </svg>
       );
+    case "ga":
+      return (
+        <svg viewBox="0 0 24 24" className="h-7 w-7">
+          <path fill="#F9AB00" d="M19.5 2A2.5 2.5 0 0 0 17 4.5v15a2.5 2.5 0 0 0 5 0v-15A2.5 2.5 0 0 0 19.5 2z"/>
+          <path fill="#E37400" d="M12 9.5a2.5 2.5 0 0 0-2.5 2.5v7.5a2.5 2.5 0 0 0 5 0V12A2.5 2.5 0 0 0 12 9.5zM4.5 17a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"/>
+        </svg>
+      );
+    case "capi":
+      return (
+        <svg viewBox="0 0 24 24" className="h-7 w-7">
+          <path fill="#0866FF" d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-6l-4 4v-4H5a2 2 0 0 1-2-2V5z"/>
+          <circle cx="8" cy="9.5" r="1.2" fill="#fff"/>
+          <circle cx="12" cy="9.5" r="1.2" fill="#fff"/>
+          <circle cx="16" cy="9.5" r="1.2" fill="#fff"/>
+        </svg>
+      );
   }
 }
+
 
 function StrategyCard({
   icon, tag, title, items, accent,
