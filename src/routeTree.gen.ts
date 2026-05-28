@@ -13,6 +13,7 @@ import { Route as TrafegoPagoRouteImport } from './routes/trafego-pago'
 import { Route as SobreAAceleriqRouteImport } from './routes/sobre-a-aceleriq'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as EstruturacaoComercialRouteImport } from './routes/estruturacao-comercial'
+import { Route as DiagnosticoDeCrescimentoRouteImport } from './routes/diagnostico-de-crescimento'
 import { Route as DiagnosticoRouteImport } from './routes/diagnostico'
 import { Route as CriacaoDeSitesRouteImport } from './routes/criacao-de-sites'
 import { Route as BlogRouteImport } from './routes/blog'
@@ -56,6 +57,12 @@ const EstruturacaoComercialRoute = EstruturacaoComercialRouteImport.update({
   path: '/estruturacao-comercial',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DiagnosticoDeCrescimentoRoute =
+  DiagnosticoDeCrescimentoRouteImport.update({
+    id: '/diagnostico-de-crescimento',
+    path: '/diagnostico-de-crescimento',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DiagnosticoRoute = DiagnosticoRouteImport.update({
   id: '/diagnostico',
   path: '/diagnostico',
@@ -182,6 +189,7 @@ export interface FileRoutesByFullPath {
   '/blog': typeof BlogRouteWithChildren
   '/criacao-de-sites': typeof CriacaoDeSitesRoute
   '/diagnostico': typeof DiagnosticoRoute
+  '/diagnostico-de-crescimento': typeof DiagnosticoDeCrescimentoRoute
   '/estruturacao-comercial': typeof EstruturacaoComercialRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
@@ -208,6 +216,7 @@ export interface FileRoutesByTo {
   '/automacao-e-ia': typeof AutomacaoEIaRoute
   '/criacao-de-sites': typeof CriacaoDeSitesRoute
   '/diagnostico': typeof DiagnosticoRoute
+  '/diagnostico-de-crescimento': typeof DiagnosticoDeCrescimentoRoute
   '/estruturacao-comercial': typeof EstruturacaoComercialRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
@@ -237,6 +246,7 @@ export interface FileRoutesById {
   '/blog': typeof BlogRouteWithChildren
   '/criacao-de-sites': typeof CriacaoDeSitesRoute
   '/diagnostico': typeof DiagnosticoRoute
+  '/diagnostico-de-crescimento': typeof DiagnosticoDeCrescimentoRoute
   '/estruturacao-comercial': typeof EstruturacaoComercialRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre-a-aceleriq': typeof SobreAAceleriqRoute
@@ -267,6 +277,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/criacao-de-sites'
     | '/diagnostico'
+    | '/diagnostico-de-crescimento'
     | '/estruturacao-comercial'
     | '/sitemap.xml'
     | '/sobre-a-aceleriq'
@@ -293,6 +304,7 @@ export interface FileRouteTypes {
     | '/automacao-e-ia'
     | '/criacao-de-sites'
     | '/diagnostico'
+    | '/diagnostico-de-crescimento'
     | '/estruturacao-comercial'
     | '/sitemap.xml'
     | '/sobre-a-aceleriq'
@@ -321,6 +333,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/criacao-de-sites'
     | '/diagnostico'
+    | '/diagnostico-de-crescimento'
     | '/estruturacao-comercial'
     | '/sitemap.xml'
     | '/sobre-a-aceleriq'
@@ -350,6 +363,7 @@ export interface RootRouteChildren {
   BlogRoute: typeof BlogRouteWithChildren
   CriacaoDeSitesRoute: typeof CriacaoDeSitesRoute
   DiagnosticoRoute: typeof DiagnosticoRoute
+  DiagnosticoDeCrescimentoRoute: typeof DiagnosticoDeCrescimentoRoute
   EstruturacaoComercialRoute: typeof EstruturacaoComercialRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreAAceleriqRoute: typeof SobreAAceleriqRoute
@@ -389,6 +403,13 @@ declare module '@tanstack/react-router' {
       path: '/estruturacao-comercial'
       fullPath: '/estruturacao-comercial'
       preLoaderRoute: typeof EstruturacaoComercialRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/diagnostico-de-crescimento': {
+      id: '/diagnostico-de-crescimento'
+      path: '/diagnostico-de-crescimento'
+      fullPath: '/diagnostico-de-crescimento'
+      preLoaderRoute: typeof DiagnosticoDeCrescimentoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/diagnostico': {
@@ -602,6 +623,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogRoute: BlogRouteWithChildren,
   CriacaoDeSitesRoute: CriacaoDeSitesRoute,
   DiagnosticoRoute: DiagnosticoRoute,
+  DiagnosticoDeCrescimentoRoute: DiagnosticoDeCrescimentoRoute,
   EstruturacaoComercialRoute: EstruturacaoComercialRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreAAceleriqRoute: SobreAAceleriqRoute,
@@ -615,3 +637,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
