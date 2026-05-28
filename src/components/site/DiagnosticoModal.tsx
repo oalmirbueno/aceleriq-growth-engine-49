@@ -38,9 +38,14 @@ type CapturaKey =
   | "nome"
   | "whatsapp"
   | "empresa"
+  | "cidade"
+  | "segmento"
   | "site_instagram"
   | "faturamento_mensal"
   | "interesse_principal"
+  | "usa_crm"
+  | "investe_trafego"
+  | "tem_equipe_comercial"
   | "principal_gargalo";
 
 const CAPTURA_STEPS: {
