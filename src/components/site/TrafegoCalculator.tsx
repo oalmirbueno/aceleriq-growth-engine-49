@@ -337,7 +337,18 @@ function FunnelBar({ pct, label, sub, tone }: { pct: number; label: string; sub:
       <div className="h-2 bg-[oklch(94%_0_0)] overflow-hidden rounded-full">
         <motion.div
           initial={{ width: 0 }}
+          animate={{ width: `${pct}%` }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="h-full rounded-full"
+          style={{ background: fill }}
+        />
+      </div>
+    </div>
+  );
+}
+
 type PlatformCode = "google" | "meta" | "linkedin" | "tiktok" | "ga" | "capi";
+
 
 function PlatformCard({
   name, code,
