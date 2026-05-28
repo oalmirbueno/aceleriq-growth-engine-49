@@ -3,12 +3,12 @@
 // Cada item já vem com fonte original (Exame, Olhar Digital, MIT, etc.).
 
 export type FeedCategory =
-  | "ia"
-  | "automacao"
-  | "trafego"
+  | "comercial"
+  | "ia_automacao"
   | "marketing"
-  | "vendas"
-  | "crescimento";
+  | "trafego"
+  | "locais"
+  | "processos";
 
 export interface FeedSource {
   id: string;
