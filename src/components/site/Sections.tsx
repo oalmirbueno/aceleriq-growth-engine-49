@@ -343,7 +343,7 @@ const STAGES = [
   },
   {
     title: "Quero automatizar atendimento",
-    desc: "Conectamos WhatsApp, CRM, IA e tarefas para reduzir atraso.",
+    desc: "Conectamos WhatsApp, CRM, IA e tarefas para reduzir atraso operacional.",
     icon: Bot,
   },
   {

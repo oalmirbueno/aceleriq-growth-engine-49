@@ -71,7 +71,7 @@ function AceleriqOS() {
           Aceleriq OS: a <span className="text-primary italic">central de crescimento</span> da sua operação.
         </>
       }
-      intro="Um ambiente unificado para acompanhar marketing, comercial, automações, campanhas, tarefas, métricas e decisões estratégicas em um só lugar."
+      intro="Um ambiente unificado para acompanhar marketing, comercial, automações, campanhas e métricas em tempo real. O Aceleriq OS dá ao empresário o controle total da operação sem precisar entrar em múltiplas ferramentas."
       benefits={[
         {
           title: "Visão 360º da Operação",
