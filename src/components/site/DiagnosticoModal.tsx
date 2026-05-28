@@ -184,6 +184,8 @@ export function DiagnosticoModal({
     tem_equipe_comercial: "nao",
     principal_gargalo: "",
     interesse_principal: "vendas",
+    faturamento_mensal: "100k_300k",
+    site_instagram: "",
   });
   const [answers, setAnswers] = useState<QuizAnswers>({});
   const [quizIdx, setQuizIdx] = useState(0);
@@ -299,20 +301,22 @@ export function DiagnosticoModal({
       const recs = recomendar(finalAnswers, captura.interesse_principal);
 
       const { error } = await supabase.from("diagnostico_leads").insert({
-        nome: captura.nome.trim(),
-        whatsapp: captura.whatsapp.trim(),
-        empresa: captura.empresa.trim(),
+        nome: captura.nome?.trim() || "",
+        whatsapp: captura.whatsapp?.trim() || "",
+        empresa: captura.empresa?.trim() || "",
         cidade: captura.cidade?.trim() || "",
         segmento: captura.segmento?.trim() || "",
         usa_crm: captura.usa_crm || "nao",
         investe_trafego: captura.investe_trafego || "nao",
         tem_equipe_comercial: captura.tem_equipe_comercial || "nao",
-        principal_gargalo: captura.principal_gargalo.trim(),
-        interesse_principal: captura.interesse_principal,
-        respostas: finalAnswers,
+        principal_gargalo: captura.principal_gargalo?.trim() || "",
+        interesse_principal: captura.interesse_principal || "vendas",
+        faturamento_mensal: captura.faturamento_mensal || "100k_300k",
+        site_instagram: captura.site_instagram || null,
+        respostas: finalAnswers as any,
         score,
         classificacao: cls.label,
-        recomendacoes: recs,
+        recomendacoes: recs as any,
         origem: origem ?? null,
       });
       if (error) throw error;
