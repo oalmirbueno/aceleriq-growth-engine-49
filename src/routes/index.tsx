@@ -109,6 +109,7 @@ function Index() {
       <Header onDiagnostico={openDiagnostico} />
       <main>
         <Hero onDiagnostico={openDiagnostico} />
+        <OperationsFirst />
         <Pains />
         <About />
         <Method />
