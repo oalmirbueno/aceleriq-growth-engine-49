@@ -357,8 +357,6 @@ const STAGES = [
     cta: "Fazer diagnóstico"
   },
 ];
-];
-
 export function EstagiosCrescimento({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
     <section className="relative py-12 md:py-20 bg-grid-ambient overflow-hidden">
@@ -391,8 +389,6 @@ export function EstagiosCrescimento({ onDiagnostico }: { onDiagnostico: () => vo
                 className="self-start text-xs font-bold font-mono tracking-widest p-0 h-auto hover:bg-transparent hover:text-primary transition-colors"
               >
                 {s.cta} <ArrowRight className="ml-2 h-3 w-3" />
-                SOLICITAR DIAGNÓSTICO <ArrowRight className="ml-2 h-3 w-3" />
-              </Button>
             </motion.div>
           ))}
         </div>

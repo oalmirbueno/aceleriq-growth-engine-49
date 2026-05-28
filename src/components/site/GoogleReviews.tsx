@@ -147,34 +147,23 @@ export function GoogleReviews() {
                 </span>
                 <h3 className="mt-4 font-display text-2xl uppercase tracking-[-0.03em] leading-[1.1]">
                   Sede física,<br />
-                  <span className="text-primary">atendimento nacional</span>
-                </h3>
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                  Operação 100% remota para o Brasil inteiro, com base em Curitiba.
-                  Perfil verificado no Google Business.
-                </p>
-              </div>
-              <a
-                href={GOOGLE_REVIEW_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="group mt-6 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-primary"
-              >
-                Ver no Google
-                <ExternalLink className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-              </a>
-            </div>
-            <div className="lg:col-span-8 overflow-hidden rounded-2xl border border-border/60 bg-card/40">
-              <iframe
-                title="Aceleriq no Google Maps"
-                src={MAPS_EMBED}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="h-[280px] w-full md:h-[340px]"
-                style={{ border: 0, filter: "invert(0.92) hue-rotate(180deg) saturate(0.6)" }}
-              />
-            </div>
+        <div className="mt-12 flex flex-col items-center justify-center rounded-2xl border border-primary/20 bg-card/40 p-12 text-center backdrop-blur-sm">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 text-primary mb-6">
+            <Star className="h-10 w-10 fill-primary" />
           </div>
+          <div className="text-5xl font-bold text-white mb-2">{AVERAGE.toFixed(1)}</div>
+          <p className="text-lg text-primary font-medium mb-4">{COUNT} avaliações verificadas no Google</p>
+          <p className="max-w-md text-sm text-muted-foreground mb-8">
+            Preferimos mostrar provas reais e verificáveis do que preencher o site com depoimentos genéricos.
+          </p>
+          <a
+            href={GOOGLE_REVIEW_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="btn-tech"
+          >
+            Ver avaliações no Google
+          </a>
         </div>
       </div>
     </section>

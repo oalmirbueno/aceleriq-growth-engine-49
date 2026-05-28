@@ -322,7 +322,6 @@ export function DiagnosticoModal({
       if (error) throw error;
 
       setResultado({
-      setResultado({
         score,
         classificacao: cls.label,
         classResumo: cls.resumo,

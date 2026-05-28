@@ -300,14 +300,11 @@ export function ServicePageLayout(props: ServicePageProps) {
                 <div className="font-display text-4xl md:text-5xl tracking-[-0.04em] leading-none text-primary">
                   0{m.val}
                 </div>
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: i * 0.06 }}
-                className="group"
-              >
+                <div className="mt-3 pt-3 border-t border-border/60 group-hover:border-primary/60 transition-colors">
+                  <div className="text-[13px] text-foreground/90 leading-snug">{m.label}</div>
+                  <div className="mt-0.5 text-[11px] text-muted-foreground/60">{m.note}</div>
+                </div>
+              </motion.div>
                 <div className="font-display text-4xl md:text-5xl tracking-[-0.04em] leading-none">
                   <CountUp
                     to={m.val}
