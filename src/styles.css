@@ -161,8 +161,8 @@
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(to right, var(--background) 0%, transparent 60%, transparent 100%),
-      linear-gradient(to bottom, transparent 60%, var(--background) 100%);
+      linear-gradient(to right, var(--surface-dark) 0%, oklch(16% 0.005 260 / 0.55) 44%, transparent 100%),
+      linear-gradient(to bottom, transparent 52%, var(--surface-dark) 100%);
   }
 
   /* Grid ambiente — muito sutil, apenas textura */
