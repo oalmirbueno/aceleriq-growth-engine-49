@@ -36,21 +36,22 @@
 }
 
 :root {
-  /* Grafite Suave — âncora preta + cinza dominante + verde sinal */
-  --background: oklch(15% 0.005 260);            /* grafite profundo, quase preto */
-  --foreground: oklch(96% 0.003 260);            /* off-white suave */
-  --primary: oklch(72% 0.19 145);                /* verde vibrante, menos neon */
-  --primary-foreground: oklch(12% 0 0);
-  --muted: oklch(22% 0.005 260);
-  --muted-foreground: oklch(70% 0.005 260);
-  --border: oklch(96% 0.003 260 / 0.09);
-  --accent: oklch(60% 0.15 250);
+  /* Grafite Suave — cinza claro dominante, preto como âncora tipográfica, verde sinal */
+  --background: oklch(97% 0.003 260);            /* off-white / cinza quase branco */
+  --foreground: oklch(16% 0.005 260);            /* preto tipográfico */
+  --primary: oklch(62% 0.17 145);                /* verde sólido, menos neon */
+  --primary-foreground: oklch(99% 0 0);
+  --muted: oklch(93% 0.004 260);
+  --muted-foreground: oklch(38% 0.005 260 / 0.75);
+  --border: oklch(16% 0.005 260 / 0.1);
+  --accent: oklch(55% 0.15 250);
 
-  /* Superfícies claras (para bandas alternadas) */
-  --surface: oklch(94% 0.004 260);               /* cinza claro dominante */
-  --surface-muted: oklch(97% 0.003 260);         /* cinza quase branco */
-  --ink: oklch(14% 0.005 260);                   /* preto tipográfico sobre claro */
-  --card: oklch(19% 0.005 260 / 0.5);
+  /* Bandas */
+  --surface: oklch(94% 0.004 260);               /* cinza claro alternado */
+  --surface-muted: oklch(90% 0.004 260);         /* cinza um pouco mais forte */
+  --surface-dark: oklch(16% 0.005 260);          /* grafite âncora pontual */
+  --ink: oklch(14% 0.005 260);
+  --card: oklch(100% 0 0);
 }
 
 @layer base {
@@ -211,37 +212,31 @@
     background: linear-gradient(to top, var(--background), transparent);
   }
 
-  /* Painel de vidro suave */
+  /* Painel de vidro suave (fundo claro) */
   .glass-panel {
-    background: oklch(100% 0 0 / 0.025);
-    border: 1px solid oklch(100% 0 0 / 0.06);
+    background: oklch(100% 0 0 / 0.7);
+    border: 1px solid oklch(16% 0.005 260 / 0.08);
     border-radius: 16px;
-    box-shadow: 0 20px 50px -20px oklch(0% 0 0 / 0.4);
+    box-shadow: 0 20px 50px -24px oklch(0% 0 0 / 0.12);
+    backdrop-filter: blur(8px);
   }
 
-  /* Card padrão — arredondado, borda fina, hover suave */
+  /* Card padrão — branco puro sobre bg claro, sombra suave */
   .card-soft {
-    background: oklch(100% 0 0 / 0.025);
-    border: 1px solid oklch(100% 0 0 / 0.07);
+    background: var(--card);
+    border: 1px solid oklch(16% 0.005 260 / 0.08);
     border-radius: 20px;
+    box-shadow: 0 1px 2px oklch(0% 0 0 / 0.03);
     transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1),
                 border-color 0.25s ease,
                 box-shadow 0.35s ease;
   }
   .card-soft:hover {
     transform: translateY(-3px);
-    border-color: oklch(72% 0.19 145 / 0.4);
-    box-shadow: 0 24px 48px -24px oklch(0% 0 0 / 0.5);
+    border-color: oklch(62% 0.17 145 / 0.45);
+    box-shadow: 0 24px 48px -24px oklch(0% 0 0 / 0.14);
   }
-  .surface-light .card-soft {
-    background: oklch(100% 0 0);
-    border-color: oklch(15% 0.005 260 / 0.08);
-    box-shadow: 0 1px 2px oklch(0% 0 0 / 0.03);
-  }
-  .surface-light .card-soft:hover {
-    border-color: oklch(72% 0.19 145 / 0.5);
-    box-shadow: 0 24px 48px -24px oklch(0% 0 0 / 0.15);
-  }
+
 
   /* Tipografia sutil (sem glow neon) */
   .text-glow { color: var(--primary); }
@@ -308,12 +303,12 @@
     font-family: var(--font-mono);
   }
 
-  /* Hairline sutil */
+  /* Hairline sutil (linha cinza sobre claro) */
   .hairline {
-    border: 1px solid oklch(100% 0 0 / 0.07);
+    border: 1px solid oklch(16% 0.005 260 / 0.1);
   }
   .surface-light .hairline {
-    border-color: oklch(15% 0.005 260 / 0.1);
+    border-color: oklch(96% 0.003 260 / 0.14);
   }
 
   /* Botão interativo (usado em CTAs) */

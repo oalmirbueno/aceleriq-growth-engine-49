@@ -32,8 +32,8 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
       className={cn(
         "fixed inset-x-0 top-0 z-50 isolate transition-all duration-300 [backdrop-filter:saturate(160%)_blur(20px)] [-webkit-backdrop-filter:saturate(160%)_blur(20px)]",
         scrolled
-          ? "border-b border-white/[0.06] bg-background/70 py-2"
-          : "border-b border-transparent bg-background/40 py-2.5",
+          ? "border-b border-foreground/[0.08] bg-background/75 py-2"
+          : "border-b border-transparent bg-background/50 py-2.5",
       )}
     >
       <div className="container-aceleriq flex items-center justify-between">
@@ -74,7 +74,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
           type="button"
           aria-label="Abrir menu"
           onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 items-center justify-center border border-white/10 bg-white/5 text-foreground lg:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-foreground/10 bg-foreground/5 text-foreground lg:hidden"
         >
           {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
         </button>
@@ -82,7 +82,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
 
       {/* Mobile Menu */}
       {open && (
-        <div className="absolute inset-x-0 top-full border-t border-white/10 bg-background/95 backdrop-blur-2xl lg:hidden">
+        <div className="absolute inset-x-0 top-full border-t border-foreground/10 bg-background/95 backdrop-blur-2xl lg:hidden">
           <div className="container-aceleriq flex flex-col gap-1 py-8">
             {NAV.map((item, i) => (
               <Link
@@ -90,7 +90,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
                 to={item.to}
                 hash={item.hash}
                 onClick={() => setOpen(false)}
-                className="flex items-center justify-between border-b border-white/5 py-4 text-sm font-mono uppercase tracking-widest text-muted-foreground hover:text-primary"
+                className="flex items-center justify-between border-b border-foreground/5 py-4 text-sm font-mono uppercase tracking-widest text-muted-foreground hover:text-primary"
               >
                 <span>{item.label}</span>
                 <span className="num-tight text-[10px] opacity-30 whitespace-nowrap">{String(i + 1).padStart(2, "0")}</span>
@@ -101,7 +101,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="flex items-center justify-between border-b border-white/5 py-4 text-sm font-mono uppercase tracking-widest text-muted-foreground hover:text-primary"
+              className="flex items-center justify-between border-b border-foreground/5 py-4 text-sm font-mono uppercase tracking-widest text-muted-foreground hover:text-primary"
             >
               <span>Client Portal</span>
               <span className="text-[10px] opacity-30">↗</span>

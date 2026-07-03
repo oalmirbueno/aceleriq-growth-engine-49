@@ -123,7 +123,7 @@ export const Route = createRootRoute({
       { name: "twitter:title", content: SITE_TITLE },
       { name: "twitter:description", content: SITE_DESCRIPTION },
       { name: "twitter:image", content: OG_IMAGE },
-      { name: "theme-color", content: "#0a0a0a" },
+      { name: "theme-color", content: "#f3f4f5" },
       { name: "google-site-verification", content: "1mBlyoiFOwpc1VMRgb385i1KzpeNFStyr8aqIkHU5-0" },
     ],
     links: [
