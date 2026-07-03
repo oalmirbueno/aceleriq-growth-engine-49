@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout, buildServiceHead } from "@/components/site/ServicePageLayout";
 import { AutomationSimulator } from "@/components/site/AutomationSimulator";
+import { HumanBand } from "@/components/site/HumanBand";
+import automacaoHumana from "@/assets/automacao-humana.jpg";
 
 const URL = "https://aceleriq.com.br/automacao-e-ia";
 const TITLE = "Automação e IA para WhatsApp, CRM e Comercial | Aceleriq";

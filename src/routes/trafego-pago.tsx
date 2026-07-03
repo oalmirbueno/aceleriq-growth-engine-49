@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout, buildServiceHead } from "@/components/site/ServicePageLayout";
 import { TrafegoCalculator } from "@/components/site/TrafegoCalculator";
+import { HumanBand } from "@/components/site/HumanBand";
+import trafegoTime from "@/assets/trafego-time-brasil.jpg";
 
 const URL = "https://aceleriq.com.br/trafego-pago";
 const TITLE = "Gestão de Tráfego Pago com Estratégia Comercial | Aceleriq";

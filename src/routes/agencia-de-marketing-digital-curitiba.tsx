@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePageLayout, buildServiceHead } from "@/components/site/ServicePageLayout";
 import { PortfolioShowcase } from "@/components/site/PortfolioShowcase";
+import { HumanBand } from "@/components/site/HumanBand";
+import officeTeam from "@/assets/office-team-brasil.jpg";
 
 const URL = "https://aceleriq.com.br/agencia-de-marketing-digital-curitiba";
 const TITLE = "Marketing de Crescimento conectado ao Comercial | Aceleriq";
