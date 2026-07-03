@@ -50,91 +50,132 @@ import { CountUp } from "@/components/ui/CountUp";
 // ─────────────────────────────────────────────────────────────
 export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section id="top" className="section-dark relative min-h-screen flex items-start lg:items-center justify-center pt-24 pb-12 md:pt-20 md:pb-16 lg:pb-20 overflow-hidden bg-grid-tech">
-      {/* Apenas o quadriculado, sem linhas */}
-      {/* Background Decorativo - Camadas Técnicas */}
-      <div className="hero-background" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[oklch(6%_0.002_260/0.35)] to-[oklch(6%_0.002_260)] z-10" />
-      
-      <div className="container-aceleriq relative z-20">
-        <div className="flex flex-col items-center">
-          
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="self-start mb-6 md:mb-8"
-          >
-            <span className="font-mono text-[9px] md:text-[10px] tracking-[0.3em] md:tracking-[0.4em] uppercase py-1 border-b border-primary text-primary">
-              <span className="hidden sm:inline">Status do Sistema: Operacional // Escala de Engenharia: Global</span>
-              <span className="sm:hidden">Sistema Operacional // Escala Global</span>
-            </span>
-          </motion.div>
+    <section
+      id="top"
+      className="relative overflow-hidden pt-28 pb-16 md:pt-36 md:pb-24 lg:min-h-[92vh] lg:flex lg:items-center"
+      style={{
+        background:
+          "radial-gradient(1200px 600px at 12% 40%, oklch(94% 0.02 78 / 0.35), transparent 60%), radial-gradient(1000px 500px at 100% 100%, oklch(24% 0.09 262 / 0.08), transparent 60%), var(--background)",
+      }}
+    >
+      {/* Marca d'água tipográfica ao fundo (letra A gigante) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 right-[-6%] flex items-center opacity-[0.06] select-none"
+      >
+        <span
+          className="font-display font-bold leading-none text-[color:var(--primary)]"
+          style={{ fontSize: "clamp(400px, 55vw, 900px)" }}
+        >
+          A
+        </span>
+      </div>
 
-          <div className="grid lg:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-center w-full max-w-full">
-            <div>
-              <motion.h1 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, ease: "circOut" }}
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] md:leading-[0.9] flex flex-col"
-              >
-                <span className="text-white">Estruture seu</span>
-                <span className="text-primary text-glow italic">comercial, marketing</span>
-                <span className="text-white">e operação</span>
-              </motion.h1>
+      <div className="container-aceleriq relative z-10">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
+          {/* Copy */}
+          <div className="max-w-2xl">
+            <motion.span
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.32em] text-muted-foreground"
+            >
+              <span className="h-px w-8 bg-[color:var(--primary)]/40" />
+              Engenharia de crescimento · Curitiba
+            </motion.span>
 
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                className="mt-8 md:mt-12 max-w-lg"
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "circOut" }}
+              className="mt-6 font-display font-medium tracking-[-0.035em] leading-[0.95] text-[color:var(--primary)] text-[clamp(2.75rem,6.5vw,5.5rem)]"
+            >
+              Estruture seu{" "}
+              <span
+                className="italic font-normal text-[color:var(--primary)]"
+                style={{ fontFamily: "var(--font-script)" }}
               >
-                <p className="text-base md:text-lg text-muted-foreground leading-relaxed border-l-2 border-primary/30 pl-4 md:pl-6">
-                  A Aceleriq organiza seu funil, CRM, WhatsApp, tráfego, conteúdo e automações para sua empresa parar de depender do improviso e começar a crescer com mais previsibilidade.
-                </p>
-                
-                <div className="mt-6 md:mt-7 flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 sm:items-center">
-                  <button onClick={onDiagnostico} className="btn-tech self-start">
-                    Fazer Diagnóstico de Crescimento
-                  </button>
-                  <a href="#como-funciona" className="group flex items-center gap-3 font-mono text-xs tracking-widest hover:text-primary transition-colors">
-                    <span className="h-px w-8 bg-white/20 group-hover:w-12 group-hover:bg-primary transition-all" />
-                    VER COMO FUNCIONA
-                  </a>
-                </div>
-              </motion.div>
-            </div>
+                comercial
+              </span>
+              ,{" "}
+              <span
+                className="italic font-normal text-[color:var(--accent-gold)]"
+                style={{ fontFamily: "var(--font-script)" }}
+              >
+                marketing
+              </span>{" "}
+              e operação<span className="text-[color:var(--accent-gold)]">.</span>
+            </motion.h1>
 
-            {/* Visual — Almir 3D recortado, sem moldura */}
-            <div className="w-full max-w-[330px] sm:max-w-md md:max-w-lg mx-auto lg:max-w-xl lg:ml-auto">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.94 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1, ease: "circOut" }}
-                className="almir-avatar-stage h-[460px] sm:h-[560px] lg:h-[680px]"
-              >
-                <img
-                  src={almirPhoto}
-                  alt="Avatar 3D de Almir Teles"
-                  width={1024}
-                  height={1408}
-                  className="almir-avatar-figure"
-                  loading="eager"
-                  decoding="sync"
-                  fetchPriority="high"
-                  draggable={false}
-                />
-              </motion.div>
-            </div>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.35, duration: 0.6 }}
+              className="mt-7 max-w-lg text-[15px] md:text-base leading-relaxed text-muted-foreground"
+            >
+              A Aceleriq organiza seu funil, CRM, WhatsApp, tráfego, conteúdo e
+              automações para sua empresa parar de depender do improviso e
+              começar a crescer com previsibilidade.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="mt-9 flex flex-wrap items-center gap-4"
+            >
+              <button onClick={onDiagnostico} className="btn-navy">
+                Fazer diagnóstico
+                <ArrowUpRight className="ml-1 h-4 w-4" />
+              </button>
+              <a href="#como-funciona" className="btn-outline">
+                Ver como funciona
+              </a>
+            </motion.div>
           </div>
+
+          {/* Avatar 3D */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, ease: "circOut" }}
+            className="relative mx-auto w-full max-w-[420px] md:max-w-[520px] lg:max-w-[620px]"
+          >
+            <div className="almir-avatar-stage h-[440px] sm:h-[560px] lg:h-[680px]">
+              <img
+                src={almirPhoto}
+                alt="Almir Teles — fundador da Aceleriq"
+                width={896}
+                height={1200}
+                className="almir-avatar-figure"
+                loading="eager"
+                decoding="sync"
+                fetchPriority="high"
+                draggable={false}
+              />
+            </div>
+          </motion.div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 hidden md:flex flex-col items-center gap-2 pointer-events-none">
-        <span className="font-mono text-[9px] tracking-[0.4em] uppercase text-white/40">Scroll</span>
-        <div className="w-px h-10 bg-gradient-to-b from-primary to-transparent animate-pulse" />
+      {/* Faixa navy inferior — trust bar */}
+      <div className="absolute inset-x-0 bottom-0 z-20 hidden md:block">
+        <div className="bg-[color:var(--primary)] text-white">
+          <div className="container-aceleriq grid grid-cols-2 gap-x-8 gap-y-3 py-4 md:grid-cols-4">
+            {[
+              "Diagnóstico antes da escala",
+              "CRM, tráfego e IA integrados",
+              "Time sênior, sem terceirização",
+              "Dashboards de receita reais",
+            ].map((t) => (
+              <div key={t} className="flex items-center gap-2.5 text-[11px] font-mono uppercase tracking-[0.14em]">
+                <ShieldCheck className="h-3.5 w-3.5 text-[color:var(--accent-gold)]" />
+                <span className="opacity-90">{t}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
