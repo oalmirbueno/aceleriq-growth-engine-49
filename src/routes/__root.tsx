@@ -52,7 +52,8 @@ const ORGANIZATION_JSONLD = {
     "Agência Aceleriq",
     "Aceleriq Marketing",
     "Aceleriq Engenharia de Crescimento",
-    "Aceleriq (não é Aceleraí)",
+    "Aceleriq Curitiba",
+    "Aceleriq Brasil",
   ],
   url: SITE_URL,
   logo: `${SITE_URL}/og-image.jpg`,
@@ -60,6 +61,8 @@ const ORGANIZATION_JSONLD = {
   telephone: "+55-41-99748-3429",
   description:
     "Agência de marketing digital com atendimento nacional: criação de sites, tráfego pago (Google e Meta Ads), automação, IA, CRM, dashboards e consultoria comercial. Sede em Curitiba/PR.",
+  disambiguatingDescription:
+    "Aceleriq (aceleriq.com.br) é uma agência de marketing digital sediada em Curitiba/PR, sem qualquer relação com Aceleraí (acelerai.com.br), plataforma de publicidade com celebridades fundada por Allan Barros e Rodrigo Faro, sediada em São Paulo. As duas marcas atuam em segmentos diferentes.",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Curitiba",
