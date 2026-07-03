@@ -101,7 +101,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="flex items-center justify-between border-b border-white/5 py-4 text-sm font-mono uppercase tracking-widest text-muted-foreground hover:text-primary"
+              className="flex items-center justify-between border-b border-foreground/5 py-4 text-sm font-mono uppercase tracking-widest text-muted-foreground hover:text-primary"
             >
               <span>Client Portal</span>
               <span className="text-[10px] opacity-30">↗</span>
