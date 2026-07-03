@@ -30,10 +30,10 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 isolate transition-all duration-300 [backdrop-filter:saturate(160%)_blur(20px)] [-webkit-backdrop-filter:saturate(160%)_blur(20px)]",
+        "fixed inset-x-0 top-0 z-50 isolate transition-all duration-300 [backdrop-filter:saturate(160%)_blur(20px)] [-webkit-backdrop-filter:saturate(160%)_blur(20px)] bg-[oklch(8%_0_0)]/95 text-white",
         scrolled
-          ? "border-b border-foreground/[0.08] bg-background/75 py-2"
-          : "border-b border-transparent bg-background/50 py-2.5",
+          ? "border-b border-white/[0.06] py-2 shadow-[0_10px_30px_-20px_oklch(0%_0_0/0.6)]"
+          : "border-b border-transparent py-2.5",
       )}
     >
       <div className="container-aceleriq flex items-center justify-between">
@@ -42,7 +42,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
             <img
               src={logoAceleriq}
               alt="Logotipo Aceleriq"
-              className="h-16 w-auto md:h-20 transition-transform duration-300 group-hover:scale-105"
+              className="h-12 w-auto md:h-14 transition-transform duration-300 group-hover:scale-105"
             />
           </Link>
 
@@ -52,10 +52,10 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
                 key={item.label}
                 to={item.to}
                 hash={item.hash}
-                className="relative text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary group"
+                className="relative text-[11px] font-mono uppercase tracking-[0.2em] text-white/65 transition-colors hover:text-[oklch(72%_0.19_145)] group"
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 h-px w-0 bg-primary transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 h-px w-0 bg-[oklch(72%_0.19_145)] transition-all duration-300 group-hover:w-full" />
               </Link>
             ))}
           </nav>
@@ -64,7 +64,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
         <div className="hidden items-center gap-4 md:flex">
           <button
             onClick={onDiagnostico}
-            className="btn-tech"
+            className="inline-flex items-center gap-2 rounded-full bg-[oklch(72%_0.19_145)] px-5 py-2.5 text-[12px] font-semibold uppercase tracking-[0.14em] text-[oklch(8%_0_0)] transition-all hover:bg-[oklch(78%_0.2_145)] hover:shadow-[0_10px_30px_-10px_oklch(72%_0.19_145/0.6)]"
           >
             Fazer Diagnóstico
           </button>
@@ -74,7 +74,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
           type="button"
           aria-label="Abrir menu"
           onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-foreground/10 bg-foreground/5 text-foreground lg:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white lg:hidden"
         >
           {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
         </button>
@@ -82,7 +82,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
 
       {/* Mobile Menu */}
       {open && (
-        <div className="absolute inset-x-0 top-full border-t border-foreground/10 bg-background/95 backdrop-blur-2xl lg:hidden">
+        <div className="absolute inset-x-0 top-full border-t border-white/10 bg-[oklch(8%_0_0)]/98 backdrop-blur-2xl lg:hidden">
           <div className="container-aceleriq flex flex-col gap-1 py-8">
             {NAV.map((item, i) => (
               <Link
@@ -90,7 +90,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
                 to={item.to}
                 hash={item.hash}
                 onClick={() => setOpen(false)}
-                className="flex items-center justify-between border-b border-foreground/5 py-4 text-sm font-mono uppercase tracking-widest text-muted-foreground hover:text-primary"
+                className="flex items-center justify-between border-b border-white/5 py-4 text-sm font-mono uppercase tracking-widest text-white/70 hover:text-[oklch(72%_0.19_145)]"
               >
                 <span>{item.label}</span>
                 <span className="num-tight text-[10px] opacity-30 whitespace-nowrap">{String(i + 1).padStart(2, "0")}</span>
@@ -101,7 +101,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="flex items-center justify-between border-b border-foreground/5 py-4 text-sm font-mono uppercase tracking-widest text-muted-foreground hover:text-primary"
+              className="flex items-center justify-between border-b border-white/5 py-4 text-sm font-mono uppercase tracking-widest text-white/70 hover:text-[oklch(72%_0.19_145)]"
             >
               <span>Client Portal</span>
               <span className="text-[10px] opacity-30">↗</span>
@@ -112,9 +112,9 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
                   setOpen(false);
                   onDiagnostico();
                 }}
-                className="btn-tech w-full py-4 text-xs"
+                className="w-full rounded-full bg-[oklch(72%_0.19_145)] py-4 text-xs font-semibold uppercase tracking-[0.14em] text-[oklch(8%_0_0)]"
               >
-                Initialize Diagnostic
+                Fazer Diagnóstico
               </button>
             </div>
           </div>

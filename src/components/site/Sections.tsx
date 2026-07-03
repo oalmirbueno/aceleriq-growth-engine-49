@@ -42,6 +42,7 @@ import {
   DEFAULT_WHATSAPP_MESSAGE,
 } from "@/lib/contact";
 import almirPhoto from "@/assets/almir-real.png";
+import logoAceleriq from "@/assets/logo-aceleriq.png";
 
 import { CountUp } from "@/components/ui/CountUp";
 
@@ -55,20 +56,20 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
       className="relative overflow-hidden pt-28 pb-16 md:pt-36 md:pb-24 lg:min-h-[92vh] lg:flex lg:items-center"
       style={{
         background:
-          "radial-gradient(1200px 600px at 12% 40%, oklch(94% 0.02 78 / 0.35), transparent 60%), radial-gradient(1000px 500px at 100% 100%, oklch(24% 0.09 262 / 0.08), transparent 60%), var(--background)",
+          "radial-gradient(1200px 600px at 12% 40%, oklch(72% 0.19 145 / 0.14), transparent 60%), radial-gradient(1000px 500px at 100% 100%, oklch(8% 0 0 / 0.06), transparent 60%), var(--background)",
       }}
     >
-      {/* Marca d'água tipográfica ao fundo (letra A gigante) */}
+      {/* Marca d'água — logo Aceleriq gigante ao fundo */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 right-[-6%] flex items-center opacity-[0.06] select-none"
+        className="pointer-events-none absolute inset-y-0 right-[-8%] flex items-center opacity-[0.05] select-none"
       >
-        <span
-          className="font-display font-bold leading-none text-[color:var(--primary)]"
-          style={{ fontSize: "clamp(400px, 55vw, 900px)" }}
-        >
-          A
-        </span>
+        <img
+          src={logoAceleriq}
+          alt=""
+          className="h-[70vh] w-auto max-h-[820px] object-contain"
+          draggable={false}
+        />
       </div>
 
       <div className="container-aceleriq relative z-10">
@@ -518,10 +519,10 @@ export function Method() {
   return (
     <section
       id="metodo"
-      className="section-dark relative py-12 md:py-16 overflow-hidden bg-grid-ambient"
+      className="section-dark relative py-16 md:py-24 overflow-hidden"
     >
-      {/* Brilho ambiente verde, achatado e sutil, sem bolha redonda */}
-      <div className="pointer-events-none absolute top-1/2 left-1/2 h-[150px] w-[860px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.035] blur-[90px]" />
+      {/* Halo verde ambiente */}
+      <div className="pointer-events-none absolute top-1/2 left-1/2 h-[220px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-[oklch(72%_0.19_145)]/[0.06] blur-[110px]" />
 
       <div className="container-aceleriq relative">
         <SectionHeader
@@ -530,37 +531,43 @@ export function Method() {
           description="Do diagnóstico à escala, com método de engenharia, não com palpite criativo."
         />
 
-        <div className="relative mt-10">
-          <div className="absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-primary/60 via-primary/30 to-transparent lg:left-[7%] lg:right-[7%] lg:top-[44px] lg:bottom-auto lg:h-px lg:w-auto lg:bg-gradient-to-r" />
-          <ol className="relative grid gap-8 pl-14 lg:grid-cols-7 lg:gap-0 lg:pl-0">
+        <div className="relative mt-14">
+          {/* Trilho contínuo (vertical no mobile, horizontal no desktop) */}
+          <div
+            aria-hidden
+            className="absolute left-6 top-3 bottom-3 w-px bg-gradient-to-b from-[oklch(72%_0.19_145)]/70 via-[oklch(72%_0.19_145)]/25 to-transparent lg:left-0 lg:right-0 lg:top-8 lg:bottom-auto lg:h-px lg:w-auto lg:bg-gradient-to-r"
+          />
+
+          <ol className="relative grid gap-10 lg:grid-cols-7 lg:gap-4">
             {METHOD.map((step, i) => (
               <motion.li
-                key={step.title}
-                initial={{ opacity: 0, y: 16 }}
+                key={step.title + i}
+                initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                className="group relative lg:flex lg:flex-col lg:items-center lg:px-2"
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.4, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                className="group relative pl-16 lg:pl-0 lg:flex lg:flex-col lg:items-center lg:text-center"
               >
-                <div className="absolute -left-14 top-0 flex h-10 w-10 items-center justify-center rounded-full border border-primary/40 bg-gradient-to-br from-[oklch(16%_0.02_145)] to-[oklch(10%_0_0)] shadow-[0_0_0_4px_oklch(10%_0_0),0_0_18px_oklch(85%_0.2_145/0.25)] lg:static lg:h-[64px] lg:w-[64px] lg:border-0 lg:bg-transparent lg:shadow-none">
-                  <div className="hidden absolute inset-0 rounded-full bg-primary/[0.08] blur-md transition-all duration-500 group-hover:bg-primary/20 group-hover:blur-lg lg:block" />
-                  <div className="hidden absolute inset-1 rounded-full border border-white/10 transition-colors group-hover:border-primary/40 lg:block" />
-                  <div className="relative flex h-full w-full items-center justify-center rounded-full lg:h-[48px] lg:w-[48px] lg:border lg:border-primary/30 lg:bg-gradient-to-br lg:from-[oklch(16%_0.02_145)] lg:to-[oklch(10%_0_0)] lg:shadow-[0_0_0_5px_oklch(10%_0_0),inset_0_1px_0_oklch(100%_0_0/0.06)]">
-                    <span className="font-display text-lg font-bold text-primary text-glow lg:text-xl">
+                {/* Nó da timeline (verde Aceleriq) */}
+                <div className="absolute left-0 top-0 lg:static lg:mb-6">
+                  <div className="relative flex h-12 w-12 items-center justify-center rounded-full bg-[oklch(8%_0_0)] ring-4 ring-[oklch(8%_0_0)] shadow-[0_0_0_1px_oklch(72%_0.19_145/0.55),0_0_28px_oklch(72%_0.19_145/0.35)]">
+                    <span className="absolute inset-0 rounded-full bg-[oklch(72%_0.19_145)]/[0.12] blur-md opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    <span className="relative font-display text-base font-bold text-[oklch(72%_0.19_145)]">
                       {step.letter}
                     </span>
                   </div>
                 </div>
-                <div className="lg:mt-6 lg:text-center">
-                  <div className="flex items-baseline gap-3 lg:block">
-                    <span className="num-tight font-mono text-[10px] tracking-[0.3em] text-muted-foreground whitespace-nowrap transition-colors group-hover:text-primary/80">
+
+                <div className="lg:px-2">
+                  <div className="flex items-baseline gap-3 lg:justify-center">
+                    <span className="num-tight font-mono text-[10px] tracking-[0.3em] text-[oklch(72%_0.19_145)]/80 whitespace-nowrap">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <h3 className="font-display text-sm font-medium uppercase tracking-[0.14em] text-foreground transition-colors group-hover:text-primary lg:mt-3 lg:text-[13px] lg:tracking-[0.16em]">
+                    <h3 className="font-display text-[15px] font-medium uppercase tracking-[0.14em] text-white transition-colors group-hover:text-[oklch(72%_0.19_145)]">
                       {step.title}
                     </h3>
                   </div>
-                  <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground lg:mx-auto lg:mt-2.5 lg:max-w-[150px] lg:text-center lg:text-[12px]">
+                  <p className="mt-2 text-[13px] leading-relaxed text-white/60 lg:mx-auto lg:max-w-[170px]">
                     {step.desc}
                   </p>
                 </div>
