@@ -859,7 +859,7 @@ export function Results({ onDiagnostico }: { onDiagnostico?: () => void } = {}) 
 // ─────────────────────────────────────────────────────────────
 export function Testimonials() {
   return (
-    <section className="relative py-12 md:py-16 bg-grid-ambient">
+    <section className="section-dark relative py-12 md:py-16 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
           eyebrow="[ 12 ] · Provas Reais"
