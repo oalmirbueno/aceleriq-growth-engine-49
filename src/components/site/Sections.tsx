@@ -42,6 +42,7 @@ import {
   DEFAULT_WHATSAPP_MESSAGE,
 } from "@/lib/contact";
 import almirPhoto from "@/assets/almir-real.png";
+import logoAceleriq from "@/assets/logo-aceleriq.png";
 
 import { CountUp } from "@/components/ui/CountUp";
 
