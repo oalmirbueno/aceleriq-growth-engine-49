@@ -30,10 +30,10 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 isolate transition-all duration-300 [backdrop-filter:saturate(160%)_blur(20px)] [-webkit-backdrop-filter:saturate(160%)_blur(20px)]",
+        "fixed inset-x-0 top-0 z-50 isolate transition-all duration-300 [backdrop-filter:saturate(160%)_blur(20px)] [-webkit-backdrop-filter:saturate(160%)_blur(20px)] bg-[oklch(8%_0_0)]/95 text-white",
         scrolled
-          ? "border-b border-foreground/[0.08] bg-background/75 py-2"
-          : "border-b border-transparent bg-background/50 py-2.5",
+          ? "border-b border-white/[0.06] py-2 shadow-[0_10px_30px_-20px_oklch(0%_0_0/0.6)]"
+          : "border-b border-transparent py-2.5",
       )}
     >
       <div className="container-aceleriq flex items-center justify-between">
@@ -42,7 +42,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
             <img
               src={logoAceleriq}
               alt="Logotipo Aceleriq"
-              className="h-16 w-auto md:h-20 transition-transform duration-300 group-hover:scale-105"
+              className="h-12 w-auto md:h-14 transition-transform duration-300 group-hover:scale-105"
             />
           </Link>
 
@@ -52,10 +52,10 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
                 key={item.label}
                 to={item.to}
                 hash={item.hash}
-                className="relative text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary group"
+                className="relative text-[11px] font-mono uppercase tracking-[0.2em] text-white/65 transition-colors hover:text-[oklch(72%_0.19_145)] group"
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 h-px w-0 bg-primary transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 h-px w-0 bg-[oklch(72%_0.19_145)] transition-all duration-300 group-hover:w-full" />
               </Link>
             ))}
           </nav>
