@@ -82,7 +82,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
 
       {/* Mobile Menu */}
       {open && (
-        <div className="absolute inset-x-0 top-full border-t border-foreground/10 bg-background/95 backdrop-blur-2xl lg:hidden">
+        <div className="absolute inset-x-0 top-full border-t border-white/10 bg-[oklch(8%_0_0)]/98 backdrop-blur-2xl lg:hidden">
           <div className="container-aceleriq flex flex-col gap-1 py-8">
             {NAV.map((item, i) => (
               <Link
@@ -90,7 +90,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
                 to={item.to}
                 hash={item.hash}
                 onClick={() => setOpen(false)}
-                className="flex items-center justify-between border-b border-foreground/5 py-4 text-sm font-mono uppercase tracking-widest text-muted-foreground hover:text-primary"
+                className="flex items-center justify-between border-b border-white/5 py-4 text-sm font-mono uppercase tracking-widest text-white/70 hover:text-[oklch(72%_0.19_145)]"
               >
                 <span>{item.label}</span>
                 <span className="num-tight text-[10px] opacity-30 whitespace-nowrap">{String(i + 1).padStart(2, "0")}</span>
@@ -101,7 +101,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="flex items-center justify-between border-b border-foreground/5 py-4 text-sm font-mono uppercase tracking-widest text-muted-foreground hover:text-primary"
+              className="flex items-center justify-between border-b border-white/5 py-4 text-sm font-mono uppercase tracking-widest text-white/70 hover:text-[oklch(72%_0.19_145)]"
             >
               <span>Client Portal</span>
               <span className="text-[10px] opacity-30">↗</span>
@@ -112,9 +112,9 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
                   setOpen(false);
                   onDiagnostico();
                 }}
-                className="btn-tech w-full py-4 text-xs"
+                className="w-full rounded-full bg-[oklch(72%_0.19_145)] py-4 text-xs font-semibold uppercase tracking-[0.14em] text-[oklch(8%_0_0)]"
               >
-                Initialize Diagnostic
+                Fazer Diagnóstico
               </button>
             </div>
           </div>
