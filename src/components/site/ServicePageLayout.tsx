@@ -260,6 +260,27 @@ export function ServicePageLayout(props: ServicePageProps) {
           `}</style>
         </section>
 
+        {/* Faixa verde Aceleriq — pilares em destaque */}
+        <section className="brand-strip relative overflow-hidden">
+          <div className="pointer-events-none absolute inset-0 opacity-[0.08]" style={{ backgroundImage: "radial-gradient(oklch(8% 0 0 / 0.6) 1px, transparent 1px)", backgroundSize: "18px 18px" }} />
+          <div className="relative max-w-[1600px] mx-auto px-6 lg:px-16 py-10 md:py-12 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
+            {[
+              { k: "01", v: "Estratégia", d: "antes da execução" },
+              { k: "02", v: "Implantação", d: "sob medida" },
+              { k: "03", v: "Operação", d: "acompanhada" },
+              { k: "04", v: "Melhoria", d: "contínua" },
+            ].map((m) => (
+              <div key={m.k} className="flex items-start gap-3 border-l-2 border-[oklch(8%_0_0)]/25 pl-4">
+                <span className="font-mono text-[10px] tracking-[0.24em] text-[oklch(8%_0_0)]/70 pt-0.5">{m.k}</span>
+                <div>
+                  <div className="font-display text-[15px] md:text-lg font-bold uppercase tracking-[-0.01em] text-[oklch(8%_0_0)]">{m.v}</div>
+                  <div className="text-[11px] md:text-[12px] text-[oklch(8%_0_0)]/75 uppercase tracking-[0.14em] mt-0.5">{m.d}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <section className="px-6 lg:px-16 py-16 md:py-20 max-w-[1600px] mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-8">
             {[
