@@ -41,7 +41,7 @@ import {
   whatsappLink,
   DEFAULT_WHATSAPP_MESSAGE,
 } from "@/lib/contact";
-import almir3d from "@/assets/almir-3d.png";
+import almirPhoto from "@/assets/almir-real.png";
 
 import { CountUp } from "@/components/ui/CountUp";
 
