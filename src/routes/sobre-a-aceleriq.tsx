@@ -170,6 +170,7 @@ function SobreAceleriq() {
                 </motion.div>
               ))}
             </div>
+          </div>
         </section>
 
         {/* QUEM LIDERA — Almir 3D */}
