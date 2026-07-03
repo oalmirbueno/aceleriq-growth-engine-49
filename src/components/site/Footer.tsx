@@ -80,7 +80,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="relative border-t border-white/[0.05]">
+      <div className="relative border-t border-foreground/10">
         <div className="container-aceleriq flex flex-col items-center justify-between gap-2 py-6 text-[11px] uppercase tracking-[0.18em] text-muted-foreground md:flex-row">
           <span>© {new Date().getFullYear()} Aceleriq</span>
           <span className="text-mono">Estratégia · Dados · IA</span>
