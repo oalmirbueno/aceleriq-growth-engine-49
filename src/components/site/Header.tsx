@@ -90,7 +90,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
                 to={item.to}
                 hash={item.hash}
                 onClick={() => setOpen(false)}
-                className="flex items-center justify-between border-b border-white/5 py-4 text-sm font-mono uppercase tracking-widest text-muted-foreground hover:text-primary"
+                className="flex items-center justify-between border-b border-foreground/5 py-4 text-sm font-mono uppercase tracking-widest text-muted-foreground hover:text-primary"
               >
                 <span>{item.label}</span>
                 <span className="num-tight text-[10px] opacity-30 whitespace-nowrap">{String(i + 1).padStart(2, "0")}</span>
