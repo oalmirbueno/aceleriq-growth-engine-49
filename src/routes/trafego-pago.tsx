@@ -64,6 +64,15 @@ function Page() {
       ]}
       faqs={FAQS}
       whatsappMessage="Olá! Quero gestão de tráfego pago com a Aceleriq."
+      humanBand={
+        <HumanBand
+          image={trafegoTime}
+          eyebrow="✦ Time sênior, decisão diária"
+          title={<>Mídia lida por <em className="italic font-light text-[oklch(72%_0.19_145)]">pipeline</em>, não por clique.</>}
+          body="Cada campanha é acompanhada por gente sênior olhando o funil de verdade — CAC, ticket, taxa de fechamento. Você não recebe relatório de vaidade, recebe decisão de investimento."
+          align="right"
+        />
+      }
       extraSection={<TrafegoCalculator />}
     />
   );

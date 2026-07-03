@@ -63,6 +63,15 @@ function Page() {
       ]}
       faqs={FAQS}
       whatsappMessage="Olá! Quero conversar sobre os serviços da agência Aceleriq."
+      humanBand={
+        <HumanBand
+          image={officeTeam}
+          eyebrow="✦ Sede em Curitiba · Time in-house"
+          title={<>Uma agência que <em className="italic font-light text-[oklch(72%_0.19_145)]">opera junto</em>, não terceiriza.</>}
+          body="Estratégia, mídia, conteúdo, CRM e dados no mesmo time, na mesma sala, no mesmo ritual semanal. Você fala com quem executa — nada de camadas de gerente entre você e o resultado."
+          withAlmir
+        />
+      }
       extraSection={
         <PortfolioShowcase
           eyebrow="[ 03b ] · Cases da agência"

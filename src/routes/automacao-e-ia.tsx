@@ -63,6 +63,15 @@ function Page() {
       ]}
       faqs={FAQS}
       whatsappMessage="Olá! Quero conversar sobre automação e IA com a Aceleriq."
+      humanBand={
+        <HumanBand
+          image={automacaoHumana}
+          eyebrow="✦ Automação com rosto humano"
+          title={<>IA que <em className="italic font-light text-[oklch(72%_0.19_145)]">libera</em> o seu time.</>}
+          body="Não é robô substituindo pessoa. É automação que responde no WhatsApp em segundos, atualiza o CRM sozinha e devolve o tempo do seu time para vender, atender melhor e pensar estratégia."
+          withAlmir
+        />
+      }
       extraSection={<AutomationSimulator />}
     />
   );
