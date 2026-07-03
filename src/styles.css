@@ -46,10 +46,11 @@
   --border: oklch(16% 0.005 260 / 0.1);
   --accent: oklch(55% 0.15 250);
 
-  /* Bandas escuras pontuais (grafite) */
-  --surface: oklch(16% 0.005 260);               /* grafite âncora para bandas */
-  --surface-muted: oklch(94% 0.004 260);         /* cinza claro alternado */
-  --ink: oklch(14% 0.005 260);                   /* preto tipográfico */
+  /* Bandas */
+  --surface: oklch(94% 0.004 260);               /* cinza claro alternado */
+  --surface-muted: oklch(90% 0.004 260);         /* cinza um pouco mais forte */
+  --surface-dark: oklch(16% 0.005 260);          /* grafite âncora pontual */
+  --ink: oklch(14% 0.005 260);
   --card: oklch(100% 0 0);
 }
 
