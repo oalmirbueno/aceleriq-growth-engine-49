@@ -41,7 +41,7 @@ import {
   whatsappLink,
   DEFAULT_WHATSAPP_MESSAGE,
 } from "@/lib/contact";
-import aiEngineerImg from "@/assets/ai-engineer.jpg";
+import almir3d from "@/assets/almir-3d.png";
 
 import { CountUp } from "@/components/ui/CountUp";
 
@@ -106,55 +106,40 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
               </motion.div>
             </div>
 
-            {/* Visual Industrial - Foto AI Engineer + cards flutuantes ao redor */}
+            {/* Visual — Almir 3D em superfície leve, sem moldura técnica */}
             <div className="w-full max-w-[280px] sm:max-w-sm md:max-w-md mx-auto lg:max-w-lg lg:ml-auto">
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.94 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1.2, ease: "circOut" }}
+                transition={{ duration: 1, ease: "circOut" }}
                 className="relative w-full aspect-[4/5]"
               >
-                {/* Glow ambiente */}
-                <div className="absolute -inset-8 bg-primary/10 blur-3xl rounded-full pointer-events-none" />
+                {/* Blob verde suave atrás */}
+                <div className="absolute inset-0 -z-10 translate-y-8 rounded-[45%] bg-primary/20 blur-3xl pointer-events-none" />
 
-                {/* Moldura técnica */}
-                <div className="absolute -inset-2 border border-primary/20 pointer-events-none" />
-                <div className="absolute -top-3 -left-3 w-8 h-8 border-l-2 border-t-2 border-primary" />
-                <div className="absolute -bottom-3 -right-3 w-8 h-8 border-r-2 border-b-2 border-primary" />
-
-                {/* Foto */}
-                <div className="relative w-full h-full overflow-hidden border border-white/10 shadow-2xl shadow-primary/10">
+                {/* Superfície clara arredondada */}
+                <div className="relative w-full h-full overflow-hidden rounded-[36px] surface-light">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.08] via-transparent to-transparent" />
                   <img
-                    src={aiEngineerImg}
-                    alt="AI Engineer Aceleriq operando protocolo neural"
+                    src={almir3d}
+                    alt="Almir Teles, fundador da Aceleriq — ilustração 3D"
                     width={1024}
-                    height={1024}
-                    className="w-full h-full object-cover select-none"
+                    height={1280}
+                    className="absolute inset-x-0 bottom-0 w-full h-[105%] object-cover object-top select-none"
                     loading="eager"
                     decoding="sync"
                     fetchPriority="high"
                     draggable={false}
-                    style={{
-                      imageRendering: "auto",
-                      filter: "contrast(1.08) saturate(1.15) brightness(1.02)",
-                      WebkitBackfaceVisibility: "hidden",
-                      transform: "translateZ(0)",
-                    }}
                   />
-                  {/* Vinheta sutil sem matar a nitidez */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-background/25 via-transparent to-transparent" />
-                  {/* Linha verde no canto inferior */}
-                  <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-60" />
 
-                  {/* Identificador discreto sobre a foto */}
-                  <div className="absolute bottom-4 left-4 flex items-center gap-2">
-                    <Brain className="h-4 w-4 text-primary" />
-                    <span className="text-xs font-bold text-white">Engenheiro Líder</span>
+                  {/* Chip flutuante */}
+                  <div className="absolute top-4 left-4 flex items-center gap-2 rounded-full bg-background/85 px-3 py-1.5 backdrop-blur-md border border-white/10">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                    <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/90">
+                      Almir · Fundador
+                    </span>
                   </div>
                 </div>
-
-                {/* ───────── Cards flutuantes removidos conforme solicitado ───────── */}
               </motion.div>
             </div>
           </div>

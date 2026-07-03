@@ -25,7 +25,7 @@ import { GoogleReviews } from "@/components/site/GoogleReviews";
 
 import { PortfolioShowcase } from "@/components/site/PortfolioShowcase";
 import { PainelComunidade } from "@/components/site/PainelComunidade";
-import aiEngineerImg from "@/assets/ai-engineer.jpg";
+import almir3d from "@/assets/almir-3d.png";
 
 const HOME_TITLE =
   "Aceleriq | Engenharia de Crescimento com IA, CRM, Marketing e Automação";
@@ -86,7 +86,7 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "canonical", href: "https://aceleriq.com.br" },
-      { rel: "preload", as: "image", href: aiEngineerImg, fetchPriority: "high" },
+      { rel: "preload", as: "image", href: almir3d, fetchPriority: "high" },
     ],
     scripts: [
       {
