@@ -54,7 +54,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
       {/* Apenas o quadriculado, sem linhas */}
       {/* Background Decorativo - Camadas Técnicas */}
       <div className="hero-background" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[oklch(16%_0.005_260/0.18)] to-[oklch(16%_0.005_260)] z-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[oklch(6%_0.002_260/0.35)] to-[oklch(6%_0.002_260)] z-10" />
       
       <div className="container-aceleriq relative z-20">
         <div className="flex flex-col items-center">

@@ -49,7 +49,7 @@
   /* Bandas */
   --surface: oklch(94% 0.004 260);               /* cinza claro alternado */
   --surface-muted: oklch(90% 0.004 260);         /* cinza um pouco mais forte */
-  --surface-dark: oklch(16% 0.005 260);          /* grafite âncora pontual */
+  --surface-dark: oklch(6% 0.002 260);           /* preto profundo, quase absoluto */
   --ink: oklch(14% 0.005 260);
   --card: oklch(100% 0 0);
 }
@@ -128,22 +128,22 @@
     color: var(--ink);
   }
 
-  /* Banda escura — grafite âncora, tipografia off-white, verde brilhando */
+  /* Banda escura — preto absoluto, tipografia off-white, verde brilhando */
   .section-dark {
     background: var(--surface-dark);
-    color: oklch(97% 0.003 260);
-    --foreground: oklch(97% 0.003 260);
-    --muted-foreground: oklch(75% 0.005 260 / 0.75);
-    --border: oklch(97% 0.003 260 / 0.1);
-    --card: oklch(22% 0.005 260);
+    color: oklch(98% 0.002 260);
+    --foreground: oklch(98% 0.002 260);
+    --muted-foreground: oklch(72% 0.005 260 / 0.7);
+    --border: oklch(98% 0.002 260 / 0.08);
+    --card: oklch(10% 0.003 260);
   }
-  .section-dark .text-muted-foreground { color: oklch(75% 0.005 260 / 0.75); }
-  .section-dark .label-eyebrow { color: oklch(78% 0.15 145 / 0.9); }
+  .section-dark .text-muted-foreground { color: oklch(72% 0.005 260 / 0.7); }
+  .section-dark .label-eyebrow { color: oklch(80% 0.16 145 / 0.95); }
   .section-dark .card-soft {
-    background: oklch(22% 0.005 260);
-    border-color: oklch(97% 0.003 260 / 0.08);
+    background: oklch(10% 0.003 260);
+    border-color: oklch(98% 0.002 260 / 0.06);
   }
-  .section-dark .hairline { border-color: oklch(97% 0.003 260 / 0.1); }
+  .section-dark .hairline { border-color: oklch(98% 0.002 260 / 0.08); }
 
   /* Hero background image */
   .hero-background {
@@ -161,7 +161,7 @@
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(to right, var(--surface-dark) 0%, oklch(16% 0.005 260 / 0.55) 44%, transparent 100%),
+      linear-gradient(to right, var(--surface-dark) 0%, oklch(6% 0.002 260 / 0.7) 44%, transparent 100%),
       linear-gradient(to bottom, transparent 52%, var(--surface-dark) 100%);
   }
 
