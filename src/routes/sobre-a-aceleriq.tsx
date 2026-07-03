@@ -24,7 +24,7 @@ import {
   whatsappLink,
   DEFAULT_WHATSAPP_MESSAGE,
 } from "@/lib/contact";
-import almir3d from "@/assets/almir-3d.png";
+import almir3d from "@/assets/almir-real.png";
 
 const PAGE_TITLE =
   "Sobre a Aceleriq · Engenharia de Crescimento";
