@@ -40,7 +40,7 @@ const DEFAULT_PRINCIPLES: Record<ServiceVariant, ServicePrinciple> = {
     eyebrow: "✦ Princípio · Sites",
     title: (
       <>
-        Site é <span className="bg-primary text-foreground px-2">ativo de receita</span>,
+        Site é <span className="bg-brand text-foreground px-2">ativo de receita</span>,
         <br />
         não cartão de visita.
       </>
@@ -56,7 +56,7 @@ const DEFAULT_PRINCIPLES: Record<ServiceVariant, ServicePrinciple> = {
     eyebrow: "✦ Princípio · Tráfego",
     title: (
       <>
-        Mídia paga é <span className="bg-primary text-foreground px-2">distribuição</span>,
+        Mídia paga é <span className="bg-brand text-foreground px-2">distribuição</span>,
         <br />
         não loteria de clique.
       </>
@@ -72,7 +72,7 @@ const DEFAULT_PRINCIPLES: Record<ServiceVariant, ServicePrinciple> = {
     eyebrow: "✦ Princípio · Automação & IA",
     title: (
       <>
-        IA é <span className="bg-primary text-foreground px-2">alavanca</span>,
+        IA é <span className="bg-brand text-foreground px-2">alavanca</span>,
         <br />
         não enfeite de pitch.
       </>
@@ -88,7 +88,7 @@ const DEFAULT_PRINCIPLES: Record<ServiceVariant, ServicePrinciple> = {
     eyebrow: "✦ Princípio · Agência",
     title: (
       <>
-        A gente <span className="bg-primary text-foreground px-2">vende sistema</span>,
+        A gente <span className="bg-brand text-foreground px-2">vende sistema</span>,
         <br />
         não relatório bonito.
       </>
@@ -119,7 +119,7 @@ export function ServicePageLayout(props: ServicePageProps) {
   const principle = props.principle ?? DEFAULT_PRINCIPLES[props.variant];
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground overflow-hidden">
+    <div className="relative min-h-screen bg-background text-foreground selection:bg-brand selection:text-[oklch(8%_0_0)] overflow-hidden">
       <AmbientBackdrop />
       <Header onDiagnostico={open} />
 
@@ -133,9 +133,9 @@ export function ServicePageLayout(props: ServicePageProps) {
               transition={{ duration: 0.5 }}
               className={`flex items-center gap-3 mb-6 md:mb-8 text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-muted-foreground/80 ${props.heroAside ? "justify-start" : "justify-center"}`}
             >
-              <span className="h-px w-7 md:w-8 bg-primary" />
-              <span className="text-primary font-mono">{props.eyebrow}</span>
-              <span className="h-px w-7 md:w-8 bg-primary" />
+              <span className="h-px w-7 md:w-8 bg-brand" />
+              <span className="text-brand font-mono">{props.eyebrow}</span>
+              <span className="h-px w-7 md:w-8 bg-brand" />
             </motion.div>
 
             {props.heroAside ? (
@@ -167,7 +167,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                   >
                     <Button
                       onClick={open}
-                      className="group h-12 w-full sm:w-auto rounded-none bg-primary px-6 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-foreground hover:-translate-y-0.5 transition-all hover:shadow-[0_8px_30px_oklch(85%_0.2_145/0.4)]"
+                      className="group h-12 w-full sm:w-auto rounded-none bg-brand px-6 text-[11px] font-bold uppercase tracking-[0.18em] text-[oklch(8%_0_0)] hover:-translate-y-0.5 transition-all hover:shadow-[0_8px_30px_oklch(85%_0.2_145/0.4)]"
                     >
                       Diagnóstico Gratuito
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -176,11 +176,11 @@ export function ServicePageLayout(props: ServicePageProps) {
                       href={wa}
                       target="_blank"
                       rel="noreferrer"
-                      className="group inline-flex items-center gap-2.5 h-12 px-2 text-[11px] font-bold uppercase tracking-[0.18em] text-foreground/80 hover:text-primary transition-colors"
+                      className="group inline-flex items-center gap-2.5 h-12 px-2 text-[11px] font-bold uppercase tracking-[0.18em] text-foreground/80 hover:text-brand transition-colors"
                     >
                       <span className="relative flex h-1.5 w-1.5">
-                        <span className="animate-ping absolute inline-flex h-full w-full bg-primary opacity-60" />
-                        <span className="relative inline-flex h-1.5 w-1.5 bg-primary" />
+                        <span className="animate-ping absolute inline-flex h-full w-full bg-brand opacity-60" />
+                        <span className="relative inline-flex h-1.5 w-1.5 bg-brand" />
                       </span>
                       WhatsApp
                       <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -217,7 +217,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                 >
                   <Button
                     onClick={open}
-                    className="group h-12 rounded-none bg-primary px-6 text-[11px] font-bold uppercase tracking-[0.18em] text-primary-foreground hover:-translate-y-0.5 transition-all hover:shadow-[0_8px_30px_oklch(85%_0.2_145/0.4)]"
+                    className="group h-12 rounded-none bg-brand px-6 text-[11px] font-bold uppercase tracking-[0.18em] text-[oklch(8%_0_0)] hover:-translate-y-0.5 transition-all hover:shadow-[0_8px_30px_oklch(85%_0.2_145/0.4)]"
                   >
                     Diagnóstico Gratuito
                     <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -226,11 +226,11 @@ export function ServicePageLayout(props: ServicePageProps) {
                     href={wa}
                     target="_blank"
                     rel="noreferrer"
-                    className="group inline-flex items-center gap-2.5 h-12 px-2 text-[11px] font-bold uppercase tracking-[0.18em] text-foreground/80 hover:text-primary transition-colors"
+                    className="group inline-flex items-center gap-2.5 h-12 px-2 text-[11px] font-bold uppercase tracking-[0.18em] text-foreground/80 hover:text-brand transition-colors"
                   >
                     <span className="relative flex h-1.5 w-1.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full bg-primary opacity-60" />
-                      <span className="relative inline-flex h-1.5 w-1.5 bg-primary" />
+                      <span className="animate-ping absolute inline-flex h-full w-full bg-brand opacity-60" />
+                      <span className="relative inline-flex h-1.5 w-1.5 bg-brand" />
                     </span>
                     WhatsApp
                     <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -242,13 +242,13 @@ export function ServicePageLayout(props: ServicePageProps) {
         </section>
 
         {/* MARQUEE */}
-        <section className="relative border-y border-primary/15 overflow-hidden bg-black">
+        <section className="relative border-y border-brand-soft/15 overflow-hidden bg-black">
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black via-primary/[0.04] to-black" />
           <div className="relative flex gap-10 py-3.5 animate-[marquee_45s_linear_infinite] whitespace-nowrap text-[12px] uppercase tracking-[0.18em] text-muted-foreground/60">
             {[...MARQUEE, ...MARQUEE, ...MARQUEE].map((t, i) => (
               <span key={i} className="flex items-center gap-10 shrink-0">
                 <span>{t}</span>
-                <span className="text-primary text-[10px]">✦</span>
+                <span className="text-brand text-[10px]">✦</span>
               </span>
             ))}
           </div>
@@ -288,7 +288,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                 transition={{ duration: 0.4 }}
                 className="group"
               >
-                <div className="h-px w-10 bg-primary mb-5 group-hover:w-16 transition-all" />
+                <div className="h-px w-10 bg-brand mb-5 group-hover:w-16 transition-all" />
                 <div className="pt-1">
                   <div className="text-[14px] md:text-[15px] text-foreground/90 leading-snug font-medium">{m.label}</div>
                   <div className="mt-1.5 text-[11px] text-muted-foreground/60">{m.note}</div>
@@ -302,11 +302,11 @@ export function ServicePageLayout(props: ServicePageProps) {
         {/* WHY / BENEFITS */}
         <section className="px-6 lg:px-16 py-16 md:py-24 border-t border-border/60 max-w-[1600px] mx-auto">
           <div className="grid lg:grid-cols-12 gap-8 mb-12">
-            <div className="lg:col-span-2 font-mono text-[10px] text-primary uppercase tracking-[0.2em] lg:pt-2">
+            <div className="lg:col-span-2 font-mono text-[10px] text-brand uppercase tracking-[0.2em] lg:pt-2">
               01 / Por que
             </div>
             <h2 className="lg:col-span-10 font-display text-2xl md:text-4xl lg:text-5xl uppercase leading-[1.05] tracking-[-0.035em] max-w-[24ch]">
-              Resultado lido por <em className="italic font-light text-primary">processo</em>, não
+              Resultado lido por <em className="italic font-light text-brand">processo</em>, não
               por entregável avulso.
             </h2>
           </div>
@@ -319,12 +319,12 @@ export function ServicePageLayout(props: ServicePageProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.35, delay: i * 0.04 }}
-                className="group grid lg:grid-cols-12 gap-4 lg:gap-10 py-6 border-b border-border/60 hover:border-primary/40 transition-colors"
+                className="group grid lg:grid-cols-12 gap-4 lg:gap-10 py-6 border-b border-border/60 hover:border-brand-soft/40 transition-colors"
               >
                 <div className="lg:col-span-2 font-mono text-[10px] text-muted-foreground/60 uppercase tracking-widest pt-1">
                   <span className="num-tight">/{String(i + 1).padStart(2, "0")}</span>
                 </div>
-                <h3 className="lg:col-span-5 font-display text-base md:text-xl uppercase tracking-[-0.02em] leading-[1.15] group-hover:text-primary transition-colors">
+                <h3 className="lg:col-span-5 font-display text-base md:text-xl uppercase tracking-[-0.02em] leading-[1.15] group-hover:text-brand transition-colors">
                   {b.title}
                 </h3>
                 <p className="lg:col-span-5 text-[14px] text-muted-foreground leading-[1.6] max-w-xl">
@@ -338,12 +338,12 @@ export function ServicePageLayout(props: ServicePageProps) {
         {/* DELIVERABLES, refined two-column list */}
         <section className="relative px-6 lg:px-16 py-16 md:py-24 max-w-[1600px] mx-auto">
           <div className="grid lg:grid-cols-12 gap-8 mb-12">
-            <div className="lg:col-span-2 font-mono text-[10px] text-primary uppercase tracking-[0.2em] lg:pt-2">
+            <div className="lg:col-span-2 font-mono text-[10px] text-brand uppercase tracking-[0.2em] lg:pt-2">
               02 / Escopo
             </div>
             <div className="lg:col-span-7">
               <h2 className="font-display text-2xl md:text-4xl lg:text-5xl uppercase leading-[1.05] tracking-[-0.035em]">
-                Tudo que entra <em className="italic font-light text-primary">no programa</em>.
+                Tudo que entra <em className="italic font-light text-brand">no programa</em>.
               </h2>
             </div>
             <p className="lg:col-span-3 text-[13px] text-muted-foreground leading-relaxed lg:pt-2">
@@ -359,7 +359,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.3, delay: i * 0.03 }}
-                className="group flex items-baseline gap-5 py-4 border-b border-border/60 hover:border-primary/50 transition-colors"
+                className="group flex items-baseline gap-5 py-4 border-b border-border/60 hover:border-brand-soft/50 transition-colors"
               >
                 <span className="num-tight font-mono text-[10px] text-muted-foreground/50 tracking-widest shrink-0 w-6">
                   {String(i + 1).padStart(2, "0")}
@@ -367,7 +367,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                 <span className="text-[15px] md:text-base text-foreground/85 leading-snug group-hover:text-foreground flex-1">
                   {d}
                 </span>
-                <span className="text-primary/40 text-xs group-hover:text-primary group-hover:translate-x-0.5 transition-all">
+                <span className="text-brand/40 text-xs group-hover:text-brand group-hover:translate-x-0.5 transition-all">
                   →
                 </span>
               </motion.div>
@@ -401,7 +401,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                   key={s.l}
                   className="flex flex-col gap-1 border-b border-background/15 pb-3"
                 >
-                  <span className="font-display text-lg font-semibold tracking-[-0.02em] text-primary">
+                  <span className="font-display text-lg font-semibold tracking-[-0.02em] text-brand">
                     {s.v}
                   </span>
                   <span className="text-[12px] uppercase tracking-widest opacity-70">{s.l}</span>
@@ -414,11 +414,11 @@ export function ServicePageLayout(props: ServicePageProps) {
         {/* PROCESS */}
         <section className="px-6 lg:px-16 py-16 md:py-24 border-t border-border/60 max-w-[1600px] mx-auto">
           <div className="grid lg:grid-cols-12 gap-8 mb-12 items-end">
-            <div className="lg:col-span-2 font-mono text-[10px] text-primary uppercase tracking-[0.2em] lg:pb-2">
+            <div className="lg:col-span-2 font-mono text-[10px] text-brand uppercase tracking-[0.2em] lg:pb-2">
               03 / Método
             </div>
             <h2 className="lg:col-span-7 font-display text-2xl md:text-4xl lg:text-5xl uppercase leading-[1.05] tracking-[-0.035em]">
-              Quatro etapas, <em className="italic font-light text-primary">zero zona cinzenta</em>.
+              Quatro etapas, <em className="italic font-light text-brand">zero zona cinzenta</em>.
             </h2>
             <p className="lg:col-span-3 text-[13px] text-muted-foreground leading-relaxed">
               Gates claros entre estratégia, execução e mensuração.
@@ -435,7 +435,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                 transition={{ duration: 0.4, delay: i * 0.05 }}
                 className="group grid lg:grid-cols-12 gap-4 lg:gap-10 items-baseline py-7 md:py-9 border-b border-border/60 hover:bg-card/15 transition-colors"
               >
-                <div className="lg:col-span-2 font-display text-4xl md:text-5xl text-primary/25 group-hover:text-primary transition-colors leading-none tracking-[-0.04em]">
+                <div className="lg:col-span-2 font-display text-4xl md:text-5xl text-brand/25 group-hover:text-brand transition-colors leading-none tracking-[-0.04em]">
                   {p.step}
                 </div>
                 <div className="lg:col-span-4">
@@ -460,11 +460,11 @@ export function ServicePageLayout(props: ServicePageProps) {
         <section className="px-6 lg:px-16 py-16 md:py-24 border-t border-border/60 max-w-[1600px] mx-auto">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
             <div className="lg:col-span-4">
-              <div className="font-mono text-primary text-[10px] uppercase tracking-[0.2em] mb-4">
+              <div className="font-mono text-brand text-[10px] uppercase tracking-[0.2em] mb-4">
                 04 / FAQ
               </div>
               <h2 className="font-display text-2xl md:text-4xl lg:text-5xl uppercase leading-[1.05] tracking-[-0.035em]">
-                Dúvidas <em className="italic font-light text-primary">comuns</em>.
+                Dúvidas <em className="italic font-light text-brand">comuns</em>.
               </h2>
               <p className="mt-5 text-[13px] text-muted-foreground leading-relaxed max-w-xs">
                 Respostas diretas. Fora desta lista? Chame no WhatsApp, respondemos em horas.
@@ -473,7 +473,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                 href={wa}
                 target="_blank"
                 rel="noreferrer"
-                className="group mt-5 inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.2em] text-primary hover:gap-3.5 transition-all"
+                className="group mt-5 inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.2em] text-brand hover:gap-3.5 transition-all"
               >
                 <MessageCircle className="h-3.5 w-3.5" />
                 Falar agora
@@ -486,7 +486,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                   key={f.q}
                   className="group border-b border-border/60 open:bg-card/10 transition-colors"
                 >
-                  <summary className="flex items-start justify-between gap-4 py-5 cursor-pointer list-none hover:text-primary transition-colors">
+                  <summary className="flex items-start justify-between gap-4 py-5 cursor-pointer list-none hover:text-brand transition-colors">
                     <div className="flex items-start gap-4">
                       <span className="num-tight font-mono text-[10px] text-muted-foreground/50 uppercase tracking-widest shrink-0 pt-1 whitespace-nowrap">
                         {String(i + 1).padStart(2, "0")}
@@ -495,7 +495,7 @@ export function ServicePageLayout(props: ServicePageProps) {
                         {f.q}
                       </span>
                     </div>
-                    <span className="pt-0.5 text-primary font-mono text-xl group-open:rotate-45 transition-transform shrink-0 leading-none">
+                    <span className="pt-0.5 text-brand font-mono text-xl group-open:rotate-45 transition-transform shrink-0 leading-none">
                       +
                     </span>
                   </summary>
@@ -520,11 +520,11 @@ export function ServicePageLayout(props: ServicePageProps) {
           />
 
           <div className="relative max-w-4xl mx-auto text-center">
-            <div className="font-mono text-primary text-[10px] uppercase tracking-[0.25em] mb-6">
+            <div className="font-mono text-brand text-[10px] uppercase tracking-[0.25em] mb-6">
               05 / Próximo passo
             </div>
             <h2 className="font-display text-3xl md:text-5xl lg:text-6xl uppercase leading-[0.95] tracking-[-0.04em] mb-6">
-              Quer o diagnóstico do seu <em className="italic font-light text-primary">cenário?</em>
+              Quer o diagnóstico do seu <em className="italic font-light text-brand">cenário?</em>
             </h2>
             <p className="text-muted-foreground text-[15px] md:text-base mb-10 font-light max-w-xl mx-auto leading-[1.6]">
               5 minutos. Score de Maturidade, classificação de estágio e 3 recomendações
@@ -534,7 +534,7 @@ export function ServicePageLayout(props: ServicePageProps) {
             <div className="flex flex-col md:flex-row justify-center items-center gap-5">
               <Button
                 onClick={open}
-                className="group h-12 w-full sm:w-auto rounded-none bg-primary px-8 text-[11px] font-bold uppercase tracking-[0.2em] text-primary-foreground hover:-translate-y-0.5 transition-all hover:shadow-[0_12px_40px_oklch(85%_0.2_145/0.5)]"
+                className="group h-12 w-full sm:w-auto rounded-none bg-brand px-8 text-[11px] font-bold uppercase tracking-[0.2em] text-[oklch(8%_0_0)] hover:-translate-y-0.5 transition-all hover:shadow-[0_12px_40px_oklch(85%_0.2_145/0.5)]"
               >
                 Fazer Diagnóstico Gratuito
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -543,9 +543,9 @@ export function ServicePageLayout(props: ServicePageProps) {
                 href={wa}
                 target="_blank"
                 rel="noreferrer"
-                className="group inline-flex items-center justify-center gap-2.5 text-center text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/80 hover:text-primary transition-colors"
+                className="group inline-flex items-center justify-center gap-2.5 text-center text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/80 hover:text-brand transition-colors"
               >
-                <MessageCircle className="h-3.5 w-3.5 text-primary" />
+                <MessageCircle className="h-3.5 w-3.5 text-brand" />
                 WhatsApp da Aceleriq
                 <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </a>
@@ -553,7 +553,7 @@ export function ServicePageLayout(props: ServicePageProps) {
 
             <Link
               to="/"
-              className="inline-block mt-14 font-mono text-[10px] text-muted-foreground/50 uppercase tracking-[0.3em] hover:text-primary transition-colors"
+              className="inline-block mt-14 font-mono text-[10px] text-muted-foreground/50 uppercase tracking-[0.3em] hover:text-brand transition-colors"
             >
               ← Voltar para a home
             </Link>
