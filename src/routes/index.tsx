@@ -27,10 +27,9 @@ import { PortfolioShowcase } from "@/components/site/PortfolioShowcase";
 import { PainelComunidade } from "@/components/site/PainelComunidade";
 import almir3d from "@/assets/almir-real.png";
 
-const HOME_TITLE =
-  "Aceleriq · Agência de Marketing Digital, Tráfego Pago e Automação para o Brasil";
+const HOME_TITLE = "Agência de Marketing Digital e Tráfego Pago | Aceleriq";
 const HOME_DESCRIPTION =
-  "Agência de marketing digital para empresas em todo o Brasil: tráfego pago, criação de sites, automação de marketing, IA, CRM e consultoria comercial. Diagnóstico gratuito, Método Acelera e sede em Curitiba.";
+  "Marketing digital, tráfego pago, sites, automação, IA e CRM para empresas no Brasil todo. Diagnóstico gratuito e Método Acelera.";
 
 const FAQS_JSONLD = {
   "@context": "https://schema.org",

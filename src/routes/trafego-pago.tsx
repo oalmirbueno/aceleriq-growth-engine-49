@@ -5,9 +5,9 @@ import { HumanBand } from "@/components/site/HumanBand";
 import trafegoTime from "@/assets/trafego-time-brasil.jpg";
 
 const URL = "https://aceleriq.com.br/trafego-pago";
-const TITLE = "Tráfego Pago: Gestão de Google Ads e Meta Ads para o Brasil | Aceleriq";
+const TITLE = "Tráfego Pago: Google Ads e Meta Ads | Aceleriq";
 const DESCRIPTION =
-  "Gestão de tráfego pago para empresas no Brasil todo: Google Ads, Meta Ads (Facebook e Instagram) e LinkedIn Ads conectados ao CRM e ao pipeline comercial. Sem taxa sobre mídia.";
+  "Gestão de tráfego pago no Brasil todo: Google Ads, Meta Ads e LinkedIn Ads conectados ao seu CRM e pipeline comercial. Sem taxa sobre mídia.";
 
 const FAQS = [
   { q: "Em quais plataformas vocês operam?", a: "Google Ads (Search, PMax, YouTube), Meta Ads (Facebook/Instagram), LinkedIn Ads, TikTok Ads e remarketing programático." },

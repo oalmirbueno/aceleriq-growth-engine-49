@@ -3,9 +3,9 @@ import { ServicePageLayout, buildServiceHead } from "@/components/site/ServicePa
 import { PortfolioShowcase } from "@/components/site/PortfolioShowcase";
 
 const URL = "https://aceleriq.com.br/criacao-de-sites";
-const TITLE = "Criação de Sites Profissionais, Rápidos e Otimizados para SEO | Aceleriq";
+const TITLE = "Criação de Sites Profissionais e Rápidos | Aceleriq";
 const DESCRIPTION =
-  "Criação de sites profissionais, landing pages e lojas para empresas no Brasil todo. Sites rápidos, otimizados para SEO, integrados a CRM, WhatsApp e Google Ads.";
+  "Criação de sites profissionais e landing pages para empresas no Brasil. Sites rápidos, com SEO, integrados a CRM, WhatsApp e Google Ads.";
 
 const FAQS = [
   { q: "Que tipo de site a Aceleriq cria?", a: "Sites institucionais, landing pages de captura, sites de produto/SaaS e plataformas sob medida, todos com foco em conversão e integração ao CRM." },

@@ -18,15 +18,29 @@ import { motion } from "framer-motion";
 import painelImg from "@/assets/painel-aceleriq-online.jpg";
 
 export const Route = createFileRoute("/aceleriq-os")({
-  head: () => ({
-    meta: [
-      { title: "Aceleriq OS | Central de Crescimento, Marketing e Comercial" },
-      { 
-        name: "description", 
-        content: "Acompanhe campanhas, automações, funil, tarefas e métricas em uma central estratégica de crescimento." 
-      },
-    ],
-  }),
+  head: () => {
+    const TITLE = "Aceleriq OS · Central de Crescimento e Comercial";
+    const DESCRIPTION =
+      "Acompanhe campanhas, automações, funil, tarefas e métricas em uma central estratégica de crescimento.";
+    const URL = "https://aceleriq.com.br/aceleriq-os";
+    const OG_IMAGE = "https://aceleriq.com.br/og-image.jpg";
+    return {
+      meta: [
+        { title: TITLE },
+        { name: "description", content: DESCRIPTION },
+        { property: "og:title", content: TITLE },
+        { property: "og:description", content: DESCRIPTION },
+        { property: "og:url", content: URL },
+        { property: "og:type", content: "website" },
+        { property: "og:image", content: OG_IMAGE },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: TITLE },
+        { name: "twitter:description", content: DESCRIPTION },
+        { name: "twitter:image", content: OG_IMAGE },
+      ],
+      links: [{ rel: "canonical", href: URL }],
+    };
+  },
   component: AceleriqOS,
 });
 
