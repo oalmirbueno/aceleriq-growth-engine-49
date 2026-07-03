@@ -55,20 +55,20 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
       className="relative overflow-hidden pt-28 pb-16 md:pt-36 md:pb-24 lg:min-h-[92vh] lg:flex lg:items-center"
       style={{
         background:
-          "radial-gradient(1200px 600px at 12% 40%, oklch(94% 0.02 78 / 0.35), transparent 60%), radial-gradient(1000px 500px at 100% 100%, oklch(24% 0.09 262 / 0.08), transparent 60%), var(--background)",
+          "radial-gradient(1200px 600px at 12% 40%, oklch(72% 0.19 145 / 0.14), transparent 60%), radial-gradient(1000px 500px at 100% 100%, oklch(8% 0 0 / 0.06), transparent 60%), var(--background)",
       }}
     >
-      {/* Marca d'água tipográfica ao fundo (letra A gigante) */}
+      {/* Marca d'água — logo Aceleriq gigante ao fundo */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 right-[-6%] flex items-center opacity-[0.06] select-none"
+        className="pointer-events-none absolute inset-y-0 right-[-8%] flex items-center opacity-[0.05] select-none"
       >
-        <span
-          className="font-display font-bold leading-none text-[color:var(--primary)]"
-          style={{ fontSize: "clamp(400px, 55vw, 900px)" }}
-        >
-          A
-        </span>
+        <img
+          src={logoAceleriq}
+          alt=""
+          className="h-[70vh] w-auto max-h-[820px] object-contain"
+          draggable={false}
+        />
       </div>
 
       <div className="container-aceleriq relative z-10">
