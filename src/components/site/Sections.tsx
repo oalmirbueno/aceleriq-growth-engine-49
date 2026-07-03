@@ -41,7 +41,7 @@ import {
   whatsappLink,
   DEFAULT_WHATSAPP_MESSAGE,
 } from "@/lib/contact";
-import almir3d from "@/assets/almir-3d.png";
+import almirPhoto from "@/assets/almir-real.png";
 
 import { CountUp } from "@/components/ui/CountUp";
 
@@ -50,7 +50,7 @@ import { CountUp } from "@/components/ui/CountUp";
 // ─────────────────────────────────────────────────────────────
 export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section id="top" className="relative min-h-screen flex items-start lg:items-center justify-center pt-24 pb-12 md:pt-20 md:pb-16 lg:pb-20 overflow-hidden bg-grid-tech">
+    <section id="top" className="section-dark relative min-h-screen flex items-start lg:items-center justify-center pt-24 pb-12 md:pt-20 md:pb-16 lg:pb-20 overflow-hidden bg-grid-tech">
       {/* Apenas o quadriculado, sem linhas */}
       {/* Background Decorativo - Camadas Técnicas */}
       <div className="hero-background" />
@@ -117,12 +117,12 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                 {/* Blob verde suave atrás */}
                 <div className="absolute inset-0 -z-10 translate-y-8 rounded-[45%] bg-primary/20 blur-3xl pointer-events-none" />
 
-                {/* Superfície clara arredondada */}
-                <div className="relative w-full h-full overflow-hidden rounded-[36px] surface-light">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.08] via-transparent to-transparent" />
+                {/* Foto real sobre superfície clara arredondada */}
+                <div className="relative w-full h-full overflow-hidden rounded-[36px] bg-[oklch(94%_0.004_260)]">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.1] via-transparent to-transparent" />
                   <img
-                    src={almir3d}
-                    alt="Almir Teles, fundador da Aceleriq — ilustração 3D"
+                    src={almirPhoto}
+                    alt="Almir Teles, fundador da Aceleriq"
                     width={1024}
                     height={1280}
                     className="absolute inset-x-0 bottom-0 w-full h-[105%] object-cover object-top select-none"
@@ -133,9 +133,9 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                   />
 
                   {/* Chip flutuante */}
-                  <div className="absolute top-4 left-4 flex items-center gap-2 rounded-full bg-background/85 px-3 py-1.5 backdrop-blur-md border border-white/10">
+                  <div className="absolute top-4 left-4 flex items-center gap-2 rounded-full bg-[oklch(16%_0.005_260/0.85)] px-3 py-1.5 backdrop-blur-md border border-white/10">
                     <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-                    <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/90">
+                    <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/90">
                       Almir · Fundador
                     </span>
                   </div>
@@ -492,7 +492,7 @@ export function Method() {
   return (
     <section
       id="metodo"
-      className="relative py-12 md:py-16 overflow-hidden bg-grid-ambient"
+      className="section-dark relative py-12 md:py-16 overflow-hidden bg-grid-ambient"
     >
       {/* Brilho ambiente verde, achatado e sutil, sem bolha redonda */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 h-[150px] w-[860px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.035] blur-[90px]" />
@@ -859,7 +859,7 @@ export function Results({ onDiagnostico }: { onDiagnostico?: () => void } = {}) 
 // ─────────────────────────────────────────────────────────────
 export function Testimonials() {
   return (
-    <section className="relative py-12 md:py-16 bg-grid-ambient">
+    <section className="section-dark relative py-12 md:py-16 bg-grid-ambient">
       <div className="container-aceleriq">
         <SectionHeader
           eyebrow="[ 12 ] · Provas Reais"
@@ -1073,7 +1073,7 @@ export function FAQ() {
 // ─────────────────────────────────────────────────────────────
 export function FinalCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section className="relative py-12 md:py-16 bg-grid-ambient">
+    <section className="section-dark relative py-12 md:py-16 bg-grid-ambient">
       <div className="container-aceleriq">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
