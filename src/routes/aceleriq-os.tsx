@@ -140,10 +140,13 @@ function AceleriqOS() {
               { icon: Database, title: "Clareza", desc: "Tudo centralizado, sem dispersão." },
               { icon: ShieldCheck, title: "Controle", desc: "Sua operação na palma da mão." }
             ].map((item, i) => (
-              <div key={i} className="p-6 rounded-xl border border-border bg-card/20 hover:border-primary/40 transition-colors">
-                <item.icon className="h-6 w-6 text-primary mb-4" />
-                <h3 className="font-display text-lg mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+              <div key={i} className="group relative overflow-hidden p-6 rounded-xl border border-border bg-card/20 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:bg-primary/[0.04] hover:shadow-[0_20px_50px_-20px_oklch(85%_0.2_145/0.35)]">
+                <div className="pointer-events-none absolute -top-10 -right-10 h-28 w-28 rounded-full bg-primary/0 blur-2xl transition-all duration-500 group-hover:bg-primary/20" />
+                <div className="relative flex h-11 w-11 items-center justify-center rounded-lg border border-primary/30 bg-primary/10 text-primary mb-4 transition-all duration-300 group-hover:scale-110 group-hover:border-primary group-hover:bg-primary/20 group-hover:shadow-[0_0_20px_oklch(85%_0.2_145/0.5)]">
+                  <item.icon className="h-5 w-5" />
+                </div>
+                <h3 className="relative font-display text-lg mb-2 transition-colors group-hover:text-primary">{item.title}</h3>
+                <p className="relative text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>

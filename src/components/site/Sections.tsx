@@ -686,23 +686,29 @@ export function FitFor() {
         />
 
         <div className="mt-8 md:mt-10 grid gap-6 md:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-8">
+          <div className="group rounded-2xl border border-white/10 bg-white/[0.03] p-8 transition-all duration-300 hover:border-primary/50 hover:bg-primary/[0.04] hover:shadow-[0_20px_60px_-20px_oklch(85%_0.2_145/0.35)]">
             <h3 className="text-lg font-semibold text-primary mb-6 flex items-center gap-2">
-              <Check className="h-5 w-5" /> É para você se:
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-primary/30 bg-primary/10 text-primary transition-all duration-300 group-hover:border-primary group-hover:bg-primary/20 group-hover:shadow-[0_0_20px_oklch(85%_0.2_145/0.5)]">
+                <Check className="h-4 w-4" />
+              </span>
+              É para você se:
             </h3>
             <ul className="space-y-4">
               {FIT_YES.map((t, i) => (
                 <li key={i} className="flex items-start gap-3 text-[14px] text-foreground/80 leading-relaxed">
-                  <div className="mt-1 h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0" />
+                  <div className="mt-1 h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0 transition-all group-hover:shadow-[0_0_8px_oklch(85%_0.2_145/0.7)]" />
                   {t}
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-8">
+          <div className="group rounded-2xl border border-white/10 bg-white/[0.03] p-8 transition-all duration-300 hover:border-white/25">
             <h3 className="text-lg font-semibold text-foreground/80 mb-6 flex items-center gap-2">
-              <X className="h-5 w-5" /> Não é para você se:
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 bg-white/[0.04] text-foreground/70">
+                <X className="h-4 w-4" />
+              </span>
+              Não é para você se:
             </h3>
             <ul className="space-y-4">
               {FIT_NO.map((t, i) => (
