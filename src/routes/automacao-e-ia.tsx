@@ -5,9 +5,9 @@ import { HumanBand } from "@/components/site/HumanBand";
 import automacaoHumana from "@/assets/automacao-humana.jpg";
 
 const URL = "https://aceleriq.com.br/automacao-e-ia";
-const TITLE = "Automação de Marketing e IA para WhatsApp, CRM e Vendas | Aceleriq";
+const TITLE = "Automação de Marketing e IA para Vendas | Aceleriq";
 const DESCRIPTION =
-  "Automação de marketing e vendas com IA para empresas no Brasil todo: WhatsApp, CRM, atendimento, qualificação e follow-up. n8n, RD Station, HubSpot e agentes de IA sob medida.";
+  "Automação de marketing e vendas com IA no Brasil: WhatsApp, CRM, qualificação e follow-up. n8n, RD Station, HubSpot e agentes sob medida.";
 
 const FAQS = [
   { q: "Que tipo de automação vocês implementam?", a: "Automação comercial (qualificação, follow-up, agendamento), de marketing (nutrição, segmentação, scoring), operacional (financeiro, atendimento, BI) e agentes de IA customizados." },
