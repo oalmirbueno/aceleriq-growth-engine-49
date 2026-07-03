@@ -242,13 +242,15 @@ export function ServicePageLayout(props: ServicePageProps) {
         </section>
 
         {/* MARQUEE */}
-        <section className="relative border-y border-brand-soft/15 overflow-hidden bg-black">
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black via-primary/[0.04] to-black" />
-          <div className="relative flex gap-10 py-3.5 animate-[marquee_45s_linear_infinite] whitespace-nowrap text-[12px] uppercase tracking-[0.18em] text-muted-foreground/60">
+        <section className="relative border-y border-[oklch(72%_0.19_145)]/20 overflow-hidden bg-black">
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black via-[oklch(72%_0.19_145)]/[0.06] to-black" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-black to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-black to-transparent z-10" />
+          <div className="relative flex gap-10 py-4 animate-[marquee_45s_linear_infinite] whitespace-nowrap font-display text-[13px] md:text-[14px] uppercase tracking-[0.22em] text-white/90">
             {[...MARQUEE, ...MARQUEE, ...MARQUEE].map((t, i) => (
               <span key={i} className="flex items-center gap-10 shrink-0">
                 <span>{t}</span>
-                <span className="text-brand text-[10px]">✦</span>
+                <span className="text-[oklch(72%_0.19_145)] text-[12px]">✦</span>
               </span>
             ))}
           </div>
