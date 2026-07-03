@@ -30,9 +30,9 @@ export function GoogleReviews() {
     >
       <div className="container-aceleriq">
         <div className="text-center max-w-2xl mx-auto">
-          <p className="label-eyebrow text-primary">Prova Social · Google</p>
+          <p className="label-eyebrow text-brand">Prova Social · Google</p>
           <h2 className="mt-4 text-4xl font-medium tracking-tight md:text-5xl">
-            O que dizem sobre a <span className="text-primary">Aceleriq</span> no Google
+            O que dizem sobre a <span className="text-brand">Aceleriq</span> no Google
           </h2>
           <div className="mt-6 flex items-center justify-center gap-4">
             <div className="flex items-center gap-1">
@@ -45,12 +45,12 @@ export function GoogleReviews() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-center rounded-2xl border border-primary/20 bg-card/40 p-12 text-center backdrop-blur-sm">
-          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 text-primary mb-6">
-            <Star className="h-10 w-10 fill-primary" />
+        <div className="mt-12 flex flex-col items-center justify-center rounded-2xl border border-brand-soft bg-card/40 p-12 text-center backdrop-blur-sm">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-brand-soft text-brand mb-6">
+            <Star className="h-10 w-10 fill-[oklch(72%_0.19_145)]" />
           </div>
-          <div className="text-5xl font-bold text-white mb-2">{AVERAGE.toFixed(1)}</div>
-          <p className="text-lg text-primary font-medium mb-4">{COUNT} avaliações verificadas no Google</p>
+          <div className="text-5xl font-bold text-brand mb-2">{AVERAGE.toFixed(1)}</div>
+          <p className="text-lg text-brand font-medium mb-4">{COUNT} avaliações verificadas no Google</p>
           <p className="max-w-md text-sm text-muted-foreground mb-8">
             Preferimos mostrar provas reais e verificáveis do que preencher o site com depoimentos genéricos.
           </p>
@@ -62,13 +62,13 @@ export function GoogleReviews() {
         <div className="mt-16 grid gap-6 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-4 flex flex-col justify-between rounded-2xl border border-border/60 bg-card/40 p-7 text-left">
             <div>
-              <span className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
+              <span className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-brand">
                 <MapPin className="h-3.5 w-3.5" />
                 Curitiba · PR
               </span>
               <h3 className="mt-4 font-display text-2xl uppercase tracking-[-0.03em] leading-[1.1]">
                 Sede física,<br />
-                <span className="text-primary">atendimento nacional</span>
+                <span className="text-brand">atendimento nacional</span>
               </h3>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
                 Operação 100% remota para o Brasil inteiro, com base em Curitiba.
