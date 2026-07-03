@@ -302,12 +302,12 @@
     font-family: var(--font-mono);
   }
 
-  /* Hairline sutil */
+  /* Hairline sutil (linha cinza sobre claro) */
   .hairline {
-    border: 1px solid oklch(100% 0 0 / 0.07);
+    border: 1px solid oklch(16% 0.005 260 / 0.1);
   }
   .surface-light .hairline {
-    border-color: oklch(15% 0.005 260 / 0.1);
+    border-color: oklch(96% 0.003 260 / 0.14);
   }
 
   /* Botão interativo (usado em CTAs) */
