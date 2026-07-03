@@ -27,29 +27,47 @@ function NotFoundComponent() {
   );
 }
 
-const SITE_TITLE = "Aceleriq · Agência de Marketing Digital em Curitiba";
+const SITE_TITLE =
+  "Aceleriq · Agência de Marketing Digital, Tráfego Pago e Automação com IA";
 const SITE_DESCRIPTION =
-  "Agência de marketing digital em Curitiba: sites, tráfego, automação, IA, CRM e consultoria. Diagnóstico gratuito + Método Acelera.";
+  "Agência de marketing digital para o Brasil todo: tráfego pago, criação de sites, automação, IA, CRM e consultoria comercial. Diagnóstico gratuito. Sede em Curitiba, atendimento nacional.";
 const SITE_URL = "https://aceleriq.com.br";
 const OG_IMAGE = `${SITE_URL}/og-image.jpg`;
+
+const BR_AREAS_SERVED = [
+  { "@type": "Country", name: "Brasil" },
+  ...[
+    "São Paulo","Rio de Janeiro","Belo Horizonte","Brasília","Curitiba","Porto Alegre",
+    "Florianópolis","Salvador","Recife","Fortaleza","Manaus","Belém","Goiânia",
+    "Campinas","Vitória","Natal","João Pessoa","Maceió","Cuiabá","Campo Grande",
+    "Joinville","Londrina","Maringá","Ribeirão Preto","Sorocaba","Uberlândia",
+  ].map((c) => ({ "@type": "City", name: c })),
+];
 
 const ORGANIZATION_JSONLD = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Aceleriq",
-  alternateName: ["Aceleriq Engenharia de Crescimento", "Agência Aceleriq", "Aceleriq Marketing"],
+  alternateName: [
+    "Aceleriq Agência",
+    "Agência Aceleriq",
+    "Aceleriq Marketing",
+    "Aceleriq Engenharia de Crescimento",
+    "Aceleriq (não é Acelera Aí)",
+  ],
   url: SITE_URL,
   logo: `${SITE_URL}/og-image.jpg`,
   email: "contato@aceleriq.com.br",
   telephone: "+55-41-99748-3429",
   description:
-    "Agência de marketing digital e engenharia de crescimento em Curitiba: criação de sites, tráfego pago, automação, IA, CRM, sistemas, dados e consultoria.",
+    "Agência de marketing digital com atendimento nacional: criação de sites, tráfego pago (Google e Meta Ads), automação, IA, CRM, dashboards e consultoria comercial. Sede em Curitiba/PR.",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Curitiba",
     addressRegion: "PR",
     addressCountry: "BR",
   },
+  areaServed: BR_AREAS_SERVED,
   sameAs: ["https://instagram.com/aceleriq", "https://share.google/N6bMgKWg8aRB1t9m9"],
   aggregateRating: {
     "@type": "AggregateRating",
@@ -62,7 +80,7 @@ const ORGANIZATION_JSONLD = {
 
 const LOCALBUSINESS_JSONLD = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": ["LocalBusiness", "ProfessionalService"],
   "@id": `${SITE_URL}#localbusiness`,
   name: "Aceleriq",
   url: SITE_URL,
@@ -71,14 +89,31 @@ const LOCALBUSINESS_JSONLD = {
   telephone: "+55-41-99748-3429",
   priceRange: "$$$",
   description:
-    "Agência de marketing digital em Curitiba com criação de sites, tráfego pago, automação, IA, CRM, sistemas e consultoria de crescimento (Método Acelera).",
+    "Agência de marketing digital com atendimento em todo o Brasil: criação de sites, tráfego pago, automação, IA, CRM, sistemas e consultoria de crescimento (Método Acelera). Sede em Curitiba/PR.",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Curitiba",
     addressRegion: "PR",
     addressCountry: "BR",
   },
-  areaServed: { "@type": "Country", name: "Brasil" },
+  areaServed: BR_AREAS_SERVED,
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Serviços Aceleriq",
+    itemListElement: [
+      "Criação de sites e landing pages",
+      "Gestão de tráfego pago (Google Ads, Meta Ads, LinkedIn Ads)",
+      "Automação de marketing e vendas",
+      "IA aplicada ao comercial",
+      "Implantação e governança de CRM",
+      "Consultoria de crescimento (Método Acelera)",
+      "Dashboards e dados comerciais",
+      "Estruturação comercial e funil de vendas",
+    ].map((s) => ({
+      "@type": "Offer",
+      itemOffered: { "@type": "Service", name: s },
+    })),
+  },
   sameAs: ["https://instagram.com/aceleriq", "https://share.google/N6bMgKWg8aRB1t9m9"],
 };
 
@@ -107,7 +142,7 @@ export const Route = createRootRoute({
       {
         name: "keywords",
         content:
-          "Aceleriq, agência de marketing digital Curitiba, criação de sites Curitiba, tráfego pago, gestão de tráfego, automação de marketing, automação comercial, IA para empresas, CRM, desenvolvimento de sistemas, aplicativos, consultoria de marketing, consultoria de crescimento, engenharia de crescimento, Método Acelera, marketing para empresas",
+          "Aceleriq, agência de marketing digital, agência de marketing digital Brasil, agência de marketing digital Curitiba, agência de marketing digital São Paulo, agência de marketing digital Rio de Janeiro, tráfego pago, gestão de tráfego, gestor de tráfego, Google Ads, Meta Ads, Facebook Ads, Instagram Ads, LinkedIn Ads, automação de marketing, automação comercial, automação WhatsApp, IA para empresas, IA aplicada a vendas, CRM, RD Station, HubSpot, criação de sites, site profissional, site rápido, site otimizado, landing page, funil de vendas, estruturação comercial, consultoria de marketing, consultoria comercial, consultoria de crescimento, engenharia de crescimento, Método Acelera, marketing para empresas, marketing B2B, agência boutique, Aceleriq não é Acelera Aí",
       },
       { property: "og:title", content: SITE_TITLE },
       { property: "og:description", content: SITE_DESCRIPTION },
