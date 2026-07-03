@@ -25,7 +25,7 @@ import { GoogleReviews } from "@/components/site/GoogleReviews";
 
 import { PortfolioShowcase } from "@/components/site/PortfolioShowcase";
 import { PainelComunidade } from "@/components/site/PainelComunidade";
-import almir3d from "@/assets/almir-3d.png";
+import almir3d from "@/assets/almir-real.png";
 
 const HOME_TITLE =
   "Aceleriq | Engenharia de Crescimento com IA, CRM, Marketing e Automação";
