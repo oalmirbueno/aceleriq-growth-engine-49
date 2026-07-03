@@ -95,10 +95,10 @@ function SobreAceleriq() {
 
       <main>
         {/* HERO da página */}
-        <section className="relative pt-32 pb-12 md:pt-40 md:pb-16 bg-grid-ambient overflow-hidden">
-          <div className="pointer-events-none absolute top-1/2 left-1/2 h-[200px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/[0.04] blur-[100px]" />
+        <section className="section-dark relative pt-32 pb-16 md:pt-40 md:pb-24 bg-grid-tech overflow-hidden">
+          <div className="pointer-events-none absolute top-1/2 left-1/2 h-[260px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-primary/10 blur-[110px]" />
 
-          <div className="container-aceleriq relative">
+          <div className="container-aceleriq relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -109,7 +109,7 @@ function SobreAceleriq() {
                 <MapPin className="h-3.5 w-3.5 text-primary" />
                 Curitiba · PR · Brasil · Atuação nacional
               </span>
-              <h1 className="mt-4 font-display text-4xl font-medium leading-[1.05] tracking-[-0.03em] md:text-6xl">
+              <h1 className="mt-4 font-display text-4xl font-medium leading-[1.05] tracking-[-0.03em] md:text-6xl text-white">
                 Sobre a <span className="text-primary neon-text-glow">Aceleriq</span>
               </h1>
               <p className="mt-5 text-base leading-relaxed text-muted-foreground md:text-lg">
