@@ -263,7 +263,8 @@
     color: oklch(12% 0 0);
     font-weight: 600;
     font-size: 0.8125rem;
-    letter-spacing: 0.02em;
+    letter-spacing: 0;
+    white-space: nowrap;
     border-radius: 999px;
     border: 1px solid oklch(72% 0.19 145 / 0.9);
     transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;

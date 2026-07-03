@@ -61,22 +61,19 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
           </nav>
         </div>
 
-        <div className="hidden items-center gap-8 md:flex">
-          <div className="flex flex-col items-end">
-            <span className="font-mono text-[9px] uppercase tracking-widest text-primary/60">System_Access</span>
-            <a
-              href="https://aceleriq.online"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[12px] font-medium text-foreground/80 transition-colors hover:text-primary"
-            >
-              Client Portal
-            </a>
-          </div>
-          
+        <div className="hidden items-center gap-6 md:flex">
+          <a
+            href="https://aceleriq.online"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden xl:inline-flex text-[11px] font-mono uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-primary"
+          >
+            Client Portal ↗
+          </a>
+
           <button
             onClick={onDiagnostico}
-            className="btn-tech text-[11px] px-6 py-2"
+            className="btn-tech"
           >
             Fazer Diagnóstico
           </button>
