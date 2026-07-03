@@ -28,9 +28,9 @@ import { PainelComunidade } from "@/components/site/PainelComunidade";
 import almir3d from "@/assets/almir-real.png";
 
 const HOME_TITLE =
-  "Aceleriq | Engenharia de Crescimento com IA, CRM, Marketing e Automação";
+  "Aceleriq · Agência de Marketing Digital, Tráfego Pago e Automação para o Brasil";
 const HOME_DESCRIPTION =
-  "Estruturamos comercial, marketing e operação para empresas crescerem com processo, CRM, automação, tráfego, conteúdo e IA aplicada ao lucro.";
+  "Agência de marketing digital para empresas em todo o Brasil: tráfego pago, criação de sites, automação de marketing, IA, CRM e consultoria comercial. Diagnóstico gratuito, Método Acelera e sede em Curitiba.";
 
 const FAQS_JSONLD = {
   "@context": "https://schema.org",
