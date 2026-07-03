@@ -31,13 +31,13 @@ export function PainelComunidade() {
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start mb-24">
           <div>
             <div className="flex items-center gap-3 mb-5">
-              <BarChart3 className="h-5 w-5 text-primary" />
-              <span className="font-mono text-xs tracking-[0.3em] uppercase text-primary">Aceleriq OS · aceleriq.online</span>
+              <BarChart3 className="h-5 w-5 text-[oklch(78%_0.2_145)]" />
+              <span className="font-mono text-xs tracking-[0.3em] uppercase text-[oklch(78%_0.2_145)]">Aceleriq OS · aceleriq.online</span>
             </div>
             <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
               Sua área de comando,
               <br />
-              <span className="text-primary text-glow italic">com tudo documentado.</span>
+              <span className="text-[oklch(78%_0.2_145)] italic">com tudo documentado.</span>
             </h3>
             <p className="mt-5 text-muted-foreground leading-relaxed">
               Centralizamos campanhas, automações, IA, CRM, entregas e métricas no <strong className="text-foreground">Aceleriq OS</strong>. Você acompanha em tempo real os mesmos números, fluxos e tarefas que o nosso time está executando, sem precisar pedir relatório.
@@ -50,8 +50,8 @@ export function PainelComunidade() {
                 { icon: CheckCircle2, label: "Próximos passos organizados para o cliente acompanhar sem depender de relatório solto" },
               ].map(({ icon: Icon, label }) => (
                 <li key={label} className="flex items-start gap-3">
-                  <span className="mt-0.5 flex h-6 w-6 items-center justify-center border border-primary/40 bg-primary/10 shrink-0">
-                    <Icon className="h-3.5 w-3.5 text-primary" />
+                  <span className="mt-0.5 flex h-6 w-6 items-center justify-center border border-[oklch(72%_0.19_145)]/45 bg-[oklch(72%_0.19_145)]/15 shrink-0">
+                    <Icon className="h-3.5 w-3.5 text-[oklch(78%_0.2_145)]" />
                   </span>
                   <span className="text-sm md:text-base text-foreground/85 leading-relaxed">{label}</span>
                 </li>
@@ -71,13 +71,13 @@ export function PainelComunidade() {
 
           <div>
             <div className="flex items-center gap-3 mb-5">
-              <MessageCircle className="h-5 w-5 text-primary" />
-              <span className="font-mono text-xs tracking-[0.3em] uppercase text-primary">Grupo Dedicado · WhatsApp</span>
+              <MessageCircle className="h-5 w-5 text-[oklch(78%_0.2_145)]" />
+              <span className="font-mono text-xs tracking-[0.3em] uppercase text-[oklch(78%_0.2_145)]">Grupo Dedicado · WhatsApp</span>
             </div>
             <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
               Um grupo só seu com
               <br />
-              <span className="text-primary text-glow italic">a equipe Aceleriq.</span>
+              <span className="text-[oklch(78%_0.2_145)] italic">a equipe Aceleriq.</span>
             </h3>
             <p className="mt-5 text-muted-foreground leading-relaxed">
               Cada cliente tem um grupo de WhatsApp exclusivo com o time da Aceleriq. Para acompanhamento, dúvidas e suporte direto, sem ticket, sem fila, sem intermediário.
@@ -90,8 +90,8 @@ export function PainelComunidade() {
                 { icon: FileText, label: "Tudo registrado e linkado ao Aceleriq OS" },
               ].map(({ icon: Icon, label }) => (
                 <li key={label} className="flex items-start gap-3">
-                  <span className="mt-0.5 flex h-6 w-6 items-center justify-center border border-primary/40 bg-primary/10 shrink-0">
-                    <Icon className="h-3.5 w-3.5 text-primary" />
+                  <span className="mt-0.5 flex h-6 w-6 items-center justify-center border border-[oklch(72%_0.19_145)]/45 bg-[oklch(72%_0.19_145)]/15 shrink-0">
+                    <Icon className="h-3.5 w-3.5 text-[oklch(78%_0.2_145)]" />
                   </span>
                   <span className="text-sm md:text-base text-foreground/85 leading-relaxed">{label}</span>
                 </li>
