@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { loadSitemapPosts } from "@/lib/blog.functions";
 import { LP_TEMA_SLUGS } from "@/lib/lp-temas";
+import { GEO_CITIES } from "@/lib/geo-cities";
 
 const BASE_URL = "https://aceleriq.com.br";
 const TODAY = new Date().toISOString().slice(0, 10);
@@ -36,6 +37,12 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/diagnostico-de-crescimento", changefreq: "monthly", priority: "0.85", lastmod: TODAY },
           { path: "/diagnostico", changefreq: "monthly", priority: "0.95", lastmod: TODAY },
           { path: "/blog", changefreq: "daily", priority: "0.8", lastmod: TODAY },
+          ...GEO_CITIES.map((c) => ({
+            path: `/${c.slug}`,
+            changefreq: "monthly" as const,
+            priority: "0.9",
+            lastmod: TODAY,
+          })),
           ...LP_TEMA_SLUGS.map((slug) => ({
             path: `/lp/${slug}`,
             changefreq: "weekly" as const,
