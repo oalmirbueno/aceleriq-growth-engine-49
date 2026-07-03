@@ -1073,7 +1073,7 @@ export function FAQ() {
 // ─────────────────────────────────────────────────────────────
 export function FinalCTA({ onDiagnostico }: { onDiagnostico: () => void }) {
   return (
-    <section className="relative py-12 md:py-16 bg-grid-ambient">
+    <section className="section-dark relative py-12 md:py-16 bg-grid-ambient">
       <div className="container-aceleriq">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
