@@ -74,7 +74,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
           type="button"
           aria-label="Abrir menu"
           onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 items-center justify-center border border-white/10 bg-white/5 text-foreground lg:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-foreground/10 bg-foreground/5 text-foreground lg:hidden"
         >
           {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
         </button>
