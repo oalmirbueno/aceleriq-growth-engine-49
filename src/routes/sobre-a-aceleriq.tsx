@@ -24,6 +24,7 @@ import {
   whatsappLink,
   DEFAULT_WHATSAPP_MESSAGE,
 } from "@/lib/contact";
+import almir3d from "@/assets/almir-3d.png";
 
 const PAGE_TITLE =
   "Sobre a Aceleriq · Engenharia de Crescimento";
@@ -168,6 +169,92 @@ function SobreAceleriq() {
                   </p>
                 </motion.div>
               ))}
+            </div>
+        </section>
+
+        {/* QUEM LIDERA — Almir 3D */}
+        <section className="relative py-16 md:py-24 surface-light overflow-hidden">
+          <div className="container-aceleriq relative">
+            <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="lg:col-span-7"
+              >
+                <span className="label-eyebrow">Quem lidera</span>
+                <h2 className="mt-3 font-display text-4xl font-medium leading-[1.05] tracking-[-0.03em] md:text-5xl text-[color:var(--ink)]">
+                  Almir Teles.<br />
+                  <span className="text-primary">Fundador da Aceleriq.</span>
+                </h2>
+                <div className="mt-6 space-y-4 text-[15px] leading-relaxed md:text-base text-[color:oklch(30%_0.005_260_/_0.85)]">
+                  <p>
+                    Mais de uma década conectando estratégia comercial, tecnologia e dados
+                    para empresas que decidiram sair do improviso e crescer com método.
+                  </p>
+                  <p>
+                    À frente da Aceleriq, lidera o time que estrutura CRM, tráfego,
+                    automação, IA e processos comerciais — traduzindo cada frente em
+                    receita previsível para o cliente.
+                  </p>
+                </div>
+
+                <div className="mt-7 flex flex-wrap gap-6 text-[color:var(--ink)]">
+                  <div>
+                    <div className="font-display text-3xl font-medium tracking-tight">10+</div>
+                    <div className="mt-1 text-[11px] font-mono uppercase tracking-[0.18em] text-[color:oklch(35%_0.005_260_/_0.7)]">
+                      anos de mercado
+                    </div>
+                  </div>
+                  <div>
+                    <div className="font-display text-3xl font-medium tracking-tight">Curitiba</div>
+                    <div className="mt-1 text-[11px] font-mono uppercase tracking-[0.18em] text-[color:oklch(35%_0.005_260_/_0.7)]">
+                      base · atuação nacional
+                    </div>
+                  </div>
+                  <div>
+                    <div className="font-display text-3xl font-medium tracking-tight">Growth · IA · CRM</div>
+                    <div className="mt-1 text-[11px] font-mono uppercase tracking-[0.18em] text-[color:oklch(35%_0.005_260_/_0.7)]">
+                      áreas de foco
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0.1 }}
+                className="relative lg:col-span-5"
+              >
+                <div className="relative mx-auto max-w-md">
+                  {/* Blob verde suave atrás */}
+                  <div className="absolute inset-0 -z-10 translate-y-6 rounded-[40%] bg-primary/25 blur-3xl" />
+                  {/* Placa preta assimétrica */}
+                  <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[32px] bg-[color:var(--background)]">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.12] via-transparent to-transparent" />
+                    <img
+                      src={almir3d}
+                      alt="Almir Teles, fundador da Aceleriq — ilustração 3D"
+                      width={1024}
+                      height={1280}
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full object-cover object-top"
+                    />
+                    {/* Card flutuante */}
+                    <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-background/85 px-4 py-3 backdrop-blur-md border border-white/10">
+                      <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-primary/80">
+                        Fundador · CEO
+                      </div>
+                      <div className="mt-1 font-display text-base font-medium text-foreground">
+                        Almir Teles
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </div>
         </section>
