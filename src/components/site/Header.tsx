@@ -64,7 +64,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
         <div className="hidden items-center gap-4 md:flex">
           <button
             onClick={onDiagnostico}
-            className="btn-tech"
+            className="inline-flex items-center gap-2 rounded-full bg-[oklch(72%_0.19_145)] px-5 py-2.5 text-[12px] font-semibold uppercase tracking-[0.14em] text-[oklch(8%_0_0)] transition-all hover:bg-[oklch(78%_0.2_145)] hover:shadow-[0_10px_30px_-10px_oklch(72%_0.19_145/0.6)]"
           >
             Fazer Diagnóstico
           </button>
@@ -74,7 +74,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
           type="button"
           aria-label="Abrir menu"
           onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-foreground/10 bg-foreground/5 text-foreground lg:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white lg:hidden"
         >
           {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
         </button>
