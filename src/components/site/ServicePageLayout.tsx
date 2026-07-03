@@ -33,6 +33,7 @@ export type ServicePageProps = {
   extraSection?: ReactNode;
   principle?: ServicePrinciple;
   heroAside?: ReactNode;
+  humanBand?: ReactNode;
 };
 
 const DEFAULT_PRINCIPLES: Record<ServiceVariant, ServicePrinciple> = {
@@ -284,6 +285,7 @@ export function ServicePageLayout(props: ServicePageProps) {
         </section>
 
 
+        {props.humanBand}
 
         {/* WHY / BENEFITS */}
         <section className="px-6 lg:px-16 py-16 md:py-24 border-t border-border/60 max-w-[1600px] mx-auto">
