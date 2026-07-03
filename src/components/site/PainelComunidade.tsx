@@ -6,23 +6,23 @@ export function PainelComunidade() {
   return (
     <section
       id="painel-comunidade"
-      className="relative py-20 md:py-28 lg:py-32 overflow-hidden bg-background"
+      className="section-dark relative py-20 md:py-28 lg:py-32 overflow-hidden"
     >
       <div className="absolute inset-0 bg-grid-tech opacity-30 pointer-events-none" />
-      <div className="absolute top-1/3 -left-32 w-[28rem] h-[28rem] bg-primary/10 blur-[140px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 -right-32 w-[28rem] h-[28rem] bg-primary/10 blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/3 -left-32 w-[28rem] h-[28rem] bg-[oklch(72%_0.19_145)]/12 blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 -right-32 w-[28rem] h-[28rem] bg-[oklch(72%_0.19_145)]/12 blur-[140px] rounded-full pointer-events-none" />
 
       <div className="container-aceleriq relative z-10">
         <div className="max-w-3xl mb-16 md:mb-20">
-          <span className="font-mono text-[10px] tracking-[0.4em] uppercase py-1 border-b border-primary text-primary">
+          <span className="font-mono text-[10px] tracking-[0.4em] uppercase py-1 border-b border-[oklch(72%_0.19_145)]/60 text-[oklch(78%_0.2_145)]">
             [ 11 ] // Operação ao Vivo
           </span>
           <h2 className="mt-6 text-3xl md:text-5xl lg:text-6xl font-bold leading-[1.05]">
-            <span className="text-white">Tudo o que fazemos é</span>
+            <span className="text-[oklch(78%_0.2_145)]">Tudo o que fazemos é</span>
             <br />
-            <span className="text-primary text-glow italic">documentado em tempo real.</span>
+            <span className="text-white italic">documentado em tempo real.</span>
           </h2>
-          <p className="mt-6 text-base md:text-lg text-muted-foreground leading-relaxed border-l-2 border-primary/30 pl-4 md:pl-6 max-w-2xl">
+          <p className="mt-6 text-base md:text-lg text-white/70 leading-relaxed border-l-2 border-[oklch(72%_0.19_145)]/50 pl-4 md:pl-6 max-w-2xl">
             Cada campanha, automação, IA, ajuste de funil e número do mês fica registrado no Aceleriq OS, o seu painel exclusivo. E você fala direto com a nossa equipe num grupo de WhatsApp dedicado só para a sua empresa.
           </p>
         </div>
