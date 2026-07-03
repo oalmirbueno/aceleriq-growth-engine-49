@@ -7,7 +7,7 @@ import { GEO_CITIES } from "@/lib/geo-cities";
 
 export const Route = createFileRoute("/agencia-de-marketing-digital-$cidade")({
   loader: ({ params }) => {
-    const geo = GEO_CITIES.find((c) => `agencia-de-marketing-digital-${c.slug.replace("agencia-de-marketing-digital-", "")}` === `agencia-de-marketing-digital-${params.cidade}`);
+    const geo = GEO_CITIES.find((c) => c.slug === `agencia-de-marketing-digital-${params.cidade}`);
     if (!geo) throw notFound();
     return { geo };
   },
