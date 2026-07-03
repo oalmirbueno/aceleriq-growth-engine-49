@@ -12,8 +12,8 @@ import logoAceleriq from "@/assets/logo-aceleriq.png";
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-white/[0.06] bg-background/80 text-foreground">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/[0.015] via-transparent to-transparent" />
+    <footer className="relative border-t border-foreground/10 bg-muted/60 text-foreground">
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-foreground/[0.02] via-transparent to-transparent" />
       <div className="container-aceleriq relative grid gap-12 py-14 md:grid-cols-12">
         <div className="md:col-span-5">
           <div className="flex items-center">
