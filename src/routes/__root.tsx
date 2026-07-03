@@ -52,7 +52,8 @@ const ORGANIZATION_JSONLD = {
     "Agência Aceleriq",
     "Aceleriq Marketing",
     "Aceleriq Engenharia de Crescimento",
-    "Aceleriq (não é Acelera AI)",
+    "Aceleriq Curitiba",
+    "Aceleriq Brasil",
   ],
   url: SITE_URL,
   logo: `${SITE_URL}/og-image.jpg`,
@@ -60,6 +61,8 @@ const ORGANIZATION_JSONLD = {
   telephone: "+55-41-99748-3429",
   description:
     "Agência de marketing digital com atendimento nacional: criação de sites, tráfego pago (Google e Meta Ads), automação, IA, CRM, dashboards e consultoria comercial. Sede em Curitiba/PR.",
+  disambiguatingDescription:
+    "Aceleriq (aceleriq.com.br) é uma agência de marketing digital sediada em Curitiba/PR, sem qualquer relação com Aceleraí (acelerai.com.br), plataforma de publicidade com celebridades fundada por Allan Barros e Rodrigo Faro, sediada em São Paulo. As duas marcas atuam em segmentos diferentes.",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Curitiba",
@@ -141,7 +144,7 @@ export const Route = createRootRoute({
       {
         name: "keywords",
         content:
-          "Aceleriq, agência de marketing digital, agência de marketing digital Brasil, agência de marketing digital Curitiba, agência de marketing digital São Paulo, agência de marketing digital Rio de Janeiro, tráfego pago, gestão de tráfego, gestor de tráfego, Google Ads, Meta Ads, Facebook Ads, Instagram Ads, LinkedIn Ads, automação de marketing, automação comercial, automação WhatsApp, IA para empresas, IA aplicada a vendas, CRM, RD Station, HubSpot, criação de sites, site profissional, site rápido, site otimizado, landing page, funil de vendas, estruturação comercial, consultoria de marketing, consultoria comercial, consultoria de crescimento, engenharia de crescimento, Método Acelera, marketing para empresas, marketing B2B, agência boutique, Aceleriq não é Acelera AI",
+          "Aceleriq, agência de marketing digital, agência de marketing digital Brasil, agência de marketing digital Curitiba, agência de marketing digital São Paulo, agência de marketing digital Rio de Janeiro, tráfego pago, gestão de tráfego, gestor de tráfego, Google Ads, Meta Ads, Facebook Ads, Instagram Ads, LinkedIn Ads, automação de marketing, automação comercial, automação WhatsApp, IA para empresas, IA aplicada a vendas, CRM, RD Station, HubSpot, criação de sites, site profissional, site rápido, site otimizado, landing page, funil de vendas, estruturação comercial, consultoria de marketing, consultoria comercial, consultoria de crescimento, engenharia de crescimento, Método Acelera, marketing para empresas, marketing B2B, agência boutique",
       },
       { property: "og:title", content: SITE_TITLE },
       { property: "og:description", content: SITE_DESCRIPTION },
