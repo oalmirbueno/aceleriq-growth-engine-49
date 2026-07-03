@@ -112,7 +112,7 @@
     .container-aceleriq { padding-inline: 2.5rem; }
   }
 
-  /* Superfície clara — bandas de cinza claro com tipografia preta */
+  /* Bandas claras — subtis alternações sobre a base off-white */
   .surface-light {
     background: var(--surface);
     color: var(--ink);
@@ -127,6 +127,23 @@
     background: var(--surface-muted);
     color: var(--ink);
   }
+
+  /* Banda escura — grafite âncora, tipografia off-white, verde brilhando */
+  .section-dark {
+    background: var(--surface-dark);
+    color: oklch(97% 0.003 260);
+    --foreground: oklch(97% 0.003 260);
+    --muted-foreground: oklch(75% 0.005 260 / 0.75);
+    --border: oklch(97% 0.003 260 / 0.1);
+    --card: oklch(22% 0.005 260);
+  }
+  .section-dark .text-muted-foreground { color: oklch(75% 0.005 260 / 0.75); }
+  .section-dark .label-eyebrow { color: oklch(78% 0.15 145 / 0.9); }
+  .section-dark .card-soft {
+    background: oklch(22% 0.005 260);
+    border-color: oklch(97% 0.003 260 / 0.08);
+  }
+  .section-dark .hairline { border-color: oklch(97% 0.003 260 / 0.1); }
 
   /* Hero background image */
   .hero-background {
