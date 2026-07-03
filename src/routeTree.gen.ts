@@ -19,6 +19,7 @@ import { Route as CriacaoDeSitesRouteImport } from './routes/criacao-de-sites'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AutomacaoEIaRouteImport } from './routes/automacao-e-ia'
 import { Route as AgenciaDeMarketingDigitalCuritibaRouteImport } from './routes/agencia-de-marketing-digital-curitiba'
+import { Route as AgenciaDeMarketingDigitalCidadeRouteImport } from './routes/agencia-de-marketing-digital-$cidade'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AceleriqOsRouteImport } from './routes/aceleriq-os'
 import { Route as A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRouteImport } from './routes/a7f3c91e8b2d4506e1ad9f72c8b3e5d1[.]txt'
@@ -87,6 +88,12 @@ const AgenciaDeMarketingDigitalCuritibaRoute =
   AgenciaDeMarketingDigitalCuritibaRouteImport.update({
     id: '/agencia-de-marketing-digital-curitiba',
     path: '/agencia-de-marketing-digital-curitiba',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AgenciaDeMarketingDigitalCidadeRoute =
+  AgenciaDeMarketingDigitalCidadeRouteImport.update({
+    id: '/agencia-de-marketing-digital-$cidade',
+    path: '/agencia-de-marketing-digital-$cidade',
     getParentRoute: () => rootRouteImport,
   } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -184,6 +191,7 @@ export interface FileRoutesByFullPath {
   '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt': typeof A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRoute
   '/aceleriq-os': typeof AceleriqOsRoute
   '/admin': typeof AdminRouteWithChildren
+  '/agencia-de-marketing-digital-$cidade': typeof AgenciaDeMarketingDigitalCidadeRoute
   '/agencia-de-marketing-digital-curitiba': typeof AgenciaDeMarketingDigitalCuritibaRoute
   '/automacao-e-ia': typeof AutomacaoEIaRoute
   '/blog': typeof BlogRouteWithChildren
@@ -212,6 +220,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt': typeof A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRoute
   '/aceleriq-os': typeof AceleriqOsRoute
+  '/agencia-de-marketing-digital-$cidade': typeof AgenciaDeMarketingDigitalCidadeRoute
   '/agencia-de-marketing-digital-curitiba': typeof AgenciaDeMarketingDigitalCuritibaRoute
   '/automacao-e-ia': typeof AutomacaoEIaRoute
   '/criacao-de-sites': typeof CriacaoDeSitesRoute
@@ -241,6 +250,7 @@ export interface FileRoutesById {
   '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt': typeof A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRoute
   '/aceleriq-os': typeof AceleriqOsRoute
   '/admin': typeof AdminRouteWithChildren
+  '/agencia-de-marketing-digital-$cidade': typeof AgenciaDeMarketingDigitalCidadeRoute
   '/agencia-de-marketing-digital-curitiba': typeof AgenciaDeMarketingDigitalCuritibaRoute
   '/automacao-e-ia': typeof AutomacaoEIaRoute
   '/blog': typeof BlogRouteWithChildren
@@ -272,6 +282,7 @@ export interface FileRouteTypes {
     | '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt'
     | '/aceleriq-os'
     | '/admin'
+    | '/agencia-de-marketing-digital-$cidade'
     | '/agencia-de-marketing-digital-curitiba'
     | '/automacao-e-ia'
     | '/blog'
@@ -300,6 +311,7 @@ export interface FileRouteTypes {
     | '/'
     | '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt'
     | '/aceleriq-os'
+    | '/agencia-de-marketing-digital-$cidade'
     | '/agencia-de-marketing-digital-curitiba'
     | '/automacao-e-ia'
     | '/criacao-de-sites'
@@ -328,6 +340,7 @@ export interface FileRouteTypes {
     | '/a7f3c91e8b2d4506e1ad9f72c8b3e5d1.txt'
     | '/aceleriq-os'
     | '/admin'
+    | '/agencia-de-marketing-digital-$cidade'
     | '/agencia-de-marketing-digital-curitiba'
     | '/automacao-e-ia'
     | '/blog'
@@ -358,6 +371,7 @@ export interface RootRouteChildren {
   A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRoute: typeof A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRoute
   AceleriqOsRoute: typeof AceleriqOsRoute
   AdminRoute: typeof AdminRouteWithChildren
+  AgenciaDeMarketingDigitalCidadeRoute: typeof AgenciaDeMarketingDigitalCidadeRoute
   AgenciaDeMarketingDigitalCuritibaRoute: typeof AgenciaDeMarketingDigitalCuritibaRoute
   AutomacaoEIaRoute: typeof AutomacaoEIaRoute
   BlogRoute: typeof BlogRouteWithChildren
@@ -445,6 +459,13 @@ declare module '@tanstack/react-router' {
       path: '/agencia-de-marketing-digital-curitiba'
       fullPath: '/agencia-de-marketing-digital-curitiba'
       preLoaderRoute: typeof AgenciaDeMarketingDigitalCuritibaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agencia-de-marketing-digital-$cidade': {
+      id: '/agencia-de-marketing-digital-$cidade'
+      path: '/agencia-de-marketing-digital-$cidade'
+      fullPath: '/agencia-de-marketing-digital-$cidade'
+      preLoaderRoute: typeof AgenciaDeMarketingDigitalCidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -617,6 +638,7 @@ const rootRouteChildren: RootRouteChildren = {
     A7f3c91e8b2d4506e1ad9f72c8b3e5d1DottxtRoute,
   AceleriqOsRoute: AceleriqOsRoute,
   AdminRoute: AdminRouteWithChildren,
+  AgenciaDeMarketingDigitalCidadeRoute: AgenciaDeMarketingDigitalCidadeRoute,
   AgenciaDeMarketingDigitalCuritibaRoute:
     AgenciaDeMarketingDigitalCuritibaRoute,
   AutomacaoEIaRoute: AutomacaoEIaRoute,
