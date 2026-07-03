@@ -38,21 +38,22 @@
 }
 
 :root {
-  /* Grafite Suave — cinza claro dominante, preto como âncora tipográfica, verde sinal */
-  --background: oklch(97% 0.003 260);            /* off-white / cinza quase branco */
-  --foreground: oklch(16% 0.005 260);            /* preto tipográfico */
-  --primary: oklch(62% 0.17 145);                /* verde sólido, menos neon */
+  /* Aceleriq — Light Premium (navy + gold, inspirado em playbet.app.br) */
+  --background: oklch(97.5% 0.005 250);
+  --foreground: oklch(18% 0.04 260);
+  --primary: oklch(24% 0.09 262);                /* navy sólido */
   --primary-foreground: oklch(99% 0 0);
-  --muted: oklch(93% 0.004 260);
-  --muted-foreground: oklch(38% 0.005 260 / 0.75);
-  --border: oklch(16% 0.005 260 / 0.1);
-  --accent: oklch(55% 0.15 250);
+  --accent-gold: oklch(78% 0.14 78);             /* dourado editorial */
+  --accent: oklch(78% 0.14 78);
+  --muted: oklch(94% 0.006 250);
+  --muted-foreground: oklch(38% 0.02 260 / 0.75);
+  --border: oklch(18% 0.04 260 / 0.09);
 
   /* Bandas */
-  --surface: oklch(94% 0.004 260);               /* cinza claro alternado */
-  --surface-muted: oklch(90% 0.004 260);         /* cinza um pouco mais forte */
-  --surface-dark: oklch(6% 0.002 260);           /* preto profundo, quase absoluto */
-  --ink: oklch(14% 0.005 260);
+  --surface: oklch(95% 0.006 250);
+  --surface-muted: oklch(92% 0.008 250);
+  --surface-dark: oklch(18% 0.05 262);            /* navy escuro */
+  --ink: oklch(15% 0.03 260);
   --card: oklch(100% 0 0);
 }
 
