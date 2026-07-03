@@ -82,7 +82,7 @@ export function Header({ onDiagnostico }: { onDiagnostico: () => void }) {
 
       {/* Mobile Menu */}
       {open && (
-        <div className="absolute inset-x-0 top-full border-t border-white/10 bg-background/95 backdrop-blur-2xl lg:hidden">
+        <div className="absolute inset-x-0 top-full border-t border-foreground/10 bg-background/95 backdrop-blur-2xl lg:hidden">
           <div className="container-aceleriq flex flex-col gap-1 py-8">
             {NAV.map((item, i) => (
               <Link
