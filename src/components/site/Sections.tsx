@@ -117,12 +117,12 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                 {/* Blob verde suave atrás */}
                 <div className="absolute inset-0 -z-10 translate-y-8 rounded-[45%] bg-primary/20 blur-3xl pointer-events-none" />
 
-                {/* Superfície clara arredondada */}
-                <div className="relative w-full h-full overflow-hidden rounded-[36px] surface-light">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.08] via-transparent to-transparent" />
+                {/* Foto real sobre superfície clara arredondada */}
+                <div className="relative w-full h-full overflow-hidden rounded-[36px] bg-[oklch(94%_0.004_260)]">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.1] via-transparent to-transparent" />
                   <img
-                    src={almir3d}
-                    alt="Almir Teles, fundador da Aceleriq — ilustração 3D"
+                    src={almirPhoto}
+                    alt="Almir Teles, fundador da Aceleriq"
                     width={1024}
                     height={1280}
                     className="absolute inset-x-0 bottom-0 w-full h-[105%] object-cover object-top select-none"
@@ -133,9 +133,9 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
                   />
 
                   {/* Chip flutuante */}
-                  <div className="absolute top-4 left-4 flex items-center gap-2 rounded-full bg-background/85 px-3 py-1.5 backdrop-blur-md border border-white/10">
+                  <div className="absolute top-4 left-4 flex items-center gap-2 rounded-full bg-[oklch(16%_0.005_260/0.85)] px-3 py-1.5 backdrop-blur-md border border-white/10">
                     <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-                    <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/90">
+                    <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/90">
                       Almir · Fundador
                     </span>
                   </div>
