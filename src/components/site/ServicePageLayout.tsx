@@ -33,6 +33,7 @@ export type ServicePageProps = {
   extraSection?: ReactNode;
   principle?: ServicePrinciple;
   heroAside?: ReactNode;
+  humanBand?: ReactNode;
 };
 
 const DEFAULT_PRINCIPLES: Record<ServiceVariant, ServicePrinciple> = {
