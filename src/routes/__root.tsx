@@ -27,10 +27,9 @@ function NotFoundComponent() {
   );
 }
 
-const SITE_TITLE =
-  "Aceleriq · Agência de Marketing Digital, Tráfego Pago e Automação com IA";
+const SITE_TITLE = "Aceleriq · Marketing Digital, Tráfego Pago e Automação";
 const SITE_DESCRIPTION =
-  "Agência de marketing digital para o Brasil todo: tráfego pago, criação de sites, automação, IA, CRM e consultoria comercial. Diagnóstico gratuito. Sede em Curitiba, atendimento nacional.";
+  "Agência de marketing digital no Brasil todo: tráfego pago, sites, automação, IA, CRM e consultoria comercial. Sede em Curitiba. Diagnóstico gratuito.";
 const SITE_URL = "https://aceleriq.com.br";
 const OG_IMAGE = `${SITE_URL}/og-image.jpg`;
 
