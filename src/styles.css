@@ -313,7 +313,7 @@
     color: transparent;
   }
 
-  /* Botão navy (primário) — pill sólida escura, inspirado em playbet.app.br */
+  /* Botão preto (primário) — pill sólida com brilho verde no hover */
   .btn-navy {
     display: inline-flex;
     align-items: center;
@@ -327,14 +327,14 @@
     letter-spacing: -0.005em;
     white-space: nowrap;
     border-radius: 999px;
-    border: 1px solid oklch(24% 0.09 262);
-    box-shadow: 0 12px 30px -14px oklch(24% 0.09 262 / 0.55);
-    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    border: 1px solid oklch(12% 0 0);
+    box-shadow: 0 12px 30px -14px oklch(0% 0 0 / 0.5);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
   }
   .btn-navy:hover {
     transform: translateY(-1px);
-    background: oklch(28% 0.1 262);
-    box-shadow: 0 18px 40px -16px oklch(24% 0.09 262 / 0.7);
+    background: oklch(18% 0 0);
+    box-shadow: 0 16px 34px -14px oklch(72% 0.19 145 / 0.45);
   }
 
   /* Botão outline sobre bg claro */
@@ -349,15 +349,16 @@
     font-weight: 500;
     font-size: 0.9rem;
     border-radius: 999px;
-    border: 1px solid oklch(18% 0.04 260 / 0.18);
+    border: 1px solid oklch(14% 0 0 / 0.2);
     transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
   }
   .btn-outline:hover {
-    border-color: var(--primary);
-    background: oklch(24% 0.09 262 / 0.04);
+    border-color: var(--accent);
+    color: var(--accent);
+    background: oklch(72% 0.19 145 / 0.06);
   }
 
-  /* Retrocompat — btn-tech agora vira btn-navy visualmente */
+  /* Retrocompat */
   .btn-tech {
     display: inline-flex;
     align-items: center;
@@ -371,13 +372,13 @@
     white-space: nowrap;
     border-radius: 999px;
     border: 1px solid var(--primary);
-    box-shadow: 0 12px 30px -14px oklch(24% 0.09 262 / 0.55);
-    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    box-shadow: 0 12px 30px -14px oklch(0% 0 0 / 0.5);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
   }
   .btn-tech:hover {
     transform: translateY(-1px);
-    background: oklch(28% 0.1 262);
-    box-shadow: 0 18px 40px -16px oklch(24% 0.09 262 / 0.7);
+    background: oklch(18% 0 0);
+    box-shadow: 0 16px 34px -14px oklch(72% 0.19 145 / 0.45);
   }
 
   /* Botão fantasma (secundário) */
