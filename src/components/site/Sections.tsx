@@ -54,7 +54,7 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
       {/* Apenas o quadriculado, sem linhas */}
       {/* Background Decorativo - Camadas Técnicas */}
       <div className="hero-background" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background z-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[oklch(16%_0.005_260/0.18)] to-[oklch(16%_0.005_260)] z-10" />
       
       <div className="container-aceleriq relative z-20">
         <div className="flex flex-col items-center">
@@ -106,40 +106,25 @@ export function Hero({ onDiagnostico }: { onDiagnostico: () => void }) {
               </motion.div>
             </div>
 
-            {/* Visual — Almir 3D em superfície leve, sem moldura técnica */}
-            <div className="w-full max-w-[280px] sm:max-w-sm md:max-w-md mx-auto lg:max-w-lg lg:ml-auto">
+            {/* Visual — Almir 3D recortado, sem moldura */}
+            <div className="w-full max-w-[330px] sm:max-w-md md:max-w-lg mx-auto lg:max-w-xl lg:ml-auto">
               <motion.div
                 initial={{ opacity: 0, scale: 0.94 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, ease: "circOut" }}
-                className="relative w-full aspect-[4/5]"
+                className="almir-avatar-stage h-[460px] sm:h-[560px] lg:h-[680px]"
               >
-                {/* Blob verde suave atrás */}
-                <div className="absolute inset-0 -z-10 translate-y-8 rounded-[45%] bg-primary/20 blur-3xl pointer-events-none" />
-
-                {/* Foto real sobre superfície clara arredondada */}
-                <div className="relative w-full h-full overflow-hidden rounded-[36px] bg-[oklch(94%_0.004_260)]">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.1] via-transparent to-transparent" />
-                  <img
-                    src={almirPhoto}
-                    alt="Almir Teles, fundador da Aceleriq"
-                    width={1024}
-                    height={1280}
-                    className="absolute inset-x-0 bottom-0 w-full h-[105%] object-cover object-top select-none"
-                    loading="eager"
-                    decoding="sync"
-                    fetchPriority="high"
-                    draggable={false}
-                  />
-
-                  {/* Chip flutuante */}
-                  <div className="absolute top-4 left-4 flex items-center gap-2 rounded-full bg-[oklch(16%_0.005_260/0.85)] px-3 py-1.5 backdrop-blur-md border border-white/10">
-                    <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-                    <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/90">
-                      Almir · Fundador
-                    </span>
-                  </div>
-                </div>
+                <img
+                  src={almirPhoto}
+                  alt="Avatar 3D de Almir Teles"
+                  width={1024}
+                  height={1408}
+                  className="almir-avatar-figure"
+                  loading="eager"
+                  decoding="sync"
+                  fetchPriority="high"
+                  draggable={false}
+                />
               </motion.div>
             </div>
           </div>

@@ -230,30 +230,16 @@ function SobreAceleriq() {
                 transition={{ duration: 0.7, delay: 0.1 }}
                 className="relative lg:col-span-5"
               >
-                <div className="relative mx-auto max-w-md">
-                  {/* Blob verde suave atrás */}
-                  <div className="absolute inset-0 -z-10 translate-y-6 rounded-[40%] bg-primary/25 blur-3xl" />
-                  {/* Placa preta assimétrica */}
-                  <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[32px] bg-[color:var(--background)]">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.12] via-transparent to-transparent" />
-                    <img
-                      src={almir3d}
-                      alt="Almir Teles, fundador da Aceleriq — ilustração 3D"
-                      width={1024}
-                      height={1280}
-                      loading="lazy"
-                      className="absolute inset-0 h-full w-full object-cover object-top"
-                    />
-                    {/* Card flutuante */}
-                    <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-background/85 px-4 py-3 backdrop-blur-md border border-white/10">
-                      <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-primary/80">
-                        Fundador · CEO
-                      </div>
-                      <div className="mt-1 font-display text-base font-medium text-foreground">
-                        Almir Teles
-                      </div>
-                    </div>
-                  </div>
+                <div className="almir-avatar-stage mx-auto h-[480px] max-w-md lg:h-[600px]">
+                  <img
+                    src={almir3d}
+                    alt="Avatar 3D de Almir Teles"
+                    width={1024}
+                    height={1408}
+                    loading="lazy"
+                    className="almir-avatar-figure"
+                    draggable={false}
+                  />
                 </div>
               </motion.div>
             </div>

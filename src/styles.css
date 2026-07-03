@@ -161,8 +161,8 @@
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(to right, var(--background) 0%, transparent 60%, transparent 100%),
-      linear-gradient(to bottom, transparent 60%, var(--background) 100%);
+      linear-gradient(to right, var(--surface-dark) 0%, oklch(16% 0.005 260 / 0.55) 44%, transparent 100%),
+      linear-gradient(to bottom, transparent 52%, var(--surface-dark) 100%);
   }
 
   /* Grid ambiente — muito sutil, apenas textura */
@@ -204,6 +204,52 @@
   .bg-grid-ambient > * {
     position: relative;
     z-index: 1;
+  }
+
+  .almir-avatar-stage {
+    position: relative;
+    width: 100%;
+    overflow: visible;
+    isolation: isolate;
+  }
+  .almir-avatar-stage::before {
+    content: '';
+    position: absolute;
+    left: 8%;
+    right: 6%;
+    bottom: 2%;
+    height: 28%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, color-mix(in oklch, var(--primary) 40%, transparent), transparent 68%);
+    filter: blur(34px);
+    opacity: 0.42;
+    z-index: -2;
+  }
+  .almir-avatar-stage::after {
+    content: '';
+    position: absolute;
+    left: 16%;
+    right: 10%;
+    bottom: 1%;
+    height: 12%;
+    border-radius: 50%;
+    background: color-mix(in oklch, var(--surface-dark) 42%, transparent);
+    filter: blur(18px);
+    opacity: 0.35;
+    z-index: -1;
+  }
+  .almir-avatar-figure {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    height: 100%;
+    width: auto;
+    max-width: none;
+    transform: translateX(-50%);
+    object-fit: contain;
+    object-position: bottom center;
+    user-select: none;
+    filter: drop-shadow(0 34px 46px color-mix(in oklch, var(--surface-dark) 30%, transparent));
   }
 
   /* Transição vertical suave */
