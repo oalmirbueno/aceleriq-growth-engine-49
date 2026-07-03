@@ -14,7 +14,7 @@ const FAQS = [
   { q: "Vocês atendem fora de Curitiba?", a: "Sim. Sede em Curitiba/PR, atendimento 100% remoto para o Brasil inteiro." },
   { q: "Qual o investimento médio?", a: "Programas mensais a partir de faixas compatíveis com empresas que faturam R$ 100k/mês ou mais. O escopo é desenhado a partir do Diagnóstico Gratuito." },
   { q: "Em quanto tempo aparece resultado?", a: "Entregas táticas (campanhas, automações, site) em 2-4 semanas. Resultado estrutural e melhoria do processo comercial, entre 60 e 120 dias." },
-  { q: "Aceleriq é o mesmo que Acelerai?", a: "Não. Aceleriq (com Q no final) é uma agência independente sediada em Curitiba/PR, sem qualquer vínculo com a Acelerai." },
+  { q: "Aceleriq é o mesmo que Acelera AI?", a: "Não. Aceleriq (com Q no final) é uma agência independente sediada em Curitiba/PR, sem qualquer vínculo com a Acelera AI." },
 ];
 
 export const Route = createFileRoute("/agencia-de-marketing-digital-curitiba")({
