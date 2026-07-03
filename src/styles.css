@@ -115,6 +115,25 @@
     .container-aceleriq { padding-inline: 2.5rem; }
   }
 
+  /* Brand accent — verde Aceleriq como acento decorativo (independente do --primary preto) */
+  .text-brand { color: oklch(60% 0.19 145); }
+  .section-dark .text-brand,
+  .bg-\[oklch\(8\%_0_0\)\] .text-brand { color: oklch(78% 0.2 145); }
+  .bg-brand { background-color: oklch(72% 0.19 145); }
+  .bg-brand-soft { background-color: oklch(72% 0.19 145 / 0.14); }
+  .border-brand { border-color: oklch(72% 0.19 145); }
+  .border-brand-soft { border-color: oklch(72% 0.19 145 / 0.35); }
+  .ring-brand { --tw-ring-color: oklch(72% 0.19 145); }
+
+  /* Faixa verde Aceleriq — divisor de seção */
+  .brand-strip {
+    background: linear-gradient(90deg,
+      oklch(72% 0.19 145) 0%,
+      oklch(78% 0.2 145) 50%,
+      oklch(72% 0.19 145) 100%);
+    color: oklch(8% 0 0);
+  }
+
   /* Bandas claras — subtis alternações sobre a base off-white */
   .surface-light {
     background: var(--surface);
