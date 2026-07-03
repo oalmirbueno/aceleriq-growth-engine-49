@@ -52,7 +52,7 @@ const ORGANIZATION_JSONLD = {
     "Agência Aceleriq",
     "Aceleriq Marketing",
     "Aceleriq Engenharia de Crescimento",
-    "Aceleriq (não é Acelera AI)",
+    "Aceleriq (não é Aceleraí)",
   ],
   url: SITE_URL,
   logo: `${SITE_URL}/og-image.jpg`,
@@ -141,7 +141,7 @@ export const Route = createRootRoute({
       {
         name: "keywords",
         content:
-          "Aceleriq, agência de marketing digital, agência de marketing digital Brasil, agência de marketing digital Curitiba, agência de marketing digital São Paulo, agência de marketing digital Rio de Janeiro, tráfego pago, gestão de tráfego, gestor de tráfego, Google Ads, Meta Ads, Facebook Ads, Instagram Ads, LinkedIn Ads, automação de marketing, automação comercial, automação WhatsApp, IA para empresas, IA aplicada a vendas, CRM, RD Station, HubSpot, criação de sites, site profissional, site rápido, site otimizado, landing page, funil de vendas, estruturação comercial, consultoria de marketing, consultoria comercial, consultoria de crescimento, engenharia de crescimento, Método Acelera, marketing para empresas, marketing B2B, agência boutique, Aceleriq não é Acelera AI",
+          "Aceleriq, agência de marketing digital, agência de marketing digital Brasil, agência de marketing digital Curitiba, agência de marketing digital São Paulo, agência de marketing digital Rio de Janeiro, tráfego pago, gestão de tráfego, gestor de tráfego, Google Ads, Meta Ads, Facebook Ads, Instagram Ads, LinkedIn Ads, automação de marketing, automação comercial, automação WhatsApp, IA para empresas, IA aplicada a vendas, CRM, RD Station, HubSpot, criação de sites, site profissional, site rápido, site otimizado, landing page, funil de vendas, estruturação comercial, consultoria de marketing, consultoria comercial, consultoria de crescimento, engenharia de crescimento, Método Acelera, marketing para empresas, marketing B2B, agência boutique, Aceleriq não é Aceleraí",
       },
       { property: "og:title", content: SITE_TITLE },
       { property: "og:description", content: SITE_DESCRIPTION },
