@@ -281,43 +281,6 @@ export function ServicePageLayout(props: ServicePageProps) {
           </div>
         </section>
 
-        <section className="px-6 lg:px-16 py-16 md:py-20 max-w-[1600px] mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-8">
-            {[
-              {
-                label: "Estratégia antes da execução",
-                note: "Diagnóstico e prioridade",
-              },
-              {
-                label: "Implantação sob medida",
-                note: "Processos e automações",
-              },
-              {
-                label: "Operação acompanhada",
-                note: "Indicadores documentados",
-              },
-              {
-                label: "Melhoria contínua",
-                note: "Ajustes guiados por dados",
-              },
-            ].map((m) => (
-              <motion.div
-                key={m.label}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4 }}
-                className="group"
-              >
-                <div className="h-px w-10 bg-brand mb-5 group-hover:w-16 transition-all" />
-                <div className="pt-1">
-                  <div className="text-[14px] md:text-[15px] text-foreground/90 leading-snug font-medium">{m.label}</div>
-                  <div className="mt-1.5 text-[11px] text-muted-foreground/60">{m.note}</div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </section>
 
 
         {/* WHY / BENEFITS */}
