@@ -408,7 +408,7 @@
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.16em;
-    color: oklch(45% 0.08 262 / 0.9);
+    color: oklch(38% 0.08 145 / 0.9);
   }
 
   .text-mono {
